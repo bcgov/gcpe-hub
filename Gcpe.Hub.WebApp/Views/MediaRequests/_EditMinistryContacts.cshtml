@@ -1,0 +1,175 @@
+﻿<div class="page-header">
+    <div>
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li ><a href="#" data-bind="click: toggleEdit">Edit Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+        <h3>Ministry Contacts</h3>
+    </div>
+</div>
+
+<form role="form" class="form-horizontal">
+
+    <!-- ko template: { name: 'ministrycontact-edit-template', foreach: $root.myMinistries} -->
+    <!-- /ko -->
+    <div class="row">
+        <div class="col-md-12" data-bind="visible: isEditing()">
+            <div class="pull-right">
+                <a class="btn btn-default disable-on-busy" data-bind="click: function() { window.history.back(); }">Cancel</a>&nbsp;
+                <a id="dom-edit-ministry-contacts-save" class="btn btn-primary disable-on-busy" data-bind="click: saveMinistryContacts">Save</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+<hr />
+
+<div class="form-horizontal">
+    <!-- ko template: { name: 'ministrycontact-view-template', foreach: $root.allMinistries} -->
+    <!-- /ko -->
+</div>
+
+  <script type="text/html" id="ministrycontact-edit-template">
+    <div class="row">
+        <div class="col-sm-12" style="display:table;">
+            <h4><span data-bind="text: displayAs"></span></h4>
+        </div>
+    </div>
+      <div data-bind="foreach: [{label: 'Primary', contact: primaryContact}, {label: 'Alternate', contact: secondaryContact}]">
+          <div class="form-group row">
+              <div class="" data-bind="if: !$index()">
+                  <div class="hidden-xs col-sm-2">&nbsp;</div>
+              </div>
+              <div class="" data-bind="if: $index()" >
+                  <label class="col-sm-2 control-label" data-bind="attr: {for: 'dom-contact-' + $index() + '-' + $parent.abbreviation()}, text: label"></label>
+              </div>
+              <div class="col-sm-10">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <select class="form-control" data-bind="visible: $parents[1].isEditing,
+                                                       options: $parent.users,
+                                                       optionsText: 'displayAs',
+                                                       value: contact,
+                                                       optionsCaption: 'Choose...',
+                                                       valueAllowUnset: true,
+                                                       attr: {id: 'dom-contact-' + $index() + '-' + $parent.abbreviation()}"></select>
+                          <p class="form-control-static" data-bind="visible: !$parents[1].isEditing()">
+                              <span data-bind="text: (contact() ? contact().displayAs() : 'N/A')"></span>
+                          </p>
+                      </div>
+                  </div>
+                  <div class="row" data-bind="if: contact">
+                      <div class="col-sm-12">
+                            <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: contact().emailAddress, click: function(data, event) { window.location.href = 'mailto:' + contact().emailAddress(); }" type="button">
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;<span data-bind="text: contact().emailAddress"></span>
+                            </button>
+                            <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: contact().workTelephone, click: contact().initiateWorkPhoneCall" type="button">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<span data-bind="text: contact().formattedWorkPhone()"></span>
+                            </button>
+                            <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: contact().mobileTelephone, click: contact().initiateMobilePhoneCall" type="button">
+                                <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;<span data-bind="text: contact().formattedMobilePhone()"></span>
+                            </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="form-group row" data-bind="visible: $parent.isEditing">
+          <label class="col-sm-2 control-label" data-bind="attr: {for: 'dom-edit-after-hours-' + id()}">After Hours</label>
+          <div class="col-sm-10">
+              <input class="form-control" maxlength="20" type="text" data-bind="kendoMaskedTextBox: { value: formattedAfterHoursPhone, mask: '000-000-0000 ext 0000' }, attr: {id: 'dom-edit-after-hours-' + id()}"  autocomplete="off" disableautocomplete="true" />
+          </div>
+      </div>
+      <div class="form-group row" data-bind="visible: !$parent.isEditing() && afterHoursPhone()">
+          <label class="col-sm-2 control-label">After Hours</label>
+          <div class="col-sm-10">
+              <button class="btn btn-default" aria-label="Left Align" data-bind="click: initiateAfterHoursPhoneCall" type="button">
+                  <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedAfterHoursPhone"></span>
+              </button>
+          </div>
+      </div>
+</script>
+
+<script type="text/html" id="ministrycontact-view-template">
+    <div data-bind="visible: !isMyMinistry()">
+        <div data-bind="foreach: [{label: 'Primary', data: primaryContact}, {label: 'Alternate', data: secondaryContact}]">
+            <div class="form-group row" data-bind="if: data, visible: !$index(), attr: {id: 'contact-' + $index() + '-' + $parent.id()}">
+                <div class="col-sm-4" style="display: table;">
+                    <div data-bind="if: !$index()">
+                        <h4 ><span data-bind="text: $parent.displayAs"></span></h4>
+                    </div>
+                    <div data-bind="if: $index()" class="pull-right">
+                        <label class="control-label"><span data-bind="text: label"></span></label>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-xs-1 hidden-sm hidden-md hidden-lg"></div>
+                        <div class="col-xs-10 col-sm-11">
+                            <div data-bind="with: data">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="form-control-static">
+                                            <span data-bind="text: displayAs"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: emailAddress, click: function(data, event) { window.location.href = 'mailto:' + emailAddress(); }" type="button">
+                                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;<span data-bind="text: emailAddress"></span>
+                                        </button>
+                                        <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: workTelephone, click: initiateWorkPhoneCall" type="button">
+                                            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedWorkPhone()"></span>
+                                        </button>
+                                        <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: mobileTelephone, click: initiateMobilePhoneCall" type="button">
+                                            <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedMobilePhone()"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1" data-bind="if: !$index()">
+                            <a href="#" data-bind="click: function() { var isVis = !$('#contact-1-' + $parent.id()).is(':visible'); $('#contact-1-' + $parent.id()).toggle(isVis); $('#afterHours-' + $parent.id()).toggle(isVis); }">
+                                <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group row" style="display:none;" data-bind="if: afterHoursPhone, attr: {id: 'afterHours-' + $data.id()}">
+            <div class="col-sm-4" style="display: table;">
+                <div class="pull-right">
+                    <label class="control-label">After Hours</label>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-xs-1 hidden-sm hidden-md hidden-lg"></div>
+                        <div class="col-xs-10 col-sm-11">
+                            <button class="btn btn-default" aria-label="Left Align" data-bind="click: initiateAfterHoursPhoneCall" type="button">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedAfterHoursPhone"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</script>
+
+@*<style>
+    .row {
+        border: 1px solid red;
+    }
+</style>*@                               
+
+<script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>
+

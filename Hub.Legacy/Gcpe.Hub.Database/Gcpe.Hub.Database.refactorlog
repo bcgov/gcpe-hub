@@ -1,0 +1,1031 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="9cea59cf-0492-44b0-9fd1-ee058b9956cf" ChangeDateTime="09/06/2016 19:17:53">
+    <Property Name="ElementName" Value="[media].[City]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[MediaCity]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8b906e0e-6509-4aef-a29a-36c6c89d2109" ChangeDateTime="09/06/2016 19:20:24">
+    <Property Name="ElementName" Value="[media].[MediaCity]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[ContactCity]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b14d066c-54be-4283-8403-5ae967771a0d" ChangeDateTime="09/06/2016 19:20:59">
+    <Property Name="ElementName" Value="[media].[Sector]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[NewsSector]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ffc6571d-1e5c-4c6f-8d86-1b9329423b50" ChangeDateTime="09/06/2016 19:21:05">
+    <Property Name="ElementName" Value="[media].[Ministry]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[NewsMinistry]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0621f678-9c77-4aa5-a96e-0712e9e1fe5a" ChangeDateTime="09/06/2016 19:21:19">
+    <Property Name="ElementName" Value="[media].[Region]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[NewsRegion]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="39aaf53c-ba6b-4038-b6ee-d25a2f52ec61" ChangeDateTime="09/06/2016 21:02:34">
+    <Property Name="ElementName" Value="[calendar].[Region]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[calendar]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[LegacyRegion]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cae1f9a6-3d41-4c55-b3ba-6620dc3249ff" ChangeDateTime="09/06/2016 21:02:51">
+    <Property Name="ElementName" Value="[calendar].[Sector]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[calendar]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[LegacySector]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e90561f-edc3-47b9-b0a8-369e2174e448" ChangeDateTime="09/06/2016 21:03:00">
+    <Property Name="ElementName" Value="[calendar].[Theme]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[calendar]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[LegacyTheme]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9037aa49-0390-48be-b5c2-a33311b95a12" ChangeDateTime="09/06/2016 21:03:24">
+    <Property Name="ElementName" Value="[calendar].[Ministry]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[calendar]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[LegacyMinistry]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a89a7972-c9aa-420d-9245-9d69870b1ca6" ChangeDateTime="09/06/2016 21:04:06">
+    <Property Name="ElementName" Value="[media].[Language]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[media]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[MediaLanguage]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1e681866-ec0e-4d59-9961-5691a8beb366" ChangeDateTime="09/06/2016 21:04:32">
+    <Property Name="ElementName" Value="[calendar].[Service]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[calendar]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[LegacyService]" />
+  </Operation>
+  <Operation Name="Move Schema" Key="09ef9409-005a-4914-88e4-57a031af70f5" ChangeDateTime="09/12/2016 21:34:49">
+    <Property Name="ElementName" Value="[dbo].[MediaRequest]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="NewSchema" Value="media" />
+    <Property Name="IsNewSchemaExternal" Value="False" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="17ccde5a-11ba-4758-a80a-445ac716bc7b" ChangeDateTime="09/12/2016 21:35:16">
+    <Property Name="ElementName" Value="[media].[FK_MediaRequest_SystemUsers]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_MediaRequest_SystemUser]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="120360c9-2fce-4399-a59b-3902c3c0c528" ChangeDateTime="09/12/2016 21:36:03">
+    <Property Name="ElementName" Value="[media].[FK_MediaRequest_MediaContact]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_MediaRequest_Contact]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3bb0cfe1-c253-45d2-bcdf-800c8b9a0577" ChangeDateTime="09/12/2016 22:04:58">
+    <Property Name="ElementName" Value="[media].[MediaRequest].[CreatedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedById" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="78e8c0fc-9fba-4ec5-8a96-d2b76cc6929a" ChangeDateTime="09/12/2016 22:05:00">
+    <Property Name="ElementName" Value="[media].[MediaRequest].[ModifiedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ModifiedById" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="831a1829-d688-46f9-9e57-578eed8e6850" ChangeDateTime="10/14/2016 00:16:22">
+    <Property Name="ElementName" Value="[media].[Beat].[BeatGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Beat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BeatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1a4eecfa-3945-4832-a6ad-37421b301621" ChangeDateTime="10/14/2016 00:18:23">
+    <Property Name="ElementName" Value="[media].[Contact].[MinisterialJobTitleGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MinisterialJobTitleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bd954352-833d-4699-b2d6-82171b37285b" ChangeDateTime="10/14/2016 00:18:32">
+    <Property Name="ElementName" Value="[media].[Contact].[MLAAssignmentGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MLAAssignmentId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="292afcb6-30d0-4a3d-8b34-56f118b715dd" ChangeDateTime="10/14/2016 00:18:51">
+    <Property Name="ElementName" Value="[media].[Contact].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c2c0ad10-bb17-4866-abc7-41b1f4297255" ChangeDateTime="10/14/2016 00:20:06">
+    <Property Name="ElementName" Value="[media].[Contact].[MinistryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MinistryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c234494a-7ca6-42b0-a1c8-8aa2c676f279" ChangeDateTime="10/14/2016 00:21:42">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[AddressGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AddressId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5f36b7bc-5014-417b-9110-37e22c29b720" ChangeDateTime="10/14/2016 00:21:47">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="85f60c20-44e4-45dd-a88f-4bfc52e50ac8" ChangeDateTime="10/14/2016 00:21:51">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[CountryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CountryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2258fb53-bb1a-4f98-bc42-7a712045aa5c" ChangeDateTime="10/14/2016 00:21:55">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[ProvStateGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProvStateId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c92c1359-c17c-40e6-8a0a-25e054218cd3" ChangeDateTime="10/14/2016 00:22:01">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[CityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CityId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d509ca90-4092-4c57-90da-949a98d14126" ChangeDateTime="10/14/2016 00:22:12">
+    <Property Name="ElementName" Value="[media].[CompanyDistribution].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyDistribution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="abc7b84e-ac14-4b82-a080-5566a6c641d0" ChangeDateTime="10/14/2016 00:22:19">
+    <Property Name="ElementName" Value="[media].[CompanyDistribution].[DistributionGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyDistribution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DistributionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="89bacf6b-e6d2-4b5d-b395-7e4f33c431a4" ChangeDateTime="10/14/2016 00:22:26">
+    <Property Name="ElementName" Value="[media].[CompanyElectoralDistrict].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="910e7e24-41bb-4422-8bc6-bc80ab230f52" ChangeDateTime="10/14/2016 00:22:31">
+    <Property Name="ElementName" Value="[media].[CompanyElectoralDistrict].[DistrictGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DistrictId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1c6feffe-50ba-4ace-b601-7d5ac2751d09" ChangeDateTime="10/14/2016 00:22:38">
+    <Property Name="ElementName" Value="[media].[CompanyEthnicity].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyEthnicity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="196b9714-d254-4ab1-8acd-b7acd8fed723" ChangeDateTime="10/14/2016 00:22:43">
+    <Property Name="ElementName" Value="[media].[CompanyEthnicity].[EthnicityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyEthnicity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EthnicityId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b3a7b4fb-f19c-4ecf-8930-d542a60fef51" ChangeDateTime="10/14/2016 00:22:49">
+    <Property Name="ElementName" Value="[media].[CompanyLanguage].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyLanguage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e92aecde-b478-4ee4-a29b-3e1a138c0339" ChangeDateTime="10/14/2016 00:22:54">
+    <Property Name="ElementName" Value="[media].[CompanyLanguage].[LanguageGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyLanguage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LanguageId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="957bac7b-7b0e-4e73-8c36-50ee12041a45" ChangeDateTime="10/14/2016 00:23:02">
+    <Property Name="ElementName" Value="[media].[CompanyMediaDesk].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaDesk]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e2de568-b2c0-4633-924d-626242a4e46b" ChangeDateTime="10/14/2016 00:23:06">
+    <Property Name="ElementName" Value="[media].[CompanyMediaDesk].[MediaDeskGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaDesk]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediaDeskId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6606c2a2-f38c-4fe2-9473-0a14757f54d0" ChangeDateTime="10/14/2016 00:23:13">
+    <Property Name="ElementName" Value="[media].[CompanyMediaPartner].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaPartner]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="44413bde-c910-4f39-bb0d-7f69d861d93c" ChangeDateTime="10/14/2016 00:23:17">
+    <Property Name="ElementName" Value="[media].[CompanyMediaPartner].[MediaPartnerGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaPartner]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediaPartnerId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2db97a93-043d-462d-9fd3-b4528567c534" ChangeDateTime="10/14/2016 00:23:23">
+    <Property Name="ElementName" Value="[media].[CompanyMediaType].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="15c112ee-657f-4c7d-962e-e560bef83c0b" ChangeDateTime="10/14/2016 00:23:27">
+    <Property Name="ElementName" Value="[media].[CompanyMediaType].[MediaTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyMediaType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediaTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c17afb04-beef-4ae7-891b-d229738474b3" ChangeDateTime="10/14/2016 00:23:35">
+    <Property Name="ElementName" Value="[media].[CompanyPhoneNumber].[PhoneNumberGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PhoneNumberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="51b1e205-9c40-40e5-9fc4-f3ffc932bdd5" ChangeDateTime="10/14/2016 00:23:39">
+    <Property Name="ElementName" Value="[media].[CompanyPhoneNumber].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3c83b0b2-4efa-460e-8846-8fdb16618daf" ChangeDateTime="10/14/2016 00:23:43">
+    <Property Name="ElementName" Value="[media].[CompanyPhoneNumber].[PhoneTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PhoneTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e23bfadd-2624-46ef-9427-609f6ea3dacd" ChangeDateTime="10/14/2016 00:23:53">
+    <Property Name="ElementName" Value="[media].[CompanyPublicationDays].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPublicationDays]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a6b87c31-3f5a-48a7-a7c4-9f9de365afba" ChangeDateTime="10/14/2016 00:23:57">
+    <Property Name="ElementName" Value="[media].[CompanyPublicationDays].[PublicationDaysGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPublicationDays]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PublicationDaysId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0938a618-2433-40fd-82b4-9b06cb2b6999" ChangeDateTime="10/14/2016 00:24:08">
+    <Property Name="ElementName" Value="[media].[CompanyRegion].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyRegion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9d618ed9-d44b-4682-8def-f8984f250ea5" ChangeDateTime="10/14/2016 00:24:12">
+    <Property Name="ElementName" Value="[media].[CompanyRegion].[RegionGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyRegion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RegionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9c82d7e6-50e9-4612-9902-bc65ab20097b" ChangeDateTime="10/14/2016 00:24:20">
+    <Property Name="ElementName" Value="[media].[CompanySector].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanySector]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e8d68f4f-05de-4377-9bf5-53d80172f6cc" ChangeDateTime="10/14/2016 00:24:24">
+    <Property Name="ElementName" Value="[media].[CompanySector].[SectorGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanySector]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SectorId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0dda0c65-fbfc-404a-a0b0-e0bca55d7776" ChangeDateTime="10/14/2016 00:24:37">
+    <Property Name="ElementName" Value="[media].[Company].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Company]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9a619073-9159-4721-87b8-bc40299e7722" ChangeDateTime="10/14/2016 00:24:44">
+    <Property Name="ElementName" Value="[media].[Company].[ParentCompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Company]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ParentCompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="560ff1bd-6760-492d-8fca-0f838365c072" ChangeDateTime="10/14/2016 00:24:49">
+    <Property Name="ElementName" Value="[media].[Company].[PrintCategoryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Company]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PrintCategoryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4a771dd-d441-411c-aab3-b44f0c066139" ChangeDateTime="10/14/2016 00:24:55">
+    <Property Name="ElementName" Value="[media].[Company].[PublicationFrequencyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Company]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PublicationFrequencyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e505b3e3-a7f8-420f-9c9e-df548e7f4f4a" ChangeDateTime="10/14/2016 00:25:38">
+    <Property Name="ElementName" Value="[media].[Beat].[BeatId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Beat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f9ccfc25-c7cb-4b77-9661-b2745fb1e3a8" ChangeDateTime="10/14/2016 00:25:52">
+    <Property Name="ElementName" Value="[media].[CompanySpecialtyPublication].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanySpecialtyPublication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c33acaeb-b56a-4792-a278-bba6174eedc7" ChangeDateTime="10/14/2016 00:25:56">
+    <Property Name="ElementName" Value="[media].[CompanySpecialtyPublication].[SpecialtyPublicationGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanySpecialtyPublication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SpecialtyPublicationId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="eba517e2-9a0a-4f03-9fb4-7b1e654463fe" ChangeDateTime="10/14/2016 00:26:05">
+    <Property Name="ElementName" Value="[media].[CompanyWebAddress].[WebAddressGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WebAddressId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="76407ccc-799c-4929-b3bc-4287e09961bb" ChangeDateTime="10/14/2016 00:26:09">
+    <Property Name="ElementName" Value="[media].[CompanyWebAddress].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3e5db417-c81d-4a34-956d-277c518778ba" ChangeDateTime="10/14/2016 00:26:13">
+    <Property Name="ElementName" Value="[media].[CompanyWebAddress].[WebAddressTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WebAddressTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e03900f9-0c71-46ab-a94c-f929faced454" ChangeDateTime="10/14/2016 00:26:20">
+    <Property Name="ElementName" Value="[media].[Contact].[ContactId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="44bba1d1-b2e2-4f0c-b0bb-3a122627da33" ChangeDateTime="10/14/2016 00:26:32">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[AddressGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AddressId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="81446757-d850-426b-b6e7-060c481a79be" ChangeDateTime="10/14/2016 00:26:35">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8fd08736-dc24-4589-bfef-72fcc19ca5d6" ChangeDateTime="10/14/2016 00:26:40">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[CityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CityId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bcea3d1b-0bfe-4e19-9185-1fb8c9ed906d" ChangeDateTime="10/14/2016 00:26:44">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[ProvStateGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProvStateId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="695a964f-22c9-404b-b207-9465590797e3" ChangeDateTime="10/14/2016 00:26:48">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[CountryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CountryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c94ac801-848c-470c-9414-7eb129fbe635" ChangeDateTime="10/14/2016 00:26:59">
+    <Property Name="ElementName" Value="[media].[ContactBeat].[ContactBeatGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactBeat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactBeatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa9365f7-66e6-4358-8d3b-8878310e879e" ChangeDateTime="10/14/2016 00:27:02">
+    <Property Name="ElementName" Value="[media].[ContactBeat].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactBeat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f35ba2c8-3221-4013-bb5c-1e69d921bed3" ChangeDateTime="10/14/2016 00:27:06">
+    <Property Name="ElementName" Value="[media].[ContactBeat].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactBeat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5276eaf8-6e75-407e-b3c1-e782d1f002c8" ChangeDateTime="10/14/2016 00:27:10">
+    <Property Name="ElementName" Value="[media].[ContactBeat].[BeatGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactBeat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BeatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa6b41d8-a42b-41b1-baf8-d70bef623db0" ChangeDateTime="10/14/2016 00:27:27">
+    <Property Name="ElementName" Value="[media].[ContactCity].[CityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactCity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="45dec936-9767-436b-8dd7-ff2c11f4d4ab" ChangeDateTime="10/14/2016 00:28:25">
+    <Property Name="ElementName" Value="[media].[ContactCompany].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactCompany]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9432c4df-f22d-450c-91f8-09d44b9c6fd4" ChangeDateTime="10/14/2016 00:28:29">
+    <Property Name="ElementName" Value="[media].[ContactCompany].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactCompany]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b5dbc1ad-1ff4-4879-a7a6-6c62afeda6dc" ChangeDateTime="10/14/2016 00:28:36">
+    <Property Name="ElementName" Value="[media].[ContactElectoralDistrict].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aaa0761e-50b2-4399-a27d-827213e709ee" ChangeDateTime="10/14/2016 00:28:40">
+    <Property Name="ElementName" Value="[media].[ContactElectoralDistrict].[DistrictGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DistrictId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="abcc4636-91b3-4c37-a049-c7eaf2ace1a2" ChangeDateTime="10/14/2016 00:28:48">
+    <Property Name="ElementName" Value="[media].[ContactMediaJobTitle].[ContactMediaJobTitleGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactMediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactMediaJobTitleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4ef03df-2302-4d21-8b35-ee88cddb5482" ChangeDateTime="10/14/2016 00:28:51">
+    <Property Name="ElementName" Value="[media].[ContactMediaJobTitle].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactMediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f833b368-93d0-4a1d-836a-ef726407a994" ChangeDateTime="10/14/2016 00:28:55">
+    <Property Name="ElementName" Value="[media].[ContactMediaJobTitle].[CompanyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactMediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b97a7e89-2b2c-40c1-8eda-da0426f39350" ChangeDateTime="10/14/2016 00:28:59">
+    <Property Name="ElementName" Value="[media].[ContactMediaJobTitle].[MediaJobTitleGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactMediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediaJobTitleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="df991aa9-60ff-430b-bb3d-389d0a4b1813" ChangeDateTime="10/14/2016 00:29:07">
+    <Property Name="ElementName" Value="[media].[ContactPhoneNumber].[PhoneNumberGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PhoneNumberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6c583732-c4ae-4e36-8b57-ad33de4b8410" ChangeDateTime="10/14/2016 00:29:11">
+    <Property Name="ElementName" Value="[media].[ContactPhoneNumber].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="395eb3e1-1382-4e48-9b88-898f36761e94" ChangeDateTime="10/14/2016 00:29:15">
+    <Property Name="ElementName" Value="[media].[ContactPhoneNumber].[PhoneTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PhoneTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="460475b5-1a8e-4398-9e06-57bd517b6eb4" ChangeDateTime="10/14/2016 00:29:26">
+    <Property Name="ElementName" Value="[media].[ContactRegion].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactRegion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6085c735-8a06-48b1-a4a3-e1e6d09d71be" ChangeDateTime="10/14/2016 00:29:30">
+    <Property Name="ElementName" Value="[media].[ContactRegion].[RegionGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactRegion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RegionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="71d86941-44bd-4670-bd1f-d50b7320d232" ChangeDateTime="10/14/2016 00:29:49">
+    <Property Name="ElementName" Value="[media].[Country].[CountryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Country]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ba7b082f-37c7-4a9b-bbbe-0920978c511a" ChangeDateTime="10/14/2016 00:30:02">
+    <Property Name="ElementName" Value="[media].[Distribution].[DistributionGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Distribution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="eb7851e4-9c73-4725-a846-cdb72d509825" ChangeDateTime="10/14/2016 00:30:10">
+    <Property Name="ElementName" Value="[media].[ElectoralDistrict].[DistrictGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="449a9656-2570-4494-8ef9-dcf114ca4259" ChangeDateTime="10/14/2016 00:33:31">
+    <Property Name="ElementName" Value="[media].[Ethnicity].[EthnicityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Ethnicity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d52f319c-8d4a-4801-85f2-97aed9a97d0b" ChangeDateTime="10/14/2016 00:33:37">
+    <Property Name="ElementName" Value="[media].[MediaDesk].[MediaDeskGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaDesk]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="be4f6df8-e8ae-4a2a-8eea-fe3410364eec" ChangeDateTime="10/14/2016 00:33:43">
+    <Property Name="ElementName" Value="[media].[MediaJobTitle].[MediaJobTitleGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="54d65838-db49-4be3-ba94-e5713f91e322" ChangeDateTime="10/14/2016 00:33:51">
+    <Property Name="ElementName" Value="[media].[MediaLanguage].[LanguageGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaLanguage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8ecdd24b-6e82-4a0a-b2d2-db97adb2b912" ChangeDateTime="10/14/2016 00:34:04">
+    <Property Name="ElementName" Value="[media].[MediaType].[MediaTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7bf826bb-cf64-46ef-8f5f-a8d96bc5083b" ChangeDateTime="10/14/2016 00:34:12">
+    <Property Name="ElementName" Value="[media].[MinisterialJobTitle].[MinisterialJobTitleGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MinisterialJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0065153a-a327-43eb-bb73-fbf55c8b0cbd" ChangeDateTime="10/14/2016 00:34:18">
+    <Property Name="ElementName" Value="[media].[NewsRegion].[RegionGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[NewsRegion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ea518fb8-d5e9-4dd4-9150-51bd04b18609" ChangeDateTime="10/14/2016 00:34:23">
+    <Property Name="ElementName" Value="[media].[PhoneType].[PhoneTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PhoneType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="824594ec-f47f-4468-b798-fc257d85017e" ChangeDateTime="10/14/2016 00:34:32">
+    <Property Name="ElementName" Value="[media].[PrintCategory].[PrintCategoryGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PrintCategory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9e53c925-a5cb-4ac5-91c2-6624ceaee5f9" ChangeDateTime="10/14/2016 00:34:37">
+    <Property Name="ElementName" Value="[media].[ProvState].[ProvStateGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ProvState]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="115186d9-d8f8-473f-a13d-52cbb3c39db0" ChangeDateTime="10/14/2016 00:34:43">
+    <Property Name="ElementName" Value="[media].[PublicationDays].[PublicationDaysGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PublicationDays]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8fc2f68d-b863-4cc2-87b6-4d70a2331edc" ChangeDateTime="10/14/2016 00:34:50">
+    <Property Name="ElementName" Value="[media].[PublicationFrequency].[PublicationFrequencyGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PublicationFrequency]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="432c37b7-0450-48be-9fe1-01e5fd1d7693" ChangeDateTime="10/14/2016 00:34:57">
+    <Property Name="ElementName" Value="[media].[Report].[ReportGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Report]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fb646933-3bfe-4ec9-bc27-3160fc340fae" ChangeDateTime="10/14/2016 00:35:05">
+    <Property Name="ElementName" Value="[media].[SpecialtyPublication].[SpecialtyPublicationGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[SpecialtyPublication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a9eb1894-acc9-496f-8eb8-10404b086dc3" ChangeDateTime="10/14/2016 00:35:22">
+    <Property Name="ElementName" Value="[media].[SysLog].[EntityGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[SysLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EntityId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fc2c2b2f-ad53-487f-8992-93d9efdfe719" ChangeDateTime="10/14/2016 00:35:28">
+    <Property Name="ElementName" Value="[media].[SysLog].[EventGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[SysLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9327fcfb-573b-407b-9a8c-c9673b827ad2" ChangeDateTime="10/14/2016 00:35:34">
+    <Property Name="ElementName" Value="[media].[WebAddressType].[WebAddressTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[WebAddressType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WebAddressTypeIdGuid" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c11ff92e-22e2-401e-b411-530c03c69731" ChangeDateTime="10/14/2016 00:35:39">
+    <Property Name="ElementName" Value="[media].[WebAddressType].[WebAddressTypeIdGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[WebAddressType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="75d60c19-5fbc-4b0f-89c4-fe7773fdad56" ChangeDateTime="10/14/2016 00:36:36">
+    <Property Name="ElementName" Value="[media].[ContactSector].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactSector]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="98756321-9370-4a69-a067-f73fe73180f6" ChangeDateTime="10/14/2016 00:36:40">
+    <Property Name="ElementName" Value="[media].[ContactSector].[SectorGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactSector]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SectorId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="eeba8999-0197-421f-a0e6-6c044cce1325" ChangeDateTime="10/14/2016 00:36:52">
+    <Property Name="ElementName" Value="[media].[ContactWebAddress].[ContactGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f8ff83d8-4996-4ede-a4c9-3272767423a1" ChangeDateTime="10/14/2016 00:37:02">
+    <Property Name="ElementName" Value="[media].[ContactWebAddress].[WebAddressGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WebAddressId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0a5e639d-2154-432e-82cf-1a6162e09f99" ChangeDateTime="10/14/2016 00:37:06">
+    <Property Name="ElementName" Value="[media].[ContactWebAddress].[WebAddressTypeGuid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WebAddressTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d8808bd2-5ca6-4864-b4ba-1a17bb6fb23c" ChangeDateTime="10/14/2016 00:38:40">
+    <Property Name="ElementName" Value="[media].[ContactMediaJobTitle].[ContactMediaJobTitleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactMediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fb335d67-095a-4840-9f71-e2655f487d70" ChangeDateTime="10/14/2016 00:38:57">
+    <Property Name="ElementName" Value="[media].[ContactWebAddress].[WebAddressId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="42def68c-1c82-4015-b8e9-732ae4490502" ChangeDateTime="10/14/2016 00:39:16">
+    <Property Name="ElementName" Value="[media].[CompanyWebAddress].[WebAddressId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyWebAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c9670bd0-cfee-458b-a5df-52cda87d0e00" ChangeDateTime="10/14/2016 00:39:36">
+    <Property Name="ElementName" Value="[media].[CompanyPhoneNumber].[PhoneNumberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5be8ee9e-831a-4486-8637-9cf10237b082" ChangeDateTime="10/14/2016 00:40:08">
+    <Property Name="ElementName" Value="[media].[CompanyAddress].[AddressId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[CompanyAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="91348085-37a9-455a-824b-60229adfffe1" ChangeDateTime="10/14/2016 00:40:57">
+    <Property Name="ElementName" Value="[media].[ContactPhoneNumber].[PhoneNumberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactPhoneNumber]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="17920e19-e652-48ce-a606-55395a78a567" ChangeDateTime="10/14/2016 00:41:17">
+    <Property Name="ElementName" Value="[media].[ContactAddress].[AddressId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactAddress]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3f2bd749-560f-42b8-83ec-e157445f2026" ChangeDateTime="10/14/2016 00:41:25">
+    <Property Name="ElementName" Value="[media].[ContactBeat].[ContactBeatId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactBeat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e6cdc72e-b4fc-4c8f-9a23-d1619dbf1c54" ChangeDateTime="10/19/2016 22:58:48">
+    <Property Name="ElementName" Value="[media].[MediaRequest].[AssignedMinistryId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LeadMinistryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5036b242-7032-48cd-9c47-abbda8d94a0b" ChangeDateTime="10/19/2016 22:59:09">
+    <Property Name="ElementName" Value="[media].[MediaRequest].[AssignedUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ResponsibleUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e28219a8-d0e3-49e0-9fe2-6732b05054e7" ChangeDateTime="10/19/2016 22:59:19">
+    <Property Name="ElementName" Value="[media].[MediaRequest].[RequestSubject]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RequestTopic" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="38a8e322-3f8b-48ad-a507-c98434ad3b7e" ChangeDateTime="10/25/2016 21:54:07">
+    <Property Name="ElementName" Value="[media].[ContactCity].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ContactCity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9b2727d2-a071-4cee-8e99-a68611803af4" ChangeDateTime="10/25/2016 21:50:50">
+    <Property Name="ElementName" Value="[media].[WebAddressType].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[WebAddressType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="43d3a2be-13d3-45d5-9608-688bea55af2a" ChangeDateTime="10/25/2016 21:51:29">
+    <Property Name="ElementName" Value="[media].[PhoneType].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PhoneType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9f39acea-ea17-43dc-b2e9-809aba6aef39" ChangeDateTime="10/25/2016 21:51:58">
+    <Property Name="ElementName" Value="[media].[MediaJobTitle].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="61b6d897-0cdc-4475-b6f4-fbc548ce14f3" ChangeDateTime="10/25/2016 21:53:30">
+    <Property Name="ElementName" Value="[media].[Beat].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Beat]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6273ef38-b82b-47bf-9d57-69852802670d" ChangeDateTime="10/25/2016 21:53:57">
+    <Property Name="ElementName" Value="[media].[Ethnicity].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Ethnicity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bfdd520f-985c-44e2-82d7-49137a5294df" ChangeDateTime="10/25/2016 21:54:23">
+    <Property Name="ElementName" Value="[media].[MediaDesk].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaDesk]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7a33ddf6-06f4-4f59-90d4-b2535fe19a78" ChangeDateTime="10/25/2016 21:54:36">
+    <Property Name="ElementName" Value="[media].[MediaLanguage].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaLanguage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f7affcbf-cc25-4003-b424-ab1b16c30470" ChangeDateTime="10/25/2016 21:54:43">
+    <Property Name="ElementName" Value="[media].[MediaType].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MediaType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7c83fbd1-8e32-4a82-8645-475de4f40495" ChangeDateTime="10/25/2016 21:54:48">
+    <Property Name="ElementName" Value="[media].[MinisterialJobTitle].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[MinisterialJobTitle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d45d02a7-9af4-4894-bdbe-508cdbb39520" ChangeDateTime="10/25/2016 21:54:53">
+    <Property Name="ElementName" Value="[media].[PrintCategory].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PrintCategory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4aaad232-b163-404b-a6f3-0d44639a9458" ChangeDateTime="10/25/2016 21:55:00">
+    <Property Name="ElementName" Value="[media].[ProvState].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ProvState]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f9a486d7-5dd3-49e9-8884-96791f85d57a" ChangeDateTime="10/25/2016 21:55:05">
+    <Property Name="ElementName" Value="[media].[PublicationDays].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PublicationDays]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="83bfcf4b-f5db-46bd-bd23-ddbf567ab4c1" ChangeDateTime="10/25/2016 21:55:13">
+    <Property Name="ElementName" Value="[media].[PublicationFrequency].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[PublicationFrequency]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d59f8e11-12c2-467b-8832-1df9cfaec4b6" ChangeDateTime="10/25/2016 21:55:18">
+    <Property Name="ElementName" Value="[media].[Report].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Report]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a6fe93c6-1d6d-489a-b2b9-fe2dd548902f" ChangeDateTime="10/25/2016 21:55:23">
+    <Property Name="ElementName" Value="[media].[SpecialtyPublication].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[SpecialtyPublication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4de3835a-a32b-4b3b-a19d-1f370ecdd6e4" ChangeDateTime="10/25/2016 21:55:41">
+    <Property Name="ElementName" Value="[media].[ElectoralDistrict].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[ElectoralDistrict]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ea8b701a-642f-40cd-b200-2df1d1884b2c" ChangeDateTime="10/25/2016 21:55:45">
+    <Property Name="ElementName" Value="[media].[Distribution].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Distribution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4e4780f5-6721-41c1-89e8-3a9daff6a8af" ChangeDateTime="10/25/2016 21:55:51">
+    <Property Name="ElementName" Value="[media].[Country].[SlotNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[media].[Country]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SortOrder" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c8a667c4-ff9d-4c63-9d53-1a523448b407" ChangeDateTime="11/08/2016 20:42:17">
+    <Property Name="ElementName" Value="[dbo].[Ministry].[EodLastRun]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Ministry]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EodDateTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="30a68ff8-0ba9-4501-8aa9-9c0483f3696e" ChangeDateTime="11/08/2016 20:42:32">
+    <Property Name="ElementName" Value="[dbo].[Ministry].[EodDateTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Ministry]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EodLastRunDateTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ddcc828-17bf-4716-b84b-508af47c3053" ChangeDateTime="11/16/2016 19:16:05">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[Planned]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlannedText" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0de13a55-173c-441c-ba71-e41652ee0fd5" ChangeDateTime="11/16/2016 19:16:16">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[Text]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Past" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9d723bea-d1f1-44a9-9068-1e14f891d583" ChangeDateTime="11/16/2016 19:16:19">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[PlannedText]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Future" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="31e3d002-c642-403d-b1d1-1cfaa4aa2932" ChangeDateTime="11/16/2016 19:16:30">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[Future]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FutureDisplayAs" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fa834aa6-92e2-48c1-86da-272d95e8a104" ChangeDateTime="11/16/2016 19:16:33">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[Past]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PastDisplayAs" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6fae4ccf-c371-4546-b1ef-a870484e88b3" ChangeDateTime="11/16/2016 19:17:29">
+    <Property Name="ElementName" Value="[dbo].[MediaRequestApproach].[PastDisplayAs]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MediaRequestApproach]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DisplayAs" />
+  </Operation>
+</Operations>

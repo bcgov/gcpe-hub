@@ -1,0 +1,14 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/News/Site.master" AutoEventWireup="true" CodeBehind="ReleaseManagement.master.cs" Inherits="Gcpe.Hub.News.ReleaseManagement.ReleaseManagement" %>
+<%@ MasterType TypeName="Gcpe.Hub.News.Site" %>
+
+<asp:Content ID="newsHeadContentPlaceHolder" ContentPlaceHolderID="headContentPlaceHolder" runat="server">
+    <asp:ContentPlaceHolder ID="headContentPlaceHolder" runat="server" />
+    <link href="<%= ResolveUrl("~/News/Content/ReleaseManager.css") %>" rel="stylesheet"/>
+    <script src="<%= ResolveUrl("~/News/ReleaseManagement/Scripts/ReleaseManagement.js") %>" type="text/javascript"></script>
+</asp:Content>
+<asp:Content ID="newsScriptsContentPlaceHolder" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="server">
+    <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="newsFormContentPlaceHolder" ContentPlaceHolderID="formContentPlaceHolder" runat="server">
+    <asp:ContentPlaceHolder ID="formContentPlaceHolder" runat="server" />
+</asp:Content>

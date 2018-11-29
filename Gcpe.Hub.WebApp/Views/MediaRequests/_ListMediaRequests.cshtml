@@ -1,0 +1,114 @@
+﻿
+<div id="update-pill" class="new-request-update-banner btn btn-primary" role="button" data-bind="visible: numNewRequests() > 0, click: scrollToTop">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <span class="glyphicon glyphicon-arrow-up"></span>&nbsp;&nbsp;<span class="badge" data-bind="text: numNewRequests"></span> New Media Requests
+        </li>
+    </ul>
+</div>
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3 style="margin-top: 0;">Media Requests</h3>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 pull-right" id="filter-buttons">
+
+            <span class="text-nowrap">
+
+                <input id="dom-toggle-active-filter" type="checkbox" data-bind="toggleChecked: $root.pollingHandler().filterResponded,
+                                                toggleCheckedOptions:{on:{value:'active',
+                                                                            text:'Active Today'
+                                                                         },
+                                                                      off:{value:'all',
+                                                                            text:'All Requests'
+                                                                         }} "
+                       style="width:130px;">
+                
+                <span data-bind="visible: !userMe().isAdvanced()">
+
+                    &nbsp;&nbsp;
+                    <input id="dom-toggle-ministry-filter" type="checkbox" data-bind="toggleChecked: $root.pollingHandler().filterMinistries,
+                                                toggleCheckedOptions:{on:{value:'my-ministries',
+                                                                            text:$root.MyMinistriesFilterText
+                                                                         },
+                                                                      off:{value:'all',
+                                                                            text:'All Ministries'
+                                                                         }} "
+                           style="width:130px;">
+
+                </span>
+
+            </span>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- ko if: specificEditMediaRequest -->
+<!-- ko template: { name: 'mediarequest-card-template', data: specificEditMediaRequest } -->
+<!-- /ko -->
+<hr />
+<!-- /ko -->
+<!-- ko template: { name: 'mediarequest-card-template', foreach: mediaRequests} -->
+<!-- /ko -->
+
+
+<script type="text/html" id="mediarequest-card-template">
+    <div class="media-request-card media-request-card-clickable row" data-bind="css: { 'new-animate' : ('new-animate' === modifiedStyle()), 'modified-animate' : ('modified-animate' === modifiedStyle()), 'responsible-media-request' : isMyResponsiblity }, routerClick:{path:'request/' + $data.id(), data: $data}">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 media-request-data-panel">
+            @*<span class="hidden-xs hidden-sm" data-bind="with: leadMinistry">
+                <b><span data-bind="text: displayAs"></span></b>
+            </span>
+            <span class="hidden-md hidden-lg" data-bind="with: leadMinistry">
+                <b><span data-bind="text: abbreviation"></span></b>
+            </span>*@
+            @*<div class="indent-left" data-bind="foreach: sharedMinistries"><span class="shared-ministries-card" data-bind="text: ($index() > 0) ? ', ' + abbreviation(): abbreviation()"></span></div>*@
+            <div class="hidden-md hidden-lg" data-bind="text: requestTopic"></div>
+            <span data-bind="with: leadMinistry">
+                <span class="tag badge-padding label label-normal label-outline" data-bind="text: abbreviation"></span>
+            </span>
+            <span data-bind="foreach: sharedMinistries">
+                <span class="tag badge-padding label label-default label-outline" data-bind="text: abbreviation"></span>
+            </span>
+            <span data-bind="with: takeOverRequestMinistry">
+                <span  class="tag badge-padding label label-default label-outline takeover" data-bind="text: abbreviation"></span>
+            </span>
+            <span class="tag badge-padding label label-primary label-outline" data-bind="visible: parentRequest, text: 'Follow-up'"></span>
+            <div name="requesttopic2" class="hidden-xs hidden-sm" data-bind="text: requestTopic"></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 media-request-data-panel">
+            <div class="badge-padding label label-danger label-outline" data-bind="visible: isMajorOutlet()">
+                Major Media
+            </div>
+            <div style="padding-top:4px;" data-bind="foreach: mediaContacts">
+                <div class="hide-long-text">
+                    <span data-bind="text: name"></span> -
+                    <span data-bind="with: job">
+                        <span data-bind="text: (outlet() ? outlet().name : '')"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 media-request-data-panel">
+            <span class="pull-right badge-padding label" data-bind="{text: isOverdue() && !completed() ? 'Overdue' : requestStatus(), css: isOverdue() && !completed() ? 'label-danger-overdue' : requestStatus() == 'Closed' ? 'label-default label-default-close' : 'label-normal label-outline'}"></span><br />
+            <span class="pull-right" name="created"  style="text-align:right;" data-bind="attr: { 'create-date' : createdAt}, css: isOverdue() && !completed() ? 'deadline' : '', momentDateDisplay: {value: isOverdue() && !completed() ? deadlineAt : requestStatus() == 'Closed' ? respondedAt : createdAt, format: isOverdue() && !completed() ? 'CALENDAR' : requestStatus() == 'Closed' ? 'CALENDAR' :'FROMNOW'}"></span><br />
+            <span class="deadline pull-right" data-bind="visible: requestStatus() == 'Open' && !isOverdue(), momentDateDisplay: {value: deadlineAt, format:'CALENDAR'}"></span><br />
+        </div>
+        @*<div class="col-xs-12">
+                <label>Created</label><span data-bind="momentDateDisplay: {value: createdAt, format:'CALENDAR'}"></span>&nbsp;
+                <label>Modified</label><span data-bind="momentDateDisplay: {value: modifiedAt, format:'CALENDAR'}"></span>&nbsp;
+                <label>Requested</label><span data-bind="momentDateDisplay: {value: requestedAt, format:'CALENDAR'}"></span>&nbsp;
+                <label>Responded</label><span data-bind="momentDateDisplay: {value: respondedAt, format:'CALENDAR'}"></span>&nbsp;
+            </div>*@
+    </div>
+</script>
+
+<div style="text-align:center">
+    <span class="ajax-busy-indicator glyphicon glyphicon-alert" style="color:darkred;" data-bind="visible: pollingHandler().pollingErrorHtml"></span>
+    <span class="ajax-busy-indicator glyphicon glyphicon-refresh gly-spin" data-bind="visible: (pollingHandler().pollingErrorHtml() || pollingHandler().infiniteScrollFetching())"></span>
+</div>
+
+<script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>

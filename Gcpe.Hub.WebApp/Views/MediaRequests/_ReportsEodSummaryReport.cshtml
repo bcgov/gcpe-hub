@@ -1,0 +1,38 @@
+﻿<div class="page-header">
+    <h3>End of Day Summary</h3>
+</div>
+
+<form role="form" class="form-horizontal">
+
+    <!-- ko template: { name: 'ministry-eodsummary-template', foreach: eodSummaryMinistries} -->
+    <!-- /ko -->
+    <div class="pull-right" data-bind="visible: !fetchingData()">
+        <a class="btn btn-default disable-on-busy" data-bind="click: function(){window.history.back()}">Cancel</a>
+        <a class="btn btn-primary disable-on-busy" data-bind="click: collectAndSubmitSummary">Email</a>
+    </div>
+
+</form>
+<div class="row">
+    <div class="col-md-12" style="text-align:center">
+        <span class="ajax-busy-indicator glyphicon glyphicon-refresh gly-spin" data-bind="visible: fetchingData"></span>
+    </div>
+</div>
+
+<script type="text/html" id="ministry-eodsummary-template">
+    <div class="media-request-card row">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="min-height:28px">
+            <span class="glyphicon glyphicon-ok-circle pull-left" style="line-height: 20px; font-size: 13pt; color: green" data-bind="visible: (eodState() == 'OK') "></span>
+            <span class="glyphicon glyphicon-exclamation-sign pull-left" style="line-height: 20px; font-size: 13pt; color: red" data-bind="visible: (eodState() == 'ERR') "></span>
+            <span data-bind="with: ministry">&nbsp;&nbsp;<span data-bind="text: displayAs"></span></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 media-request-data-panel" style="padding-left: 15px; min-height:28px">
+            <span data-bind="text: eodStateText"></span>
+        </div>
+     </div>
+
+</script>
+
+
+
+<script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>
+

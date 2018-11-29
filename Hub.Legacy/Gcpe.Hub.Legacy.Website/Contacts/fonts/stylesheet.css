@@ -1,0 +1,29 @@
+﻿/* ==================    Basic Formating    ================== */
+
+@font-face {
+    font-family: 'MyriadProItalic';
+    src: url('myriadpro-it-webfont.eot?') format('eot'),
+         url('myriadpro-it-webfont.woff') format('woff'),
+         url('myriadpro-it-webfont.ttf') format('truetype'),
+         url('myriadpro-it-webfont.svg#webfontfY7qnynf') format('svg');
+    font-weight: normal;
+    font-: normal;
+    }
+
+@font-face {
+    font-family: 'MyriadProRegular';
+    src: url('myriadpro-regular-webfont.eot?') format('eot'),
+         url('myriadpro-regular-webfont.woff') format('woff'),
+         url('myriadpro-regular-webfont.ttf') format('truetype'),
+         url('myriadpro-regular-webfont.svg#webfontjIWyc3z2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyriadProSemibold';
+    src: url('myriadpro-semibold-webfont.eot');
+    src: local('â˜º'), url('myriadpro-semibold-webfont.woff') format('woff'), url('myriadpro-semibold-webfont.ttf') format('truetype'), url('myriadpro-semibold-webfont.svg#webfontfAN9uCFx')         format('svg');
+    font-weight: normal;
+    font-style: normal;
+    }

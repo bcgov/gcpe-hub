@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="ActivityListProvider.ashx.cs" Class="Gcpe.Hub.Calendar.ActivityListProvider" %>

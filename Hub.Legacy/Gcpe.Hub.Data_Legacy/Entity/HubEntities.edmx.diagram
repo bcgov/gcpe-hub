@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="554dfc12397b43f282d7db623c84785d" Name="Diagram1" ZoomLevel="116" >
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Language" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Ministry" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.MinistryLanguage" Width="1.75" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsRelease" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseLanguage" Width="1.875" PointX="10.25" PointY="12.75" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Region" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.RegionLanguage" Width="1.5" PointX="7.5" PointY="13.125" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Sector" Width="2.5" PointX="10.5" PointY="15.75" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.SectorLanguage" Width="1.5" PointX="7.125" PointY="15.5" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.User" Width="1.5" PointX="12.25" PointY="4.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_RegionLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_ReleaseLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_SectorLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryLanguage_Ministry" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_ReleaseLanguage_Release" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_RegionLanguage_Region" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_SectorLanguage_Sector" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMinistry" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseRegion" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseSector" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseLog" Width="1.875" PointX="15.375" PointY="8.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseLog_NewsRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseLog_User" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseImage" Width="2.125" PointX="0.5" PointY="0.875" />
+        <AssociationConnector Association="Gcpe.Hub_Model.MinistrySector" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseImageLanguage" Width="2.25" PointX="5.5" PointY="3.25" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_NewsReleaseImage" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsRelease_Ministry" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseHistory" Width="1.75" PointX="5.25" PointY="18.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseHistory_NewsRelease" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.ApplicationSetting" Width="2" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Blob" Width="1.5" PointX="0.875" PointY="20.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseImage_Blob" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseHistory_Blob" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseCollection" Width="1.875" PointX="4.875" PointY="16.5" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseDocument" Width="2" PointX="6.125" PointY="22.25" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseDocumentContact" Width="2.375" PointX="11" PointY="8.25" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Width="2.25" PointX="8.375" PointY="6.625" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_DocumentLanguage_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_DocumentLanguageContact_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Document_Release" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsRelease_NewsCollection" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_DocumentLanguage_Document" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_DocumentLanguageContact_Document" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsDocumentLanguageContact_NewsDocumentLanguage" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsDocumentLanguage_NewsReleaseImage" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_DocumentLanguage_Image" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Tag" Width="1.5" PointX="5.25" PointY="25.875" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseTag" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_FeatureRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_TopRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Region_FeatureRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Region_TopRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Sector_FeatureRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Sector_TopRelease" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Theme" Width="1.5" PointX="5.25" PointY="7.875" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Theme_FeatureRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Theme_TopRelease" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseTheme" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_Parent" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseType" Width="2" PointX="11" PointY="0.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseType_Language" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseType_NewsReleaseImage" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.MinistryService" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.MinistryTopic" Width="1.5" PointX="3" PointY="23.625" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryService_Ministry" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryTopic_Ministry" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.MinistryNewsletter" Width="2" PointX="3" PointY="29.25" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryNewsletter_Ministry" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.ResourceLink" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Service" Width="1.5" PointX="5.75" PointY="29.5" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseService" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Carousel" Width="1.5" PointX="14.375" PointY="17.5" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.CarouselSlide" Width="1.5" PointX="16.625" PointY="13.375" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.Slide" Width="1.5" PointX="14.375" PointY="13" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_CarouselSlide_Carousel" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_CarouselSlide_Slide" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.SystemUser" Width="1.5" PointX="16.375" PointY="17.125" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_ContactSystemUser" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_EodLastRunSystemUser" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_Ministry_SecondContactSystemUser" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_SystemUser_SystemUser_CreatedBy" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_SystemUser_SystemUser_UpdatedBy" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.NewsReleaseMediaDistribution" Width="2.375" PointX="5.25" PointY="12.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_NewsReleaseMediaDistribution_NewsRelease" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.MediaDistributionList" Width="2.125" PointX="14.375" PointY="0.875" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution1" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution1" />
+        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

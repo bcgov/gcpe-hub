@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_MediaRequestsLayout.cshtml";
+}
+
+<style>
+    .k-datetimepicker {
+        width: 100%;
+        border-radius: 0px;
+    }
+</style>
+
+
+<div id="ko-media-request">
+
+    <div class="alert alert-warning" style="margin-top:20px;display:none;" data-bind="visible: $root.pollingHandler().pollingErrorHtml">
+        <div data-bind="html: $root.pollingHandler().pollingErrorHtml"></div>
+    </div>
+
+    <div class="alert alert-danger" style="margin-top:20px;display:none;" data-bind="visible: $root.saveErrorHtml">
+        <div data-bind="html: $root.saveErrorHtml"></div>
+    </div>
+    <!-- Modal or Navigation confirmations -->
+    <div id="confirmNav" class="modal" role="dialog" data-bind="with: $root.navConfirm()">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-title" data-bind="text: dialogTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <p data-bind="text: dialogText"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: noResponse, text:noLabel, visible:noButtonVisible()"></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: yesResponse, text:yesLabel"></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="display:none;" data-bind="visible: currentUi() === 'dashboard'">
+        <partial name="_ListMediaRequests" />
+    </div>
+
+    <div id="dom-edit-media-request" style="display:none;" data-bind="visible: currentUi() === 'new' || currentUi() === 'edit', with: currentMediaRequest">
+        <partial name="_EditMediaRequest" />
+    </div>
+
+    <div id="dom-search-media-request" style="display:none;" data-bind="visible: currentUi() === 'search', with: searchHandler">
+        <partial name="_SearchMediaRequests" />
+    </div>
+
+    <div id="dom-edit-ministry-contacts" style="display:none;" data-bind="visible: currentUi() === 'ministrycontacts', with: ministryContactsHandler">
+        <partial name="_EditMinistryContacts" />
+    </div>
+
+    <div id="dom-reports-eodreport" style="display:none;" data-bind="visible: currentUi() === 'eodreport', with: reportsHandler">
+        <partial name="_ReportsEodReport" />
+    </div>
+
+    <div id="dom-reports-eodsummaryreport" style="display:none;" data-bind="visible: currentUi() === 'eodsummaryreport', with: reportsHandler">
+        <partial name="_ReportsEodSummaryReport" />
+    </div>
+
+    <partial name="_EditMediaContactModal" />
+
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+
+            var routePath;
+
+            var urlparts = window.location.href.toLowerCase().split('/');
+            if (urlparts.length > 3 && urlparts[3] === 'mediarequests') {
+                urlparts.splice(0, 4);
+                routePath = urlparts.join("/");
+            }
+
+            // After we parse the URL, set the current page to /all
+            history.replaceState({ url: "all" }, null, "all");
+
+            var user = @Html.Raw(ViewBag.UserMe.ToJson());
+            var pvm = new MediaRequest.MediaRequestPvm(user);
+            pvm.initialize(routePath);
+            pvm.initInfiniteScroll();
+            ko.applyBindings(pvm);
+
+            // When the user hits the back button, or when window.history.back() is called.
+            window.onpopstate = function (event) {
+
+                $('input').blur();
+                $('#dom-edit-content').blur();
+                $('#dom-parent').blur();
+                $('#dom-new-ministry').blur();
+                $('#dom-displayMinistry').blur();
+                $('#dom-shared-ministries').blur();
+                $('#dom-responsibleUser').blur();
+                $('#dom-response-edit-content').blur();
+
+                pvm.router.onpopstate(event);
+            };
+
+            window.onbeforeunload = function () {
+                return pvm.navConfirm().confirmPageUnload();
+            }
+            $.ajaxSetup({ cache: false }); //IE caches the get requests...don't do that.
+        });
+    </script>
+}

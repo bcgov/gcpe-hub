@@ -1,0 +1,11 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "2.3.17",
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "10.0.3"
+  },
+  "frameworks": {
+    ".NETStandard1.5": {}
+  }
+}

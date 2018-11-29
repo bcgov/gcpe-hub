@@ -1,0 +1,117 @@
+﻿<div id="editMediaContact" class="modal" tabindex="-1" role="dialog">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" data-bind="with: $root.mediaContactHandler().editMediaContact">
+            <form role="form" class="form-horizontal">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click: function() { window.history.back(); }" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span data-bind="text: ( id() ? 'Edit' : 'Add' ) + ' Contact'"></span></h4>
+                </div>
+                <div class="alert alert-danger" data-bind="visible: $root.mediaContactHandler().pageError">
+                    <div data-bind="html: $root.mediaContactHandler().saveMediaContactErrorHtml"></div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-firstname">First Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="dom-edit-contact-firstname" type="text" data-bind="value:firstName"/> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-lastname">Last Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="dom-edit-contact-lastname" type="text" data-bind="value:lastName"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-title">Title</label>
+                        <div class="col-sm-9">
+                            <select id="dom-edit-contact-title" class="form-control" data-bind="options: $root.mediaContactHandler().contactTitles,
+                                               value: job().title,
+                                               optionsCaption: 'Choose...'"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-email">Email</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="dom-edit-contact-email" type="text" data-bind="trimmedValue:email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-phone">Phone</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="dom-edit-contact-phone" type="text" data-bind="kendoMaskedTextBox: { value: formattedWorkPhone, mask: '000-000-0000 ext 0000' }" />
+                            <span class="validation-error-message" data-bind="validationMessage: workPhone"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-cellphone">Cell</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="dom-edit-contact-cellphone" type="text" data-bind="kendoMaskedTextBox: { value: formattedCellPhone, mask: '000-000-0000' }" />
+                            <span class="validation-error-message" data-bind="validationMessage: cellPhone"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="dom-edit-contact-outlet">Outlet</label>
+                        <div class="col-sm-9 no-validation-border" data-bind="validationElement: job().outlet">
+                            <div data-bind="visible: !$root.mediaContactHandler().editMediaContact().job().outlet()">
+
+                                <div id="dom-outlet-search-combobox" class="ko-combobox clearfix" 
+                                            data-bind="combobox: { dataSource: $root.mediaContactHandler().outlets,
+                                                                         comboboxTemplate: 'outlet-combo-template',
+                                                                         nextFocusSelector: '#dom-edit-mediacontact-save',
+                                                                         paging: false },
+                                                            comboboxValue: $root.mediaContactHandler().editMediaContact().job().outlet"></div>
+                            </div>
+                            <span class="validation-error-message" data-bind="validationMessage: job().outlet"></span>
+                            <div class="form-control gcpeoptionsNoBorder" data-bind="visible: $root.mediaContactHandler().editMediaContact().job().outlet()">
+                                <span class="pull-right" data-bind="click: $root.mediaContactHandler().changeOutlet">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </span>
+                                <span data-bind="text: (job().outlet() ? job().outlet().name : '')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<span data-bind="text: ko.toJSON($data, null, 2)"></span>*@
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bind="click: $root.mediaContactHandler().cancelEditContact">Cancel</button>
+                    <button id="dom-edit-mediacontact-save" type="submit" class="btn btn-primary" data-bind="click: $root.mediaContactHandler().submitEditContact.bind($root)">Save</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script id="outlet-combo-template" type="text/html">
+    <div class="input-group clearfix" data-bind="event: { keydown: onKeyPress }">
+        <input class="form-control searchable-combo" id="dom-edit-contact-outlet-input" autocomplete="off" disableautocomplete="true" data-bind="value: searchText, valueUpdate: 'afterkeydown', hasfocus: searchHasFocus, attr: { placeholder: 'Search...' }" />
+        <span class="input-group-addon" data-bind="click: forceShow, css: { open: dropdownVisible }">&nbsp;&nbsp;<span class="glyphicon glyphicon-search form-control-feedback"></span></span>
+    </div>
+    <div class="ko-dropdown-menu" id="outlet-combo-template-dropdown-menu" data-bind="visible: dropdownVisible, __cb__clickedIn: dropdownVisible">
+        <!-- ko foreach: dropdownItems -->
+        <div class="ko-dropdown-item" data-bind="click: $parent.selected.bind($parent), event: { mouseover: $parent.active.bind($parent), mouseout: $parent.inactive.bind($parent) }, css: { active: navigated, highlighted: active },  __cb__flexibleTemplate: { template: $parent.rowTemplate, data: $data.item }"></div>
+        <!-- /ko -->
+        <div class="ko-dropdown-nav">
+            <button class="btn btn-default" type="button" data-bind="click: function() { $root.mediaContactHandler().createNewOutlet($data.searchText()); }">Create New Outlet</button>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/javascript">
+    $('#editMediaContact').on('shown.bs.modal', function () {
+        if ($('#dom-edit-contact-firstname').is(':visible')) {
+            $('#dom-edit-contact-firstname').focus().select(); // focus & select firstName
+        } else {
+            // Edit mode, firstName & LastName are displayed with span tags
+            $('#dom-edit-contact-title').focus(); // focus to the Title select
+        }
+    })
+
+
+    function createNewOutlet(outletName) {
+        ko.contextFor(document.getElementById("editMediaContact")).$root.mediaContactHandler().createNewOutlet(outletName);
+    }
+</script>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix2">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>17.5895cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.82021cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Subreport Name="DocumentReport">
+                      <ReportName>DocumentReport</ReportName>
+                      <Parameters>
+                        <Parameter Name="DocumentId">
+                          <Value>=Fields!DocumentId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Subreport>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details">
+                <PageBreak>
+                  <BreakLocation>Between</BreakLocation>
+                </PageBreak>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>Documents</DataSetName>
+        <Height>0.82021cm</Height>
+        <Width>17.5895cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>0.32292in</Height>
+    <Style />
+  </Body>
+  <Width>6.925in</Width>
+  <Page>
+    <PageHeight>27.94cm</PageHeight>
+    <PageWidth>21.59cm</PageWidth>
+    <LeftMargin>2.54cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>1.27cm</TopMargin>
+    <BottomMargin>1.905cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="GcpeNewsReleaseManagementTemplates">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>96940456-5bbc-480c-b2ca-b43e0b5e5376</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Release">
+      <Query>
+        <DataSourceName>GcpeNewsReleaseManagementTemplates</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="IsReleased">
+          <DataField>IsReleased</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ReleaseDateTime">
+          <DataField>ReleaseDateTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Gcpe.News.ReleaseManagement.Templates</rd:DataSetName>
+        <rd:TableName>Release</rd:TableName>
+        <rd:ObjectDataSourceType>Gcpe.News.ReleaseManagement.Templates.Release, Gcpe.News.ReleaseManagement.Templates, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="Documents">
+      <Query>
+        <DataSourceName>GcpeNewsReleaseManagementTemplates</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="BodyHtml">
+          <DataField>BodyHtml</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BodyText">
+          <DataField>BodyText</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BodyWithoutLocationHtml">
+          <DataField>BodyWithoutLocationHtml</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Byline">
+          <DataField>Byline</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Contacts">
+          <DataField>Contacts</DataField>
+          <rd:TypeName>System.Collections.Generic.IEnumerableCreateFromEntryAsync1[[Gcpe.News.ReleaseManagement.Templates.Contact, Gcpe.News.ReleaseManagement.Templates, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]</rd:TypeName>
+        </Field>
+        <Field Name="ContactsCount">
+          <DataField>ContactsCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DocumentId">
+          <DataField>DocumentId</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="Headline">
+          <DataField>Headline</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LanguageCode">
+          <DataField>LanguageCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MiddleHeader">
+          <DataField>MiddleHeader</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Organizations">
+          <DataField>Organizations</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PageImage">
+          <DataField>PageImage</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="PageImageAlternateName">
+          <DataField>PageImageAlternateName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PageImageName">
+          <DataField>PageImageName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PageLayout">
+          <DataField>PageLayout</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PageTitle">
+          <DataField>PageTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ReferenceNumber">
+          <DataField>ReferenceNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Release">
+          <DataField>Release</DataField>
+          <rd:TypeName>Gcpe.News.ReleaseManagement.Templates.Release</rd:TypeName>
+        </Field>
+        <Field Name="SubheadlineHtml">
+          <DataField>SubheadlineHtml</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TopLeftHeader">
+          <DataField>TopLeftHeader</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TopRightHeader">
+          <DataField>TopRightHeader</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Gcpe.News.ReleaseManagement.Templates</rd:DataSetName>
+        <rd:TableName>Release</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>Documents</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>Gcpe.News.ReleaseManagement.Templates.Release, Gcpe.News.ReleaseManagement.Templates, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>2d31bad9-7775-42ee-af21-c99ff81e2283</rd:ReportID>
+</Report>

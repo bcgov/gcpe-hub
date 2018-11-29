@@ -1,0 +1,966 @@
+﻿/** smaller than standard 960 (devices and browsers) **/
+/*@media screen and (max-width: 960px), screen and (max-device-width: 960px) {			*/
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+}
+
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait), only screen and (min-width: 610px) and (max-width: 767px) {
+}
+
+
+@media only screen and (max-width: 609px), only screen and (max-device-width: 609px) {
+    /**media609start**/
+    html, body {
+        font-size: 14px;
+    }
+
+    a {
+        font-size: 14px;
+    }
+
+        a:visited {
+            font-size: 14px;
+        }
+
+        a:hover {
+            /*color: #dadada;*/
+            text-decoration: underline;
+        }
+
+    input, select, textarea {
+        font-size: 16px;
+    }
+
+    div.desktop, span.desktop, a.desktop, p.desktop, img.desktop, .desktop {
+        display: none;
+    }
+
+    span.phone, a.phone, p.phone, img.phone, .phone {
+        display: inline;
+    }
+
+    div.phone {
+        display: block;
+    }
+
+    div.common-page-header-top img.bclogo {
+        float: left;
+        height: 30px;
+        margin-top: 9px;
+        margin-left: 15px;
+    }
+
+    /** mobile navigation styles **/
+    a.mobile-menu {
+        cursor: pointer;
+        float: left;
+        margin-left: 5px;
+        margin-top: 9px;
+    }
+
+        a.mobile-menu img {
+            height: 30px;
+        }
+
+    div.mobile-navigation-container {
+        width: 70%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    div.mobile-navigation-container-open {
+        display: block;
+    }
+
+    div.mobile-navigation-container-closed {
+        display: none;
+    }
+
+    div.mobile-page-container-open {
+        position: fixed;
+        left: 70%;
+        top: 0px;
+        width: 100%;
+    }
+
+    div.mobile-navigation-container a, div.mobile-navigation-container a:visited {
+        font-family: MyriadProSemibold;
+        width: 95%;
+        padding: 15px 0% 15px 5%;
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        background-image: url("/Contacts/images/shadow.png"), url("/Contacts/images/BlackNavSlice.png");
+        background-position: top right, top left;
+        background-repeat: repeat-y, repeat-x;
+        height: 20px;
+        margin-bottom: 1px;
+        line-height: 26px;
+        color: #FFFFFF;
+        position: relative;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+        div.mobile-navigation-container a:hover {
+            text-decoration: underline;
+        }
+
+        div.mobile-navigation-container a.selected {
+            color: #FCC336;
+        }
+
+        div.mobile-navigation-container a.report-item, div.mobile-navigation-container a.report-item:visited {
+            background-image: url("/Contacts/images/shadow.png");
+            background-position: top right;
+            background-repeat: repeat-y;
+            background-color: #FFFFFF;
+            height: auto;
+            line-height: 17px;
+            padding: 13px 9% 10px 7%;
+            width: 84%;
+            font-size: 13px;
+            color: #333333;
+            border-bottom: 1px solid #777777;
+            text-transform: none;
+            margin: 0;
+        }
+
+    div.mobile-page-container-open div.bottom-save-bar {
+        left: 70%;
+    }
+
+    div.mobile-navigation-container a div {
+        background: url(../images/UpArrow_mobile.png) no-repeat;
+        width: 7px;
+        height: 4px;
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 22px;
+    }
+
+        div.mobile-navigation-container a div.down {
+            background: url(../images/DownArrow_mobile.png) no-repeat;
+        }
+
+    /** common page style overrides **/
+
+    div.common-page-header {
+        background: url(../images/TopBlueSlice.png) repeat-x;
+        height: 48px;
+        width: 100%;
+    }
+
+    div.common-page-navigation {
+        display: none;
+    }
+
+    div.common-page-960 {
+        width: 100%;
+    }
+
+    div.common-page-breadcrumb {
+        display: none;
+    }
+
+    div.common-page-box-border {
+        border: none;
+        display: block;
+        width: 100%;
+    }
+
+    div.common-admin-control-bar {
+        background: none;
+        height: auto;
+        line-height: 18px;
+        padding-left: 10px;
+    }
+
+        div.common-admin-control-bar span.label {
+        }
+
+        div.common-admin-control-bar span.labelbold {
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+        }
+
+        div.common-admin-control-bar p.mobile-view-name {
+            display: block;
+            text-align: center;
+            color: #000000;
+            font-family: MyriadProSemibold;
+            font-size: 14px;
+            padding: 0;
+            margin: 5px 0;
+        }
+
+    h1 {
+        /*background: url(../images/TopBlackSlice.png) repeat-x;*/
+        background: #000000;
+        height: 32px;
+        line-height: 36px;
+        text-align: center;
+        font-family: MyriadProSemibold;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #ffffff;
+        border-bottom: 3px solid #ffd800;
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+
+    /** tabs overrides **/
+    div.common-page-tabs-inner {
+        padding: 0px;
+    }
+
+    /** tabs and content under tabs **/
+    div.common-page-tabs {
+    }
+
+    div.common-page-tabs a, div.common-page-tabs div {
+    }
+
+        div.common-page-tabs a.num3, div.common-page-tabs div.num3 {
+            width: 34%;
+            padding: 0;
+            margin: 0;
+            border: none;
+            -moz-box-shadow: inset 0 0 1px 0 #666666;
+            -webkit-box-shadow: inset 0 0 1px 0 #666666;
+            box-shadow: inset 0 0 1px 0 #666666;
+        }
+
+        div.common-page-tabs a.first, div.common-page-tabs div.first {
+            width: 32%;
+            margin-right: 1%;
+        }
+
+        div.common-page-tabs a.last, div.common-page-tabs div.last {
+            width: 32%;
+            margin-left: 1%;
+        }
+
+    /** contact/company display **/
+    div.view-panel-show, div.view-panel-hidden {
+        display: block;
+        padding: 0 10px;
+    }
+
+    div.view-panel-header {
+        background: #f1f1f1;
+        font-family: MyriadProSemibold;
+        font-size: 12px;
+        font-weight: bold;
+        height: 25px;
+        line-height: 27px;
+        padding-left: 10px;
+        margin-top: 10px;
+    }
+
+    span.view-label, span.view-value {
+        /*display: inline; */
+    }
+
+    span.view-value {
+        font-size: 14px;
+    }
+
+    span.view-label {
+        /*font-size: 14px;
+        font-family: Arial;
+        line-height: 24px; */
+        font-size: 13px;
+    }
+
+    div.last-updated-date {
+        padding-left: 10px;
+    }
+
+    /*div.info-row {
+        overflow: hidden;
+        margin-top: 10px;
+        width: 96%;
+        padding: 0 2%;
+    }
+
+    div.info-row span.view-label, div.info-row span.view-value {
+        display: inline-block;
+        float: left;
+    }
+
+    div.info-row span.view-value {
+        width: 75%;
+    }
+
+    div.info-row span.view-label {        
+        width: 22%;        
+        text-align: right;
+        margin: 0 3% 0 0;
+    }*/
+
+
+    /** bottom save bar **/
+    div.bottom-save-bar {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        overflow: hidden;
+        padding-top: 5px;
+        background: #FAFAFA;
+    }
+
+    input.common-admin-button, a.common-admin-link-button {
+        font-family: MyriadProSemibold;
+        font-size: 17px;
+        color: #FFFFFF;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    input.common-admin-button2-left, a.common-admin-button2-left {
+        width: 50%;
+        float: left;
+    }
+
+    input.common-admin-button2-right, a.common-admin-button2-right {
+        width: 49%;
+        float: right;
+    }
+
+    input.common-admin-button3 {
+        float: left;
+        width: 31%;
+        margin: 0 1%;
+    }
+
+    a.mobile-share-button {
+        background: url(../images/ShareIcon.png) no-repeat 27% 42% #234075;
+        width: 50%;
+        padding-left: 20%;
+        text-align: left;
+    }
+
+    a.mobile-email-button {
+        background: url(../images/EmailIcon.png) no-repeat 27% 42% #234075;
+        width: 49%;
+        padding-left: 20%;
+        text-align: left;
+    }
+
+    div.bottom-save-bar input.left {
+        margin-left: 0px;
+        width: 32%;
+    }
+
+
+    div.bottom-save-bar input.right {
+        float: right;
+        margin-right: 0px;
+        width: 32%;
+    }
+
+    /** advanced search styles **/
+    div.desktop-advanced-search-container {
+        width: 100%;
+        border: none;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        height: auto;
+        border-radius: 0px;
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border: none;
+    }
+
+        div.desktop-advanced-search-container div.criteria-area {
+            float: none;
+            width: 92%;
+            padding: 0 4%;
+            margin: 0 0 0 0;
+            height: auto;
+        }
+
+        div.desktop-advanced-search-container div.search-label {
+        }
+
+            div.desktop-advanced-search-container div.search-label div.left {
+                float: none;
+            }
+
+            div.desktop-advanced-search-container div.search-label div.right {
+                display: none;
+            }
+
+        div.desktop-advanced-search-container div.criteria-area input[type=text] {
+            width: 100%;
+            padding: 0 1%;
+            height: 33px;
+            line-height: 33px;
+        }
+
+    input#searchValueTextBox {
+        margin-bottom: 10px;
+    }
+
+    div.desktop-advanced-search-container div.criteria-area a.desktop-advanced-search-clear-text {
+        right: 4px;
+        top: 9px;
+    }
+
+    div.desktop-advanced-search-container div.criteria-area select {
+        width: 100%;
+        display: block;
+        margin-bottom: 15px;
+        height: 33px;
+        line-height: 33px;
+    }
+
+    div.desktop-advanced-search-container div.advanced-search-add-button-container {
+        float: none;
+        width: 80px;
+        margin: 0 auto;
+    }
+
+        div.desktop-advanced-search-container div.advanced-search-add-button-container input {
+            margin: 0px;
+            height: 33px;
+            width: 80px;
+        }
+
+    div.desktop-advanced-search-container div.criteria-area input[type=button] {
+        margin: 0 0 10px 0;
+    }
+
+    div.desktop-advanced-search-container div.criteria-selected-area {
+        float: none;
+        height: auto;
+        width: 98%;
+        padding: 10px 1% 0;
+        margin: 0 0 0 0;
+    }
+
+        div.desktop-advanced-search-container div.criteria-selected-area div.criteria-selected-items {
+            height: auto;
+            width: 94%;
+            padding-bottom: 50px;
+            padding-left: 3%;
+            padding-right: 3%;
+        }
+
+        div.desktop-advanced-search-container div.criteria-selected-area div.item {
+            width: 97%;
+            padding: 7px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+    div.desktop-advanced-search-container div.search-submit {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        float: none;
+        position: relative;
+        bottom: 0px;
+        width: 100%;
+        height: 80px;
+        border-top: 1px solid #dadada;
+    }
+
+        div.desktop-advanced-search-container div.search-submit div.save-button-container {
+            display: none;
+        }
+
+        div.desktop-advanced-search-container div.search-submit #rbContainer {
+            width: 180px;
+            margin: 10px auto;
+            bottom: 50px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+            div.desktop-advanced-search-container div.search-submit #rbContainer input {
+                margin-left: 20px;
+            }
+
+                div.desktop-advanced-search-container div.search-submit #rbContainer input.first {
+                    margin-left: 0px;
+                }
+
+        div.desktop-advanced-search-container div.search-submit div.button-container {
+            position: relative;
+            overflow: auto;
+        }
+
+            div.desktop-advanced-search-container div.search-submit div.button-container input.search-button {
+                width: 49%;
+                padding-left: 20%;
+                float: right;
+                height: auto;
+                margin-top: 0;
+                margin-left: 0px;
+                line-height: 18px;
+                background-position: 27% 42%;
+                border-radius: 0px;
+                -moz-border-radius: 0px;
+                -webkit-border-radius: 0px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+
+    /** search results **/
+    div.phone-search-top {
+        color: #000000;
+        font-size: 14px;
+        font-family: MyriadProSemibold;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+        div.phone-search-top a.save-report-button {
+            font-size: 14px;
+            float: left;
+        }
+
+        div.phone-search-top a.refine-results-link {
+            float: right;
+        }
+
+        div.phone-search-top p {
+            text-align: center;
+            margin: 10px 0 5px;
+            padding: 0;
+        }
+
+    div.search-result-item {
+        line-height: 24px;
+        font-size: 14px;
+        font-family: Arial;
+        color: #000000;
+        padding: 10px 10px;
+        position: relative;
+    }
+
+    div.phone div.odd {
+        background-color: #FAFAFA;
+    }
+
+    div.search-result-item div.search-result-info {
+        width: 92%;
+    }
+
+        div.search-result-item div.search-result-info div.row {
+            overflow: hidden;
+        }
+
+            div.search-result-item div.search-result-info div.row a, div.search-result-item div.search-result-info div.row a:visited {
+                font-weight: normal;
+            }
+
+            div.search-result-item div.search-result-info div.row div.search-label {
+                float: left;
+                width: 25%;
+                text-align: right;
+                margin-right: 3%;
+                color: #555555;
+                font-weight: bold;
+                font-size: 13px;
+                font-family: MyriadProSemibold;
+            }
+
+            div.search-result-item div.search-result-info div.row div.search-value {
+                float: left;
+                width: 72%;
+                word-wrap: break-word;
+            }
+
+    div.search-result-item div.result-arrow {
+        position: absolute;
+        right: 0px;
+        top: 40%;
+        width: 44px;
+        height: 44px;
+    }
+
+        div.search-result-item div.result-arrow a img {
+            width: 44px;
+            height: 44px;
+        }
+
+    div.no-items-found {
+        margin: 15px 0;
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+        font-family: MyriadProSemibold;
+    }
+
+    div.search-back-to-top {
+        position: fixed;
+        right: 10px;
+        bottom: 50px;
+    }
+
+        div.search-back-to-top a img {
+            width: 27px;
+            height: 16px;
+        }
+
+
+    div.mini-tab-bar {
+        /*NTK - old if we need it again
+            overflow: hidden;
+        font-size: 10px;
+        margin: 10px 0px;
+            */
+        -moz-box-shadow: inset 0 0 1px 0 #666666;
+        -webkit-box-shadow: inset 0 0 1px 0 #666666;
+        box-shadow: inset 0 0 1px 0 #666666;
+        height: 30px;
+        line-height: 30px;
+        color: #666666;
+        font-family: MyriadProSemibold;
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 10px;
+        margin-top: 15px;
+    }
+
+    div.mini-tab-bar-top {
+        margin-top: 0px;
+    }
+
+    div.mini-tab-bar a {
+        width: 33%;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 11px;
+    }
+
+    div.mini-tab-bar4 a {
+        width: 25%;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 11px;
+    }
+
+    a.mini-tab {
+        display: block;
+        background: #cccccc;
+        color: #666666;
+        float: left;
+        /*padding:5px 25px;*/
+        /*margin-right:5px;*/
+        color: #666666;
+        text-decoration: none;
+    }
+
+    a.mini-tab-on {
+        display: block;
+        background: #666666;
+        color: #cccccc;
+        float: left;
+        /*padding:5px 25px;
+        margin-right:5px;*/
+        color: #cccccc;
+        text-decoration: none;
+    }
+
+    /** home page **/
+
+    div.home-container div.search-label {
+        font-family: MyriadProSemibold;
+        font-size: 12px;
+        color: #666666;
+        margin: 0 2% 3px;
+    }
+
+    div.home-container div.box-container {
+        height: 35px;
+        /*border: 1px solid #dadada;*/
+        width: 96%;
+        margin: 0 2%;
+        position: relative;
+    }
+
+    div.home-container div.search-button a.right-chevron {
+        margin: 10px 2%;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    div.home-container div.box-container div.left {
+        margin-right: 2%;
+        width: 83%;
+        float: left;
+        position: relative;
+    }
+
+        /** overrides for right padding on default.aspx*/
+        div.home-container div.box-container div.left input {
+            width: 88%;
+            padding-left: 2%;
+            padding-right: 10%;
+            height: 33px;
+            line-height: 33px;
+        }
+
+        div.home-container div.box-container div.left a {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+        }
+
+            div.home-container div.box-container div.left a img {
+                width: 18px;
+                height: 18px;
+            }
+
+    div.home-container div.box-container div.search {
+        float: right;
+        right: 0px;
+        top: 0px;
+        height: 100%;
+        width: 15%;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        background: #234075;
+    }
+
+        div.home-container div.box-container div.search a.home-search {
+            width: 100%;
+            height: 100%;
+            background: url(../images/SearchIcon.png) 50% 50% no-repeat;
+            display: inline-block;
+        }
+
+
+    /** home page reports container **/
+    div.home-container div.reports {
+        position: relative;
+    }
+
+        div.home-container div.reports div.home-reports-header a,
+        div.home-container div.reports div.home-reports-header a:visited {
+            font-family: MyriadProSemibold;
+            width: 96%;
+            padding: 15px 0% 15px 4%;
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            /*background-image: url("/Contacts/images/shadow.png"), url("/Contacts/images/BlackNavSlice.png");
+        background-position: top right, top left;
+        background-repeat: repeat-y, repeat-x;*/
+            background: #333333;
+            height: 50px;
+            margin-bottom: 1px;
+            line-height: 26px;
+            color: #FFFFFF;
+            position: relative;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        div.home-container div.reports div.home-reports-subcontainer {
+            width: 100%;
+            position: relative;
+        }
+
+            div.home-container div.reports div.home-reports-subcontainer a, div.home-container div.reports div.home-reports-subcontainer a:visited,
+            div.home-container div.reports div.home-reports-subcontainer div.no-reports {
+                background-color: #FFFFFF;
+                display: block;
+                height: auto;
+                line-height: 17px;
+                padding: 13px 9% 10px 4%;
+                width: 87%;
+                font-size: 13px;
+                color: #333333;
+                /*border-bottom: 1px solid #dadada;*/
+                text-transform: none;
+                margin: 0;
+                text-decoration: none;
+                position: relative;
+            }
+
+                div.home-container div.reports div.home-reports-subcontainer a,
+                div.home-container div.reports div.home-reports-subcontainer a:visited {
+                    font-weight: bold;
+                }
+
+                    div.home-container div.reports div.home-reports-subcontainer a:hover {
+                        text-decoration: underline;
+                    }
+
+                    div.home-container div.reports div.home-reports-subcontainer a.odd {
+                        background-color: #f1f1f1;
+                    }
+
+            div.home-container div.reports div.home-reports-subcontainer div.no-reports {
+                text-align: center;
+            }
+
+            div.home-container div.reports div.home-reports-subcontainer a img {
+                position: absolute;
+                right: 4%;
+                top: 10px;
+                z-index: 10;
+                width: 18px;
+                height: 18px;
+            }
+
+        div.home-container div.reports div.home-reports-header div {
+            background: url(../images/UpArrow_mobile.png) no-repeat;
+            width: 15px;
+            height: 11px;
+            display: block;
+            position: absolute;
+            right: 4%;
+            top: 19px;
+        }
+
+            div.home-container div.reports div.home-reports-header div.down {
+                background: url(../images/DownArrow_mobile.png) no-repeat;
+            }
+
+    /** save search dialog **/
+    div#saveReportDialogBox {
+        width: auto;
+    }
+
+        div#saveReportDialogBox input[type=text] {
+            height: 33px;
+            line-height: 33px;
+        }
+
+    div.common-page-tabs-inner-border {
+        border: none;
+        border-radius: 0px;
+    }
+
+    /** typedown stuff **/
+    div.typedown-results div.typedown-result {
+        cursor: pointer;
+        padding: 10px 0;
+    }
+
+    div.typedown-results div.selected, div.typedown-results div:hover {
+        background: #d8d8d8;
+    }
+
+    div.typedown-result span.result-original,
+    div.typedown-result span.result-url {
+        display: none;
+    }
+
+    div.typedown-results {
+        position: absolute;
+        background: #ffffff;
+        padding: 10px;
+        border: solid #cccccc 1px;
+        z-index: 1000;
+        top: 35px;
+        left: 0px;
+        width: 98%;
+        overflow: auto;
+        overflow-x: hidden;
+        font-size: 14px;
+    }
+
+    /** view outlet/cmpany **/
+    div.mailing-address-header {
+        margin-top: 10px;
+    }
+
+
+    /** loading module **/
+    #loadingModule .modal-dialog{
+        width: 250px;
+    }
+
+    #loadingModule div.text {
+        width: 100%;
+        margin: 0;
+    }
+
+        #loadingModule div.text h1 {
+            text-align: center;
+            background: none;
+            border: none;
+            color: #000000;
+        }
+    /**media609end**/
+}
+
+/** mobile portrait size to mobile landscape size **/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+
+    a.right-chevron {
+        background: url(../images/BlueChevronsRight@2x.png) 100% 50% no-repeat;
+        background-size: 12px 8px;
+        display: inline-block;
+    }
+
+    a.left-chevron {
+        background: url(../images/BlueChevronsLeft@2x.png) 0% 50% no-repeat;
+        background-size: 12px 8px;
+        display: inline-block;
+    }
+
+    a.save-report-button {
+        line-height: 17px;
+        height: 17px;
+        display: inline-block;
+    }
+
+    a.save-report-button {
+        background: url(../images/SaveIcon@2x.png) 0% 50% no-repeat;
+        background-size: 16px 16px;
+    }
+
+    div.home-container div.box-container div.search a.home-search {
+        background: url(../images/SearchIcon@2x.png) 50% 50% no-repeat;
+        background-size: 20px 19px;
+    }
+
+    div.home-container div.reports div.home-reports-header div {
+        background: url(../images/UpArrow_mobile@2x.png) no-repeat;
+        background-size: 15px 11px;
+    }
+
+        div.home-container div.reports div.home-reports-header div.down {
+            background: url('/images/DownArrow_mobile@2x.png') no-repeat;
+            background-size: 15px 11px;
+        }
+
+    div.desktop-advanced-search-container div.search-submit div.button-container input.search-button {
+        background-image: url(../images/SearchIcon@2x.png);
+        background-size: 20px 19px;
+    }
+
+    a.mobile-share-button {
+        background-image: url(../images/ShareIcon@2x.png);
+        background-size: 16px 12px;
+    }
+
+    a.mobile-email-button {
+        background-image: url(../images/EmailIcon@2x.png);
+        background-size: 16px 12px;
+    }
+}
+
+@media only screen and (max-width: 300px), only screen and (max-device-width: 300px) {
+
+    div.common-page-header-top img.bclogo {
+        margin-left: 10px;
+    }
+}

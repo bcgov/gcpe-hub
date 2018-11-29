@@ -1,0 +1,28 @@
+﻿{
+  "SubscribeBaseUri": "",
+  "CommOffice": "",
+  "GCPEMediaGUID": "",
+  "ActiveDirectoryDomain": "",
+  "TimeZoneId": "",
+  "NoReplyAddress": "",
+  "FaviconImg" : "",
+  "ConnectionStrings": {
+    "HubDbContext": ""
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "MailProvider": {
+    "SmtpHost": ""
+  },
+  "SearchService": {
+    "AccessToken": "",
+    "Enable": false,
+    "BaseUri": ""
+  }
+}

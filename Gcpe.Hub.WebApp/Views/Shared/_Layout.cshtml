@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @*<base href="@(ViewBag.baseHref + Request.ApplicationPath.TrimEnd('/') + "/")">*@
+    <base href="@(ViewBag.baseHref + "/")">
+
+    <link rel="icon" href="@(ViewBag.FaviconImg)" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@(ViewBag.Title + (string.IsNullOrEmpty(ViewBag.Title) ? "" : " - ") + "Hub")</title>
+
+    <environment names="Development,Testing">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        @*TODO: Orignal code had new CssRewriteUrlTransform() as an option when registering kendo.common-bootstrap.min.css.  Determine if it's needed here.*@
+        <link rel="stylesheet" href="~/lib/kendo-ui-core/styles/kendo.common-bootstrap.min.css" />
+        @*TODO: Orignal code had new CssRewriteUrlTransform() as an option when registering kendo.bootstrap.min.css.  Determine if it's needed here.*@
+        <link rel="stylesheet" href="~/lib/kendo-ui-core/styles/kendo.bootstrap.min.css" />
+        <link rel="stylesheet" href="~/extras/knockout-combo/knockout-combobox.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.css" />
+        <link rel="stylesheet" href="~/extras/bootstrap-toggle/bootstrap-toggle.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        @*TODO: Orignal code had new CssRewriteUrlTransform() as an option when registering kendo.common-bootstrap.min.css.  Determine if it's needed here.*@
+        <link rel="stylesheet" href="~/lib/kendo-ui-core/styles/kendo.common-bootstrap.min.css" />
+        @*TODO: Orignal code had new CssRewriteUrlTransform() as an option when registering kendo.bootstrap.min.css.  Determine if it's needed here.*@
+        <link rel="stylesheet" href="~/lib/kendo-ui-core/styles/kendo.bootstrap.min.css" />
+        <link rel="stylesheet" href="~/extras/knockout-combo/knockout-combobox.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="~/extras/bootstrap-toggle/bootstrap-toggle.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" />
+    </environment>
+
+    <environment names="Development,Testing">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/extras/jquery.ns-autogrow/jquery.ns-autogrow.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-validation/dist/knockout.validation.js"></script>
+        <script src="~/lib/kendo-ui-core/js/kendo.ui.core.min.js"></script>
+        <script src="~/lib/knockout-kendo/build/knockout-kendo.js"></script>
+        <script src="~/lib/moment/moment.js"></script>
+        <script src="~/extras/knockout-combo/knockout-combobox.js"></script>
+        <script src="~/extras/modernizr/modernizr-2.8.3.js"></script>
+        <script src="~/extras/bootstrap-toggle/bootstrap-toggle.js"></script>
+        <script asp-src-include="~/js/**/*.js" asp-append-version="true"></script>
+        <script asp-src-include="~/ts/**/*.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/extras/jquery.ns-autogrow/jquery.ns-autogrow.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-validation/dist/knockout.validation.min.js"></script>
+        <script src="~/lib/kendo-ui-core/js/kendo.ui.core.min.js"></script>
+        <script src="~/lib/knockout-kendo/build/knockout-kendo.min.js"></script>
+        <script src="~/lib/moment/min/moment.min.js"></script>
+        <script src="~/extras/knockout-combo/knockout-combobox.js"></script>
+        <script src="~/extras/modernizr/modernizr-2.8.3.js"></script>
+        <script src="~/extras/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+        <script asp-src-include="~/js/**/*.js" asp-append-version="true"></script>
+        <script asp-src-include="~/ts/**/*.js" asp-append-version="true"></script>
+    </environment>
+
+</head>
+<body>
+    <script type="text/javascript">
+        ko.validation.init({
+            registerExtenders: true,
+            messagesOnModified: true,
+            insertMessages: true,
+            parseInputAttributes: true,
+            messageTemplate: null,
+            decorateInputElement: true,
+            decorateElementOnModified: true,
+            errorsAsTitle: false,
+            errorElementClass: 'validation-error-input-element',
+            errorMessageClass: 'validation-error-message'
+
+        }, true);
+    </script>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">@ViewBag.SectionName</div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @RenderSection("menu")
+                </ul>
+                <p class="nav navbar-text navbar-right hidden-xs">@ViewBag.UserMe.DisplayAs</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @*  TODO: A Busy Indicator that shows we're waiting on the server!
+            <span id="dom-page-busy" class="page-busy-indicator glyphicon glyphicon-refresh gly-spin"></span>*@
+
+        @RenderBody()
+
+        <div style="clear: both">&nbsp;</div>
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

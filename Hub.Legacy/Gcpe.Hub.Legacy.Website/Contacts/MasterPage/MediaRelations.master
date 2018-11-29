@@ -1,0 +1,140 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="MasterPage_MediaRelations" CodeBehind="MediaRelations.master.cs" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><asp:Literal runat="server" ID="titleTag" /></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="<%= ResolveUrl("~/Contacts/fonts/stylesheet.css") %>" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Contacts/css/print.css") %>" media="print" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/kendo/2016.2.504/kendo.common.min.css") %>" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/kendo/2016.2.504/kendo.default.min.css") %>" />
+
+    <!--Scripts are shared with Gcpe.Hub modules-->
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery-2.2.3.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery-ui-1.11.4.min.js") %>"></script> <!-- datepicker and select combo boxes -->
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.ui.core.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.popup.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.data.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.list.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.multiselect.min.js") %>"></script>
+
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/themes/base/all.css") %>" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="<%= ResolveUrl("~/Content/bootstrap.min.css") %>" />
+    
+    <link href="<%= ResolveUrl("~/Contacts/css/Common.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Contacts/css/MediaRelations.css") %>" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="<%= ResolveUrl("~/Contacts/js/MediaRelations.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Contacts/js/multiselector.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Contacts/js/multiselectorDuplicate.js") %>"></script>
+
+    <script type="text/javascript" src="<%= ResolveUrl("~/Contacts/js/jquery.activity-indicator-1.0.0.min.js") %>"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <asp:Literal ID="printStyleArea" runat="server" />
+
+    <script type="text/javascript">
+
+        $.datepicker.setDefaults({
+            dateFormat: "yy/mm/dd"
+        });
+
+        $(document).ready(function() {
+            addDropDownFixToElements();
+        });
+
+    </script>
+</head>
+<body>
+    <asp:Panel ID="printButtonPanel" runat="server">
+        <p>
+            <input type="button" class="print-preview-print-button" value="Print" onclick="print();" />
+        </p>
+        <style type="text/css" media="print">
+            .print-preview-print-button {
+                display: none;
+            }
+        </style>
+    </asp:Panel>
+    <form id="form1" runat="server">
+
+        <div class="common-page-header noprint">
+            <div class="common-page-960">
+                <div class="common-page-header-top">
+
+                    <a href="<%= ResolveUrl("~/Contacts") %>" class="mobile-menu phone">
+                        <img runat="server" src="~/Contacts/images/HomeButton.png" border="0" alt="home" /></a>
+
+                    <img runat="server" ID="DesktopLogo" runat="server" class="logo desktop" alt="logo / media relations site" border="0" />
+                    <img runat="server" ID="PhoneLogo" runat="server" class="logo phone" alt="logo / media relations site" border="0" />
+                </div>
+
+                <div class="common-page-navigation">
+                    <asp:Literal runat="server" ID="navigationLiteral" />
+                </div>
+            </div>
+        </div>
+
+        <div class="common-page-960 pagetext">
+            <div class="common-page-breadcrumb noprint">
+                <asp:Literal runat="server" ID="breadcrumbLiteral" />
+            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />
+        </div>
+
+        <script type="text/javascript">
+            <asp:Literal ID="ScriptLiteral" runat="Server" />
+        </script>
+
+
+        <div class="bottom-filler-div" style=""></div>
+
+        <div id="loadingModule" class="modal fade">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <style type="text/css">
+                        .square {
+                            width: 60px;
+                            height: 80px;
+                            padding: 10px 0;
+                            color: #000;
+                            margin: 0;
+                        }
+                    </style>
+                    <div style="width: 60px; margin: 0 auto;">
+                        <div class="square" id="spinningElement"></div>
+                    </div>
+
+                    <div class='text'>
+                        <h3>SEARCHING...</h3>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('#spinningElement').activity();
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function ShowSearchLoadingModule() {
+                $("#loadingModule").modal('show')
+            }
+        </script>
+
+
+        <div>
+            <iframe id="printFrame" name="printFrame" style="visibility: hidden; border: 0px; width: 0px; height: 0px;" frameborder="0"></iframe>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Title = "Media Requests";
+    ViewBag.SectionName = "Media Requests";
+}
+
+@section menu {
+
+    <li data-bind="css:{active:currentUi() === 'dashboard'}">
+        <a href="all" class="hidden-xs"
+           data-bind="routerClick: {path:'all'}">Queue</a>
+    </li>
+    <li data-bind="css:{active:currentUi() === 'dashboard'}">
+        <a href="all" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+           data-bind="routerClick: {path:'all'}">Queue</a>
+    </li>
+
+    <li data-bind="css:{active:currentUi() === 'search'}">
+        <a href="request/search" class="hidden-xs"
+           data-bind="routerClick: {path:'search'}">Search</a>
+    </li>
+    <li data-bind="css:{active:currentUi() === 'search'}">
+        <a href="request/search" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+           data-bind="routerClick: {path:'search'}">Search</a>
+    </li>
+
+    @if (!ViewBag.UserMe.IsAdvanced)
+    //visible: myMinistries().length > 0
+    {
+        <li data-bind="css:{active:currentUi() === 'eodreport'}">
+            <a href="reports/eod" class="hidden-xs"
+               data-bind="routerClick: {path:'reports/eod'}">Report</a>
+        </li>
+        <li data-bind="css:{active:currentUi() === 'eodreport'}">
+            <a href="reports/eod" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+               data-bind="routerClick: {path:'reports/eod'}">Report</a>
+        </li>
+    }
+
+    @if (ViewBag.UserMe.IsAdvanced)
+    //visible: userMe().isAdvanced()
+    {
+        <li data-bind="css:{active:currentUi() === 'eodsummaryreport'}">
+            <a href="reports/eodsummary" class="hidden-xs"
+               data-bind="routerClick: {path:'reports/eodsummary'}">Report</a>
+        </li>
+        <li data-bind="css:{active:currentUi() === 'eodsummaryreport'}">
+            <a href="reports/eodsummary" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+               data-bind="routerClick: {path:'reports/eodsummary'}">Report</a>
+        </li>
+    }
+
+    <li data-bind="css:{active:currentUi() === 'ministrycontacts'}">
+        <a href="contacts" class="hidden-xs"
+           data-bind="routerClick: {path:'contacts'}">Contacts</a>
+    </li>
+    <li data-bind="css:{active:currentUi() === 'ministrycontacts'}">
+        <a href="contacts" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+           data-bind="routerClick: {path:'contacts'}">Contacts</a>
+    </li>
+
+@if (ViewBag.UserMe.IsEditor)
+//visible: userMe().isEditor() && myMinistries().length > 0
+{
+    <li data-bind="css:{active:currentUi() === 'new'}">
+        <a href="request/new" class="hidden-xs"
+           data-bind="routerClick: {path:'request/new'}">New</a>
+    </li>
+    <li data-bind="css:{active:currentUi() === 'new'}">
+        <a href="request/new" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"
+           data-bind="routerClick: {path:'request/new'}">New</a>
+    </li>
+}
+
+    @*<li style="color:#fff;">
+            #<span data-bind="text: mediaRequests().length"></span>
+        </li>*@
+}
+
+@RenderBody()
+
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+}

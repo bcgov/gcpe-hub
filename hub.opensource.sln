@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hub", "Hub", "{F73C50E6-D953-4915-9BAD-DC3C4B816E08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcpe.Hub.WebApp", "Gcpe.Hub.WebApp\Gcpe.Hub.WebApp.csproj", "{90E18098-98B9-4792-9794-8EC032D5DE49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcpe.Hub.WebApp.ApiTests", "Gcpe.Hub.WebApp.ApiTests\Gcpe.Hub.WebApp.ApiTests.csproj", "{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcpe.Hub.Data", "Gcpe.Hub.Data\Gcpe.Hub.Data.csproj", "{1AB0D2F8-954B-4B73-A74B-8E28F60839BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service Clients", "Service Clients", "{87ADD529-911B-424B-ACBB-4CC26DC89E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcpe.NewsOnDemand.Client", "Gcpe.NewsOnDemand.Client\Gcpe.NewsOnDemand.Client.csproj", "{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90E18098-98B9-4792-9794-8EC032D5DE49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E18098-98B9-4792-9794-8EC032D5DE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E18098-98B9-4792-9794-8EC032D5DE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E18098-98B9-4792-9794-8EC032D5DE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB0D2F8-954B-4B73-A74B-8E28F60839BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB0D2F8-954B-4B73-A74B-8E28F60839BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB0D2F8-954B-4B73-A74B-8E28F60839BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB0D2F8-954B-4B73-A74B-8E28F60839BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{90E18098-98B9-4792-9794-8EC032D5DE49} = {F73C50E6-D953-4915-9BAD-DC3C4B816E08}
+		{A6AC4666-EA3A-4218-8FDD-B36DF2AE0D6E} = {F73C50E6-D953-4915-9BAD-DC3C4B816E08}
+		{1AB0D2F8-954B-4B73-A74B-8E28F60839BE} = {F73C50E6-D953-4915-9BAD-DC3C4B816E08}
+		{C34F6D4A-6AB3-4309-9D87-EF3F634D7F46} = {87ADD529-911B-424B-ACBB-4CC26DC89E44}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C00D1997-2D88-4C82-B9E2-7F6C21D15EEC}
+	EndGlobalSection
+EndGlobal

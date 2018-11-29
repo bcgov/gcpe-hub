@@ -1,0 +1,12 @@
+﻿.noprint {
+    display:none !important;
+}
+.printonly {
+    display:block !important;
+}
+h1, h2, h3, table.common-admin-table th, div.common-page-manageitems-count {
+    font-family:Arial !important;
+}
+span.gradient item {
+    font-weight:bold;
+}

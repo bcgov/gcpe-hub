@@ -1,0 +1,3142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Gcpe.Hub_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="FilterDisplayValue" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HiddenColumns" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ApplicationSetting">
+          <Key>
+            <PropertyRef Name="SettingName" />
+          </Key>
+          <Property Name="SettingName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SettingValue" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Data" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carousel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PublishDateTime" Type="datetimeoffset" Precision="7" />
+          <Property Name="Timestamp" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarouselSlide">
+          <Key>
+            <PropertyRef Name="CarouselId" />
+            <PropertyRef Name="SlideId" />
+          </Key>
+          <Property Name="CarouselId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SlideId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaDistributionList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ministry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Abbreviation" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="MinisterEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MinisterPhotoUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="MinisterPageHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="MiscHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiscRightHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TwitterUsername" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FlickrUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="YoutubeUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AudioUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FacebookEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="YoutubeEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AudioEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TopReleaseId" Type="uniqueidentifier" />
+          <Property Name="FeatureReleaseId" Type="uniqueidentifier" />
+          <Property Name="MinisterAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MinisterName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MinisterSummary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MinistryUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="ContactUserId" Type="int" />
+          <Property Name="SecondContactUserId" Type="int" />
+          <Property Name="WeekendContactNumber" Type="varchar" MaxLength="20" />
+          <Property Name="EodFinalizedDateTime" Type="datetimeoffset" Precision="7" />
+          <Property Name="EodLastRunUserId" Type="int" />
+          <Property Name="EodLastRunDateTime" Type="datetimeoffset" Precision="7" />
+          <Property Name="DisplayAdditionalName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MinistryLanguage">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MinistryNewsletter">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="NewsletterId" />
+          </Key>
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewsletterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MinistrySector">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="SectorId" />
+          </Key>
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SectorId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MinistryService">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="LinkText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LinkUrl" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MinistryTopic">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="LinkText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LinkUrl" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsRelease">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Timestamp" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="ReleaseType" Type="int" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CollectionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="YearRelease" Type="int" />
+          <Property Name="MinistryId" Type="uniqueidentifier" />
+          <Property Name="MinistryRelease" Type="int" />
+          <Property Name="Reference" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActivityId" Type="int" />
+          <Property Name="ReleaseDateTime" Type="datetime" />
+          <Property Name="PublishDateTime" Type="datetimeoffset" Precision="7" />
+          <Property Name="IsCommitted" Type="bit" Nullable="false" />
+          <Property Name="IsPublished" Type="bit" Nullable="false" />
+          <Property Name="PublishOptions" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="HasMediaAssets" Type="bit" Nullable="false" />
+          <Property Name="NodSubscribers" Type="int" />
+          <Property Name="MediaSubscribers" Type="int" />
+          <Property Name="AtomId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AssetUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="RedirectUrl" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="PageLayout" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocumentContact">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LanguageId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="DocumentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="Information" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocumentLanguage">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="DocumentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="PageImageId" Type="uniqueidentifier" />
+          <Property Name="PageTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Organizations" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Headline" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Subheadline" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Byline" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="BodyHtml" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseHistory">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="PublishDateTime" />
+            <PropertyRef Name="MimeType" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PublishDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="MimeType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MimeType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseImageLanguage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="ImageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="AlternateName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseLanguage">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SocialMediaSummary" Type="nvarchar(max)" />
+          <Property Name="SocialMediaHeadline" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NewsReleaseLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseMediaDistribution">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="MediaDistributionListId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MediaDistributionListId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseMinistry">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="MinistryId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MinistryId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseSector">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="SectorId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SectorId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseService">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseTag">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TagId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseTheme">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="ThemeId" />
+          </Key>
+          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ThemeId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsReleaseType">
+          <Key>
+            <PropertyRef Name="PageTitle" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="PageTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="ReleaseType" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="PageLayout" Type="int" Nullable="false" />
+          <Property Name="PageImageId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ResourceLink">
+          <Key>
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="LinkText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LinkUrl" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="MiscHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiscRightHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TwitterUsername" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FlickrUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="YoutubeUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AudioUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FacebookEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="YoutubeEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AudioEmbedHtml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TopReleaseId" Type="uniqueidentifier" />
+          <Property Name="FeatureReleaseId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="SectorLanguage">
+          <Key>
+            <PropertyRef Name="SectorId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="SectorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Headline" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ActionUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="FacebookPostUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="Justify" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="TopReleaseId" Type="uniqueidentifier" />
+          <Property Name="FeatureReleaseId" Type="uniqueidentifier" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CarouselSlide_Carousel">
+          <End Role="Carousel" Type="Self.Carousel" Multiplicity="1" />
+          <End Role="CarouselSlide" Type="Self.CarouselSlide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carousel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarouselSlide">
+              <PropertyRef Name="CarouselId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarouselSlide_Slide">
+          <End Role="Slide" Type="Self.Slide" Multiplicity="1" />
+          <End Role="CarouselSlide" Type="Self.CarouselSlide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slide">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarouselSlide">
+              <PropertyRef Name="SlideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_Release">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseDocument" Type="Self.NewsReleaseDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocument">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguage_Document">
+          <End Role="NewsReleaseDocument" Type="Self.NewsReleaseDocument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseDocumentLanguage" Type="Self.NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguage_Image">
+          <End Role="NewsReleaseImageLanguage" Type="Self.NewsReleaseImageLanguage" Multiplicity="0..1" />
+          <End Role="NewsReleaseDocumentLanguage" Type="Self.NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="ImageId" />
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="PageImageId" />
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="NewsReleaseDocumentLanguage" Type="Self.NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguageContact_Document">
+          <End Role="NewsReleaseDocument" Type="Self.NewsReleaseDocument" Multiplicity="1" />
+          <End Role="NewsReleaseDocumentContact" Type="Self.NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguageContact_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="NewsReleaseDocumentContact" Type="Self.NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_ContactSystemUser">
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="ContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_EodLastRunSystemUser">
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="EodLastRunUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_FeatureRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_Parent">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="0..1" />
+          <End Role="Ministry1" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_SecondContactSystemUser">
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="SecondContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_TopRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryLanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="MinistryLanguage" Type="Self.MinistryLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryLanguage_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="MinistryLanguage" Type="Self.MinistryLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryLanguage">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryNewsletter_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="MinistryNewsletter" Type="Self.MinistryNewsletter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryNewsletter">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistrySector_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="MinistrySector" Type="Self.MinistrySector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistrySector">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistrySector_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="MinistrySector" Type="Self.MinistrySector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistrySector">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryService_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="MinistryService" Type="Self.MinistryService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryService">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryTopic_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="MinistryTopic" Type="Self.MinistryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryTopic">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsDocumentLanguageContact_NewsDocumentLanguage">
+          <End Role="NewsReleaseDocumentLanguage" Type="Self.NewsReleaseDocumentLanguage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseDocumentContact" Type="Self.NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="DocumentId" />
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="DocumentId" />
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsRelease_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="0..1" />
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsRelease">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsRelease_NewsCollection">
+          <End Role="NewsReleaseCollection" Type="Self.NewsReleaseCollection" Multiplicity="1" />
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseCollection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsRelease">
+              <PropertyRef Name="CollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseHistory_Blob">
+          <End Role="Blob" Type="Self.Blob" Multiplicity="1" />
+          <End Role="NewsReleaseHistory" Type="Self.NewsReleaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseHistory">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseHistory_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseHistory" Type="Self.NewsReleaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseHistory">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseImage_Blob">
+          <End Role="Blob" Type="Self.Blob" Multiplicity="1" />
+          <End Role="NewsReleaseImage" Type="Self.NewsReleaseImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImage">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseImageLanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="NewsReleaseImageLanguage" Type="Self.NewsReleaseImageLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseImageLanguage_NewsReleaseImage">
+          <End Role="NewsReleaseImage" Type="Self.NewsReleaseImage" Multiplicity="1" />
+          <End Role="NewsReleaseImageLanguage" Type="Self.NewsReleaseImageLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseLog_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseLog" Type="Self.NewsReleaseLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLog">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="NewsReleaseLog" Type="Self.NewsReleaseLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseMediaDistribution_List">
+          <End Role="MediaDistributionList" Type="Self.MediaDistributionList" Multiplicity="1" />
+          <End Role="NewsReleaseMediaDistribution" Type="Self.NewsReleaseMediaDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaDistributionList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseMediaDistribution">
+              <PropertyRef Name="MediaDistributionListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseMediaDistribution_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseMediaDistribution" Type="Self.NewsReleaseMediaDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseMediaDistribution">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseMinistry_Ministry">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="1" />
+          <End Role="NewsReleaseMinistry" Type="Self.NewsReleaseMinistry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseMinistry">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseMinistry_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseMinistry" Type="Self.NewsReleaseMinistry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseMinistry">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseSector_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseSector" Type="Self.NewsReleaseSector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseSector">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseSector_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="NewsReleaseSector" Type="Self.NewsReleaseSector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseSector">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseService_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseService" Type="Self.NewsReleaseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseService">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="NewsReleaseService" Type="Self.NewsReleaseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseService">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseTag_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseTag" Type="Self.NewsReleaseTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseTag">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="NewsReleaseTag" Type="Self.NewsReleaseTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseTheme_NewsRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseTheme" Type="Self.NewsReleaseTheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseTheme">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseTheme_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="NewsReleaseTheme" Type="Self.NewsReleaseTheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseTheme">
+              <PropertyRef Name="ThemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseType_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="NewsReleaseType" Type="Self.NewsReleaseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseType">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseType_NewsReleaseImage">
+          <End Role="NewsReleaseImage" Type="Self.NewsReleaseImage" Multiplicity="0..1" />
+          <End Role="NewsReleaseType" Type="Self.NewsReleaseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseType">
+              <PropertyRef Name="PageImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseLanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="NewsReleaseLanguage" Type="Self.NewsReleaseLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseLanguage_Release">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsReleaseLanguage" Type="Self.NewsReleaseLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLanguage">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_FeatureRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_TopRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectorLanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="SectorLanguage" Type="Self.SectorLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectorLanguage_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="SectorLanguage" Type="Self.SectorLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorLanguage">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUser_SystemUser_CreatedBy">
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
+          <End Role="SystemUser1" Type="Self.SystemUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUser1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUser_SystemUser_UpdatedBy">
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
+          <End Role="SystemUser1" Type="Self.SystemUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUser1">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme_FeatureRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme_TopRelease">
+          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="0..1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GcpeHub_ModelStoreContainer">
+          <EntitySet Name="SystemUser" EntityType="Self.SystemUser" Schema="calendar" store:Type="Tables" />
+          <EntitySet Name="ApplicationSetting" EntityType="Self.ApplicationSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blob" EntityType="Self.Blob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carousel" EntityType="Self.Carousel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarouselSlide" EntityType="Self.CarouselSlide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaDistributionList" EntityType="Self.MediaDistributionList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ministry" EntityType="Self.Ministry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MinistryLanguage" EntityType="Self.MinistryLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MinistryNewsletter" EntityType="Self.MinistryNewsletter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MinistrySector" EntityType="Self.MinistrySector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MinistryService" EntityType="Self.MinistryService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MinistryTopic" EntityType="Self.MinistryTopic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsRelease" EntityType="Self.NewsRelease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseCollection" EntityType="Self.NewsReleaseCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseDocument" EntityType="Self.NewsReleaseDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseDocumentContact" EntityType="Self.NewsReleaseDocumentContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseDocumentLanguage" EntityType="Self.NewsReleaseDocumentLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseHistory" EntityType="Self.NewsReleaseHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseImage" EntityType="Self.NewsReleaseImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseImageLanguage" EntityType="Self.NewsReleaseImageLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseLanguage" EntityType="Self.NewsReleaseLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseLog" EntityType="Self.NewsReleaseLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseMediaDistribution" EntityType="Self.NewsReleaseMediaDistribution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseMinistry" EntityType="Self.NewsReleaseMinistry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseSector" EntityType="Self.NewsReleaseSector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseService" EntityType="Self.NewsReleaseService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseTag" EntityType="Self.NewsReleaseTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseTheme" EntityType="Self.NewsReleaseTheme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsReleaseType" EntityType="Self.NewsReleaseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceLink" EntityType="Self.ResourceLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SectorLanguage" EntityType="Self.SectorLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slide" EntityType="Self.Slide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CarouselSlide_Carousel" Association="Self.FK_CarouselSlide_Carousel">
+            <End Role="Carousel" EntitySet="Carousel" />
+            <End Role="CarouselSlide" EntitySet="CarouselSlide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarouselSlide_Slide" Association="Self.FK_CarouselSlide_Slide">
+            <End Role="Slide" EntitySet="Slide" />
+            <End Role="CarouselSlide" EntitySet="CarouselSlide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_Release" Association="Self.FK_Document_Release">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguage_Document" Association="Self.FK_DocumentLanguage_Document">
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocument" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguage_Image" Association="Self.FK_DocumentLanguage_Image">
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguage" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguage_Language" Association="Self.FK_DocumentLanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguageContact_Document" Association="Self.FK_DocumentLanguageContact_Document">
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocument" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguageContact_Language" Association="Self.FK_DocumentLanguageContact_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_ContactSystemUser" Association="Self.FK_Ministry_ContactSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_EodLastRunSystemUser" Association="Self.FK_Ministry_EodLastRunSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_FeatureRelease" Association="Self.FK_Ministry_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_Parent" Association="Self.FK_Ministry_Parent">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="Ministry1" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_SecondContactSystemUser" Association="Self.FK_Ministry_SecondContactSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_TopRelease" Association="Self.FK_Ministry_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryLanguage_Language" Association="Self.FK_MinistryLanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="MinistryLanguage" EntitySet="MinistryLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryLanguage_Ministry" Association="Self.FK_MinistryLanguage_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="MinistryLanguage" EntitySet="MinistryLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryNewsletter_Ministry" Association="Self.FK_MinistryNewsletter_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="MinistryNewsletter" EntitySet="MinistryNewsletter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistrySector_Ministry" Association="Self.FK_MinistrySector_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="MinistrySector" EntitySet="MinistrySector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistrySector_Sector" Association="Self.FK_MinistrySector_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="MinistrySector" EntitySet="MinistrySector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryService_Ministry" Association="Self.FK_MinistryService_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="MinistryService" EntitySet="MinistryService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryTopic_Ministry" Association="Self.FK_MinistryTopic_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="MinistryTopic" EntitySet="MinistryTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsDocumentLanguageContact_NewsDocumentLanguage" Association="Self.FK_NewsDocumentLanguageContact_NewsDocumentLanguage">
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguage" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsRelease_Ministry" Association="Self.FK_NewsRelease_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsRelease_NewsCollection" Association="Self.FK_NewsRelease_NewsCollection">
+            <End Role="NewsReleaseCollection" EntitySet="NewsReleaseCollection" />
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseHistory_Blob" Association="Self.FK_NewsReleaseHistory_Blob">
+            <End Role="Blob" EntitySet="Blob" />
+            <End Role="NewsReleaseHistory" EntitySet="NewsReleaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseHistory_NewsRelease" Association="Self.FK_NewsReleaseHistory_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseHistory" EntitySet="NewsReleaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseImage_Blob" Association="Self.FK_NewsReleaseImage_Blob">
+            <End Role="Blob" EntitySet="Blob" />
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseImageLanguage_Language" Association="Self.FK_NewsReleaseImageLanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseImageLanguage_NewsReleaseImage" Association="Self.FK_NewsReleaseImageLanguage_NewsReleaseImage">
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImage" />
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseLog_NewsRelease" Association="Self.FK_NewsReleaseLog_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseLog" EntitySet="NewsReleaseLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseLog_User" Association="Self.FK_NewsReleaseLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="NewsReleaseLog" EntitySet="NewsReleaseLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseMediaDistribution_List" Association="Self.FK_NewsReleaseMediaDistribution_List">
+            <End Role="MediaDistributionList" EntitySet="MediaDistributionList" />
+            <End Role="NewsReleaseMediaDistribution" EntitySet="NewsReleaseMediaDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseMediaDistribution_NewsRelease" Association="Self.FK_NewsReleaseMediaDistribution_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseMediaDistribution" EntitySet="NewsReleaseMediaDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseMinistry_Ministry" Association="Self.FK_NewsReleaseMinistry_Ministry">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="NewsReleaseMinistry" EntitySet="NewsReleaseMinistry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseMinistry_NewsRelease" Association="Self.FK_NewsReleaseMinistry_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseMinistry" EntitySet="NewsReleaseMinistry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseSector_NewsRelease" Association="Self.FK_NewsReleaseSector_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseSector" EntitySet="NewsReleaseSector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseSector_Sector" Association="Self.FK_NewsReleaseSector_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="NewsReleaseSector" EntitySet="NewsReleaseSector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseService_NewsRelease" Association="Self.FK_NewsReleaseService_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseService" EntitySet="NewsReleaseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseService_Service" Association="Self.FK_NewsReleaseService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="NewsReleaseService" EntitySet="NewsReleaseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseTag_NewsRelease" Association="Self.FK_NewsReleaseTag_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseTag" EntitySet="NewsReleaseTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseTag_Tag" Association="Self.FK_NewsReleaseTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="NewsReleaseTag" EntitySet="NewsReleaseTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseTheme_NewsRelease" Association="Self.FK_NewsReleaseTheme_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseTheme" EntitySet="NewsReleaseTheme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseTheme_Theme" Association="Self.FK_NewsReleaseTheme_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="NewsReleaseTheme" EntitySet="NewsReleaseTheme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseType_Language" Association="Self.FK_NewsReleaseType_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="NewsReleaseType" EntitySet="NewsReleaseType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseType_NewsReleaseImage" Association="Self.FK_NewsReleaseType_NewsReleaseImage">
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImage" />
+            <End Role="NewsReleaseType" EntitySet="NewsReleaseType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseLanguage_Language" Association="Self.FK_ReleaseLanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="NewsReleaseLanguage" EntitySet="NewsReleaseLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseLanguage_Release" Association="Self.FK_ReleaseLanguage_Release">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="NewsReleaseLanguage" EntitySet="NewsReleaseLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_FeatureRelease" Association="Self.FK_Sector_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_TopRelease" Association="Self.FK_Sector_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectorLanguage_Language" Association="Self.FK_SectorLanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="SectorLanguage" EntitySet="SectorLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectorLanguage_Sector" Association="Self.FK_SectorLanguage_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="SectorLanguage" EntitySet="SectorLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUser_SystemUser_CreatedBy" Association="Self.FK_SystemUser_SystemUser_CreatedBy">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="SystemUser1" EntitySet="SystemUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUser_SystemUser_UpdatedBy" Association="Self.FK_SystemUser_SystemUser_UpdatedBy">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="SystemUser1" EntitySet="SystemUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme_FeatureRelease" Association="Self.FK_Theme_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme_TopRelease" Association="Self.FK_Theme_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsRelease" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gcpe.Hub_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HubEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Languages" EntityType="Gcpe.Hub_Model.Language" />
+          <EntitySet Name="Ministries" EntityType="Gcpe.Hub_Model.Ministry" />
+          <EntitySet Name="MinistryLanguages" EntityType="Gcpe.Hub_Model.MinistryLanguage" />
+          <EntitySet Name="NewsReleases" EntityType="Gcpe.Hub_Model.NewsRelease" />
+          <EntitySet Name="NewsReleaseLanguages" EntityType="Gcpe.Hub_Model.NewsReleaseLanguage" />
+          <EntitySet Name="Sectors" EntityType="Gcpe.Hub_Model.Sector" />
+          <EntitySet Name="SectorLanguages" EntityType="Gcpe.Hub_Model.SectorLanguage" />
+          <EntitySet Name="Users" EntityType="Gcpe.Hub_Model.User" />
+          <AssociationSet Name="FK_MinistryLanguage_Language" Association="Gcpe.Hub_Model.FK_MinistryLanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="MinistryLanguage" EntitySet="MinistryLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseLanguage_Language" Association="Gcpe.Hub_Model.FK_ReleaseLanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="NewsReleaseLanguage" EntitySet="NewsReleaseLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectorLanguage_Language" Association="Gcpe.Hub_Model.FK_SectorLanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="SectorLanguage" EntitySet="SectorLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryLanguage_Ministry" Association="Gcpe.Hub_Model.FK_MinistryLanguage_Ministry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="MinistryLanguage" EntitySet="MinistryLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseLanguage_Release" Association="Gcpe.Hub_Model.FK_ReleaseLanguage_Release">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="NewsReleaseLanguage" EntitySet="NewsReleaseLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectorLanguage_Sector" Association="Gcpe.Hub_Model.FK_SectorLanguage_Sector">
+            <End Role="Sector" EntitySet="Sectors" />
+            <End Role="SectorLanguage" EntitySet="SectorLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="NewsReleaseMinistry" Association="Gcpe.Hub_Model.NewsReleaseMinistry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+          </AssociationSet>
+          <AssociationSet Name="NewsReleaseSector" Association="Gcpe.Hub_Model.NewsReleaseSector">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Sector" EntitySet="Sectors" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseLogs" EntityType="Gcpe.Hub_Model.NewsReleaseLog" />
+          <AssociationSet Name="FK_NewsReleaseLog_NewsRelease" Association="Gcpe.Hub_Model.FK_NewsReleaseLog_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="NewsReleaseLog" EntitySet="NewsReleaseLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseLog_User" Association="Gcpe.Hub_Model.FK_NewsReleaseLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="NewsReleaseLog" EntitySet="NewsReleaseLogs" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseImages" EntityType="Gcpe.Hub_Model.NewsReleaseImage" />
+          <AssociationSet Name="MinistrySector" Association="Gcpe.Hub_Model.MinistrySector">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="Sector" EntitySet="Sectors" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseImageLanguages" EntityType="Gcpe.Hub_Model.NewsReleaseImageLanguage" />
+          <AssociationSet Name="FK_NewsReleaseImageLanguage_Language" Association="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseImageLanguage_NewsReleaseImage" Association="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_NewsReleaseImage">
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImages" />
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsRelease_Ministry" Association="Gcpe.Hub_Model.FK_NewsRelease_Ministry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseHistory" EntityType="Gcpe.Hub_Model.NewsReleaseHistory" />
+          <AssociationSet Name="FK_NewsReleaseHistory_NewsRelease" Association="Gcpe.Hub_Model.FK_NewsReleaseHistory_NewsRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="NewsReleaseHistory" EntitySet="NewsReleaseHistory" />
+          </AssociationSet>
+          <EntitySet Name="ApplicationSettings" EntityType="Gcpe.Hub_Model.ApplicationSetting" />
+          <EntitySet Name="Blobs" EntityType="Gcpe.Hub_Model.Blob" />
+          <AssociationSet Name="FK_NewsReleaseImage_Blob" Association="Gcpe.Hub_Model.FK_NewsReleaseImage_Blob">
+            <End Role="Blob" EntitySet="Blobs" />
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseHistory_Blob" Association="Gcpe.Hub_Model.FK_NewsReleaseHistory_Blob">
+            <End Role="Blob" EntitySet="Blobs" />
+            <End Role="NewsReleaseHistory" EntitySet="NewsReleaseHistory" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseCollections" EntityType="Gcpe.Hub_Model.NewsReleaseCollection" />
+          <EntitySet Name="NewsReleaseDocuments" EntityType="Gcpe.Hub_Model.NewsReleaseDocument" />
+          <EntitySet Name="NewsReleaseDocumentContacts" EntityType="Gcpe.Hub_Model.NewsReleaseDocumentContact" />
+          <EntitySet Name="NewsReleaseDocumentLanguages" EntityType="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" />
+          <AssociationSet Name="FK_DocumentLanguage_Language" Association="Gcpe.Hub_Model.FK_DocumentLanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguageContact_Language" Association="Gcpe.Hub_Model.FK_DocumentLanguageContact_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_Release" Association="Gcpe.Hub_Model.FK_Document_Release">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsRelease_NewsCollection" Association="Gcpe.Hub_Model.FK_NewsRelease_NewsCollection">
+            <End Role="NewsReleaseCollection" EntitySet="NewsReleaseCollections" />
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguage_Document" Association="Gcpe.Hub_Model.FK_DocumentLanguage_Document">
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocuments" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguageContact_Document" Association="Gcpe.Hub_Model.FK_DocumentLanguageContact_Document">
+            <End Role="NewsReleaseDocument" EntitySet="NewsReleaseDocuments" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsDocumentLanguageContact_NewsDocumentLanguage" Association="Gcpe.Hub_Model.FK_NewsDocumentLanguageContact_NewsDocumentLanguage">
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguages" />
+            <End Role="NewsReleaseDocumentContact" EntitySet="NewsReleaseDocumentContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsDocumentLanguage_NewsReleaseImage" Association="Gcpe.Hub_Model.FK_NewsDocumentLanguage_NewsReleaseImage">
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImages" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentLanguage_Image" Association="Gcpe.Hub_Model.FK_DocumentLanguage_Image">
+            <End Role="NewsReleaseImageLanguage" EntitySet="NewsReleaseImageLanguages" />
+            <End Role="NewsReleaseDocumentLanguage" EntitySet="NewsReleaseDocumentLanguages" />
+          </AssociationSet>
+          <EntitySet Name="Tags" EntityType="Gcpe.Hub_Model.Tag" />
+          <AssociationSet Name="NewsReleaseTag" Association="Gcpe.Hub_Model.NewsReleaseTag">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_FeatureRelease" Association="Gcpe.Hub_Model.FK_Ministry_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Ministry" EntitySet="Ministries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_TopRelease" Association="Gcpe.Hub_Model.FK_Ministry_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Ministry" EntitySet="Ministries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_FeatureRelease" Association="Gcpe.Hub_Model.FK_Sector_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Sector" EntitySet="Sectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_TopRelease" Association="Gcpe.Hub_Model.FK_Sector_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Sector" EntitySet="Sectors" />
+          </AssociationSet>
+          <EntitySet Name="Themes" EntityType="Gcpe.Hub_Model.Theme" />
+          <AssociationSet Name="FK_Theme_FeatureRelease" Association="Gcpe.Hub_Model.FK_Theme_FeatureRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Theme" EntitySet="Themes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme_TopRelease" Association="Gcpe.Hub_Model.FK_Theme_TopRelease">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Theme" EntitySet="Themes" />
+          </AssociationSet>
+          <AssociationSet Name="NewsReleaseTheme" Association="Gcpe.Hub_Model.NewsReleaseTheme">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Theme" EntitySet="Themes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_Parent" Association="Gcpe.Hub_Model.FK_Ministry_Parent">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="Ministry1" EntitySet="Ministries" />
+          </AssociationSet>
+          <EntitySet Name="NewsReleaseTypes" EntityType="Gcpe.Hub_Model.NewsReleaseType" />
+          <AssociationSet Name="FK_NewsReleaseType_Language" Association="Gcpe.Hub_Model.FK_NewsReleaseType_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="NewsReleaseType" EntitySet="NewsReleaseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsReleaseType_NewsReleaseImage" Association="Gcpe.Hub_Model.FK_NewsReleaseType_NewsReleaseImage">
+            <End Role="NewsReleaseImage" EntitySet="NewsReleaseImages" />
+            <End Role="NewsReleaseType" EntitySet="NewsReleaseTypes" />
+          </AssociationSet>
+          <EntitySet Name="MinistryServices" EntityType="Gcpe.Hub_Model.MinistryService" />
+          <EntitySet Name="MinistryTopics" EntityType="Gcpe.Hub_Model.MinistryTopic" />
+          <AssociationSet Name="FK_MinistryService_Ministry" Association="Gcpe.Hub_Model.FK_MinistryService_Ministry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="MinistryService" EntitySet="MinistryServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinistryTopic_Ministry" Association="Gcpe.Hub_Model.FK_MinistryTopic_Ministry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="MinistryTopic" EntitySet="MinistryTopics" />
+          </AssociationSet>
+          <EntitySet Name="MinistryNewsletters" EntityType="Gcpe.Hub_Model.MinistryNewsletter" />
+          <AssociationSet Name="FK_MinistryNewsletter_Ministry" Association="Gcpe.Hub_Model.FK_MinistryNewsletter_Ministry">
+            <End Role="Ministry" EntitySet="Ministries" />
+            <End Role="MinistryNewsletter" EntitySet="MinistryNewsletters" />
+          </AssociationSet>
+          <EntitySet Name="ResourceLinks" EntityType="Gcpe.Hub_Model.ResourceLink" />
+          <EntitySet Name="Services" EntityType="Gcpe.Hub_Model.Service" />
+          <AssociationSet Name="NewsReleaseService" Association="Gcpe.Hub_Model.NewsReleaseService">
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <EntitySet Name="Carousels" EntityType="Gcpe.Hub_Model.Carousel" />
+          <EntitySet Name="CarouselSlides" EntityType="Gcpe.Hub_Model.CarouselSlide" />
+          <EntitySet Name="Slides" EntityType="Gcpe.Hub_Model.Slide" />
+          <AssociationSet Name="FK_CarouselSlide_Carousel" Association="Gcpe.Hub_Model.FK_CarouselSlide_Carousel">
+            <End Role="Carousel" EntitySet="Carousels" />
+            <End Role="CarouselSlide" EntitySet="CarouselSlides" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarouselSlide_Slide" Association="Gcpe.Hub_Model.FK_CarouselSlide_Slide">
+            <End Role="Slide" EntitySet="Slides" />
+            <End Role="CarouselSlide" EntitySet="CarouselSlides" />
+          </AssociationSet>
+          <EntitySet Name="SystemUsers" EntityType="Gcpe.Hub_Model.SystemUser" />
+          <AssociationSet Name="FK_Ministry_ContactSystemUser" Association="Gcpe.Hub_Model.FK_Ministry_ContactSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="Ministry" EntitySet="Ministries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_EodLastRunSystemUser" Association="Gcpe.Hub_Model.FK_Ministry_EodLastRunSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="Ministry" EntitySet="Ministries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_SecondContactSystemUser" Association="Gcpe.Hub_Model.FK_Ministry_SecondContactSystemUser">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="Ministry" EntitySet="Ministries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUser_SystemUser_CreatedBy" Association="Gcpe.Hub_Model.FK_SystemUser_SystemUser_CreatedBy">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="SystemUser1" EntitySet="SystemUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUser_SystemUser_UpdatedBy" Association="Gcpe.Hub_Model.FK_SystemUser_SystemUser_UpdatedBy">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="SystemUser1" EntitySet="SystemUsers" />
+          </AssociationSet>
+          <EntitySet Name="MediaDistributionLists" EntityType="Gcpe.Hub_Model.MediaDistributionList" />
+          <AssociationSet Name="NewsReleaseMediaDistribution" Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution">
+            <End Role="MediaDistributionList" EntitySet="MediaDistributionLists" />
+            <End Role="NewsRelease" EntitySet="NewsReleases" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ministries" Relationship="Gcpe.Hub_Model.FK_MinistryLanguage_Language" FromRole="Language" ToRole="MinistryLanguage" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.FK_ReleaseLanguage_Language" FromRole="Language" ToRole="NewsReleaseLanguage" />
+          <NavigationProperty Name="Sectors" Relationship="Gcpe.Hub_Model.FK_SectorLanguage_Language" FromRole="Language" ToRole="SectorLanguage" />
+          <NavigationProperty Name="NewsReleaseImageLanguages" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_Language" FromRole="Language" ToRole="NewsReleaseImageLanguage" />
+          <NavigationProperty Name="NewsReleaseDocumentLanguages" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Language" FromRole="Language" ToRole="NewsReleaseDocumentLanguage" />
+          <NavigationProperty Name="NewsReleaseDocumentContacts" Relationship="Gcpe.Hub_Model.FK_DocumentLanguageContact_Language" FromRole="Language" ToRole="NewsReleaseDocumentContact" />
+          <NavigationProperty Name="NewsReleaseTypes" Relationship="Gcpe.Hub_Model.FK_NewsReleaseType_Language" FromRole="Language" ToRole="NewsReleaseType" />
+        </EntityType>
+        <EntityType Name="Ministry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Languages" Relationship="Gcpe.Hub_Model.FK_MinistryLanguage_Ministry" FromRole="Ministry" ToRole="MinistryLanguage" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseMinistry" FromRole="Ministry" ToRole="NewsRelease" />
+          <NavigationProperty Name="NewsReleaseLeads" Relationship="Gcpe.Hub_Model.FK_NewsRelease_Ministry" FromRole="Ministry" ToRole="NewsRelease" />
+          <NavigationProperty Name="Sectors" Relationship="Gcpe.Hub_Model.MinistrySector" FromRole="Ministry" ToRole="Sector" />
+          <Property Name="MinisterEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinisterPhotoUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinisterPageHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MiscHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiscRightHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterUsername" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FlickrUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AudioUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AudioEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TopReleaseId" Type="Guid" />
+          <Property Name="FeatureReleaseId" Type="Guid" />
+          <NavigationProperty Name="TopRelease" Relationship="Gcpe.Hub_Model.FK_Ministry_TopRelease" FromRole="Ministry" ToRole="NewsRelease" />
+          <NavigationProperty Name="FeatureRelease" Relationship="Gcpe.Hub_Model.FK_Ministry_FeatureRelease" FromRole="Ministry" ToRole="NewsRelease" />
+          <Property Name="MinisterAddress" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinisterName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinisterSummary" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Guid" />
+          <NavigationProperty Name="Parent" Relationship="Gcpe.Hub_Model.FK_Ministry_Parent" FromRole="Ministry1" ToRole="Ministry" />
+          <NavigationProperty Name="Children" Relationship="Gcpe.Hub_Model.FK_Ministry_Parent" FromRole="Ministry" ToRole="Ministry1" />
+          <NavigationProperty Name="Services" Relationship="Gcpe.Hub_Model.FK_MinistryService_Ministry" FromRole="Ministry" ToRole="MinistryService" />
+          <NavigationProperty Name="Topics" Relationship="Gcpe.Hub_Model.FK_MinistryTopic_Ministry" FromRole="Ministry" ToRole="MinistryTopic" />
+          <NavigationProperty Name="Newsletters" Relationship="Gcpe.Hub_Model.FK_MinistryNewsletter_Ministry" FromRole="Ministry" ToRole="MinistryNewsletter" />
+          <Property Name="MinistryUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ContactUserId" Type="Int32" />
+          <Property Name="SecondContactUserId" Type="Int32" />
+          <Property Name="WeekendContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EodFinalizedDateTime" Type="DateTimeOffset" Precision="7" />
+          <Property Name="EodLastRunUserId" Type="Int32" />
+          <Property Name="EodLastRunDateTime" Type="DateTimeOffset" Precision="7" />
+          <Property Name="DisplayAdditionalName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContactUser" Relationship="Gcpe.Hub_Model.FK_Ministry_ContactSystemUser" FromRole="Ministry" ToRole="SystemUser" />
+          <NavigationProperty Name="EodLastRunUser" Relationship="Gcpe.Hub_Model.FK_Ministry_EodLastRunSystemUser" FromRole="Ministry" ToRole="SystemUser" />
+          <NavigationProperty Name="SecondContactUser" Relationship="Gcpe.Hub_Model.FK_Ministry_SecondContactSystemUser" FromRole="Ministry" ToRole="SystemUser" />
+        </EntityType>
+        <EntityType Name="MinistryLanguage">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="MinistryId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_MinistryLanguage_Language" FromRole="MinistryLanguage" ToRole="Language" />
+          <NavigationProperty Name="Ministry" Relationship="Gcpe.Hub_Model.FK_MinistryLanguage_Ministry" FromRole="MinistryLanguage" ToRole="Ministry" />
+        </EntityType>
+        <EntityType Name="NewsRelease">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="YearRelease" Type="Int32" />
+          <Property Name="MinistryId" Type="Guid" />
+          <Property Name="MinistryRelease" Type="Int32" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityId" Type="Int32" />
+          <Property Name="ReleaseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PublishDateTime" Type="DateTimeOffset" Precision="7" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+          <Property Name="PublishOptions" Type="Gcpe.Hub_Model.PublishOptions" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Languages" Relationship="Gcpe.Hub_Model.FK_ReleaseLanguage_Release" FromRole="NewsRelease" ToRole="NewsReleaseLanguage" />
+          <NavigationProperty Name="Ministries" Relationship="Gcpe.Hub_Model.NewsReleaseMinistry" FromRole="NewsRelease" ToRole="Ministry" />
+          <NavigationProperty Name="Sectors" Relationship="Gcpe.Hub_Model.NewsReleaseSector" FromRole="NewsRelease" ToRole="Sector" />
+          <NavigationProperty Name="Logs" Relationship="Gcpe.Hub_Model.FK_NewsReleaseLog_NewsRelease" FromRole="NewsRelease" ToRole="NewsReleaseLog" />
+          <Property Name="CollectionId" Type="Guid" Nullable="false" />
+          <Property Name="IsCommitted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ministry" Relationship="Gcpe.Hub_Model.FK_NewsRelease_Ministry" FromRole="NewsRelease" ToRole="Ministry" />
+          <NavigationProperty Name="History" Relationship="Gcpe.Hub_Model.FK_NewsReleaseHistory_NewsRelease" FromRole="NewsRelease" ToRole="NewsReleaseHistory" />
+          <NavigationProperty Name="Documents" Relationship="Gcpe.Hub_Model.FK_Document_Release" FromRole="NewsRelease" ToRole="NewsReleaseDocument" />
+          <NavigationProperty Name="Collection" Relationship="Gcpe.Hub_Model.FK_NewsRelease_NewsCollection" FromRole="NewsRelease" ToRole="NewsReleaseCollection" />
+          <Property Name="AtomId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Keywords" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AssetUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HasMediaAssets" Type="Boolean" Nullable="false" />
+          <Property Name="ReleaseType" Type="Gcpe.Hub_Model.ReleaseType" Nullable="false" />
+          <NavigationProperty Name="Tags" Relationship="Gcpe.Hub_Model.NewsReleaseTag" FromRole="NewsRelease" ToRole="Tag" />
+          <NavigationProperty Name="TopMinistries" Relationship="Gcpe.Hub_Model.FK_Ministry_TopRelease" FromRole="NewsRelease" ToRole="Ministry" />
+          <NavigationProperty Name="FeatureMinistries" Relationship="Gcpe.Hub_Model.FK_Ministry_FeatureRelease" FromRole="NewsRelease" ToRole="Ministry" />
+          <NavigationProperty Name="TopSectors" Relationship="Gcpe.Hub_Model.FK_Sector_TopRelease" FromRole="NewsRelease" ToRole="Sector" />
+          <NavigationProperty Name="FeatureSectors" Relationship="Gcpe.Hub_Model.FK_Sector_FeatureRelease" FromRole="NewsRelease" ToRole="Sector" />
+          <NavigationProperty Name="FeatureThemes" Relationship="Gcpe.Hub_Model.FK_Theme_FeatureRelease" FromRole="NewsRelease" ToRole="Theme" />
+          <NavigationProperty Name="TopThemes" Relationship="Gcpe.Hub_Model.FK_Theme_TopRelease" FromRole="NewsRelease" ToRole="Theme" />
+          <NavigationProperty Name="Themes" Relationship="Gcpe.Hub_Model.NewsReleaseTheme" FromRole="NewsRelease" ToRole="Theme" />
+          <NavigationProperty Name="Services" Relationship="Gcpe.Hub_Model.NewsReleaseService" FromRole="NewsRelease" ToRole="Service" />
+          <Property Name="RedirectUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MediaDistributionLists" Relationship="Gcpe.Hub_Model.NewsReleaseMediaDistribution" FromRole="NewsRelease" ToRole="MediaDistributionList" />
+          <Property Name="NodSubscribers" Type="Int32" />
+          <Property Name="MediaSubscribers" Type="Int32" />
+        </EntityType>
+        <EntityType Name="NewsReleaseLanguage">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="ReleaseId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_ReleaseLanguage_Language" FromRole="NewsReleaseLanguage" ToRole="Language" />
+          <NavigationProperty Name="Release" Relationship="Gcpe.Hub_Model.FK_ReleaseLanguage_Release" FromRole="NewsReleaseLanguage" ToRole="NewsRelease" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMediaSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SocialMediaHeadline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Languages" Relationship="Gcpe.Hub_Model.FK_SectorLanguage_Sector" FromRole="Sector" ToRole="SectorLanguage" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseSector" FromRole="Sector" ToRole="NewsRelease" />
+          <NavigationProperty Name="Ministries" Relationship="Gcpe.Hub_Model.MinistrySector" FromRole="Sector" ToRole="Ministry" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MiscHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiscRightHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterUsername" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FlickrUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="YoutubeUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AudioUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AudioEmbedHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TopReleaseId" Type="Guid" />
+          <Property Name="FeatureReleaseId" Type="Guid" />
+          <NavigationProperty Name="TopRelease" Relationship="Gcpe.Hub_Model.FK_Sector_TopRelease" FromRole="Sector" ToRole="NewsRelease" />
+          <NavigationProperty Name="FeatureRelease" Relationship="Gcpe.Hub_Model.FK_Sector_FeatureRelease" FromRole="Sector" ToRole="NewsRelease" />
+        </EntityType>
+        <EntityType Name="SectorLanguage">
+          <Key>
+            <PropertyRef Name="SectorId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="SectorId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_SectorLanguage_Language" FromRole="SectorLanguage" ToRole="Language" />
+          <NavigationProperty Name="Sector" Relationship="Gcpe.Hub_Model.FK_SectorLanguage_Sector" FromRole="SectorLanguage" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NewsReleaseLogs" Relationship="Gcpe.Hub_Model.FK_NewsReleaseLog_User" FromRole="User" ToRole="NewsReleaseLog" />
+        </EntityType>
+        <Association Name="FK_MinistryLanguage_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.MinistryLanguage" Role="MinistryLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseLanguage_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseLanguage" Role="NewsReleaseLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectorLanguage_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.SectorLanguage" Role="SectorLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryLanguage_Ministry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.MinistryLanguage" Role="MinistryLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryLanguage">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseLanguage_Release">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseLanguage" Role="NewsReleaseLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLanguage">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectorLanguage_Sector">
+          <End Type="Gcpe.Hub_Model.Sector" Role="Sector" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.SectorLanguage" Role="SectorLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorLanguage">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NewsReleaseMinistry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+        </Association>
+        <Association Name="NewsReleaseSector">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.Sector" Role="Sector" Multiplicity="*" />
+        </Association>
+        <EntityType Name="NewsReleaseLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReleaseId" Type="Guid" Nullable="false" />
+          <Property Name="DateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Release" Relationship="Gcpe.Hub_Model.FK_NewsReleaseLog_NewsRelease" FromRole="NewsReleaseLog" ToRole="NewsRelease" />
+          <NavigationProperty Name="User" Relationship="Gcpe.Hub_Model.FK_NewsReleaseLog_User" FromRole="NewsReleaseLog" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_NewsReleaseLog_NewsRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseLog" Role="NewsReleaseLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLog">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseLog_User">
+          <End Type="Gcpe.Hub_Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseLog" Role="NewsReleaseLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="PageLayout">
+          <Member Name="Formal" Value="1" />
+          <Member Name="Informal" Value="2" />
+        </EnumType>
+        <EntityType Name="NewsReleaseImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MimeType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Languages" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_NewsReleaseImage" FromRole="NewsReleaseImage" ToRole="NewsReleaseImageLanguage" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="BlobId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Blob" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImage_Blob" FromRole="NewsReleaseImage" ToRole="Blob" />
+          <NavigationProperty Name="DocumentLanguages" Relationship="Gcpe.Hub_Model.FK_NewsDocumentLanguage_NewsReleaseImage" FromRole="NewsReleaseImage" ToRole="NewsReleaseDocumentLanguage" />
+          <NavigationProperty Name="NewsReleaseTypes" Relationship="Gcpe.Hub_Model.FK_NewsReleaseType_NewsReleaseImage" FromRole="NewsReleaseImage" ToRole="NewsReleaseType" />
+        </EntityType>
+        <Association Name="MinistrySector">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.Sector" Role="Sector" Multiplicity="*" />
+        </Association>
+        <EntityType Name="NewsReleaseImageLanguage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="ImageId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="AlternateName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_Language" FromRole="NewsReleaseImageLanguage" ToRole="Language" />
+          <NavigationProperty Name="Image" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImageLanguage_NewsReleaseImage" FromRole="NewsReleaseImageLanguage" ToRole="NewsReleaseImage" />
+          <NavigationProperty Name="DocumentLanguages" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Image" FromRole="NewsReleaseImageLanguage" ToRole="NewsReleaseDocumentLanguage" />
+        </EntityType>
+        <Association Name="FK_NewsReleaseImageLanguage_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseImageLanguage" Role="NewsReleaseImageLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseImageLanguage_NewsReleaseImage">
+          <End Type="Gcpe.Hub_Model.NewsReleaseImage" Role="NewsReleaseImage" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseImageLanguage" Role="NewsReleaseImageLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsRelease_Ministry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsRelease">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NewsReleaseHistory">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+            <PropertyRef Name="PublishDateTime" />
+            <PropertyRef Name="MimeType" />
+          </Key>
+          <Property Name="ReleaseId" Type="Guid" Nullable="false" />
+          <Property Name="PublishDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="MimeType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Release" Relationship="Gcpe.Hub_Model.FK_NewsReleaseHistory_NewsRelease" FromRole="NewsReleaseHistory" ToRole="NewsRelease" />
+          <Property Name="BlobId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Blob" Relationship="Gcpe.Hub_Model.FK_NewsReleaseHistory_Blob" FromRole="NewsReleaseHistory" ToRole="Blob" />
+        </EntityType>
+        <Association Name="FK_NewsReleaseHistory_NewsRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseHistory" Role="NewsReleaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseHistory">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApplicationSetting">
+          <Key>
+            <PropertyRef Name="SettingName" />
+          </Key>
+          <Property Name="SettingName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SettingValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Blob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="NewsReleaseImages" Relationship="Gcpe.Hub_Model.FK_NewsReleaseImage_Blob" FromRole="Blob" ToRole="NewsReleaseImage" />
+          <NavigationProperty Name="NewsReleaseHistories" Relationship="Gcpe.Hub_Model.FK_NewsReleaseHistory_Blob" FromRole="Blob" ToRole="NewsReleaseHistory" />
+        </EntityType>
+        <Association Name="FK_NewsReleaseImage_Blob">
+          <End Type="Gcpe.Hub_Model.Blob" Role="Blob" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseImage" Role="NewsReleaseImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseImage">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseHistory_Blob">
+          <End Type="Gcpe.Hub_Model.Blob" Role="Blob" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseHistory" Role="NewsReleaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseHistory">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="PublishOptions" IsFlags="true">
+          <Member Name="PublishNewsArchives" Value="1" />
+          <Member Name="PublishNewsOnDemand" Value="2" />
+          <Member Name="PublishMediaContacts" Value="4" />
+        </EnumType>
+        <EntityType Name="NewsReleaseCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Releases" Relationship="Gcpe.Hub_Model.FK_NewsRelease_NewsCollection" FromRole="NewsReleaseCollection" ToRole="NewsRelease" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ReleaseId" Type="Guid" Nullable="false" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="PageLayout" Type="Gcpe.Hub_Model.PageLayout" Nullable="false" />
+          <NavigationProperty Name="Release" Relationship="Gcpe.Hub_Model.FK_Document_Release" FromRole="NewsReleaseDocument" ToRole="NewsRelease" />
+          <NavigationProperty Name="Languages" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Document" FromRole="NewsReleaseDocument" ToRole="NewsReleaseDocumentLanguage" />
+          <NavigationProperty Name="Contacts" Relationship="Gcpe.Hub_Model.FK_DocumentLanguageContact_Document" FromRole="NewsReleaseDocument" ToRole="NewsReleaseDocumentContact" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocumentContact">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LanguageId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="DocumentId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="Information" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_DocumentLanguageContact_Language" FromRole="NewsReleaseDocumentContact" ToRole="Language" />
+          <NavigationProperty Name="Document" Relationship="Gcpe.Hub_Model.FK_DocumentLanguageContact_Document" FromRole="NewsReleaseDocumentContact" ToRole="NewsReleaseDocument" />
+          <NavigationProperty Name="DocumentLanguage" Relationship="Gcpe.Hub_Model.FK_NewsDocumentLanguageContact_NewsDocumentLanguage" FromRole="NewsReleaseDocumentContact" ToRole="NewsReleaseDocumentLanguage" />
+        </EntityType>
+        <EntityType Name="NewsReleaseDocumentLanguage">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="DocumentId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="PageImageId" Type="Guid" />
+          <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Organizations" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Headline" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Subheadline" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Byline" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BodyHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Language" FromRole="NewsReleaseDocumentLanguage" ToRole="Language" />
+          <NavigationProperty Name="Document" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Document" FromRole="NewsReleaseDocumentLanguage" ToRole="NewsReleaseDocument" />
+          <NavigationProperty Name="Contacts" Relationship="Gcpe.Hub_Model.FK_NewsDocumentLanguageContact_NewsDocumentLanguage" FromRole="NewsReleaseDocumentLanguage" ToRole="NewsReleaseDocumentContact" />
+          <NavigationProperty Name="PageImage" Relationship="Gcpe.Hub_Model.FK_NewsDocumentLanguage_NewsReleaseImage" FromRole="NewsReleaseDocumentLanguage" ToRole="NewsReleaseImage" />
+          <NavigationProperty Name="PageImageLanguage" Relationship="Gcpe.Hub_Model.FK_DocumentLanguage_Image" FromRole="NewsReleaseDocumentLanguage" ToRole="NewsReleaseImageLanguage" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        </EntityType>
+        <Association Name="FK_DocumentLanguage_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Role="NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguageContact_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentContact" Role="NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_Release">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocument" Role="NewsReleaseDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocument">
+              <PropertyRef Name="ReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsRelease_NewsCollection">
+          <End Type="Gcpe.Hub_Model.NewsReleaseCollection" Role="NewsReleaseCollection" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseCollection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsRelease">
+              <PropertyRef Name="CollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguage_Document">
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocument" Role="NewsReleaseDocument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Role="NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguageContact_Document">
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocument" Role="NewsReleaseDocument" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentContact" Role="NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsDocumentLanguageContact_NewsDocumentLanguage">
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Role="NewsReleaseDocumentLanguage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentContact" Role="NewsReleaseDocumentContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="DocumentId" />
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentContact">
+              <PropertyRef Name="DocumentId" />
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsDocumentLanguage_NewsReleaseImage">
+          <End Type="Gcpe.Hub_Model.NewsReleaseImage" Role="NewsReleaseImage" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Role="NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="PageImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentLanguage_Image">
+          <End Type="Gcpe.Hub_Model.NewsReleaseImageLanguage" Role="NewsReleaseImageLanguage" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseDocumentLanguage" Role="NewsReleaseDocumentLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImageLanguage">
+              <PropertyRef Name="ImageId" />
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="NewsReleaseDocumentLanguage">
+              <PropertyRef Name="PageImageId" />
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseTag" FromRole="Tag" ToRole="NewsRelease" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="NewsReleaseTag">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <EnumType Name="ReleaseType">
+          <Member Name="Release" Value="1" />
+          <Member Name="Story" Value="2" />
+          <Member Name="Factsheet" Value="3" />
+          <Member Name="Update" Value="4" />
+          <Member Name="Advisory" Value="5" />
+        </EnumType>
+        <Association Name="FK_Ministry_FeatureRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_TopRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_FeatureRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_TopRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="AssetType">
+          <Member Name="YoutubeUrl" Value="1" />
+          <Member Name="FlickrUrl" Value="2" />
+        </EnumType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TopReleaseId" Type="Guid" />
+          <Property Name="FeatureReleaseId" Type="Guid" />
+          <NavigationProperty Name="FeatureRelease" Relationship="Gcpe.Hub_Model.FK_Theme_FeatureRelease" FromRole="Theme" ToRole="NewsRelease" />
+          <NavigationProperty Name="TopRelease" Relationship="Gcpe.Hub_Model.FK_Theme_TopRelease" FromRole="Theme" ToRole="NewsRelease" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseTheme" FromRole="Theme" ToRole="NewsRelease" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Theme_FeatureRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Theme" Role="Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="FeatureReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme_TopRelease">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Theme" Role="Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsRelease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="TopReleaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NewsReleaseTheme">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.Theme" Role="Theme" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Ministry_Parent">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NewsReleaseType">
+          <Key>
+            <PropertyRef Name="PageTitle" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="ReleaseType" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="PageLayout" Type="Int32" Nullable="false" />
+          <Property Name="PageImageId" Type="Guid" />
+          <NavigationProperty Name="Language" Relationship="Gcpe.Hub_Model.FK_NewsReleaseType_Language" FromRole="NewsReleaseType" ToRole="Language" />
+          <NavigationProperty Name="PageImage" Relationship="Gcpe.Hub_Model.FK_NewsReleaseType_NewsReleaseImage" FromRole="NewsReleaseType" ToRole="NewsReleaseImage" />
+        </EntityType>
+        <Association Name="FK_NewsReleaseType_Language">
+          <End Type="Gcpe.Hub_Model.Language" Role="Language" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseType" Role="NewsReleaseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseType">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsReleaseType_NewsReleaseImage">
+          <End Type="Gcpe.Hub_Model.NewsReleaseImage" Role="NewsReleaseImage" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.NewsReleaseType" Role="NewsReleaseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsReleaseImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewsReleaseType">
+              <PropertyRef Name="PageImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MinistryService">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="MinistryId" Type="Guid" Nullable="false" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="LinkText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ministry" Relationship="Gcpe.Hub_Model.FK_MinistryService_Ministry" FromRole="MinistryService" ToRole="Ministry" />
+        </EntityType>
+        <EntityType Name="MinistryTopic">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="MinistryId" Type="Guid" Nullable="false" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="LinkText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ministry" Relationship="Gcpe.Hub_Model.FK_MinistryTopic_Ministry" FromRole="MinistryTopic" ToRole="Ministry" />
+        </EntityType>
+        <Association Name="FK_MinistryService_Ministry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.MinistryService" Role="MinistryService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryService">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinistryTopic_Ministry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.MinistryTopic" Role="MinistryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryTopic">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MinistryNewsletter">
+          <Key>
+            <PropertyRef Name="MinistryId" />
+            <PropertyRef Name="NewsletterId" />
+          </Key>
+          <Property Name="MinistryId" Type="Guid" Nullable="false" />
+          <Property Name="NewsletterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ministry" Relationship="Gcpe.Hub_Model.FK_MinistryNewsletter_Ministry" FromRole="MinistryNewsletter" ToRole="Ministry" />
+        </EntityType>
+        <Association Name="FK_MinistryNewsletter_Ministry">
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.MinistryNewsletter" Role="MinistryNewsletter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MinistryNewsletter">
+              <PropertyRef Name="MinistryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="Justify">
+          <Member Name="Left" Value="1" />
+          <Member Name="Right" Value="2" />
+        </EnumType>
+        <EntityType Name="ResourceLink">
+          <Key>
+            <PropertyRef Name="SortIndex" />
+          </Key>
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="LinkText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseService" FromRole="Service" ToRole="NewsRelease" />
+        </EntityType>
+        <Association Name="NewsReleaseService">
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.Service" Role="Service" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Carousel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PublishDateTime" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Timestamp" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <NavigationProperty Name="CarouselSlides" Relationship="Gcpe.Hub_Model.FK_CarouselSlide_Carousel" FromRole="Carousel" ToRole="CarouselSlide" />
+        </EntityType>
+        <EntityType Name="CarouselSlide">
+          <Key>
+            <PropertyRef Name="CarouselId" />
+            <PropertyRef Name="SlideId" />
+          </Key>
+          <Property Name="CarouselId" Type="Guid" Nullable="false" />
+          <Property Name="SlideId" Type="Guid" Nullable="false" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carousel" Relationship="Gcpe.Hub_Model.FK_CarouselSlide_Carousel" FromRole="CarouselSlide" ToRole="Carousel" />
+          <NavigationProperty Name="Slide" Relationship="Gcpe.Hub_Model.FK_CarouselSlide_Slide" FromRole="CarouselSlide" ToRole="Slide" />
+        </EntityType>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Headline" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActionUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="FacebookPostUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Justify" Type="Gcpe.Hub_Model.Justify" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <NavigationProperty Name="CarouselSlides" Relationship="Gcpe.Hub_Model.FK_CarouselSlide_Slide" FromRole="Slide" ToRole="CarouselSlide" />
+        </EntityType>
+        <Association Name="FK_CarouselSlide_Carousel">
+          <End Type="Gcpe.Hub_Model.Carousel" Role="Carousel" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.CarouselSlide" Role="CarouselSlide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carousel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarouselSlide">
+              <PropertyRef Name="CarouselId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarouselSlide_Slide">
+          <End Type="Gcpe.Hub_Model.Slide" Role="Slide" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.CarouselSlide" Role="CarouselSlide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slide">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarouselSlide">
+              <PropertyRef Name="SlideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FilterDisplayValue" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RowGuid" Type="Guid" Nullable="false" />
+          <Property Name="HiddenColumns" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ministries" Relationship="Gcpe.Hub_Model.FK_Ministry_ContactSystemUser" FromRole="SystemUser" ToRole="Ministry" />
+          <NavigationProperty Name="Ministries1" Relationship="Gcpe.Hub_Model.FK_Ministry_EodLastRunSystemUser" FromRole="SystemUser" ToRole="Ministry" />
+          <NavigationProperty Name="Ministries2" Relationship="Gcpe.Hub_Model.FK_Ministry_SecondContactSystemUser" FromRole="SystemUser" ToRole="Ministry" />
+          <NavigationProperty Name="SystemUser1" Relationship="Gcpe.Hub_Model.FK_SystemUser_SystemUser_CreatedBy" FromRole="SystemUser" ToRole="SystemUser1" />
+          <NavigationProperty Name="SystemUser2" Relationship="Gcpe.Hub_Model.FK_SystemUser_SystemUser_CreatedBy" FromRole="SystemUser1" ToRole="SystemUser" />
+          <NavigationProperty Name="SystemUser11" Relationship="Gcpe.Hub_Model.FK_SystemUser_SystemUser_UpdatedBy" FromRole="SystemUser" ToRole="SystemUser1" />
+          <NavigationProperty Name="SystemUser3" Relationship="Gcpe.Hub_Model.FK_SystemUser_SystemUser_UpdatedBy" FromRole="SystemUser1" ToRole="SystemUser" />
+        </EntityType>
+        <Association Name="FK_Ministry_ContactSystemUser">
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="ContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_EodLastRunSystemUser">
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="EodLastRunUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_SecondContactSystemUser">
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.Ministry" Role="Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry">
+              <PropertyRef Name="SecondContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUser_SystemUser_CreatedBy">
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUser1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUser_SystemUser_UpdatedBy">
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="Gcpe.Hub_Model.SystemUser" Role="SystemUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUser1">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MediaDistributionList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseMediaDistribution" FromRole="MediaDistributionList" ToRole="NewsRelease" />
+        </EntityType>
+        <Association Name="NewsReleaseMediaDistribution">
+          <End Type="Gcpe.Hub_Model.MediaDistributionList" Role="MediaDistributionList" Multiplicity="*" />
+          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GcpeHub_ModelStoreContainer" CdmEntityContainer="HubEntities" >
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ministries">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Ministry">
+              <MappingFragment StoreEntitySet="Ministry">
+                <ScalarProperty Name="DisplayAdditionalName" ColumnName="DisplayAdditionalName" />
+                <ScalarProperty Name="EodLastRunDateTime" ColumnName="EodLastRunDateTime" />
+                <ScalarProperty Name="EodLastRunUserId" ColumnName="EodLastRunUserId" />
+                <ScalarProperty Name="EodFinalizedDateTime" ColumnName="EodFinalizedDateTime" />
+                <ScalarProperty Name="WeekendContactNumber" ColumnName="WeekendContactNumber" />
+                <ScalarProperty Name="SecondContactUserId" ColumnName="SecondContactUserId" />
+                <ScalarProperty Name="ContactUserId" ColumnName="ContactUserId" />
+                <ScalarProperty Name="MinistryUrl" ColumnName="MinistryUrl" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="MinisterSummary" ColumnName="MinisterSummary" />
+                <ScalarProperty Name="MinisterName" ColumnName="MinisterName" />
+                <ScalarProperty Name="MinisterAddress" ColumnName="MinisterAddress" />
+                <ScalarProperty Name="FeatureReleaseId" ColumnName="FeatureReleaseId" />
+                <ScalarProperty Name="TopReleaseId" ColumnName="TopReleaseId" />
+                <ScalarProperty Name="FacebookEmbedHtml" ColumnName="FacebookEmbedHtml" />
+                <ScalarProperty Name="AudioEmbedHtml" ColumnName="AudioEmbedHtml" />
+                <ScalarProperty Name="YoutubeEmbedHtml" ColumnName="YoutubeEmbedHtml" />
+                <ScalarProperty Name="AudioUrl" ColumnName="AudioUrl" />
+                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
+                <ScalarProperty Name="FlickrUrl" ColumnName="FlickrUrl" />
+                <ScalarProperty Name="TwitterUsername" ColumnName="TwitterUsername" />
+                <ScalarProperty Name="MiscRightHtml" ColumnName="MiscRightHtml" />
+                <ScalarProperty Name="MiscHtml" ColumnName="MiscHtml" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="MinisterPageHtml" ColumnName="MinisterPageHtml" />
+                <ScalarProperty Name="MinisterPhotoUrl" ColumnName="MinisterPhotoUrl" />
+                <ScalarProperty Name="MinisterEmail" ColumnName="MinisterEmail" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MinistryLanguages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.MinistryLanguage">
+              <MappingFragment StoreEntitySet="MinistryLanguage">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleases">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsRelease">
+              <MappingFragment StoreEntitySet="NewsRelease">
+                <ScalarProperty Name="MediaSubscribers" ColumnName="MediaSubscribers" />
+                <ScalarProperty Name="NodSubscribers" ColumnName="NodSubscribers" />
+                <ScalarProperty Name="RedirectUrl" ColumnName="RedirectUrl" />
+                <ScalarProperty Name="ReleaseDateTime" ColumnName="ReleaseDateTime" />
+                <ScalarProperty Name="AssetUrl" ColumnName="AssetUrl" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ReleaseType" ColumnName="ReleaseType" />
+                <ScalarProperty Name="HasMediaAssets" ColumnName="HasMediaAssets" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="AtomId" ColumnName="AtomId" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="PublishOptions" ColumnName="PublishOptions" />
+                <ScalarProperty Name="MinistryRelease" ColumnName="MinistryRelease" />
+                <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
+                <ScalarProperty Name="YearRelease" ColumnName="YearRelease" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="IsCommitted" ColumnName="IsCommitted" />
+                <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="PublishDateTime" ColumnName="PublishDateTime" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseLanguages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseLanguage">
+              <MappingFragment StoreEntitySet="NewsReleaseLanguage">
+                <ScalarProperty Name="SocialMediaHeadline" ColumnName="SocialMediaHeadline" />
+                <ScalarProperty Name="SocialMediaSummary" ColumnName="SocialMediaSummary" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="ReleaseId" ColumnName="ReleaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Sector">
+              <MappingFragment StoreEntitySet="Sector">
+                <ScalarProperty Name="FeatureReleaseId" ColumnName="FeatureReleaseId" />
+                <ScalarProperty Name="TopReleaseId" ColumnName="TopReleaseId" />
+                <ScalarProperty Name="FacebookEmbedHtml" ColumnName="FacebookEmbedHtml" />
+                <ScalarProperty Name="AudioEmbedHtml" ColumnName="AudioEmbedHtml" />
+                <ScalarProperty Name="YoutubeEmbedHtml" ColumnName="YoutubeEmbedHtml" />
+                <ScalarProperty Name="AudioUrl" ColumnName="AudioUrl" />
+                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
+                <ScalarProperty Name="FlickrUrl" ColumnName="FlickrUrl" />
+                <ScalarProperty Name="TwitterUsername" ColumnName="TwitterUsername" />
+                <ScalarProperty Name="MiscRightHtml" ColumnName="MiscRightHtml" />
+                <ScalarProperty Name="MiscHtml" ColumnName="MiscHtml" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectorLanguages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.SectorLanguage">
+              <MappingFragment StoreEntitySet="SectorLanguage">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="SectorId" ColumnName="SectorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NewsReleaseMinistry" TypeName="Gcpe.Hub_Model.NewsReleaseMinistry" StoreEntitySet="NewsReleaseMinistry">
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+            <EndProperty Name="Ministry">
+              <ScalarProperty Name="Id" ColumnName="MinistryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="NewsReleaseSector" TypeName="Gcpe.Hub_Model.NewsReleaseSector" StoreEntitySet="NewsReleaseSector">
+            <EndProperty Name="Sector">
+              <ScalarProperty Name="Id" ColumnName="SectorId" />
+            </EndProperty>
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="NewsReleaseLogs">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseLog">
+              <MappingFragment StoreEntitySet="NewsReleaseLog">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="ReleaseId" ColumnName="ReleaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseImages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseImage">
+              <MappingFragment StoreEntitySet="NewsReleaseImage">
+                <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MinistrySector" TypeName="Gcpe.Hub_Model.MinistrySector" StoreEntitySet="MinistrySector">
+            <EndProperty Name="Sector">
+              <ScalarProperty Name="Id" ColumnName="SectorId" />
+            </EndProperty>
+            <EndProperty Name="Ministry">
+              <ScalarProperty Name="Id" ColumnName="MinistryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="NewsReleaseImageLanguages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseImageLanguage">
+              <MappingFragment StoreEntitySet="NewsReleaseImageLanguage">
+                <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseHistory">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseHistory">
+              <MappingFragment StoreEntitySet="NewsReleaseHistory">
+                <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+                <ScalarProperty Name="PublishDateTime" ColumnName="PublishDateTime" />
+                <ScalarProperty Name="ReleaseId" ColumnName="ReleaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationSettings">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.ApplicationSetting">
+              <MappingFragment StoreEntitySet="ApplicationSetting">
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blobs">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Blob">
+              <MappingFragment StoreEntitySet="Blob">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseCollections">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseCollection">
+              <MappingFragment StoreEntitySet="NewsReleaseCollection">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseDocuments">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseDocument">
+              <MappingFragment StoreEntitySet="NewsReleaseDocument">
+                <ScalarProperty Name="PageLayout" ColumnName="PageLayout" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="ReleaseId" ColumnName="ReleaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseDocumentContacts">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseDocumentContact">
+              <MappingFragment StoreEntitySet="NewsReleaseDocumentContact">
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsReleaseDocumentLanguages">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseDocumentLanguage">
+              <MappingFragment StoreEntitySet="NewsReleaseDocumentLanguage">
+                <ScalarProperty Name="BodyHtml" ColumnName="BodyHtml" />
+                <ScalarProperty Name="Byline" ColumnName="Byline" />
+                <ScalarProperty Name="Subheadline" ColumnName="Subheadline" />
+                <ScalarProperty Name="Headline" ColumnName="Headline" />
+                <ScalarProperty Name="Organizations" ColumnName="Organizations" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="PageImageId" ColumnName="PageImageId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NewsReleaseTag" TypeName="Gcpe.Hub_Model.NewsReleaseTag" StoreEntitySet="NewsReleaseTag">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Themes">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Theme">
+              <MappingFragment StoreEntitySet="Theme">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="FeatureReleaseId" ColumnName="FeatureReleaseId" />
+                <ScalarProperty Name="TopReleaseId" ColumnName="TopReleaseId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NewsReleaseTheme" TypeName="Gcpe.Hub_Model.NewsReleaseTheme" StoreEntitySet="NewsReleaseTheme">
+            <EndProperty Name="Theme">
+              <ScalarProperty Name="Id" ColumnName="ThemeId" />
+            </EndProperty>
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="NewsReleaseTypes">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsReleaseType">
+              <MappingFragment StoreEntitySet="NewsReleaseType">
+                <ScalarProperty Name="PageImageId" ColumnName="PageImageId" />
+                <ScalarProperty Name="PageLayout" ColumnName="PageLayout" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ReleaseType" ColumnName="ReleaseType" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MinistryServices">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.MinistryService">
+              <MappingFragment StoreEntitySet="MinistryService">
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="LinkText" ColumnName="LinkText" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MinistryTopics">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.MinistryTopic">
+              <MappingFragment StoreEntitySet="MinistryTopic">
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="LinkText" ColumnName="LinkText" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MinistryNewsletters">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.MinistryNewsletter">
+              <MappingFragment StoreEntitySet="MinistryNewsletter">
+                <ScalarProperty Name="NewsletterId" ColumnName="NewsletterId" />
+                <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceLinks">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.ResourceLink">
+              <MappingFragment StoreEntitySet="ResourceLink">
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="LinkText" ColumnName="LinkText" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NewsReleaseService" TypeName="Gcpe.Hub_Model.NewsReleaseService" StoreEntitySet="NewsReleaseService">
+            <EndProperty Name="Service">
+              <ScalarProperty Name="Id" ColumnName="ServiceId" />
+            </EndProperty>
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Carousels">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Carousel">
+              <MappingFragment StoreEntitySet="Carousel">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="PublishDateTime" ColumnName="PublishDateTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarouselSlides">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.CarouselSlide">
+              <MappingFragment StoreEntitySet="CarouselSlide">
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="SlideId" ColumnName="SlideId" />
+                <ScalarProperty Name="CarouselId" ColumnName="CarouselId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slides">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Slide">
+              <MappingFragment StoreEntitySet="Slide">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Justify" ColumnName="Justify" />
+                <ScalarProperty Name="FacebookPostUrl" ColumnName="FacebookPostUrl" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ActionUrl" ColumnName="ActionUrl" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Headline" ColumnName="Headline" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUser">
+                <ScalarProperty Name="HiddenColumns" ColumnName="HiddenColumns" />
+                <ScalarProperty Name="RowGuid" ColumnName="RowGuid" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FilterDisplayValue" ColumnName="FilterDisplayValue" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaDistributionLists">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.MediaDistributionList">
+              <MappingFragment StoreEntitySet="MediaDistributionList">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NewsReleaseMediaDistribution" TypeName="Gcpe.Hub_Model.NewsReleaseMediaDistribution" StoreEntitySet="NewsReleaseMediaDistribution">
+            <EndProperty Name="NewsRelease">
+              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
+            </EndProperty>
+            <EndProperty Name="MediaDistributionList">
+              <ScalarProperty Name="Id" ColumnName="MediaDistributionListId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

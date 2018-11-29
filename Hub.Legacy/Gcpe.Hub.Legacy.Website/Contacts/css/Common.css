@@ -1,0 +1,748 @@
+﻿/** Common Css Styles accross site **/
+
+html, body {
+    font-size: 13px;
+    font-family: Verdana;
+    color: #333333;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+a, a:visited {
+    color: #234075;
+    text-decoration: none;
+    font-family: Verdana;
+    font-size: 13px;
+}
+
+    a:hover {
+        /*color: #dadada;*/
+        text-decoration: underline;
+    }
+
+h1 {
+    font-family: MyriadProSemibold;
+    font-size: 18px;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family: MyriadProSemibold;
+    font-size: 18px;
+    color: #000000;
+}
+
+h3 {
+    font-family: MyriadProSemibold;
+    font-size: 16px;
+    color: #000000;
+}
+
+div.common-div-next-to-h3 {
+    float: left;
+    margin: 16px 0 0 5px;
+}
+
+input[type=text] {
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    height: 27px;
+    line-height: 25px;
+    padding: 0 10px;
+    width: 180px;
+}
+
+input[type="radio"] {
+    margin: 3px 3px 0px 5px;
+}
+
+textarea {
+    padding: 10px;
+    width: 430px;
+    height: 130px;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+    textarea.textarea-250 {
+        height: 65px;
+    }
+
+input, select, textarea {
+    color: #555555;
+    font-family: Verdana;
+    font-size: 13px;
+}
+
+.gradient {
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+.gradientBorder {
+    border: 1px solid #dadada;
+}
+
+input.gradient {
+    border: 1px solid #dadada;
+    color: #333333;
+    font-family: Verdana;
+    font-size: 12px;
+    padding: 0px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    height: 25px;
+    line-height: 21px;
+    margin: 0;
+}
+
+select {
+    height: 25px;
+    font-size: 13px;
+    line-height: normal;
+    padding: 3px;
+    margin: 0 0 0 0;
+}
+
+input.gradient:hover {
+    background: #999999;
+}
+
+table {
+    *border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+span.required {
+    color: red;
+}
+
+.myriadbold {
+    font-weight: bold;
+    font-family: MyriadProSemibold;
+}
+
+div.clear {
+    clear: both;
+}
+
+div.line {
+    height: 1px;
+    display: block;
+    width: 100%;
+    border-top: 1px solid #dadada;
+}
+
+.error {
+    margin-top: 3px;
+    color: red;
+    font-size: 11px;
+}
+
+/*div.label {
+    margin: 10px 0 2px 0;
+}*/
+
+div.labeltop {
+    margin-top: 0px;
+}
+
+.common-text-placeholder {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 13px;
+    font-family: Verdana;
+    color: #999999;
+}
+
+table.common-admin-table {
+    *border-collapse: collapse;
+    border-spacing: 0;
+    font-family: Verdana;
+    border: solid #dadada 1px;
+    width: 100%;
+    font-family: Verdana;
+    font-size: 12px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+    table.common-admin-table tr.top th {
+        border-bottom: 1px solid #dadada;
+        font-weight: normal;
+    }
+
+    table.common-admin-table tr.bottom th {
+        border-top: 1px solid #dadada;
+        font-weight: normal;
+    }
+
+    table.common-admin-table tr.top th:first-child {
+        -moz-border-radius-topleft: 4px;
+        -webkit-border-top-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+
+    table.common-admin-table tr.top th:last-child {
+        -moz-border-radius-topright: 4px;
+        -webkit-border-top-right-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+
+    table.common-admin-table tr.bottom th:first-child {
+        -moz-border-radius-bottomleft: 4px;
+        -webkit-border-bottom-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    table.common-admin-table tr.bottom th:last-child {
+        -moz-border-radius-bottomright: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    table.common-admin-table .left {
+        text-align: left;
+    }
+
+    table.common-admin-table .first {
+        padding-left: 20px;
+    }
+
+    table.common-admin-table th {
+        /*border-top:solid #dadada 1px;
+    border-bottom: solid #dadada 1px;    */
+        color: #666666;
+        padding: 5px 20px 0px 20px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 13px;
+        font-family: MyriadProSemibold;
+        text-transform: uppercase;
+        background: #ffffff; /* Old browsers */
+        background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+    }
+
+        table.common-admin-table th a {
+            text-decoration: none;
+            color: #666666;
+            font-weight: bold;
+            font-family: MyriadProSemibold;
+        }
+
+            table.common-admin-table th a:hover {
+                /*text-decoration:underline;*/
+                color: #999999;
+            }
+
+            table.common-admin-table th a.sort-asc {
+                /*font-style: italic;*/
+            }
+
+            table.common-admin-table th a.sort-desc {
+                /*font-style: italic;*/
+            }
+
+            table.common-admin-table th a img {
+                margin-left: 3px;
+            }
+
+        table.common-admin-table th.checkbox, table.common-admin-table td.checkbox {
+            width: 20px;
+            text-align: left;
+            padding-left: 5px;
+        }
+
+    table.common-admin-table td {
+        padding: 8px 5px 8px 5px;
+        text-align: center;
+        /*border-bottom:solid #cccccc 1px;*/
+        font-family: Verdana;
+        /*font-size: 11px;*/
+        color: #666666;
+    }
+
+    table.common-admin-table tr.result-top td {
+        padding: 8px 5px 0px 5px;
+    }
+
+    table.common-admin-table tr.result-bottom td {
+        padding: 0px 5px 8px 5px;
+        text-align: left;
+    }
+
+    table.common-admin-table td a, table.common-admin-table td a:visited {
+        color: #234075;
+        font-family: Verdana;
+        font-size: 12px;
+        text-decoration: none;
+    }
+
+        table.common-admin-table td a:hover {
+            text-decoration: underline;
+        }
+
+    table.common-admin-table tr.odd td {
+        background: #f1f1f1;
+    }
+
+    table.common-admin-table tr.light td {
+        background: #f1f1f1;
+    }
+
+    table.common-admin-table td.updownarrows a {
+        position: relative;
+        display: inline-block;
+        height: 20px;
+        width: 23px;
+        line-height: 23px;
+    }
+
+div.common-admin-control-bar {
+    height: 50px;
+    line-height: 50px;
+    background: #f1f1f1;
+    overflow: hidden;
+    font-family: Verdana;
+    font-size: 14px;
+    color: #555555;
+    padding-left: 15px;
+}
+
+    div.common-admin-control-bar a, div.common-admin-control-bar a:visited {
+        color: #234075;
+        font-family: Verdana;
+        font-size: 12px;
+        text-decoration: none;
+    }
+
+        div.common-admin-control-bar a:hover {
+            text-decoration: underline;
+        }
+
+    div.common-admin-control-bar span.label {
+        font-weight: normal;
+        float: left;
+    }
+
+    div.common-admin-control-bar span.labelbold {
+        font-weight: bold;
+        color: #000000;
+    }
+
+    div.common-admin-control-bar p.mobile-view-name {
+        display: none;
+    }
+
+    div.common-admin-control-bar span.small {
+        font-size: 12px;
+        padding: 0 30px;
+        float: left;
+        line-height: 52px;
+    }
+
+    div.common-admin-control-bar div.right {
+        float: right;
+        padding-right: 10px;
+    }
+
+div.common-paginator-container {
+    font-family: Verdana;
+    font-size: 12px;
+    color: #555555;
+    overflow: hidden;
+    margin: 10px 0;
+    line-height: 20px;
+}
+
+    div.common-paginator-container div.common-paginator-left {
+        float: left;
+    }
+
+    div.common-paginator-container div.common-paginator-right {
+        float: right;
+    }
+
+        div.common-paginator-container div.common-paginator-right div.common-paginatory-perpage {
+            float: left;
+            height: 25px;
+            line-height: 25px;
+        }
+
+        div.common-paginator-container div.common-paginator-right div.common-paginator-row-numbers {
+            position: relative;
+            float: left;
+            margin: 0 10px;
+            height: 25px;
+            line-height: 25px;
+        }
+
+        div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks {
+            position: relative;
+            overflow: hidden;
+            float: left;
+        }
+
+            div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks a {
+                text-decoration: none;
+                color: #555555;
+            }
+
+                div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks a:hover {
+                    text-decoration: underline;
+                }
+
+            div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks span {
+                color: #ffffff;
+                background: #234075;
+                filter: none;
+            }
+
+            div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks .item {
+                padding: 0 10px;
+                margin: 0 2px;
+                display: block;
+                float: left;
+                border: solid #f1f1f1 1px;
+                -moz-border-radius: 2px;
+                -webkit-border-radius: 2px;
+                border-radius: 4px;
+                height: 25px;
+                line-height: 25px;
+            }
+
+            div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks a.arrow {
+                position: relative;
+            }
+
+                div.common-paginator-container div.common-paginator-right div.common-paginator-pagelinks a.arrow img {
+                    position: absolute;
+                    top: 8px;
+                    left: 6px;
+                }
+
+p.common-search-form {
+    display: inline-block;
+    padding: 0 10px 0 0;
+    border: 1px solid #dadada;
+    height: 30px;
+    position: relative;
+    margin: 0 0 0 0;
+    overflow: hidden;
+    zoom: 1;
+    *display: inline;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+    p.common-search-form input[type="text"] {
+        border: none;
+        margin: 0 0 0 0;
+        padding: 0 5px 0 5px;
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        width: 175px;
+        border-right: 1px solid #dadada;
+        border-radius: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+    }
+
+    p.common-search-form input.common-search-button {
+        border: none;
+        background: url(../images/Search.png) 50% 50% no-repeat;
+        width: 20px;
+        height: 30px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+p.common-search-form-filter {
+    margin-top: 5px;
+}
+
+div.common-page-box-border {
+    border: 1px solid #dadada;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    div.common-page-box-border div.common-page-box-inner-small {
+        padding: 10px 15px;
+        color: #555555;
+    }
+
+    div.common-page-box-border div.common-page-box-inner-small-bottom {
+        padding-bottom: 30px;
+    }
+
+    div.common-page-box-border div.common-page-box-inner {
+        padding: 10px 30px 30px;
+        color: #555555;
+    }
+
+input.common-admin-button, a.common-admin-link-button {
+    border: 0px;
+    background: #234075;
+    padding: 8px 0px;
+    color: #FFFFFF;
+    font-family: MyriadProSemibold;
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    min-width: 80px;
+    text-transform: uppercase;
+    width: 100px;
+}
+
+a.common-admin-link-button {
+    display: block;
+}
+
+    a.common-admin-link-button:hover {
+        color: #FCC336;
+        text-decoration: none;
+    }
+
+input.common-admin-button:hover {
+    color: #FCC336;
+}
+
+input.common-admin-button-disabled {
+    background: #f1f1f1;
+}
+
+div.pagetext {
+    line-height: 18px;
+}
+
+/** page layout styles **/
+div.common-page-header {
+    width: 100%;
+    background: url(../images/topslice.png) repeat-x;
+    height: 140px;
+}
+
+div.common-page-960 {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+div.common-page-header-top {
+    height: 100px;
+    overflow: hidden;
+}
+
+    div.common-page-header-top img.bclogo {
+        float: left;
+        height: 47px;
+        margin-top: 24px;
+    }
+
+    div.common-page-header-top div.newsroom-text {
+        float: left;
+        margin-left: 30px;
+        margin-top: 25px;
+    }
+
+        div.common-page-header-top div.newsroom-text div.newsroom-text-top {
+            font-family: MyriadProSemibold;
+            font-size: 36px;
+            color: #FFFFFF;
+        }
+
+        div.common-page-header-top div.newsroom-text div.newsroom-text-bottom {
+            font-family: Verdana;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+div.common-page-navigation {
+    width: 100%;
+    color: #FFFFFF;
+    height: 40px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+    div.common-page-navigation a, div.common-page-navigation a:visited {
+        margin: 0 10px;
+        color: #999999;
+        text-decoration: none;
+        font-family: MyriadProSemibold;
+        font-size: 14px;
+        height: 40px;
+        line-height: 42px;
+        display: block;
+        float: left;
+        text-transform: uppercase;
+    }
+
+        div.common-page-navigation a:hover {
+            color: #FFFFFF;
+        }
+
+        div.common-page-navigation a.first, div.common-page-navigation a.first:visited {
+            margin-left: 0px;
+        }
+
+        div.common-page-navigation a.selected, div.common-page-navigation a.selected:visited {
+            height: 37px;
+            border-bottom: 3px solid #FCC336;
+            color: #FFFFFF;
+        }
+
+div.common-page-breadcrumb {
+    font-family: Verdana;
+    font-size: 10px;
+    color: #666666;
+    margin: 10px 0;
+    height: 20px;
+    display: block;
+}
+
+    div.common-page-breadcrumb a, div.common-page-breadcrumb a:visited {
+        font-family: Verdana;
+        font-size: 10px;
+        color: #666666;
+        text-decoration: none;
+    }
+
+        div.common-page-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+div.common-page-add-new-item {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    height: 35px;
+    line-height: 15px;
+    padding: 10px 20px 10px 35px;
+    background: url(../images/Add.png) 10% 50% no-repeat #234075;
+}
+
+div.common-page-add-new-item-small {
+    padding: 10px 20px 10px 35px;
+    background-position: 15% 50%;
+}
+
+div.common-page-add-new-item a, div.common-page-add-new-item a:visited {
+    font-family: Verdana;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+    div.common-page-add-new-item a:hover {
+        color: #FCC336;
+    }
+
+div.common-page-manageitems-count {
+    color: #234075;
+    font-family: MyriadProSemibold;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+div.common-back-button {
+    position: relative;
+    margin: 30px 0;
+    background: url(../images/Back.png) 10% 50% no-repeat #FCC336;
+    padding: 10px 30px 10px 35px;
+    height: 35px;
+    line-height: 15px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+
+    div.common-back-button a, div.div.common-back-button a:visited {
+        text-decoration: none;
+        font-family: MyriadProSemibold;
+        color: #FFFFFF;
+        font-size: 12px;
+    }
+
+        div.common-back-button a:hover {
+            /*color: #234075;*/
+        }
+
+div.report-selector-control {
+    margin: 0px 0px 15px 0px;
+}
+
+select.report-selector-dropdown {
+    width: 300px;
+}
+
+div.report-selector-print-button {
+    background: #234075;
+    height: 15px;
+    line-height: 15px;
+    padding: 10px 20px 10px 45px;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 120px;
+}
+
+div.report-selector-export-button {
+    background: url("../images/Export.png") no-repeat scroll 10% 50% #234075;
+    height: 15px;
+    line-height: 15px;
+    padding: 10px 20px 10px 45px;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    width: 120px;
+}
+
+    div.report-selector-print-button a, div.report-selector-print-button a:visited,
+    div.report-selector-export-button a, div.report-selector-export-button a:visited {
+        font-family: Verdana;
+        font-size: 12px;
+        color: #FFFFFF;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+        div.report-selector-print-button a:hover, div.report-selector-export-button a:hover {
+            color: #FCC336;
+        }
+
+.printonly {
+    display: none;
+}

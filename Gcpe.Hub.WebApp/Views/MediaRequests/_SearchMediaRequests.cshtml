@@ -1,0 +1,131 @@
+﻿
+<div class="page-header" id="search-page-header">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 style="margin-top: 0; color: black" class="pull-left ">Search Media Requests</h3>
+            <button id="facet-toggle" href="#" style="padding-top: 3px; margin: 0px;" class="navbar-toggle pull-right" onclick="toggleFacetView()" data-bind="visible: $root.searchHandler().searchResults().length > 0">
+                <span class="sr-only">Toggle filter</span>
+                <span>Filter</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<form role="form" class="form-horizontal" data-bind="submit: $root.searchHandler().doSearch">
+    <div class="form-group row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="input-group">
+                <input  class="form-control" autofocus id="dom-search-text" type="text" data-bind="value: $root.searchHandler().searchString" autocomplete="off" disableautocomplete="true" />
+                <span class="input-group-btn">
+                    <input id="form-submit" type="submit" class="btn btn-primary" name="Search" value="Search" />
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+
+@* Reusing the "mediarequest-card-template" from the List page! *@
+
+<div class="row" >
+    <!-- Start Facets UI -->
+    <div id="facet-ui" class="col-xs-12 col-sm-3" style="padding-right:10px;" data-bind="visible: $root.searchHandler().displayFacetUI()" > 
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" data-bind="foreach: $root.searchHandler().facets">
+                <div id="facet-heading" class="panel-heading" >
+                    <h4 class="panel-title"  >
+                        <a data-toggle="collapse" data-bind="text: displayName, attr: { href: '#facet-' + $index() }, click: hideMore.bind($data)" ></a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" data-bind="foreach: filters, attr: { id: 'facet-' + $index() }">
+                    <div class="list-group" data-bind="style: { display: $index() <= 2 ? 'block' : 'none' }">
+                        <div class="list-group-item facetitem">
+                            <table style="width:100%">
+                                <tr>
+                                    <td class="facetcard" style="padding-top: 3px;"><a id="deselect-facet" data-bind="style: { display: isChecked ? 'block' : 'none' }, click: clearFacet.bind($data)" class="glyphicon glyphicon-remove"></a></td>
+                                    <td class="facetcard" style="width: 100%;"><a href="#" data-bind="text: name, click: runSearch"></a></td>
+                                    <td style="float: right;" class="facetcard"><label data-bind="text: count"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="more" style="height: 18px;" data-bind="style: { display: filters.length > 3 ? 'block' : 'none' }">
+                    <a class="pull-right" style="padding-right: 5px;" href="#" data-bind="click: showmore.bind($parent), attr: {id: 'morelabel-' + $index() }">more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-results" class="column-xs-12 col-sm-9" >
+        <!-- End Facets UI-->
+        <!-- ko template: { name: 'mediarequest-card-template', foreach: $root.searchHandler().searchResults } -->
+        <!-- /ko -->
+    </div>
+</div>
+
+<div data-bind="visible: $root.searchHandler().zeroResults">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="margin-top: 80px;">No results found for <strong><span data-bind="text: $root.searchHandler().searchString"></span></strong>.</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="text-align:center">
+    <span class="ajax-busy-indicator glyphicon glyphicon-alert" style="color:darkred;" data-bind="visible: $root.searchHandler().searchingErrorHtml"></span>
+    <span class="ajax-busy-indicator glyphicon glyphicon-refresh gly-spin" data-bind="visible: $root.searchHandler().isFetching"></span>
+</div>
+
+<script type="text/javascript">
+
+    function hideMore(data) {
+        var moreid = data.displayName == 'Ministry' ? 'morelabel-0' : data.displayName == 'Outlet' ? 'morelabel-1' : 'morelabel-2';
+        var element = document.getElementById(moreid);
+        element.style.display = element.style.display == 'none' ? 'block' : 'none';
+    }
+
+    function showmore(data) {
+        var facetid = data.displayName == 'Ministry' ? 'facet-0' : data.displayName == 'Outlet' ? 'facet-1' : 'facet-2';
+        var moreid = facetid == 'facet-0' ? 'morelabel-0' : facetid == 'facet-1' ? 'morelabel-1' : 'morelabel-2';
+
+        var morelabel = document.getElementById(moreid);
+
+        var children = document.getElementById(facetid).getElementsByClassName('list-group');
+
+        if (morelabel.textContent == 'more') {
+            for (i = 2; i < children.length; i++) {
+                children[i].style.display = 'block';
+            }
+        }
+        else
+        {
+            for (i = children.length-1; i > 2; i--)
+                children[i].style.display = 'none';
+        }
+
+        morelabel.textContent = morelabel.textContent == 'more' ? 'less' : 'more';
+    }
+
+    function clearFacet(data) {
+        data.isChecked = false;
+        document.getElementById("form-submit").click();
+    }
+
+    function runSearch(data) {
+        data.isChecked = true;
+        document.getElementById("form-submit").click();
+    }
+    
+    function toggleFacetView() {
+        var facetui = document.getElementById("facet-ui");
+        if (facetui.style.display == "block") {
+            facetui.style.display = "none";
+        }
+        else {
+            facetui.style.display = "block";
+        }
+    }
+</script>
+
+<script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>

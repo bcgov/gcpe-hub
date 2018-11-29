@@ -1,0 +1,2 @@
+dotnet restore
+dotnet ef dbcontext scaffold "Server=DbServer;Database=DbName;User Id=DbUserID;Password=DbPassword;" Microsoft.EntityFrameworkCore.SqlServer --data-annotations -o Entity --context HubDbContext --verbose --force

@@ -1,0 +1,6 @@
+﻿@Document.Headline
+@Document.Subheadline
+
+Format(@Document.BodyText)
+
+Format(@Contacts)

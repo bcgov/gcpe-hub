@@ -1,0 +1,131 @@
+﻿<div class="page-header">
+    <h3>
+        <span></span>End of Day Report
+    </h3>
+
+</div>
+
+<form role="form" class="form-horizontal">
+
+    <!-- ko template: { name: 'mediarequest-create-eod-template', foreach: eodMediaRequests} -->
+    <!-- /ko -->
+
+    <div class="pull-right" data-bind="visible: !fetchingData()">
+        <a class="btn btn-default disable-on-busy" data-bind="click: function(){window.history.back()}">Cancel</a>
+        <a class="btn btn-primary disable-on-busy" data-bind="click: collectAndSubmit">Email</a>
+    </div>
+
+</form>
+<div class="row">
+    <div class="col-md-12" style="text-align:center">
+        <span class="ajax-busy-indicator glyphicon glyphicon-refresh gly-spin" data-bind="visible: fetchingData"></span>
+    </div>
+</div>
+
+<script type="text/html" id="mediarequest-create-eod-template">
+    <div class="media-request-card row" data-bind="css: { 'responsible-media-request' : isMyResponsiblity }">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 media-request-data-panel">
+
+            <span class="shared-ministries-card hidden-xs hidden-sm" data-bind="with: leadMinistry">
+                <span class="tag badge-padding label label-normal label-outline" data-bind="text: abbreviation"></span>
+            </span>
+
+            <span class="shared-ministries-card hidden-xs hidden-sm" data-bind="foreach: sharedMinistries">
+                <span class="tag badge-padding label label-default label-outline" data-bind="text: abbreviation"></span>
+            </span>
+
+            <div style="padding-top:4px;" data-bind="foreach: mediaContacts">
+                @*<span data-bind="text: ($index() ? '; ' : '') + name()" style="font-weight:bold"></span> - <span data-bind="text: job().outlet().name"></span>*@
+                <span data-bind="text: ($index() ? '; ' : '') + name()"></span> - <span data-bind="text: job().outlet().name"></span>
+            </div>
+
+            <div data-bind="text: 'ISSUE: ' + requestTopic()"></div>
+
+            <div>
+
+                <div class="media-request-progress-input" data-bind="validationElement: eodReportWith, css: {'media-request-progress-input-highlight': !(eodReportWith())}">
+
+                    <span style="float:left;">STATUS:&nbsp;</span>
+
+                        <!-- ko foreach: [{id:'CommOffice', name:'GCPE'}, {id:'ProgramArea', name:'Program Area'}, {id:'MinistersOffice', name:'Minister\'s Office'} ] -->
+
+                        <div style="white-space: nowrap; display: inline-block">
+                            <input type="radio" data-bind="validationOptions:{insertMessages: false}, value: $data.id, checked: $parent.eodReportWith, attr: { id: $data.id + 'rb' + $parent.id(), name : $parent.id() + 'progressGroup'}" />
+                            <label data-bind="text: $data.name, attr: {for: $data.id + 'rb' + $parent.id()}"></label>
+                        </div>
+
+                        <!-- /ko -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</script>
+
+<style>
+    input[type="radio"] + label {
+        font-weight: normal;
+    }
+
+    input[type="radio"]:checked + label {
+        font-weight: bold;
+    }
+</style>
+
+@*<script type="text/html" id="mediarequest-create-eod-template">
+    <div class="media-request-card row" data-bind="css: { 'responsible-media-request' : isMyResponsiblity }">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 media-request-data-panel">
+            <span class="shared-ministries-card hidden-xs hidden-sm" data-bind="with: leadMinistry">
+                <span class="tag badge-padding label label-normal label-outline" data-bind="text: abbreviation"></span>
+            </span>
+            <span class="shared-ministries-card hidden-xs hidden-sm" data-bind="foreach: sharedMinistries">
+                <span class="tag badge-padding label label-default label-outline" data-bind="text: abbreviation"></span>
+            </span>
+            <div data-bind="text: requestTopic"></div>
+            <span class="shared-ministries-card hidden-md hidden-lg" data-bind="with: leadMinistry">
+                <span class="tag badge-padding label label-normal label-outline" data-bind="text: abbreviation"></span>
+            </span>
+            <span class="shared-ministries-card hidden-md hidden-lg" data-bind="foreach: sharedMinistries">
+                <span class="tag badge-padding label label-default label-outline" data-bind="text: abbreviation"></span>
+            </span>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 media-request-data-panel">
+            <div class="badge-padding label label-danger label-outline" data-bind="visible: isMajorOutlet()">
+                Major Media
+            </div>
+            <div style="padding-top:4px;" data-bind="foreach: mediaContacts">
+                <div class="hide-long-text">
+                    <span data-bind="text: name"></span> -
+                    <span data-bind="with: job">
+                        <span data-bind="text: outlet().name"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="hidden-xs col-sm-6 col-md-2 col-lg-2 media-request-data-panel"></div>
+        <div class="col-xs-12 media-request-progress-panel">
+            <div>
+                <div class="media-request-progress-input pull-right" data-bind="validationElement: eodReportWith, css: {'media-request-progress-input-highlight': !(eodReportWith())}">
+                    <!-- ko foreach: [{id:'CommOffice', name:'GCPE'}, {id:'ProgramArea', name:'Program Area'}, {id:'MinistersOffice', name:'Minister\'s Office'} ] -->
+                    <div style="padding-left: 25px; white-space: nowrap;">
+                        <input type="radio" data-bind="validationOptions:{insertMessages: false}, value: $data.id, checked: $parent.eodReportWith, attr: { id: $data.id + 'rb' + $parent.id(), name : $parent.id() + 'progressGroup'}, " />
+                        <label data-bind="text: $data.name, attr: {for: $data.id + 'rb' + $parent.id()}"></label>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <label>Requested</label>
+                <span data-bind="momentDateDisplay: {value: requestedAt, format:'CALENDAR'}"></span>
+            </div>
+
+
+            @*<span class="pull-right validation-error-message" data-bind="validationMessage: eodReportWith"></span>*@@*
+            </div>
+        </div>
+    </script>*@
+
+            <script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>
+

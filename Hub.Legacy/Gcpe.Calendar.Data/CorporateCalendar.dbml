@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Gcpe.Hub" Class="CorporateCalendarDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=dev.sql.sdlc.gcpe.bcgov;Initial Catalog=Gcpe.Hub;User ID=HB_SDLC_DVLPR;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="CorporateCalendar.Data.Properties.Settings" SettingsPropertyName="Gcpe_HubConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="calendar.ActivitySharedWith" Member="ActivitySharedWiths">
+    <Type Name="ActivitySharedWith">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_ActivitySharedWith" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivitySharedWith" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivitySharedWith1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_ActivitySharedWith" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.[Log]" Member="Logs">
+    <Type Name="Log">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LogType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TableName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FieldName" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="OldValue" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NewValue" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Operation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_Log" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_Log" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_Log1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivitySectors" Member="ActivitySectors">
+    <Type Name="ActivitySector">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SectorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Sector_ActivitySector" Member="Sector" ThisKey="SectorId" OtherKey="Id" Type="Sector" IsForeignKey="true" />
+      <Association Name="Activity_ActivitySector" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivitySector" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivitySector1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityNROrigins" Member="ActivityNROrigins">
+    <Type Name="ActivityNROrigin">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NROriginId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="NROrigin_ActivityNROrigin" Member="NROrigin" ThisKey="NROriginId" OtherKey="Id" Type="NROrigin" IsForeignKey="true" />
+      <Association Name="Activity_ActivityNROrigin" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityNROrigin" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityNROrigin1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityCommunicationMaterials" Member="ActivityCommunicationMaterials">
+    <Type Name="ActivityCommunicationMaterial">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CommunicationMaterialId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="CommunicationMaterial_ActivityCommunicationMaterial" Member="CommunicationMaterial" ThisKey="CommunicationMaterialId" OtherKey="Id" Type="CommunicationMaterial" IsForeignKey="true" />
+      <Association Name="Activity_ActivityCommunicationMaterial" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityCommunicationMaterial" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityCommunicationMaterial1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityCategories" Member="ActivityCategories">
+    <Type Name="ActivityCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Category_ActivityCategory" Member="Category" ThisKey="CategoryId" OtherKey="Id" Type="Category" IsForeignKey="true" />
+      <Association Name="Activity_ActivityCategory" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityCategory" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityCategory1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityFilter" Member="ActivityFilters">
+    <Type Name="ActivityFilter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="QueryString" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="SystemUser_ActivityFilter" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityFilter1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.SystemUserMinistry" Member="SystemUserMinistries">
+    <Type Name="SystemUserMinistry">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SystemUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="SystemUser_SystemUserMinistry" Member="SystemUser" ThisKey="SystemUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_SystemUserMinistry1" Member="CreatedBySystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_SystemUserMinistry2" Member="LastUpdatedBySystemUser" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_SystemUserMinistry" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.NewsFeed" Member="NewsFeeds">
+    <Type Name="NewsFeed" Id="ID1">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_NewsFeed" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_NewsFeed" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_NewsFeed1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_NewsFeed" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Category_ActivityCategory" Member="ActivityCategories" ThisKey="Id" OtherKey="CategoryId" Type="ActivityCategory" />
+    </Type>
+  </Table>
+  <Table Name="calendar.CommunicationMaterial" Member="CommunicationMaterials">
+    <Type Name="CommunicationMaterial">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="CommunicationMaterial_ActivityCommunicationMaterial" Member="ActivityCommunicationMaterials" ThisKey="Id" OtherKey="CommunicationMaterialId" Type="ActivityCommunicationMaterial" />
+    </Type>
+  </Table>
+  <Table Name="calendar.NROrigin" Member="NROrigins">
+    <Type Name="NROrigin">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="NROrigin_ActivityNROrigin" Member="ActivityNROrigins" ThisKey="Id" OtherKey="NROriginId" Type="ActivityNROrigin" />
+    </Type>
+  </Table>
+  <Table Name="calendar.CommunicationContact" Member="CommunicationContacts">
+    <Type Name="CommunicationContact">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SystemUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MinistryShortName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="CommunicationContact_Activity" Member="Activities" ThisKey="Id" OtherKey="CommunicationContactId" Type="Activity" />
+      <Association Name="SystemUser_CommunicationContact" Member="SystemUser" ThisKey="SystemUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_CommunicationContact" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.NRDistribution" Member="NRDistributions">
+    <Type Name="NRDistribution">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="NRDistribution_Activity" Member="Activities" ThisKey="Id" OtherKey="NRDistributionId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.PremierRequested" Member="PremierRequested">
+    <Type Name="PremierRequested">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="PremierRequested_Activity" Member="Activities" ThisKey="Id" OtherKey="PremierRequestedId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.GovernmentRepresentative" Member="GovernmentRepresentatives">
+    <Type Name="GovernmentRepresentative">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="GovernmentRepresentative_Activity" Member="Activities" ThisKey="Id" OtherKey="GovernmentRepresentativeId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.EventPlanner" Member="EventPlanners">
+    <Type Name="EventPlanner">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="EventPlanner_Activity" Member="Activities" ThisKey="Id" OtherKey="EventPlannerId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="City_Activity" Member="Activities" ThisKey="Id" OtherKey="CityId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Videographer" Member="Videographers">
+    <Type Name="Videographer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Videographer_Activity" Member="Activities" ThisKey="Id" OtherKey="VideographerId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Priority" Member="Priorities">
+    <Type Name="Priority">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Status_Activity" Member="Activities" ThisKey="Id" OtherKey="HqStatusId" Type="Activity" />
+      <Association Name="Status_Activity1" Member="Activities1" ThisKey="Id" OtherKey="StatusId" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActiveDistinctCommunicationContacts" Member="ActiveDistinctCommunicationContacts">
+    <Type Name="ActiveDistinctCommunicationContact">
+      <Column Name="SystemUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NameAndNumber" Type="System.String" DbType="NVarChar(101)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActiveCommunicationContacts" Member="ActiveCommunicationContacts">
+    <Type Name="ActiveCommunicationContact">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SystemUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NameAndNumber" Type="System.String" DbType="NVarChar(151)" CanBeNull="true" />
+      <Column Name="MinistryShortName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MinistryId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Expr1" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ministry" Member="Ministries">
+    <Type Name="Ministry">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[Key]" Member="Key" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Abbreviation" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MinisterEmail" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MinisterPhotoUrl" Type="System.String" DbType="NVarChar(255) NULL" CanBeNull="true" />
+      <Column Name="MinisterPageHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MiscHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MiscRightHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TwitterUsername" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FlickrUrl" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="YoutubeUrl" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AudioUrl" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FacebookEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="YoutubeEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AudioEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TopReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FeatureReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="MinisterAddress" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MinisterName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MinisterSummary" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MinistryUrl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ParentId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ContactUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SecondContactUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WeekendContactNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EodFinalizedDateTime" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EodLastRunUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EodLastRunDateTime" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DisplayAdditionalName" Type="System.String" DbType="NVarChar(255) NULL" CanBeNull="true" />
+      <Association Name="Ministry_ActivitySharedWith" Member="ActivitySharedWiths" ThisKey="Id" OtherKey="MinistryId" Type="ActivitySharedWith" />
+      <Association Name="Ministry_SystemUserMinistry" Member="SystemUserMinistries" ThisKey="Id" OtherKey="MinistryId" Type="SystemUserMinistry" />
+      <Association Name="Ministry_NewsFeed" Member="NewsFeeds" ThisKey="Id" OtherKey="MinistryId" Type="NewsFeed" />
+      <Association Name="Ministry_CommunicationContact" Member="CommunicationContacts" ThisKey="Id" OtherKey="MinistryId" Type="CommunicationContact" />
+      <Association Name="Ministry_Ministry" Member="Ministries" ThisKey="Id" OtherKey="ParentId" Type="Ministry" />
+      <Association Name="Ministry_Activity" Member="Activities" ThisKey="Id" OtherKey="ContactMinistryId" Type="Activity" />
+      <Association Name="SystemUser_Ministry" Member="ContactUser" ThisKey="ContactUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_Ministry1" Member="EodLastRunUser" ThisKey="EodLastRunUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_Ministry" Member="ParentMinistry" ThisKey="ParentId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+      <Association Name="SystemUser_Ministry2" Member="SecondContactUser" ThisKey="SecondContactUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sector" Member="Sectors">
+    <Type Name="Sector">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[Key]" Member="Key" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MiscHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MiscRightHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TwitterUsername" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FlickrUrl" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="YoutubeUrl" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AudioUrl" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FacebookEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="YoutubeEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AudioEmbedHtml" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TopReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FeatureReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Sector_ActivitySector" Member="ActivitySectors" ThisKey="Id" OtherKey="SectorId" Type="ActivitySector" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Role_SystemUser" Member="SystemUsers" ThisKey="Id" OtherKey="RoleId" Type="SystemUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Theme" Member="Themes">
+    <Type Name="Theme">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[Key]" Member="Key" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TopReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FeatureReleaseId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Theme_ActivityTheme" Member="ActivityThemes" ThisKey="Id" OtherKey="ThemeId" Type="ActivityTheme" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityThemes" Member="ActivityThemes">
+    <Type Name="ActivityTheme">
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ThemeId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Theme_ActivityTheme" Member="Theme" ThisKey="ThemeId" OtherKey="Id" Type="Theme" IsForeignKey="true" />
+      <Association Name="Activity_ActivityTheme" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Initiative" Member="Initiatives">
+    <Type Name="Initiative">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Initiative_ActivityInitiative" Member="ActivityInitiatives" ThisKey="Id" OtherKey="InitiativeId" Type="ActivityInitiative" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityInitiatives" Member="ActivityInitiatives">
+    <Type Name="ActivityInitiative">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InitiativeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Initiative_ActivityInitiative" Member="Initiative" ThisKey="InitiativeId" OtherKey="Id" Type="Initiative" IsForeignKey="true" />
+      <Association Name="Activity_ActivityInitiative" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityInitiative" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_ActivityInitiative1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.SystemUser" Member="SystemUsers">
+    <Type Name="SystemUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MobileNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FilterDisplayValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="HiddenColumns" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="SystemUser_ActivitySharedWith" Member="ActivitySharedWiths" ThisKey="Id" OtherKey="CreatedBy" Type="ActivitySharedWith" />
+      <Association Name="SystemUser_ActivitySharedWith1" Member="ActivitySharedWiths1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivitySharedWith" />
+      <Association Name="SystemUser_Log" Member="Logs" ThisKey="Id" OtherKey="CreatedBy" Type="Log" />
+      <Association Name="SystemUser_Log1" Member="Logs1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="Log" />
+      <Association Name="SystemUser_ActivitySector" Member="ActivitySectors" ThisKey="Id" OtherKey="CreatedBy" Type="ActivitySector" />
+      <Association Name="SystemUser_ActivitySector1" Member="ActivitySectors1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivitySector" />
+      <Association Name="SystemUser_ActivityNROrigin" Member="ActivityNROrigins" ThisKey="Id" OtherKey="CreatedBy" Type="ActivityNROrigin" />
+      <Association Name="SystemUser_ActivityNROrigin1" Member="ActivityNROrigins1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivityNROrigin" />
+      <Association Name="SystemUser_ActivityCommunicationMaterial" Member="ActivityCommunicationMaterials" ThisKey="Id" OtherKey="CreatedBy" Type="ActivityCommunicationMaterial" />
+      <Association Name="SystemUser_ActivityCommunicationMaterial1" Member="ActivityCommunicationMaterials1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivityCommunicationMaterial" />
+      <Association Name="SystemUser_ActivityCategory" Member="ActivityCategories" ThisKey="Id" OtherKey="CreatedBy" Type="ActivityCategory" />
+      <Association Name="SystemUser_ActivityCategory1" Member="ActivityCategories1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivityCategory" />
+      <Association Name="SystemUser_ActivityFilter" Member="ActivityFilters" ThisKey="Id" OtherKey="CreatedBy" Type="ActivityFilter" />
+      <Association Name="SystemUser_ActivityFilter1" Member="ActivityFilters1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivityFilter" />
+      <Association Name="SystemUser_SystemUserMinistry" Member="SystemUserMinistries" ThisKey="Id" OtherKey="SystemUserId" Type="SystemUserMinistry" />
+      <Association Name="SystemUser_SystemUserMinistry1" Member="CreatedBySystemUserMinistries" ThisKey="Id" OtherKey="CreatedBy" Type="SystemUserMinistry" />
+      <Association Name="SystemUser_SystemUserMinistry2" Member="LastUpdatedBySystemUserMinistries" ThisKey="Id" OtherKey="LastUpdatedBy" Type="SystemUserMinistry" />
+      <Association Name="SystemUser_NewsFeed" Member="NewsFeeds" ThisKey="Id" OtherKey="CreatedBy" Type="NewsFeed" />
+      <Association Name="SystemUser_NewsFeed1" Member="NewsFeeds1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="NewsFeed" />
+      <Association Name="SystemUser_CommunicationContact" Member="CommunicationContacts" ThisKey="Id" OtherKey="SystemUserId" Type="CommunicationContact" />
+      <Association Name="SystemUser_Ministry" Member="Ministries" ThisKey="Id" OtherKey="ContactUserId" Type="Ministry" />
+      <Association Name="SystemUser_Ministry1" Member="Ministries1" ThisKey="Id" OtherKey="EodLastRunUserId" Type="Ministry" />
+      <Association Name="SystemUser_Ministry2" Member="Ministries2" ThisKey="Id" OtherKey="SecondContactUserId" Type="Ministry" />
+      <Association Name="SystemUser_ActivityInitiative" Member="ActivityInitiatives" ThisKey="Id" OtherKey="CreatedBy" Type="ActivityInitiative" />
+      <Association Name="SystemUser_ActivityInitiative1" Member="ActivityInitiatives1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="ActivityInitiative" />
+      <Association Name="SystemUser_SystemUser" Member="SystemUsers" ThisKey="Id" OtherKey="CreatedBy" Type="SystemUser" />
+      <Association Name="SystemUser_SystemUser1" Member="SystemUsers1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="SystemUser" />
+      <Association Name="SystemUser_FavoriteActivity" Member="FavoriteActivities" ThisKey="Id" OtherKey="SystemUserId" Type="FavoriteActivity" />
+      <Association Name="SystemUser_Activity" Member="Activities" ThisKey="Id" OtherKey="CreatedBy" Type="Activity" />
+      <Association Name="SystemUser_Activity1" Member="Activities1" ThisKey="Id" OtherKey="LastUpdatedBy" Type="Activity" />
+      <Association Name="SystemUser_SystemUser" Member="SystemUser1" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Role_SystemUser" Member="Role" ThisKey="RoleId" OtherKey="Id" Type="Role" IsForeignKey="true" />
+      <Association Name="SystemUser_SystemUser1" Member="SystemUser2" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.FavoriteActivity" Member="FavoriteActivities">
+    <Type Name="FavoriteActivity">
+      <Column Name="SystemUserId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Activity_FavoriteActivity" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="SystemUser_FavoriteActivity" Member="SystemUser" ThisKey="SystemUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityKeywords" Member="ActivityKeywords">
+    <Type Name="ActivityKeyword">
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="KeywordId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_ActivityKeyword" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Keyword" Member="Keywords">
+    <Type Name="Keyword">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="calendar.Activity" Member="Activities">
+    <Type Name="Activity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PotentialDates" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Details" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="Schedule" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Significance" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Strategy" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="LeadOrganization" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Venue" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NRDistributionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PremierRequestedId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactMinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="GovernmentRepresentativeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CommunicationContactId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EventPlannerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VideographerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OtherCity" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HqStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HqSection" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HqComments" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsIssue" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsMilestone" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAllDay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAtLegislature" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsConfidential" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCrossGovernment" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsTitleNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDetailsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsRepresentativeNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCityNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsStartDateNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsEndDateNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCategoriesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCommMaterialsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActiveNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="NRDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Activity_ActivitySharedWith" Member="ActivitySharedWiths" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySharedWith" />
+      <Association Name="Activity_Log" Member="Logs" ThisKey="Id" OtherKey="ActivityId" Type="Log" />
+      <Association Name="Activity_ActivitySector" Member="ActivitySectors" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySector" />
+      <Association Name="Activity_ActivityNROrigin" Member="ActivityNROrigins" ThisKey="Id" OtherKey="ActivityId" Type="ActivityNROrigin" />
+      <Association Name="Activity_ActivityCommunicationMaterial" Member="ActivityCommunicationMaterials" ThisKey="Id" OtherKey="ActivityId" Type="ActivityCommunicationMaterial" />
+      <Association Name="Activity_ActivityCategory" Member="ActivityCategories" ThisKey="Id" OtherKey="ActivityId" Type="ActivityCategory" />
+      <Association Name="Activity_NewsFeed" Member="NewsFeeds" ThisKey="Id" OtherKey="ActivityId" Type="NewsFeed" />
+      <Association Name="Activity_ActivityTheme" Member="ActivityThemes" ThisKey="Id" OtherKey="ActivityId" Type="ActivityTheme" />
+      <Association Name="Activity_ActivityInitiative" Member="ActivityInitiatives" ThisKey="Id" OtherKey="ActivityId" Type="ActivityInitiative" />
+      <Association Name="Activity_FavoriteActivity" Member="FavoriteActivities" ThisKey="Id" OtherKey="ActivityId" Type="FavoriteActivity" />
+      <Association Name="Activity_ActivityKeyword" Member="ActivityKeywords" ThisKey="Id" OtherKey="ActivityId" Type="ActivityKeyword" />
+      <Association Name="Activity_ActivityFile" Member="ActivityFiles" ThisKey="Id" OtherKey="ActivityId" Type="ActivityFile" />
+      <Association Name="City_Activity" Member="City" ThisKey="CityId" OtherKey="Id" Type="City" IsForeignKey="true" />
+      <Association Name="CommunicationContact_Activity" Member="CommunicationContact" ThisKey="CommunicationContactId" OtherKey="Id" Type="CommunicationContact" IsForeignKey="true" />
+      <Association Name="EventPlanner_Activity" Member="EventPlanner" ThisKey="EventPlannerId" OtherKey="Id" Type="EventPlanner" IsForeignKey="true" />
+      <Association Name="GovernmentRepresentative_Activity" Member="GovernmentRepresentative" ThisKey="GovernmentRepresentativeId" OtherKey="Id" Type="GovernmentRepresentative" IsForeignKey="true" />
+      <Association Name="Status_Activity" Member="Status" ThisKey="HqStatusId" OtherKey="Id" Type="Status" IsForeignKey="true" />
+      <Association Name="NRDistribution_Activity" Member="NRDistribution" ThisKey="NRDistributionId" OtherKey="Id" Type="NRDistribution" IsForeignKey="true" />
+      <Association Name="PremierRequested_Activity" Member="PremierRequested" ThisKey="PremierRequestedId" OtherKey="Id" Type="PremierRequested" IsForeignKey="true" />
+      <Association Name="Status_Activity1" Member="Status1" ThisKey="StatusId" OtherKey="Id" Type="Status" IsForeignKey="true" />
+      <Association Name="Videographer_Activity" Member="Videographer" ThisKey="VideographerId" OtherKey="Id" Type="Videographer" IsForeignKey="true" />
+      <Association Name="SystemUser_Activity" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="SystemUser_Activity1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Ministry_Activity" Member="Ministry" ThisKey="ContactMinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActiveActivities" Member="ActiveActivities">
+    <Type Name="ActiveActivity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HqStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PotentialDates" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Details" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="HqComments" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="HqSection" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PremierRequestedId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactMinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="LeadOrganization" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Venue" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="GovernmentRepresentativeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsAllDay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAtLegislature" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsConfidential" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCrossGovernment" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Schedule" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Significance" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="IsIssue" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsMilestone" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Strategy" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="NRDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CommunicationContactId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HqStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Ministry" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NRDistributionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SharedWithMinistryIds" Type="System.String" DbType="VarChar(1500)" CanBeNull="true" />
+      <Column Name="FavoriteSystemUsers" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Categories" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Sectors" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="NROrigins" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Keywords" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NRDistributions" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GovernmentRepresentative" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OtherCity" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="PremierRequested" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContactNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EventPlannerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VideographerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CommunicationsMaterials" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="IsTitleNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDetailsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsRepresentativeNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCityNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsStartDateNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsEndDateNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCategoriesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActiveNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCommMaterialsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityFiles" Member="ActivityFiles">
+    <Type Name="ActivityFile">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="FileType" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="FileLength" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Md5" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Activity_ActivityFile" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="calendar.GetActivitySharedWithMinistries" Method="GetActivitySharedWithMinistries" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivitySharedWithMinistriesResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sharedWithMinistries" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetActivityCategories" Method="GetActivityCategories" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityCategoriesResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="categories" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetActivityCommunicationMaterials" Method="GetActivityCommunicationMaterials" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityCommunicationMaterialsResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activityCommunicationMaterials" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetActivityNewsReleaseOrigins" Method="GetActivityNewsReleaseOrigins" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityNewsReleaseOriginsResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activityNewsReleaseOrigins" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetActivitySectors" Method="GetActivitySectors" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivitySectorsResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activitySectors" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetCorpCalendarUpdates" Method="GetCorpCalendarUpdates">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsInAppOwnerList" Parameter="isInAppOwnerList" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="calendar.GetCorpCalendarUpdatesToday" Method="GetCorpCalendarUpdatesToday">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsInAppOwnerList" Parameter="isInAppOwnerList" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="calendar.sGetActivitySectorsByName" Method="sGetActivitySectorsByName" IsComposable="true">
+    <Parameter Name="ActID" Parameter="actID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.sGetActivityCommunicationMaterialsByName" Method="sGetActivityCommunicationMaterialsByName" IsComposable="true">
+    <Parameter Name="ActID" Parameter="actID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.sGetActivitySharedWithMinistries" Method="sGetActivitySharedWithMinistries" IsComposable="true">
+    <Parameter Name="ActID" Parameter="actID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.GetCorpCalendarUpdatesBetweenDates" Method="GetCorpCalendarUpdatesBetweenDates">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsInAppOwnerList" Parameter="isInAppOwnerList" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ActivityID" Parameter="activityID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UpdateType" Parameter="updateType" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="calendar.GetActivityThemes" Method="GetActivityThemes" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityThemesResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activityThemes" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.sGetActivityInitiatives" Method="sGetActivityInitiatives" IsComposable="true">
+    <Parameter Name="ActivityId" Parameter="activityId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.sGetActivityNROrigins" Method="sGetActivityNROrigins" IsComposable="true">
+    <Parameter Name="ActivityId" Parameter="activityId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.sGetActivityFavoriteSystemUsers" Method="sGetActivityFavoriteSystemUsers" IsComposable="true">
+    <Parameter Name="ActID" Parameter="actID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="calendar.GetActivityKeywords" Method="GetActivityKeywords" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityKeywordsResult">
+      <Column Name="keywordId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="keywordName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

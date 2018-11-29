@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 37, 25.375" name="CorporateCalendar">
+  <DataContextMoniker Name="/CorporateCalendarDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d5fb0d13-2618-43c3-9189-215f9401ef65" absoluteBounds="3, 2.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivitySharedWith" />
+      <nestedChildShapes>
+        <elementListCompartment Id="028fe697-f39e-4bd1-b9c4-5326be3c5d39" absoluteBounds="3.015, 3.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9d6db617-fca1-47fc-8b02-c6d88204f63d" isExpanded="false" absoluteBounds="8.5, 3.25, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Log" />
+      <nestedChildShapes>
+        <elementListCompartment Id="51ff2028-2926-4838-9e5e-6f799f5018e4" absoluteBounds="8.515, 3.71, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="48dbad3a-69b3-433c-b709-24f2109616db" absoluteBounds="3, 9.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivitySector" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e9a0d6e-4bef-474d-8ed1-ea4dccf6199f" absoluteBounds="3.015, 10.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c47bb8f4-5fef-4089-907b-36ef8aa80069" isExpanded="false" absoluteBounds="3, 8.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityNROrigin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b4598e2-bad6-49dd-97ce-7251308b5dde" absoluteBounds="3.015, 9.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bcc8e117-72e0-440f-a7f0-cfd4b4372940" isExpanded="false" absoluteBounds="3, 8.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityCommunicationMaterial" />
+      <nestedChildShapes>
+        <elementListCompartment Id="772cb078-cf51-4ea8-b33f-69c1260879c9" absoluteBounds="3.015, 8.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="12430063-83a5-4502-b35f-0fc428700465" isExpanded="false" absoluteBounds="3, 7.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd203f79-84dd-4b7f-b794-0f170d4af4e2" absoluteBounds="3.015, 8.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5e056281-b807-441c-9cf2-838a5c2ffbcb" absoluteBounds="15.75, 5.125, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/SystemUserMinistry" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad7d3858-fb7b-45ef-a9c8-a3337e47da7f" absoluteBounds="15.765, 5.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5e70e08f-5d3e-44a7-9893-90d55fd57ba0" isExpanded="false" absoluteBounds="8.375, 1.875, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/NewsFeed" />
+      <nestedChildShapes>
+        <elementListCompartment Id="44706e00-22b9-41fa-ba55-88cec9e07062" absoluteBounds="8.39, 2.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7bd2a55d-35a1-44ea-8630-96c9453b34e2" isExpanded="false" absoluteBounds="0.5, 7.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="345e73c9-d2c3-4d1b-a04f-07bd671062d1" absoluteBounds="0.51500000000000012, 8.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 7.85); (2.54166666666667 : 7.85 : JumpStart); (2.83333333333333 : 7.85 : JumpEnd); (3 : 7.85)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Category/Category_ActivityCategory" />
+      <nodes>
+        <classShapeMoniker Id="7bd2a55d-35a1-44ea-8630-96c9453b34e2" />
+        <classShapeMoniker Id="12430063-83a5-4502-b35f-0fc428700465" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b498c8aa-3106-4132-9cdc-55f945157739" isExpanded="false" absoluteBounds="0.5, 8.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/CommunicationMaterial" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a82f1ae2-198f-4594-8491-5b21ff33d904" absoluteBounds="0.51500000000000012, 8.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 8.35); (2.54166666666667 : 8.35 : JumpStart); (2.83333333333333 : 8.35 : JumpEnd); (3 : 8.35)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/CommunicationMaterial/CommunicationMaterial_ActivityCommunicationMaterial" />
+      <nodes>
+        <classShapeMoniker Id="b498c8aa-3106-4132-9cdc-55f945157739" />
+        <classShapeMoniker Id="bcc8e117-72e0-440f-a7f0-cfd4b4372940" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3683816b-b0ef-453c-942c-71dc8a347ee9" isExpanded="false" absoluteBounds="0.5, 8.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/NROrigin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb71a707-fb80-4a53-ac07-08ad3eb51d67" absoluteBounds="0.51500000000000012, 9.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 8.85); (2.54166666666667 : 8.85 : JumpStart); (2.83333333333333 : 8.85 : JumpEnd); (3 : 8.85)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/NROrigin/NROrigin_ActivityNROrigin" />
+      <nodes>
+        <classShapeMoniker Id="3683816b-b0ef-453c-942c-71dc8a347ee9" />
+        <classShapeMoniker Id="c47bb8f4-5fef-4089-907b-36ef8aa80069" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="062bda02-9e12-4bf7-9c53-73e3a7664442" absoluteBounds="8.5, 8.625, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/CommunicationContact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b1f689e0-38c7-48de-a9ad-b52359b2b671" absoluteBounds="8.515, 9.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97929762-083e-44a4-b523-bbf1c3487e0d" isExpanded="false" absoluteBounds="8.5, 8.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/NRDistribution" />
+      <nestedChildShapes>
+        <elementListCompartment Id="974e0269-f08c-459b-b064-d756e3aa4559" absoluteBounds="8.515, 8.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="40fae1ed-c026-4492-8476-3d91206a49f8" isExpanded="false" absoluteBounds="8.5, 7.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/PremierRequested" />
+      <nestedChildShapes>
+        <elementListCompartment Id="321ca8fe-2435-4b3b-b293-0b173797ed53" absoluteBounds="8.515, 8.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c4b3726a-4885-483e-a844-cf107a632851" isExpanded="false" absoluteBounds="8.5, 7.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/GovernmentRepresentative" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cabdef24-1318-4d81-b17c-67b952ba1109" absoluteBounds="8.515, 7.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7f46b97b-02f9-498c-b5e7-dc2bd45f168d" isExpanded="false" absoluteBounds="8.5, 6.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/EventPlanner" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5034ea84-975a-46f2-86d9-3b915014af63" absoluteBounds="8.515, 7.085, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="553b31ff-10ef-42cb-ae6e-84b2db791bbd" isExpanded="false" absoluteBounds="8.5, 6.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/City" />
+      <nestedChildShapes>
+        <elementListCompartment Id="763eef8e-1872-482c-ad44-c29e9056e2d7" absoluteBounds="8.515, 6.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6d8c1cd8-1a9e-4bdf-be65-a1cc1ca25d0b" isExpanded="false" absoluteBounds="8.5, 5.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Videographer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee40c85f-e4f1-4e28-ab18-245ba3a6a85a" absoluteBounds="8.515, 6.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a7ae4c66-38ab-487f-8a40-6db0ff16b697" isExpanded="false" absoluteBounds="8.5, 5.125, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Priority" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7e40a394-d450-4fd3-b98b-de5eab7591c2" absoluteBounds="8.515, 5.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e12290f0-2907-40dd-8174-0e36407634ac" isExpanded="false" absoluteBounds="8.5, 4.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Status" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9d3e1cf-c2fd-459b-aefc-c679f5406b4c" absoluteBounds="8.515, 5.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="60fc0022-5046-4e15-ba20-a8df15bdb44e" isExpanded="false" absoluteBounds="15.5, 0.875, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActiveDistinctCommunicationContact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e66694e5-25cc-41ea-8c65-5c0895a9c904" absoluteBounds="15.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dba92f52-7927-4f81-b217-cebe421a0df8" absoluteBounds="15.625, 3.125, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9781f16b-f9b4-4d63-9492-72dfbfc8316b" absoluteBounds="15.64, 3.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66629269-1d2e-4b0b-8596-3ea155dc2ede" absoluteBounds="10.875, 17.25, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Theme" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dfac475d-b55f-4892-8c4b-f3c6ba442a7e" absoluteBounds="10.89, 17.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6a4a49a-d6c2-415b-9313-9fb0380d58a7" absoluteBounds="13.375, 13.25, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityTheme" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d43547a9-4dc8-4a19-8a8f-c26eba38ad75" absoluteBounds="13.39, 13.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.90625 : 17.25); (10.90625 : 15.3069482421875); (13.375 : 15.3069482421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Theme/Theme_ActivityTheme" />
+      <nodes>
+        <classShapeMoniker Id="66629269-1d2e-4b0b-8596-3ea155dc2ede" />
+        <classShapeMoniker Id="c6a4a49a-d6c2-415b-9313-9fb0380d58a7" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ee614eab-d670-4ac5-ae66-534d2ed5c952" absoluteBounds="24.875, 13.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/FavoriteActivity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5d1e622c-42b5-4704-bf20-5b45f19dc419" absoluteBounds="24.89, 14.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="05cbd3a4-d8c9-4b86-a541-22e116a2e7dc" absoluteBounds="11, 13.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityKeyword" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0aacd34d-71c7-485d-af83-a499a5e05c11" absoluteBounds="11.015, 13.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b260a33-9fc0-4b9c-9ede-ad5798be652c" absoluteBounds="13.5, 16.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Keyword" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb5835cb-7aa9-43ec-9730-8701450b950c" absoluteBounds="13.515, 17.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="958fc6d5-18fb-4ec0-a423-bcad87671f66" absoluteBounds="7.625, 13.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityInitiative" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb1540d8-4e78-4600-9244-a75dcbf489a8" absoluteBounds="7.6400000000000006, 14.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2c9f1c46-41c5-49b5-abb1-9ca0ad049774" absoluteBounds="4.875, 14.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Initiative" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0a9b589a-71da-44cb-b19d-3261f25b0e0c" absoluteBounds="4.89, 15.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.875 : 15.6162019856771); (7.625 : 15.6162019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Initiative/Initiative_ActivityInitiative" />
+      <nodes>
+        <classShapeMoniker Id="2c9f1c46-41c5-49b5-abb1-9ca0ad049774" />
+        <classShapeMoniker Id="958fc6d5-18fb-4ec0-a423-bcad87671f66" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" absoluteBounds="30.75, 9.75, 2, 10.232159830729165">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Activity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45cc642a-2cef-4c35-8e8d-7800502d575a" absoluteBounds="30.765, 10.21, 1.9700000000000002, 9.6721598307291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(30.75 : 12.111276484472); (30.5991811261187 : 12.111276484472 : JumpStart); (30.432514459452 : 12.111276484472 : JumpEnd); (30.3478466889732 : 12.111276484472 : JumpStart); (30.1811800223065 : 12.111276484472 : JumpEnd); (27.7083333333333 : 12.111276484472 : JumpStart); (27.5416666666667 : 12.111276484472 : JumpEnd); (27.125 : 12.111276484472); (27.125 : 12.9824039713542); (22.3470080833333 : 12.9824039713542 : JumpStart); (21.1676422916667 : 12.9824039713542 : JumpEnd); (21.1018862083333 : 12.9824039713542 : JumpStart); (20.7027967916667 : 12.9824039713542 : JumpEnd); (20.6370402083333 : 12.9824039713542 : JumpStart); (20.4703735416667 : 12.9824039713542 : JumpEnd); (15.7395833333333 : 12.9824039713542 : JumpStart); (15.5729166666667 : 12.9824039713542 : JumpEnd); (12.6770833333333 : 12.9824039713542 : JumpStart); (12.5104166666667 : 12.9824039713542 : JumpEnd); (10.2083333333333 : 12.9824039713542 : JumpStart); (10.0416666666667 : 12.9824039713542 : JumpEnd); (9.95833333333333 : 12.9824039713542 : JumpStart); (9.79166666666667 : 12.9824039713542 : JumpEnd); (3.06770833333333 : 12.9824039713542 : JumpStart); (2.88541666666667 : 12.9824039713542 : JumpEnd); (2.875 : 12.9824039713542); (2.875 : 9.75); (2.75 : 9.75); (2.75 : 5.85740397135417); (3.38541466666667 : 5.85740397135417 : JumpStart); (3.55208133333333 : 5.85740397135417 : JumpEnd); (4 : 5.85740397135417); (4 : 5.48240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivitySharedWith" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="d5fb0d13-2618-43c3-9189-215f9401ef65" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(31.1961538461538 : 9.75); (31.0289004106999 : 9.67347634884744 : JumpStart); (30.8773435893001 : 9.60413438705686 : JumpEnd); (30.3765374615385 : 9.375); (30.0935664355486 : 9.375 : JumpStart); (29.9268997688819 : 9.375 : JumpEnd); (21.8987642083333 : 9.375 : JumpStart); (21.1676422916667 : 9.375 : JumpEnd); (21.1018862083333 : 9.375 : JumpStart); (20.7027967916667 : 9.375 : JumpEnd); (20.6370402083333 : 9.375 : JumpStart); (20.4703735416667 : 9.375 : JumpEnd); (15.7395833333333 : 9.375 : JumpStart); (15.5729166666667 : 9.375 : JumpEnd); (11.2395833333333 : 9.375 : JumpStart); (11.0729166666667 : 9.375 : JumpEnd); (10.875 : 9.375); (10.875 : 4.075); (10.5 : 3.7)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_Log" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="9d6db617-fca1-47fc-8b02-c6d88204f63d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 11.9126123367137); (30.5822951123399 : 11.9126123367137 : JumpStart); (30.4156284456732 : 11.9126123367137 : JumpEnd); (30.3293849691415 : 11.9126123367137 : JumpStart); (30.1627183024749 : 11.9126123367137 : JumpEnd); (27.7083333333333 : 11.9126123367137 : JumpStart); (27.5416666666667 : 11.9126123367137 : JumpEnd); (22.3470080833333 : 11.9126123367137 : JumpStart); (22.0309267916667 : 11.9126123367137 : JumpEnd); (21.8987642083333 : 11.9126123367137 : JumpStart); (21.1676422916667 : 11.9126123367137 : JumpEnd); (21.1018862083333 : 11.9126123367137 : JumpStart); (20.7027967916667 : 11.9126123367137 : JumpEnd); (20.6370402083333 : 11.9126123367137 : JumpStart); (20.4703735416667 : 11.9126123367137 : JumpEnd); (15.7395833333333 : 11.9126123367137 : JumpStart); (15.5729166666667 : 11.9126123367137 : JumpEnd); (12.6770833333333 : 11.9126123367137 : JumpStart); (12.5104166666667 : 11.9126123367137 : JumpEnd); (10.2083333333333 : 11.9126123367137 : JumpStart); (10.0416666666667 : 11.9126123367137 : JumpEnd); (9.95833333333333 : 11.9126123367137 : JumpStart); (9.79166666666667 : 11.9126123367137 : JumpEnd); (7.33333333333333 : 11.9126123367137 : JumpStart); (7.16666666666667 : 11.9126123367137 : JumpEnd); (5 : 11.9126123367137)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivitySector" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="48dbad3a-69b3-433c-b709-24f2109616db" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 16.7320540192057); (27.7083333333333 : 16.7320540192057 : JumpStart); (27.5416666666667 : 16.7320540192057 : JumpEnd); (27.375 : 16.7320540192057); (27.375 : 12.8574039713542); (27.2083333333333 : 12.8574039713542 : JumpStart); (27.0416666666667 : 12.8574039713542 : JumpEnd); (22.3470080833333 : 12.8574039713542 : JumpStart); (21.1676422916667 : 12.8574039713542 : JumpEnd); (21.1018862083333 : 12.8574039713542 : JumpStart); (20.7027967916667 : 12.8574039713542 : JumpEnd); (20.6370402083333 : 12.8574039713542 : JumpStart); (20.4703735416667 : 12.8574039713542 : JumpEnd); (15.7395833333333 : 12.8574039713542 : JumpStart); (15.5729166666667 : 12.8574039713542 : JumpEnd); (12.6770833333333 : 12.8574039713542 : JumpStart); (12.5104166666667 : 12.8574039713542 : JumpEnd); (10.2083333333333 : 12.8574039713542 : JumpStart); (10.0416666666667 : 12.8574039713542 : JumpEnd); (9.95833333333333 : 12.8574039713542 : JumpStart); (9.79166666666667 : 12.8574039713542 : JumpEnd); (2.9375 : 12.8574039713542); (2.9375 : 9.75); (2.77083333333333 : 9.75 : JumpStart); (2.60416666666667 : 9.75 : JumpEnd); (2.5 : 9.75); (2.5 : 9.45); (2.54166666666667 : 9.45 : JumpStart); (2.83333333333333 : 9.45 : JumpEnd); (2.83854166666667 : 9.45 : JumpStart); (3.06770833333333 : 9.45 : JumpEnd); (4 : 9.45); (4 : 9.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityNROrigin" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="c47bb8f4-5fef-4089-907b-36ef8aa80069" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.953122 : 9.75); (30.953122 : 8.109375); (21.8987642083333 : 8.109375 : JumpStart); (21.1676422916667 : 8.109375 : JumpEnd); (21.1018862083333 : 8.109375 : JumpStart); (20.7027967916667 : 8.109375 : JumpEnd); (20.6370402083333 : 8.109375 : JumpStart); (20.4703735416667 : 8.109375 : JumpEnd); (15.7395833333333 : 8.109375 : JumpStart); (15.5729166666667 : 8.109375 : JumpEnd); (12.2395833333333 : 8.109375 : JumpStart); (12.0729166666667 : 8.109375 : JumpEnd); (11.9895833333333 : 8.109375 : JumpStart); (11.8229166666667 : 8.109375 : JumpEnd); (11.4895833333333 : 8.109375 : JumpStart); (11.3229166666667 : 8.109375 : JumpEnd); (11.2933886542882 : 8.109375 : JumpStart); (10.7916666666667 : 8.109375 : JumpEnd); (8.45833333333333 : 8.109375 : JumpStart); (8.16666666666667 : 8.109375 : JumpEnd); (8.03125 : 8.109375); (8.03125 : 8.4209619140625); (5.0234375 : 8.4209619140625); (5.0234375 : 8.35); (5 : 8.35)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityCommunicationMaterial" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="bcc8e117-72e0-440f-a7f0-cfd4b4372940" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(32.281252 : 9.75); (32.281252 : 7.87302897135417); (21.8987642083333 : 7.87302897135417 : JumpStart); (21.1676422916667 : 7.87302897135417 : JumpEnd); (21.1018862083333 : 7.87302897135417 : JumpStart); (20.7027967916667 : 7.87302897135417 : JumpEnd); (20.6370402083333 : 7.87302897135417 : JumpStart); (20.4703735416667 : 7.87302897135417 : JumpEnd); (15.7395833333333 : 7.87302897135417 : JumpStart); (15.5729166666667 : 7.87302897135417 : JumpEnd); (12.2395833333333 : 7.87302897135417 : JumpStart); (12.0729166666667 : 7.87302897135417 : JumpEnd); (11.856032360501 : 7.87302897135417 : JumpStart); (11.6893656938343 : 7.87302897135417 : JumpEnd); (11.4895833333333 : 7.87302897135417 : JumpStart); (11.3229166666667 : 7.87302897135417 : JumpEnd); (11.2395833333333 : 7.87302897135417 : JumpStart); (10.7916666666667 : 7.87302897135417 : JumpEnd); (10.515625 : 7.87302897135417); (10.515625 : 7.609375); (8.45833333333333 : 7.609375 : JumpStart); (8.16666666666667 : 7.609375 : JumpEnd); (8.015625 : 7.609375); (8.015625 : 8.4209619140625); (5 : 8.4209619140625); (5 : 8.075)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityCategory" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="12430063-83a5-4502-b35f-0fc428700465" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 17.8362572897136); (27.625 : 17.8362572897136); (27.625 : 11.4151025390625); (22.3470080833333 : 11.4151025390625 : JumpStart); (22.1803414166667 : 11.4151025390625 : JumpEnd); (21.8987642083333 : 11.4151025390625 : JumpStart); (21.1676422916667 : 11.4151025390625 : JumpEnd); (21.1018862083333 : 11.4151025390625 : JumpStart); (20.7027967916667 : 11.4151025390625 : JumpEnd); (20.6370402083333 : 11.4151025390625 : JumpStart); (20.4703735416667 : 11.4151025390625 : JumpEnd); (15.7395833333333 : 11.4151025390625 : JumpStart); (15.5729166666667 : 11.4151025390625 : JumpEnd); (12.6770833333333 : 11.4151025390625 : JumpStart); (12.5104166666667 : 11.4151025390625 : JumpEnd); (9.95833333333333 : 11.4151025390625 : JumpStart); (9.79166666666667 : 11.4151025390625 : JumpEnd); (8.25 : 11.4151025390625); (8.25 : 2.575); (9.375 : 2.575); (9.375 : 2.325)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_NewsFeed" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="5e70e08f-5d3e-44a7-9893-90d55fd57ba0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 13.53125); (30.7198757387065 : 13.53125 : JumpStart); (30.5532090720399 : 13.53125 : JumpEnd); (30.4798038312553 : 13.53125 : JumpStart); (30.3131371645887 : 13.53125 : JumpEnd); (27.7083333333333 : 13.53125 : JumpStart); (27.5416666666667 : 13.53125 : JumpEnd); (27.4583333333333 : 13.53125 : JumpStart); (27.2916666666667 : 13.53125 : JumpEnd); (22.3470080833333 : 13.53125 : JumpStart); (21.1676422916667 : 13.53125 : JumpEnd); (21.1018862083333 : 13.53125 : JumpStart); (20.7027967916667 : 13.53125 : JumpEnd); (20.6370402083333 : 13.53125 : JumpStart); (20.4703735416667 : 13.53125 : JumpEnd); (15.7395833333333 : 13.53125 : JumpStart); (15.5729166666667 : 13.53125 : JumpEnd); (15.375 : 13.53125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityTheme" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="c6a4a49a-d6c2-415b-9313-9fb0380d58a7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 15.6278507486979); (30.6746394674692 : 15.6278507486979 : JumpStart); (30.5079728008025 : 15.6278507486979 : JumpEnd); (27.7083333333333 : 15.6278507486979 : JumpStart); (27.5416666666667 : 15.6278507486979 : JumpEnd); (27.4583333333333 : 15.6278507486979 : JumpStart); (27.2916666666667 : 15.6278507486979 : JumpEnd); (22.4964227083333 : 15.6278507486979 : JumpStart); (21.1676422916667 : 15.6278507486979 : JumpEnd); (21.1018862083333 : 15.6278507486979 : JumpStart); (20.7027967916667 : 15.6278507486979 : JumpEnd); (20.6370402083333 : 15.6278507486979 : JumpStart); (20.4703735416667 : 15.6278507486979 : JumpEnd); (15.7395833333333 : 15.6278507486979 : JumpStart); (15.5729166666667 : 15.6278507486979 : JumpEnd); (10.9895833333333 : 15.6278507486979 : JumpStart); (10.8229166666667 : 15.6278507486979 : JumpEnd); (10.2083333333333 : 15.6278507486979 : JumpStart); (10.0416666666667 : 15.6278507486979 : JumpEnd); (9.95833333333333 : 15.6278507486979 : JumpStart); (9.79166666666667 : 15.6278507486979 : JumpEnd); (9.625 : 15.6278507486979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityInitiative" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="958fc6d5-18fb-4ec0-a423-bcad87671f66" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 14.3080399576823); (30.5519903768833 : 14.3080399576823 : JumpStart); (30.3853237102166 : 14.3080399576823 : JumpEnd); (27.7083333333333 : 14.3080399576823 : JumpStart); (27.5416666666667 : 14.3080399576823 : JumpEnd); (27.4583333333333 : 14.3080399576823 : JumpStart); (27.2916666666667 : 14.3080399576823 : JumpEnd); (26.875 : 14.3080399576823)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_FavoriteActivity" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="ee614eab-d670-4ac5-ae66-534d2ed5c952" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.75 : 10.6913029689441); (30.4784865135309 : 10.6913029689441 : JumpStart); (30.3118198468642 : 10.6913029689441 : JumpEnd); (30.2158895466911 : 10.6913029689441 : JumpStart); (30.0492228800244 : 10.6913029689441 : JumpEnd); (22.3470080833333 : 10.6913029689441 : JumpStart); (22.1803414166667 : 10.6913029689441 : JumpEnd); (21.8987642083333 : 10.691302968944 : JumpStart); (21.1676422916667 : 10.6913029689441 : JumpEnd); (21.1018862083333 : 10.691302968944 : JumpStart); (20.7027967916667 : 10.6913029689441 : JumpEnd); (20.6370402083333 : 10.6913029689441 : JumpStart); (20.4703735416667 : 10.6913029689441 : JumpEnd); (15.7395833333333 : 10.6913029689441 : JumpStart); (15.5729166666667 : 10.6913029689441 : JumpEnd); (12.59375 : 10.6913029689441); (12.59375 : 13.375)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityKeyword" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="05cbd3a4-d8c9-4b86-a541-22e116a2e7dc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 6.55284515384615); (10.8018948131735 : 6.71803288180898 : JumpStart); (10.9481051868265 : 6.79803478437388 : JumpEnd); (10.9581448131735 : 6.80352816482785 : JumpStart); (11.2293551868265 : 6.95192629380784 : JumpEnd); (11.3331448131735 : 7.00871684407313 : JumpStart); (11.4793551868265 : 7.08871874663803 : JumpEnd); (12.15625 : 7.45909515384615); (12.15625 : 8.6875); (15.5729166666667 : 8.6875 : JumpStart); (15.7395833333333 : 8.6875 : JumpEnd); (20.4703735416667 : 8.6875 : JumpStart); (20.6370402083333 : 8.6875 : JumpEnd); (20.7027967916667 : 8.6875 : JumpStart); (21.1018862083333 : 8.6875 : JumpEnd); (21.1676422916667 : 8.6875 : JumpStart); (21.8987642083333 : 8.6875 : JumpEnd); (29.8192297692308 : 8.6875); (30.5241631623763 : 9.02676439311447 : JumpStart); (30.6743424276799 : 9.09904140225748 : JumpEnd); (30.8780323673482 : 9.19707157707549 : JumpStart); (31.0282116326518 : 9.2693485862185 : JumpEnd); (31.1436583673482 : 9.32490981620799 : JumpStart); (31.2938376326518 : 9.397186825351 : JumpEnd); (31.6749103673482 : 9.58058629447301 : JumpStart); (31.8250896326518 : 9.65286330361602 : JumpEnd); (32.0269230769231 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/City/City_Activity" />
+      <nodes>
+        <classShapeMoniker Id="553b31ff-10ef-42cb-ae6e-84b2db791bbd" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 10.5049576156851); (15.5729166666667 : 10.5049576156851 : JumpStart); (15.7395833333333 : 10.5049576156851 : JumpEnd); (20.4703735416667 : 10.5049576156851 : JumpStart); (20.6370402083333 : 10.5049576156851 : JumpEnd); (20.7027967916667 : 10.5049576156851 : JumpStart); (21.1018862083333 : 10.5049576156851 : JumpEnd); (21.1676422916667 : 10.5049576156851 : JumpStart); (21.8987642083333 : 10.5049576156851 : JumpEnd); (22.1803414166667 : 10.5049576156851 : JumpStart); (22.3470080833333 : 10.5049576156851 : JumpEnd); (30.0319059371204 : 10.5049576156851 : JumpStart); (30.1985726037871 : 10.5049576156851 : JumpEnd); (30.2959809034099 : 10.5049576156851 : JumpStart); (30.4626475700765 : 10.5049576156851 : JumpEnd); (30.75 : 10.5049576156851)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/CommunicationContact/CommunicationContact_Activity" />
+      <nodes>
+        <classShapeMoniker Id="062bda02-9e12-4bf7-9c53-73e3a7664442" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 7.05284515384615); (10.8049524137422 : 7.24937004270223 : JumpStart); (10.9450475862578 : 7.3396535983234 : JumpEnd); (10.9612024137422 : 7.35006448714668 : JumpStart); (11.2262975862578 : 7.5209035983234 : JumpEnd); (11.3362024137422 : 7.59173115381334 : JumpStart); (11.4762975862578 : 7.68201470943451 : JumpEnd); (11.90625 : 7.95909515384615); (11.90625 : 8.75); (15.5729166666667 : 8.75 : JumpStart); (15.7395833333333 : 8.75 : JumpEnd); (20.4703735416667 : 8.75 : JumpStart); (20.6370402083333 : 8.75 : JumpEnd); (20.7027967916667 : 8.75 : JumpStart); (21.1018862083333 : 8.75 : JumpEnd); (21.1676422916667 : 8.75 : JumpStart); (21.8987642083333 : 8.75 : JumpEnd); (29.8007682307692 : 8.75); (30.8781548091942 : 9.27300293952527 : JumpStart); (31.0280891908058 : 9.34578658458738 : JumpEnd); (31.0510055282635 : 9.35691101484625 : JumpStart); (31.2937151908058 : 9.47473118218709 : JumpEnd); (31.8607692307692 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/EventPlanner/EventPlanner_Activity" />
+      <nodes>
+        <classShapeMoniker Id="7f46b97b-02f9-498c-b5e7-dc2bd45f168d" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 7.55284515384615); (10.8094120070707 : 7.79535726749618 : JumpStart); (10.9405879929293 : 7.89817087803396 : JumpEnd); (10.9656620070707 : 7.91782348371239 : JumpStart); (11.2218379929293 : 8.11861006722315 : JumpEnd); (11.3406620070707 : 8.21174240263131 : JumpStart); (11.4718379929293 : 8.3145560131691 : JumpEnd); (11.65625 : 8.45909515384615); (11.65625 : 8.625); (11.8229166666667 : 8.625 : JumpStart); (11.9895833333333 : 8.625 : JumpEnd); (15.5729166666667 : 8.625 : JumpStart); (15.7395833333333 : 8.625 : JumpEnd); (20.4703735416667 : 8.625 : JumpStart); (20.6370402083333 : 8.625 : JumpEnd); (20.7027967916667 : 8.625 : JumpStart); (21.1018862083333 : 8.625 : JumpEnd); (21.1676422916667 : 8.625 : JumpStart); (21.8987642083333 : 8.625 : JumpEnd); (29.9011528461538 : 8.625); (30.8825278521998 : 9.24059517309396 : JumpStart); (31.0237161478002 : 9.32915951672759 : JumpEnd); (31.1481538521998 : 9.40721657922399 : JumpStart); (31.2893421478002 : 9.49578092285762 : JumpEnd); (31.6946153846154 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/GovernmentRepresentative/GovernmentRepresentative_Activity" />
+      <nodes>
+        <classShapeMoniker Id="c4b3726a-4885-483e-a844-cf107a632851" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 5.06738361538461); (10.8160744349011 : 5.38345805028573 : JumpStart); (10.9339255650989 : 5.50130918048349 : JumpEnd); (11.40625 : 5.97363361538461); (11.40625 : 9.25); (15.5729166666667 : 9.25 : JumpStart); (15.7395833333333 : 9.25 : JumpEnd); (20.4703735416667 : 9.25 : JumpStart); (20.6370402083333 : 9.25 : JumpEnd); (20.7027967916667 : 9.25 : JumpStart); (21.1018862083333 : 9.25 : JumpEnd); (21.1676422916667 : 9.25 : JumpStart); (21.8987642083333 : 9.25 : JumpEnd); (29.9152836066051 : 9.25 : JumpStart); (30.0819502732717 : 9.25 : JumpEnd); (30.2515374615385 : 9.25); (30.8755253257477 : 9.49433240608665 : JumpStart); (31.0307186742523 : 9.55510083833308 : JumpEnd); (31.1411513257477 : 9.59834250535585 : JumpStart); (31.2963446742523 : 9.65911093760228 : JumpEnd); (31.5284615384615 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Status/Status_Activity" />
+      <nodes>
+        <classShapeMoniker Id="e12290f0-2907-40dd-8174-0e36407634ac" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 8.35); (10.7916666666667 : 8.35 : JumpStart); (11.2395833333333 : 8.35 : JumpEnd); (11.3229166666667 : 8.35 : JumpStart); (11.6003929646331 : 8.35 : JumpEnd); (11.8229166666667 : 8.35 : JumpStart); (11.9895833333333 : 8.35 : JumpEnd); (12.0729166666667 : 8.35 : JumpStart); (12.2395833333333 : 8.35 : JumpEnd); (15.5729166666667 : 8.35 : JumpStart); (15.7395833333333 : 8.35 : JumpEnd); (20.4703735416667 : 8.35 : JumpStart); (20.6370402083333 : 8.35 : JumpEnd); (20.7027967916667 : 8.35 : JumpStart); (21.1018862083333 : 8.35 : JumpEnd); (21.1676422916667 : 8.35 : JumpStart); (21.8987642083333 : 8.35 : JumpEnd); (30.8697886666667 : 8.35 : JumpStart); (31.0364553333333 : 8.35 : JumpEnd); (31.218748 : 8.35); (31.218748 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/NRDistribution/NRDistribution_Activity" />
+      <nodes>
+        <classShapeMoniker Id="97929762-083e-44a4-b523-bbf1c3487e0d" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 7.99745198567708); (10.7916666666667 : 7.99745198567708 : JumpStart); (11.2395833333333 : 7.99745198567708 : JumpEnd); (11.3229166666667 : 7.99745198567708 : JumpStart); (11.4895833333333 : 7.99745198567708 : JumpEnd); (12.0729166666667 : 7.99745198567708 : JumpStart); (12.2395833333333 : 7.99745198567708 : JumpEnd); (15.5729166666667 : 7.99745198567708 : JumpStart); (15.7395833333333 : 7.99745198567708 : JumpEnd); (20.4703735416667 : 7.99745198567708 : JumpStart); (20.6370402083333 : 7.99745198567708 : JumpEnd); (20.7027967916667 : 7.99745198567708 : JumpStart); (21.1018862083333 : 7.99745198567708 : JumpEnd); (21.1676422916667 : 7.99745198567708 : JumpStart); (21.8987642083333 : 7.99745198567708 : JumpEnd); (31.75 : 7.99745198567708); (31.75 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/PremierRequested/PremierRequested_Activity" />
+      <nodes>
+        <classShapeMoniker Id="40fae1ed-c026-4492-8476-3d91206a49f8" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 5.05284515384615); (10.8160744349011 : 5.36891958874727 : JumpStart); (10.9339255650989 : 5.48677071894503 : JumpEnd); (11.03125 : 5.58409515384615); (11.03125 : 9); (11.0729166666667 : 9 : JumpStart); (11.2395833333333 : 9 : JumpEnd); (11.3229166666667 : 9 : JumpStart); (11.4895833333333 : 9 : JumpEnd); (15.5729166666667 : 9 : JumpStart); (15.7395833333333 : 9 : JumpEnd); (20.4703735416667 : 9 : JumpStart); (20.6370402083333 : 9 : JumpEnd); (20.7027967916667 : 9 : JumpStart); (21.1018862083333 : 9 : JumpEnd); (21.1676422916667 : 9 : JumpStart); (21.8987642083333 : 9 : JumpEnd); (29.9753846153846 : 9); (30.75 : 17.3355346429287)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Status/Status_Activity1" />
+      <nodes>
+        <classShapeMoniker Id="e12290f0-2907-40dd-8174-0e36407634ac" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.5 : 6.05284515384615); (10.8160744349011 : 6.36891958874727 : JumpStart); (10.9339255650989 : 6.48677071894503 : JumpEnd); (10.9723244349011 : 6.52516958874727 : JumpStart); (11.0901755650989 : 6.64302071894503 : JumpEnd); (11.15625 : 6.70909515384615); (11.15625 : 9.875); (15.5729166666667 : 9.875 : JumpStart); (15.7395833333333 : 9.875 : JumpEnd); (20.4703735416667 : 9.875 : JumpStart); (20.6370402083333 : 9.875 : JumpEnd); (20.7027967916667 : 9.875 : JumpStart); (21.1018862083333 : 9.875 : JumpEnd); (21.1676422916667 : 9.875 : JumpStart); (21.8987642083333 : 9.875 : JumpEnd); (22.1803414166667 : 9.875 : JumpStart); (22.3470080833333 : 9.875 : JumpEnd); (29.9733644179895 : 9.875 : JumpStart); (30.1400310846562 : 9.875 : JumpEnd); (30.3257692307692 : 9.875); (30.75 : 14.8660799153646)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Videographer/Videographer_Activity" />
+      <nodes>
+        <classShapeMoniker Id="6d8c1cd8-1a9e-4bdf-be65-a1cc1ca25d0b" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b0b278ea-36d6-4a50-af9a-2c6305956d26" absoluteBounds="0.5, 0.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityFile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b95ffb75-040c-41ff-b744-cf0711a274f1" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(32.5468785 : 9.75); (32.5468785 : 0.53125); (2.5 : 0.53125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Activity/Activity_ActivityFile" />
+      <nodes>
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+        <classShapeMoniker Id="b0b278ea-36d6-4a50-af9a-2c6305956d26" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9f58920e-0462-4d91-ba36-2f63d9adbaeb" absoluteBounds="0.625, 10, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Sector" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f0d198a3-b41a-42bf-8d31-b0a2359c5289" absoluteBounds="0.64, 10.46, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 11.2412019856771); (2.72916666666667 : 11.2412019856771 : JumpStart); (2.98958333333333 : 11.2412019856771 : JumpEnd); (3 : 11.2412019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Sector/Sector_ActivitySector" />
+      <nodes>
+        <classShapeMoniker Id="9f58920e-0462-4d91-ba36-2f63d9adbaeb" />
+        <classShapeMoniker Id="48dbad3a-69b3-433c-b709-24f2109616db" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="aec6bfc1-9de4-4a8b-8fdc-0e33941a07e1" isExpanded="false" absoluteBounds="15.5, 1.5, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActiveCommunicationContact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="58249491-cc51-4284-95ed-d39ec12f5850" absoluteBounds="15.515, 1.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="afc9982a-6293-4736-98d4-3f11f580c249" absoluteBounds="20.5, 19.875, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/SystemUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d5d2c0d-a755-415d-b8b4-f668c9d53115" absoluteBounds="20.515, 20.335, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(20.5 : 20.3860116077474); (15.7395833333333 : 20.3860116077474 : JumpStart); (15.5729166666667 : 20.3860116077474 : JumpEnd); (10.2083333333333 : 20.3860116077474 : JumpStart); (10.0416666666667 : 20.3860116077474 : JumpEnd); (9.95833333333333 : 20.3860116077474 : JumpStart); (9.79166666666667 : 20.3860116077474 : JumpEnd); (3.06770833333333 : 20.3860116077474 : JumpStart); (2.82291666666667 : 20.3860116077474 : JumpEnd); (2.8125 : 20.3860116077474); (2.8125 : 9.75); (2.625 : 9.75); (2.625 : 6.10740397135417); (2.66666666666667 : 6.10740397135417 : JumpStart); (2.83333333333333 : 6.10740397135417 : JumpEnd); (4.531252 : 6.10740397135417); (4.531252 : 5.48240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivitySharedWith" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="d5fb0d13-2618-43c3-9189-215f9401ef65" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 20.8878377645264); (15.7395833333333 : 20.8878377645264 : JumpStart); (15.5729166666667 : 20.8878377645264 : JumpEnd); (10.2083333333333 : 20.8878377645264 : JumpStart); (10.0416666666667 : 20.8878377645264 : JumpEnd); (9.95833333333333 : 20.8878377645264 : JumpStart); (9.79166666666667 : 20.8878377645264 : JumpEnd); (3.06770833333333 : 20.8878377645264 : JumpStart); (2.76041666666667 : 20.8878377645264 : JumpEnd); (2.6875 : 20.8878377645264); (2.6875 : 5.98240397135417); (3.468748 : 5.98240397135417); (3.468748 : 5.48240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivitySharedWith1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="d5fb0d13-2618-43c3-9189-215f9401ef65" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 23.3969685484212); (9.875 : 23.3969685484212); (9.875 : 11.2901025390625); (8.375 : 11.2901025390625); (8.375 : 4.075); (9.468748 : 4.075); (9.468748 : 3.7)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Log" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="9d6db617-fca1-47fc-8b02-c6d88204f63d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.367187 : 19.875); (21.367187 : 2.875); (21.3343089583333 : 2.875 : JumpStart); (21.1676422916667 : 2.875 : JumpEnd); (21.1018862083333 : 2.875 : JumpStart); (20.9352195416667 : 2.875 : JumpEnd); (17.8020833333333 : 2.875 : JumpStart); (17.6354166666667 : 2.875 : JumpEnd); (11.11 : 2.875); (11.11 : 3.668747); (10.5 : 3.668747)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Log1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="9d6db617-fca1-47fc-8b02-c6d88204f63d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.9648455 : 19.875); (21.9648455 : 12.2287606540339); (21.8987642083333 : 12.2287606540339 : JumpStart); (21.1676422916667 : 12.2287606540339 : JumpEnd); (21.1018862083333 : 12.2287606540339 : JumpStart); (20.7027967916667 : 12.2287606540339 : JumpEnd); (20.6370402083333 : 12.2287606540339 : JumpStart); (20.4703735416667 : 12.2287606540339 : JumpEnd); (15.7395833333333 : 12.2287606540339 : JumpStart); (15.5729166666667 : 12.2287606540339 : JumpEnd); (12.6770833333333 : 12.2287606540339 : JumpStart); (12.5104166666667 : 12.2287606540339 : JumpEnd); (10.2083333333333 : 12.2287606540339 : JumpStart); (10.0416666666667 : 12.2287606540339 : JumpEnd); (9.95833333333333 : 12.2287606540339 : JumpStart); (9.79166666666667 : 12.2287606540339 : JumpEnd); (7.33333333333333 : 12.2287606540339 : JumpStart); (7.16666666666667 : 12.2287606540339 : JumpEnd); (5 : 12.2287606540339)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivitySector" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="48dbad3a-69b3-433c-b709-24f2109616db" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.114260125 : 19.875); (22.114260125 : 11.6326049378881); (21.8987642083333 : 11.6326049378881 : JumpStart); (21.1676422916667 : 11.6326049378881 : JumpEnd); (21.1018862083333 : 11.6326049378881 : JumpStart); (20.7027967916667 : 11.6326049378881 : JumpEnd); (20.6370402083333 : 11.6326049378881 : JumpStart); (20.4703735416667 : 11.6326049378881 : JumpEnd); (15.7395833333333 : 11.6326049378881 : JumpStart); (15.5729166666667 : 11.6326049378881 : JumpEnd); (12.6770833333333 : 11.6326049378881 : JumpStart); (12.5104166666667 : 11.6326049378881 : JumpEnd); (9.95833333333333 : 11.6326049378881 : JumpStart); (9.79166666666667 : 11.6326049378881 : JumpEnd); (8.39583333333333 : 11.6326049378881 : JumpStart); (8.22916666666667 : 11.6326049378881 : JumpEnd); (7.33333333333333 : 11.6326049378881 : JumpStart); (7.16666666666667 : 11.6326049378881 : JumpEnd); (5 : 11.6326049378881)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivitySector1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="48dbad3a-69b3-433c-b709-24f2109616db" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 21.8914900780843); (15.7395833333333 : 21.8914900780843 : JumpStart); (15.5729166666667 : 21.8914900780843 : JumpEnd); (9.95833333333333 : 21.8914900780843 : JumpStart); (9.79166666666667 : 21.8914900780843 : JumpEnd); (2.90625 : 21.8914900780843); (2.90625 : 9.75); (2.77083333333333 : 9.75 : JumpStart); (2.60416666666667 : 9.75 : JumpEnd); (2.375 : 9.75); (2.375 : 9.575); (2.41666666666667 : 9.575 : JumpStart); (2.83333333333333 : 9.575 : JumpEnd); (2.83854166666667 : 9.575 : JumpStart); (3.06770833333333 : 9.575 : JumpEnd); (4.531252 : 9.575); (4.531252 : 9.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityNROrigin" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="c47bb8f4-5fef-4089-907b-36ef8aa80069" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 22.8951423916423); (9.95833333333333 : 22.8951423916423 : JumpStart); (9.79166666666667 : 22.8951423916423 : JumpEnd); (3.06770833333333 : 22.8951423916423 : JumpStart); (2.90104166666667 : 22.8951423916423 : JumpEnd); (2.84375 : 22.8951423916423); (2.84375 : 9.75); (2.77083333333333 : 9.75 : JumpStart); (2.60416666666667 : 9.75 : JumpEnd); (2.5625 : 9.75); (2.5625 : 9.325); (2.60416666666667 : 9.325 : JumpStart); (2.83333333333333 : 9.325 : JumpEnd); (2.83854166666667 : 9.325 : JumpStart); (3.06770833333333 : 9.325 : JumpEnd); (3.468748 : 9.325); (3.468748 : 9.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityNROrigin1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="c47bb8f4-5fef-4089-907b-36ef8aa80069" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 23.8987947052002); (2.984375 : 23.8987947052002); (2.984375 : 8.5984375); (4 : 8.5984375); (4 : 8.575)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityCommunicationMaterial" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="bcc8e117-72e0-440f-a7f0-cfd4b4372940" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 20.0992538038737); (15.7395833333333 : 20.0992538038737 : JumpStart); (15.5729166666667 : 20.0992538038737 : JumpEnd); (10.2083333333333 : 20.0992538038737 : JumpStart); (10.0416666666667 : 20.0992538038737 : JumpEnd); (9.95833333333333 : 20.0992538038737 : JumpStart); (9.79166666666667 : 20.0992538038737 : JumpEnd); (2.96875 : 20.0992538038737); (2.96875 : 8.60625); (4.4999995 : 8.60625); (4.4999995 : 8.575)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityCommunicationMaterial1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="bcc8e117-72e0-440f-a7f0-cfd4b4372940" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 20.6369246861369); (15.7395833333333 : 20.6369246861369 : JumpStart); (15.5729166666667 : 20.6369246861369 : JumpEnd); (10.2083333333333 : 20.6369246861369 : JumpStart); (10.0416666666667 : 20.6369246861369 : JumpEnd); (9.95833333333333 : 20.6369246861369 : JumpStart); (9.79166666666667 : 20.6369246861369 : JumpEnd); (2.953125 : 20.6369246861369); (2.953125 : 8.0984375); (4 : 8.0984375); (4 : 8.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityCategory" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="12430063-83a5-4502-b35f-0fc428700465" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 21.1387508429159); (15.7395833333333 : 21.1387508429159 : JumpStart); (15.5729166666667 : 21.1387508429159 : JumpEnd); (10.2083333333333 : 21.1387508429159 : JumpStart); (10.0416666666667 : 21.1387508429159 : JumpEnd); (9.95833333333333 : 21.1387508429159 : JumpStart); (9.79166666666667 : 21.1387508429159 : JumpEnd); (2.921875 : 21.1387508429159); (2.921875 : 8.10625); (4.4999995 : 8.10625); (4.4999995 : 8.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityCategory1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="12430063-83a5-4502-b35f-0fc428700465" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.516601625 : 19.875); (21.516601625 : 6.49120198567708); (21.4817728333333 : 6.49120198567708 : JumpStart); (21.1676422916667 : 6.49120198567708 : JumpEnd); (21.1018862083333 : 6.49120198567708 : JumpStart); (20.7027967916667 : 6.49120198567708 : JumpEnd); (20.6370402083333 : 6.49120198567708 : JumpStart); (20.4703735416667 : 6.49120198567708 : JumpEnd); (17.75 : 6.49120198567708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_SystemUserMinistry" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="5e056281-b807-441c-9cf2-838a5c2ffbcb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.66601625 : 19.875); (21.66601625 : 7.20555547851562); (21.5999349583333 : 7.20555547851562 : JumpStart); (21.1676422916667 : 7.20555547851562 : JumpEnd); (21.1018862083333 : 7.20555547851562 : JumpStart); (20.7027967916667 : 7.20555547851562 : JumpEnd); (20.6370402083333 : 7.20555547851562 : JumpStart); (20.4703735416667 : 7.20555547851562 : JumpEnd); (17.75 : 7.20555547851562)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_SystemUserMinistry1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="5e056281-b807-441c-9cf2-838a5c2ffbcb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.9023415 : 19.875); (20.9023415 : 5.77684849283854); (20.8694634583333 : 5.77684849283854 : JumpStart); (20.7027967916667 : 5.77684849283854 : JumpEnd); (20.6370402083333 : 5.77684849283854 : JumpStart); (20.4703735416667 : 5.77684849283854 : JumpEnd); (17.75 : 5.77684849283854)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_SystemUserMinistry2" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="5e056281-b807-441c-9cf2-838a5c2ffbcb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.815430875 : 19.875); (21.815430875 : 2.0375); (21.3343089583333 : 2.0375 : JumpStart); (21.1676422916667 : 2.0375 : JumpEnd); (21.1018862083333 : 2.0375 : JumpStart); (20.9352195416667 : 2.0375 : JumpEnd); (10.375 : 2.0375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_NewsFeed" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="5e70e08f-5d3e-44a7-9893-90d55fd57ba0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.5 : 21.3896639213053); (15.7395833333333 : 21.3896639213053 : JumpStart); (15.5729166666667 : 21.3896639213053 : JumpEnd); (10.125 : 21.3896639213053); (10.125 : 11.7901025390625); (9.95833333333333 : 11.7901025390625 : JumpStart); (9.79166666666667 : 11.7901025390625 : JumpEnd); (8.3125 : 11.7901025390625); (8.3125 : 3.075); (9.906252 : 3.075); (9.906252 : 2.325)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_NewsFeed1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="5e70e08f-5d3e-44a7-9893-90d55fd57ba0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.26367475 : 19.875); (22.26367475 : 9.5625); (21.8987642083333 : 9.5625 : JumpStart); (21.1676422916667 : 9.5625 : JumpEnd); (21.1018862083333 : 9.5625 : JumpStart); (20.7027967916667 : 9.5625 : JumpEnd); (20.6370402083333 : 9.5625 : JumpStart); (20.4703735416667 : 9.5625 : JumpEnd); (15.7395833333333 : 9.5625 : JumpStart); (15.5729166666667 : 9.5625 : JumpEnd); (11.2395833333333 : 9.5625 : JumpStart); (11.0729166666667 : 9.5625 : JumpEnd); (10.5 : 9.5625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_CommunicationContact" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="062bda02-9e12-4bf7-9c53-73e3a7664442" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.13476425 : 19.875); (21.13476425 : 15.9127018229167); (21.1018862083333 : 15.9127018229167 : JumpStart); (20.7027967916667 : 15.9127018229167 : JumpEnd); (20.6370402083333 : 15.9127018229167 : JumpStart); (20.4703735416667 : 15.9127018229167 : JumpEnd); (15.7395833333333 : 15.9127018229167 : JumpStart); (15.5729166666667 : 15.9127018229167 : JumpEnd); (10.9895833333333 : 15.9127018229167 : JumpStart); (10.8229166666667 : 15.9127018229167 : JumpEnd); (10.2083333333333 : 15.9127018229167 : JumpStart); (10.0416666666667 : 15.9127018229167 : JumpEnd); (9.95833333333333 : 15.9127018229167 : JumpStart); (9.79166666666667 : 15.9127018229167 : JumpEnd); (9.625 : 15.9127018229167)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityInitiative" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="958fc6d5-18fb-4ec0-a423-bcad87671f66" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.66991875 : 19.875); (20.66991875 : 16.1663053971354); (20.6370402083333 : 16.1663053971354 : JumpStart); (20.4703735416667 : 16.1663053971354 : JumpEnd); (15.7395833333333 : 16.1663053971354 : JumpStart); (15.5729166666667 : 16.1663053971354 : JumpEnd); (10.9895833333333 : 16.1663053971354 : JumpStart); (10.8229166666667 : 16.1663053971354 : JumpEnd); (10.2083333333333 : 16.1663053971354 : JumpStart); (10.0416666666667 : 16.1663053971354 : JumpEnd); (9.95833333333333 : 16.1663053971354 : JumpStart); (9.79166666666667 : 16.1663053971354 : JumpEnd); (9.625 : 16.1663053971354)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityInitiative1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="958fc6d5-18fb-4ec0-a423-bcad87671f66" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.413089375 : 19.875); (22.413089375 : 14.3319547275641); (24.875 : 14.3319547275641)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_FavoriteActivity" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="ee614eab-d670-4ac5-ae66-534d2ed5c952" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.5 : 22.1601388463542); (31.1354141666667 : 22.1601388463542 : JumpStart); (31.3020808333333 : 22.1601388463542 : JumpEnd); (31.75 : 22.1601388463542); (31.75 : 19.9821598307292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Activity" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.5 : 23.2803803541667); (31.2187475 : 23.2803803541667); (31.2187475 : 19.9821598307292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Activity1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.96 : 24.3381168619792); (20.96 : 24.5881168619792); (21.3061538461538 : 24.5881168619792); (21.3061538461538 : 24.3381168619792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_SystemUser" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(15.65625 : 5.0881982421875); (15.65625 : 22.3933162348633); (20.5 : 22.3933162348633)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Role/Role_SystemUser" />
+      <nodes>
+        <classShapeMoniker Id="dba92f52-7927-4f81-b217-cebe421a0df8" />
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.6523076923077 : 24.3381168619792); (21.6523076923077 : 24.5881168619792); (21.9984615384615 : 24.5881168619792); (21.9984615384615 : 24.3381168619792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_SystemUser1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="dd1c918d-fa31-4984-96e7-2858eaa8eb07" isExpanded="false" absoluteBounds="8.875, 0.625, 2, 0.45">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActivityFilter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8d0ecb33-3df3-4bf6-ab17-0bde33d5aa79" absoluteBounds="8.89, 1.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(21.018552875 : 19.875); (21.018552875 : 0.71875); (10.875 : 0.71875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityFilter" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="dd1c918d-fa31-4984-96e7-2858eaa8eb07" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.250975625 : 19.875); (21.250975625 : 0.7500025); (10.875 : 0.7500025)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_ActivityFilter1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="dd1c918d-fa31-4984-96e7-2858eaa8eb07" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" absoluteBounds="6, 1.25, 2, 7.1553369140625">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/Ministry" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ab0b6c1-75f1-4e55-a0de-05ab70caa753" absoluteBounds="6.015, 1.71, 1.9700000000000002, 6.5953369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6 : 4.11620198567708); (5 : 4.11620198567708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_ActivitySharedWith" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="d5fb0d13-2618-43c3-9189-215f9401ef65" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 2.7875); (8.16666666666667 : 2.7875 : JumpStart); (8.33333333333333 : 2.7875 : JumpEnd); (9.82291866666667 : 2.7875 : JumpStart); (9.98958533333333 : 2.7875 : JumpEnd); (17.71875 : 2.7875); (17.71875 : 5.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_SystemUserMinistry" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="5e056281-b807-441c-9cf2-838a5c2ffbcb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 2.1); (8.375 : 2.1)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_NewsFeed" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="5e70e08f-5d3e-44a7-9893-90d55fd57ba0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 8.4053369140625); (8.17370480810795 : 8.48164998244485 : JumpStart); (8.45129519189205 : 8.60360270310203 : JumpEnd); (8.5 : 8.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_CommunicationContact" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="062bda02-9e12-4bf7-9c53-73e3a7664442" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.25 : 8.4053369140625); (7.25 : 12.7081303270169); (9.79166666666667 : 12.7081303270169 : JumpStart); (9.95833333333333 : 12.7081303270169 : JumpEnd); (10.0416666666667 : 12.7081303270169 : JumpStart); (10.2083333333333 : 12.7081303270169 : JumpEnd); (12.5104166666667 : 12.7081303270169 : JumpStart); (12.6770833333333 : 12.7081303270169 : JumpEnd); (15.5729166666667 : 12.7081303270169 : JumpStart); (15.7395833333333 : 12.7081303270169 : JumpEnd); (20.4703735416667 : 12.7081303270169 : JumpStart); (20.6370402083333 : 12.7081303270169 : JumpEnd); (20.7027967916667 : 12.7081303270169 : JumpStart); (21.1018862083333 : 12.7081303270169 : JumpEnd); (21.1676422916667 : 12.7081303270169 : JumpStart); (22.3470080833333 : 12.7081303270169 : JumpEnd); (27.0416666666667 : 12.7081303270169 : JumpStart); (27.2083333333333 : 12.7081303270169 : JumpEnd); (27.5416666666667 : 12.7081303270169 : JumpStart); (27.7083333333333 : 12.7081303270169 : JumpEnd); (30.2366452310313 : 12.7081303270169 : JumpStart); (30.4033118976979 : 12.7081303270169 : JumpEnd); (30.4832457178239 : 12.7081303270169 : JumpStart); (30.6499123844906 : 12.7081303270169 : JumpEnd); (30.75 : 12.7081303270169)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_Activity" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="23f7ae85-75d4-4651-9ea4-89ae3c3fbd5a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.553706875 : 19.875); (20.553706875 : 3.00625); (17.8020833333333 : 3.00625 : JumpStart); (17.6354166666667 : 3.00625 : JumpEnd); (11.1933333333333 : 3.00625 : JumpStart); (11.0266666666667 : 3.00625 : JumpEnd); (8.33333333333333 : 3.00625 : JumpStart); (8.16666666666667 : 3.00625 : JumpEnd); (8 : 3.00625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Ministry" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.786130125 : 19.875); (20.786130125 : 2.9125); (17.8020833333333 : 2.9125 : JumpStart); (17.6354166666667 : 2.9125 : JumpEnd); (9.98958533333333 : 2.9125 : JumpStart); (9.82291866666667 : 2.9125 : JumpEnd); (8.33333333333333 : 2.9125 : JumpStart); (8.16666666666667 : 2.9125 : JumpEnd); (8 : 2.9125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Ministry1" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.70923076923077 : 1.25); (6.70923076923077 : 1); (7.30461538461539 : 1); (7.30461538461539 : 1.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/Ministry/Ministry_Ministry" />
+      <nodes>
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.3984395 : 19.875); (21.3984395 : 2.8187525); (21.3343089583333 : 2.8187525 : JumpStart); (21.1676422916667 : 2.8187525 : JumpEnd); (21.1018862083333 : 2.8187525 : JumpStart); (20.9352195416667 : 2.8187525 : JumpEnd); (9.98958533333333 : 2.8187525 : JumpStart); (9.82291866666667 : 2.8187525 : JumpEnd); (8.33333333333333 : 2.8187525 : JumpStart); (8.16666666666667 : 2.8187525 : JumpEnd); (8 : 2.8187525)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CorporateCalendarDataContext/SystemUser/SystemUser_Ministry2" />
+      <nodes>
+        <classShapeMoniker Id="afc9982a-6293-4736-98d4-3f11f580c249" />
+        <classShapeMoniker Id="12f5de1a-5cf8-4f47-89a9-b63d5d2eb921" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="32b6710b-1aee-4f0d-acbc-68f53d613a64" absoluteBounds="34.75, 12.25, 2, 12.9243798828125">
+      <DataClassMoniker Name="/CorporateCalendarDataContext/ActiveActivity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="737d925d-bc47-496e-b5d6-dc8b797cd32f" absoluteBounds="34.765, 12.71, 1.9700000000000002, 12.3643798828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

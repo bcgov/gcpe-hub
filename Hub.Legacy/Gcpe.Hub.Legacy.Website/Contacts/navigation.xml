@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<navigation>
+
+  <item url="/Contacts/Default" name="Home" breadcrumb="true" DisplayOnDashboard="false" MobileNav="true"/>
+
+  <item url="/Contacts/Search" name="Search Results" SiteSection="MediaRelationsSearch" AccessLevel="Read" Navigation="false"/>
+  <item url="/Contacts/AdvancedSearch" name="Advanced Search" SiteSection="MediaRelationsSearch" AccessLevel="Read" Navigation="false" MobileNav="true"/>
+  <item url="/Contacts/RefineResults" name="Refine Results" SiteSection="MediaRelationsSearch" AccessLevel="Read" Navigation="false" MobileNav="false"/>
+
+  <item url="/Contacts/Reports/MyReports" name="My Reports" SiteSection="MediaRelationsUserReports" AccessLevel="Read" MobileNav="true"/>
+  <item url="/Contacts/Reports/Reports" name="Reports" SiteSection="MediaRelationsCommonReports" AccessLevel="Read" MobileNav="true"/>
+
+  <item url="/Contacts/Contact/AddContact" name="Add Contact" SiteSection="MediaRelationsContact" AccessLevel="Create"/>
+  <item url="/Contacts/MediaOutlet/AddOutlet" name="Add Outlet" SiteSection="MediaRelationsCompany" AccessLevel="Create"/>
+  <item url="/Contacts/Company/AddCompany" name="Add Company" SiteSection="MediaRelationsCompany" AccessLevel="Create"/>
+
+  <item url="/Contacts/MediaOutlet/EditOutlet?guid" name="Edit Outlet" SiteSection="MediaRelationsCompany" AccessLevel="Update" Navigation="false"/>
+  <item url="/Contacts/MediaOutlet/ViewOutlet?guid" name="View Outlet" SiteSection="MediaRelationsCompany" AccessLevel="Read" Navigation="false"/>
+
+  <item url="/Contacts/Company/EditCompany?guid" name="Edit Company" SiteSection="MediaRelationsCompany" AccessLevel="Update" Navigation="false"/>
+  <item url="/Contacts/Company/ViewCompany?guid" name="View Company" SiteSection="MediaRelationsCompany" AccessLevel="Read" Navigation="false"/>
+
+  <item url="/Contacts/Contact/EditContact?guid" name="Edit Contact" SiteSection="MediaRelationsContact" AccessLevel="Update" Navigation="false"/>
+  <item url="/Contacts/Contact/ViewContact?guid" name="View Contact" SiteSection="MediaRelationsContact" AccessLevel="Read" Navigation="false"/>
+
+  <item url="/Contacts/RecordHistory" name="Record History" SiteSection="MediaRelationsApprovals" AccessLevel="Read"/>
+
+  <item url="/Contacts/DataManagement/ManageData" name="Manage Data" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+    <item url="/Contacts/DataManagement/ManageBeats" name="Manage Beats" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditBeat" name="Add New Beat" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditBeat?guid" name="Edit Beat" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageCities" name="Manage Cities" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditCity" name="Add New City" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditCity?guid" name="Edit City" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageCountries" name="Manage Countries" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditCountry" name="Add New Country" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditCountry?guid" name="Edit Country" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageDistributions" name="Manage Distributions" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditDistribution" name="Add New Distribution" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditDistribution?guid" name="Edit Distribution" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageElectoralDistricts" name="Manage Electoral Districts" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditElectoralDistrict" name="Add New Electoral District" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditElectoralDistrict?guid" name="Edit Electoral District" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageEthnicities" name="Manage Ethnicities" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditEthnicity" name="Add New Ethnicity" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditEthnicity?guid" name="Edit Ethnicity" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageLanguages" name="Manage Languages" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditLanguage" name="Add New Language" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditLanguage?guid" name="Edit Language" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageMediaDesks" name="Manage Media Desks" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditMediaDesk" name="Add New Media Desk" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditMediaDesk?guid" name="Edit Media Desk" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageMediaJobTitles" name="Manage Media Job Titles" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditMediaJobTitle" name="Add New Media Job Title" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditMediaJobTitle?guid" name="Edit Media Job Title" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageMediaTypes" name="Manage Media Types" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditMediaType" name="Add New Media Type" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditMediaType?guid" name="Edit Media Type" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageMinisterialJobTitles" name="Manage Ministerial Job Titles" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditMinisterialJobTitle" name="Add Ministerial Job Title" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditMinisterialJobTitle?guid" name="Edit Ministerial Job Title" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageRegions" name="Manage Regions" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditRegion" name="Add New Region" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditRegion?guid" name="Edit Region" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManagePrintCategories" name="Manage Print Categories" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditPrintCategory" name="Add New Print Category" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditPrintCategory?guid" name="Edit Print Category" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageProvinces" name="Manage Provinces/States" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditProvince" name="Add New Province/State" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditProvince?guid" name="Edit Province/State" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManagePublicationDays" name="Manage Publication Days" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditPublicationDay" name="Add New Publication Day" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditPublicationDay?guid" name="Edit Publication Day" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManagePublicationFrequencies" name="Manage Publication Frequencies" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditPublicationFrequency" name="Add New Publication Frequency" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditPublicationFrequency?guid" name="Edit Publication Frequency" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+    <item url="/Contacts/DataManagement/ManageSpecialtyPublications" name="Manage Specialty Publications" SiteSection="MediaRelationsDataLists" AccessLevel="Read">
+      <item url="/Contacts/DataManagement/AddEditSpecialtyPublication" name="Add New Specialty Publication" SiteSection="MediaRelationsDataLists" AccessLevel="Create"/>
+      <item url="/Contacts/DataManagement/AddEditSpecialtyPublication?guid" name="Edit Specialty Publication" SiteSection="MediaRelationsDataLists" AccessLevel="Update"/>
+    </item>
+  </item>
+
+</navigation>

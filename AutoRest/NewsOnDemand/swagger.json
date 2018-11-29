@@ -1,0 +1,520 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Gcpe.NewsOnDemand"
+  },
+  "host": "localhost:54656",
+  "schemes": [ "http" ],
+  "paths": {
+    "/LogBounce": {
+      "post": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_LogBounce",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "smtpAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "emailSubject",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "receivedDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "hardBounced",
+            "in": "query",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/BounceLogResult" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/IsNewsOnDemandEnabled": {
+      "get": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_IsNewsOnDemandEnabled",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/TryRunningDailyDigest": {
+      "post": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_TryRunningDailyDigest",
+        "consumes": [],
+        "produces": [],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/AddNewsOnDemandEntry": {
+      "post": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_AddNewsOnDemandEntry",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "article",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Article" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/AddNewsOnDemandPosts": {
+      "post": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_AddNewsOnDemandPosts",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "articles",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Article" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/RemoveNewsOnDemandEntry": {
+      "post": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_RemoveNewsOnDemandEntry",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "absoluteUri",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/NewsOnDemandSubscriberCount": {
+      "get": {
+        "tags": [ "Distribution" ],
+        "operationId": "Distribution_NewsOnDemandSubscriberCount",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "distributionLists",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/ConfigurationValues": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_ConfigurationValues",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/KeyValuePair[String,String]" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/CheckEmailActivationGuid": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_CheckEmailActivationGuid",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/SubscriberInformation": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_SubscriberInformation",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "emailAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/SubscriberInfo" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/ManageNewsOnDemandEmailSubscription": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_ManageNewsOnDemandEmailSubscription",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "emailAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/CreateNewsOnDemandEmailSubscriptionWithPreferences": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_CreateNewsOnDemandEmailSubscriptionWithPreferences",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriberInfo",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/SubscriberInfo" }
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/UpdateNewsOnDemandEmailSubscriptionWithPreferences": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_UpdateNewsOnDemandEmailSubscriptionWithPreferences",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriberInfo",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/SubscriberInfo" }
+          },
+          {
+            "name": "tokenOrEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/ConfirmUpdateCreateSubscription": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_ConfirmUpdateCreateSubscription",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "linkGuid",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/SubscriberInfo" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/UnsubscribeSubscriber": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_UnsubscribeSubscriber",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "tokenOrEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/SubscriptionCategories": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_SubscriptionCategories",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/KeyValuePair[String,String]" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/SubscriptionItems": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_SubscriptionItems",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "categoryKey",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/KeyValuePair[String,String]" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/NewsroomFeeds": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_NewsroomFeeds",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/NewsFeeds": {
+      "get": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_NewsFeeds",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/KeyValuePair[String,String]" }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/PurgeNewsOnDemandSubscribers": {
+      "post": {
+        "tags": [ "Subscribe" ],
+        "operationId": "Subscribe_PurgeNewsOnDemandSubscribers",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "unverifiedPurgeVal",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "regularPurgeVal",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "lookBackDays",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "BounceLogResult": {
+      "type": "object",
+      "properties": {
+        "LogBounceRecorded": { "type": "boolean" },
+        "BounceStats": { "type": "string" },
+        "SubscriberMarkedDeleted": { "type": "boolean" },
+        "HasMediaDistributions": { "type": "boolean" }
+      }
+    },
+    "Article": {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Uri": { "type": "string" },
+        "Title": { "type": "string" },
+        "HtmlContent": { "type": "string" },
+        "TextContent": { "type": "string" },
+        "Published": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "DistributionLists": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "KeyValuePair[String,String]": {
+      "type": "object",
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
+    "SubscriberInfo": {
+      "type": "object",
+      "properties": {
+        "EmailAddress": { "type": "string" },
+        "SubscribedCategories": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "IsAllNews": { "type": "boolean" },
+        "IsAsItHappens": { "type": "boolean" },
+        "IsDailyDigest": { "type": "boolean" },
+        "IsAdminRegistration": { "type": "boolean" },
+        "NotifyIfNewCategories": { "type": "boolean" },
+        "ExpiredLinkOrUnverifiedEmail": { "type": "boolean" }
+      }
+    }
+  }
+}

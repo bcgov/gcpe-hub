@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Contacts/MasterPage/MediaRelations.master" AutoEventWireup="true" CodeBehind="Manage.master.cs" Inherits="MediaRelationsSiteApp.DataManagement.Manage" %>
+
+<%@ Register TagPrefix="mr" TagName="SortColumnHeader" Src="~/Contacts/UserControls/SortColumnHeader.ascx" %>
+<%@ Register TagPrefix="mr" TagName="Paginator" Src="~/Contacts/UserControls/Paginator.ascx" %>
+<%@ Register TagPrefix="mrcl" Namespace="MediaRelationsLibrary" Assembly="MediaRelationsLibrary" %>
+
+
+<asp:Content ID="manageContent" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+
+    <mrcl:PermissionContainer ID="PermissionContainer1" runat="server" Section="MediaRelationsDataLists" AccessLevel="Read">
+        <Content>
+            <h1>Manage
+                <label id="Label1" runat="server"></label>
+            </h1>
+
+            <p class="common-search-form gradient">
+                <asp:TextBox ID="SearchBox" CssClass="ignore-unload" runat="server" />
+                <asp:Button ID="SearchButton" runat="server" Text="" OnClick="SearchButton_Click" CssClass="common-search-button" />
+            </p>
+
+            <p class="common-search-form-filter"></p>
+
+            <div id="addNew" runat="server" class="common-page-add-new-item">
+                <asp:HyperLink runat="server" ID="addUrlLink"></asp:HyperLink>
+                <label id="Label2" runat="server" visible="false">Entity</label>
+            </div>
+
+            <mr:Paginator ID="PaginatorTop" BulkActions="true" runat="server" Mod="top" />
+
+            <table class="common-admin-table">
+
+                <thead>
+                    <tr class="top">
+
+                        <th>
+                            <input type="checkbox" name="selectAll" onclick="toggleSelectAll(this, 'tableContentTB');" /></th>
+
+                        <asp:Repeater runat="server" ID="columnHeaderRepeater" ItemType="MediaRelationsSiteApp.DataManagement.ManageColumn">
+                            <ItemTemplate>
+                                <th>
+                                    <mr:SortColumnHeader ID="SortColumnHeader2" runat="server" Text="<%# Item.Text %>" ColumnName="<%# Item.PropertyName %>" IsDefault='<%# Item.PropertyName.Equals(SortProperty) %>' />
+                                </th>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                        <th>Function</th>
+
+                        <% if (MoveUp != null && MoveDown != null)
+                            { %>
+                        <th>
+                            <mr:SortColumnHeader ID="SortColumnHeader1" runat="server" Text="Order" ColumnName="SortOrder" IsDefault='<%# SortProperty=="SortOrder" %>' />
+                        </th>
+                        <% } %>
+                    </tr>
+                </thead>
+                <tbody id="tableContentTB">
+
+                    <asp:Repeater runat="server" ID="rowRepeater" ItemType="MediaRelationsSiteApp.DataManagement.ManageRow">
+                        <ItemTemplate>
+                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "even" : "odd" %>'>
+                                <td>
+                                    <input type='checkbox' name='categoryAction' value='<%# Item.Guid %>' /></td>
+                                <asp:Repeater runat="server" ID="rowRepeater" DataSource="<%# Item.Values %>">
+                                    <ItemTemplate>
+                                        <td><%# Container.DataItem %></td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <td>
+                                    <nobr>
+                                    <% bool separator = false; %>
+                                    
+                                    <% if (canUpdate)
+                                        { %>
+                                        <a id="A1" href="<%# AddUrl + "?guid=" + Item.Guid %>">Edit</a>
+                                    <% separator = true;
+                                        } %>
+
+                                    <% if (canDelete)
+                                        { %>
+                                        <%= separator ? " | " : "" %>
+                                        <a href="<%# Request.Url.AbsolutePath + "?delete=" + Item.Guid %>" onclick='return confirm(deleteButtonText);'>Delete</a>
+                                    <% separator = true;
+                                        } %>
+                                    </nobr>
+                                </td>
+
+                                <% if (MoveUp != null && MoveDown != null)
+                                    { %>
+                                <% if (canUpdate && SortProperty == "SortOrder" && !SortDescending && IsSortOrderDistinct)
+                                    { %>
+                                <td class='updownarrows'>
+                                    <nobr><%# GetUpDownControls(Item) %></nobr>
+                                </td>
+                                <% } else { %>
+                                <td><%# Item.SortOrder %></td>
+                                <% } %>
+                                <% } %>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <% if (Rows == null || Rows.Count() == 0)
+                        { %>
+
+                    <tr>
+                        <td colspan='<%# Columns.Count().ToString() %>'>'>No items to display</td>
+                    </tr>
+
+                    <% } %>
+                </tbody>
+                <% if (Rows.Count() > 10)
+                    { %>
+                <tfoot>
+                    <tr class="bottom">
+                        <th>
+                            <input type="checkbox" name="selectAll" onclick="toggleSelectAll(this, 'tableContentTB');" /></th>
+
+                        <asp:Repeater runat="server" ID="columnFooterRepeater" ItemType="MediaRelationsSiteApp.DataManagement.ManageColumn">
+                            <ItemTemplate>
+                                <th>
+                                    <%# Item.Text %>
+                                </th>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                        <th>Function</th>
+
+                        <% if (MoveUp != null && MoveDown != null)
+                            { %>
+                        <th>
+                            <mr:SortColumnHeader ID="SortColumnHeader3" runat="server" Text="Order" ColumnName="SortOrder" IsDefault='<%# SortProperty=="SortOrder" %>' />
+                        </th>
+                        <% } %>
+                    </tr>
+                </tfoot>
+                <% } %>
+            </table>
+
+            <mr:Paginator ID="PaginatorBottom" runat="server" Mode="Bottom" BulkActions="true" />
+
+            <div class="common-back-button">
+                <a href="ManageData.aspx" class="common-back-button">BACK TO MANAGE DATA</a>
+            </div>
+
+        </Content>
+
+    </mrcl:PermissionContainer>
+
+</asp:Content>

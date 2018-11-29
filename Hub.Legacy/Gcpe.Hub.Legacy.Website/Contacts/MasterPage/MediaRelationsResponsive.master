@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="MasterPage_MediaRelationsResponsive" MasterPageFile="~/Contacts/MasterPage/MediaRelations.master" Codebehind="MediaRelationsResponsive.master.cs" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="head">
+
+    <link href="<%= ResolveUrl("~/Contacts/css/MediaRelationsResponsive.css") %>" rel="stylesheet" type="text/css" />
+    
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+
+     <div class="mobile-navigation-container" id="mobileNavigationContainer">
+        <asp:Literal runat="server" ID="mobileNavigationLit" />
+    </div>
+
+    <div id="pageContainer">
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder" runat="server"/>
+
+    </div>
+
+
+</asp:Content>

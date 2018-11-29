@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>Gcpe.Hub.WebApp</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>Gcpe.Hub.WebApp</PackageId>
+    <RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gcpe.Hub.Data\Gcpe.Hub.Data.csproj" />
+    <ProjectReference Include="..\Gcpe.NewsOnDemand.Client\Gcpe.NewsOnDemand.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.*" />
+    <PackageReference Include="Microsoft.Azure.Search" Version="5.0.*" />
+    <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
+    <PackageReference Include="MailKit" Version="1.18.1.1" />
+  </ItemGroup>
+
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <Exec Command="bower install" />
+    <Exec Command="dotnet bundle" />
+  </Target>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <Target Name="CopyConfigurationForDebug" AfterTargets="AfterBuild">
+    <!-- copy the specified configuration appsettings over as appSettings -->
+    <Copy SourceFiles="$(SolutionDir)Config\Hub.WebApp.$(Configuration).appSettings.json" DestinationFiles="$(SolutionDir)Config\Hub.WebApp.appSettings.json" ContinueOnError="false" />
+  </Target>
+</Project>

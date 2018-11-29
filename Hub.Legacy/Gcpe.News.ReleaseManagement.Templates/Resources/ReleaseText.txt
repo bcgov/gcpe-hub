@@ -1,0 +1,6 @@
+﻿@Documents.First().ReferenceNumber
+@Release.ReleaseDateTime.ToString("MMMM d, yyyy")
+
+@Documents.First().Organizations
+
+Format(@Documents)

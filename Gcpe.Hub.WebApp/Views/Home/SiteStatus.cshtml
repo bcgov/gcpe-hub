@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<string>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Status | BC Gov News</title>
+</head>
+<body>
+    <ul>
+        @foreach (var status in Model)
+        {
+            <li>@status</li>
+        }
+    </ul>
+</body>
+</html>

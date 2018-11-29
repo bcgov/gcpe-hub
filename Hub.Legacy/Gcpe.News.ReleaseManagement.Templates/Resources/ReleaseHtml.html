@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html lang="en-ca" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--<meta http-equiv=Content-Type content="text/html; charset=windows-1252">-->
+    <meta charset="utf-8" />
+    <title>@Documents.First().Headline</title>
+    <meta name="dc.date" content="@MetaDcDate" />
+    <meta name="topic_obj_id" content="@MetaSectors" /> 
+    <meta name="location_obj_id" content="@MetaLocation" />
+    <meta name="prime_organization_obj_id" content="@MetaOrganization" />
+</head>
+<body style="font-family:Calibri; font-size:12pt">
+    <div style="text-align:center; width:700px; margin:0 auto; font-size:10pt">
+        View the <a href="@Documents.First().Reference.pdf">printer-friendly version</a> of this release.
+    </div>
+    Format(@Documents)
+    <div style="width:700px; margin:0 auto; padding-top:20px;">Connect with the Province of B.C. at: <a href="http://news.gov.bc.ca/connect">news.gov.bc.ca/connect</a></div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff0b984b4108411a87ff71b5370c8380" Name="Diagram1">
+        <EntityTypeShape EntityType="MediaRelationsModel.Beat" Width="1.5" PointX="8.6475371311640075" PointY="24.432863172345265" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Company" Width="1.5" PointX="3.987677220249398" PointY="27.83695870444037" />
+        <EntityTypeShape EntityType="MediaRelationsModel.CompanyAddress" Width="1.5" PointX="3.15476243344823" PointY="2.0361536601726682" />
+        <EntityTypeShape EntityType="MediaRelationsModel.CompanyPhoneNumber" Width="1.5" PointX="1" PointY="4.625" />
+        <EntityTypeShape EntityType="MediaRelationsModel.CompanyWebAddress" Width="1.5" PointX="5" PointY="13.125" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Contact" Width="1.5" PointX="6.5" PointY="16.25" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ContactAddress" Width="1.5" PointX="6.5" PointY="9.125" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ContactBeat" Width="1.5" PointX="9.875" PointY="9.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ContactMediaJobTitle" Width="1.5" PointX="1.875" PointY="15.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ContactPhoneNumber" Width="1.5" PointX="10.577883352794629" PointY="0.16209287949003878" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ContactWebAddress" Width="1.5" PointX="11.5" PointY="24.625" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Country" Width="1.5" PointX="1.3796577813940392" PointY="10.084221904205261" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Distribution" Width="1.5" PointX="1.387855282699622" PointY="0.11365774279164977" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ElectoralDistrict" Width="1.5" PointX="8.125" PointY="9.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Ethnicity" Width="1.5" PointX="5.75" PointY="4.25" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MediaDesk" Width="1.5" PointX="4.875" PointY="17.25" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MediaJobTitle" Width="1.5" PointX="4.875" PointY="10.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MediaType" Width="1.5" PointX="1.25" PointY="13.125" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Minister" Width="1.5" PointX="9.1841154979467934" PointY="12.906563764860184" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MinisterialJobTitle" Width="2.25" PointX="12" PointY="17.625" />
+        <EntityTypeShape EntityType="MediaRelationsModel.PhoneType" Width="1.5" PointX="9.834947676321" PointY="7.3960499797929309" />
+        <EntityTypeShape EntityType="MediaRelationsModel.PrintCategory" Width="1.5" PointX="11.254382835353903" PointY="30.836432158405163" />
+        <EntityTypeShape EntityType="MediaRelationsModel.ProvState" Width="1.5" PointX="9.6389368202718622" PointY="3.3729138837069805" />
+        <EntityTypeShape EntityType="MediaRelationsModel.PublicationDay" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.PublicationFrequency" Width="1.5" PointX="4.2782362682177855" PointY="22.898006136947313" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Report" Width="1.5" PointX="6.6156950530669167" PointY="0.54958401645980026" />
+        <EntityTypeShape EntityType="MediaRelationsModel.SpecialtyPublication" Width="1.5" PointX="6.125" PointY="29.5" />
+        <EntityTypeShape EntityType="MediaRelationsModel.SysConfig" Width="1.5" PointX="7.9472212139271292" PointY="7.1539147380524852" />
+        <EntityTypeShape EntityType="MediaRelationsModel.SysLog" Width="1.5" PointX="0.17310559571399614" PointY="31.850348800351075" />
+        <EntityTypeShape EntityType="MediaRelationsModel.WebAddressType" Width="1.5" PointX="10.845493565707232" PointY="15.510370276640343" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_Beat" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_PrintCategory" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_PublicationFrequency" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyPhoneNumber_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyWebAddress_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Country" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_ProvState" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyPhoneNumber_PhoneType" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyWebAddress_WebAddressType" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Contact" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Contact_ElectoralDistrict" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Contact_Minister" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Contact_MinisterialJobTitle" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_ContactBeat" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_Contact" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactPhoneNumber_Contact" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactWebAddress_Contact" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_Country" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_ProvState" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_MediaJobTitle" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactPhoneNumber_PhoneType" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactWebAddress_WebAddressType" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyDistribution" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyElectoralDistrict" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyEthnicity" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaDesk" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaPartner" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaType" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyPublicationDays" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySpecialtyPublication" />
+        <AssociationConnector Association="MediaRelationsModel.ContactCompany" />
+        <AssociationConnector Association="MediaRelationsModel.ContactElectoralDistrict" />
+        <EntityTypeShape EntityType="MediaRelationsModel.City" Width="1.5" PointX="9" PointY="33.75" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Language" Width="1.5" PointX="6.25" PointY="33.5" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Region" Width="1.5" PointX="8.75" PointY="19.625" />
+        <EntityTypeShape EntityType="MediaRelationsModel.Sector" Width="1.5" PointX="8.75" PointY="27.5" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_City" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_City" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyLanguage" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyRegion" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySector" />
+        <AssociationConnector Association="MediaRelationsModel.ContactRegion" />
+        <AssociationConnector Association="MediaRelationsModel.ContactSector" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_Beat1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_PrintCategory1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Company_PublicationFrequency1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyPhoneNumber_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyWebAddress_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_Company1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_City1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Country1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_ProvState1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyPhoneNumber_PhoneType1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_CompanyWebAddress_WebAddressType1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Address_Contact1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Contact_ElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_Contact_MinisterialJobTitle1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactBeat_ContactBeat1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_Contact1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactPhoneNumber_Contact1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactWebAddress_Contact1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_City1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_Country1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactAddress_ProvState1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactMediaJobTitle_MediaJobTitle1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactPhoneNumber_PhoneType1" />
+        <AssociationConnector Association="MediaRelationsModel.FK_ContactWebAddress_WebAddressType1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyDistribution1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyEthnicity1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyLanguage1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaDesk1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaPartner1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaType1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyPublicationDays1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySector1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySpecialtyPublication1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactCompany1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactSector1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyDistribution1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyEthnicity1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyLanguage1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaDesk1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaPartner1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaType1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyPublicationDays1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySector1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySpecialtyPublication1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactCompany1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactSector1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyDistribution1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyEthnicity1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyLanguage1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaDesk1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaPartner1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyMediaType1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyPublicationDays1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanyRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySector1" />
+        <AssociationConnector Association="MediaRelationsModel.CompanySpecialtyPublication1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactCompany1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactElectoralDistrict1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactRegion1" />
+        <AssociationConnector Association="MediaRelationsModel.ContactSector1" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MediaRequest" Width="2.75" PointX="12" PointY="4.25" />
+        <EntityTypeShape EntityType="MediaRelationsModel.MediaRequestContact" Width="2.75" PointX="12" PointY="20.625" />
+        <AssociationConnector Association="MediaRelationsModel.FK_MediaRequestContact_Company" />
+        <AssociationConnector Association="MediaRelationsModel.FK_MediaRequestContact_Contact" />
+        <AssociationConnector Association="MediaRelationsModel.FK_MediaRequest_Parent" />
+        <AssociationConnector Association="MediaRelationsModel.FK_MediaRequestContact_MediaRequest" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

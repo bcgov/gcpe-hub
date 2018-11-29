@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SectionName = "Hub";
+}
+
+@section menu {
+
+    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+    @*<li>@Html.ActionLink("Ping", "Ping", "Home")</li>*@
+    <li><a href="/Legacy/News/ReleaseManagement/Drafts/">News Releases</a></li>
+    <li><a href="/Legacy/Calendar/">Corporate Calendar</a></li>
+    <li><a href="/Legacy/Contacts/">Media Contacts</a></li>
+    <li>@Html.ActionLink("Media Requests", "Index", "MediaRequests")</li>
+    @*<li><a href="/swagger">Swagger</a></li>*@
+
+}
+
+@RenderBody()
+
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+}

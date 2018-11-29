@@ -1,0 +1,771 @@
+﻿html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+body {
+    padding: 50px 0 20px 0;
+    margin: 0;
+    height: 100%;
+    background-color: rgb(241, 241, 241);
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    background: white;
+    min-height: 100%;
+}
+
+.panel-default {
+    margin-top: 0px;
+}
+
+/* Override the arbitrary width imposed by Kendo widgets */
+.k-autocomplete,
+.k-combobox,
+.k-datepicker,
+.k-timepicker,
+.k-datetimepicker,
+.k-colorpicker,
+.k-numerictextbox,
+.k-dropdown,
+.k-selectbox,
+.k-textbox,
+.k-toolbar .k-split-button {
+    width: 100%;
+}
+
+.navbar-default {
+    background-color: #003366;
+    border-color: #5475a7;
+}
+.navbar-default .navbar-brand {
+  color: #d0d0d0;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #d0d0d0;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #d0d0d0;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #5475a7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #5475a7;
+}
+.navbar-default .navbar-toggle {
+  border-color: #5475a7;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5475a7;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #d0d0d0;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #d0d0d0;
+}
+.navbar-default .navbar-link {
+  color: #d0d0d0;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #d0d0d0;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ffffff;
+        background-color: #5475a7;
+    }
+}
+
+.navbar-default {
+    border-bottom-color: #fcba19;
+    border-bottom-width: 2px;
+    /*box-shadow: 0px 3px 3px 1px rgba(51,51,51,0.5)*/
+}
+
+.contact-card {
+    /*border: 1px solid #ccc;
+    padding: 10px 0 10px 0;*/
+}
+.contact-card-name {
+    /*font-size: larger;
+    font-weight: bold;*/
+}
+
+.contact-card-clear {
+    display: none;
+}
+
+/*.contact-card:hover .contact-card-clear {
+    display: block;
+    cursor: pointer;
+}*/
+
+.contact-card .contact-card-clear {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+    color: rgb(51, 51, 51);
+    padding-right: 15px;
+}
+/**************
+    Validation Styles
+***************/
+.validation-error-input-element {
+    border-color: #A94442 !important;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+}
+    .validation-error-input-element input.form-control {
+        border-color: #A94442 !important;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 4px;
+    }
+    .validation-error-input-element span.k-widget {
+        border: 0;
+    }
+.validation-error-message {
+    color: #A94442
+}
+.no-validation-border {
+    border: 0;
+}
+
+.gcpe-datetime-picker-wrapped {
+    width: 100%;
+    border: none;
+}
+/* Media Request List Styles*/
+.media-request-card {
+    margin: 0px 0px 8px 0px;
+    border-radius: 2px 2px 2px 2px;
+    /*border-left: 3px solid #fcba19;*/
+    border-left: 4px solid rgb(238, 238, 238);
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(238, 238, 238);
+    padding-top: 4px;
+    padding-bottom: 6px;
+}
+.media-request-card-clickable:hover {
+    cursor: pointer;
+    /*border-color: #003366;*/
+    border-color: #808080;
+}
+.responsible-media-request {
+    border-left: 4px solid #5475a7;
+}
+
+.media-request-data-panel {
+    overflow: hidden;
+    padding: 2px 8px 0px 8px;
+    min-height: 40px;
+}
+.media-request-progress-panel {
+    overflow: hidden;
+    /*padding: 8px 8px 0px 8px;*/
+}
+
+.media-request-progress-input {
+    /*display: block;
+    padding-top: 5px;
+    padding-right: 5px;*/
+}
+.media-request-progress-input-highlight {
+    display: block;
+    border: 1px solid #808080;
+    background-color: #fefec3;
+    /*border-radius: 4px;*/
+}
+
+/* Small devices (768px and up) */
+@media (min-width: 768px) {
+    /*.media-request-progress-input {
+        display: flex;
+        padding-top: 5px;
+        padding-right: 5px;
+    }*/
+    #dom-mediaContactSearch > div > .ko-dropdown-menu {
+        max-height: 480px;
+    }
+}
+.bottom {
+    position:absolute;
+    bottom: 0px;
+}
+.deadline {
+    color: #A94442;
+    text-align:right;
+}
+.shared-ministries-card {
+    /*color: #d0d0d0;*/
+    /*font-size:12px;*/    
+    /*padding-top:3px;*/ 
+}
+.media-contact-card-border {
+    /*border-right: 2px solid #d0d0d0;*/
+    /*background-color:#d0d0d0;*/
+}
+.badge-padding {
+    padding-top:4px;
+    padding-right:7px;
+}
+.label-outline {
+    background-color: transparent;
+    color: inherit;
+}
+.label-normal.label-outline{
+    color:#000000;
+    border: 1px solid;
+    border-color: #000000;
+}
+.label-primary.label-outline {
+    color: #428bca;
+    border:1px solid;
+    border-color: #357ebd;
+}
+.label-default.label-outline {
+    border: 1px solid;
+    color: #777;
+    border-color: #777;
+}
+
+    .label-default.label-outline.takeover {
+        border: 1px solid;
+        color: #070;
+        border-color: #070;
+    }
+
+.label-danger.label-outline {
+    /*color: #d9534f;*/
+    color: #A94442;
+    border: 1px solid;
+    border-color: #A94442;
+}
+.edit-badge-padding {
+    padding-left:10px;
+}
+.tag {
+    margin-bottom:4px;
+    display:inline-block;
+}
+.label-danger-overdue{
+    background-color:#A94442;
+    border:1px solid;
+    border-color: #A94442;
+}
+.label-default {
+    border: 1px solid;
+    border-color: #777;
+}
+.hide-long-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    display: block;
+}
+
+/* Manage the filter buttons while we're busy. */
+#filter-buttons {
+    text-align: right;
+}
+
+    #filter-buttons .disabled-content {
+        pointer-events: none;
+    }
+
+    #filter-buttons > span > .label {
+        cursor: pointer;
+    }
+
+div#filter-buttons.disabled-content > input[type=checkbox] {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+/* Fade animation for newly added Media Requests. */
+.new-animate {
+    animation-name: fadeColorNew;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeColorNew {
+    from {
+        background-color: #eee;
+    }
+    to {
+        background-color: #fff;
+    }
+}
+
+/* Fade animation for newly modified Media Requests. */
+.modified-animate {
+    animation-name: fadeColorModified;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeColorModified {
+    from {
+        background-color: #eee;
+    }
+    to {
+        background-color: #fff;
+    }
+}
+
+/*Removes the select arrow in IE*/
+select.gcpeoptionsimple::-ms-expand {
+    display: none;
+}
+/*Removes the select arrow everywhere else*/
+.gcpeoptionsimple {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.gcpeoptionsNoBorder {
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.k-list-container .k-nodata > div {
+    padding: 5px;
+    text-transform: none;
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.8em;
+    color: #000;
+}
+
+/* Make a Busy indicator for the Contact picker */
+div.ko-combobox > div > input {
+    background-color: transparent;
+}
+
+.ko-combobox-busy-indicator {
+    display: none;
+    position: absolute;
+    right: 60px;
+    top: 1em;
+    font-size: smaller;
+    color: #ccc;
+}
+
+/* IE-only hack to sidestep the 'x' that gets injected to the right of all inputs. */
+@media screen and (min-width:0\0) {
+    .ko-combobox-busy-indicator {
+        right: 85px;
+        top: 0.75em;
+    }
+}
+
+/* Make a Page is Busy indicator  */
+.page-busy-indicator {
+    display: block;
+    position: fixed;
+    right: 5px;
+    top: 55px;
+    font-size: smaller;
+    color: #ccc;
+}
+
+.ajax-busy-indicator {
+    color: #ccc;
+    font-size: 22px;
+}
+
+
+/* glyph spinner classes */
+.gly-spin {
+    -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+/*New Pill Button Styles*/
+.new-request-update-banner {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+}
+
+/*Bootstrap Styling for checkboxes: https://github.com/flatlogic/awesome-bootstrap-checkbox*/
+.checkbox {
+    padding-left: 20px;
+}
+
+    .checkbox label {
+        display: inline-block;
+        position: relative;
+        padding-left: 5px;
+    }
+
+        .checkbox label::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            left: 0;
+            margin-left: -20px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            background-color: #fff;
+            -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+        }
+
+        .checkbox label::after {
+            display: inline-block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 0;
+            top: 0;
+            margin-left: -20px;
+            padding-left: 3px;
+            padding-top: 1px;
+            font-size: 11px;
+            color: #555555;
+        }
+
+    .checkbox input[type="checkbox"] {
+        opacity: 0;
+    }
+
+        .checkbox input[type="checkbox"]:focus + label::before {
+            outline: thin dotted;
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+        }
+
+        .checkbox input[type="checkbox"]:checked + label::after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e013";
+        }
+
+        .checkbox input[type="checkbox"]:disabled + label {
+            opacity: 0.65;
+        }
+
+            .checkbox input[type="checkbox"]:disabled + label::before {
+                background-color: #eeeeee;
+                cursor: not-allowed;
+            }
+
+    .checkbox.checkbox-circle label::before {
+        border-radius: 50%;
+    }
+
+    .checkbox.checkbox-inline {
+        margin-top: 0;
+    }
+
+.checkbox-primary input[type="checkbox"]:checked + label::before {
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::after {
+    color: #fff;
+}
+
+.checkbox-danger input[type="checkbox"]:checked + label::before {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.checkbox-danger input[type="checkbox"]:checked + label::after {
+    color: #fff;
+}
+
+.checkbox-info input[type="checkbox"]:checked + label::before {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.checkbox-info input[type="checkbox"]:checked + label::after {
+    color: #fff;
+}
+
+.checkbox-warning input[type="checkbox"]:checked + label::before {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.checkbox-warning input[type="checkbox"]:checked + label::after {
+    color: #fff;
+}
+
+.checkbox-success input[type="checkbox"]:checked + label::before {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.checkbox-success input[type="checkbox"]:checked + label::after {
+    color: #fff;
+}
+
+.radio {
+    padding-left: 20px;
+}
+
+    .radio label {
+        display: inline-block;
+        position: relative;
+        padding-left: 5px;
+    }
+
+        .radio label::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            left: 0;
+            margin-left: -20px;
+            border: 1px solid #cccccc;
+            border-radius: 50%;
+            background-color: #fff;
+            -webkit-transition: border 0.15s ease-in-out;
+            -o-transition: border 0.15s ease-in-out;
+            transition: border 0.15s ease-in-out;
+        }
+
+        .radio label::after {
+            display: inline-block;
+            position: absolute;
+            content: " ";
+            width: 11px;
+            height: 11px;
+            left: 3px;
+            top: 3px;
+            margin-left: -20px;
+            border-radius: 50%;
+            background-color: #555555;
+            -webkit-transform: scale(0, 0);
+            -ms-transform: scale(0, 0);
+            -o-transform: scale(0, 0);
+            transform: scale(0, 0);
+            -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+            -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+            -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+            transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+        }
+
+    .radio input[type="radio"] {
+        opacity: 0;
+    }
+
+        .radio input[type="radio"]:focus + label::before {
+            outline: thin dotted;
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+        }
+
+        .radio input[type="radio"]:checked + label::after {
+            -webkit-transform: scale(1, 1);
+            -ms-transform: scale(1, 1);
+            -o-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+
+        .radio input[type="radio"]:disabled + label {
+            opacity: 0.65;
+        }
+
+            .radio input[type="radio"]:disabled + label::before {
+                cursor: not-allowed;
+            }
+
+    .radio.radio-inline {
+        margin-top: 0;
+    }
+
+.radio-primary input[type="radio"] + label::after {
+    background-color: #428bca;
+}
+
+.radio-primary input[type="radio"]:checked + label::before {
+    border-color: #428bca;
+}
+
+.radio-primary input[type="radio"]:checked + label::after {
+    background-color: #428bca;
+}
+
+.radio-danger input[type="radio"] + label::after {
+    background-color: #d9534f;
+}
+
+.radio-danger input[type="radio"]:checked + label::before {
+    border-color: #d9534f;
+}
+
+.radio-danger input[type="radio"]:checked + label::after {
+    background-color: #d9534f;
+}
+
+.radio-info input[type="radio"] + label::after {
+    background-color: #5bc0de;
+}
+
+.radio-info input[type="radio"]:checked + label::before {
+    border-color: #5bc0de;
+}
+
+.radio-info input[type="radio"]:checked + label::after {
+    background-color: #5bc0de;
+}
+
+.radio-warning input[type="radio"] + label::after {
+    background-color: #f0ad4e;
+}
+
+.radio-warning input[type="radio"]:checked + label::before {
+    border-color: #f0ad4e;
+}
+
+.radio-warning input[type="radio"]:checked + label::after {
+    background-color: #f0ad4e;
+}
+
+.radio-success input[type="radio"] + label::after {
+    background-color: #5cb85c;
+}
+
+.radio-success input[type="radio"]:checked + label::before {
+    border-color: #5cb85c;
+}
+
+.radio-success input[type="radio"]:checked + label::after {
+    background-color: #5cb85c;
+}
+
+/* End of bootstrap styling for checkboxes*/
+/* Override to deal with scorll locking on iPhone 
+    Overrides the bootstrap .modal classs
+*/
+.modal {
+    -webkit-overflow-scrolling: auto;
+    /*-webkit-overflow-scrolling: auto !important;
+    overflow-y: auto !important;*/
+}
+
+/*Facet UI CSS*/
+
+#facet-heading {
+    background-color: #003366;
+    color: #fff;
+}
+
+#deselect-facet {
+    display: none;
+}
+
+#facet-ui {
+    padding-left: 10px;
+    padding-right: 0px;
+    z-index: 10;
+}
+
+.facetcard {
+    vertical-align: top;
+    padding-right: 3px;
+}
+
+.facetitem {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+/*End facet UI CSSS*/
+
+.dropdown-menu-item-display-block {
+    display: block;
+}

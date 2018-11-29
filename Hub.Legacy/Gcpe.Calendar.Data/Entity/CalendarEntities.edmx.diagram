@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c396a92de1dc43f2ae84354963c5ba51" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Activity" Width="1.5" PointX="23.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityCategory" Width="1.5" PointX="10.5" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityCommunicationMaterial" Width="1.5" PointX="13.5" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityFilter" Width="1.5" PointX="5.25" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityNROrigin" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityRegion" Width="1.5" PointX="10.5" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivitySector" Width="1.5" PointX="13.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivitySharedWith" Width="1.5" PointX="13.5" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Category" Width="1.5" PointX="8.25" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.City" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.CommunicationContact" Width="1.5" PointX="5.25" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.CommunicationMaterial" Width="1.5" PointX="11.25" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.EventPlanner" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.GovernmentRepresentative" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Log" Width="1.5" PointX="16.5" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.NewsFeed" Width="1.5" PointX="16.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.NRDistribution" Width="1.5" PointX="6" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.NROrigin" Width="1.5" PointX="8.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.PremierRequested" Width="1.5" PointX="6" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Priority" Width="1.5" PointX="6" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Role" Width="1.5" PointX="0.75" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Status" Width="1.5" PointX="6" PointY="46.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.SystemUser" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.SystemUserMinistry" Width="1.5" PointX="5.25" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Videographer" Width="1.5" PointX="6" PointY="49.375" IsExpanded="true" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_CommunicationContact" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_EventPlanner" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_GovernmentRepresentative" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_NRDistribution" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_PremierRequested" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_Priority" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_Videographer" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCategories_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCommunicationMaterials_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityNROrigins_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityRegions_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySectors_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySharedWith_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Log_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_NewsFeed_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCategories_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCategories_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCategories_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCommunicationMaterials_CommunicationMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCommunicationMaterials_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityCommunicationMaterials_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityFilter_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityFilter_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityNROrigins_NROrigin" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityNROrigins_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityNROrigins_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityRegions_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityRegions_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySectors_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySectors_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySharedWith_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySharedWith_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_CommunicationContact_SystemUser_SystemUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Log_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Log_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_NewsFeed_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_NewsFeed_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUser_SystemUser_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUser_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUser_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUserMinistry_SystemUser_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUserMinistry_SystemUser_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUserMinistry_SystemUserId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityTheme" Width="1.5" PointX="16.5" PointY="32.625" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityThemes_Activity" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityInitiative" Width="1.5" PointX="19.5" PointY="28.375" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Tag" Width="1.5" PointX="17.25" PointY="18" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityInitiatives_Activity" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityInitiatives_SystemUser_CreatedBy" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityInitiatives_SystemUser_UpdatedBy" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityInitiatives_Tag" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FavoriteActivity" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityKeyword" Width="1.5" PointX="10.875" PointY="41.625" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Keyword" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Activity" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_HqStatus" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Initiative" Width="1.5" PointX="23.75" PointY="20.25" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityInitiatives_Initiative" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Ministry" Width="1.5" PointX="9.75" PointY="3.875" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Region" Width="1.5" PointX="8.25" PointY="33.5" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Sector" Width="1.5" PointX="11.25" PointY="15.5" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Service" Width="1.5" PointX="14.25" PointY="47.25" />
+        <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Theme" Width="1.5" PointX="14.25" PointY="44.125" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Activity_Ministry1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityRegions_Region1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySectors_Sector1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivitySharedWith_Ministry1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityThemes_Theme1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_CommunicationContact_Ministry1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Ministry_SystemUser1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_NewsFeed_Ministry1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUserMinistry_Ministry1" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Ministry_EodLastRunSystemUser" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Ministry_SecondContactSystemUser" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

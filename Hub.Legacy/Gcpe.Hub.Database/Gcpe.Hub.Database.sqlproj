@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Gcpe.Hub.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c78c1f28-5ceb-4e64-b4f3-a519d477894a}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Gcpe.Hub.Database</RootNamespace>
+    <AssemblyName>Gcpe.Hub.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>
+    </SccProjectName>
+    <SccProvider>
+    </SccProvider>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccLocalPath>
+    </SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dashboard\" />
+    <Folder Include="dashboard\Tables\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="calendar" />
+    <Folder Include="calendar\Functions" />
+    <Folder Include="calendar\Stored Procedures" />
+    <Folder Include="calendar\Tables" />
+    <Folder Include="calendar\Views" />
+    <Folder Include="media" />
+    <Folder Include="media\Tables" />
+    <Folder Include="Storage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Compare to Test.scmp" />
+    <None Include="Compare to Development.scmp" />
+    <None Include="Compare from Development.scmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Security\dashboard.sql" />
+    <Build Include="dashboard\Tables\Message.sql" />
+    <Build Include="dashboard\Tables\SocialMediaPost.sql" />
+    <Build Include="dbo\Tables\ApplicationSetting.sql" />
+    <Build Include="dbo\Tables\Blob.sql" />
+    <Build Include="dbo\Tables\Carousel.sql" />
+    <Build Include="dbo\Tables\CarouselSlide.sql" />
+    <Build Include="dbo\Tables\Language.sql" />
+    <Build Include="dbo\Tables\MediaDistributionList.sql" />
+    <Build Include="dbo\Tables\Ministry.sql" />
+    <Build Include="dbo\Tables\MinistryLanguage.sql" />
+    <Build Include="dbo\Tables\MinistryNewsletter.sql" />
+    <Build Include="dbo\Tables\MinistrySector.sql" />
+    <Build Include="dbo\Tables\MinistryService.sql" />
+    <Build Include="dbo\Tables\MinistryTopic.sql" />
+    <Build Include="dbo\Tables\NewsCollection.sql" />
+    <Build Include="dbo\Tables\NewsDocument.sql" />
+    <Build Include="dbo\Tables\NewsRelease.sql" />
+    <Build Include="dbo\Tables\NewsReleaseCollection.sql" />
+    <Build Include="dbo\Tables\NewsReleaseDocument.sql" />
+    <Build Include="dbo\Tables\NewsReleaseDocumentContact.sql" />
+    <Build Include="dbo\Tables\NewsReleaseDocumentLanguage.sql" />
+    <Build Include="dbo\Tables\NewsReleaseHistory.sql" />
+    <Build Include="dbo\Tables\NewsReleaseImage.sql" />
+    <Build Include="dbo\Tables\NewsReleaseImageLanguage.sql" />
+    <Build Include="dbo\Tables\NewsReleaseLanguage.sql" />
+    <Build Include="dbo\Tables\NewsReleaseLog.sql" />
+    <Build Include="dbo\Tables\NewsReleaseMediaDistribution.sql" />
+    <Build Include="dbo\Tables\NewsReleaseMinistry.sql" />
+    <Build Include="dbo\Tables\NewsReleaseSector.sql" />
+    <Build Include="dbo\Tables\NewsReleaseService.sql" />
+    <Build Include="dbo\Tables\NewsReleaseTag.sql" />
+    <Build Include="dbo\Tables\NewsReleaseTheme.sql" />
+    <Build Include="dbo\Tables\NewsReleaseType.sql" />
+    <Build Include="dbo\Tables\ResourceLink.sql" />
+    <Build Include="dbo\Tables\Sector.sql" />
+    <Build Include="dbo\Tables\SectorLanguage.sql" />
+    <Build Include="dbo\Tables\Service.sql" />
+    <Build Include="dbo\Tables\Slide.sql" />
+    <Build Include="dbo\Tables\Tag.sql" />
+    <Build Include="dbo\Tables\Theme.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="Security\calendar.sql" />
+    <Build Include="calendar\Functions\GetActivityCategories.sql" />
+    <Build Include="calendar\Functions\GetActivityCommunicationMaterials.sql" />
+    <Build Include="calendar\Functions\GetActivityKeywords.sql" />
+    <Build Include="calendar\Functions\GetActivityNewsReleaseOrigins.sql" />
+    <Build Include="calendar\Functions\GetActivitySectors.sql" />
+    <Build Include="calendar\Functions\GetActivitySharedWithMinistries.sql" />
+    <Build Include="calendar\Functions\GetActivityThemes.sql" />
+    <Build Include="calendar\Functions\sGetActivityCategoriesByName.sql" />
+    <Build Include="calendar\Functions\sGetActivityCommunicationMaterialsByName.sql" />
+    <Build Include="calendar\Functions\sGetActivityFavoriteSystemUsers.sql" />
+    <Build Include="calendar\Functions\sGetActivityInitiatives.sql" />
+    <Build Include="calendar\Functions\sGetActivityNROrigins.sql" />
+    <Build Include="calendar\Functions\sGetActivitySectorsByName.sql" />
+    <Build Include="calendar\Functions\sGetActivitySharedWithMinistries.sql" />
+    <Build Include="calendar\Stored Procedures\GetCorpCalendarUpdates.sql" />
+    <Build Include="calendar\Stored Procedures\GetCorpCalendarUpdatesBetweenDates.sql" />
+    <Build Include="calendar\Stored Procedures\GetCorpCalendarUpdatesToday.sql" />
+    <Build Include="calendar\Tables\Activity.sql" />
+    <Build Include="calendar\Tables\ActivityCategories.sql" />
+    <Build Include="calendar\Tables\ActivityCommunicationMaterials.sql" />
+    <Build Include="calendar\Tables\ActivityFiles.sql" />
+    <Build Include="calendar\Tables\ActivityFilter.sql" />
+    <Build Include="calendar\Tables\ActivityInitiatives.sql" />
+    <Build Include="calendar\Tables\ActivityKeywords.sql" />
+    <Build Include="calendar\Tables\ActivityNROrigins.sql" />
+    <Build Include="calendar\Tables\ActivitySectors.sql" />
+    <Build Include="calendar\Tables\ActivityServices.sql" />
+    <Build Include="calendar\Tables\ActivitySharedWith.sql" />
+    <Build Include="calendar\Tables\ActivityThemes.sql" />
+    <Build Include="calendar\Tables\Category.sql" />
+    <Build Include="calendar\Tables\City.sql" />
+    <Build Include="calendar\Tables\CommunicationContact.sql" />
+    <Build Include="calendar\Tables\CommunicationMaterial.sql" />
+    <Build Include="calendar\Tables\EventPlanner.sql" />
+    <Build Include="calendar\Tables\FavoriteActivity.sql" />
+    <Build Include="calendar\Tables\GovernmentRepresentative.sql" />
+    <Build Include="calendar\Tables\Initiative.sql" />
+    <Build Include="calendar\Tables\Keyword.sql" />
+    <Build Include="calendar\Tables\Log.sql" />
+    <Build Include="calendar\Tables\NewsFeed.sql" />
+    <Build Include="calendar\Tables\NRDistribution.sql" />
+    <Build Include="calendar\Tables\NROrigin.sql" />
+    <Build Include="calendar\Tables\PremierRequested.sql" />
+    <Build Include="calendar\Tables\Priority.sql" />
+    <Build Include="calendar\Tables\Role.sql" />
+    <Build Include="calendar\Tables\Status.sql" />
+    <Build Include="calendar\Tables\SystemUser.sql" />
+    <Build Include="calendar\Tables\SystemUserMinistry.sql" />
+    <Build Include="calendar\Tables\Videographer.sql" />
+    <Build Include="calendar\Views\ActiveActivities.sql" />
+    <Build Include="calendar\Views\ActiveCommunicationContacts.sql" />
+    <Build Include="calendar\Views\ActiveDistinctCommunicationContacts.sql" />
+    <Build Include="Security\media.sql" />
+    <Build Include="media\Tables\Beat.sql" />
+    <Build Include="media\Tables\ContactCity.sql" />
+    <Build Include="media\Tables\Company.sql" />
+    <Build Include="media\Tables\CompanyAddress.sql" />
+    <Build Include="media\Tables\CompanyDistribution.sql" />
+    <Build Include="media\Tables\CompanyElectoralDistrict.sql" />
+    <Build Include="media\Tables\CompanyEthnicity.sql" />
+    <Build Include="media\Tables\CompanyLanguage.sql" />
+    <Build Include="media\Tables\CompanyMediaDesk.sql" />
+    <Build Include="media\Tables\CompanyMediaPartner.sql" />
+    <Build Include="media\Tables\CompanyMediaType.sql" />
+    <Build Include="media\Tables\CompanyPhoneNumber.sql" />
+    <Build Include="media\Tables\CompanyPublicationDays.sql" />
+    <Build Include="media\Tables\CompanyRegion.sql" />
+    <Build Include="media\Tables\CompanySector.sql" />
+    <Build Include="media\Tables\CompanySpecialtyPublication.sql" />
+    <Build Include="media\Tables\CompanyWebAddress.sql" />
+    <Build Include="media\Tables\Contact.sql" />
+    <Build Include="media\Tables\ContactAddress.sql" />
+    <Build Include="media\Tables\ContactBeat.sql" />
+    <Build Include="media\Tables\ContactElectoralDistrict.sql" />
+    <Build Include="media\Tables\ContactMediaJobTitle.sql" />
+    <Build Include="media\Tables\ContactPhoneNumber.sql" />
+    <Build Include="media\Tables\ContactRegion.sql" />
+    <Build Include="media\Tables\ContactSector.sql" />
+    <Build Include="media\Tables\ContactWebAddress.sql" />
+    <Build Include="media\Tables\Country.sql" />
+    <Build Include="media\Tables\Distribution.sql" />
+    <Build Include="media\Tables\ElectoralDistrict.sql" />
+    <Build Include="media\Tables\Ethnicity.sql" />
+    <Build Include="media\Tables\MediaLanguage.sql" />
+    <Build Include="media\Tables\MediaDesk.sql" />
+    <Build Include="media\Tables\MediaJobTitle.sql" />
+    <Build Include="media\Tables\MediaType.sql" />
+    <Build Include="media\Tables\MinisterialJobTitle.sql" />
+    <Build Include="media\Tables\PhoneType.sql" />
+    <Build Include="media\Tables\PrintCategory.sql" />
+    <Build Include="media\Tables\ProvState.sql" />
+    <Build Include="media\Tables\PublicationDays.sql" />
+    <Build Include="media\Tables\PublicationFrequency.sql" />
+    <Build Include="media\Tables\MediaRequest.sql" />
+    <Build Include="media\Tables\MediaRequestContact.sql" />
+    <Build Include="media\Tables\MediaRequestSharedMinistry.sql" />
+    <Build Include="media\Tables\MediaRequestResolution.sql" />
+    <Build Include="media\Tables\NewsRegion.sql" />
+    <Build Include="media\Tables\Report.sql" />
+    <Build Include="media\Tables\SpecialtyPublication.sql" />
+    <Build Include="media\Tables\SysConfig.sql" />
+    <Build Include="media\Tables\SysLog.sql" />
+    <Build Include="media\Tables\WebAddressType.sql" />
+    <Build Include="Storage\FTS_MediaRequest.sql" />
+    <Build Include="FullTextIndexes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Gcpe.Hub.Database.refactorlog" />
+  </ItemGroup>
+</Project>

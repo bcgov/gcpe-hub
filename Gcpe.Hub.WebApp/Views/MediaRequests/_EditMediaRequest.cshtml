@@ -1,0 +1,276 @@
+﻿<div class="page-header">
+    <h3>
+        <span data-bind="text: editPageHeader"></span>
+        <div class="pull-right" ><div class="btn-group">
+            <button type="button" id="hamburgermenu" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="#" id="addreportermenu" data-bind="click: function(){ $('#dom-mediaContactSearch').show(); $('#dom-mediaContactSearch .searchable-combo').focus();}">Add Reporter</a></li>
+                <li data-bind="visible:id()"><a href="#" id="addfollowupmenu" data-bind="click: $root.cloneCurrentRequest">Create Follow-up</a></li>
+                <li data-bind="visible:id() && isMyResponsiblity()"><a href="#" id="deleterequestmenu" data-bind="click: $root.deleteCurrentRequest">Delete Request</a></li>
+            </ul>
+        </div></div>
+    </h3>
+    <div class="badge-container">
+        <span class="badge-padding label label-danger label-outline" data-bind="visible: (isMajorOutlet())">
+            Major Media
+        </span>
+        <span data-bind="css: { 'edit-badge-padding' : isMajorOutlet() }">
+            <span class="badge-padding label" data-bind="{text: isOverdue() && !completed() ? 'Overdue' : requestStatus(), css: isOverdue() && !completed() ? 'label-danger-overdue' : requestStatus() == 'Closed' ? 'label-default label-default-close' : 'label-normal label-outline'}"></span>
+        </span>
+    </div>
+</div>
+
+<form role="form" class="form-horizontal">    
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-requestedAt">Received</label>
+        <div class="col-sm-10">
+            <div id="dom-requestedAt" class="form-control" data-bind="gcpeDateTimePicker: requestedAt"></div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-edit-mediaContactSearch">Reporter</label>
+        <div class="col-sm-10">
+            <div id="dom-mediaContactSearch" class="no-validation-border" data-bind="visible: mediaContacts().length === 0">
+                <span id="dom-mediaContactSearch-busy" class="ko-combobox-busy-indicator glyphicon glyphicon-refresh gly-spin"></span>
+                <div class="ko-combobox clearfix" data-bind="{ combobox: { dataSource: $root.mediaContactHandler().searchContacts,
+                                                                             rowTemplate: 'row-template',
+                                                                             comboboxTemplate: 'contact-combo-template',
+                                                                             nextFocusSelector: ['#dom-deadlineAt_picker', '#dom-deadlineAt_pickerFriendly'],
+                                                                             paging: false,
+                                                                             minimumSearchTextLength: 2 },
+                                                                comboboxValue: $root.mediaContactHandler().selectedMediaContact }"></div>
+                <span class="validation-error-message" data-bind="validationMessage: mediaContacts"></span>
+            </div>
+
+
+            <div data-bind="foreach: mediaContacts">
+                <div class="contact-card form-control-static">
+
+                    <div style="padding-left: 12px;">
+
+                        <span class="pull-right contact-card-clear" data-bind="click: function(){ $root.removeMediaContact($data); }">
+                            &nbsp;<span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                        <span class="pull-right contact-card-clear" data-bind="routerClick:{path:'request/' + ($root.currentMediaRequest().id() ? $root.currentMediaRequest().id() : 'new') + '/contact/' + $data.id(), data: $data, confirmed: true}">
+                            &nbsp;<span class="glyphicon glyphicon-pencil"></span>
+                        </span>
+
+                        <div class="contact-card-name" data-bind="text: name"></div>
+
+                        <div data-bind="text: job().title"></div>
+
+                        <div data-bind="text: (job().outlet() ? job().outlet().name  : '')"></div>
+
+                    </div>
+
+
+                    <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: email, click: function(data, event) { var mailUrl='mailto:' + data.email() + '?subject=' + ($root.currentMediaRequest().requestTopic() ? 'RE: ' + $root.currentMediaRequest().requestTopic() : ''); window.location.href = mailUrl; }" type="button">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;<span data-bind="text: email"></span>
+                    </button>
+
+                    <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: workPhone, click: initiateWorkPhoneCall" type="button">
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedWorkPhone"></span>
+                    </button>
+
+                    <button class="btn btn-default" style="margin-top: 10px;" aria-label="Left Align" data-bind="visible: cellPhone, click: initiateCellPhoneCall" type="button">
+                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;<span data-bind="text: formattedCellPhone"></span>
+                    </button>
+
+                </div>
+            </div>
+            @* End of MediaContacts layout.*@
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-deadlineAt">Deadline</label>
+        <div class="col-sm-10">
+            <div class="form-control" data-bind="gcpeDateTimePicker: deadlineAt, gcpeDateTimePickerOptions: {placeholder:'ASAP' }" id="dom-deadlineAt"></div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-edit-subject">Topic</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="dom-edit-subject" type="text" data-bind="textInput: requestTopic" autocomplete="off" disableautocomplete="true" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-edit-content">Request</label>
+        <div class="col-sm-10">
+            <textarea style="min-height: 96px;" class="form-control" id="dom-edit-content" data-bind="textInput: requestContent"></textarea>
+        </div>
+    </div>
+
+    <div data-bind="visible: parentRequest, with:parentRequest">
+        <div class="form-group row">
+
+            <label class="col-sm-2 control-label" for="dom-parent">Follow-up&nbsp;To</label>
+            <div class="col-sm-10">
+                <div id="dom-parent" data-bind="template: {name: 'mediarequest-card-template', data: $parent.parentRequest}"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group row" data-bind="visible: $root.takeOverRequestInProgress()">
+        <label class="col-sm-2 control-label" for="dom-deadlineAt">NOTICE</label>
+        <div class="col-sm-10">
+            <font color="red">Please confirm your ministry will take over this media request by selecting "Take Over" in the Ministry dropdown.</font>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-new-ministry">Ministry</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div data-bind="visible: (!id() || $root.ministryClaimInProgress())">
+                    <select id="dom-new-ministry" class="form-control" data-bind="gcpeOptions: $root.myMinistries,
+                                            optionsText: 'displayAs',
+                                            value: leadMinistry,
+                                            optionsCaption: 'Choose...', valueAllowUnset: true"></select>
+                </div>
+
+                <div data-bind="with:leadMinistry, visible: (id() && !$root.ministryClaimInProgress())">
+                    <span class="form-control " id="dom-displayMinistry" data-bind="text: displayAs"></span>
+                </div>
+
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-option-horizontal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="top: 0px;"></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li data-bind="visible: (id())">
+                            <a href="#" data-bind="click: $root.claimMinistry, enable:$root.canClaimMinistry || $root.takeOverRequestInProgress()">
+                                <span class="dropdown-menu-item-display-block" data-bind="text: ($root.myMinistries().length > 1 ? 'Change Ministry' : 'Take Over')"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-bind="click: $root.startSharingWithMinistries">Share With...</a>
+                        </li>
+                        <li>
+                            <a href="#" data-bind="click: $root.sendTakeOverRequest">Send Take Over Request...</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    @*Revisit this issue on safari: http://stackoverflow.com/questions/34660500/mobile-safari-multi-select-bug*@
+    <div class="form-group" data-bind="visible: ($root.sharingWithMinistries()) || $root.ministryClaimInProgress()">
+        <label class="col-sm-2 control-label" for="dom-shared-ministries">Shared&nbsp;With</label>
+        <div class="col-sm-10">
+            <select id="dom-shared-ministries" multiple class="form-control" data-none-selected-text="Not shared" data-dropup-Auto="false" data-bind="selectPicker: $root.sharedMinistries,
+                    optionsText: 'displayAs', optionsValue: 'id', optionsCaption:  leadMinistry() ? leadMinistry().displayAs(): 'Choose...', selectPickerOptions: {optionsArray: $root.allMinistriesExceptCurrentLead} "></select>
+        </div>
+    </div>
+
+    <div class="form-group" data-bind="visible: ($root.takeOverRequestActive())">
+        <label class="col-sm-2 control-label" for="dom-takeoverMinistry">Take Over Request</label>
+        <div class="col-sm-10">     
+            <select id="dom-takeoverMinistry" class="form-control" data-bind="gcpeOptions: $root.allMinistriesExceptCurrentLead,
+                                            optionsText: 'displayAs', value: takeOverRequestMinistry, optionsCaption: 'Choose...'"></select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 control-label" for="dom-responsibleUser">Responsible</label>
+        <div class="col-sm-10">
+            @*Don't include "optionsCaption: 'Choose...'" for no selection.*@
+            <select id="dom-responsibleUser" class="form-control" data-bind="gcpeOptions: $root.users,
+                                            optionsText: 'displayAs',
+                                            value: responsibleUser"></select>
+        </div>
+    </div>
+    <style type="text/css">
+        /* Used when ministry text input is disabled */
+        input[type="text"]:disabled {
+            background-color: white;
+            cursor: default;
+        }
+    </style>
+    <div data-bind="visible: id">
+        <div class="form-group row">
+            <label class="col-sm-2 control-label" for="dom-completedCheck">Responded</label>
+            <div class="col-sm-10">
+                <div style="float:left" class="checkbox checkbox-inline checkbox-primary" data-bind="visible: requestStatus() != 'Closed'">
+                    <input type="checkbox" id="dom-completedCheck" data-bind="checked: completed" />
+                    <label for="dom-completedCheck" />
+                </div>
+                <div style="overflow:hidden" data-bind="visible: requestStatus() == 'Closed'">
+                    <div id="dom-respondedAt" class="form-control" data-bind="gcpeDateTimePicker: respondedAt, gcpeDateTimePickerOptions: {enable:respondedAt}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" data-bind="visible: requestStatus() == 'Closed'">
+            <label class="col-sm-2 control-label" for="dom-response-edit-content">Resolution</label>
+            <div class="col-sm-10">
+                <select id="dom-edit-resolution" class="form-control" data-bind="options: $root.resolutions,
+                                                value: resolution,
+                                                optionsText: 'displayAs',
+                                                optionsCaption: 'Choose...'"></select>
+            </div>
+        </div>
+        <div class="form-group row" data-bind="visible: requestStatus() == 'Closed'">
+            <label class="col-sm-2 control-label" for="dom-response-edit-content">Response</label>
+            <div class="col-sm-10">
+                <textarea style="min-height: 96px;" class="form-control" id="dom-response-edit-content" data-bind="textInput:response"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <div class="pull-right">
+                <div class="new-request-buttons" data-bind="visible: !id()">
+                    <button class="btn btn-default disable-on-busy" type="button" data-bind="click: function(){ window.history.back(); }">Cancel</button>
+                    <button id="dom-edit-mediarequest-save-send1" class="btn btn-primary disable-on-busy" type="button" data-bind="click: $root.submitAndSendEditMediaRequest.bind($root)">Save &amp; Email</button>
+                </div>
+                <div class="edit-request-buttons" data-bind="visible: id()">
+                    <div class="edit-not-shared" data-bind="visible: !$root.isShared()">
+                        <button class="btn btn-default disable-on-busy" type="button" data-bind="click: function(){ window.history.back(); }">Cancel</button>
+                        <button id="dom-edit-mediarequest-save-send2" class="btn btn-default disable-on-busy" type="button" data-bind="click: $root.submitAndSendEditMediaRequest.bind($root)">Save &amp; Email</button>
+                        <button id="dom-edit-mediarequest-save" class="btn btn-primary disable-on-busy" type="button" data-bind="click: $root.submitEditMediaRequest.bind($root)">Save</button>&nbsp;
+                    </div>
+                    <div class="edit-shared" data-bind="visible: $root.isShared()">
+                        <button class="btn btn-default disable-on-busy" type="button" data-bind="click: function(){ window.history.back(); }">Cancel</button>
+                        <button id="dom-edit-mediarequest-save" class="btn btn-default disable-on-busy" type="button" data-bind="click: $root.submitEditMediaRequest.bind($root)">Save</button>&nbsp;
+                        <button id="dom-edit-mediarequest-save-send3" class="btn btn-primary disable-on-busy" type="button" data-bind="click: $root.submitAndSendEditMediaRequest.bind($root)">Save &amp; Email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- This is the layout used in the Media Contact pull-down menu. -->
+<script id="row-template" type="text/html">
+    <div class="row" style="margin: 0;">
+        <div class="col-xs-12"><span data-bind="html: searchFormattedName"></span>, <span data-bind="text: job().title"></span></div>
+        <div class="col-xs-12"><span data-bind="html: searchFormattedOutletName"></span></div>
+    </div>
+</script>
+
+<script id="contact-combo-template" type="text/html">
+    <div class="input-group clearfix" data-bind="event: { keydown: onKeyPress }">
+        <input id="combo-template-input" class="form-control searchable-combo" autocomplete="off" disableautocomplete="true" data-bind="value: searchText, valueUpdate: 'afterkeydown', hasfocus: searchHasFocus, attr: { placeholder: 'Search by Outlet or by Reporter\'s First or Last Name' }" />
+        <span class="input-group-addon" data-bind="click: forceShow, css: { open: dropdownVisible }">&nbsp;&nbsp;<span class="glyphicon glyphicon-search form-control-feedback"></span></span>
+    </div>
+    <div class="ko-dropdown-menu" data-bind="visible: dropdownVisible, __cb__clickedIn: dropdownVisible">
+        <!-- ko foreach: dropdownItems -->
+        <div class="ko-dropdown-item" data-bind="click: $parent.selected.bind($parent), event: { mouseover: $parent.active.bind($parent), mouseout: $parent.inactive.bind($parent) }, css: { active: navigated, highlighted: active },  __cb__flexibleTemplate: { template: $parent.rowTemplate, data: $data.item }"></div>
+        <!-- /ko -->
+        <div class="ko-dropdown-nav">
+            <button class="btn btn-default" id="combo-template-add-contact" type="button" data-bind="click: function() { $root.mediaContactHandler().addNewMediaContact($data.searchText()); }">Add Contact...</button>
+        </div>
+    </div>
+</script>
+
+<script>@*At least one script tag must be on the page for Knockout Intellisense*@</script>
+

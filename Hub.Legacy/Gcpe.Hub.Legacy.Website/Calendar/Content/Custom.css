@@ -1,0 +1,458 @@
+﻿label {
+    font-weight: normal;
+}
+
+/* Activity Page */ .activity-top-row { text-align: right; width: 97%; margin-left:1%; margin-right:2%; display:block; margin-bottom: 0px;}
+.activityidlabel { color: Black; float: left; font-size: larger; padding-right: 7px; }
+.activityid { color: Black; font-weight: 600; float: left; font-size: larger; padding-right: 15px; }
+.StatusSavedLabel { color: Black; float: left; font-size: larger; padding-right: 7px; }
+.SavedLabel { color: Red; font-weight:600;  float: left; font-size: larger;}
+.lastupdatedlabel { color: Black; float: right; font-size: larger; padding-right: 7px; }
+.lastupdated { color: Black; font-weight: 600; float: right; font-size: larger; }
+
+.activity-top-row .checks { text-align:right; margin-right:10px; float: right; vertical-align: middle;  }
+
+.activity { width: 98%; margin-left: 1%; margin-right: 1%; clear:both; }
+
+.leftHelpDiv,
+.rightHelpDiv {
+    display: none;
+    color: #585858;
+    background-color: #96c0e6;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    min-width: 300px;
+    /*text-align: justify;*/
+}
+
+.tooltip > .tooltip-inner {
+    color: #585858;
+    background-color: #96c0e6;
+    border: 1px solid black;
+    min-width: 390px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.tooltip.in {
+    opacity: 1 !important;
+}
+
+.col1 { width: 49%; vertical-align: top; }
+.col2 { width: 49%; vertical-align: top;  }
+.colSpacer {width: 2%; display:block;}
+.narrowerColumn { width: 33%; }
+input, 
+textarea { background-color: #ffffff; }
+.closingX { margin: -10px -7px 10px 7px; font-weight: bold; text-align: right;}
+.helpSectionTitle { float: left;font-weight: bold;} 
+hr { margin-top: 15px; }
+.helpLink { text-align: right; margin-top: -24px; }
+.helpLink i:hover,
+.helpActive i { color: gray }
+.helpFieldTitle { font-weight: bold; margin-bottom: 0px; }
+
+.new-activity-textareas { width: 97%;font-family:Verdana; font-size: 11px; color: #777;  }
+/*.new-activity-dropdowns { width: 100%;  width: 95%;  }*/
+#charlimitinfo, #charlimitinfo1, #charlimitinfo2, #charlimitinfo3, #charlimitinfo4, #charlimitinfo5, #charlimitinfo6, #charlimitinfo7, #charlimitinfo8, #charlimitinfo9 { font-size: 0.8em; line-height: 2em; }
+
+.new-activity-time { height: 25px;font-family:Verdana; font-size: 11px; width: 98%; }
+.new-activity-date { padding: 5px;font-family:Verdana; font-size: 11px;  }
+
+.ErrorNotice {
+    background-color:Red; color:#FFFFFF; padding: 8px; width:96%;border:1px solid #ffcc00; margin:0 auto; text-align:center;
+}
+.SaveNotice {
+    background-color:#BCED91; color:#333; padding: 8px; width:96%;border:1px solid #94e24f; margin:0 auto; text-align:center;
+}
+.ChangesNotice {
+    background-color:#ffcc00; color:#333; padding: 8px; border:1px solid #ffcc00; width:96%; margin:0 auto; text-align:center;
+}
+.InfoNotice {
+    background-color:#a9d4ff; color:#333; padding: 8px; border:1px solid #ffcc00; width:96%; margin:0 auto; text-align:center;
+}
+
+/* Style="width: 275px; "  */
+tr.row, .row
+{
+
+}
+
+input[type=checkbox], input[type=radio] {
+    margin-left:5px;
+    margin-right:3px
+}
+
+legend {
+    width: auto;
+}
+tr.row td.column-indicator { width: 2%; vertical-align:top;  margin: 0; padding: 0; padding-bottom: 10px; }
+
+tr.row td.column-left
+{
+    width: 27%;
+    text-align: left;
+    vertical-align:top;
+    padding-bottom: 10px;
+}
+
+tr.row td.column-right
+{
+    width: 65%;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+
+tr.row td.column-left-date  { width: 20%; padding-left: 1%; text-align: left; vertical-align:top;  padding-bottom: 10px;}
+tr.row td.column-right-date { width: 24%; padding-left: 1%; text-align: left; padding-bottom: 10px; }
+
+tr.row td.column-left-time  { width: 18%; padding-left: 1%; text-align: left; vertical-align:top;padding-bottom: 10px;  }
+tr.row td.column-right-time { width: 24%; padding-left: 1%; text-align: left;padding-bottom: 10px;  }
+
+tr.row td.full-width-center
+{
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+span.required-field
+{
+    color: red;
+    width: 10px; display:inline-block;
+}
+span.non-required-field
+{
+    width: 10px; display:inline-block;
+}
+.panel
+{
+    box-sizing: border-box;
+    padding: 10px;
+    background: #FFFFFF url(../../images/pinstripes.png);
+    border: 1px solid #D6D3D6;
+    width: 95%;
+    margin-left: -4px;
+    -moz-box-shadow: 1px 1px 1px 1px #EFEFEF;
+    -webkit-box-shadow: 1px 1px 1px 1px #EFEFEF;
+    box-shadow: 1px 1px 1px 1px #EFEFEF;
+    filter: progid:DXImageTransform.Microsoft.Shadow (color=#EFEFEF,direction=90,strength=4) progid:DXImageTransform.Microsoft.Shadow (color=#EFEFEF,direction=180,strength=5) progid:DXImageTransform.Microsoft.Shadow (color=#EFEFEF,direction=270,strength=4) progid:DXImageTransform.Microsoft.Shadow (color=#EFEFEF,direction=0,strength=4);
+}
+
+
+/* Default Page */
+
+/* This is referenced in the GetUserAccessibleActiveActivitiesWithFilter method
+    to populate the flexgrid since modifying through js was more time consuming */
+.reviewed
+{
+    background-color: #FFF380;
+}
+.filter
+{
+    padding-bottom: 15px; 
+    font-size: 0.8em;
+    position: relative;
+    overflow: hidden;
+    max-height:100%; 
+}
+
+.filter-section-header
+{
+    margin-top: 5px;
+    margin-left: 3px;
+    margin-right: 7px;
+    padding: 1px 0px 0px 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    width: 217px;
+}
+.filter-section
+{
+    border: 1px dashed #ccc;
+    margin-left: 3px;
+    margin-right: 7px;
+    padding: 1px 3px 5px 2px;
+    margin-bottom: 15px;
+}
+div.selector span {
+    width: 190px
+}
+
+#contentwrapper{
+    float: left;
+    width: 100%;
+}
+
+#historycontentcolumn{
+    margin-left: 250px; /*Set left margin to LeftColumnWidth*/
+}
+
+#leftcolumn{
+    float: left;
+    width: 225px; /*Width of left column*/
+    margin-left: -100%;
+    padding: 0 3px 0 3px;
+}
+#ClearLAStatus span{
+    padding-left:0.1em;
+    padding-right:0.1em;
+}
+.innertube{
+    margin-top: 0;
+}
+
+
+/*
+#OuterTable
+{
+    width: 99%;
+    height: 200px;
+    border: 0px;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+}
+*/
+input.dates {
+ background-color: #fff; 
+ border: 1px groove #aaa;
+/* padding-left: 20px; */
+ font: 12px Arial, Helvetica, sans-serif; 
+ text-align: left;
+ padding: 0px;
+ width: 76px;
+ height: 18px
+}
+input.dates[disabled] {
+ color: gray;
+}
+.thisdayonly {
+    display: inline;
+}
+.primary {
+    color: navy;
+}
+.hasDatepicker {
+    margin-right:2px;
+}
+
+.MyQueries ul
+{
+    vertical-align: top;
+    padding-left: 20px;
+    list-style: square url('../../images/arrowBullet.gif');
+    line-height: 1.8em;
+}
+.MyQueries ul li
+{
+/*text-indent: -2px;
+margin-left: 2px;*/
+}
+
+/* kendo placeholder*/
+.k-multiselect-wrap>.k-input {
+   color: #A0A0A0;
+}
+
+:-ms-input-placeholder {
+   color: #A0A0A0;
+}
+
+.fieldlbl
+{
+    width: 60px; 
+    display: inline-block;
+}
+.flexigrid div.fbutton .export
+{
+    background: url(../../images/icon-download.gif) no-repeat center left;
+}
+.flexigrid div.fbutton .print
+{
+    background: url(../../images/print.png) no-repeat center left;
+}
+
+.flexigrid div.fbutton .toggleSidebar.closeIt
+{
+    background: url(../../images/flexgrid/first.gif) no-repeat center left;
+}
+.flexigrid div.fbutton .toggleSidebar.openIt
+{
+    background: url(../../images/flexgrid/last.gif) no-repeat center left;
+}
+
+.flexigrid div.fbutton .review
+{
+    background: url(../../images/eye-icon.png) no-repeat center left;
+}
+
+.flexigrid div.fbutton .delete
+{
+    background: url(../../images/flexgrid/close.png) no-repeat center left;
+}
+.flexigrid div.mDiv div
+{
+    padding: 3px 6px
+}
+.flexigrid div.tDiv
+{
+    padding: 2px 0px
+}
+.flexigrid div.bDiv
+{
+    overflow-x :hidden;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.ui-accordion-header-active {
+    background: #cccccc/*{bgColorHeader}*/ url(../../Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png)/*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/ !important;
+}
+.ui-accordion .ui-accordion-content {
+    padding: .2em .4em 1.0em .4em;
+}
+.ui-accordion .ui-accordion-header {
+    padding: .4em .5em .4em 2.2em;
+}
+
+
+/* Buttons */
+
+/* Interaction states
+(copied from the downloaded css file and modified to have :
+1)The .primary class added
+2)The url image changed accordingly.
+----------------------------------*/
+.primary.ui-state-default,
+.primary.ui-widget-content .primary.ui-state-default,
+.primary.ui-widget-header .primary.ui-state-default {
+    border: 1px solid #595959;
+    background: #394559 url(../themes/customCorpCal/images/ui-bg_glass_75_394559_1x400.png) 50% 50% repeat-x;
+    font-weight: normal;
+    color: #ffffff;
+}
+.primary.ui-state-default a,
+.primary.ui-state-default a:link,
+.primary.ui-state-default a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+.primary.ui-state-hover,
+.primary.ui-widget-content .primary.ui-state-hover,
+.primary.ui-widget-header .primary.ui-state-hover,
+.primary.ui-state-focus,
+.primary.ui-widget-content .primary.ui-state-focus,
+.primary.ui-widget-header .primary.ui-state-focus {
+    border: 1px solid #999999;
+    background: #dadada url(../themes/customCorpCal/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x;
+    font-weight: normal;
+    color: #212121;
+}
+.primary.ui-state-hover a,
+.primary.ui-state-hover a:hover,
+.primary.ui-state-hover a:link,
+.primary.ui-state-hover a:visited {
+    color: #212121;
+    text-decoration: none;
+}
+.primary.ui-state-active,
+.primary.ui-widget-content .primary.ui-state-active,
+.primary.ui-widget-header .primary.ui-state-active {
+    border: 1px solid #aaaaaa;
+    background: #ffffff url(../themes/customCorpCal/images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+    font-weight: normal;
+    color: #212121;
+}
+.primary.ui-state-active a,
+.primary.ui-state-active a:link,
+.primary.ui-state-active a:visited {
+    color: #212121;
+    text-decoration: none;
+}
+
+.blue-nav {
+    background: #4b6c9e;
+    color: #ffffff;
+}
+span.ui-icon {float: left}
+
+/* For MyQueries */
+span.ui-icon.ui-icon-arrowthick-2-n-s {margin-top:4px}
+
+.fc-event {
+    background-color:#f7f7f7;
+    color: black;
+    font-size: 100%;
+    border-color:grey;
+}
+
+.fc-event:hover {
+    color: grey;
+}
+
+/* wrap full calendar titles */
+.fc-day-grid-event > .fc-content {
+    white-space: inherit;
+}
+
+.popover {
+    background-color: #eff5d7;
+    max-width: 500px;
+}
+
+#cmdSave {
+    margin-right:6px
+}
+
+#DisplayRadioButtonList input {
+    margin-top: 0;
+}
+#DisplayRadioButtonList_0 {
+    margin-top: 4px !important;
+}
+
+#LAStatusRadioButtonList label {
+    margin-right: 20px;
+}
+
+#LASectionCheckBoxList input {
+    display: none;
+}
+
+#LASectionCheckBoxList td {
+    border-color:lightgrey;
+    border-style:solid;
+    border-width:2px;
+}
+
+#LASectionCheckBoxList label {
+    text-align:center;
+    margin:0;
+}
+
+#LASectionCheckBoxList_0:checked + label{
+    background-color: #f2dbdb;
+}
+#LASectionCheckBoxList_1:checked + label{
+    background-color: #558abd;
+}
+#LASectionCheckBoxList_2:checked + label{
+    background-color: #e8f3a9;
+}
+#LASectionCheckBoxList_4:checked + label{
+    background-color: #dbe5f1;
+}
+
+#uniform-IsDateConfirmed.checker span.checked {
+    background-image:url(../../images/confirmed.png);
+    background-position: 0px 0px !important;
+}
