@@ -59,11 +59,7 @@ namespace CorporateCalendar.Security
         {
             get
             {
-                string debugUsername = null;
-                if (!Identity.Name.StartsWith(Configuration.App.Settings.ActiveDirectoryDomain, true, CultureInfo.CurrentCulture))
-                {
-                    debugUsername = Environment.GetEnvironmentVariable("DebugUsername");
-                }
+                string debugUsername = Environment.GetEnvironmentVariable("DebugUsername");
                 return Utility.User.GetUserNameWithoutDomain(string.IsNullOrEmpty(debugUsername) ? Identity.Name : debugUsername);
             }
         }

@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Gcpe.Hub
 {
     public static class Utility
     {
-        public static string FormatPhoneNumberAndExtension(string numberAndExtension)
-        {
-            string numberWithoutExtension;
-            string extension = GetPhoneExtension(numberAndExtension, out numberWithoutExtension);
-
-            return FormatPhoneNumber(numberWithoutExtension) + (string.IsNullOrEmpty(extension) ? "" : " x " + extension);
-        }
-
         /// <summary>
         /// This method takes in a phone number from the system and formats it
         /// to a friendly string
@@ -64,14 +55,6 @@ namespace Gcpe.Hub
                 numberWithoutExtension = numberAndExtension;
             }
             return result;
-        }
-
-        public static IEnumerable<T> Yield<T>(this T item)
-        {
-            if (item == null)
-                return new T[0];
-
-            return new T[] { item };
         }
     }
 }

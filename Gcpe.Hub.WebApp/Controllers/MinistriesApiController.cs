@@ -24,8 +24,11 @@ namespace Gcpe.Hub.WebApp.Controllers
         [HttpGet]
         public async Task<IEnumerable<MinistryDto>> Get()
         {
-            var ministries = await QueryMinistries()
-                .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName)
+            var ministries = await QueryMinistries(db)
+                .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact) //Required for UsersController.ConvertToDto
+                .Include(m => m.EodLastRunUser)
+                .Include(m => m.ContactUser)
+                .Include(m => m.SecondContactUser)
                 .ToListAsync();
 
             return ministries.Select(e => ConvertToDto(e));
@@ -39,12 +42,9 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         public static async Task<IEnumerable<EodStatusDto>> GetEodSummaryData(HubDbContext db)
         {
-            var ministries = await (from m in db.Ministry
-                                    where m.IsActive && (m.MinisterName.StartsWith("Honourable") || m.Abbreviation == "IGRS") && (m.ParentId == null || m.Abbreviation.Equals("EMBC"))
-                                    orderby m.SortOrder, m.DisplayName
-                                    select m)
-                                    .Include(m => m.EodLastRunUser)
-                                    .ToListAsync();
+            var ministries = await QueryMinistries(db)
+                                .Include(m => m.EodLastRunUser)
+                                .ToListAsync();
 
             var requests = await (from m in db.Ministry.Include(e => e.EodLastRunUser)
                                   join r in db.MediaRequest on m.Id equals r.LeadMinistryId
@@ -54,7 +54,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             return ministries.Select(e => new EodStatusDto
             {
-                Ministry = MinistriesApiController.ConvertToDto(e, false),
+                Ministry = ConvertToDto(e, false),
                 LastActivity = requests.Where(r => r.LeadMinistryId == e.Id).Any() ? requests.Where(r => r.LeadMinistryId == e.Id).Max(r => r.RespondedAt ?? r.RequestedAt) : (DateTimeOffset?)null
                 //,OpenCount = requests.Where(r => r.LeadMinistryId == e.Id && !r.RespondedAt.hasValue).Count()
             });
@@ -75,14 +75,11 @@ namespace Gcpe.Hub.WebApp.Controllers
             return ministries.Select(e => ConvertToDto(e));
         }*/
 
-        private IQueryable<Ministry> QueryMinistries()
+        internal static IQueryable<Ministry> QueryMinistries(HubDbContext db)
         {
             return db.Ministry
-                     .Where(m => m.IsActive && (m.MinisterName.StartsWith("Honourable") || m.Abbreviation == "IGRS") && (m.ParentId == null || m.Abbreviation.Equals("EMBC")))
-                     .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact) //Required for UsersController.ConvertToDto
-                     .Include(m => m.EodLastRunUser)
-                     .Include(m => m.ContactUser)
-                     .Include(m => m.SecondContactUser);
+                     .Where(m => m.IsActive && m.MinistryLanguage.Any() && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier"))
+                     .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName);
         }
 
         internal static MinistryDto ConvertToDto(Ministry ministry, bool includeUsers = true)
@@ -138,7 +135,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             Ministry ministry = await db.Ministry.FindAsync(dto.Id);
 
             // Only permit updating select properties.
-            SystemUser priUser = null; 
+            SystemUser priUser = null;
             if (dto.PrimaryContact != null)
             {
                 priUser = await db.SystemUser.SingleOrDefaultAsync(e => e.RowGuid == dto.PrimaryContact.Id);

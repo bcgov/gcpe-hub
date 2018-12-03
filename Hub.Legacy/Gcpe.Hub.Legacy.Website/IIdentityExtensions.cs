@@ -38,7 +38,7 @@ namespace Gcpe.Hub
         /// <returns></returns>
         public static Guid GetGuid(this IIdentity identity)
         {
-            if (System.Diagnostics.Debugger.IsAttached && Environment.UserDomainName.ToUpper() != Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain.ToUpper())
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DebugUsername")))
                 return Guid.Empty;
 
             var section = ConfigurationManager.GetSection("system.web/sessionState") as SessionStateSection;
@@ -50,7 +50,7 @@ namespace Gcpe.Hub
 
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGuidSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ContextDomainName);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user.Guid.Value;
@@ -81,7 +81,7 @@ namespace Gcpe.Hub
             string result = null;
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userEmailSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ContextDomainName);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user?.EmailAddress ?? "";
@@ -103,8 +103,9 @@ namespace Gcpe.Hub
         /// <returns></returns>
         public static string GetDisplayName(this IIdentity identity)
         {
-            if (System.Diagnostics.Debugger.IsAttached  && Environment.UserDomainName != Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain.ToUpper())
-                return "Developer " + Environment.UserName;
+            string debugUsername = Environment.GetEnvironmentVariable("DebugUsername");
+            if (!string.IsNullOrEmpty(debugUsername))
+                return "Developer " + debugUsername;
 
             var section = ConfigurationManager.GetSection("system.web/sessionState") as SessionStateSection;
             int cacheExpiryMinutes = (int)section.Timeout.TotalMinutes;
@@ -113,7 +114,7 @@ namespace Gcpe.Hub
             string result = null;
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userDisplayNameSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ContextDomainName);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user.DisplayName.ToString();
@@ -154,7 +155,7 @@ namespace Gcpe.Hub
             List<String> result = new List<string>();
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGroupsSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ContextDomainName);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, username);
 
                 var authGroups = user.GetAuthorizationGroups(); //this is recursive on the AD server, much faster than trying to perform the recursion on our side with multiple calls to the AD server
@@ -199,7 +200,7 @@ namespace Gcpe.Hub
 
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGroupsSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ContextDomainName);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
                 if (user != null)
                 {

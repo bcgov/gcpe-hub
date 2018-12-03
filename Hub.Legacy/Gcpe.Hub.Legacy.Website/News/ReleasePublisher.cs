@@ -1,16 +1,13 @@
-﻿extern alias legacy;
+extern alias legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using Gcpe.Hub.News.ReleaseManagement;
 using Gcpe.Hub.Services.Legacy;
 using Gcpe.News.ReleaseManagement;
 using legacy::Gcpe.Hub.Data.Entity;
 using MediaRelationsLibrary.Configuration;
-using Newtonsoft.Json;
 
 namespace Gcpe.Hub
 {

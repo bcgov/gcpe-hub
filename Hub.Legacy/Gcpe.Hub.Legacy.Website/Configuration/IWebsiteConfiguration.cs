@@ -11,8 +11,8 @@ namespace Gcpe.Hub.Configuration
     public interface IWebsiteConfiguration : ICalendarConfiguration, IMediaRelationsConfiguration
     {
         new String SMTPServer { get; }
-        new String ActiveDirectoryDomain { get; }
         new String SubscribeBaseUri { get; }
+        new String ActiveDirectoryDomain { get; }
 
         // Calendar
         String Version { get; }
@@ -46,7 +46,6 @@ namespace Gcpe.Hub.Configuration
 
         // Website
         String TrustedReverseProxyServers { get; }
-        String ContextDomainName { get; }
 
         String FlickrApiKey { get; }
         String FlickrApiSecret { get; }

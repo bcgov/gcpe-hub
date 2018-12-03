@@ -40,17 +40,13 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         protected UserDto GetUserFromContext()
         {
-            string activeDirectoryDomain = Configuration["ActiveDirectoryDomain"];
-            string debugUsername = null;
-            if (User.Identity.Name == null || !User.Identity.Name.StartsWith(activeDirectoryDomain, StringComparison.OrdinalIgnoreCase))
-            {
-                debugUsername = Environment.GetEnvironmentVariable("DebugUsername");
-            }
+            string debugUsername = Environment.GetEnvironmentVariable("DebugUsername");
             string userName = string.IsNullOrEmpty(debugUsername) ? User.Identity.Name : debugUsername;
 
+            if (string.IsNullOrEmpty(userName))
+                throw new ApiHttpException(HttpStatusCode.Forbidden);
 
-            if (userName.StartsWith(activeDirectoryDomain, StringComparison.OrdinalIgnoreCase))
-                userName = userName.Substring((activeDirectoryDomain + "\\").Length);
+            userName = userName.Substring(userName.LastIndexOf("\\") + 1);
 
             IQueryable<SystemUser> users;
             /*if (returnSystemMinistries)

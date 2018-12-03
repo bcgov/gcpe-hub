@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web;
 using System.Linq;
 using System.Globalization;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using CorporateCalendar.Data;
 using CorporateCalendar.Security;
-using Microsoft.Reporting.WebForms;
+using Microsoft.Reporting.WinForms;
 
 namespace Gcpe.Hub.Calendar
 {

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
@@ -20,11 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gcpe.Hub.Data\Gcpe.Hub.Data.csproj" />
-    <ProjectReference Include="..\Gcpe.NewsOnDemand.Client\Gcpe.NewsOnDemand.Client.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Gcpe.Hub.Data" Version="1.2.1" />
+    <PackageReference Include="Gcpe.NewsOnDemand.Client" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.*" />
     <PackageReference Include="Microsoft.Azure.Search" Version="5.0.*" />

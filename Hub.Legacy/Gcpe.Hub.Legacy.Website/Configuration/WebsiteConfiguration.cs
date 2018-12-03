@@ -51,13 +51,11 @@ namespace Gcpe.Hub.Configuration
             {
                 // ICalendarConfiguration
                 validator.Check(() => LdapUrl);
-                validator.Check(() => ActiveDirectoryDomain);
                 validator.Check(() => HQAdmin);
                 validator.Check(() => ApplicationOwnerOrganizations);
                 validator.Check(() => SMTPServer);
                 validator.Check(() => LogMailFrom);
                 validator.Check(() => LogMailTo);
-                validator.Check(() => DebugLdapUser);
 
                 // IMediaRelationsConfiguration
                 validator.Check(() => DoExceptionLogging);
@@ -104,7 +102,6 @@ namespace Gcpe.Hub.Configuration
 
                // Website
                 validator.Check(() => TrustedReverseProxyServers);
-                validator.Check(() => ContextDomainName);
                 validator.Check(() => FlickrApiKey);
                 validator.Check(() => FlickrApiSecret);
                 validator.Check(() => FlickrApiToken);
@@ -123,23 +120,13 @@ namespace Gcpe.Hub.Configuration
                 validator.Check(() => CloudEndpointSuffix);
 
                 // Customizations - Images, Text, etc.
-               /* validator.Check(() => FaviconImg);
+                validator.Check(() => FaviconImg);
                 validator.Check(() => ContactsHeaderImg);
                 validator.Check(() => CalendarLookAheadCoverImg);
-                validator.Check(() => ContactsTitle);
-                validator.Check(() => CalendarTitle);
-                validator.Check(() => NewsReleaseManagementTitle);
-                validator.Check(() => NewsFileManagementTitle);
-                validator.Check(() => NewsHelpUrl);
-
-                validator.Check(() => GovShortName);
-                validator.Check(() => GovLongName);
-                validator.Check(() => ICalProductID);*/
             }
         }
         // Shared across other interfaces
         public String SMTPServer => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String ActiveDirectoryDomain => configuration.GetString(MethodBase.GetCurrentMethod());
         public String SubscribeBaseUri => configuration.GetString(MethodBase.GetCurrentMethod());
 
         // ICalendarConfiguration
@@ -148,10 +135,10 @@ namespace Gcpe.Hub.Configuration
         public String ApplicationOwnerOrganizations => configuration.GetString(MethodBase.GetCurrentMethod());
         public String LogMailFrom => configuration.GetString(MethodBase.GetCurrentMethod());
         public String LogMailTo => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String DebugLdapUser => configuration.GetString(MethodBase.GetCurrentMethod());
 
         // IMediaRelationsConfiguration
         public bool DoExceptionLogging => configuration.GetBool(MethodBase.GetCurrentMethod());
+        public String ActiveDirectoryDomain => configuration.GetString(MethodBase.GetCurrentMethod());
         public String AdminGroups => configuration.GetString(MethodBase.GetCurrentMethod());
         public String ContributorGroups => configuration.GetString(MethodBase.GetCurrentMethod());
         public int TypedownItemLimit => configuration.GetIntWithDefault(MethodBase.GetCurrentMethod(), 20);
@@ -159,7 +146,7 @@ namespace Gcpe.Hub.Configuration
         public int CompanyPurgeDays => configuration.GetIntWithDefault(MethodBase.GetCurrentMethod(), 90);
         public int ContactPurgeDays => configuration.GetIntWithDefault(MethodBase.GetCurrentMethod(), 90);
         public int LookbackDays => configuration.GetIntWithDefault(MethodBase.GetCurrentMethod(), 10);
- 
+
         // IWebsiteConfiguration (Calendar)
         public String Version => configuration.GetString(MethodBase.GetCurrentMethod());
         public bool DisableEditTable => configuration.GetBool(MethodBase.GetCurrentMethod());
@@ -193,7 +180,6 @@ namespace Gcpe.Hub.Configuration
 
         // Website
         public String TrustedReverseProxyServers => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String ContextDomainName => configuration.GetString(MethodBase.GetCurrentMethod());
 
         public String FlickrApiKey => configuration.GetString(MethodBase.GetCurrentMethod());
         public String FlickrApiSecret => configuration.GetString(MethodBase.GetCurrentMethod());

@@ -15,10 +15,11 @@ namespace CorporateCalendar.Security
             directoryEntry.Path = CorporateCalendar.Configuration.App.Settings.LdapUrl;
             directoryEntry.AuthenticationType = AuthenticationTypes.Secure;
             string debugLdapPwd = Environment.GetEnvironmentVariable("DebugLdapPwd");
-            if (!string.IsNullOrEmpty(debugLdapPwd))
+            string debugLdapUser = Environment.GetEnvironmentVariable("DebugLdapUser");
+            if (!string.IsNullOrEmpty(debugLdapPwd) && !string.IsNullOrEmpty(debugLdapUser))
             {
                 // required for contractors not part of the configured AD domain
-                directoryEntry.Username = Configuration.App.Settings.DebugLdapUser;
+                directoryEntry.Username = debugLdapUser;
                 directoryEntry.Password = debugLdapPwd;
             }
 

@@ -36,15 +36,12 @@ namespace CorporateCalendar.Configuration
             using (var validator = configuration.CreateValidator)
             {
                 validator.Check(() => LdapUrl);
-                validator.Check(() => ActiveDirectoryDomain);
                 validator.Check(() => HQAdmin);
                 validator.Check(() => ApplicationOwnerOrganizations);
 
                 validator.Check(() => SMTPServer);
                 validator.Check(() => LogMailFrom);
                 validator.Check(() => LogMailTo);
-
-                validator.Check(() => DebugLdapUser);
 
                 validator.Check(() => DbServer);
                 validator.Check(() => DbName);
@@ -54,14 +51,11 @@ namespace CorporateCalendar.Configuration
         }
 
         public String LdapUrl => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String ActiveDirectoryDomain => configuration.GetString(MethodBase.GetCurrentMethod());
         public String HQAdmin => configuration.GetString(MethodBase.GetCurrentMethod());
         public String ApplicationOwnerOrganizations => configuration.GetString(MethodBase.GetCurrentMethod());
         public String SMTPServer => configuration.GetString(MethodBase.GetCurrentMethod());
         public String LogMailFrom => configuration.GetString(MethodBase.GetCurrentMethod());
         public String LogMailTo => configuration.GetString(MethodBase.GetCurrentMethod());
-
-        public String DebugLdapUser => configuration.GetString(MethodBase.GetCurrentMethod());
 
         public string DbServer => configuration.GetString(MethodBase.GetCurrentMethod());
         public string DbName => configuration.GetString(MethodBase.GetCurrentMethod());

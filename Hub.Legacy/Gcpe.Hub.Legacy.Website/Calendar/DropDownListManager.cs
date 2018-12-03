@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -305,42 +305,11 @@ public class DropDownListManager
     /// Returns active rows from the CommunicationMaterial table and sorts by SortOrder column.
     /// </summary>
     /// <returns>System.Object</returns>
-    public IQueryable<CommunicationMaterial> GetActiveCommunicationMaterialsOptions(List<int> includedIds, bool showLegacy = false)
+    public IQueryable<CommunicationMaterial> GetActiveCommunicationMaterialsOptions(List<int> includedIds)
     {
         if (includedIds == null)
             includedIds = noIds;
         IQueryable<CommunicationMaterial> options = corporateCalendarDataContext.CommunicationMaterials.Where(p => p.IsActive == true || includedIds.Contains(p.Id));
-
-        if (!showLegacy)
-        {
-            string[] legacyItems = {
-            "High Significance",
-            "Low Significance",
-            "Date Flexible",
-            "Date Not Flexible",
-            "Time Flexible",
-            "Time Not Flexible",
-            "–",
-            "TBD",
-            "Communications Rollout",
-            "BC Newsroom Feature",
-            "BC Newsroom Top Story",
-            "3rd Party Event",
-            "Other or N/A",
-            "Legislation-intro",
-            "Legislation-1st reading",
-            "Legislation-2nd reading",
-            "Legislation-Royal Assent",
-            "Town Hall (Public)",
-            "Town Hall (Twitter)",
-            "MEDIA AVAIL",
-            "Proactive Comm.",
-            "IGRS: Event Plan Required",
-            "IGRS: Event Plan in Process"
-        };
-
-            options = options.Where(e => !legacyItems.Contains(e.Name) || includedIds.Contains(e.Id));
-        }
 
         return options.OrderBy(p => p.SortOrder).ThenBy(p => p.Name);
     }
@@ -352,43 +321,11 @@ public class DropDownListManager
     /// Returns active rows from the NROrigin table and sorts by SortOrder column.
     /// </summary>
     /// <returns>System.Object</returns>
-    public object GetActiveNrOriginOptions(List<int> includedIds, bool showLegacy = false)
+    public object GetActiveNrOriginOptions(List<int> includedIds)
     {
         if (includedIds == null)
             includedIds = noIds;
         IQueryable<NROrigin> options = corporateCalendarDataContext.NROrigins.Where(p => p.IsActive || includedIds.Contains(p.Id));
-
-        if (!showLegacy)
-        {
-            string[] legacyItems = {
-            "–",
-            "PLS SELECT ACCURATELY:",
-            "Caucus",
-            "PHO (Provincial Health Officer)",
-            "BC Ambulance Service (BCAS)",
-            "Health Authority (FH)",
-            "Health Authority (FNHA)",
-            "Health Authority (IH)",
-            "Health Authority (NH)",
-            "Health Authority (PHC)",
-            "Health Authority (PHSA)",
-            "Health Authority (VCH)",
-            "Health Authority (VIHA)",
-            "Joint (Prov/IH)",
-            "Joint (Prov/NH)",
-            "Joint (Prov/PHSA)",
-            "Joint (Prov/VCH)",
-            "Joint (Prov/VIHA)",
-            "Joint Prov/BCAS release",
-            "Joint (Prov/FH)",
-            "Joint (Prov/PHC)",
-            "Joint (Prov/PHO)",
-            "Office of the Seniors Advocate"
-            //"Other"
-        };
-
-            options = options.Where(e => !legacyItems.Contains(e.Name) || includedIds.Contains(e.Id));
-        }
 
         return options.OrderBy(p => p.SortOrder).ThenBy(p => p.Name).ToArray();
     }

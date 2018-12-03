@@ -1,9 +1,7 @@
 ﻿{
   "SubscribeBaseUri": "",
   "CommOffice": "",
-  "GCPEMediaGUID": "",
-  "ActiveDirectoryDomain": "",
-  "TimeZoneId": "",
+  "HQMinistry": "",
   "NoReplyAddress": "",
   "FaviconImg" : "",
   "ConnectionStrings": {

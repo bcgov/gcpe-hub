@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,6 +13,7 @@ using Gcpe.Hub.Website.Models;
 using Microsoft.Azure.Search.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Azure.Search.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MimeKit.Cryptography;
@@ -20,19 +21,19 @@ using Newtonsoft.Json;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
-    using static Utility;
 
     [Route("api/mediarequests")]
     public class MediaRequestsApiController : BaseController
     {
         readonly MailProvider mailProvider;
-        readonly Guid GCPEMedia;
+        readonly string HQMinistry;
         static HttpClient Client = new HttpClient();
 
-        public MediaRequestsApiController(HubDbContext db, IConfiguration configuration, MailProvider mailProvider) : base(db, configuration)
+        public MediaRequestsApiController(HubDbContext db, IConfiguration configuration, MailProvider mailProvider) :
+            base(db, configuration)
         {
             this.mailProvider = mailProvider;
-            this.GCPEMedia = new System.Guid(Configuration["GCPEMediaGUID"]);
+            this.HQMinistry = Configuration["HQMinistry"];
         }
 
         [HttpGet]
@@ -49,9 +50,11 @@ namespace Gcpe.Hub.WebApp.Controllers
             string suffixClause = "";
             if (ministries != null)
             {
-                string ministryInClause = "IN('" + SqlHelper.ProtectAgainstSqlInjection(ministries).Replace(",", "', '") + "')";
+                string ministryInClause =
+                    "IN('" + SqlHelper.ProtectAgainstSqlInjection(ministries).Replace(",", "', '") + "')";
                 suffixClause = " LEFT JOIN media.MediaRequestSharedMinistry s ON rq.Id = s.MediaRequestId";
-                suffixClause += " WHERE (LeadMinistryId " + ministryInClause + " OR s.MinistryId " + ministryInClause + ") ";
+                suffixClause += " WHERE (LeadMinistryId " + ministryInClause + " OR s.MinistryId " + ministryInClause +
+                                ") ";
             }
 
             // responded == "all" - nothing to filter out!
@@ -66,7 +69,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             else if (responded == "active" && requestsToday.HasValue)
             {
                 // Open MediaRequests or MediaRequests that were closed today.
-                SqlHelper.AddDateToWhereClause(ref suffixClause, "RespondedAt IS NULL OR RespondedAt > ", requestsToday);
+                SqlHelper.AddDateToWhereClause(ref suffixClause, "RespondedAt IS NULL OR RespondedAt > ",
+                    requestsToday);
             }
 
             if (requestsBefore.HasValue)
@@ -81,10 +85,12 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (modifiedAfter.HasValue)
             {
-                SqlHelper.AddDateToWhereClause(ref suffixClause, "ModifiedAt > CreatedAt AND ModifiedAt > ", modifiedAfter);
+                SqlHelper.AddDateToWhereClause(ref suffixClause, "ModifiedAt > CreatedAt AND ModifiedAt > ",
+                    modifiedAfter);
             }
 
-            return await QueryMediaRequests(suffixClause, requestsAfter.HasValue ? null : (int?)_skip, _limit, idsOnly);
+            return await QueryMediaRequests(suffixClause, requestsAfter.HasValue ? null : (int?) _skip, _limit,
+                idsOnly);
         }
 
         [HttpGet("search")]
@@ -107,16 +113,21 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     adjustedQuery = "/.*" + query + ".*/";
                 }
+
                 // get a list of IDs from the search service.
-                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, filters, _skip, _limit);
+                DocumentSearchResult searchServiceResult =
+                    await QueryHubMediaRequestSearchService(adjustedQuery, filters, _skip, _limit);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
                 // get full information on each MediaRequest from the database
                 if (searchServiceResult.Results != null && searchServiceResult.Results.Count > 0)
                 {
                     // extract the ids.
-                    string inClause = string.Join("','", searchServiceResult.Results.Select(r => r.Document.Values.First()));
-                    List<MediaRequest> data = db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause + "') order by RequestedAt DESC").ToList();
+                    string inClause = string.Join("','",
+                        searchServiceResult.Results.Select(r => r.Document.Values.First()));
+                    List<MediaRequest> data = db.MediaRequest
+                        .FromSql("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause +
+                                 "') order by RequestedAt DESC").ToList();
 
                     LoadNavigationProperties(data);
 
@@ -135,7 +146,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                         {
                             FilterDto fdto = new FilterDto();
                             fdto.Name = item.Value.ToString();
-                            fdto.Count = (int)item.Count;
+                            fdto.Count = (int) item.Count;
                             facetFilters.Add(fdto);
                         }
 
@@ -148,18 +159,20 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     results.MediaRequests = new List<MediaRequestDto>();
                 }
+
                 results.Facets = facetResults;
 
             }
             else
             {
-                string s = "(CONTAINS((RequestTopic, RequestContent, Response), 'FORMSOF(INFLECTIONAL, {0})') OR CONTAINS((FirstName, LastName), '\"{0}*\"') OR CONTAINS(CompanyName, '\"{0}*\"'))";
+                string s =
+                    "(CONTAINS((RequestTopic, RequestContent, Response), 'FORMSOF(INFLECTIONAL, {0})') OR CONTAINS((FirstName, LastName), '\"{0}*\"') OR CONTAINS(CompanyName, '\"{0}*\"'))";
                 string suffixClause = SqlHelper.CreateSearchClause(query, s);
 
                 // Prepend additional joins to Contact and Company tables
                 suffixClause = " LEFT JOIN media.MediaRequestContact rc ON rc.MediaRequestId = rq.Id" +
-                                     " LEFT JOIN media.Contact ct ON ct.Id = rc.ContactId" +
-                                     " LEFT JOIN media.Company cp ON cp.Id = rc.CompanyId" + suffixClause;
+                               " LEFT JOIN media.Contact ct ON ct.Id = rc.ContactId" +
+                               " LEFT JOIN media.Company cp ON cp.Id = rc.CompanyId" + suffixClause;
 
                 // Search never does idsOnly.
                 const Boolean idsOnly = false;
@@ -169,7 +182,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             return results;
         }
 
-        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IList<string> filters, int? _skip, int _limit)
+        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IList<string> filters,
+            int? _skip, int _limit)
         {
             DocumentSearchResult result = null;
             // Add the Http Get parameters
@@ -178,6 +192,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             {
                 newUri = QueryHelpers.AddQueryString(newUri, "skip", _skip.ToString());
             }
+
             newUri = QueryHelpers.AddQueryString(newUri, "limit", _limit.ToString());
             foreach (var filter in filters)
             {
@@ -187,14 +202,17 @@ namespace Gcpe.Hub.WebApp.Controllers
                 }
                 else
                 {
-                    newUri = QueryHelpers.AddQueryString(newUri, "filters", filter.Replace("|", "/any(t: t eq '") + "')");
+                    newUri = QueryHelpers.AddQueryString(newUri, "filters",
+                        filter.Replace("|", "/any(t: t eq '") + "')");
                 }
             }
-            var facets = new List<string> { "leadMinistryDisplayName", "companyNames", "contactNames" };
+
+            var facets = new List<string> {"leadMinistryDisplayName", "companyNames", "contactNames"};
             foreach (var facet in facets)
             {
                 newUri = QueryHelpers.AddQueryString(newUri, "facets", facet);
             }
+
             newUri = QueryHelpers.AddQueryString(newUri, "selectedFields", "id");
 
             try
@@ -202,8 +220,10 @@ namespace Gcpe.Hub.WebApp.Controllers
                 HttpResponseMessage response = await SendRequestToAzureSearchServiceAsync(HttpMethod.Get, newUri);
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    throw new ApiHttpException(HttpStatusCode.InternalServerError, new Exception("Unauthorized - Token was rejected by the search server"));
+                    throw new ApiHttpException(HttpStatusCode.InternalServerError,
+                        new Exception("Unauthorized - Token was rejected by the search server"));
                 }
+
                 var stringtask = response.Content.ReadAsStringAsync();
                 stringtask.Wait();
                 // parse as JSON.
@@ -212,13 +232,16 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     throw new ApiHttpException(HttpStatusCode.InternalServerError);
                 }
+
                 // Success. Remove the continuationToken so that the deserialization succeeds
-                result = JsonConvert.DeserializeObject<DocumentSearchResult>(jsonString.Replace(",\"continuationToken\":null", ""));
+                result = JsonConvert.DeserializeObject<DocumentSearchResult>(
+                    jsonString.Replace(",\"continuationToken\":null", ""));
             }
             catch (Exception e)
             {
                 throw new ApiHttpException(HttpStatusCode.InternalServerError);
             }
+
             return result;
         }
 
@@ -252,7 +275,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             return await Client.SendAsync(request);
         }
 
-        private async Task<IEnumerable<MediaRequestDto>> QueryMediaRequests(string suffixClause, int? _skip, int _limit, Boolean idsOnly)
+        private async Task<IEnumerable<MediaRequestDto>> QueryMediaRequests(string suffixClause, int? _skip, int _limit,
+            Boolean idsOnly)
         {
             //Only return Active Media Requests. 
             SqlHelper.AddToWhereClause(ref suffixClause, "rq.IsActive='true'");
@@ -264,6 +288,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 //when were getting new ones, we have to get them all. Skipping and limiting is applied to the 'before' requests
                 suffixClause += string.Format(" OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", _skip, _limit);
             }
+
             IQueryable<MediaRequest> query = db.MediaRequest;
             if (!string.IsNullOrEmpty(suffixClause))
             {
@@ -327,6 +352,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     idList.Add(tmp);
                     //}
                 }
+
                 return idList;
             }
 
@@ -344,22 +370,25 @@ namespace Gcpe.Hub.WebApp.Controllers
                 IEnumerable<MediaRequest> list2populate = list;
                 if (withParents.Count() != 0)
                 {
-                    db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id " + SqlHelper.ToInClause(withParents.Select(r => r.RequestParentId.Value))).Load();
+                    db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id " +
+                                            SqlHelper.ToInClause(withParents.Select(r => r.RequestParentId.Value)))
+                        .Load();
                     list2populate = list2populate.Union(withParents.Select(r => r.RequestParent));
                 }
 
                 string inClause = SqlHelper.ToInClause(list2populate.Select(r => r.Id));
                 db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id " + inClause)
-                     .Include(e => e.Resolution)
-                     .Include(e => e.ResponsibleUser)
-                     .Include(e => e.CreatedBy)
-                     .Include(e => e.ModifiedBy)
-                     .Include(e => e.LeadMinistry)
-                     .Include(e => e.MediaRequestSharedMinistry).ThenInclude(e => e.Ministry)
-                     .Include(e => e.TakeOverRequestMinistry)
-                     .Load();
+                    .Include(e => e.Resolution)
+                    .Include(e => e.ResponsibleUser)
+                    .Include(e => e.CreatedBy)
+                    .Include(e => e.ModifiedBy)
+                    .Include(e => e.LeadMinistry)
+                    .Include(e => e.MediaRequestSharedMinistry).ThenInclude(e => e.Ministry)
+                    .Include(e => e.TakeOverRequestMinistry)
+                    .Load();
 
-                db.MediaRequestContact.FromSql("SELECT * FROM media.MediaRequestContact WHERE MediaRequestId " + inClause)
+                db.MediaRequestContact
+                    .FromSql("SELECT * FROM media.MediaRequestContact WHERE MediaRequestId " + inClause)
                     .Include(e => e.Company).Include(e => e.Contact).Load();
 
                 List<Guid> contactsGuids = new List<Guid>();
@@ -368,8 +397,10 @@ namespace Gcpe.Hub.WebApp.Controllers
                     if (!contactsGuids.Contains(mediaRequestContact.ContactId))
                         contactsGuids.Add(mediaRequestContact.ContactId);
                 }
+
                 inClause = SqlHelper.ToInClause(contactsGuids);
-                db.ContactMediaJobTitle.FromSql("SELECT * FROM media.ContactMediaJobTitle WHERE ContactId " + inClause).Load();
+                db.ContactMediaJobTitle.FromSql("SELECT * FROM media.ContactMediaJobTitle WHERE ContactId " + inClause)
+                    .Load();
                 SqlHelper.LoadContactNavigationProperties(inClause, db);
             }
         }
@@ -378,37 +409,43 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             if (dto.LeadMinistry == null)
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.LeadMinistry)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.LeadMinistry)));
             }
 
             if (dto.RequestedAt == default(DateTimeOffset))
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.RequestedAt)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.RequestedAt)));
             }
 
             if (string.IsNullOrWhiteSpace(dto.RequestContent))
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.RequestContent)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.RequestContent)));
             }
 
             if (string.IsNullOrWhiteSpace(dto.RequestTopic))
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.RequestTopic)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.RequestTopic)));
             }
 
             if (!dto.MediaContacts.Any())
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.MediaContacts)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.MediaContacts)));
             }
 
             if (dto.ResponsibleUser == null)
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new ArgumentNullException(nameof(dto.ResponsibleUser)));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new ArgumentNullException(nameof(dto.ResponsibleUser)));
             }
         }
 
         [HttpPost]
-        public async Task<Guid> Post([FromBody]MediaRequestDto dto, Boolean triggerEmail = false)
+        public async Task<Guid> Post([FromBody] MediaRequestDto dto, Boolean triggerEmail = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
 
@@ -451,13 +488,13 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpPost("postendofdayupdates")]
-        public async Task UpdateEndOfDay([FromBody]List<ReportUpdate> updates)
+        public async Task UpdateEndOfDay([FromBody] List<ReportUpdate> updates)
         {
             var mediaRequestIds = updates.Select(e => e.Id).ToArray();
 
             var mediaRequests = await db.MediaRequest
-                                        .Where(e => mediaRequestIds.Contains(e.Id))
-                                        .ToListAsync();
+                .Where(e => mediaRequestIds.Contains(e.Id))
+                .ToListAsync();
 
             //First we updated all the Media Requests with the updates.
             foreach (ReportUpdate update in updates)
@@ -465,7 +502,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                 var mediaRequest = mediaRequests.SingleOrDefault(e => e.Id == update.Id);
 
                 if (mediaRequest == null)
-                    throw new ApiHttpException(HttpStatusCode.BadRequest, new KeyNotFoundException(nameof(update.Id) + " Not Found"));
+                    throw new ApiHttpException(HttpStatusCode.BadRequest,
+                        new KeyNotFoundException(nameof(update.Id) + " Not Found"));
 
                 //Uses the Enum definition.
                 mediaRequest.EodReportWith = update.EodReportWith;
@@ -475,10 +513,10 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             //get all open and closed request for those ministries.
             List<Ministry> listMinistries = await db.Ministry
-                                                    .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
-                                                    .ToListAsync();
+                .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
+                .ToListAsync();
 
-            var localTimeNow = GetLocalTimeNow();
+            var localNow = DateTimeOffset.Now;
 
             var emails = new Dictionary<Ministry, IEnumerable<MediaRequest>>();
 
@@ -488,17 +526,19 @@ namespace Gcpe.Hub.WebApp.Controllers
                 //Do Null checking on EodFinalizedDateTime/EodLastRunDateTime as will be null for all new records. 
                 if (ministry.EodFinalizedDateTime == null)
                 {
-                    ministry.EodFinalizedDateTime = new DateTimeOffset(localTimeNow.Date).ToUniversalTime();
+                    ministry.EodFinalizedDateTime = localNow;
                 }
+
                 if (ministry.EodLastRunDateTime == null)
                 {
-                    ministry.EodLastRunDateTime = new DateTimeOffset(localTimeNow).ToUniversalTime();
+                    ministry.EodLastRunDateTime = localNow;
                 }
+
                 //Need to use a variable here, since LoadNavigationProperties method can blow away updates to the Ministry object. 
                 var closedSince = ministry.EodFinalizedDateTime;
                 //Compare the EodLastRunDateTime Calendar Date with today's date. If todays date is in the future (i.e. it's been 24 hours since running) update the
                 //EodFinalizedDateTime. 
-                if (GetLocalDateTime(ministry.EodLastRunDateTime.Value.DateTime).Date < localTimeNow.Date)
+                if (ministry.EodLastRunDateTime.Value.Date < localNow.Date)
                 {
                     closedSince = ministry.EodLastRunDateTime;
                     //ministry.EodFinalizedDateTime = ministry.EodLastRunDateTime;
@@ -506,11 +546,11 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 //Retrieve the open requests for the current ministry (all of them back through history).
                 var requests = await db.MediaRequest
-                        .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince)
-                        .Where(e => e.LeadMinistryId == ministry.Id)
-                        .Where(e => e.IsActive == true)
-                        .OrderByDescending(e => e.RequestedAt)
-                        .ToListAsync();
+                    .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince)
+                    .Where(e => e.LeadMinistryId == ministry.Id)
+                    .Where(e => e.IsActive == true)
+                    .OrderByDescending(e => e.RequestedAt)
+                    .ToListAsync();
 
                 LoadNavigationProperties(requests);
 
@@ -520,7 +560,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 //update the EodfinalizeDateTime - updated to closedSince local variable based on the condition above.
                 ministry.EodFinalizedDateTime = closedSince;
                 //Always update the last run date time when a report is run. 
-                ministry.EodLastRunDateTime = DateTimeOffset.UtcNow;
+                ministry.EodLastRunDateTime = DateTimeOffset.Now;
 
                 emails.Add(ministry, requests);
             }
@@ -550,7 +590,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             //now loop through the summary to see if all's good 
             Boolean allGood = true;
-            DateTime localTimeNow = GetLocalTimeNow();
+            var localNow = DateTimeOffset.Now;
             foreach (EodStatusDto eodSum in summary)
             {
                 Boolean eodStat = false;
@@ -561,11 +601,11 @@ namespace Gcpe.Hub.WebApp.Controllers
                 }
                 else
                 {
-                    //The last activity date is today, and it was before the last report
+                    //The last activity date was before the last report
 
-                    //bad. allthough...if the last activity was today and before the eodLastRunDate of the ministry, then we should be ok
+                    //bad. allthough...if the last activity was before the eodLastRunDate of the ministry, then we should be ok
                     eodStat = (eodSum.Ministry.EodLastRunDateTime.HasValue && eodSum.LastActivity < eodSum.Ministry.EodLastRunDateTime
-                        && localTimeNow.Date == GetLocalDateTime(eodSum.LastActivity.Value).Date);
+                        && localNow.Date == eodSum.Ministry.EodLastRunDateTime.Value.Date);
 
                 }
 
@@ -603,11 +643,14 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             //get the dates off the gcpe hq record
 
-            var mediaMinistry = MinistriesApiController.ConvertToDto(db.Ministry
-                 .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact)
-                 .FirstOrDefault(m => m.Id == GCPEMedia), true);
+            var mediaMinistry = db.Ministry
+                .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser)
+                .ThenInclude(su => su.CommunicationContact)
+                .FirstOrDefault(m => m.Abbreviation == HQMinistry);
 
-            if (!manualRun && GetLocalTimeNow().Date == GetLocalDateTime(mediaMinistry.EodLastRunDateTime.Value).Date)
+            var localNow = DateTimeOffset.Now;
+            if (!manualRun && mediaMinistry.EodLastRunDateTime.HasValue &&
+                localNow.Date == mediaMinistry.EodLastRunDateTime.Value.Date)
             {
                 return;
             }
@@ -618,49 +661,45 @@ namespace Gcpe.Hub.WebApp.Controllers
             //Compare the EodLastRunDateTime Calender Date with today's date. If today's date is in the future (i.e. it's been 24 hours since running) update the
             //EodFinalizedDateTime. 
 
-            var localTimeNow = GetLocalTimeNow();
-
             if (mediaMinistry.EodFinalizedDateTime == null)
             {
-                mediaMinistry.EodFinalizedDateTime = new DateTimeOffset(localTimeNow.Date).ToUniversalTime();
-            }
-            if (mediaMinistry.EodLastRunDateTime == null)
-            {
-                mediaMinistry.EodLastRunDateTime = new DateTimeOffset(localTimeNow).ToUniversalTime();
+                mediaMinistry.EodFinalizedDateTime = localNow;
             }
 
-            if (GetLocalDateTime(mediaMinistry.EodLastRunDateTime.Value.UtcDateTime).Date < localTimeNow.Date)
+            if (mediaMinistry.EodLastRunDateTime == null)
+            {
+                mediaMinistry.EodLastRunDateTime = localNow;
+            }
+            else if (mediaMinistry.EodLastRunDateTime.Value.Date < localNow.Date)
             {
                 mediaMinistry.EodFinalizedDateTime = mediaMinistry.EodLastRunDateTime;
             }
-            mediaMinistry.EodLastRunDateTime = localTimeNow;
+
+            mediaMinistry.EodLastRunDateTime = localNow;
 
 
-            //now get the list of ministries, plagiarized this code from the ministries api controller.
-            var ministries = await db.Ministry
-                     .Where(m => m.IsActive && (m.MinisterName.StartsWith("Honourable") || m.DisplayName == "Intergovernmental Relations Secretariat"))
-                     .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName)
-                     .Include(m => m.SystemUserMinistry)
-                     .ThenInclude(m => m.SystemUser)
-                     .ThenInclude(su => su.CommunicationContact).Select(m => MinistriesApiController.ConvertToDto(m, false)).ToListAsync();
-
+            //now get the list of ministries
+            var ministries = await MinistriesApiController.QueryMinistries(db)
+                .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser)
+                .ThenInclude(su => su.CommunicationContact) //Required for UsersController.ConvertToDto
+                .Select(m => MinistriesApiController.ConvertToDto(m, false)).ToListAsync();
 
             //setup the email
             string emailAddress = UserMe.EmailAddress;
-            if (string.IsNullOrEmpty(emailAddress))
-                return;
             string displayAs = UserMe.DisplayAs;
 
             //TODO: Use populate template
             var subject = "Emerging Issues/Media Calls - " + DateTime.Today.ToString("D");
-            string bodyHtml = @"<html style='font-family:Calibri, sans-serif;'>" + @"<style type=""text/css""></style>" + @"<body style='font-family:Calibri, sans-serif; font-size:12.0pt; color: black;'>";
+            string bodyHtml = @"<html style='font-family:Calibri, sans-serif;'>" +
+                              @"<style type=""text/css""></style>" +
+                              @"<body style='font-family:Calibri, sans-serif; font-size:12.0pt; color: black;'>";
 
             //Retrieve the open requests for the current ministry (all of them back through history).
             var requests = await db.MediaRequest
-                    .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime)
-                    .Where(e => e.IsActive == true)
-                    .OrderByDescending(e => e.RequestedAt)
-                    .ToListAsync();
+                .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime)
+                .Where(e => e.IsActive == true)
+                .OrderByDescending(e => e.RequestedAt)
+                .ToListAsync();
 
             LoadNavigationProperties(requests);
 
@@ -688,16 +727,20 @@ namespace Gcpe.Hub.WebApp.Controllers
                 //now make a list of the media contact users' email addresses
                 List<MailAddress> userList = new List<MailAddress>();
 
-                foreach (var usr in mediaMinistry.Users)
+                foreach (var userMinistry in mediaMinistry.SystemUserMinistry.Where(sum => sum.IsActive))
                 {
-                    if (!string.IsNullOrEmpty(usr.EmailAddress))
+                    var usr = userMinistry.SystemUser;
+                    if (!string.IsNullOrEmpty(usr.EmailAddress) && usr.IsActive &&
+                        usr.CommunicationContact.Any(c => c.SortOrder != 0))
                     {
                         userList.Add(MailAddressFor(usr));
                     }
                 }
 
-                MailAddress fromAddress = new MailAddress(Configuration["NoReplyAddress"], "No Reply");                
+                MailAddress fromAddress = new MailAddress("no-reply@gov.bc.ca", "No Reply");
 
+                if (string.IsNullOrEmpty(emailAddress))
+                    return;
 #if DEBUG
                 userList = new List<MailAddress>();
                 userList.Add(MailAddressFor(UserMe));
@@ -721,7 +764,8 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (singleMediaRequest == null)
             {
-                throw new ApiHttpException(HttpStatusCode.BadRequest, new KeyNotFoundException(id.ToString() + " Not Found"));
+                throw new ApiHttpException(HttpStatusCode.BadRequest,
+                    new KeyNotFoundException(id.ToString() + " Not Found"));
             }
 
             if (!singleMediaRequest.IsActive)
@@ -736,8 +780,8 @@ namespace Gcpe.Hub.WebApp.Controllers
         public int CountChildren(Guid id)
         {
             var children = db.MediaRequest
-                            .Where(e => e.RequestParentId == id)
-                            .Where(e => e.IsActive);
+                .Where(e => e.RequestParentId == id)
+                .Where(e => e.IsActive);
             return children.Count();
             //throw new ApiHttpException(HttpStatusCode.BadRequest, new KeyNotFoundException("Media Request ID: " + id.ToString() + " has no children."));
         }
@@ -756,25 +800,25 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             //get all open and closed request for those ministries.
             var listMinistries = await db.Ministry
-                                         .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
-                                         .ToListAsync();
+                .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
+                .ToListAsync();
 
             var listMinistryIds = listMinistries.Select(e => e.Id).ToArray();
 
             var openMediaRequests = await db.MediaRequest
-                                            .Where(e => e.RespondedAt == null)
-                                            .Where(e => listMinistryIds.Contains(e.LeadMinistryId))
-                                            .Where(e => e.IsActive)
-                                            .OrderBy(e => e.LeadMinistry.SortOrder).ThenBy(e => e.LeadMinistry.Abbreviation)
-                                                                                   .ThenBy(e => e.RequestedAt)
-                                            .ToListAsync();
+                .Where(e => e.RespondedAt == null)
+                .Where(e => listMinistryIds.Contains(e.LeadMinistryId))
+                .Where(e => e.IsActive)
+                .OrderBy(e => e.LeadMinistry.SortOrder).ThenBy(e => e.LeadMinistry.Abbreviation)
+                .ThenBy(e => e.RequestedAt)
+                .ToListAsync();
 
             LoadNavigationProperties(openMediaRequests);
 
             //Need be a list because Enums cannot be set to null if the collection is IEnumberable
             var items = openMediaRequests.Select(e => ConvertToDto(e)).ToList();
 
-            var localTimeNow = GetLocalTimeNow();
+            var localNow = DateTimeOffset.Now;
 
             foreach (Ministry min in listMinistries)
             {
@@ -783,7 +827,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 foreach (var item in items.Where(mr => mr.LeadMinistry.Id == min.Id))
                 {
-                    if (GetLocalDateTime(min.EodLastRunDateTime.Value.UtcDateTime).Date < localTimeNow.Date)
+                    if (min.EodLastRunDateTime.Value.Date < localNow.Date)
                     {
                         item.EodReportWith = null;
                     }
@@ -793,8 +837,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             return items;
 
         }
+
         [HttpPut("{id}")]
-        public async Task Put(Guid id, [FromBody]MediaRequestDto dto, Boolean triggerEmail = false)
+        public async Task Put(Guid id, [FromBody] MediaRequestDto dto, Boolean triggerEmail = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
             if (id != dto.Id)
@@ -839,7 +884,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             if (numChildren > 0)
             {
                 // Pass a useful error to the client
-                Exception ex = new Exception(String.Format("Unable to delete MediaRequest with {0} follow-up {1}.", numChildren, (numChildren == 1 ? "request" : "requests")));
+                Exception ex = new Exception(String.Format("Unable to delete MediaRequest with {0} follow-up {1}.",
+                    numChildren, (numChildren == 1 ? "request" : "requests")));
                 throw new ApiHttpException(HttpStatusCode.BadRequest, ex);
             }
 
@@ -876,23 +922,25 @@ namespace Gcpe.Hub.WebApp.Controllers
             {
                 dto.LeadMinistry = MinistriesApiController.ConvertToDto(mediaRequest.LeadMinistry, false);
             }
+
             if (mediaRequest.MediaRequestSharedMinistry != null)
             {
                 dto.SharedMinistries = mediaRequest.MediaRequestSharedMinistry
-                                     .Select(rq => MinistriesApiController.ConvertToDto(rq.Ministry, false));
+                    .Select(rq => MinistriesApiController.ConvertToDto(rq.Ministry, false));
             }
 
             if (mediaRequest.TakeOverRequestMinistry != null)
             {
-                dto.TakeOverRequestMinistry = MinistriesApiController.ConvertToDto(mediaRequest.TakeOverRequestMinistry, false);
+                dto.TakeOverRequestMinistry =
+                    MinistriesApiController.ConvertToDto(mediaRequest.TakeOverRequestMinistry, false);
             }
-           
+
 
             if (mediaRequest.MediaRequestContact != null)
             {
                 dto.MediaContacts = mediaRequest.MediaRequestContact
-                                     .Select(rq => MediaContactsApiController.ConvertToDto(db, rq.Contact, rq.Company))
-                                     .OrderByDescending(e => e.Job.Outlet.IsMajor).ThenBy(e => e.FirstName).ThenBy(e => e.LastName);
+                    .Select(rq => MediaContactsApiController.ConvertToDto(db, rq.Contact, rq.Company))
+                    .OrderByDescending(e => e.Job.Outlet.IsMajor).ThenBy(e => e.FirstName).ThenBy(e => e.LastName);
             }
 
             dto.DeadlineAt = mediaRequest.DeadlineAt;
@@ -908,7 +956,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
 
             dto.EodReportWith = mediaRequest.EodReportWith;
-            dto.Resolution = mediaRequest.Resolution == null ? null : new ResolutionDto { Id = mediaRequest.Resolution.Id, DisplayAs = mediaRequest.Resolution.DisplayAs };
+            dto.Resolution = mediaRequest.Resolution == null
+                ? null
+                : new ResolutionDto {Id = mediaRequest.Resolution.Id, DisplayAs = mediaRequest.Resolution.DisplayAs};
 
             return dto;
         }
@@ -921,11 +971,13 @@ namespace Gcpe.Hub.WebApp.Controllers
         /// <returns></returns>
         private async Task UpdateSharedMinistries(IEnumerable<MinistryDto> sharedMinistries, Guid Id)
         {
-            IList<MediaRequestSharedMinistry> existingSharedMinistries = db.MediaRequestSharedMinistry.Where(e => e.MediaRequestId == Id).ToList();
+            IList<MediaRequestSharedMinistry> existingSharedMinistries =
+                db.MediaRequestSharedMinistry.Where(e => e.MediaRequestId == Id).ToList();
             IEnumerable<MediaRequestSharedMinistry> removedSharedMinistries = existingSharedMinistries;
             if (sharedMinistries != null)
             {
-                removedSharedMinistries = existingSharedMinistries.Where(e => !sharedMinistries.Any(m => m.Id == e.MinistryId));
+                removedSharedMinistries =
+                    existingSharedMinistries.Where(e => !sharedMinistries.Any(m => m.Id == e.MinistryId));
                 foreach (MinistryDto sharedMinistry in sharedMinistries)
                 {
                     if (!existingSharedMinistries.Any(m => m.MinistryId == sharedMinistry.Id))
@@ -938,11 +990,12 @@ namespace Gcpe.Hub.WebApp.Controllers
                     }
                 }
             }
+
             db.MediaRequestSharedMinistry.RemoveRange(removedSharedMinistries);
         }
 
 
-        
+
         private async Task<MediaRequest> ConvertFromDtoAsync(MediaRequestDto dto)
         {
             MediaRequest mediaRequest;
@@ -961,7 +1014,8 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             mediaRequest.ResponsibleUser = await db.SystemUser.SingleAsync(e => e.RowGuid == dto.ResponsibleUser.Id);
 
-            mediaRequest.ResponsibleUserId = mediaRequest.ResponsibleUser.Id; // We save using the Id, not the full object.
+            mediaRequest.ResponsibleUserId =
+                mediaRequest.ResponsibleUser.Id; // We save using the Id, not the full object.
             mediaRequest.DeadlineAt = dto.DeadlineAt?.ToUniversalTime();
             mediaRequest.RequestTopic = dto.RequestTopic?.Trim();
             mediaRequest.RequestContent = dto.RequestContent?.Trim();
@@ -972,7 +1026,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             mediaRequest.Response = dto.Response?.Trim();
 
             //TODO: Test if this can simply be mediaRequest.Resolution = dto.Resolution.Id instead of requiring a lookup;
-            mediaRequest.Resolution = dto.Resolution == null ? null : await db.MediaRequestResolution.FindAsync(dto.Resolution.Id);
+            mediaRequest.Resolution = dto.Resolution == null
+                ? null
+                : await db.MediaRequestResolution.FindAsync(dto.Resolution.Id);
             mediaRequest.LeadMinistryId = dto.LeadMinistry.Id;
 
             await UpdateSharedMinistries(dto.SharedMinistries, mediaRequest.Id);
@@ -987,14 +1043,17 @@ namespace Gcpe.Hub.WebApp.Controllers
                 mediaRequest.TakeOverRequestMinistryId = null;
             }
 
-            IList<MediaRequestContact> existingMediaRequestContacts = db.MediaRequestContact.Where(e => e.MediaRequestId == mediaRequest.Id).ToList();
-            IEnumerable<MediaRequestContact> removedMediaRequestContacts = existingMediaRequestContacts.Where(e => !dto.MediaContacts.Any(mc => mc.Id == e.ContactId));
+            IList<MediaRequestContact> existingMediaRequestContacts =
+                db.MediaRequestContact.Where(e => e.MediaRequestId == mediaRequest.Id).ToList();
+            IEnumerable<MediaRequestContact> removedMediaRequestContacts =
+                existingMediaRequestContacts.Where(e => !dto.MediaContacts.Any(mc => mc.Id == e.ContactId));
             db.MediaRequestContact.RemoveRange(removedMediaRequestContacts);
 
             foreach (MediaContactDto mediaContact in dto.MediaContacts)
             {
                 // a contact belonging to 2 outlets can only appear once in a media request (enforced by primary key)
-                MediaRequestContact rq = existingMediaRequestContacts.SingleOrDefault(mc => mc.ContactId == mediaContact.Id);
+                MediaRequestContact rq =
+                    existingMediaRequestContacts.SingleOrDefault(mc => mc.ContactId == mediaContact.Id);
 
                 if (rq == null)
                 {
@@ -1005,6 +1064,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     };
                     db.MediaRequestContact.Add(rq);
                 }
+
                 rq.CompanyId = mediaContact.Job.Outlet.Id;
             }
 
@@ -1025,7 +1085,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             var subjectTemplate = "{{MinistryAbbreviation}}: End of Day Media Request Report";
 
             string subject = subjectTemplate.Replace("{{MinistryAbbreviation}}", ministry.Abbreviation);
-            string bodyHtml = @"<html style='font-family:Calibri, sans-serif;'>" + @"<style type=""text/css""></style>" + @"<body style='font-family:Calibri, sans-serif; font-size:12.0pt; color: black;'>";
+            string bodyHtml = @"<html style='font-family:Calibri, sans-serif;'>" +
+                              @"<style type=""text/css""></style>" +
+                              @"<body style='font-family:Calibri, sans-serif; font-size:12.0pt; color: black;'>";
             bodyHtml += GenerateEodEmail(requests);
 
             await mailProvider.SendAsync(subject, bodyHtml, MailAddressFor(UserMe));
@@ -1041,10 +1103,12 @@ namespace Gcpe.Hub.WebApp.Controllers
             var myContact = MailAddressFor(UserMe);
 
             //var subjectTemplate = "{{MinistryAbbreviation}} Media Request: {{OutletName}} - {{ReporterName}} - {{RequestTopic}}";
-            var subjectTemplate = "{{MinistryAbbreviation}} " + (dto.ParentRequest == null ? "" : "Follow-up ") + "Media Request: {{RequestTopic}}";
+            var subjectTemplate = "{{MinistryAbbreviation}} " + (dto.ParentRequest == null ? "" : "Follow-up ") +
+                                  "Media Request: {{RequestTopic}}";
             //TODO: Use PopulateTemplate(subjectTemplate, dto);
 
-            string subject = subjectTemplate.Replace("{{MinistryAbbreviation}}", dto.LeadMinistry.Abbreviation).Replace("{{RequestTopic}}", dto.RequestTopic);
+            string subject = subjectTemplate.Replace("{{MinistryAbbreviation}}", dto.LeadMinistry.Abbreviation)
+                .Replace("{{RequestTopic}}", dto.RequestTopic);
 
             string bodyHtml = GenerateEmail(dto);
 
@@ -1062,10 +1126,10 @@ namespace Gcpe.Hub.WebApp.Controllers
             foreach (var minDto in dto.SharedMinistries)
             {
                 var ministry = db.Ministry
-                                .Where(e => e.Id == minDto.Id)
-                                .Include(e => e.ContactUser)
-                                .Include(e => e.SecondContactUser)
-                                .FirstOrDefault();
+                    .Where(e => e.Id == minDto.Id)
+                    .Include(e => e.ContactUser)
+                    .Include(e => e.SecondContactUser)
+                    .FirstOrDefault();
 
                 //This is the primary contact.  As of 2017-11-03 this is now put into the CC list.
                 if (ministry.ContactUser != null)
@@ -1092,20 +1156,22 @@ namespace Gcpe.Hub.WebApp.Controllers
             {
                 await EmailTakeOverRequest(subject, dto, myContact, bodyHtml);
             }
-            
+
         }
 
-        private async Task EmailTakeOverRequest(string subject, MediaRequestDto dto, MailAddress myContact, string bodyHtml)
+        private async Task EmailTakeOverRequest(string subject, MediaRequestDto dto, MailAddress myContact,
+            string bodyHtml)
         {
             string messageSubject = "Take over as lead for " + subject;
-            
+
             var toList = new List<MailAddress>();
             var ccList = new List<MailAddress>();
             UriBuilder uriBuilder = new UriBuilder
             {
                 Scheme = this.Request.Scheme,
-                Host = this.Request.Host.Host,              
-                Path = "/MediaRequests/request/" + dto.Id.ToString() // Can't use the current path, as it is an api reference.
+                Host = this.Request.Host.Host,
+                Path = "/MediaRequests/request/" +
+                       dto.Id.ToString() // Can't use the current path, as it is an api reference.
             };
 
             if (this.Request.Host.Port != null)
@@ -1119,10 +1185,10 @@ namespace Gcpe.Hub.WebApp.Controllers
             ccList.Add(myContact);
 
             var ministry = db.Ministry
-                            .Where(e => e.Id == dto.TakeOverRequestMinistry.Id)
-                            .Include(e => e.ContactUser)
-                            .Include(e => e.SecondContactUser)
-                            .FirstOrDefault();
+                .Where(e => e.Id == dto.TakeOverRequestMinistry.Id)
+                .Include(e => e.ContactUser)
+                .Include(e => e.SecondContactUser)
+                .FirstOrDefault();
 
             //This is the primary contact.  Put into the To address as they are the primary recipient.
             if (ministry.ContactUser != null)
@@ -1133,7 +1199,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 ccList.Add(MailAddressFor(ministry.SecondContactUser));
 
             await mailProvider.SendAsync(messageSubject, messageBody, myContact, toList, ccList);
-            
+
         }
 
         private static string FormatTelephone(string telephone, string extension)
@@ -1145,7 +1211,8 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (telephone.Length == 10)
             {
-                telephone = telephone.Substring(0, 3) + "-" + telephone.Substring(3, 3) + "-" + telephone.Substring(6, 4);
+                telephone = telephone.Substring(0, 3) + "-" + telephone.Substring(3, 3) + "-" +
+                            telephone.Substring(6, 4);
             }
 
             return string.IsNullOrEmpty(extension) ? telephone : telephone + " x " + extension;
@@ -1160,7 +1227,8 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (telephone.Length == 10)
             {
-                telephone = telephone.Substring(0, 3) + "-" + telephone.Substring(3, 3) + "-" + telephone.Substring(6, 4);
+                telephone = telephone.Substring(0, 3) + "-" + telephone.Substring(3, 3) + "-" +
+                            telephone.Substring(6, 4);
             }
 
             return telephone;
@@ -1207,7 +1275,9 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     placeholder += "Unknown ";
                 }
-                mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br /></p>";
+
+                mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder +
+                               "{{EodReportWith}}<br /></p>";
                 mediaString = mediaString.Replace("{{EodReportWith}}", EodReportWithString(mr.EodReportWith));
                 string contacts = "";
                 //TODO: Change to a for loop
@@ -1222,11 +1292,14 @@ namespace Gcpe.Hub.WebApp.Controllers
                     if (i >= 1)
                         contacts += "; ";
                     //contacts += "<b>" + array[i].Contact.FirstName + " " + array[i].Contact.LastName + "</b>" + " - " + array[i].Company.CompanyName;
-                    contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " + array[i].Company.CompanyName;
+                    contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " +
+                                array[i].Company.CompanyName;
                 }
+
                 mediaString = mediaString.Replace("{{Contacts}}", contacts + "<br />");
                 mediaString = mediaString.Replace("{{Topic}}", mr.RequestTopic);
             }
+
             sb.Append(mediaString);
 
             //sb.Append("</table>");
@@ -1246,7 +1319,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             string closedMediaString = "";
             foreach (MediaRequest mr in closedMediaRequests)
             {
-                closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
+                closedMediaString +=
+                    "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
                 closedMediaString = closedMediaString.Replace("{{EodReportWith}}", mr.EodReportWith.ToString());
                 string contacts = "";
                 //foreach (MediaRequestContact contact in mr.MediaRequestContact)
@@ -1258,13 +1332,17 @@ namespace Gcpe.Hub.WebApp.Controllers
                     var array = mr.MediaRequestContact.ToArray();
                     if (i >= 1)
                         contacts += "; ";
-                    contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " + array[i].Company.CompanyName;
+                    contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " +
+                                array[i].Company.CompanyName;
                 }
+
                 closedMediaString = closedMediaString.Replace("{{Contacts}}", contacts + "<br />");
                 closedMediaString = closedMediaString.Replace("{{Topic}}", mr.RequestTopic);
                 closedMediaString = closedMediaString.Replace("{{Resolution}}", mr.Resolution.DisplayAs);
-                closedMediaString = closedMediaString.Replace("{{Response}}", mr.Response.Replace("\r\n", "\n").Replace("\n", "<br />"));
+                closedMediaString = closedMediaString.Replace("{{Response}}",
+                    mr.Response.Replace("\r\n", "\n").Replace("\n", "<br />"));
             }
+
             sb.Append(closedMediaString);
             sb.Append("</Div></body></html>");
             //sb.Append("</table></body></html>");
@@ -1279,7 +1357,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             //closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>"
             template += "<p style=\"padding-right: 8px; vertical-align:top;\">";
             template += "<b>Deadline</b>  ";
-            template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";
+            template +=
+                "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";
             template += "<br /><b>Request</b><br />";
             template += "<span style=\"color:black;\">{{Request}}</span><br />";
             template += "<br /><b>Background</b><br />";
@@ -1290,7 +1369,9 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             var sb = new StringBuilder();
 
-            sb.Append(@"<html style='font-family:Calibri, sans-serif;'>" + @"<style type=""text/css""> td { font-family: Calibri, sans-serif; }</style>" + @"<body style='font-family:Calibri, sans-serif; font-size:11.0pt; color: black;'>");
+            sb.Append(@"<html style='font-family:Calibri, sans-serif;'>" +
+                      @"<style type=""text/css""> td { font-family: Calibri, sans-serif; }</style>" +
+                      @"<body style='font-family:Calibri, sans-serif; font-size:11.0pt; color: black;'>");
 
 
             sb.Append(@"<div style='font-family:Calibri, sans-serif;'>");
@@ -1298,9 +1379,11 @@ namespace Gcpe.Hub.WebApp.Controllers
             sb.Append("<div style=\"margin-left: 20px;\"> ");
             string reporters = "";
 
-            foreach (var mediaContact in dto.MediaContacts.OrderByDescending(e => e.Job.Outlet.IsMajor).ThenBy(e => e.FirstName).ThenBy(e => e.LastName))
+            foreach (var mediaContact in dto.MediaContacts.OrderByDescending(e => e.Job.Outlet.IsMajor)
+                .ThenBy(e => e.FirstName).ThenBy(e => e.LastName))
             {
-                string reporter = "{{ReporterName}}, {{ReporterTitle}}<br />{{OutletName}}<br />{{ReporterEmailLine}}{{ReporterTelephoneLine}}";
+                string reporter =
+                    "{{ReporterName}}, {{ReporterTitle}}<br />{{OutletName}}<br />{{ReporterEmailLine}}{{ReporterTelephoneLine}}";
 
                 reporter = reporter.Replace("{{OutletName}}", mediaContact.Job.Outlet.Name);
                 reporter = reporter.Replace("{{ReporterName}}", mediaContact.FirstName + " " + mediaContact.LastName);
@@ -1312,21 +1395,25 @@ namespace Gcpe.Hub.WebApp.Controllers
                 string telephone = "";
                 if (showWorkPhone && showCellPhone)
                 {
-                    telephone = FormatTelephone(showWorkPhone ? mediaContact.WorkPhone : null, showWorkPhone ? mediaContact.WorkPhoneExtension : null);
+                    telephone = FormatTelephone(showWorkPhone ? mediaContact.WorkPhone : null,
+                        showWorkPhone ? mediaContact.WorkPhoneExtension : null);
                     telephone += " c: " + FormatTelephone(showCellPhone ? mediaContact.CellPhone : null);
                 }
                 else if (showWorkPhone)
                 {
-                    telephone = FormatTelephone(showWorkPhone ? mediaContact.WorkPhone : null, showWorkPhone ? mediaContact.WorkPhoneExtension : null);
+                    telephone = FormatTelephone(showWorkPhone ? mediaContact.WorkPhone : null,
+                        showWorkPhone ? mediaContact.WorkPhoneExtension : null);
                 }
                 else if (showCellPhone)
                 {
                     telephone = FormatTelephone(showCellPhone ? mediaContact.CellPhone : null);
                 }
 
-                reporter = reporter.Replace("{{ReporterTelephoneLine}}", string.IsNullOrEmpty(telephone) ? "" : (telephone + "<br />"));
+                reporter = reporter.Replace("{{ReporterTelephoneLine}}",
+                    string.IsNullOrEmpty(telephone) ? "" : (telephone + "<br />"));
 
-                reporter = reporter.Replace("{{ReporterEmailLine}}", string.IsNullOrEmpty(mediaContact.Email) ? "" : (mediaContact.Email + "<br />"));
+                reporter = reporter.Replace("{{ReporterEmailLine}}",
+                    string.IsNullOrEmpty(mediaContact.Email) ? "" : (mediaContact.Email + "<br />"));
                 //template.Insert(0, mediaContactTemplate);
 
                 reporters += (reporters == "" ? "" : "<br />") + reporter;
@@ -1346,7 +1433,8 @@ namespace Gcpe.Hub.WebApp.Controllers
             string takeOverRequestMinistry = "";
             if (dto.TakeOverRequestMinistry != null)
             {
-                takeOverRequestMinistry = dto.TakeOverRequestMinistry.Abbreviation + " - " + dto.TakeOverRequestMinistry.DisplayAs + "<br />";
+                takeOverRequestMinistry = dto.TakeOverRequestMinistry.Abbreviation + " - " +
+                                          dto.TakeOverRequestMinistry.DisplayAs + "<br />";
             }
 
             template = template.Replace("{{MinistryAbbreviation}}", dto.LeadMinistry.Abbreviation);
@@ -1369,13 +1457,15 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             template = template.Replace("{{MinistryName}}", dto.LeadMinistry.DisplayAs);
             template = template.Replace("{{RequestedAt}}", dto.RequestedAt.DateTime.ToLocalTime().ToString("f"));
-            template = template.Replace("{{Request}}", dto.RequestContent.Replace("\r\n", "\n").Replace("\n", "<br />"));
+            template = template.Replace("{{Request}}",
+                dto.RequestContent.Replace("\r\n", "\n").Replace("\n", "<br />"));
 
             string background = "";
 
             if (dto.ParentRequest != null)
             {
-                background = "This is a follow-up to a media request from " + dto.ParentRequest.RequestedAt.ToString("MMMM d, yyyy") + "." + "<br />";
+                background = "This is a follow-up to a media request from " +
+                             dto.ParentRequest.RequestedAt.ToString("MMMM d, yyyy") + "." + "<br />";
                 background += "<br />";
                 background += "<div style=\"margin-left: 20px;\">";
                 background += "<i>REQUEST:</i>" + "<br />";
@@ -1386,9 +1476,11 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     background += "<br /><br />";
                     background += "<i>RESPONSE:</i>" + "<br />";
-                    background += dto.ParentRequest.Resolution.DisplayAs.Replace("\r\n", "\n").Replace("\n", "<br />") + "<br />";
+                    background += dto.ParentRequest.Resolution.DisplayAs.Replace("\r\n", "\n").Replace("\n", "<br />") +
+                                  "<br />";
                     background += dto.ParentRequest.Response.Replace("\r\n", "\n").Replace("\n", "<br />");
                 }
+
                 background += "</div>";
             }
 
@@ -1400,6 +1492,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             return sb.ToString();
         }
+
         //TODO: This should be eliminated and the ENUM type built into the database to be automatically returned as a string
         private string EodReportWithString(Data.Entity.EodReportWith? reportWith)
         {
@@ -1410,7 +1503,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 switch (reportWith.Value)
                 {
                     case EodReportWith.CommOffice:
-                        result = Configuration["CommOffice"];
+                        result = "GCPE";
                         break;
                     case EodReportWith.MinistersOffice:
                         result = "Minister's Office";
@@ -1448,20 +1541,5 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             return new MailAddress(user.EmailAddress, user.DisplayAs);
         }
-
-        private DateTime GetLocalTimeNow()
-        {
-            return GetLocalDateTime(DateTimeOffset.UtcNow);
-        }
-
-        private DateTime GetLocalDateTime(DateTimeOffset dateTimeOffset)
-        {
-            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(Configuration["TimeZoneId"]);
-
-            var localDateTime = TimeZoneInfo.ConvertTime(dateTimeOffset.DateTime, TimeZoneInfo.Utc, timeZoneInfo);
-
-            return localDateTime;
-        }
-
     }
 }
