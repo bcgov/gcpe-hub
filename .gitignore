@@ -249,3 +249,11 @@ Config/Hub\.WebApp\.Debug\.appsettings\.json
 Config/Hub\.WebApp\.Release\.appsettings\.json
 
 **/PublishProfiles/**
+
+Gcpe\.Hub\.WebApp/package-lock\.json
+
+Hub\.Legacy/Gcpe\.Hub\.Legacy\.Website/Calendar/Scripts/activityhelper\.js
+
+Hub\.Legacy/Gcpe\.Hub\.Legacy\.Website/Calendar/Scripts/activityList\.js
+
+Hub\.Legacy/Gcpe\.Hub\.Legacy\.Website/Calendar/Scripts/ContextualHelp\.js
