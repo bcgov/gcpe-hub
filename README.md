@@ -38,6 +38,9 @@ Environment variables will be required for these developers to mimic Authorizati
    This used to be included in Web Essentials, but it is no longer. It is a tool for generating typescript .d.ts files from C# classes. See Gcpe.Hub.WebApp in the models folder there are C# objects with generated .d.ts files (click the arrow to see).
    **Note: this only works on Windows 10**
 
+9. Node.js with NPM (version 8.11 or later, this written using 10.4.1) [link](https://nodejs.org/en/download/)
+
+
 #### Installation
 Assumes administrative privileges on the machine.
 
@@ -57,6 +60,17 @@ Assumes administrative privileges on the machine.
 
 4. SQL Server Management Studio, double-click and use defaults
 5. Web Essentials and TypeScript (if applicable) extensions, just double-click.
+6. Node.js, follow installation instuctions.  If using the Windows Installer, double-click and accept defaults.  Ensure node is in the path.
+7. Install bower and gulp globally, from a command prompt:
+
+   `npm install -g bower`
+
+   `npm install -g gulp`
+
+8.  Ensure MSBUILD is on your PATH, if it is not already there (Community Edition does not add VS tools to PATH).
+    
+    `set PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\bin;`
+
 
 #### SQL Server Configuration
 By default, the local SQL Server accepts only Windows Authorization, we need to allow for SQL Server Authorization.
@@ -80,12 +94,12 @@ Create a local version of the Gcpe.Hub database.  This will create the database,
 6. Open a command prompt at /db-scripts
 7. Run the following command:
 
- `sqlcmd -S localhost -i _sqlcmd.master.sql -v path="path to /db-scripts"`
+   `sqlcmd -S localhost -i _sqlcmd.master.sql -v path="path to /db-scripts"`
 
 #### Configure Applications
-Under the /Config directory, there are 2 template files: Hub.Legacy.Template.appSettings.config and Hub.WebApp.Template.appsettings.json.  Copy these files and rename as: Hub.Legacy.Debug.appSettings.config and Hub.WebApp.Debug.appsettings.json.  This should be done for each build/runtime configuration and should remain in /Config directory.  **DO NOT CHECK THESE INTO SOURCE CONTROL**
+Under the /Configuration directory, there are 2 template files: Hub.Legacy.Template.appSettings.config and Hub.WebApp.Template.appsettings.json.  Copy these files and rename as: Hub.Legacy.Debug.appSettings.config and Hub.WebApp.Debug.appsettings.json.  This should be done for each build/runtime configuration and should remain in /Configuration directory.  **DO NOT CHECK THESE INTO SOURCE CONTROL**
 
-Note that at build time, the configuration specific files will be copied to /Config as Hub.Legacy.appSettings.config and Hub.WebApp.appSettings.json.  In this way, we mimic the production layout and file naming for configuration.
+Note that at build time, the configuration specific files will be copied to /Configuration as Hub.Legacy.appSettings.config and Hub.WebApp.appSettings.json.  In this way, we mimic the production layout and file naming for configuration.
 
 ##### Hub.Legacy
 This is the collection of applications (Calendar, Contacts/Media Relations, News Release Management) that are bundled together.  These will be deployed as a sub-site of the Hub.WebApp.  Configuration for Hub.Legacy is considerable.  All configuration keys must in Hub.Legacy.\*.appSettings.config must be populated, but for immediate development purposes, set the following values to match your system:
@@ -130,3 +144,42 @@ There are two solutions: hub.web.opensource.sln (Hub.WebApp) and hub.legacy.open
 4. Right-click solution in Solution Explorer, click Restore Nuget Packages
 5. Rebuild solution
 6. Debug 
+
+## Publication and Deployment
+
+### IIS Site Layout and Configuration
+
+  
+  /Configuration
+
+  /Log Files
+
+  /Web Site
+
+  /Web Site - Legacy
+
+
+### Publish Applications
+We will build and publish to a local filesystem first, then copy the output to the IIS server.  The /p:DeleteExistingFiles=True switch will not only delete files, but will delete the base folder.  We need to leave those intact on IIS directories due to specific permissions and site configuration.
+
+
+1. Ensure msbuild, bower, gulp are on your path
+2. Open command prompt at root of code (ex. C:\gcpe-hub)
+3. Publish to a local filesystem mirroring IIS layout (ex. C:\pub)   
+4. Build and Publish the Release version of Hub.Web
+
+   `msbuild Gcpe.Hub.WebApp\Gcpe.Hub.WebApp.csproj /t:Clean,Build,Publish /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Release /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:PublishProvider=FileSystem /p:publishUrl="C:\Pub\Web Site" /p:DeleteExistingFiles=True`
+
+5. Build and Publish the Release version of Gcpe.Hub.Legacy.Website
+
+   `msbuild Hub.Legacy\Gcpe.Hub.Legacy.Website\Gcpe.Hub.Legacy.Website.csproj /t:Clean,Build,Publish /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Release /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:PublishProvider=FileSystem /p:publishUrl="C:\Pub\Web Site - Legacy" /p:DeleteExistingFiles=True`
+
+6.  Take applications offline in IIS.  Under \\IIS Site\Web Site and \\IIS Site\Web Site - Legacy, add files app_offline.htm (http://appoffline.appspot.com/).
+7.  Copying over of files will be up to the team.  You may want to delete all current files from IIS or just cherrypick files, or copy over the build output.  That would assume that no resource files were removed between releases, only changes to the dlls and configuration.  Also, the tools and scripts can vary, for example, you may wish to use ROBOCOPY.
+
+   `xcopy "C:\Pub\Web Site\*" "\\IIS Site\Web Site" /s /i /y'
+   `xcopy "C:\Pub\Web Site - Legacy\*" "\\IIS Site\Web Site - Legacy" /s /i /y'
+
+8.  Copy the environment specific configuration files to the IIS Site Configuration folder (Hub.Legacy.appSettings.config and Hub.WebApp.appSettings.json).  Ensure files are named correctly and are configured for the intended environment.
+9.  Remove (or rename) the 2 app_offline.htm files
+

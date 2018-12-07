@@ -240,13 +240,13 @@ ModelManifest.xml
 
 # copied over configuration files
 /Hub.Legacy/Gcpe.Hub.Legacy.Website/Config/**
-Config/Hub\.Legacy\.appSettings\.config
-Config/Hub\.WebApp\.appSettings\.json
+Config*/Hub\.Legacy\.appSettings\.config
+Config*/Hub\.WebApp\.appSettings\.json
 
-Config/Hub\.Legacy\.Debug\.appSettings\.config
-Config/Hub\.Legacy\.Release\.appSettings\.config
-Config/Hub\.WebApp\.Debug\.appsettings\.json
-Config/Hub\.WebApp\.Release\.appsettings\.json
+Config*/Hub\.Legacy\.Debug\.appSettings\.config
+Config*/Hub\.Legacy\.Release\.appSettings\.config
+Config*/Hub\.WebApp\.Debug\.appsettings\.json
+Config*/Hub\.WebApp\.Release\.appsettings\.json
 
 **/PublishProfiles/**
 

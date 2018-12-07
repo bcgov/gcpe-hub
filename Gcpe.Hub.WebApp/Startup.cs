@@ -17,7 +17,7 @@ namespace Gcpe.Hub.WebApp
     {
         public Startup(IHostingEnvironment env)
         {
-            var configPath = Path.Combine(Directory.GetParent(env.ContentRootPath).FullName, "Config");
+            var configPath = Path.Combine(Directory.GetParent(env.ContentRootPath).FullName, "Configuration");
             
             var builder = new ConfigurationBuilder()
                 .SetBasePath(configPath)

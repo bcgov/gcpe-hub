@@ -839,6 +839,8 @@
     <Content Include="Resources\BC\MediaRelations%402x.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
@@ -1344,6 +1346,7 @@
     <Content Include="News\ReleaseManagement\ReleaseManagement.master" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -2445,7 +2448,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Scripts\typings\moment\" />
     <Folder Include="SqlServerTypes\" />
   </ItemGroup>
@@ -2493,6 +2495,6 @@
   -->
   <Target Name="CopyConfigurationToSourceForDebug" AfterTargets="AfterBuild" Condition=" '$(PublishProfileName)' == '' And '$(WebPublishProfileFile)' == '' ">
     <!-- copy the specified configuration appsettings over as appSettings -->
-    <Copy SourceFiles="$(SolutionDir)Config\Hub.Legacy.$(Configuration).appSettings.config" DestinationFiles="$(SolutionDir)Config\Hub.Legacy.appSettings.config" ContinueOnError="false" />
+    <Copy SourceFiles="$(SolutionDir)Configuration\Hub.Legacy.$(Configuration).appSettings.config" DestinationFiles="$(SolutionDir)Configuration\Hub.Legacy.appSettings.config" ContinueOnError="false" />
   </Target>
 </Project>
