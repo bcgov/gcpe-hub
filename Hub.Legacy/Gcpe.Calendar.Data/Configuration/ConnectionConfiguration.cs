@@ -33,14 +33,10 @@ namespace CorporateCalendar.Data.Configuration
             {
                 validator.Check(() => DbServer);
                 validator.Check(() => DbName);
-                validator.Check(() => DbUserID);
-                validator.Check(() => DbPassword);
             }
         }
 
         public string DbServer => configuration.GetString(MethodBase.GetCurrentMethod());
         public string DbName => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbUserID => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbPassword => configuration.GetString(MethodBase.GetCurrentMethod());
     }
 }

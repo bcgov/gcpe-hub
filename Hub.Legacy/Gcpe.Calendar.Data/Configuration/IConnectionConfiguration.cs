@@ -10,8 +10,6 @@ namespace CorporateCalendar.Data.Configuration
     {
         String DbServer { get; }
         String DbName { get; }
-        String DbUserID { get;  }
-        String DbPassword { get; }
 
     }
 }

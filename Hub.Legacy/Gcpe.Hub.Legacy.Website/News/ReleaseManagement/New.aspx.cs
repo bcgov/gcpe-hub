@@ -100,12 +100,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
                                 where nrl.LanguageId == 4105 && nrl.Release.IsActive && nrl.Location != ""
                                 group nrl by nrl.Location into g
                                 select new { Location = g.Key, Count = g.Count() };
-
-                if (locations.Count() < 1000)
-                {
-                    return App.Settings.NewsReleaseEnglishLocations.ToCollection('|');
-                }
-
                 return locations.OrderByDescending(e => e.Count).Select(e => e.Location);
             }
         }
@@ -136,14 +130,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
         }
 
         #endregion
-
-        public NewsReleaseCollection CurrentCollection
-        {
-            get
-            {
-                return DbContext.NewsReleaseCollections.Find(new Guid(App.Settings.CurrentNewsReleaseCollectionId));
-            }
-        }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {

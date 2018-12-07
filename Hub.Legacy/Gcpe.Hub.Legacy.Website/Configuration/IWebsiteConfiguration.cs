@@ -41,8 +41,6 @@ namespace Gcpe.Hub.Configuration
         bool EnableForecastTab { get; }
         String PublishLocation { get; }
         String DeployLocations { get; }
-        String CurrentNewsReleaseCollectionId { get; }
-        String NewsReleaseEnglishLocations { get; }
 
         // Website
         String TrustedReverseProxyServers { get; }
@@ -56,8 +54,6 @@ namespace Gcpe.Hub.Configuration
         // Database Connection
         new String DbServer { get; }
         new String DbName { get; }
-        new String DbUserID { get; }
-        new String DbPassword { get; }
 
         // Cloud Storage / Azure Configuration
         String CloudEndpointsProtocol { get; }

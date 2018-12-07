@@ -97,8 +97,6 @@ namespace Gcpe.Hub.Configuration
                 validator.Check(() => EnableForecastTab);
                 validator.Check(() => PublishLocation);
                 validator.Check(() => DeployLocations);
-                validator.Check(() => CurrentNewsReleaseCollectionId);
-                validator.Check(() => NewsReleaseEnglishLocations);
 
                // Website
                 validator.Check(() => TrustedReverseProxyServers);
@@ -111,8 +109,6 @@ namespace Gcpe.Hub.Configuration
                 // Database Connection
                 validator.Check(() => DbServer);
                 validator.Check(() => DbName);
-                validator.Check(() => DbUserID);
-                validator.Check(() => DbPassword);
 
                 validator.Check(() => CloudEndpointsProtocol);
                 validator.Check(() => CloudAccountName);
@@ -175,8 +171,6 @@ namespace Gcpe.Hub.Configuration
         public bool EnableForecastTab => configuration.GetBool(MethodBase.GetCurrentMethod());
         public String PublishLocation => configuration.GetString(MethodBase.GetCurrentMethod());
         public String DeployLocations => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String CurrentNewsReleaseCollectionId => configuration.GetString(MethodBase.GetCurrentMethod());
-        public String NewsReleaseEnglishLocations => configuration.GetString(MethodBase.GetCurrentMethod());
 
         // Website
         public String TrustedReverseProxyServers => configuration.GetString(MethodBase.GetCurrentMethod());
@@ -190,8 +184,6 @@ namespace Gcpe.Hub.Configuration
         // Database Connection
         public string DbServer => configuration.GetString(MethodBase.GetCurrentMethod());
         public string DbName => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbUserID => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbPassword => configuration.GetString(MethodBase.GetCurrentMethod());
 
         // Cloud Storage / Azure Configuration
         public string CloudEndpointsProtocol => configuration.GetString(MethodBase.GetCurrentMethod());

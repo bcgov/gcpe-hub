@@ -17,7 +17,10 @@ Environment variables will be required for these developers to mimic Authorizati
   * **DebugLpadUser**: Domain\Username of account that can access the AD
   * **DebugLpadPwd**: password for that account
   * **DebugUsername**: Domain\Username of the developer's AD account.
+  * **GcpeHubDbUserID**: Database User ID used for developer only connections.  Set to HB_SDLC_DVLPR to match db-scriptsgcpe.hub-02-create-login_hb_sdlc_dvlpr.sql.. Adjust as necessary.
+  * **GcpeHubDbPassword**: Database User Password used for developer only connections.  Same as password entered in HB_SDLC_DVLPR to match db-scriptsgcpe.hub-02-create-login_hb_sdlc_dvlpr.sql
 
+  **Note**: if GcpeHubDbUserID and GcpeHubDbPassword environment variables are set, connection strings will be changed from Integrated Security=true to Integrated Security=false. These values are added as User ID and Password.
 
 #### Downloads
 1. .NET Framework 4.6.2 Developer Pack [link](https://www.microsoft.com/en-us/download/details.aspx?id=53321)
@@ -88,7 +91,7 @@ Create a local version of the Gcpe.Hub database.  This will create the database,
 
 1. Review the files under /db-scripts directory.
 2. Open gcpe.hub-01-create-db.sql, ensure file path is correct for location of db mdf and ldf files.
-3. Edit gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql, set desired password.  This password will be used in appSettings.
+3. Edit gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql, set desired password.  User ID and passwords should be set as see [environment variables](#-environment-variables): GcpeHubDbUserID and GcpeHubDbPassword.  This should only be used on Debug/Development environments.
 4. Edit gcpe.hub-data-04-systemuser.sql, edit the @systemUsername variable - your Active Directory User Account name (without the DOMAIN\)..  Also see: DebugUsername
 5. In the same file, edit the @fullName variable - Display name for the Active Directory User Account 
 6. Open a command prompt at /db-scripts
@@ -107,10 +110,8 @@ This is the collection of applications (Calendar, Contacts/Media Relations, News
 ###### Database
   * DbServer (localhost)
   * DbName (Gcpe.Hub)
-  * DbUserID (see gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql: HB_SDLC_DVLPR)
-  * DbPassword (password you set)
 
-These values will be used to build up various connection strings in the applications at runtime.
+These values will be used to build up various connection strings in the applications at runtime.  For development scenarios, see [environment variables](#-environment-variables). 
 
 ###### Active Directory
 

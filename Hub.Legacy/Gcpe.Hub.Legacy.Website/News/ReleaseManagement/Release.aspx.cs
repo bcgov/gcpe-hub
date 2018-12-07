@@ -231,12 +231,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
                                 where nrl.LanguageId == 4105 && nrl.Release.IsActive && nrl.Location != ""
                                 orderby nrl.Location
                                 select nrl.Location;
-
-                if (locations.Count() < 1000)
-                {
-                    return App.Settings.NewsReleaseEnglishLocations.ToCollection('|');
-                }
-
                 return locations.Distinct().ToArray();
             }
         }

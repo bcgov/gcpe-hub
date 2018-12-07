@@ -27,8 +27,16 @@ namespace MediaRelationsDatabase
 
                 //Console.WriteLine(builder.ConnectionString);
 
-                builder.Password = App.Settings.DbPassword;
-                builder.UserID = App.Settings.DbUserID;
+                string GcpeHubDbUserID = Environment.GetEnvironmentVariable("GcpeHubDbUserID");
+                string GcpeHubDbPassword = Environment.GetEnvironmentVariable("GcpeHubDbPassword");
+                if (!string.IsNullOrEmpty(GcpeHubDbUserID) && !string.IsNullOrEmpty(GcpeHubDbPassword))
+                {
+                    // override the connection string.
+                    // turn off integrated security and add these credentials
+                    builder.Password = GcpeHubDbPassword;
+                    builder.UserID = GcpeHubDbUserID;
+                    builder.IntegratedSecurity = false;
+                }
                 builder["Database"] = App.Settings.DbName;
                 builder["Server"] = App.Settings.DbServer;
 
