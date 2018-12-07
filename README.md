@@ -177,8 +177,8 @@ We will build and publish to a local filesystem first, then copy the output to t
 6.  Take applications offline in IIS.  Under \\IIS Site\Web Site and \\IIS Site\Web Site - Legacy, add files app_offline.htm (http://appoffline.appspot.com/).
 7.  Copying over of files will be up to the team.  You may want to delete all current files from IIS or just cherrypick files, or copy over the build output.  That would assume that no resource files were removed between releases, only changes to the dlls and configuration.  Also, the tools and scripts can vary, for example, you may wish to use ROBOCOPY.
 
-   `xcopy "C:\Pub\Web Site\*" "\\IIS Site\Web Site" /s /i /y'
-   `xcopy "C:\Pub\Web Site - Legacy\*" "\\IIS Site\Web Site - Legacy" /s /i /y'
+   `xcopy "C:\Pub\Web Site\*" "\\IIS Site\Web Site" /s /i /y`
+   `xcopy "C:\Pub\Web Site - Legacy\*" "\\IIS Site\Web Site - Legacy" /s /i /y`
 
 8.  Copy the environment specific configuration files to the IIS Site Configuration folder (Hub.Legacy.appSettings.config and Hub.WebApp.appSettings.json).  Ensure files are named correctly and are configured for the intended environment.
 9.  Remove (or rename) the 2 app_offline.htm files
