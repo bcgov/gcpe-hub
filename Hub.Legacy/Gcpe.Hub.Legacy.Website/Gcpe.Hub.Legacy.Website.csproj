@@ -715,7 +715,6 @@
     <Content Include="Content\screen.css" />
     <Content Include="Content\uniform.default.css" />
     <Content Include="Content\validationEngine.jquery.css" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="IEStandards.xml" />
     <Content Include="News\BlockBlobUpload.js" />
