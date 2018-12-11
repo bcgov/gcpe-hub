@@ -91,7 +91,7 @@ Create a local version of the Gcpe.Hub database.  This will create the database,
 
 1. Review the files under /db-scripts directory.
 2. Open gcpe.hub-01-create-db.sql, ensure file path is correct for location of db mdf and ldf files.
-3. Edit gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql, set desired password.  User ID and passwords should be set as see [environment variables](#-environment-variables): GcpeHubDbUserID and GcpeHubDbPassword.  This should only be used on Debug/Development environments.
+3. Edit gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql, set desired password.  User ID and passwords should be set as see [environment variables](#environment-variables): GcpeHubDbUserID and GcpeHubDbPassword.  This should only be used on Debug/Development environments.
 4. Edit gcpe.hub-data-04-systemuser.sql, edit the @systemUsername variable - your Active Directory User Account name (without the DOMAIN\)..  Also see: DebugUsername
 5. In the same file, edit the @fullName variable - Display name for the Active Directory User Account 
 6. Open a command prompt at /db-scripts
@@ -111,7 +111,7 @@ This is the collection of applications (Calendar, Contacts/Media Relations, News
   * DbServer (localhost)
   * DbName (Gcpe.Hub)
 
-These values will be used to build up various connection strings in the applications at runtime.  For development scenarios, see [environment variables](#-environment-variables). 
+These values will be used to build up various connection strings in the applications at runtime.  For development scenarios, see [environment variables](#environment-variables). 
 
 ###### Active Directory
 
@@ -151,13 +151,25 @@ There are two solutions: hub.web.opensource.sln (Hub.WebApp) and hub.legacy.open
 ### IIS Site Layout and Configuration
 
   
-  /Configuration
+  **/Configuration**
+  
+  Contains the configuration for Hub and Hub Legacy.  Ensure that the configuration values are for this specific environment.
 
-  /Log Files
+  Hub.Legacy.appSettings.config
+  Hub.WebApp.appSettings.json
 
-  /Web Site
+  **/Log Files**
 
-  /Web Site - Legacy
+  **/Web Site**
+
+  This is the parent site, the Hub.  
+  This is .NET Core 2.1.4 application. 
+
+  **/Web Site - Legacy**
+
+  This contains the Hub Legacy applications, ASP 4 Site.
+  Configure as a virtual child site with the path /Legacy
+  Ensure that this has its own application pool.
 
 
 ### Publish Applications

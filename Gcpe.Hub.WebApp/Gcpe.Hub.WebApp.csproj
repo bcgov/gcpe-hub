@@ -43,7 +43,7 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
-  <Target Name="CopyConfigurationForDebug" AfterTargets="AfterBuild" Condition="('$(DeployDefaultTarget)' == '' And '$(WebPublishMethod)' == '')" >
+  <Target Name="CopyConfigurationForDebug" AfterTargets="AfterBuild" >
     <!-- copy the specified configuration appsettings over as appSettings -->
     <Copy SourceFiles="$(SolutionDir)Configuration\Hub.WebApp.$(Configuration).appSettings.json" DestinationFiles="$(SolutionDir)Configuration\Hub.WebApp.appSettings.json" ContinueOnError="false" />
   </Target>
