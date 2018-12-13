@@ -14,8 +14,8 @@ Environment variables will be required for these developers to mimic Authorizati
 
 ###### Environment Variables
 
-  * **DebugLpadUser**: Domain\Username of account that can access the AD
-  * **DebugLpadPwd**: password for that account
+  * **DebugLdapUser**: Domain\Username of account that can access the AD
+  * **DebugLdapPwd**: password for that account
   * **DebugUsername**: Domain\Username of the developer's AD account.
   * **GcpeHubDbUserID**: Database User ID used for developer only connections.  Set to HB_SDLC_DVLPR to match db-scriptsgcpe.hub-02-create-login_hb_sdlc_dvlpr.sql.. Adjust as necessary.
   * **GcpeHubDbPassword**: Database User Password used for developer only connections.  Same as password entered in HB_SDLC_DVLPR to match db-scriptsgcpe.hub-02-create-login_hb_sdlc_dvlpr.sql
