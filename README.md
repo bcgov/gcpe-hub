@@ -50,7 +50,7 @@ It is best to first create the folder, which will be required when the Website i
 ##### Directory Example
 
     \\env.iis\applications\Gcpe.Hub
-        IIS Root
+        IIS Application Root
         
     \\env.iis\applications\Gcpe.Hub\Configuration
         Location of configuration files for the Hub application and Legacy Applications.
@@ -351,12 +351,12 @@ We will build and publish to a local filesystem first, then copy the output to t
 ## Hub.Legacy.appSettings.config
 
   **Notes**
-  - Configuration for all of the legacy applications.\
-  - A template file with all the keys and comments is provided (/Configuration/Hub.Legacy.Template.config).\
-  - Create a file for each build configuration (ex. Hub.Legacy.Debug.appSettings.config) with appropriate values.\
-  - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))\
-  - This is an xml file, used to populate the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config appSettings section.\
-  - Connection strings are in the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config connectionStrings section, Database Name and Server Name are replaced with values in the appSettings.config file.\
+  - Configuration for all of the legacy applications.
+  - A template file with all the keys and comments is provided (/Configuration/Hub.Legacy.Template.config).
+  - Create a file for each build configuration (ex. Hub.Legacy.Debug.appSettings.config) with appropriate values.
+  - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))
+  - This is an xml file, used to populate the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config appSettings section.
+  - Connection strings are in the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config connectionStrings section, Database Name and Server Name are replaced with values in the appSettings.config file.
    
   **TODO: fill in each key ** 
 
@@ -425,9 +425,9 @@ Flags used to determine allowed functionality within the application; basically 
   **Notes**
   - Configuration for the .NET Core Hub application.
   - This is a json file, and thus has no notes or comments within.
-  - A template file with all the keys is provided (/Configuration/Hub.WebApp.Template.json).\
-  - Create a file for each build configuration (ex. Hub.WebApp.Debug.appSettings.json) with appropriate values.\
-  - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))\
+  - A template file with all the keys is provided (/Configuration/Hub.WebApp.Template.json).
+  - Create a file for each build configuration (ex. Hub.WebApp.Debug.appSettings.json) with appropriate values.
+  - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))
   - The connection string is in this file, so we can fully create it for each environment.
    
   **TODO: fill in each key ** 
