@@ -2,7 +2,7 @@ SET NOCOUNT ON
 GO
 
 --
--- Example usage (must pass in a path variable
+-- Example usage (must pass in a path variable)
 -- sqlcmd -S localhost -i _sqlcmd.developer.sql -v path="C:\gcpe-hub\db-scripts"
 --
 

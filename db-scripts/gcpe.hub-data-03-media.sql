@@ -35,5 +35,8 @@ INSERT [media].[ProvState] ([Id], [ProvStateName], [ProvStateAbbrev], [CreationD
 INSERT [media].[MediaLanguage] ([Id], [LanguageName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'English', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
 INSERT [media].[MediaLanguage] ([Id], [LanguageName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'French', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
 
+INSERT INTO [media].[MinisterialJobTitle]([Id],[MinisterialJobTitleName],[CreationDate],[ModifiedDate],[SortOrder]) VALUES (NEWID() ,'Minister' ,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ,1)
+
+
 GO
 

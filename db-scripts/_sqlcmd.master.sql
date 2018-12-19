@@ -11,6 +11,8 @@ PRINT 'Load Gcpe.Hub initial data...'
 
 PRINT 'Create objects...'
 :r $(path)\gcpe.hub-03-create-objects.sql
+PRINT 'Create full text search...'
+:r $(path)\gcpe.hub-04-fulltextsearch.sql
 PRINT 'Load dbo schema data...'
 :r $(path)\gcpe.hub-data-01-dbo.sql
 PRINT 'Load calendar schema data...'

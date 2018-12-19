@@ -31,6 +31,45 @@ INSERT [dbo].[NewsReleaseCollection] ([Id], [Name]) VALUES (N'37e637e3-0a3a-45f7
 INSERT [dbo].[NewsReleaseCollection] ([Id], [Name]) VALUES (N'42ae17e6-5a27-4f76-ba10-2d42dbc1c358', N'2017-2017')
 INSERT [dbo].[NewsReleaseCollection] ([Id], [Name]) VALUES (N'dd1be731-8c9a-4f50-953d-b8db37f85d17', N'2017-2021')
 
+-- NB Ministries/Departments
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'aboriginal-affairs', 15, N'Department of Aboriginal Affairs', N'AAS', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'agriculture-aquaculture-and-fisheries', 20, N'Department of Agriculture, Aquaculture and Fisheries', N'AAF', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'department-of-seniors', 24, N'Department of Seniors', N'SENIORS', 0, N'', N'-', N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'economic-development-small-business', 20, N'Department of Economic Development and Small Business', N'EDSB', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'education-early-childhood-development', 30, N'Department of Education and Early Childhood Development', N'EECD', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'energy-resource-development', 40, N'Department of Energy and Resource Development', N'ERD', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'environment-local-government', 10, N'Department of Environment and Local Government', N'ELG', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'executive-council', 5, N'Executive Council Office', N'ECO', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'finance', 50, N'Department of Finance', N'FIN', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'health', 60, N'Department of Health', N'DH', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'intergovernmental-affairs', 70, N'Department of Intergovernmental Affairs', N'IGA', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'justice-attorney-general', 80, N'Department of Justice and Office of the Attorney General', N'JAG', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'post-secondary-education-training-labour', 90, N'Department of Post-Secondary Education, Training and Labour', N'PETL', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'public-safety', 100, N'Department of Public Safety', N'DPS', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'service-new-brunswick', 200, N'Department of Service New Brunswick', N'SERVICE', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'social-development', 110, N'Department of Social Development', N'SD', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'tourism-heritage-culture', 120, N'Department of Tourism, Heritage and Culture', N'THC', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (NEWID(), N'transportation-infrastructure', 130, N'Department of Transportation and Infrastructure', N'DTI', 1, N'', NULL, N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'-', N'-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+
+
 -- insert ministry sectors...
 INSERT INTO [dbo].[MinistrySector]
 	  SELECT m.id, s.id from dbo.Ministry m, dbo.Sector s;
@@ -45,53 +84,14 @@ insert into dbo.SectorLanguage
   
 GO
 
-DECLARE @list varchar(8000)
-DECLARE @pos INT
-DECLARE @len INT
-DECLARE @value varchar(8000)
 
-declare @id uniqueidentifier
-declare @key nvarchar(100)
-declare @sortOrder int
-declare @displayName nvarchar(255)
-declare @abbrev nvarchar(10)
-
-SET @list = 'Department of Agriculture-AGRI|Department of Community Services-COMMSRV|Department of Economic and Rural Development and Tourism-ERDT|Department of Education and Early Childhood Development-EECD|Department of Energy-ENERGY|Department of Environment-ENVIRO|Department of Finance-FIN|Department of Fisheries and Aquaculture-FISHAQUA|Department of Health and Wellness-HEALTH|Department of Intergovernmental Affairs-INTERGOV|Department of Justice-JUSTICE|Department of Labour and Workforce Development-LABOUR|Department of Natural Resources-NATURALRES|Department of Public Service Commission-PUBSRV|Department of Seniors-SENIORS|Department of Service Nova Scotia and Municipal Relations-NSMUNICIPAL|Department of Tourism, Culture and Heritage-TOURISM|Department of Transportation and Infrastructure Renewal-TRANSPO|'
-
-set @pos = 0
-set @len = 0
-set @sortOrder = 10
-
-WHILE CHARINDEX('|', @list, @pos+1)>0
-BEGIN
-    set @len = CHARINDEX('|', @list, @pos+1) - @pos
-    set @value = SUBSTRING(@list, @pos, @len)
-
-	declare @l int = CHARINDEX('-', @value, 1)
-	
-	set @id = NEWID()
-	set @displayName = SUBSTRING(@value, 1, @l-1)
-	set @abbrev = SUBSTRING(@value, @l+1, 10)
-	set @key = REPLACE(LOWER(@value), ' ', '-')
-    
-	/*        
-    PRINT @id -- for debug porpose   
-	PRINT @displayName
-	PRINT @abbrev
-	PRINT @key
-	PRINT ''
-    */
-    INSERT [dbo].[Ministry] ([Id], [Key], [SortOrder], [DisplayName], [Abbreviation], [IsActive], [MinisterEmail], [MinisterPhotoUrl], [MinisterPageHtml], [Timestamp], [MiscHtml], [MiscRightHtml], [TwitterUsername], [FlickrUrl], [YoutubeUrl], [AudioUrl], [FacebookEmbedHtml], [YoutubeEmbedHtml], [AudioEmbedHtml], [TopReleaseId], [FeatureReleaseId], [MinisterAddress], [MinisterName], [MinisterSummary], [MinistryUrl], [ParentId], [ContactUserId], [SecondContactUserId], [WeekendContactNumber], [EodFinalizedDateTime], [EodLastRunUserId], [EodLastRunDateTime], [DisplayAdditionalName]) VALUES (@id, @key, @sortOrder, @displayName, @abbrev, 1, N'', N'', N'', CURRENT_TIMESTAMP, N'', N'', N'', N'', N'', N'', N'', N'', N'', NULL, NULL, N'', N'', N'', NULL, NULL, NULL, NULL, N'', NULL, NULL, NULL, N'');
-    -- add with English language...
-    INSERT [dbo].[MinistryLanguage] ([MinistryId], [LanguageId], [Name]) VALUES (@id, 4105, @displayName);
-    -- add sectors for the ministry...
-    INSERT INTO [dbo].[MinistrySector]
-	  SELECT @id, s.id FROM [dbo].[Sector] s
-
-
-
-    set @pos = CHARINDEX('|', @list, @pos+@len) +1
-	set @sortOrder = @sortOrder + 1
-END
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Provided Background')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Provided Statement')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Scheduled Interview')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Referred to Third Party')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Photo-Op')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Reporter Dropped')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Declined to Comment')
+INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Unavailable for Interview')
 
 GO
