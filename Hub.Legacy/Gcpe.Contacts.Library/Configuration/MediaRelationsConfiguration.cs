@@ -63,8 +63,6 @@ namespace MediaRelationsLibrary.Configuration
 
                 validator.Check(() => DbServer);
                 validator.Check(() => DbName);
-                validator.Check(() => DbUserID);
-                validator.Check(() => DbPassword);
             }
         }
 
@@ -84,7 +82,5 @@ namespace MediaRelationsLibrary.Configuration
 
         public string DbServer => configuration.GetString(MethodBase.GetCurrentMethod());
         public string DbName => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbUserID => configuration.GetString(MethodBase.GetCurrentMethod());
-        public string DbPassword => configuration.GetString(MethodBase.GetCurrentMethod());
     }
 }
