@@ -86,6 +86,10 @@ In this website, create an Application named &quot;Legacy&quot; using the &quot;
 
 A valid SSL certificate is highly recommended for the website, especially if it will be accessible form the internet.
 
+**Additional Components for Reporting:**
+* MS Report Viewer 2015 Runtime (also known as v12.0.0.0)
+* MS CLR Types for SQL 2014
+
 ##### NTFS Permissions
 
 The folders used by the application require the following permissions in addition to what ever is required by the system. AppPools can be identified with the local reference &quot;IIS AppPool\_\&lt;appPoolName\&gt;&quot;_
@@ -134,7 +138,7 @@ A database administrator should create the database in advance according to thei
 
 All connections to SQL Server will be with Integrated Security = true in the connection strings, so the service account used for their identity will require access to the database (Gcpe.Hub).
 
-This example will create a SQL Login for the Test Service account **DIR\HUBSVCT** , create a user in the Gcpe.Hub database, and grant it the db\_owner role.
+This example will create a SQL Login for the Test Service account **DIR\HUBSVCT** , create a user in the Gcpe.Hub database, create a role to allow execution of Table and Scalar functions, and grant required roles to the service account.
 
   > USE [master]
   >
@@ -147,6 +151,15 @@ This example will create a SQL Login for the Test Service account **DIR\HUBSVCT*
   > USE [Gcpe.Hub]
   >
   > GO
+  >
+  > CREATE ROLE db_executor
+  >
+  > GO
+  > 
+  > GRANT EXECUTE TO db_executor
+  >
+  > GO
+  >
   > CREATE USER [DIR\HUBSVCT] FOR LOGIN [DIR\HUBSVCT]
   >
   > GO
@@ -154,8 +167,13 @@ This example will create a SQL Login for the Test Service account **DIR\HUBSVCT*
   > USE [Gcpe.Hub]
   >
   > GO
-  > ALTER ROLE [db\_owner] ADD MEMBER [DIR\HUBSVCT]
+  >
+  > ALTER ROLE [db_datareader] ADD MEMBER [DIR\HUBSVCT]
   > 
+  > ALTER ROLE [db_datawriter] ADD MEMBER [DIR\HUBSVCT]
+  >
+  > ALTER ROLE [db_executor] ADD MEMBER [DIR\HUBSVCT]
+  >
   > GO
 
 ### SQL Server Groups
@@ -164,12 +182,24 @@ Developers will require db\_owner access to pre-production databases to create/m
 
 Similar T-SQL used to create the Login/User for the service account can be used to provide the developer groups access, using the desired roles.
 
-## Groups used within Application Code
+#### Groups used within Application Code
 
 Within the Media Relations / Contacts application (/Legacy/Contacts), Active Directory groups are used for additional logic and security.
 
 In the Hub.Legacy.appSettings.config, there are two group settings: ContributorGroups and AdminGroups.
 See [Configuration / Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)
+
+### Seed Gcpe.Hub Database
+The assumption here is that the DBAs have created a Gcpe.Hub database, assigned the service accounts and Active Directory access. The following is to load the objects (tables, views, etc), and load an initial dataset. The initial data set contains records that are required for certain (current) system logic to work correctly; ids and names that are expected to trigger additional logic.
+
+1. Edit gcpe.hub-data-04-systemuser.sql, edit the @list variable.  This should be a list of Active Directory accounts and names to be seeded as System Admins.  The @list variable requires that it end with the separator: "|", and that each Account Name have a Full name.  (ex. "ACCOUNT1 - Acct One|ACCOUNT2 - AcctTwo|ACCOUNTN - Acct N|")
+2. Determine if you want some non-required sample data (these tables can be populated via the Admin screens).  Open \_sqlcmd.master.sql and uncomment the lines to call the sample data scripts.
+3. Review the 3 data scripts (ex. gcpe.hub-data-01-dbo.sql) and add any additional data you would like seeded.  For example, seed more Ministries or Cities.
+5. Open a command prompt at /db-scripts
+6. Run the following command:
+
+   `sqlcmd -S localhost -i _sqlcmd.master.sql -v path="path to /db-scripts"`
+
 
 # Developer Setup
 
@@ -261,12 +291,11 @@ Create a local version of the Gcpe.Hub database.  This will create the database,
 1. Review the files under /db-scripts directory.
 2. Open gcpe.hub-01-create-db.sql, ensure file path is correct for location of db mdf and ldf files.
 3. Edit gcpe.hub-02-create-login_hb_sdlc_dvlpr.sql, set desired password.  User ID and passwords should be set as see [environment variables](#environment-variables): GcpeHubDbUserID and GcpeHubDbPassword.  This should only be used on Debug/Development environments.
-4. Edit gcpe.hub-data-04-systemuser.sql, edit the @systemUsername variable - your Active Directory User Account name (without the DOMAIN\)..  Also see: DebugUsername
-5. In the same file, edit the @fullName variable - Display name for the Active Directory User Account 
-6. Open a command prompt at /db-scripts
-7. Run the following command:
+4. Edit gcpe.hub-data-04-systemuser.sql, edit the @list variable - enter your account name (without DOMAIN\) followed by a dash and a Full name (ex. "ADEVELOPER - Adam Developer|").  Ensure the list is terminated with the separator "|".   Also see: DebugUsername
+5. Open a command prompt at /db-scripts
+6. Run the following command:
 
-   `sqlcmd -S localhost -i _sqlcmd.master.sql -v path="path to /db-scripts"`
+   `sqlcmd -S localhost -i _sqlcmd.developer.sql -v path="path to /db-scripts"`
 
 ## Configure Applications
 Under the /Configuration directory, there are 2 template files: Hub.Legacy.Template.appSettings.config and Hub.WebApp.Template.appsettings.json.  Copy these files and rename as: Hub.Legacy.Debug.appSettings.config and Hub.WebApp.Debug.appsettings.json.  This should be done for each build/runtime configuration and should remain in /Configuration directory.  **DO NOT CHECK THESE INTO SOURCE CONTROL**
