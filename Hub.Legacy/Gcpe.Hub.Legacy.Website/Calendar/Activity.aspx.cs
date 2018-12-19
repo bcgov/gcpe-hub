@@ -239,10 +239,21 @@ namespace Gcpe.Hub.Calendar
                 if (string.IsNullOrEmpty(CurrentActiveActivity.Significance) && !Gcpe.Hub.Configuration.App.Settings.ShowSignificanceField)
                 {
                     SignificanceRow.Style.Add("display", "none");
+                    // if we are not showing this field, do not validate - cannot enter data, cannot pass validation.
+                    SignificanceRequiredFieldValidator.Visible = false;
+                    SignificanceRequiredFieldValidator.Enabled = false;
                 }
 
-                if (string.IsNullOrEmpty(CurrentActiveActivity.Schedule) && !Gcpe.Hub.Configuration.App.Settings.ShowScheduleField)
+                if (string.IsNullOrEmpty(CurrentActiveActivity.Schedule) &&
+                    !Gcpe.Hub.Configuration.App.Settings.ShowScheduleField)
+                {
                     ScheduleRow.Style.Add("display", "none");
+                    // if we are not showing this field, do not validate - cannot enter data, cannot pass validation.
+                    SchedulingFieldValidator.Visible = false;
+                    SchedulingFieldValidator.Enabled = false;
+                }
+
+
             }
 
             if (!Gcpe.Hub.Configuration.App.Settings.ShowRecordsSection)
