@@ -26,5 +26,14 @@ INSERT [media].[WebAddressType] ([Id], [WebAddressTypeName], [SortOrder]) VALUES
 INSERT [media].[WebAddressType] ([Id], [WebAddressTypeName], [SortOrder]) VALUES (NEWID(), N'Facebook URL', 4);
 INSERT [media].[WebAddressType] ([Id], [WebAddressTypeName], [SortOrder]) VALUES (NEWID(), N'Website URL', 2);
 
+INSERT [media].[Beat] ([Id], [BeatName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'Politics', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[ContactCity] ([Id], [CityName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'Fredericton', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[MediaJobTitle] ([Id], [MediaJobTitleName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'Editor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[MediaJobTitle] ([Id], [MediaJobTitleName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'Reporter', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[Country] ([Id], [CountryName], [CountryAbbrev], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'Canada', N'CAD', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[ProvState] ([Id], [ProvStateName], [ProvStateAbbrev], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'New Brunswick', N'NB', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[MediaLanguage] ([Id], [LanguageName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'English', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+INSERT [media].[MediaLanguage] ([Id], [LanguageName], [CreationDate], [ModifiedDate], [SortOrder]) VALUES (NEWID(), N'French', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 999);
+
 GO
 

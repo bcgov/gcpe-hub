@@ -24,6 +24,7 @@ SET IDENTITY_INSERT [calendar].[Role] OFF
 SET IDENTITY_INSERT [calendar].[City] ON 
 
 INSERT [calendar].[City] ([Id], [Name], [IsActive], [SortOrder]) VALUES (311, N'Other...', 1, 0)
+INSERT [calendar].[City] ([Id], [Name], [IsActive], [SortOrder]) VALUES (322, N'Victoria, BC', 1, 0)
 
 SET IDENTITY_INSERT [calendar].[City] OFF
 
@@ -56,5 +57,42 @@ INSERT [calendar].[PremierRequested] ([Id], [Name], [IsActive], [SortOrder]) VAL
 SET IDENTITY_INSERT [calendar].[PremierRequested] OFF
 GO
 
-INSERT INTO [calendar].[Category] ([Name] ,[SortOrder] ,[IsActive] ,[RowGuid]) VALUES ('Awareness Day / Week / Month' ,20 ,1 ,NEWID())
+
+SET IDENTITY_INSERT [calendar].[Category] ON 
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (60, N'HQ Placeholder', 1, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (1, N'Marketing / Advertising', 84, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (2, N'Awareness Day / Week / Month', 20, 1 ,NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (3, N'Conference / AGM / Forum', 23, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (9, N'FYI Only', 24, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name] ,[SortOrder] ,[IsActive] ,[RowGuid]) VALUES (12, 'Proposed Release' ,26 ,1 ,NEWID())
+INSERT [calendar].[Category] ([Id], [Name] ,[SortOrder] ,[IsActive] ,[RowGuid]) VALUES (58, 'Approved Release' ,11 ,1 ,NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (59, N'Approved Event or Activity', 10, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (55, N'Proposed Event or Activity', 25, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (16, N'Speech /  Remarks', 140, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (57, N'Release Only (No Event)', 34, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (49, N'Event with Release', 36, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (25, N'Event without Release', 38, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (17, N'Tour / Visit', 150, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (11, N'MEDIA AVAIL', 86, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (26, N'Legislation', 82, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (39, N'Proclamation', 123, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (18, N'TV / Radio', 173, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (37, N'Event (3rd Party) - With Release', 65, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (19, N'Meeting', 90, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (42, N'Open House', 110, 0, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (51, N'IGRS use: Half-Masting', 195, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (52, N'IGRS use: National Day', 205, 1, NEWID())
+INSERT [calendar].[Category] ([Id], [Name], [SortOrder], [IsActive], [RowGuid]) VALUES (53, N'IGRS use: Visit', 215, 1, NEWID())
+
+SET IDENTITY_INSERT [calendar].[Category] OFF
+GO
+
+SET IDENTITY_INSERT [calendar].[NROrigin] ON 
+
+INSERT [calendar].[NROrigin] ([Id], [Name], [IsActive], [SortOrder], [RowGuid]) VALUES (3, N'Ministry', 1, 15,  NEWID())
+INSERT [calendar].[NROrigin] ([Id], [Name], [IsActive], [SortOrder], [RowGuid]) VALUES (5, N'Joint Prov/Fed release', 1, 25, NEWID())
+INSERT [calendar].[NROrigin] ([Id], [Name], [IsActive], [SortOrder], [RowGuid]) VALUES (7, N'3rd Party release', 1, 30, NEWID())
+INSERT [calendar].[NROrigin] ([Id], [Name], [IsActive], [SortOrder], [RowGuid]) VALUES (28, N'Joint Prov/3rd party release', 1, 20,  NEWID())
+
+SET IDENTITY_INSERT [calendar].[NROrigin] OFF
 GO
