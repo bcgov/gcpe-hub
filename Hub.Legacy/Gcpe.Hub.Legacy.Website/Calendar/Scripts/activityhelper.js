@@ -89,15 +89,9 @@ function hideIrrelevantPanels(category) {
     var hideRelease = false;
     switch (category) {
         case "Marketing / Advertising":
-        case "Proclamation":
-        //hideEvent = true
         case "Conference / AGM / Forum":
         case "TV / Radio":
-        case "Tour / Visit":
-        case "Event without Release":
         case "Event (3rd Party) - No Release":
-        case "Meeting":
-        case "Open House":
         case "Awareness Day / Week / Month":
         case "IGRS use: Half-Masting":
         case "IGRS use: National Day":

@@ -149,7 +149,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
             {
                 futureActivities = db.ActiveActivities
                     .Where(a => a.StartDateTime >= DateTime.Now && !a.IsConfidential && a.IsConfirmed && a.IsActive &&
-                        (a.Categories.StartsWith(" Approved") || a.Categories == " Release Only (No Event)" || a.Categories.EndsWith("with Release")))
+                        (a.Categories.StartsWith(" Approved") ))
                     .ToList();
 
                 ministries = db.Ministries.Where(m => m.IsActive).ToList();

@@ -2135,21 +2135,12 @@
                 else if (isConfirmed || new Date($('#EndDate').val()) < CalculateMaxEndDate(2)) {
                     laPos = 3;
                     switch (selectedCategory) {
-                        case "Release Only (No Event)":
-                            var selectedOrigin = GetDropDownSelection('#NROriginDropDownList');
-                            if (selectedOrigin && selectedOrigin.indexOf("Ministry (") == -1)
-                                break;
                         case "Approved Release":
                         case "Proposed Release":
                         case "Approved Event or Activity":
                         case "Proposed Event or Activity":
-                        case "Event with Release":
-                        case "Event without Release":
                         case "Speech":
                         case "Speech / Remarks":
-                        case "Tour / Visit":
-                        case "MEDIA AVAIL":
-                        case "Legislation":
                         case "HQ Placeholder":
                             laPos = 2;
                     }

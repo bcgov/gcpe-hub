@@ -85,7 +85,7 @@ namespace Gcpe.Hub.News
             using (var corporateCalendarDataContext = new CorporateCalendarDataContext())
             {
                 IQueryable<Activity> activities = corporateCalendarDataContext.Activities.Where(a => a.Id == activityId && a.EndDateTime >= DateTime.Today && a.IsConfidential == false
-                            && a.ActivityCategories.Any(c => c.Category.Name.StartsWith("Approved") || c.Category.Name == "Release Only (No Event)" || c.Category.Name.EndsWith("with Release")));
+                            && a.ActivityCategories.Any(c => c.Category.Name.StartsWith("Approved")));
                 activity = activities.Select(a => new ActivityInfo()
                 {
                     Id = a.Id,
