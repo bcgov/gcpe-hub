@@ -1,5 +1,3 @@
-#define USE_AZURE
-
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
@@ -38,7 +36,7 @@ namespace Gcpe.Hub.News
         {
             try
             {
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
                 var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("files"));
 
                 foreach (RepeaterItem item in rptAssetList.Items)
@@ -91,7 +89,7 @@ namespace Gcpe.Hub.News
         {
             List<string>  mediaAssets = new List<string>();
 
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
             var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("files"));
 
             foreach (CloudBlockBlob blob in container.ListBlobs().OfType<CloudBlockBlob>())

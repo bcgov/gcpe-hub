@@ -345,6 +345,15 @@ There are two solutions: hub.web.opensource.sln (Hub.WebApp) and hub.legacy.open
 5. Rebuild solution
 6. Debug 
 
+##### LOCAL_MEDIA_STORAGE Preprocessor Symbol
+There is a [define preprocessor symbol](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-define) (LOCAL_MEDIA_STORAGE).  This controls whether the application uses local storage (filesystem and database) or Azure Cloud based storage.  By default, this is _NOT_ defined and will use Azure Cloud Storage.  
+
+This can be added to the [Project](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/define-compiler-option) (Gcpe.Hub.Legacy.Website) Properties... Build -> Conditional compilation symbols. 
+
+Or this can be added as a parameter to msbuild (note that you must specify ALL DefineConstants in this parameter - it overrides the value in the csproj file):
+
+    `msbuild Hub.Legacy\Gcpe.Hub.Legacy.Website\Gcpe.Hub.Legacy.Website.csproj /t:Clean,Build /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Debug  /p:DefineConstants="DEBUG;TRACE;LOCAL_MEDIA_STORAGE"`
+
 **Note:** If you encounter an issue when running through the IDE like _"Could not find a part of the path … bin\roslyn\csc.exe"_.  Try the following in the Package Manager console:
   
   `PM> Install-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform`
@@ -357,7 +366,7 @@ We will build and publish to a local filesystem first, then copy the output to t
 1. Ensure msbuild, bower, gulp are on your path
 2. Open command prompt at root of code (ex. C:\gcpe-hub)
 3. Publish to a local filesystem mirroring IIS layout (ex. C:\pub)   
-4. Build and Publish the Release version of Hub.Web
+4. Build and Publish the Release version of Hub.Web (see [LOCAL_MEDIA_STORAGE Preprocessor Symbol](#local_media_storage-preprocessor-symbol))
 
     `msbuild Gcpe.Hub.WebApp\Gcpe.Hub.WebApp.csproj /t:Clean,Build,Publish /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Release /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:PublishProvider=FileSystem /p:publishUrl="C:\Pub\Web Site" /p:DeleteExistingFiles=True`
 
@@ -412,7 +421,7 @@ The permissions\_ key values are parsed into Site Sections, Active Directory Gro
 
 Example:
 
-  `<add key="permissions_1" value="MediaRelationsCompany/GCPE\_CONTRIB/Read|Create|Update" />`
+  `<add key="permissions_1" value="MediaRelationsCompany/GCPE_CONTRIB/Read|Create|Update" />`
 
 The 3 components are separated with &quot;/&quot;.
 

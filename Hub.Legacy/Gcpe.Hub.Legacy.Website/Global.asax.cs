@@ -1,5 +1,4 @@
-﻿#define USE_AZURE
-using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Configuration;
@@ -144,7 +143,7 @@ namespace Gcpe.Hub
         {
         }
 
-#if !USE_AZURE
+#if LOCAL_MEDIA_STORAGE
         public static void QueueBackgroundWorkItemWithRetry(Action action)
         {
             System.Threading.Tasks.Task.Run(async () =>
@@ -160,7 +159,7 @@ namespace Gcpe.Hub
                     {
                         try
                         {
-                            LogError(ex.ToString());
+                            //LogError(ex.ToString());
                         }
                         catch{}
                     }

@@ -1,6 +1,4 @@
-﻿#define USE_AZURE
-
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +7,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using Gcpe.Hub.Configuration;
 
 namespace Gcpe.Hub.News
 {
@@ -31,7 +30,7 @@ namespace Gcpe.Hub.News
         {
             if (key == StaticFileKey)
             {
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
                 return PrepareMetadataResponse("files", null, blocksCount, fileName, fileSize, chunkSize, true);
 #else
                 try
@@ -236,7 +235,7 @@ namespace Gcpe.Hub.News
             if (uploadedData.ContentLength > 4 * 1024 * 1024)
                 throw new ArgumentOutOfRangeException(nameof(uploadedData));
 
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
             var containerUri = Global.ModifyContainerWithSharedAccessSignature(model.UploadFolder);
 
             var container = new CloudBlobContainer(containerUri);

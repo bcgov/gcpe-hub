@@ -1,9 +1,9 @@
-﻿#define USE_AZURE
-extern alias legacy;
+﻿extern alias legacy;
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -659,7 +659,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
         private void DeleteMediaAssets(string fileName)
         {
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
             var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("assets"));
 
             var directory = container.GetDirectoryReference(Model.ReleasePathName);

@@ -1,6 +1,4 @@
-﻿#define USE_AZURE
-
-extern alias legacy;
+﻿extern alias legacy;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -511,7 +509,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     mediaAssets = new List<string>();
 
-#if USE_AZURE
+#if !LOCAL_MEDIA_STORAGE
                     var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("assets"));
 
                     var directory = container.GetDirectoryReference(ReleasePathName);
