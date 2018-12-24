@@ -105,6 +105,7 @@ namespace Gcpe.Hub.Configuration
                 validator.Check(() => FlickrApiToken);
                 validator.Check(() => FlickrApiTokenSecret);
                 validator.Check(() => FlickrApiVerifier);
+                validator.Check(() => FlickrPrivateBaseUri);
 
                 // Database Connection
                 validator.Check(() => DbServer);
@@ -180,6 +181,7 @@ namespace Gcpe.Hub.Configuration
         public String FlickrApiToken => configuration.GetString(MethodBase.GetCurrentMethod());
         public String FlickrApiTokenSecret => configuration.GetString(MethodBase.GetCurrentMethod());
         public String FlickrApiVerifier => configuration.GetString(MethodBase.GetCurrentMethod());
+        public String FlickrPrivateBaseUri => configuration.GetString(MethodBase.GetCurrentMethod());
 
         // Database Connection
         public string DbServer => configuration.GetString(MethodBase.GetCurrentMethod());

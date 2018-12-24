@@ -9,7 +9,7 @@ namespace Gcpe.Hub
     public class FlickrManager
     {
         private static readonly Flickr flickrClient = new Flickr();
-        private static readonly string flickrPrivateBaseUrl = "https://www.flickr.com/photos/bcgovphotos/";
+        private static readonly string flickrPrivateBaseUrl = Gcpe.Hub.Configuration.App.Settings.FlickrPrivateBaseUri;
 
         public bool AuthenticateWithFlickr()
         {

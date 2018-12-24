@@ -737,7 +737,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     }
                 }
 
-                MailAddress fromAddress = new MailAddress("no-reply@gov.bc.ca", "No Reply");
+                MailAddress fromAddress = new MailAddress(Configuration["NoReplyAddress"], "No Reply");
 
                 if (string.IsNullOrEmpty(emailAddress))
                     return;

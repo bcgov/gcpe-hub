@@ -50,6 +50,7 @@ namespace Gcpe.Hub.Configuration
         String FlickrApiToken { get; }
         String FlickrApiTokenSecret { get; }
         String FlickrApiVerifier { get; }
+        String FlickrPrivateBaseUri { get; }
 
         // Database Connection
         new String DbServer { get; }

@@ -320,8 +320,7 @@ These values will be used to build up various connection strings in the applicat
 This is the HUB proper.  It is a .NET Core application.  Configuration is significantly easier.
 
 #### Hub.WebApp.appSettings.json
-  * CommOffice: GCPE
-  * HQMinistry: GCPEMedia
+  * HQMinistry: GCPEMEDIA
   * ConnectionStrings/HubDbConnect: connection string for your Gcpe.Hub database.  This should align with the DB configuration in Hub.Legacy.
 
 ### Solutions
@@ -350,9 +349,9 @@ There is a [define preprocessor symbol](https://docs.microsoft.com/en-us/dotnet/
 
 This can be added to the [Project](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/define-compiler-option) (Gcpe.Hub.Legacy.Website) Properties... Build -> Conditional compilation symbols. 
 
-Or this can be added as a parameter to msbuild (note that you must specify ALL DefineConstants in this parameter - it overrides the value in the csproj file):
-
-    `msbuild Hub.Legacy\Gcpe.Hub.Legacy.Website\Gcpe.Hub.Legacy.Website.csproj /t:Clean,Build /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Debug  /p:DefineConstants="DEBUG;TRACE;LOCAL_MEDIA_STORAGE"`
+Or this can be added as a parameter to msbuild (note that you must specify ALL DefineConstants in this parameter - it overrides the value in the csproj file).
+ 
+`msbuild Hub.Legacy\Gcpe.Hub.Legacy.Website\Gcpe.Hub.Legacy.Website.csproj /t:Clean,Build /p:SolutionDir=C:\gcpe-hub\ /p:Configuration=Debug  /p:DefineConstants="DEBUG;TRACE;LOCAL_MEDIA_STORAGE"`
 
 **Note:** If you encounter an issue when running through the IDE like _"Could not find a part of the path … bin\roslyn\csc.exe"_.  Try the following in the Package Manager console:
   
@@ -394,12 +393,206 @@ We will build and publish to a local filesystem first, then copy the output to t
   - Create a file for each build configuration (ex. Hub.Legacy.Debug.appSettings.config) with appropriate values.
   - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))
   - This is an xml file, used to populate the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config appSettings section.
-  - Connection strings are in the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config connectionStrings section, Database Name and Server Name are replaced with values in the appSettings.config file.
-   
-  **TODO: fill in each key ** 
+  - Connection strings are in the Hub.Legacy\Gcpe.Hub.Legacy.Website\Web.Config connectionStrings section, Database Name and Server Name are replaced with values in the Hub.Legacy.appSettings.config file.
+  - ALL configuration values are checked at runtime if they are populated.  They are not checked for valid value (ie. URI exists).  Configuration value checks are made in concrete classes under {MODULE}/Configuration (ex. Gcpe.Hub.Legacy.Website/Configuration/WebsiteConfiguration.cs)
+  
 
+### Keys   
+* **DbServer**
+  Name of the database server.  
+  Value is always used to override what is set in _ALL_ the connection strings for Hub.Legacy.
 
+* **DbName**
+  Name of the database.  Default is Gcpe.Hub.
+  Value is always used to override what is set in _ALL_ the connection strings for Hub.Legacy.
 
+* **CloudEndpointsProtocol** / **CloudAccountName** / **CloudAccountKey** / **CloudEndpointSuffix**
+  Configuration for Cloud based services.
+  All values above are used to build the connection string:
+  DefaultEndpointsProtocol={CloudEndpointsProtocol};AccountName={CloudAccountName};AccountKey={CloudAccountKey};EndpointSuffix={CloudEndpointSuffix}
+  See (see [LOCAL_MEDIA_STORAGE Preprocessor Symbol](#local_media_storage-preprocessor-symbol)).
+  If LOCAL_MEDIA_STORAGE is not defined (the default), then the application expects cloud based storage for media assets for News Release (pictures etc), else it expects there be local storage (see MediaAssetsUnc)
+  
+* **FaviconImg**
+  Relative web path to .ico file to use as the favicon.
+  Allows graphic rebranding of site.
+  Example for BC: "~/Resources/BC/favicon.ico"
+
+* **ContactsHeaderImg**
+  Relative web path to image file placed in header of the Contacts / Media Relations DB application.
+  Allows graphic rebranding of site.
+  Example for BC: "~/Resources/BC/MediaRelations@2x.png"
+
+* **CalendarLookAheadCoverImg**
+  Physical file path to image used on Look Ahead Reports.  File is added as the report is built.
+  Allows for graphic rebranding of site.
+  Example for BC: "\\Resources\\BC\\LookAheadCover.png"
+
+* **NewsHelpUrl**
+   This is an absolute url to help pages for News.
+   Part of the path (the actual help file name) is passed in to build the absolute URL.
+   Value must have a placeholder for the page name.
+   ex. https://gcpe.gov.bc.ca/help/hub/Pages/{0}.aspx
+
+* **LdapUrl**
+    Url for your Active Directory (ex. LDAP://dmn.mygov/dc=dmn,dc=mygov)
+
+* **ActiveDirectoryDomain**
+  Domain Context or Domain name. (ex. dmn.mygov)
+  
+* **SMTPServer**
+  Outbound mail server host.
+
+* **LogMailFrom** / **LogMailTo**
+  Email addresses used for sending error messages from Corporate Calendar.
+
+* **ApplicationOwnerOrganizations**
+  Comma separated list of Ministries (Abbreviation) considered the owners of the application.
+  Default: "GCPEHQ,GCPEMEDIA,PREM"
+  Application Owners (members of those Ministries) have more power within the applications.  For example, they can see all ministries, have more fields on activities available.
+  Used to populate CustomPrincipal.IsInApplicationOwnerOrganizations
+
+* **HQAdmin**
+  Single Ministry designated as Head Quarters / Admin.
+  Default: "GCPEHQ"
+  Members of this ministry have more power and responsibility within the applications.
+  Used to populate CustomPrincipal.IsGCPEHQ
+ 
+* **Version**
+  Version number displayed on Corporate Calender
+  Currently set at version 8.
+
+* **SharedWithExcludes**
+  Comma separated list of ministries that will not appear on Activity "Shared across/with Ministry" selection list
+
+* **HelpFileUri**
+  Url to a help file (htm or pdf)
+  Used on Corporate Calendar Site.master page.
+
+* **ShowSignificanceField** / **SignificanceIsRequired**
+  Used in Corporate Calendar - Activity
+  Determine if significance field to be rendered and if it is required.
+  Field should only be required if it is shown.
+
+* **ShowScheduleField** / **SchedulingIsRequired**
+  Used in Corporate Calendar - Activity
+  Determine if schedule field to be rendered and if it is required.
+  Field should only be required if it is shown.
+
+* **StrategyIsRequired**
+  Used in Corporate Calendar - Activity
+  Determine if strategy field is required.
+
+* **ShowHqCommentsField**
+  Used in Corporate Calendar - Activity
+  Determine if Look Ahead Comments field is shown.
+
+* **ShowRecordsSection**
+  Used in Corporate Calendar - Activity
+  Determine if Records Section (associated release documents) are shown.
+
+* **DisableEditTable**
+  Disable Editing on Corporate Calender Admin screens.
+
+* **SubscribeBaseUri**
+  Url to the News On Demand Service.  This service is not part of the Hub Open Source project.
+  *_Should match configuration in Hub.WebApp.appSettings.json_*
+  Used in Contacts / Media Relations Db application
+
+* **DoExceptionLogging**
+    Exceptions raised and thrown, or just logged
+    Boolean (true/false)
+
+* **ContributorGroups**
+    See [Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)
+    Comma Separated List of Active Directory groups used to determine Contributors
+    A User is considered a contributor if in one of these groups.
+    For add/edit company, add/edit contact
+
+* **AdminGroups**
+    See [Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)
+    Comma Separated List of Active Directory groups used to determine Admins
+    A User is considered a Admin if in one of these groups.
+    For add/edit company, add/edit contact
+
+* **TypedownItemLimit**
+  In Contacts / Media Relations, Limit the number of items in typedown list (ajax search results)
+  Integer, default 20
+
+* **CompanyPurgeDays**
+  In Contacts / Media Relations, remove deleted records older than this.
+  Integer, default 90
+
+* **ContactPurgeDays**
+  In Contacts / Media Relations, remove deleted records older than this.
+  Integer, default 90
+
+* **LookBackDays**
+  In Contacts / Media Relations, specify deleted record earliest date range (leave records for lookback).
+  Integer, default 10
+
+* **PurgeTaskFrequencyHours**
+  In Contacts / Media Relations, on session start, check to see if purge needs to be run.
+  Integer, default 24
+
+* **DisableEmail**
+  Set whether to disable emails from Contact / Media Relations
+  Boolean, default true
+
+* **FromEmailAddress**
+  Email address to use as the sender for Contact / Media Relations emails
+
+* **MaxBccEmails**
+  limit the number of bccs added to emails in Contact / Media Relations application.
+  Integer, default 30
+
+* **permissions\_N**
+    See [Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)
+
+* **NewsHostUri**
+    URI for Gov News Host (not part of the Hub Open Source project)
+    This is where the published news releases are hosted/available.  
+
+* **MediaAssetsUri**
+    URI for Media Assets on Gov News (not part of the Hub Open Source project)
+
+* **PublishLocation**
+   UNC or mapped drive for publishing artifacts
+
+* **DeployLocations**
+    UNC or mapped drive(s) for deploying artifacts
+    Comma separated list.
+
+* **MediaAssetsUnc**
+    UNC for Media Assets
+    Used when LOCAL_MEDIA_STORAGE is defined
+
+* **DeployFolders**
+    UNC for deploying Assets
+    Comma separated list
+    Used when LOCAL_MEDIA_STORAGE is defined
+
+* **NewsFileFolder**
+    UNC for media asset manament
+    Used when LOCAL_MEDIA_STORAGE is defined
+
+* **EnableForecastTab**
+    Whether to show the Forecast Tab or not on News Release Management application.  
+    Boolean, default is false
+
+* **FlickrApiKey** / **FlickrApiSecret** / **FlickrApiToken** / **FlickrApiTokenSecret** / **FlickrApiVerifier** / **FlickrPrivateBaseUri**
+  Configure private Flickr Account for pictures included with News Releases.
+  
+  
+* **TrustedReverseProxyServers**
+    Comma Separated list of Servers that we can mine for Site Minder headers
+    ex. SM_USER
+    Used in Authentication.
+
+* **ValidationSettings:UnobtrusiveValidationMode**
+    This setting is required by the Calendar Activity page.
+    You will get an error like the following without it: $(...).tooltip is not a function
+    Default value: "None"  
 
 ### Groups Configuration and Permissions Matrix
 
@@ -467,6 +660,48 @@ Flags used to determine allowed functionality within the application; basically 
   - Create a file for each build configuration (ex. Hub.WebApp.Debug.appSettings.json) with appropriate values.
   - Create a file for each environment, and ensure that it is copied to the /Configuration IIS directory on publication (see [Additional Details of Folders](#additional-details-of-folders))
   - The connection string is in this file, so we can fully create it for each environment.
-   
-  **TODO: fill in each key ** 
+
+### Keys   
+* **SubscribeBaseUri**
+  Url to the News On Demand Service.  This service is not part of the Hub Open Source project.
+  In Hub.WebApp, the service is used to add subscribers to News On Demand.
+  *_Should match configuration in Hub.Legacy.appSettings.config_*
+
+* **HQMinistry**
+  The HQMinistry is the abbreviation of a Ministry designated as the head communications branch office.
+  By default, it is set to GCPEMEDIA.  This is used to determine which ministry and ministry contacts should receive the emailed End of Day Summary report.
+
+* **NoReplyAddress**
+  Email address used when sending End of Day summary report
+
+* **FaviconImg**
+  Path to .ico file to use as the favicon.
+  Allows graphic rebranding of site.
+  Example for BC: "/resources/bc/favicon.ico"
+
+* **ConnectionStrings / HubDbContext**
+  Connection string to Gcpe.Hub database.
+  Connection string is used as entered in configuration, no substitutions or further building are done with this value.
+
+* **Logging**
+  Configure the NET Core logging.  
+  See [documentation](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1) for details.
+
+* **MailProvider**
+  To send email, one of the following must be configured.
+  * **SmtpHost**
+    The SMTP Server name.  Used to configure System.Net.Mail.SmtpClient host.
+  * **PickupDirectory**
+    Physical folder name used for [System.Net.Mail.SmtpClient.PickupDirectoryLocation](https://docs.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient.pickupdirectorylocation?view=netframework-4.7.2)
+    
+* **SearchService**
+  Configuration of the Cloud based Media Request search service.
+  This is not required.
+  * **Enable**
+    Whether to use the cloud based search service or local database queries.  Default to false.
+  * **BaseUri**
+    If enabled, this is the URI for the deployed service
+  * **AccessToken**
+    If enabled, this is the secured access token to acces the cloud based service
+
 

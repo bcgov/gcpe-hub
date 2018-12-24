@@ -1,11 +1,10 @@
 ﻿{
   "SubscribeBaseUri": "",
-  "CommOffice": "",
-  "HQMinistry": "",
+  "HQMinistry": "GCPEMedia",
   "NoReplyAddress": "",
   "FaviconImg" : "",
   "ConnectionStrings": {
-    "HubDbContext": ""
+    "HubDbContext": "Server=DbServer;Database=DbName;Integrated Security=true;MultipleActiveResultSets=true"
   },
   "Logging": {
     "IncludeScopes": false,
