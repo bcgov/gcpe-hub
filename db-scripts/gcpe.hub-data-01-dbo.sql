@@ -95,3 +95,9 @@ INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'
 INSERT INTO [dbo].[MediaRequestResolution]([Id],[DisplayAs]) VALUES (NEWID(), N'Unavailable for Interview')
 
 GO
+
+INSERT INTO [dbo].[ApplicationSetting]([SettingName] ,[SettingValue]) VALUES ('live_webcast_enabled' ,'false')
+GO
+
+INSERT INTO [dbo].[Carousel] ([Id] ,[PublishDateTime], [Timestamp]) VALUES  (NEWID() ,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP)
+GO
