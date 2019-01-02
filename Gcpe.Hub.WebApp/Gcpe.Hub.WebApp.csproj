@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>Gcpe.Hub.WebApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Gcpe.Hub.WebApp</PackageId>
-    <RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
 
@@ -13,18 +12,17 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
 
-
   <ItemGroup>
     <None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Gcpe.Hub.Data" Version="1.2.1" />
+    <PackageReference Include="Gcpe.Hub.Data" Version="1.2.2" />
     <PackageReference Include="Gcpe.NewsOnDemand.Client" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.Azure.Search" Version="5.0.*" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
     <PackageReference Include="MailKit" Version="1.18.1.1" />
@@ -37,10 +35,6 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
   <Target Name="CopyConfigurationForDebug" AfterTargets="AfterBuild" >

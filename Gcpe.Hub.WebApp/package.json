@@ -1,7 +1,7 @@
 {
-	"version": "1.0.0",
-	"name": "asp.net",
-	"private": true,
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-watch": "4.3.10",

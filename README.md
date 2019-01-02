@@ -62,7 +62,7 @@ It is best to first create the folder, which will be required when the Website i
         See Hub.WebApp.appSettings.json Logging section to enable and configure logging.
         
     \\env.iis\applications\Gcpe.Hub\Web Site
-        Main Web Site – the Hub..NET Core 2.1.4 application.
+        Main Web Site – the Hub..NET Core 2.2 application.
         Name of the directory can be changed.
         
     \\env.iis\applications\Gcpe.Hub\Web Site - Legacy 
@@ -120,7 +120,7 @@ Under this directory there will be two files:
 
 ##### \\env.iis\applications\Gcpe.Hub\Web Site
 
-Contains application code for the Hub, the main web site.  This is a .NET Core 2.1.4 application.
+Contains application code for the Hub, the main web site.  This is a .NET Core 2.2 application.
 
 ##### \\env.iis\applications\Gcpe.Hub\Web Site - Legacy
 
@@ -223,24 +223,28 @@ Environment variables will be required for these developers to mimic Authorizati
 
 ## Downloads
 1. .NET Framework 4.6.2 Developer Pack [link](https://www.microsoft.com/en-us/download/details.aspx?id=53321)
-2. TypeScript 2.3 SDK for Visual Studio 2017 [link](https://www.microsoft.com/en-us/download/details.aspx?id=55258)
-3. Open XML SDK 2.5 & Open XML SDK Tool 2.5 [link](https://www.microsoft.com/en-us/download/details.aspx?id=30425)
-4. Visual Studio 2017 Community Edition [link](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
+2. .NET Core 2.2 SDK and Runtime [link](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+
+   Gcpe.Hub.WebApp is a .NET Core application.  .NET Core 2.2 is a separate download from the .NET Framework
+  
+3. TypeScript 2.3 SDK for Visual Studio 2017 [link](https://www.microsoft.com/en-us/download/details.aspx?id=55258)
+4. Open XML SDK 2.5 & Open XML SDK Tool 2.5 [link](https://www.microsoft.com/en-us/download/details.aspx?id=30425)
+5. Visual Studio 2017 Community Edition [link](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
 
    This code base can be developed and run using Visual Studio 2017 Community Edition, however; 2017 Professional Edition is preferred.
   
-5. SQL Server Developer Edition [link](https://go.microsoft.com/fwlink/?linkid=853016)
-6. SQL Server Management Studio [link](https://go.microsoft.com/fwlink/?linkid=2043154)
-7. Web Essentials 2017 VS extension [link](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebExtensionPack2017)
+6. SQL Server Developer Edition [link](https://go.microsoft.com/fwlink/?linkid=853016)
+7. SQL Server Management Studio [link](https://go.microsoft.com/fwlink/?linkid=2043154)
+8. Web Essentials 2017 VS extension [link](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebExtensionPack2017)
 
    This is required to generate/identify the minified version of our site.css file in the Gcpe.Hub.WebApp project and the Gov.News.WebApp projects. This projects will not build locally without site.min.cs, so it must be generated locally, by installing web essentials
 
-8. TypeScript Definition Generator VS extension [link](https://github.com/madskristensen/TypeScriptDefinitionGenerator)
+9. TypeScript Definition Generator VS extension [link](https://github.com/madskristensen/TypeScriptDefinitionGenerator)
 
    This used to be included in Web Essentials, but it is no longer. It is a tool for generating typescript .d.ts files from C# classes. See Gcpe.Hub.WebApp in the models folder there are C# objects with generated .d.ts files (click the arrow to see).
    **Note: this only works on Windows 10**
 
-9. Node.js with NPM (version 8.11 or later, this written using 10.4.1) [link](https://nodejs.org/en/download/)
+10. Node.js with NPM (version 8.11 or later, this written using 10.4.1) [link](https://nodejs.org/en/download/)
 
 
 ## Installation
