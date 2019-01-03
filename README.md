@@ -417,6 +417,8 @@ We will build and publish to a local filesystem first, then copy the output to t
   See (see [LOCAL_MEDIA_STORAGE Preprocessor Symbol](#local_media_storage-preprocessor-symbol)).  
   If LOCAL_MEDIA_STORAGE is not defined (the default), then the application expects cloud based storage for media assets for News Release (pictures etc), else it expects there be local storage (see MediaAssetsUnc)  
   
+#### Customizations - Resources, Images
+  
 * **FaviconImg**
   Relative web path to .ico file to use as the favicon.  
   Allows graphic rebranding of site.  
@@ -437,6 +439,8 @@ We will build and publish to a local filesystem first, then copy the output to t
    Part of the path (the actual help file name) is passed in to build the absolute URL.  
    Value must have a placeholder for the page name.  
    ex. https://gcpe.gov.bc.ca/help/hub/Pages/{0}.aspx  
+  
+#### Calendar Settings (Library)
 
 * **LdapUrl**  
     Url for your Active Directory (ex. LDAP://dmn.mygov/dc=dmn,dc=mygov)  
@@ -461,7 +465,9 @@ We will build and publish to a local filesystem first, then copy the output to t
   Default: "GCPEHQ"  
   Members of this ministry have more power and responsibility within the applications.  
   Used to populate CustomPrincipal.IsGCPEHQ  
- 
+  
+#### Calendar Settings (Website / UI)
+
 * **Version**  
   Version number displayed on Corporate Calender  
   Currently set at version 8.  
@@ -497,6 +503,8 @@ We will build and publish to a local filesystem first, then copy the output to t
 
 * **DisableEditTable**  
   Disable Editing on Corporate Calender Admin screens.  
+  
+#### Contacts/Media Relations Settings (Library)
 
 * **SubscribeBaseUri**
   Url to the News On Demand Service. This service is not part of the Hub Open Source project.  
@@ -538,6 +546,8 @@ We will build and publish to a local filesystem first, then copy the output to t
 * **PurgeTaskFrequencyHours**  
   In Contacts / Media Relations, on session start, check to see if purge needs to be run.  
   Integer, default 24  
+  
+#### Contacts/Media Relations Settings (Website / UI)
 
 * **DisableEmail**  
   Set whether to disable emails from Contact / Media Relations  
@@ -553,6 +563,8 @@ We will build and publish to a local filesystem first, then copy the output to t
 * **permissions\_N**  
     See [Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)  
 
+#### News / Release Management configuration
+  
 * **NewsHostUri**  
     URI for Gov News Host (not part of the Hub Open Source project)  
     This is where the published news releases are hosted/available.    
@@ -586,7 +598,8 @@ We will build and publish to a local filesystem first, then copy the output to t
 
 * **FlickrApiKey** / **FlickrApiSecret** / **FlickrApiToken** / **FlickrApiTokenSecret** / **FlickrApiVerifier** / **FlickrPrivateBaseUri**  
   Configure private Flickr Account for pictures included with News Releases.  
-  
+
+#### Hub Legacy Website configuration
   
 * **TrustedReverseProxyServers**  
     Comma Separated list of Servers that we can mine for Site Minder headers  
