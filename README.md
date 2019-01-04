@@ -349,7 +349,7 @@ There are two solutions: hub.web.opensource.sln (Hub.WebApp) and hub.legacy.open
 6. Debug 
 
 ##### LOCAL_MEDIA_STORAGE Preprocessor Symbol
-There is a [define preprocessor symbol](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-define) (LOCAL_MEDIA_STORAGE).  This controls whether the application uses local storage (filesystem and database) or Azure Cloud based storage.  By default, this is _NOT_ defined and will use Azure Cloud Storage.  
+There is a [define preprocessor symbol](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-define) (LOCAL_MEDIA_STORAGE).  This controls whether the application uses local storage (filesystem and database) or Azure Cloud based storage.  By default, this is _NOT_ defined and will use Azure Cloud Storage.  This only matters if the Legacy News / Release Management application is used.  See [News / Release Management Configuration](#news--release-management-configuration)
 
 This can be added to the [Project](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/define-compiler-option) (Gcpe.Hub.Legacy.Website) Properties... Build -> Conditional compilation symbols. 
 
@@ -409,13 +409,6 @@ We will build and publish to a local filesystem first, then copy the output to t
 * **DbName**  
   Name of the database.  Default is Gcpe.Hub.  
   Value is always used to override what is set in _ALL_ the connection strings for Hub.Legacy.  
-
-* **CloudEndpointsProtocol** / **CloudAccountName** / **CloudAccountKey** / **CloudEndpointSuffix**  
-  Configuration for Cloud based services.  
-  All values above are used to build the connection string:
-  DefaultEndpointsProtocol={CloudEndpointsProtocol};AccountName={CloudAccountName};AccountKey={CloudAccountKey};EndpointSuffix={CloudEndpointSuffix}  
-  See (see [LOCAL_MEDIA_STORAGE Preprocessor Symbol](#local_media_storage-preprocessor-symbol)).  
-  If LOCAL_MEDIA_STORAGE is not defined (the default), then the application expects cloud based storage for media assets for News Release (pictures etc), else it expects there be local storage (see MediaAssetsUnc)  
   
 #### Customizations - Resources, Images
   
@@ -564,6 +557,13 @@ We will build and publish to a local filesystem first, then copy the output to t
     See [Groups Configuration and Permissions Matrix](#groups-configuration-and-permissions-matrix)  
 
 #### News / Release Management configuration
+
+* **CloudEndpointsProtocol** / **CloudAccountName** / **CloudAccountKey** / **CloudEndpointSuffix**  
+  Configuration for Cloud based services.  
+  All values above are used to build the connection string:
+  DefaultEndpointsProtocol={CloudEndpointsProtocol};AccountName={CloudAccountName};AccountKey={CloudAccountKey};EndpointSuffix={CloudEndpointSuffix}  
+  See (see [LOCAL_MEDIA_STORAGE Preprocessor Symbol](#local_media_storage-preprocessor-symbol)).  
+  If LOCAL_MEDIA_STORAGE is not defined (the default), then the application expects cloud based storage for media assets for News Release (pictures etc), else it expects there be local storage (see MediaAssetsUnc)  
   
 * **NewsHostUri**  
     URI for Gov News Host (not part of the Hub Open Source project)  
