@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>Gcpe.Hub.WebApp</PackageId>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <UserSecretsId>dca1b645-6b13-4ee8-8f47-84c196505e15</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,8 +38,4 @@
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
   </ItemGroup>
 
-  <Target Name="CopyConfigurationForDebug" AfterTargets="AfterBuild" >
-    <!-- copy the specified configuration appsettings over as appSettings -->
-    <Copy SourceFiles="$(SolutionDir)Configuration\Hub.WebApp.$(Configuration).appSettings.json" DestinationFiles="$(SolutionDir)Configuration\Hub.WebApp.appSettings.json" ContinueOnError="false" />
-  </Target>
 </Project>

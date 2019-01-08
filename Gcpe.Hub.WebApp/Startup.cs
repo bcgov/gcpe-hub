@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Gcpe.Hub.Data.Entity;
 using Gcpe.Hub.WebApp.Middleware;
 using Gcpe.Hub.WebApp.Providers;
@@ -17,16 +16,14 @@ namespace Gcpe.Hub.WebApp
     {
         public Startup(IHostingEnvironment env)
         {
-            var configPath = Path.Combine(Directory.GetParent(env.ContentRootPath).FullName, "Configuration");
-            
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(configPath)
-                .AddJsonFile("Hub.WebApp.appSettings.json", optional: true, reloadOnChange: true);
-
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath);
+            if (env.IsDevelopment())
+                builder.AddUserSecrets<Startup>();
             if (!System.Diagnostics.Debugger.IsAttached)
-                builder.AddJsonFile($"Hub.WebApp.appSettings.{env.EnvironmentName}.json", optional: true);
-
-            builder.AddEnvironmentVariables();
+            {
+                builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                builder.AddEnvironmentVariables(); // for openshift
+            }
             Configuration = builder.Build();
         }
 
