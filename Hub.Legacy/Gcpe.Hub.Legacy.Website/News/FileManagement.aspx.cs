@@ -54,7 +54,7 @@ namespace Gcpe.Hub.News
                     }
                 }
 #else
-                string directory = Gcpe.Hub.Configuration.App.Settings.NewsFileFolder;
+                string directory = Settings.Default.NewsFileFolder;
                 if (Directory.Exists(directory))
                 {
                
@@ -99,9 +99,9 @@ namespace Gcpe.Hub.News
                 mediaAssets.Add(blob.Metadata.TryGetValue("filename", out fileName) ? fileName : Path.GetFileName(blob.Name));
             }
 #else
-            if (!String.IsNullOrEmpty(Gcpe.Hub.Configuration.App.Settings.NewsFileFolder))
+            if (!String.IsNullOrEmpty(Settings.Default.NewsFileFolder))
             {
-                string directory = Gcpe.Hub.Configuration.App.Settings.NewsFileFolder;
+                string directory = Settings.Default.NewsFileFolder;
 
                 if (Directory.Exists(directory))
                 {

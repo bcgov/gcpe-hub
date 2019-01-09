@@ -7,6 +7,7 @@ using System.Data;
 using CorporateCalendar.Data;
 using CorporateCalendar.Security;
 using Microsoft.Reporting.WinForms;
+using Gcpe.Hub.Properties;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -650,7 +651,7 @@ namespace Gcpe.Hub.Calendar
                     parameters.Add(new ReportParameter("ReportTitle", title));
                     parameters.Add(new ReportParameter("IsAppOwner", IsAppOwner.ToString()));
                     parameters.Add(new ReportParameter("IncludeLTOutlook", includeLTOutlook.ToString()));
-                    parameters.Add(new ReportParameter("CoverImage", "file:" + request.PhysicalApplicationPath + Gcpe.Hub.Configuration.App.Settings.CalendarLookAheadCoverImg));
+                    parameters.Add(new ReportParameter("CoverImage", "file:" + request.PhysicalApplicationPath + Settings.Default.CalendarLookAheadCoverImg));
                     localReport.EnableExternalImages = true;
                     dailyPageBreakColumn = reportData.Columns.Add("DailyPageBreak", typeof(bool));
                     hasNoActivitiesThatDayColumn = reportData.Columns.Add("NoActivitiesThatDay", typeof(string));

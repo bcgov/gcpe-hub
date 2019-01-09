@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gcpe.Hub.Properties;
 using MediaRelationsDatabase;
 using MediaRelationsLibrary;
 
@@ -388,7 +389,7 @@ public partial class UserControls_ViewCompany : System.Web.UI.UserControl
             if (webAddress.WebAddressType.WebAddressTypeName == WebAddressType.Email)
             {
                 didContainEmail = true;
-                bool disableEmail = Gcpe.Hub.Configuration.App.Settings.DisableEmail;
+                bool disableEmail = Settings.Default.DisableEmail;
 
                 if (disableEmail) emailHref.HRef = emailMobileButton.NavigateUrl = "javascript:alert('this function has been disabled')";
                 else emailHref.HRef = emailMobileButton.NavigateUrl = "mailto:" + webAddress.WebAddress;
@@ -1385,7 +1386,7 @@ public partial class UserControls_ViewCompany : System.Web.UI.UserControl
                 }
                 sb.Append("</div>\n");
 
-                CommonMethods.SendEmail(Gcpe.Hub.Configuration.App.Settings.FromEmailAddress, email, "Media Relations " + (cmp.IsOutlet ? "Outlet" : "Company") + " share", sb.ToString(), true);
+                CommonMethods.SendEmail(Settings.Default.FromEmailAddress, email, "Media Relations " + (cmp.IsOutlet ? "Outlet" : "Company") + " share", sb.ToString(), true);
 
                 bottomScriptArea.Text = "<script type='text/javascript'>alert(sentShareEmailText.replace(\"###email###\", \"" + email.Replace("\"", "\\\"") + "\"));</script>\n";
             }

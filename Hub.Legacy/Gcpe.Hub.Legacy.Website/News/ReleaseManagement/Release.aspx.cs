@@ -8,7 +8,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gcpe.Hub.Configuration;
 using legacy::Gcpe.Hub.Data.Entity;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -672,14 +671,14 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
             file.Delete();
 #else
-            string directory = Path.Combine(Gcpe.Hub.Configuration.App.Settings.MediaAssetsUnc, Model.ReleasePathName, Model.Key);
+            string directory = Path.Combine(Settings.Default.MediaAssetsUnc, Model.ReleasePathName, Model.Key);
             if (System.IO.File.Exists(Path.Combine(directory, fileName)))
             {
                 System.IO.File.Delete(Path.Combine(directory, fileName));
 
                 Global.QueueBackgroundWorkItemWithRetry(() =>
                 {
-                    foreach (string folder in Gcpe.Hub.Configuration.App.Settings.DeployFolders.ToCollection())
+                    foreach (string folder in Properties.Settings.Default.DeployFolders)
                     {
                         string deployDirectory = Path.Combine(folder, Model.ReleasePathName, Model.Key);
 

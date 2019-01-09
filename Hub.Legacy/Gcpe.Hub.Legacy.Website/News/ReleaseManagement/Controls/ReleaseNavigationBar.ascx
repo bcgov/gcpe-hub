@@ -42,7 +42,7 @@
                                 <div style="margin-top: 8px; font-size: 1em"><%# Model.Reference %></div>
                         <% } else { %>
 
-                            <a href='<%# Gcpe.Hub.Configuration.App.Settings.NewsHostUri  + (Model.Reference == "" ? "" : Model.Reference.Substring("NEWS-".Length)) %>' target="_blank"><%# Model.Reference %></a>
+                            <a href='<%# Gcpe.Hub.Properties.Settings.Default.NewsHostUri  + (Model.Reference == "" ? "" : Model.Reference.Substring("NEWS-".Length)) %>' target="_blank"><%# Model.Reference %></a>
 
                         <% } %>
 

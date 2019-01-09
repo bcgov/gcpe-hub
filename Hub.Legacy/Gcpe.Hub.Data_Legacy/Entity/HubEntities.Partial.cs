@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Gcpe.Hub.Data.Configuration;
 
 namespace Gcpe.Hub.Data.Entity
 {
@@ -38,8 +34,7 @@ namespace Gcpe.Hub.Data.Entity
                     builder.IntegratedSecurity = false;
                 }
 
-                builder["Database"] = App.Settings.DbName;
-                builder["Server"] = App.Settings.DbServer;
+                builder["Server"] = Environment.GetEnvironmentVariable("DbServer");
 
                 //Console.WriteLine(builder.ConnectionString);
                 string providerString = builder.ToString();

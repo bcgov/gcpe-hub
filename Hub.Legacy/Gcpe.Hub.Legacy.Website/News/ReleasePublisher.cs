@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Gcpe.Hub.News.ReleaseManagement;
+using Gcpe.Hub.Properties;
 using Gcpe.Hub.Services.Legacy;
 using Gcpe.News.ReleaseManagement;
 using legacy::Gcpe.Hub.Data.Entity;
-using MediaRelationsLibrary.Configuration;
 
 namespace Gcpe.Hub
 {
@@ -74,7 +74,7 @@ namespace Gcpe.Hub
             {
                 try
                 {
-                    using (var client = new SubscribeClient(Gcpe.Hub.Configuration.App.Settings.SubscribeBaseUri.ToUri()))
+                    using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
                     {
                         if (NextNewsReleasePublishDate <= DateTimeOffset.Now)
                         {
@@ -138,9 +138,9 @@ namespace Gcpe.Hub
                         }
                         break;
                     }
-                    PublishManager.PublishInMediaGallery(db, post, Gcpe.Hub.Configuration.App.Settings.PublishLocation); // because of new ReportViewer() in ToPortableDocument(), trying to do any await call in this file will causes a deadlock!
+                    PublishManager.PublishInMediaGallery(db, post, Settings.Default.PublishLocation); // because of new ReportViewer() in ToPortableDocument(), trying to do any await call in this file will causes a deadlock!
                     // we're going to tell Facebook to scrape these afterwards
-                    releaseUris.Add(new Uri(Gcpe.Hub.Configuration.App.Settings.NewsHostUri.ToUri(), post.ReleasePathName() + "/" + post.Key).ToString());
+                    releaseUris.Add(new Uri(Settings.Default.NewsHostUri, post.ReleasePathName() + "/" + post.Key).ToString());
                     if (!articles.Any(e => e.Id == post.AtomId))
                     {
                         AppendNewPost(post, articles);
@@ -151,7 +151,7 @@ namespace Gcpe.Hub
                     db.SaveChanges();
                     Utils.LogMessage("Published");
                     client.Distribution.AddNewsOnDemandPostsAsync(articles, applicationShutdownToken).GetAwaiter().GetResult();
-                    PublishManager.DeployFiles(Gcpe.Hub.Configuration.App.Settings.PublishLocation, Gcpe.Hub.Configuration.App.Settings.DeployLocations.ToCollection()); // this will throw if a deployPath is down
+                    PublishManager.DeployFiles(Settings.Default.PublishLocation, Settings.Default.DeployLocations.Split('|')); // this will throw if a deployPath is down
                 }
             }
             return nextCheckTime;
@@ -159,12 +159,12 @@ namespace Gcpe.Hub
 
         public static void UnpublishNewsRelease(string permanentUri)
         {
-            using (var client = new SubscribeClient(Gcpe.Hub.Configuration.App.Settings.SubscribeBaseUri.ToUri()))
+            using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
             {
                 client.Distribution.RemoveNewsOnDemandEntry(permanentUri);
                 using (HubEntities db = new HubEntities())
                 {
-                    PublishManager.UnpublishMediaGallery(db, Gcpe.Hub.Configuration.App.Settings.PublishLocation);
+                    PublishManager.UnpublishMediaGallery(db, Settings.Default.PublishLocation);
                 }
             }
         }
@@ -172,7 +172,7 @@ namespace Gcpe.Hub
         public static int? NewsReleaseSubscriberCount(IList<string> distributionLists)
         {
             if (distributionLists.Count == 0) return null;
-            using (var client = new SubscribeClient(Gcpe.Hub.Configuration.App.Settings.SubscribeBaseUri.ToUri()))
+            using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
             {
                 return client.Distribution.NewsOnDemandSubscriberCount(distributionLists);
             }

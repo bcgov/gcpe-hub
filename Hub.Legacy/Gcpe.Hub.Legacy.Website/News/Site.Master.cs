@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gcpe.Hub.Properties;
 
 namespace Gcpe.Hub.News
 {
@@ -36,7 +37,7 @@ namespace Gcpe.Hub.News
 
             //updatePanel.Triggers.Add(trigger);
             //updatePanel.Triggers.Remove(trigger);
-            favicon.Href = Gcpe.Hub.Configuration.App.Settings.FaviconImg;
+            favicon.Href = Settings.Default.FaviconImg;
         }
 
         public string MenuText { get; set; }
@@ -82,7 +83,7 @@ namespace Gcpe.Hub.News
 
         public string GetHelpUrl()
         {
-            return String.Format(Gcpe.Hub.Configuration.App.Settings.NewsHelpUrl, HelpPage);
+            return String.Format(Settings.Default.NewsHelpUrl, HelpPage);
         }
 
         //protected void txtSearch_TextChanged(object sender, EventArgs e)

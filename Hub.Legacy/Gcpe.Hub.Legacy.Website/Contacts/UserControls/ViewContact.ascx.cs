@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using MediaRelationsLibrary;
 using MediaRelationsDatabase;
 using System.Text;
+using Gcpe.Hub.Properties;
 
 public partial class UserControls_ViewContact : System.Web.UI.UserControl
 {
@@ -113,7 +114,7 @@ public partial class UserControls_ViewContact : System.Web.UI.UserControl
                 }
                 else
                 {
-                    bool disableEmail = Gcpe.Hub.Configuration.App.Settings.DisableEmail;
+                    bool disableEmail = Settings.Default.DisableEmail;
 
                     if (disableEmail)
                     {
@@ -692,7 +693,7 @@ public partial class UserControls_ViewContact : System.Web.UI.UserControl
                 if (con.MLAAssignmentId != null && con.MLAAssignmentId != Guid.Empty) sb.Append("<div style='" + labelStyle + "'>MLA Assignment</div><div> " + con.ElectoralDistrict.DistrictName + "</div>\n");
 
                 sb.Append("</div>\n");
-                CommonMethods.SendEmail(Gcpe.Hub.Configuration.App.Settings.FromEmailAddress, email, "Media Relations Contact Share", sb.ToString(), true);
+                CommonMethods.SendEmail(Settings.Default.FromEmailAddress, email, "Media Relations Contact Share", sb.ToString(), true);
                 CommonEventLogging.WriteActivityLogEntry(con, "", CommonEventLogging.ActivityType.Share);
 
                 bottomScriptArea.Text = "alert(sentShareEmailText.replace(\"###email###\", \"" + email.Replace("\"", "\\\"") + "\"));\n";

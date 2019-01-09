@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using MediaRelationsDatabase.Configuration;
 
 namespace MediaRelationsDatabase
 {
@@ -37,8 +31,7 @@ namespace MediaRelationsDatabase
                     builder.UserID = GcpeHubDbUserID;
                     builder.IntegratedSecurity = false;
                 }
-                builder["Database"] = App.Settings.DbName;
-                builder["Server"] = App.Settings.DbServer;
+                builder["Server"] = Environment.GetEnvironmentVariable("DbServer");
 
                 //Console.WriteLine(builder.ConnectionString);
                 string providerString = builder.ToString();

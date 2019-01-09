@@ -1,12 +1,13 @@
 using System;
 using System.Web;
 using CorporateCalendar.Security;
+using Gcpe.Hub.Properties;
 
 public partial class SiteMaster : System.Web.UI.MasterPage
 {
     public string GetVersion()
     {
-        return Gcpe.Hub.Configuration.App.Settings.Version;
+        return Settings.Default.Version;
     }
     //Security is determined based upon user Account Name. Here the user Identity gives the Users Account Name.
     CustomPrincipal _customPrincipal = null;
@@ -55,8 +56,8 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
         sync.HRef = GetCalendarUrl();
 
-        help.HRef = Gcpe.Hub.Configuration.App.Settings.HelpFileUri;
+        help.HRef = Settings.Default.HelpFileUri.ToString();
 
-        favicon.Href = Gcpe.Hub.Configuration.App.Settings.FaviconImg;
+        favicon.Href = Settings.Default.FaviconImg;
     }
 }

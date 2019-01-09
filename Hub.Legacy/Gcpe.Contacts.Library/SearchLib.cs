@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using MediaRelationsDatabase;
+using Gcpe.Hub.Properties;
 
 namespace MediaRelationsLibrary
 {
@@ -189,7 +190,7 @@ namespace MediaRelationsLibrary
                                    Name = cmp.CompanyName
                                });
 
-                int take = MediaRelationsLibrary.Configuration.App.Settings.TypedownItemLimit;
+                int take = Settings.Default.TypedownItemLimit;
 
                 var combined = contacts.Union(companies).Union(outlets).OrderBy(t => t.Name).Take(take);
                 foreach (var result in combined)

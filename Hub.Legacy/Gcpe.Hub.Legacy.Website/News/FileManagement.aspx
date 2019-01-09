@@ -102,7 +102,7 @@
                             <td></td>
                             <td><asp:Label ID="file" runat="server" Text="<%# Container.DataItem.ToString() %>" /></td>
                             <td>
-                                <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Configuration.App.Settings.NewsHostUri + "files/" + Container.DataItem.ToString() %>' Text="View file" />
+                                <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.NewsHostUri + "files/" + Container.DataItem.ToString() %>' Text="View file" />
                             </td>
 
                             <td style="text-align: center; padding: 3px;">

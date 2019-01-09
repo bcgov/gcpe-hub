@@ -10,6 +10,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using static MediaRelationsLibrary.CommonEventLogging;
+using Gcpe.Hub.Properties;
 
 public partial class Search : System.Web.UI.Page
 {
@@ -98,7 +99,7 @@ public partial class Search : System.Web.UI.Page
             bottomContactsPaginator.BulkActionsEventHandler += BottomContactsBulkActionHandler;
         }
 
-        int maxEmailCount = Gcpe.Hub.Configuration.App.Settings.MaxBccEmails;
+        int maxEmailCount = Settings.Default.MaxBccEmails;
         if (maxEmailCount > 50) maxEmailCount = 50; //hard-coded limit
 
         using (var ctx = new MediaRelationsEntities())
@@ -147,7 +148,7 @@ public partial class Search : System.Web.UI.Page
         ShareCountLit.Text = "share: " + shareSb.Length;
 
 
-        if (!Gcpe.Hub.Configuration.App.Settings.DisableEmail)
+        if (!Settings.Default.DisableEmail)
         {
             emailHrefLink.NavigateUrl = mobileEmailHref.NavigateUrl = (emailCount > maxEmailCount ? "javascript:alert(tooManyEmailError.replace('###emailcount###', " + emailCount + ").replace('###maxemails###'," + maxEmailCount + "));" : emailSb.ToString());
         }
@@ -499,7 +500,7 @@ public partial class Search : System.Web.UI.Page
             WriteActivityLogEntry(CommonEventLogging.ActivityType.Share, CommonEventLogging.EntityType.Search,
                 Guid.Empty, "", Guid.Empty, advancedSearchControlDesktop.SearchCriteriaQueryUrl, CommonMethods.GetLoggedInUser());
 
-            CommonMethods.SendEmail(Gcpe.Hub.Configuration.App.Settings.FromEmailAddress, email, "Media Relations Search Results Share", shareSb.ToString(), true);
+            CommonMethods.SendEmail(Settings.Default.FromEmailAddress, email, "Media Relations Search Results Share", shareSb.ToString(), true);
             shareSuccessLit.Text = "<script type='text/javascript'>alert(sentShareEmailText.replace(\"###email###\", \"" + email.Replace("\"", "\\\"") + "\"));</script>\n";
         }
     }

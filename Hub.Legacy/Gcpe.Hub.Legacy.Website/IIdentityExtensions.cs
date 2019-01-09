@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Caching;
 using System.Configuration;
 using System.Web.Configuration;
+using Gcpe.Hub.Properties;
 
 namespace Gcpe.Hub
 {
@@ -50,7 +51,7 @@ namespace Gcpe.Hub
 
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGuidSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user.Guid.Value;
@@ -81,7 +82,7 @@ namespace Gcpe.Hub
             string result = null;
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userEmailSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user?.EmailAddress ?? "";
@@ -114,7 +115,7 @@ namespace Gcpe.Hub
             string result = null;
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userDisplayNameSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
 
                 result = user.DisplayName.ToString();
@@ -155,7 +156,7 @@ namespace Gcpe.Hub
             List<String> result = new List<string>();
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGroupsSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, username);
 
                 var authGroups = user.GetAuthorizationGroups(); //this is recursive on the AD server, much faster than trying to perform the recursion on our side with multiple calls to the AD server
@@ -200,7 +201,7 @@ namespace Gcpe.Hub
 
             if (HttpContext.Current.Cache == null || HttpContext.Current.Cache[userGroupsSessionKey] == null)
             {
-                PrincipalContext context = new PrincipalContext(ContextType.Domain, Gcpe.Hub.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext context = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
                 UserPrincipal user = UserPrincipal.FindByIdentity(context, identity.Name);
                 if (user != null)
                 {

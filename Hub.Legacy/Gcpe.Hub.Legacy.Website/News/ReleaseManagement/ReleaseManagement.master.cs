@@ -19,7 +19,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
             site.AddAppItem("BC Gov News", "~/News/FileManagement");
 
             site.AddNavigationItem("New", "~/News/ReleaseManagement/New");
-            if (Gcpe.Hub.Configuration.App.Settings.EnableForecastTab)
+            if (Gcpe.Hub.Properties.Settings.Default.EnableForecastTab)
             {
                 site.AddNavigationItem("Forecast", "~/News/ReleaseManagement/Forecast");
             }

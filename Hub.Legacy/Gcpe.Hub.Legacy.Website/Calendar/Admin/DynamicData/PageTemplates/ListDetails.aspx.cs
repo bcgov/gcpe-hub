@@ -1,11 +1,12 @@
-﻿using CorporateCalendar.Security;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.Expressions;
+using CorporateCalendar.Security;
+using Gcpe.Hub.Properties;
 
 namespace CorporateCalendarAdmin
 {
@@ -30,7 +31,7 @@ namespace CorporateCalendarAdmin
         {
             Title = table.DisplayName;
 
-            bool DisableEditTable = Gcpe.Hub.Configuration.App.Settings.DisableEditTable;
+            bool DisableEditTable = Settings.Default.DisableEditTable;
 
             // Selection from url
             if (!Page.IsPostBack && table.HasPrimaryKey)

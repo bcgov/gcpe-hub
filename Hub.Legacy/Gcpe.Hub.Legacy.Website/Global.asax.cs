@@ -1,12 +1,11 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿extern alias legacy;
 using System;
-using System.Configuration;
 using System.Web.DynamicData;
 using System.Web.Hosting;
 using System.Web.Routing;
-using Gcpe.Hub.Configuration;
-using Microsoft.WindowsAzure.Storage.Auth;
+using Gcpe.Hub.Properties;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Gcpe.Hub
 {
@@ -28,6 +27,9 @@ namespace Gcpe.Hub
 #endif
         protected void Application_Start(object sender, EventArgs e)
         {
+            Environment.SetEnvironmentVariable("DbServer", Settings.Default.DbServer); // for the 3 db Contexts
+
+
             // IMPORTANT: DATA MODEL REGISTRATION 
             // Uncomment this line to register a LINQ to SQL model for ASP.NET Dynamic Data.
             // Set ScaffoldAllTables = true only if you are sure that you want all tables in the
@@ -82,7 +84,8 @@ namespace Gcpe.Hub
         {
             //TODO: This method should be moved out-of-process (for instance, to the Gcpe.Hub.Services project).
  
-            var connectionString = App.Settings.CloudStorageConnectionString();
+            var connectionString = string.Format("DefaultEndpointsProtocol={0};AccountName={1};AccountKey={2};EndpointSuffix={3}", 
+                Settings.Default.CloudEndpointsProtocol, Settings.Default.CloudAccountName, Settings.Default.CloudAccountKey, Settings.Default.CloudEndpointSuffix);
 
             var account = CloudStorageAccount.Parse(connectionString);
 

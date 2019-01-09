@@ -122,9 +122,6 @@
     <Reference Include="Gcpe.NewsOnDemand.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Gcpe.NewsOnDemand.Client.2.0.0\lib\netstandard1.4\Gcpe.NewsOnDemand.Client.dll</HintPath>
     </Reference>
-    <Reference Include="RES.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RES.Configuration.1.0.0\lib\net40\RES.Configuration.dll</HintPath>
-    </Reference>
     <Reference Include="System.Spatial, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -837,8 +834,12 @@
     <Content Include="Resources\BC\MediaRelations%402x.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Debug Build to Development.pubxml" />
+    <None Include="Properties\PublishProfiles\Release Build to Test.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
@@ -1782,8 +1783,6 @@
     <Compile Include="Calendar\MinistryHandler.ashx.cs">
       <DependentUpon>MinistryHandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\IWebsiteConfiguration.cs" />
-    <Compile Include="Configuration\WebsiteConfiguration.cs" />
     <Compile Include="News\ReleaseManagement\FlickrHandler.ashx.cs">
       <DependentUpon>FlickrHandler.ashx</DependentUpon>
     </Compile>
@@ -1794,6 +1793,11 @@
     </Compile>
     <Compile Include="News\LiveFeedManagement.aspx.designer.cs">
       <DependentUpon>LiveFeedManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -2447,7 +2451,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\typings\moment\" />
-    <Folder Include="SqlServerTypes\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -2491,8 +2494,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="CopyConfigurationToSourceForDebug" AfterTargets="AfterBuild" Condition=" '$(PublishProfileName)' == '' And '$(WebPublishProfileFile)' == '' ">
-    <!-- copy the specified configuration appsettings over as appSettings -->
-    <Copy SourceFiles="$(SolutionDir)Configuration\Hub.Legacy.$(Configuration).appSettings.config" DestinationFiles="$(SolutionDir)Configuration\Hub.Legacy.appSettings.config" ContinueOnError="false" />
-  </Target>
 </Project>
