@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Gcpe.Hub.Services.Legacy;
 using Gcpe.Hub.Services.Legacy.Models;
-using MediaRelationsLibrary.Configuration;
+using Gcpe.Hub.Properties;
 
 namespace MediaRelationsLibrary
 {
@@ -9,7 +9,7 @@ namespace MediaRelationsLibrary
     {
         public static IList<KeyValuePairStringString> GetMediaDistributionLists()
         {
-            using (var client = new SubscribeClient(App.Settings.SubscribeBaseUri.ToUri()))
+            using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
             {
                 return client.Subscribe.SubscriptionItems("media-distribution-lists");
             }
@@ -17,7 +17,7 @@ namespace MediaRelationsLibrary
 
         public static SubscriberInfo GetSubscriberInfo(string emailAddress)
         {
-            using (var client = new SubscribeClient(App.Settings.SubscribeBaseUri.ToUri()))
+            using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
             {
                 return client.Subscribe.SubscriberInformation(emailAddress);
             }
@@ -25,7 +25,7 @@ namespace MediaRelationsLibrary
 
         public static void SaveSubscriberInfo(string emailAddress, IList<string> mediaDistributionLists = null, string newEmailAddress = null)
         {
-            using (var client = new SubscribeClient(App.Settings.SubscribeBaseUri.ToUri()))
+            using (var client = new SubscribeClient(Settings.Default.SubscribeBaseUri))
             {
                 SubscriberInfo info = client.Subscribe.SubscriberInformation(emailAddress);
                 bool isNewSubscriber = (info == null);

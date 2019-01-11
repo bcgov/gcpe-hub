@@ -36,15 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="RES.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RES.Configuration.1.0.0\lib\net40\RES.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -60,8 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConnectionConfiguration.cs" />
-    <Compile Include="Configuration\IConnectionConfiguration.cs" />
     <Compile Include="CorporateCalendar.cs">
       <SubType>Code</SubType>
       <DependentUpon>CorporateCalendar.dbml</DependentUpon>
@@ -71,8 +66,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Entity\CalendarEntities.Designer.cs" />
-    <Compile Include="Entity\CalendarEntities1.Designer.cs">
+    <Compile Include="Entity\CalendarEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalendarEntities.edmx</DependentUpon>
@@ -94,7 +88,7 @@
     </None>
     <EntityDeploy Include="Entity\CalendarEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CalendarEntities1.Designer.cs</LastGenOutput>
+      <LastGenOutput>CalendarEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Entity\CalendarEntities.edmx.diagram">
       <DependentUpon>CalendarEntities.edmx</DependentUpon>

@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Security.Principal;
+﻿using System.Security.Principal;
+using System.Web;
 using CorporateCalendar.Security;
-using Gcpe.Hub.Configuration;
 
 namespace Gcpe.Hub
 {
@@ -20,7 +19,7 @@ namespace Gcpe.Hub
             string remote_addr = Request.ServerVariables["REMOTE_ADDR"];
             if (!NeedsNewsValidation(remote_addr, Request.RequestContext.HttpContext.Request.RawUrl)) return;
 
-            if (App.Settings.TrustedReverseProxyServers.ToCollection().Contains(remote_addr))
+            if (Properties.Settings.Default.TrustedReverseProxyServers.Contains(remote_addr))
             {
                 userName = Request.Headers["SM_USER"];
             }

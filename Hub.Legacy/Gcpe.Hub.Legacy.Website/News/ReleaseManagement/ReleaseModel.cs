@@ -8,8 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
+using Gcpe.Hub.Properties;
 using legacy::Gcpe.Hub.Data.Entity;
-using MediaRelationsLibrary.Configuration;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Gcpe.Hub.News.ReleaseManagement
@@ -87,7 +87,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
         private static Uri GetReleaseUri(NewsRelease post)
         {
             //TODO: get it from NewRooms
-            return new Uri(Gcpe.Hub.Configuration.App.Settings.NewsHostUri.ToUri(), post.ReleasePathName() + "/" + post.Key);
+            return new Uri(Settings.Default.NewsHostUri, post.ReleasePathName() + "/" + post.Key);
         }
 
         public string PermanentUri
@@ -100,7 +100,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
             if (post.ReleaseType == ReleaseType.Advisory)
                 return "advisories/" + post.Key;
             if (post.Reference.StartsWith("NEWS-"))
-                return Gcpe.Hub.Configuration.App.Settings.NewsHostUri + post.Reference.Substring("NEWS-".Length);
+                return Settings.Default.NewsHostUri + post.Reference.Substring("NEWS-".Length);
             return GetReleaseUri(post).ToString();
         }
 
@@ -527,9 +527,9 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     }
 #else
 
-                    if (!String.IsNullOrEmpty(Gcpe.Hub.Configuration.App.Settings.MediaAssetsUnc))
+                    if (!String.IsNullOrEmpty(Settings.Default.MediaAssetsUnc))
                     {
-                        string directory = Path.Combine(Gcpe.Hub.Configuration.App.Settings.MediaAssetsUnc, ReleasePathName, Release.Key);
+                        string directory = Path.Combine(Settings.Default.MediaAssetsUnc, ReleasePathName, Release.Key);
 
                         if (Directory.Exists(directory))
                         {

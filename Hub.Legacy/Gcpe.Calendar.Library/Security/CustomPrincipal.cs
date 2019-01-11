@@ -2,10 +2,9 @@
 using System.Security.Principal;
 using System.Linq;
 using System.Collections.Generic;
-using System.Globalization;
-using CorporateCalendar.Configuration;
-using CorporateCalendar.Data;
 
+using CorporateCalendar.Data;
+using Gcpe.Hub.Properties;
 
 namespace CorporateCalendar.Security
 {
@@ -75,7 +74,7 @@ namespace CorporateCalendar.Security
         /// <param name="identity">user identity</param>
         public CustomPrincipal(IIdentity identity)
         {
-            GCPEHQ_Ministry = Configuration.App.Settings.HQAdmin;
+            GCPEHQ_Ministry = Settings.Default.HQAdmin;
             if (identity == null) { throw new ArgumentException("Parameter identity cannot be null"); }
 
             Identity = identity;
@@ -173,6 +172,17 @@ namespace CorporateCalendar.Security
         /// </summary>
         /// <returns></returns>
 
-        private string[] ApplicationOwners => App.Settings.ApplicationOwnerOrganizations.ToStringArray();
+        private string[] ApplicationOwners
+        {
+            get
+            {
+                string applicationOwnerOrganizationsCSVs = Settings.Default.ApplicationOwnerOrganizations;
+                if (string.IsNullOrEmpty(applicationOwnerOrganizationsCSVs))
+                    throw new System.Exception("owner id's not set");
+
+
+                return applicationOwnerOrganizationsCSVs.Split(','); // get individual values
+            }
+        }
     }
 }

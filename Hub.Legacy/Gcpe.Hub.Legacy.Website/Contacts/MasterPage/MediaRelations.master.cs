@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Gcpe.Hub.Properties;
 using MediaRelationsLibrary;
 
 public partial class MasterPage_MediaRelations : System.Web.UI.MasterPage
@@ -49,8 +50,8 @@ public partial class MasterPage_MediaRelations : System.Web.UI.MasterPage
             ScriptLiteral.Text = mb.ToString();*/
         }
 
-        DesktopLogo.Src = Gcpe.Hub.Configuration.App.Settings.ContactsHeaderImg;
-        PhoneLogo.Src = Gcpe.Hub.Configuration.App.Settings.ContactsHeaderImg;
+        DesktopLogo.Src = Settings.Default.ContactsHeaderImg;
+        PhoneLogo.Src = Settings.Default.ContactsHeaderImg;
     }
 
     private void SetupPageNavigation()

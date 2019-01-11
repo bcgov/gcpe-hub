@@ -1,6 +1,7 @@
 using System;
 using System.DirectoryServices;
 using System.Collections.Generic;
+using Gcpe.Hub.Properties;
 
 namespace CorporateCalendar.Security
 {
@@ -12,7 +13,7 @@ namespace CorporateCalendar.Security
         private static DirectoryEntry GetDirectoryEntry()
         {
             DirectoryEntry directoryEntry = new DirectoryEntry();
-            directoryEntry.Path = CorporateCalendar.Configuration.App.Settings.LdapUrl;
+            directoryEntry.Path = Settings.Default.LdapUrl;
             directoryEntry.AuthenticationType = AuthenticationTypes.Secure;
             string debugLdapPwd = Environment.GetEnvironmentVariable("DebugLdapPwd");
             string debugLdapUser = Environment.GetEnvironmentVariable("DebugLdapUser");

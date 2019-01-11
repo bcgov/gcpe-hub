@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAzure.Storage.Blob;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
-using Gcpe.Hub.Configuration;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Gcpe.Hub.News
 {
@@ -35,7 +34,7 @@ namespace Gcpe.Hub.News
 #else
                 try
                 {
-                    string directory = Gcpe.Hub.Configuration.App.Settings.NewsFileFolder;
+                    string directory = Properties.Settings.Default.NewsFileFolder;
 
                     if (!Directory.Exists(directory))
                         Directory.CreateDirectory(directory);
@@ -45,7 +44,7 @@ namespace Gcpe.Hub.News
                     return new { error = true, message = "Error occurred when preparing uploading a file." + e.Message };
                 }
 
-                string uploadFolder = Gcpe.Hub.Configuration.App.Settings.NewsFileFolder;
+                string uploadFolder = Properties.Settings.Default.NewsFileFolder;
                 string folder = null;
 
                 return PrepareMetadataResponse(uploadFolder, folder, blocksCount, fileName, fileSize, chunkSize, false);
@@ -339,7 +338,7 @@ namespace Gcpe.Hub.News
 
                         Global.QueueBackgroundWorkItemWithRetry(() =>
                         {
-                            foreach (string folder in Gcpe.Hub.Configuration.App.Settings.DeployFolders.ToCollection())
+                            foreach (string folder in Properties.Settings.Default.DeployFolders)
                             {
                                 string deployDirectory = Path.Combine(folder, model.FolderName);
 

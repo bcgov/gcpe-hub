@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gcpe.Hub.Configuration;
 
 namespace Gcpe.Hub.News.ReleaseManagement
 {

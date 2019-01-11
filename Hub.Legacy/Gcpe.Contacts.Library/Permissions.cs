@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.DirectoryServices.AccountManagement;
-using MediaRelationsLibrary.Configuration;
+using Gcpe.Hub.Properties;
 
 namespace MediaRelationsLibrary
 {
@@ -41,7 +41,7 @@ namespace MediaRelationsLibrary
         {
             Dictionary<string, bool> userGroupPermissions = GetUsersGroupPermissions(userId);
 
-            foreach (string group in App.Settings.AdminGroups.ToCollection())
+            foreach (string group in Settings.Default.AdminGroups.Split(','))
             {
                 if (!string.IsNullOrWhiteSpace(group))
                 {
@@ -67,7 +67,7 @@ namespace MediaRelationsLibrary
 
             Dictionary<string, bool> userGroupPermissions = GetUsersGroupPermissions(userId);
 
-            foreach (string group in App.Settings.ContributorGroups.ToCollection())
+            foreach (string group in Settings.Default.ContributorGroups.Split(','))
             {
                 if (!string.IsNullOrWhiteSpace(group))
                 {
@@ -96,11 +96,11 @@ namespace MediaRelationsLibrary
                         permissionMatrix = new Dictionary<SiteSection, List<KeyValuePair<string, SiteAction>>>();
 
                         //decode from config
-                        foreach (string key in ConfigurationManager.AppSettings)
+                        foreach (SettingsProperty prop in Settings.Default.Properties)
                         {
-                            if (key.StartsWith("permissions_"))
+                            if (prop.Name.StartsWith("permissions_"))
                             {
-                                string[] cPerm = ConfigurationManager.AppSettings[key].Split('/');
+                                string[] cPerm = ((string)Settings.Default[prop.Name]).Split('/');
                                 if (cPerm.Length == 3)
                                 {
                                     SiteSection section = (SiteSection)Enum.Parse(typeof(SiteSection), cPerm[0].Trim());
@@ -187,7 +187,7 @@ namespace MediaRelationsLibrary
                 adGroups = new Dictionary<string, bool>();
 
                 bool debugMode = System.Diagnostics.Debugger.IsAttached ? HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] == "::1" : false;
-                using (PrincipalContext ctx = debugMode ? null : new PrincipalContext(ContextType.Domain, MediaRelationsLibrary.Configuration.App.Settings.ActiveDirectoryDomain))
+                using (PrincipalContext ctx = debugMode ? null : new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain))
                 {
                     UserPrincipal principal = debugMode ? null : UserPrincipal.FindByIdentity(ctx, IdentityType.SamAccountName, userId);
                     // get the list of siteSections from the permission matrix to
@@ -290,7 +290,7 @@ namespace MediaRelationsLibrary
             try
             {
                 // establish domain context
-                PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain, MediaRelationsLibrary.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
 
                 // find your user
                 UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, loggedInUser);
@@ -318,7 +318,7 @@ namespace MediaRelationsLibrary
             try
             {
                 // establish domain context
-                PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain, MediaRelationsLibrary.Configuration.App.Settings.ActiveDirectoryDomain);
+                PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain, Settings.Default.ActiveDirectoryDomain);
 
                 // find your user
                 UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, loggedInUser);

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using MediaRelationsDatabase;
+using Gcpe.Hub.Properties;
 
 namespace MediaRelationsLibrary
 {
@@ -195,7 +196,7 @@ namespace MediaRelationsLibrary
 
         public void WriteConfigurationException(Exception e, string methodName, string appKey)
         {
-            if (!MediaRelationsLibrary.Configuration.App.Settings.DoExceptionLogging)
+            if (!Settings.Default.DoExceptionLogging)
             {
                 throw new Exception(e + " ||| " + methodName + " ||| " + appKey);
             }
@@ -224,7 +225,7 @@ namespace MediaRelationsLibrary
 
         public void WriteException(Exception e, string source)
         {
-            if (!MediaRelationsLibrary.Configuration.App.Settings.DoExceptionLogging)
+            if (!Settings.Default.DoExceptionLogging)
             {
                 throw new Exception(e.Message + "\n\n" + e.StackTrace + "\n\n" + source);
             }

@@ -1,13 +1,11 @@
 ﻿extern alias legacy;
-
-using legacy::Gcpe.Hub.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gcpe.Hub.Configuration;
+using Gcpe.Hub.Properties;
+using legacy::Gcpe.Hub.Data.Entity;
 
 namespace Gcpe.Hub.News.ReleaseManagement.Controls
 {
@@ -40,7 +38,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
 
         protected IEnumerable<System.Web.UI.WebControls.ListItem> DocumentLanguages(Guid documentId)
         {
-            List<System.Web.UI.WebControls.ListItem> documents = new List<System.Web.UI.WebControls.ListItem>();
+           var documents = new List<System.Web.UI.WebControls.ListItem>();
 
             Model.AddDocumentLanguages(documentId, documents);
 
@@ -187,7 +185,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             {
                 message.Attachments.Add(new System.Net.Mail.Attachment(stream, fileName));
 
-                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(App.Settings.SMTPServer))
+                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(Settings.Default.SMTPServer))
                     client.Send(message);
             }
         }

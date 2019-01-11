@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Net.Mail;
+using Gcpe.Hub.Properties;
 
 namespace CorporateCalendar.Logging
 {
@@ -125,12 +121,12 @@ namespace CorporateCalendar.Logging
 
             MailMessage mailMessage = new MailMessage();
             mailMessage.IsBodyHtml = true;
-            mailMessage.From = new MailAddress(CorporateCalendar.Configuration.App.Settings.LogMailFrom);
-            mailMessage.To.Add(new MailAddress(CorporateCalendar.Configuration.App.Settings.LogMailTo));
+            mailMessage.From = new MailAddress(Settings.Default.LogMailFrom);
+            mailMessage.To.Add(new MailAddress(Settings.Default.LogMailTo));
             mailMessage.Subject = string.Format("Corporate Calendar logged an event of type: {0}", logType.ToString());
             mailMessage.Body = Message;
 
-            SmtpClient client = new SmtpClient(CorporateCalendar.Configuration.App.Settings.SMTPServer);
+            SmtpClient client = new SmtpClient(Settings.Default.SMTPServer);
 
             try
             {

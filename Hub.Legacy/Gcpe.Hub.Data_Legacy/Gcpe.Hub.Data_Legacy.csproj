@@ -52,9 +52,6 @@
       <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RES.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RES.Configuration.1.0.0\lib\net40\RES.Configuration.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -68,8 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConnectionConfiguration.cs" />
-    <Compile Include="Configuration\IConnectionConfiguration.cs" />
     <Compile Include="Entity\ApplicationSetting.cs">
       <DependentUpon>HubEntities.tt</DependentUpon>
     </Compile>
@@ -219,7 +214,9 @@
       <DependentUpon>HubEntities.edmx</DependentUpon>
       <LastGenOutput>HubEntities.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

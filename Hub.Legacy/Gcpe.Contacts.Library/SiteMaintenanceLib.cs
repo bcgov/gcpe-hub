@@ -27,7 +27,7 @@ namespace MediaRelationsLibrary
                 if (HttpContext.Current.Application["MediaRelations_PurgeLockCheck"] != null)
                 {
 
-                    int frequencyHours = MediaRelationsLibrary.Configuration.App.Settings.PurgeTaskFrequencyHours;
+                    int frequencyHours = 24;
                     DateTime dateToCheck = DateTime.Now.AddHours(frequencyHours * -1);
                     DateTime lastRunDate = DateTime.MinValue;
                     try
@@ -73,9 +73,9 @@ namespace MediaRelationsLibrary
         /// </summary>
         private void RunSitePurge()
         {
-            int companyPurgeDays = MediaRelationsLibrary.Configuration.App.Settings.CompanyPurgeDays;
-            int contactPurgeDays = MediaRelationsLibrary.Configuration.App.Settings.ContactPurgeDays;
-            int lookBackdays = MediaRelationsLibrary.Configuration.App.Settings.LookbackDays;
+            int companyPurgeDays = 90;
+            int contactPurgeDays = 90;
+            int lookBackdays = 10;
 
 
             ContactAdminLib contactAdminLib = new ContactAdminLib();

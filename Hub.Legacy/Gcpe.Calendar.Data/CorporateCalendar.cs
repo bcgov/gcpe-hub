@@ -1,6 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using CorporateCalendar.Data.Configuration;
 
 namespace CorporateCalendar.Data
 {
@@ -33,8 +32,7 @@ namespace CorporateCalendar.Data
                     builder.IntegratedSecurity = false;
                 }
 
-                builder["Database"] = App.Settings.DbName;
-                builder["Server"] = App.Settings.DbServer;
+                builder["Server"] = Environment.GetEnvironmentVariable("DbServer");
 
                 _connectionString = builder.ToString();
 

@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Web;
 using System.IO;
 using System.Text.RegularExpressions;
+using Gcpe.Hub.Properties;
 
 namespace MediaRelationsLibrary
 {
@@ -116,7 +117,7 @@ namespace MediaRelationsLibrary
             CommonEventLogging logger = new CommonEventLogging();
 
             // todo create this config
-            server = MediaRelationsLibrary.Configuration.App.Settings.SMTPServer;
+            server = Settings.Default.SMTPServer;
             if (string.IsNullOrEmpty(server))
             {
                 logger.WriteMissingConfigurationValue("SMTPServer");

@@ -1,28 +1,25 @@
-﻿using FlickrNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
+using FlickrNet;
+using Gcpe.Hub.Properties;
 
 namespace Gcpe.Hub
 {
     public class FlickrManager
     {
         private static readonly Flickr flickrClient = new Flickr();
-        private static readonly string flickrPrivateBaseUrl = Gcpe.Hub.Configuration.App.Settings.FlickrPrivateBaseUri;
+        private static readonly Uri flickrPrivateBaseUrl = Settings.Default.FlickrPrivateBaseUri;
 
         public bool AuthenticateWithFlickr()
         {
-            flickrClient.ApiKey = Gcpe.Hub.Configuration.App.Settings.FlickrApiKey;
-            flickrClient.ApiSecret = Gcpe.Hub.Configuration.App.Settings.FlickrApiSecret;
+            flickrClient.ApiKey = Settings.Default.FlickrApiKey;
+            flickrClient.ApiSecret = Settings.Default.FlickrApiSecret;
             flickrClient.OAuthGetAccessToken(new OAuthRequestToken
-            {
-                Token = Gcpe.Hub.Configuration.App.Settings.FlickrApiToken,
-                TokenSecret = Gcpe.Hub.Configuration.App.Settings.FlickrApiTokenSecret
-            },
-                Gcpe.Hub.Configuration.App.Settings.FlickrApiVerifier);
+                {
+                    Token = Settings.Default.FlickrApiToken,
+                    TokenSecret = Settings.Default.FlickrApiTokenSecret
+                },
+                Settings.Default.FlickrApiVerifier);
             flickrClient.InstanceCacheDisabled = true;
-
 
             var foundUser = flickrClient.TestLogin();
             return foundUser != null;

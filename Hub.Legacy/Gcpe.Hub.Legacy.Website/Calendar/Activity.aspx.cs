@@ -9,11 +9,11 @@ using System.Web.UI.WebControls;
 using CorporateCalendar;
 using CorporateCalendar.Data;
 using CorporateCalendar.Security;
-using CorporateCalendar.Configuration;
 using legacy::Gcpe.Hub.Data.Entity;
 using Ministry = CorporateCalendar.Data.Ministry;
 using ci = System.Globalization.CultureInfo;
 using Gcpe.Hub.News.ReleaseManagement;
+using Gcpe.Hub.Properties;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -152,11 +152,11 @@ namespace Gcpe.Hub.Calendar
             ErrorNotice.Style.Clear();
             ErrorNotice.Style.Add("display", "none");
 
-            StrategyIsRequiredFieldValidator.Visible = Gcpe.Hub.Configuration.App.Settings.StrategyIsRequired;
+            StrategyIsRequiredFieldValidator.Visible = Settings.Default.StrategyIsRequired;
 
-            SignificanceRequiredFieldValidator.Visible = Gcpe.Hub.Configuration.App.Settings.SignificanceIsRequired;
+            SignificanceRequiredFieldValidator.Visible = Settings.Default.SignificanceIsRequired;
 
-            SchedulingFieldValidator.Visible = Gcpe.Hub.Configuration.App.Settings.SchedulingIsRequired;
+            SchedulingFieldValidator.Visible = Settings.Default.SchedulingIsRequired;
 
             // Why is this here?
             CategoriesDropDownListRequiredFieldValidator.Attributes.Add("style", "display:none;color:red");
@@ -229,14 +229,14 @@ namespace Gcpe.Hub.Calendar
             else
             {
                 LACommentsCustomValidator.Visible = false;
-                if (!Gcpe.Hub.Configuration.App.Settings.ShowHqCommentsField)
+                if (!Settings.Default.ShowHqCommentsField)
                 {
                     LACommentsRow.Visible = false;
                     LAStatusRow.Visible = false;
                     laFieldset.Style.Add("display", "none");
                 }
 
-                if (string.IsNullOrEmpty(CurrentActiveActivity.Significance) && !Gcpe.Hub.Configuration.App.Settings.ShowSignificanceField)
+                if (string.IsNullOrEmpty(CurrentActiveActivity.Significance) && !Settings.Default.ShowSignificanceField)
                 {
                     SignificanceRow.Style.Add("display", "none");
                     // if we are not showing this field, do not validate - cannot enter data, cannot pass validation.
@@ -245,7 +245,7 @@ namespace Gcpe.Hub.Calendar
                 }
 
                 if (string.IsNullOrEmpty(CurrentActiveActivity.Schedule) &&
-                    !Gcpe.Hub.Configuration.App.Settings.ShowScheduleField)
+                    !Settings.Default.ShowScheduleField)
                 {
                     ScheduleRow.Style.Add("display", "none");
                     // if we are not showing this field, do not validate - cannot enter data, cannot pass validation.
@@ -256,7 +256,7 @@ namespace Gcpe.Hub.Calendar
 
             }
 
-            if (!Gcpe.Hub.Configuration.App.Settings.ShowRecordsSection)
+            if (!Settings.Default.ShowRecordsSection)
                 RecordsSection.Style.Add("display", "none");
         }
 
@@ -424,7 +424,7 @@ namespace Gcpe.Hub.Calendar
                 BindDropDownList(SharedWithDropDownList, "Abbreviation", dataSource);
             }
 
-            string[] sharedWithMinistryExcludes = Gcpe.Hub.Configuration.App.Settings.SharedWithExcludes.Split(',');
+            string[] sharedWithMinistryExcludes = Settings.Default.SharedWithExcludes.Split(',');
             // Remove application owners from the list
             foreach (string sharedWithMinistryExclude in sharedWithMinistryExcludes)
             {
@@ -641,8 +641,7 @@ namespace Gcpe.Hub.Calendar
                 selectedMinistryIds.Add(CurrentActiveActivity.ContactMinistryId.Value);
             LoadMinistryScript(selectedMinistryIds);
 
-            ApplicationOwnerOrganizations.Text =
-                Gcpe.Hub.Configuration.App.Settings.ApplicationOwnerOrganizations;
+            ApplicationOwnerOrganizations.Text = Settings.Default.ApplicationOwnerOrganizations;
 
             //Add "Activity ID" label (made of ministry short name and ActivityID)
             ActiveID.Text = string.Format("{0}-{1}", CurrentActiveActivity.Ministry, ActivityId);
@@ -852,7 +851,7 @@ namespace Gcpe.Hub.Calendar
 
             var files = corporateCalendarDataContext.ActivityFiles.Where(f => f.ActivityId == ActivityId);
 
-            if (!files.Any() && !Gcpe.Hub.Configuration.App.Settings.ShowRecordsSection)
+            if (!files.Any() && !Settings.Default.ShowRecordsSection)
                 RecordsSection.Style.Add("display", "none");
 
             documentsRepeater.DataSource = files.ToList();
