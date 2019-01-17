@@ -4,16 +4,12 @@ using System.Net;
 using Gcpe.Hub.Data.Entity;
 using Gcpe.Hub.Website.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
     public abstract class BaseController : Controller
     {
         protected readonly HubDbContext db;
-        protected readonly IConfiguration Configuration;
 
         public UserDto UserMe
         {
@@ -27,15 +23,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
         }
 
-        public BaseController(HubDbContext db, IConfiguration configuration)
+        public BaseController(HubDbContext db)
         {
             this.db = db;
-            this.Configuration = configuration;
-        }
-
-        public override void OnActionExecuting(ActionExecutingContext ctx)
-        {
-            ViewBag.FaviconImg = this.Configuration["FaviconImg"];
         }
 
         protected UserDto GetUserFromContext()

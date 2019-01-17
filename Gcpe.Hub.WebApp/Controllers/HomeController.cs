@@ -5,14 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Gcpe.Hub.Data.Entity;
 using Gcpe.Hub.Services.Legacy;
 using Gcpe.Hub.Services.Legacy.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
     public class HomeController : BaseController
     {
         private ISubscribe subscribe;
-        public HomeController(HubDbContext db, IConfiguration configuration, ISubscribeClient subscribeClient) : base(db, configuration)
+        public HomeController(HubDbContext db, ISubscribeClient subscribeClient) : base(db)
         {
             subscribe = subscribeClient.Subscribe;
         }

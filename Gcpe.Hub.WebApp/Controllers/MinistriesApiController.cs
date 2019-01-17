@@ -8,7 +8,6 @@ using Gcpe.Hub.WebApp.Models;
 using Gcpe.Hub.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
@@ -17,7 +16,7 @@ namespace Gcpe.Hub.WebApp.Controllers
     [Route("api/ministries")]
     public class MinistriesApiController : BaseController
     {
-        public MinistriesApiController(HubDbContext db, IConfiguration configuration) : base(db, configuration)
+        public MinistriesApiController(HubDbContext db) : base(db)
         {
         }
 
@@ -25,11 +24,11 @@ namespace Gcpe.Hub.WebApp.Controllers
         public async Task<IEnumerable<MinistryDto>> Get()
         {
             var ministries = await QueryMinistries(db)
-                .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact) //Required for UsersController.ConvertToDto
-                .Include(m => m.EodLastRunUser)
-                .Include(m => m.ContactUser)
-                .Include(m => m.SecondContactUser)
-                .ToListAsync();
+                     .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact) //Required for UsersController.ConvertToDto
+                     .Include(m => m.EodLastRunUser)
+                     .Include(m => m.ContactUser)
+                     .Include(m => m.SecondContactUser)
+                     .ToListAsync();
 
             return ministries.Select(e => ConvertToDto(e));
         }
@@ -135,7 +134,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             Ministry ministry = await db.Ministry.FindAsync(dto.Id);
 
             // Only permit updating select properties.
-            SystemUser priUser = null;
+            SystemUser priUser = null; 
             if (dto.PrimaryContact != null)
             {
                 priUser = await db.SystemUser.SingleOrDefaultAsync(e => e.RowGuid == dto.PrimaryContact.Id);

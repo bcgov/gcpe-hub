@@ -6,7 +6,6 @@ using Gcpe.Hub.Data.Entity;
 using Gcpe.Hub.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
@@ -15,7 +14,7 @@ namespace Gcpe.Hub.WebApp.Controllers
     [Route("api/users")]
     public class UsersApiController : BaseController
     {
-        public UsersApiController(HubDbContext db, IConfiguration configuration) : base(db, configuration)
+        public UsersApiController(HubDbContext db) : base(db)
         {
         }
 

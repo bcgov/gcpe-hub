@@ -7,14 +7,17 @@ namespace Gcpe.Hub.WebApp.Controllers
     //[ApiExplorerSettings(IgnoreApi = true)]
     public class MediaRequestsController : BaseController
     {
-        public MediaRequestsController(HubDbContext db, IConfiguration configuration) : base(db, configuration)
+        protected readonly IConfiguration Configuration;
+        public MediaRequestsController(HubDbContext db, IConfiguration configuration) : base(db)
         {
+            this.Configuration = configuration;
         }
 
         public IActionResult App()
         {
             ViewBag.baseHref = "/MediaRequests";
             ViewBag.UserMe = GetUserFromContext();
+            ViewBag.FaviconImg = this.Configuration["FaviconImg"];
 
             return View();
         }

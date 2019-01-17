@@ -5,6 +5,7 @@
     <AssemblyName>Gcpe.Hub.WebApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Gcpe.Hub.WebApp</PackageId>
+    <RuntimeFrameworkVersion>2.2.1</RuntimeFrameworkVersion>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <UserSecretsId>dca1b645-6b13-4ee8-8f47-84c196505e15</UserSecretsId>
   </PropertyGroup>
@@ -22,7 +23,7 @@
   <ItemGroup>
     <PackageReference Include="Gcpe.Hub.Data" Version="1.2.2" />
     <PackageReference Include="Gcpe.NewsOnDemand.Client" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App"/>
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.Azure.Search" Version="5.0.*" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />

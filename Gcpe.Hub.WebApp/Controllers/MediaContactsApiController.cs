@@ -10,7 +10,6 @@ using Gcpe.Hub.WebApp.Providers;
 using Gcpe.Hub.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Gcpe.Hub.WebApp.Controllers
 {
@@ -28,7 +27,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         static Dictionary<Guid, string> mediaJobTitles;
         const int duplicateSqlKey = 2601;
 
-        public MediaContactsApiController(HubDbContext db, IConfiguration configuration, ISubscribeClient subscribeClient) : base(db, configuration)
+        public MediaContactsApiController(HubDbContext db, ISubscribeClient subscribeClient) : base(db)
         {
             subscribe = subscribeClient.Subscribe;
         }
