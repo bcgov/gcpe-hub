@@ -515,6 +515,7 @@ namespace Gcpe.Hub.Calendar
         private static void GeneratePlannedActivities(DataTable activitiesTable, IEnumerable<ActiveActivity> activityList)
         {
             var scheduleColumn = activitiesTable.Columns.Add("Schedule", typeof(string));
+            var tagsColumn = activitiesTable.Columns.Add("Tags", typeof(string));
             var summaryColumn = activitiesTable.Columns.Add("Summary", typeof(string));
             var significanceColumn = activitiesTable.Columns.Add("Significance", typeof(string));
             var ministryColumn = activitiesTable.Columns.Add("Ministry", typeof(string));
@@ -525,7 +526,20 @@ namespace Gcpe.Hub.Calendar
 
             foreach (ActiveActivity activity in activityList)
             {
-                DataRow row = AddNewRow(scheduleColumn, ActivityListProvider.FriendlyDateTimeRange(activity, true) + " <br />" + activity.Schedule);
+                string date = ActivityListProvider.FriendlyDateTimeRange(activity, true);
+                DataRow row = AddNewRow(scheduleColumn, date + (string.IsNullOrEmpty(activity.Schedule) ? "" : "<br/>" + activity.Schedule));
+
+                bool HasPremierInfo = !string.IsNullOrEmpty(activity.PremierRequested);
+                string tags = HasPremierInfo ? "<br><b>Premier Requested: </b> " + activity.PremierRequested.Replace("Premier ", "") : "";
+                if (!string.IsNullOrEmpty(activity.Keywords))
+                {
+                    var keywords = activity.Keywords.Split(',');
+                    var sortedTag = keywords.Where(k => k.StartsWith(" HQ")).ToList();
+                    sortedTag.AddRange(keywords.Where(k => !k.StartsWith(" HQ")));
+                    tags += "<br><b>Tags:</b>" + string.Join(",", sortedTag);
+                }
+
+                row[tagsColumn] = string.IsNullOrEmpty(tags) ? "" : "<br>" + tags;
 
                 string headline = activity.City != null && activity.City != "TBD" ? activity.CityOrOther : "";
                 headline = headline.Replace(", BC", "").Trim();
@@ -547,24 +561,6 @@ namespace Gcpe.Hub.Calendar
                 else if (activity.Categories != null && activity.Categories.Contains("FYI Only"))
                 {
                     significance = "FYI Only";
-                }
-
-                //significance = significance.TrimEnd(',', ' ');
-
-                if (activity.Sectors != null)
-                {
-                    string tags = "";
-
-                    foreach (var tag in activity.Sectors.Split(',').Select(e => e.Trim()).Where(e => e.StartsWith("Tag: ")))
-                        tags += (tags == "" ? "" : ", ") + tag.Substring("Tag: ".Length);
-
-                    if (tags != "")
-                    {
-                        if (significance == "FYI Only")
-                            significance = "";
-
-                        significance += (significance == "" ? "" : " ") + tags;
-                    }
                 }
 
                 row[significanceColumn] = significance == "" ? "" : significance + "<br />";
