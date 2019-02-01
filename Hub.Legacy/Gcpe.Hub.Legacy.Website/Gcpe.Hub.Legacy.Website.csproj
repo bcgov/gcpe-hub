@@ -1352,6 +1352,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Hub.Legacy.Template.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calendar\ContextualHelp\planning.html" />

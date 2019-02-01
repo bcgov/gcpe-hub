@@ -7,5 +7,6 @@
 	[IsHighlighted]			BIT					CONSTRAINT [DF_Message_IsHighlighted] DEFAULT ((0)) NOT NULL,
 	[IsPublished]			BIT					CONSTRAINT [DF_Message_IsPublished] DEFAULT ((0)) NOT NULL,
 	[Timestamp]				DATETIME			CONSTRAINT [DF_Message_Timestamp] DEFAULT (getdate()) NOT NULL,
-	PRIMARY KEY ([Id])
+	[IsActive] BIT NOT NULL, 
+    PRIMARY KEY ([Id])
 )
