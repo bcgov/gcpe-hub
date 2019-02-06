@@ -533,7 +533,7 @@ namespace Gcpe.Hub.Calendar
                 string tags = HasPremierInfo ? "<br><b>Premier Requested: </b> " + activity.PremierRequested.Replace("Premier ", "") : "";
                 if (!string.IsNullOrEmpty(activity.Keywords))
                 {
-                    var keywords = activity.Keywords.Split(',');
+                    var keywords = activity.Keywords.Split(',').OrderBy(k => k);
                     var sortedTag = keywords.Where(k => k.StartsWith(" HQ")).ToList();
                     sortedTag.AddRange(keywords.Where(k => !k.StartsWith(" HQ")));
                     tags += "<br><b>Tags:</b>" + string.Join(",", sortedTag);
