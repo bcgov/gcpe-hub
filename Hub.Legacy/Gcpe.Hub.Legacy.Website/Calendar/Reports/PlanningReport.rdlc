@@ -121,7 +121,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Summary</Value>
+                                  <Value>Title &amp; Summary</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -193,7 +193,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Details</Value>
+                                  <Value>CC ID#</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -202,7 +202,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox11</rd:DefaultName>
@@ -437,7 +439,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Schedule of Activities</Value>
+                      <Value>GCPE Corporate Calendar: Schedule of Activities</Value>
                       <Style>
                         <FontFamily>MicrosoftSansSerif</FontFamily>
                         <FontSize>14pt</FontSize>
@@ -451,7 +453,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox43</rd:DefaultName>
               <Height>0.67cm</Height>
-              <Width>7.11099cm</Width>
+              <Width>11cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
