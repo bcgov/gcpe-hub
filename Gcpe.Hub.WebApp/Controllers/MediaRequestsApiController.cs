@@ -106,7 +106,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                     adjustedQuery = "/.*" + query + ".*/";
                 }
                 // get a list of IDs from the search service.
-                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, filters, _skip, _limit);
+                var facets = new List<string> { "leadMinistryDisplayName", "companyNames", "contactNames" };
+                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, filters, facets, _skip, _limit);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
                 // get full information on each MediaRequest from the database
@@ -122,24 +123,21 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     results.MediaRequests = data.Select(e => ConvertToDto(e)).ToList();
 
-                    foreach (var facetResult in searchServiceResult.Facets)
+                    foreach (var facet in facets) // iterate in the order we asked for
                     {
-                        FacetDto facet = new FacetDto();
+                        IList<FacetResult> facetResult;
+                        if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
 
-                        facet.Name = facetResult.Key;
                         List<FilterDto> facetFilters = new List<FilterDto>();
 
-                        foreach (FacetResult item in facetResult.Value)
+                        foreach (FacetResult item in facetResult)
                         {
                             FilterDto fdto = new FilterDto();
                             fdto.Name = item.Value.ToString();
                             fdto.Count = (int)item.Count;
                             facetFilters.Add(fdto);
                         }
-
-                        facet.Filters = facetFilters;
-                        facetResults.Add(facet);
-
+                        facetResults.Add(new FacetDto() { Name = facet, Filters = facetFilters });
                     }
                 }
                 else // no search results, return an empty list of media requests.
@@ -167,7 +165,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             return results;
         }
 
-        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IList<string> filters, int? _skip, int _limit)
+        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IList<string> filters, IList<string> facets, int? _skip, int _limit)
         {
             DocumentSearchResult result = null;
             // Add the Http Get parameters
@@ -179,16 +177,11 @@ namespace Gcpe.Hub.WebApp.Controllers
             newUri = QueryHelpers.AddQueryString(newUri, "limit", _limit.ToString());
             foreach (var filter in filters)
             {
-                if (filter.StartsWith("leadMinistryDisplayName"))
-                {
-                    newUri = QueryHelpers.AddQueryString(newUri, "filters", filter.Replace("|", " eq '") + "'");
-                }
-                else
-                {
-                    newUri = QueryHelpers.AddQueryString(newUri, "filters", filter.Replace("|", "/any(t: t eq '") + "')");
-                }
+                string[] fPair = filter.Split('|', 2);
+                if (fPair.Length != 2) continue;
+                string azureFormat = fPair[0].EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
+                newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, fPair[0], fPair[1]));
             }
-            var facets = new List<string> { "leadMinistryDisplayName", "companyNames", "contactNames" };
             foreach (var facet in facets)
             {
                 newUri = QueryHelpers.AddQueryString(newUri, "facets", facet);
@@ -226,11 +219,11 @@ namespace Gcpe.Hub.WebApp.Controllers
         /// </summary>
         /// <param name="method"></param>
         /// <param name="id"></param>
-        void SendRequestToAzureSearchService(HttpMethod method, string id) // replace with Guid
+        void SendRequestToAzureSearchService(HttpMethod method, Guid id)
         {
             try
             {
-                Task<HttpResponseMessage> responseTask = SendRequestToAzureSearchServiceAsync(method, id);
+                Task<HttpResponseMessage> responseTask = SendRequestToAzureSearchServiceAsync(method, id.ToString());
                 responseTask.Wait();
             }
             catch (Exception e)
@@ -443,7 +436,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
 
             // trigger the index service to index the new document.
-            SendRequestToAzureSearchService(HttpMethod.Get, "add/" + mediaRequest.Id.ToString());
+            SendRequestToAzureSearchService(HttpMethod.Post, mediaRequest.Id);
 
             return mediaRequest.Id;
         }
@@ -820,8 +813,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
 
             // Trigger the document to be re-indexed.
-            SendRequestToAzureSearchService(HttpMethod.Get, "add/" + id.ToString());
-            //SendRequestToAzureSearchService(HttpMethod.Post, id);
+            SendRequestToAzureSearchService(HttpMethod.Post, id);
         }
 
         [HttpDelete("{id}")]
@@ -850,7 +842,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             await db.SaveChangesAsync();
 
             // trigger a removal the document from the search index.
-            SendRequestToAzureSearchService(HttpMethod.Delete, id.ToString());
+            SendRequestToAzureSearchService(HttpMethod.Delete, id);
         }
 
         private MediaRequestDto ConvertToDto(MediaRequest mediaRequest)
