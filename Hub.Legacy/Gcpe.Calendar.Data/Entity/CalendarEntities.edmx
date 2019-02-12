@@ -22,6 +22,7 @@
           <Property Name="HqComments" Type="nvarchar" MaxLength="2000" />
           <Property Name="LeadOrganization" Type="nvarchar" MaxLength="100" />
           <Property Name="Venue" Type="nvarchar" MaxLength="150" />
+          <Property Name="Translations" Type="nvarchar" MaxLength="150" />
           <Property Name="StatusId" Type="int" />
           <Property Name="HqStatusId" Type="int" />
           <Property Name="HqSection" Type="int" Nullable="false" />
@@ -373,16 +374,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="SortOrder" Type="int" />
-          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Priority">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -867,6 +858,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityKeywords_Keyword">
+          <End Role="Keyword" Type="Self.Keyword" Multiplicity="1" />
+          <End Role="ActivityKeywords" Type="Self.ActivityKeywords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Keyword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityKeywords">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ActivityNROrigins_Activity">
           <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
           <End Role="ActivityNROrigins" Type="Self.ActivityNROrigins" Multiplicity="*" />
@@ -1328,7 +1331,6 @@
           <EntitySet Name="NRDistribution" EntityType="Self.NRDistribution" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="NROrigin" EntityType="Self.NROrigin" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="PremierRequested" EntityType="Self.PremierRequested" Schema="calendar" store:Type="Tables" />
-          <EntitySet Name="Priority" EntityType="Self.Priority" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="SystemUser" EntityType="Self.SystemUser" Schema="calendar" store:Type="Tables" />
@@ -1447,6 +1449,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ActivityKeywords_Activity" Association="Self.FK_ActivityKeywords_Activity">
             <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityKeywords" EntitySet="ActivityKeywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityKeywords_Keyword" Association="Self.FK_ActivityKeywords_Keyword">
+            <End Role="Keyword" EntitySet="Keyword" />
             <End Role="ActivityKeywords" EntitySet="ActivityKeywords" />
           </AssociationSet>
           <AssociationSet Name="FK_ActivityNROrigins_Activity" Association="Self.FK_ActivityNROrigins_Activity">
@@ -1675,6 +1681,7 @@
           <NavigationProperty Name="Status1" Relationship="Gcpe.CorporateCalendar_Model.FK_Activity_HqStatus" FromRole="Activity" ToRole="Status" />
           <NavigationProperty Name="ActivityFiles" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityFiles_Activity" FromRole="Activity" ToRole="ActivityFile" />
           <NavigationProperty Name="Ministry" Relationship="Gcpe.CorporateCalendar_Model.FK_Activity_Ministry1" FromRole="Activity" ToRole="Ministry" />
+          <Property Name="Translations" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ActivityCategory">
           <Key>
@@ -1948,16 +1955,6 @@
           <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="RowGuid" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_PremierRequested" FromRole="PremierRequested" ToRole="Activity" />
-        </EntityType>
-        <EntityType Name="Priority">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="RowGuid" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -2606,7 +2603,6 @@
           <EntitySet Name="NRDistributions" EntityType="Self.NRDistribution" />
           <EntitySet Name="NROrigins" EntityType="Self.NROrigin" />
           <EntitySet Name="PremierRequesteds" EntityType="Self.PremierRequested" />
-          <EntitySet Name="Priorities" EntityType="Self.Priority" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
@@ -2873,6 +2869,10 @@
             <End Role="SystemUser" EntitySet="SystemUsers" />
             <End Role="Ministry" EntitySet="Ministries" />
           </AssociationSet>
+          <AssociationSet Name="FK_ActivityKeywords_Keyword" Association="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Keyword">
+            <End Role="Keyword" EntitySet="Keywords" />
+            <End Role="ActivityKeyword" EntitySet="ActivityKeywords" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActivityTheme">
           <Key>
@@ -2926,7 +2926,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShortName" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="SortOrder" Type="Int32" />
           <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
@@ -2996,6 +2996,7 @@
           <Property Name="LastUpdatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Activity" FromRole="ActivityKeyword" ToRole="Activity" />
+          <NavigationProperty Name="Keyword" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Keyword" FromRole="ActivityKeyword" ToRole="Keyword" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -3007,6 +3008,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActivityKeywords" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Keyword" FromRole="Keyword" ToRole="ActivityKeyword" />
         </EntityType>
         <Association Name="FK_ActivityKeywords_Activity">
           <End Type="Gcpe.CorporateCalendar_Model.Activity" Role="Activity" Multiplicity="1" />
@@ -3275,6 +3277,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityKeywords_Keyword">
+          <End Type="Gcpe.CorporateCalendar_Model.Keyword" Role="Keyword" Multiplicity="1" />
+          <End Type="Gcpe.CorporateCalendar_Model.ActivityKeyword" Role="ActivityKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Keyword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3284,6 +3298,7 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.Activity">
               <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="Translations" ColumnName="Translations" />
                 <ScalarProperty Name="NRDateTime" ColumnName="NRDateTime" />
                 <ScalarProperty Name="IsCommMaterialsNeedsReview" ColumnName="IsCommMaterialsNeedsReview" />
                 <ScalarProperty Name="HqSection" ColumnName="HqSection" />
@@ -3581,17 +3596,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
-                <ScalarProperty Name="RowGuid" ColumnName="RowGuid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Priorities">
-            <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.Priority">
-              <MappingFragment StoreEntitySet="Priority">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="RowGuid" ColumnName="RowGuid" />
               </MappingFragment>

@@ -277,21 +277,14 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
         public static List<string> SelectedNodDistributionLists(NewsRelease post)
         {
-            if (post.ReleaseType == ReleaseType.Update)
+            List<string> distributionLists = new List<string>();
+            if (post.ReleaseType != ReleaseType.Update && post.ReleaseType != ReleaseType.Advisory)
             {
-                return post.Services.Select(e => "services/" + e.Key).ToList();
+                distributionLists.AddRange(post.Ministries.Select(e => "ministries/" + e.Key));
+                distributionLists.AddRange(post.Sectors.Select(e => "sectors/" + e.Key));
+                distributionLists.AddRange(post.Tags.Select(e => "tags/" + e.Key));
             }
-            else
-            {
-                List<string> distributionLists = new List<string>();
-                if (post.ReleaseType != ReleaseType.Advisory)
-                {
-                    distributionLists.AddRange(post.Ministries.Select(e => "ministries/" + e.Key));
-                    distributionLists.AddRange(post.Sectors.Select(e => "sectors/" + e.Key));
-                    distributionLists.AddRange(post.Tags.Select(e => "tags/" + e.Key));
-                }
-                return distributionLists;
-            }
+            return distributionLists;
         }
     }
 }

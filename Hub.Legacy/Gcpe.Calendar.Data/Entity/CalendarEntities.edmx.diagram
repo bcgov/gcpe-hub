@@ -108,6 +108,7 @@
         <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_SystemUserMinistry_Ministry1" />
         <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Ministry_EodLastRunSystemUser" />
         <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_Ministry_SecondContactSystemUser" />
+        <AssociationConnector Association="Gcpe.CorporateCalendar_Model.FK_ActivityKeywords_Keyword" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

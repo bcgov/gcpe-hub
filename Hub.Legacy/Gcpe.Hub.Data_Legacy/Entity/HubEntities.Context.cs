@@ -46,7 +46,6 @@ namespace Gcpe.Hub.Data.Entity
         public virtual DbSet<MinistryTopic> MinistryTopics { get; set; }
         public virtual DbSet<MinistryNewsletter> MinistryNewsletters { get; set; }
         public virtual DbSet<ResourceLink> ResourceLinks { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Carousel> Carousels { get; set; }
         public virtual DbSet<CarouselSlide> CarouselSlides { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }

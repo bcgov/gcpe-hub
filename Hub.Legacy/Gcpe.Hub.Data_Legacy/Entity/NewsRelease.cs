@@ -30,7 +30,6 @@ namespace Gcpe.Hub.Data.Entity
             this.FeatureThemes = new HashSet<Theme>();
             this.TopThemes = new HashSet<Theme>();
             this.Themes = new HashSet<Theme>();
-            this.Services = new HashSet<Service>();
             this.MediaDistributionLists = new HashSet<MediaDistributionList>();
         }
     
@@ -75,7 +74,6 @@ namespace Gcpe.Hub.Data.Entity
         public virtual ICollection<Theme> FeatureThemes { get; set; }
         public virtual ICollection<Theme> TopThemes { get; set; }
         public virtual ICollection<Theme> Themes { get; set; }
-        public virtual ICollection<Service> Services { get; set; }
         public virtual ICollection<MediaDistributionList> MediaDistributionLists { get; set; }
     }
 }

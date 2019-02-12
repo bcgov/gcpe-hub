@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Gcpe.Hub" Class="CorporateCalendarDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=dev.sql.sdlc.gcpe.bcgov;Initial Catalog=Gcpe.Hub;User ID=HB_SDLC_DVLPR;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="CorporateCalendar.Data.Properties.Settings" SettingsPropertyName="Gcpe_HubConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=dev.sql.sdlc.gcpe.bcgov;Initial Catalog=Gcpe.Hub;User ID=HB_SDLC_DVLPR;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="CorporateCalendar.Data.Properties.Settings" SettingsPropertyName="Gcpe_HubConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="calendar.ActivitySharedWith" Member="ActivitySharedWiths">
     <Type Name="ActivitySharedWith">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -12,10 +12,10 @@
       <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="true" />
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Activity_ActivitySharedWith" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivitySharedWith" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivitySharedWith1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="Ministry_ActivitySharedWith" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+      <Association Name="Activity_ActivitySharedWith" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.[Log]" Member="Logs">
@@ -35,9 +35,9 @@
       <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Activity_Log" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_Log" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_Log1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_Log" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivitySectors" Member="ActivitySectors">
@@ -53,9 +53,9 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="Sector_ActivitySector" Member="Sector" ThisKey="SectorId" OtherKey="Id" Type="Sector" IsForeignKey="true" />
-      <Association Name="Activity_ActivitySector" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivitySector" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivitySector1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_ActivitySector" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityNROrigins" Member="ActivityNROrigins">
@@ -71,9 +71,9 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="NROrigin_ActivityNROrigin" Member="NROrigin" ThisKey="NROriginId" OtherKey="Id" Type="NROrigin" IsForeignKey="true" />
-      <Association Name="Activity_ActivityNROrigin" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityNROrigin" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityNROrigin1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_ActivityNROrigin" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityCommunicationMaterials" Member="ActivityCommunicationMaterials">
@@ -89,9 +89,9 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="CommunicationMaterial_ActivityCommunicationMaterial" Member="CommunicationMaterial" ThisKey="CommunicationMaterialId" OtherKey="Id" Type="CommunicationMaterial" IsForeignKey="true" />
-      <Association Name="Activity_ActivityCommunicationMaterial" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityCommunicationMaterial" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityCommunicationMaterial1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_ActivityCommunicationMaterial" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityCategories" Member="ActivityCategories">
@@ -107,9 +107,9 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="Category_ActivityCategory" Member="Category" ThisKey="CategoryId" OtherKey="Id" Type="Category" IsForeignKey="true" />
-      <Association Name="Activity_ActivityCategory" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityCategory" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityCategory1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_ActivityCategory" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityFilter" Member="ActivityFilters">
@@ -161,10 +161,10 @@
       <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Activity_NewsFeed" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_NewsFeed" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_NewsFeed1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="Ministry_NewsFeed" Member="Ministry" ThisKey="MinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+      <Association Name="Activity_NewsFeed" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.Category" Member="Categories">
@@ -284,15 +284,6 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="Videographer_Activity" Member="Activities" ThisKey="Id" OtherKey="VideographerId" Type="Activity" />
-    </Type>
-  </Table>
-  <Table Name="calendar.Priority" Member="Priorities">
-    <Type Name="Priority">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="calendar.Status" Member="Status">
@@ -457,9 +448,9 @@
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="Initiative_ActivityInitiative" Member="Initiative" ThisKey="InitiativeId" OtherKey="Id" Type="Initiative" IsForeignKey="true" />
-      <Association Name="Activity_ActivityInitiative" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityInitiative" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_ActivityInitiative1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_ActivityInitiative" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.SystemUser" Member="SystemUsers">
@@ -522,8 +513,8 @@
     <Type Name="FavoriteActivity">
       <Column Name="SystemUserId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Activity_FavoriteActivity" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="SystemUser_FavoriteActivity" Member="SystemUser" ThisKey="SystemUserId" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
+      <Association Name="Activity_FavoriteActivity" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityKeywords" Member="ActivityKeywords">
@@ -551,15 +542,20 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="StartDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="EndDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PotentialDates" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="PotentialDates" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="Details" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="Comments" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
       <Column Name="Schedule" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="Significance" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="Strategy" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="LeadOrganization" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Venue" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Strategy" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="HqComments" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="LeadOrganization" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Venue" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Translations" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HqStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HqSection" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NRDistributionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PremierRequestedId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ContactMinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
@@ -568,19 +564,15 @@
       <Column Name="EventPlannerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VideographerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OtherCity" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="HqStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="HqSection" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="HqComments" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="OtherCity" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsIssue" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="IsMilestone" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsAllDay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsAtLegislature" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsConfidential" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsCrossGovernment" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsMilestone" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsTitleNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsDetailsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsRepresentativeNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
@@ -590,13 +582,13 @@
       <Column Name="IsCategoriesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsCommMaterialsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsActiveNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NRDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="NRDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Activity_ActivitySharedWith" Member="ActivitySharedWiths" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySharedWith" />
       <Association Name="Activity_Log" Member="Logs" ThisKey="Id" OtherKey="ActivityId" Type="Log" />
       <Association Name="Activity_ActivitySector" Member="ActivitySectors" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySector" />
@@ -614,13 +606,13 @@
       <Association Name="EventPlanner_Activity" Member="EventPlanner" ThisKey="EventPlannerId" OtherKey="Id" Type="EventPlanner" IsForeignKey="true" />
       <Association Name="GovernmentRepresentative_Activity" Member="GovernmentRepresentative" ThisKey="GovernmentRepresentativeId" OtherKey="Id" Type="GovernmentRepresentative" IsForeignKey="true" />
       <Association Name="Status_Activity" Member="Status" ThisKey="HqStatusId" OtherKey="Id" Type="Status" IsForeignKey="true" />
+      <Association Name="Ministry_Activity" Member="Ministry" ThisKey="ContactMinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
       <Association Name="NRDistribution_Activity" Member="NRDistribution" ThisKey="NRDistributionId" OtherKey="Id" Type="NRDistribution" IsForeignKey="true" />
       <Association Name="PremierRequested_Activity" Member="PremierRequested" ThisKey="PremierRequestedId" OtherKey="Id" Type="PremierRequested" IsForeignKey="true" />
       <Association Name="Status_Activity1" Member="Status1" ThisKey="StatusId" OtherKey="Id" Type="Status" IsForeignKey="true" />
-      <Association Name="Videographer_Activity" Member="Videographer" ThisKey="VideographerId" OtherKey="Id" Type="Videographer" IsForeignKey="true" />
       <Association Name="SystemUser_Activity" Member="SystemUser" ThisKey="CreatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
       <Association Name="SystemUser_Activity1" Member="SystemUser1" ThisKey="LastUpdatedBy" OtherKey="Id" Type="SystemUser" IsForeignKey="true" />
-      <Association Name="Ministry_Activity" Member="Ministry" ThisKey="ContactMinistryId" OtherKey="Id" Type="Ministry" IsForeignKey="true" />
+      <Association Name="Videographer_Activity" Member="Videographer" ThisKey="VideographerId" OtherKey="Id" Type="Videographer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="calendar.ActiveActivities" Member="ActiveActivities">
@@ -639,6 +631,7 @@
       <Column Name="HqSection" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PremierRequestedId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ContactMinistryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Ministry" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="LeadOrganization" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Venue" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
@@ -662,7 +655,7 @@
       <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="HqStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="City" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Ministry" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Translations" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="NRDistributionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SharedWithMinistryIds" Type="System.String" DbType="VarChar(1500)" CanBeNull="true" />
       <Column Name="FavoriteSystemUsers" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />

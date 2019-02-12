@@ -87,9 +87,6 @@ namespace CorporateCalendar.Data
     partial void InsertVideographer(Videographer instance);
     partial void UpdateVideographer(Videographer instance);
     partial void DeleteVideographer(Videographer instance);
-    partial void InsertPriority(Priority instance);
-    partial void UpdatePriority(Priority instance);
-    partial void DeletePriority(Priority instance);
     partial void InsertStatus(Status instance);
     partial void UpdateStatus(Status instance);
     partial void DeleteStatus(Status instance);
@@ -307,14 +304,6 @@ namespace CorporateCalendar.Data
 			get
 			{
 				return this.GetTable<Videographer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Priority> Priorities
-		{
-			get
-			{
-				return this.GetTable<Priority>();
 			}
 		}
 		
@@ -580,13 +569,13 @@ namespace CorporateCalendar.Data
 		
 		private System.Guid _RowGuid;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
 		
 		private EntityRef<Ministry> _Ministry;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -616,10 +605,10 @@ namespace CorporateCalendar.Data
 		
 		public ActivitySharedWith()
 		{
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
 			this._Ministry = default(EntityRef<Ministry>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -1032,11 +1021,11 @@ namespace CorporateCalendar.Data
 		
 		private System.Guid _RowGuid;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1076,9 +1065,9 @@ namespace CorporateCalendar.Data
 		
 		public Log()
 		{
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -1545,11 +1534,11 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<Sector> _Sector;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1580,9 +1569,9 @@ namespace CorporateCalendar.Data
 		public ActivitySector()
 		{
 			this._Sector = default(EntityRef<Sector>);
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -1987,11 +1976,11 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<NROrigin> _NROrigin;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2022,9 +2011,9 @@ namespace CorporateCalendar.Data
 		public ActivityNROrigin()
 		{
 			this._NROrigin = default(EntityRef<NROrigin>);
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -2429,11 +2418,11 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<CommunicationMaterial> _CommunicationMaterial;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2464,9 +2453,9 @@ namespace CorporateCalendar.Data
 		public ActivityCommunicationMaterial()
 		{
 			this._CommunicationMaterial = default(EntityRef<CommunicationMaterial>);
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -2871,11 +2860,11 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<Category> _Category;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2906,9 +2895,9 @@ namespace CorporateCalendar.Data
 		public ActivityCategory()
 		{
 			this._Category = default(EntityRef<Category>);
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -4141,13 +4130,13 @@ namespace CorporateCalendar.Data
 		
 		private System.Guid _RowGuid;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
 		
 		private EntityRef<Ministry> _Ministry;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4181,10 +4170,10 @@ namespace CorporateCalendar.Data
 		
 		public NewsFeed()
 		{
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
 			this._Ministry = default(EntityRef<Ministry>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -6948,164 +6937,6 @@ namespace CorporateCalendar.Data
 		{
 			this.SendPropertyChanging();
 			entity.Videographer = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="calendar.Priority")]
-	public partial class Priority : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private bool _IsActive;
-		
-		private System.Data.Linq.Binary _TimeStamp;
-		
-		private System.Guid _RowGuid;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnIsActiveChanging(bool value);
-    partial void OnIsActiveChanged();
-    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnTimeStampChanged();
-    partial void OnRowGuidChanging(System.Guid value);
-    partial void OnRowGuidChanged();
-    #endregion
-		
-		public Priority()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public bool IsActive
-		{
-			get
-			{
-				return this._IsActive;
-			}
-			set
-			{
-				if ((this._IsActive != value))
-				{
-					this.OnIsActiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsActive = value;
-					this.SendPropertyChanged("IsActive");
-					this.OnIsActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary TimeStamp
-		{
-			get
-			{
-				return this._TimeStamp;
-			}
-			set
-			{
-				if ((this._TimeStamp != value))
-				{
-					this.OnTimeStampChanging(value);
-					this.SendPropertyChanging();
-					this._TimeStamp = value;
-					this.SendPropertyChanged("TimeStamp");
-					this.OnTimeStampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RowGuid", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public System.Guid RowGuid
-		{
-			get
-			{
-				return this._RowGuid;
-			}
-			set
-			{
-				if ((this._RowGuid != value))
-				{
-					this.OnRowGuidChanging(value);
-					this.SendPropertyChanging();
-					this._RowGuid = value;
-					this.SendPropertyChanged("RowGuid");
-					this.OnRowGuidChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -10211,11 +10042,11 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<Initiative> _Initiative;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10246,9 +10077,9 @@ namespace CorporateCalendar.Data
 		public ActivityInitiative()
 		{
 			this._Initiative = default(EntityRef<Initiative>);
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -12092,9 +11923,9 @@ namespace CorporateCalendar.Data
 		
 		private int _ActivityId;
 		
-		private EntityRef<Activity> _Activity;
-		
 		private EntityRef<SystemUser> _SystemUser;
+		
+		private EntityRef<Activity> _Activity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -12108,8 +11939,8 @@ namespace CorporateCalendar.Data
 		
 		public FavoriteActivity()
 		{
-			this._Activity = default(EntityRef<Activity>);
 			this._SystemUser = default(EntityRef<SystemUser>);
+			this._Activity = default(EntityRef<Activity>);
 			OnCreated();
 		}
 		
@@ -12649,17 +12480,27 @@ namespace CorporateCalendar.Data
 		
 		private string _Details;
 		
-		private string _Comments;
-		
 		private string _Schedule;
 		
 		private string _Significance;
 		
 		private string _Strategy;
 		
+		private string _Comments;
+		
+		private string _HqComments;
+		
 		private string _LeadOrganization;
 		
 		private string _Venue;
+		
+		private string _Translations;
+		
+		private System.Nullable<int> _StatusId;
+		
+		private System.Nullable<int> _HqStatusId;
+		
+		private int _HqSection;
 		
 		private System.Nullable<int> _NRDistributionId;
 		
@@ -12679,21 +12520,11 @@ namespace CorporateCalendar.Data
 		
 		private string _OtherCity;
 		
-		private System.Nullable<int> _StatusId;
-		
-		private System.Nullable<int> _HqStatusId;
-		
-		private int _HqSection;
-		
-		private string _HqComments;
-		
 		private bool _IsActive;
 		
 		private bool _IsConfirmed;
 		
 		private bool _IsIssue;
-		
-		private bool _IsMilestone;
 		
 		private bool _IsAllDay;
 		
@@ -12702,6 +12533,8 @@ namespace CorporateCalendar.Data
 		private bool _IsConfidential;
 		
 		private bool _IsCrossGovernment;
+		
+		private bool _IsMilestone;
 		
 		private bool _IsTitleNeedsReview;
 		
@@ -12721,6 +12554,8 @@ namespace CorporateCalendar.Data
 		
 		private bool _IsActiveNeedsReview;
 		
+		private System.Nullable<System.DateTime> _NRDateTime;
+		
 		private System.Nullable<System.DateTime> _CreatedDateTime;
 		
 		private System.Nullable<int> _CreatedBy;
@@ -12732,8 +12567,6 @@ namespace CorporateCalendar.Data
 		private System.Data.Linq.Binary _TimeStamp;
 		
 		private System.Nullable<System.Guid> _RowGuid;
-		
-		private System.Nullable<System.DateTime> _NRDateTime;
 		
 		private EntitySet<ActivitySharedWith> _ActivitySharedWiths;
 		
@@ -12769,19 +12602,19 @@ namespace CorporateCalendar.Data
 		
 		private EntityRef<Status> _Status;
 		
+		private EntityRef<Ministry> _Ministry;
+		
 		private EntityRef<NRDistribution> _NRDistribution;
 		
 		private EntityRef<PremierRequested> _PremierRequested;
 		
 		private EntityRef<Status> _Status1;
 		
-		private EntityRef<Videographer> _Videographer;
-		
 		private EntityRef<SystemUser> _SystemUser;
 		
 		private EntityRef<SystemUser> _SystemUser1;
 		
-		private EntityRef<Ministry> _Ministry;
+		private EntityRef<Videographer> _Videographer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -12799,18 +12632,28 @@ namespace CorporateCalendar.Data
     partial void OnTitleChanged();
     partial void OnDetailsChanging(string value);
     partial void OnDetailsChanged();
-    partial void OnCommentsChanging(string value);
-    partial void OnCommentsChanged();
     partial void OnScheduleChanging(string value);
     partial void OnScheduleChanged();
     partial void OnSignificanceChanging(string value);
     partial void OnSignificanceChanged();
     partial void OnStrategyChanging(string value);
     partial void OnStrategyChanged();
+    partial void OnCommentsChanging(string value);
+    partial void OnCommentsChanged();
+    partial void OnHqCommentsChanging(string value);
+    partial void OnHqCommentsChanged();
     partial void OnLeadOrganizationChanging(string value);
     partial void OnLeadOrganizationChanged();
     partial void OnVenueChanging(string value);
     partial void OnVenueChanged();
+    partial void OnTranslationsChanging(string value);
+    partial void OnTranslationsChanged();
+    partial void OnStatusIdChanging(System.Nullable<int> value);
+    partial void OnStatusIdChanged();
+    partial void OnHqStatusIdChanging(System.Nullable<int> value);
+    partial void OnHqStatusIdChanged();
+    partial void OnHqSectionChanging(int value);
+    partial void OnHqSectionChanged();
     partial void OnNRDistributionIdChanging(System.Nullable<int> value);
     partial void OnNRDistributionIdChanged();
     partial void OnPremierRequestedIdChanging(System.Nullable<int> value);
@@ -12829,22 +12672,12 @@ namespace CorporateCalendar.Data
     partial void OnCityIdChanged();
     partial void OnOtherCityChanging(string value);
     partial void OnOtherCityChanged();
-    partial void OnStatusIdChanging(System.Nullable<int> value);
-    partial void OnStatusIdChanged();
-    partial void OnHqStatusIdChanging(System.Nullable<int> value);
-    partial void OnHqStatusIdChanged();
-    partial void OnHqSectionChanging(int value);
-    partial void OnHqSectionChanged();
-    partial void OnHqCommentsChanging(string value);
-    partial void OnHqCommentsChanged();
     partial void OnIsActiveChanging(bool value);
     partial void OnIsActiveChanged();
     partial void OnIsConfirmedChanging(bool value);
     partial void OnIsConfirmedChanged();
     partial void OnIsIssueChanging(bool value);
     partial void OnIsIssueChanged();
-    partial void OnIsMilestoneChanging(bool value);
-    partial void OnIsMilestoneChanged();
     partial void OnIsAllDayChanging(bool value);
     partial void OnIsAllDayChanged();
     partial void OnIsAtLegislatureChanging(bool value);
@@ -12853,6 +12686,8 @@ namespace CorporateCalendar.Data
     partial void OnIsConfidentialChanged();
     partial void OnIsCrossGovernmentChanging(bool value);
     partial void OnIsCrossGovernmentChanged();
+    partial void OnIsMilestoneChanging(bool value);
+    partial void OnIsMilestoneChanged();
     partial void OnIsTitleNeedsReviewChanging(bool value);
     partial void OnIsTitleNeedsReviewChanged();
     partial void OnIsDetailsNeedsReviewChanging(bool value);
@@ -12871,6 +12706,8 @@ namespace CorporateCalendar.Data
     partial void OnIsCommMaterialsNeedsReviewChanged();
     partial void OnIsActiveNeedsReviewChanging(bool value);
     partial void OnIsActiveNeedsReviewChanged();
+    partial void OnNRDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnNRDateTimeChanged();
     partial void OnCreatedDateTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateTimeChanged();
     partial void OnCreatedByChanging(System.Nullable<int> value);
@@ -12883,8 +12720,6 @@ namespace CorporateCalendar.Data
     partial void OnTimeStampChanged();
     partial void OnRowGuidChanging(System.Nullable<System.Guid> value);
     partial void OnRowGuidChanged();
-    partial void OnNRDateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnNRDateTimeChanged();
     #endregion
 		
 		public Activity()
@@ -12906,13 +12741,13 @@ namespace CorporateCalendar.Data
 			this._EventPlanner = default(EntityRef<EventPlanner>);
 			this._GovernmentRepresentative = default(EntityRef<GovernmentRepresentative>);
 			this._Status = default(EntityRef<Status>);
+			this._Ministry = default(EntityRef<Ministry>);
 			this._NRDistribution = default(EntityRef<NRDistribution>);
 			this._PremierRequested = default(EntityRef<PremierRequested>);
 			this._Status1 = default(EntityRef<Status>);
-			this._Videographer = default(EntityRef<Videographer>);
 			this._SystemUser = default(EntityRef<SystemUser>);
 			this._SystemUser1 = default(EntityRef<SystemUser>);
-			this._Ministry = default(EntityRef<Ministry>);
+			this._Videographer = default(EntityRef<Videographer>);
 			OnCreated();
 		}
 		
@@ -12976,7 +12811,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PotentialDates", DbType="NVarChar(70) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PotentialDates", DbType="NVarChar(70)", UpdateCheck=UpdateCheck.Never)]
 		public string PotentialDates
 		{
 			get
@@ -13036,26 +12871,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="NVarChar(4000) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				if ((this._Comments != value))
-				{
-					this.OnCommentsChanging(value);
-					this.SendPropertyChanging();
-					this._Comments = value;
-					this.SendPropertyChanged("Comments");
-					this.OnCommentsChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schedule", DbType="NVarChar(500) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Schedule
 		{
@@ -13096,7 +12911,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Strategy", DbType="NVarChar(500) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Strategy", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
 		public string Strategy
 		{
 			get
@@ -13116,7 +12931,47 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LeadOrganization", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="NVarChar(4000)", UpdateCheck=UpdateCheck.Never)]
+		public string Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				if ((this._Comments != value))
+				{
+					this.OnCommentsChanging(value);
+					this.SendPropertyChanging();
+					this._Comments = value;
+					this.SendPropertyChanged("Comments");
+					this.OnCommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqComments", DbType="NVarChar(2000)", UpdateCheck=UpdateCheck.Never)]
+		public string HqComments
+		{
+			get
+			{
+				return this._HqComments;
+			}
+			set
+			{
+				if ((this._HqComments != value))
+				{
+					this.OnHqCommentsChanging(value);
+					this.SendPropertyChanging();
+					this._HqComments = value;
+					this.SendPropertyChanged("HqComments");
+					this.OnHqCommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LeadOrganization", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
 		public string LeadOrganization
 		{
 			get
@@ -13136,7 +12991,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Venue", DbType="NVarChar(150) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Venue", DbType="NVarChar(150)", UpdateCheck=UpdateCheck.Never)]
 		public string Venue
 		{
 			get
@@ -13152,6 +13007,94 @@ namespace CorporateCalendar.Data
 					this._Venue = value;
 					this.SendPropertyChanged("Venue");
 					this.OnVenueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Translations", DbType="NVarChar(150)", UpdateCheck=UpdateCheck.Never)]
+		public string Translations
+		{
+			get
+			{
+				return this._Translations;
+			}
+			set
+			{
+				if ((this._Translations != value))
+				{
+					this.OnTranslationsChanging(value);
+					this.SendPropertyChanging();
+					this._Translations = value;
+					this.SendPropertyChanged("Translations");
+					this.OnTranslationsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> StatusId
+		{
+			get
+			{
+				return this._StatusId;
+			}
+			set
+			{
+				if ((this._StatusId != value))
+				{
+					if (this._Status1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStatusIdChanging(value);
+					this.SendPropertyChanging();
+					this._StatusId = value;
+					this.SendPropertyChanged("StatusId");
+					this.OnStatusIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqStatusId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> HqStatusId
+		{
+			get
+			{
+				return this._HqStatusId;
+			}
+			set
+			{
+				if ((this._HqStatusId != value))
+				{
+					if (this._Status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnHqStatusIdChanging(value);
+					this.SendPropertyChanging();
+					this._HqStatusId = value;
+					this.SendPropertyChanged("HqStatusId");
+					this.OnHqStatusIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqSection", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public int HqSection
+		{
+			get
+			{
+				return this._HqSection;
+			}
+			set
+			{
+				if ((this._HqSection != value))
+				{
+					this.OnHqSectionChanging(value);
+					this.SendPropertyChanging();
+					this._HqSection = value;
+					this.SendPropertyChanged("HqSection");
+					this.OnHqSectionChanged();
 				}
 			}
 		}
@@ -13348,7 +13291,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OtherCity", DbType="NVarChar(250) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OtherCity", DbType="NVarChar(150)", UpdateCheck=UpdateCheck.Never)]
 		public string OtherCity
 		{
 			get
@@ -13364,94 +13307,6 @@ namespace CorporateCalendar.Data
 					this._OtherCity = value;
 					this.SendPropertyChanged("OtherCity");
 					this.OnOtherCityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> StatusId
-		{
-			get
-			{
-				return this._StatusId;
-			}
-			set
-			{
-				if ((this._StatusId != value))
-				{
-					if (this._Status1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStatusIdChanging(value);
-					this.SendPropertyChanging();
-					this._StatusId = value;
-					this.SendPropertyChanged("StatusId");
-					this.OnStatusIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqStatusId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> HqStatusId
-		{
-			get
-			{
-				return this._HqStatusId;
-			}
-			set
-			{
-				if ((this._HqStatusId != value))
-				{
-					if (this._Status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnHqStatusIdChanging(value);
-					this.SendPropertyChanging();
-					this._HqStatusId = value;
-					this.SendPropertyChanged("HqStatusId");
-					this.OnHqStatusIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqSection", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int HqSection
-		{
-			get
-			{
-				return this._HqSection;
-			}
-			set
-			{
-				if ((this._HqSection != value))
-				{
-					this.OnHqSectionChanging(value);
-					this.SendPropertyChanging();
-					this._HqSection = value;
-					this.SendPropertyChanged("HqSection");
-					this.OnHqSectionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HqComments", DbType="NVarChar(500) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string HqComments
-		{
-			get
-			{
-				return this._HqComments;
-			}
-			set
-			{
-				if ((this._HqComments != value))
-				{
-					this.OnHqCommentsChanging(value);
-					this.SendPropertyChanging();
-					this._HqComments = value;
-					this.SendPropertyChanged("HqComments");
-					this.OnHqCommentsChanged();
 				}
 			}
 		}
@@ -13512,26 +13367,6 @@ namespace CorporateCalendar.Data
 					this._IsIssue = value;
 					this.SendPropertyChanged("IsIssue");
 					this.OnIsIssueChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsMilestone", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public bool IsMilestone
-		{
-			get
-			{
-				return this._IsMilestone;
-			}
-			set
-			{
-				if ((this._IsMilestone != value))
-				{
-					this.OnIsMilestoneChanging(value);
-					this.SendPropertyChanging();
-					this._IsMilestone = value;
-					this.SendPropertyChanged("IsMilestone");
-					this.OnIsMilestoneChanged();
 				}
 			}
 		}
@@ -13612,6 +13447,26 @@ namespace CorporateCalendar.Data
 					this._IsCrossGovernment = value;
 					this.SendPropertyChanged("IsCrossGovernment");
 					this.OnIsCrossGovernmentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsMilestone", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsMilestone
+		{
+			get
+			{
+				return this._IsMilestone;
+			}
+			set
+			{
+				if ((this._IsMilestone != value))
+				{
+					this.OnIsMilestoneChanging(value);
+					this.SendPropertyChanging();
+					this._IsMilestone = value;
+					this.SendPropertyChanged("IsMilestone");
+					this.OnIsMilestoneChanged();
 				}
 			}
 		}
@@ -13796,6 +13651,26 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRDateTime", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> NRDateTime
+		{
+			get
+			{
+				return this._NRDateTime;
+			}
+			set
+			{
+				if ((this._NRDateTime != value))
+				{
+					this.OnNRDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._NRDateTime = value;
+					this.SendPropertyChanged("NRDateTime");
+					this.OnNRDateTimeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDateTime", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CreatedDateTime
 		{
@@ -13920,26 +13795,6 @@ namespace CorporateCalendar.Data
 					this._RowGuid = value;
 					this.SendPropertyChanged("RowGuid");
 					this.OnRowGuidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRDateTime", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> NRDateTime
-		{
-			get
-			{
-				return this._NRDateTime;
-			}
-			set
-			{
-				if ((this._NRDateTime != value))
-				{
-					this.OnNRDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._NRDateTime = value;
-					this.SendPropertyChanged("NRDateTime");
-					this.OnNRDateTimeChanged();
 				}
 			}
 		}
@@ -14753,6 +14608,8 @@ namespace CorporateCalendar.Data
 		
 		private string _City;
 		
+		private string _Translations;
+		
 		private System.Nullable<int> _NRDistributionId;
 		
 		private string _SharedWithMinistryIds;
@@ -15027,6 +14884,22 @@ namespace CorporateCalendar.Data
 				if ((this._ContactMinistryId != value))
 				{
 					this._ContactMinistryId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ministry", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string Ministry
+		{
+			get
+			{
+				return this._Ministry;
+			}
+			set
+			{
+				if ((this._Ministry != value))
+				{
+					this._Ministry = value;
 				}
 			}
 		}
@@ -15399,18 +15272,18 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ministry", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
-		public string Ministry
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Translations", DbType="NVarChar(150)")]
+		public string Translations
 		{
 			get
 			{
-				return this._Ministry;
+				return this._Translations;
 			}
 			set
 			{
-				if ((this._Ministry != value))
+				if ((this._Translations != value))
 				{
-					this._Ministry = value;
+					this._Translations = value;
 				}
 			}
 		}

@@ -77,8 +77,6 @@
         <EntityTypeShape EntityType="Gcpe.Hub_Model.MinistryNewsletter" Width="2" PointX="3" PointY="29.25" />
         <AssociationConnector Association="Gcpe.Hub_Model.FK_MinistryNewsletter_Ministry" />
         <EntityTypeShape EntityType="Gcpe.Hub_Model.ResourceLink" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Gcpe.Hub_Model.Service" Width="1.5" PointX="5.75" PointY="29.5" />
-        <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseService" />
         <EntityTypeShape EntityType="Gcpe.Hub_Model.Carousel" Width="1.5" PointX="14.375" PointY="17.5" />
         <EntityTypeShape EntityType="Gcpe.Hub_Model.CarouselSlide" Width="1.5" PointX="16.625" PointY="13.375" />
         <EntityTypeShape EntityType="Gcpe.Hub_Model.Slide" Width="1.5" PointX="14.375" PointY="13" />

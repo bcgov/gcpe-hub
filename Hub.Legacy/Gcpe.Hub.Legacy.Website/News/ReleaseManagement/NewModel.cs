@@ -154,28 +154,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
             }
         }
 
-        private List<ListItem<Guid>> services;
-        public IEnumerable<ListItem<Guid>> Services
-        {
-            get
-            {
-                if (services == null)
-                {
-                    services = new List<ListItem<Guid>>();
-
-                    var dbServices = from t in db.Services orderby t.SortOrder, t.DisplayName select t;
-                    foreach (var dbService in dbServices)
-                    {
-                        bool isSelected = Release.Services.Contains(dbService);
-                        if (dbService.IsActive || isSelected)
-                            services.Add(new ListItem<Guid>() { Text = dbService.DisplayName, Value = dbService.Id, Selected = isSelected });
-                    }
-                }
-
-                return services.AsReadOnly();
-            }
-        }
-
         private List<ListItem<Guid>> mediaDistributionLists;
         public IEnumerable<ListItem<Guid>> MediaDistributionLists
         {
@@ -394,10 +372,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
             Release.Themes.Clear();
             foreach (var item in Themes.Where(e => e.Selected))
                 Release.Themes.Add(db.Themes.Find(item.Value));
-
-            Release.Services.Clear();
-            foreach (var item in Services.Where(e => e.Selected))
-                Release.Services.Add(db.Services.Find(item.Value));
 
             Release.MediaDistributionLists.Clear();
             foreach (var item in MediaDistributionLists.Where(e => e.Selected))

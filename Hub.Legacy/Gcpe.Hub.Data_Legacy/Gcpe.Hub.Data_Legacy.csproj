@@ -174,9 +174,6 @@
     <Compile Include="Entity\SectorLanguage.cs">
       <DependentUpon>HubEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\Service.cs">
-      <DependentUpon>HubEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\Slide.cs">
       <DependentUpon>HubEntities.tt</DependentUpon>
     </Compile>

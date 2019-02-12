@@ -271,8 +271,8 @@
           <Property Name="LanguageId" Type="int" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SocialMediaSummary" Type="nvarchar(max)" />
           <Property Name="SocialMediaHeadline" Type="nvarchar(max)" />
+          <Property Name="SocialMediaSummary" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="NewsReleaseLog">
           <Key>
@@ -307,14 +307,6 @@
           </Key>
           <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SectorId" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NewsReleaseService">
-          <Key>
-            <PropertyRef Name="ReleaseId" />
-            <PropertyRef Name="ServiceId" />
-          </Key>
-          <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ServiceId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="NewsReleaseTag">
           <Key>
@@ -382,16 +374,6 @@
           <Property Name="SectorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LanguageId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Slide">
           <Key>
@@ -902,32 +884,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NewsReleaseService_NewsRelease">
-          <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="NewsReleaseService" Type="Self.NewsReleaseService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NewsRelease">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NewsReleaseService">
-              <PropertyRef Name="ReleaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NewsReleaseService_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="NewsReleaseService" Type="Self.NewsReleaseService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NewsReleaseService">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_NewsReleaseTag_NewsRelease">
           <End Role="NewsRelease" Type="Self.NewsRelease" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1153,14 +1109,12 @@
           <EntitySet Name="NewsReleaseMediaDistribution" EntityType="Self.NewsReleaseMediaDistribution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsReleaseMinistry" EntityType="Self.NewsReleaseMinistry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsReleaseSector" EntityType="Self.NewsReleaseSector" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NewsReleaseService" EntityType="Self.NewsReleaseService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsReleaseTag" EntityType="Self.NewsReleaseTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsReleaseTheme" EntityType="Self.NewsReleaseTheme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsReleaseType" EntityType="Self.NewsReleaseType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceLink" EntityType="Self.ResourceLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SectorLanguage" EntityType="Self.SectorLanguage" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slide" EntityType="Self.Slide" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
@@ -1312,14 +1266,6 @@
           <AssociationSet Name="FK_NewsReleaseSector_Sector" Association="Self.FK_NewsReleaseSector_Sector">
             <End Role="Sector" EntitySet="Sector" />
             <End Role="NewsReleaseSector" EntitySet="NewsReleaseSector" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NewsReleaseService_NewsRelease" Association="Self.FK_NewsReleaseService_NewsRelease">
-            <End Role="NewsRelease" EntitySet="NewsRelease" />
-            <End Role="NewsReleaseService" EntitySet="NewsReleaseService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NewsReleaseService_Service" Association="Self.FK_NewsReleaseService_Service">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="NewsReleaseService" EntitySet="NewsReleaseService" />
           </AssociationSet>
           <AssociationSet Name="FK_NewsReleaseTag_NewsRelease" Association="Self.FK_NewsReleaseTag_NewsRelease">
             <End Role="NewsRelease" EntitySet="NewsRelease" />
@@ -1576,11 +1522,6 @@
             <End Role="MinistryNewsletter" EntitySet="MinistryNewsletters" />
           </AssociationSet>
           <EntitySet Name="ResourceLinks" EntityType="Gcpe.Hub_Model.ResourceLink" />
-          <EntitySet Name="Services" EntityType="Gcpe.Hub_Model.Service" />
-          <AssociationSet Name="NewsReleaseService" Association="Gcpe.Hub_Model.NewsReleaseService">
-            <End Role="NewsRelease" EntitySet="NewsReleases" />
-            <End Role="Service" EntitySet="Services" />
-          </AssociationSet>
           <EntitySet Name="Carousels" EntityType="Gcpe.Hub_Model.Carousel" />
           <EntitySet Name="CarouselSlides" EntityType="Gcpe.Hub_Model.CarouselSlide" />
           <EntitySet Name="Slides" EntityType="Gcpe.Hub_Model.Slide" />
@@ -1738,7 +1679,6 @@
           <NavigationProperty Name="FeatureThemes" Relationship="Gcpe.Hub_Model.FK_Theme_FeatureRelease" FromRole="NewsRelease" ToRole="Theme" />
           <NavigationProperty Name="TopThemes" Relationship="Gcpe.Hub_Model.FK_Theme_TopRelease" FromRole="NewsRelease" ToRole="Theme" />
           <NavigationProperty Name="Themes" Relationship="Gcpe.Hub_Model.NewsReleaseTheme" FromRole="NewsRelease" ToRole="Theme" />
-          <NavigationProperty Name="Services" Relationship="Gcpe.Hub_Model.NewsReleaseService" FromRole="NewsRelease" ToRole="Service" />
           <Property Name="RedirectUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MediaDistributionLists" Relationship="Gcpe.Hub_Model.NewsReleaseMediaDistribution" FromRole="NewsRelease" ToRole="MediaDistributionList" />
           <Property Name="NodSubscribers" Type="Int32" />
@@ -2481,21 +2421,6 @@
           <Property Name="LinkText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseService" FromRole="Service" ToRole="NewsRelease" />
-        </EntityType>
-        <Association Name="NewsReleaseService">
-          <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
-          <End Type="Gcpe.Hub_Model.Service" Role="Service" Multiplicity="*" />
-        </Association>
         <EntityType Name="Carousel">
           <Key>
             <PropertyRef Name="Id" />
@@ -3021,25 +2946,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="Gcpe.Hub_Model.Service">
-              <MappingFragment StoreEntitySet="Service">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Key" ColumnName="Key" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="NewsReleaseService" TypeName="Gcpe.Hub_Model.NewsReleaseService" StoreEntitySet="NewsReleaseService">
-            <EndProperty Name="Service">
-              <ScalarProperty Name="Id" ColumnName="ServiceId" />
-            </EndProperty>
-            <EndProperty Name="NewsRelease">
-              <ScalarProperty Name="Id" ColumnName="ReleaseId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Carousels">
             <EntityTypeMapping TypeName="Gcpe.Hub_Model.Carousel">
               <MappingFragment StoreEntitySet="Carousel">

@@ -115,14 +115,12 @@
     <Build Include="dbo\Tables\NewsReleaseMediaDistribution.sql" />
     <Build Include="dbo\Tables\NewsReleaseMinistry.sql" />
     <Build Include="dbo\Tables\NewsReleaseSector.sql" />
-    <Build Include="dbo\Tables\NewsReleaseService.sql" />
     <Build Include="dbo\Tables\NewsReleaseTag.sql" />
     <Build Include="dbo\Tables\NewsReleaseTheme.sql" />
     <Build Include="dbo\Tables\NewsReleaseType.sql" />
     <Build Include="dbo\Tables\ResourceLink.sql" />
     <Build Include="dbo\Tables\Sector.sql" />
     <Build Include="dbo\Tables\SectorLanguage.sql" />
-    <Build Include="dbo\Tables\Service.sql" />
     <Build Include="dbo\Tables\Slide.sql" />
     <Build Include="dbo\Tables\Tag.sql" />
     <Build Include="dbo\Tables\Theme.sql" />
@@ -154,7 +152,6 @@
     <Build Include="calendar\Tables\ActivityKeywords.sql" />
     <Build Include="calendar\Tables\ActivityNROrigins.sql" />
     <Build Include="calendar\Tables\ActivitySectors.sql" />
-    <Build Include="calendar\Tables\ActivityServices.sql" />
     <Build Include="calendar\Tables\ActivitySharedWith.sql" />
     <Build Include="calendar\Tables\ActivityThemes.sql" />
     <Build Include="calendar\Tables\Category.sql" />
@@ -171,7 +168,6 @@
     <Build Include="calendar\Tables\NRDistribution.sql" />
     <Build Include="calendar\Tables\NROrigin.sql" />
     <Build Include="calendar\Tables\PremierRequested.sql" />
-    <Build Include="calendar\Tables\Priority.sql" />
     <Build Include="calendar\Tables\Role.sql" />
     <Build Include="calendar\Tables\Status.sql" />
     <Build Include="calendar\Tables\SystemUser.sql" />
