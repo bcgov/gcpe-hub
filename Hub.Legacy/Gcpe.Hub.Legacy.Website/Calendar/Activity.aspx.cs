@@ -20,11 +20,11 @@ namespace Gcpe.Hub.Calendar
     public partial class Activity : System.Web.UI.Page
     {
         public ActivityModel Model { get; } = new ActivityModel();
-        private CorporateCalendarDataContext corporateCalendarDataContext = new CorporateCalendarDataContext();
+        private CorporateCalendarDataContext calendarDataContext = new CorporateCalendarDataContext();
 
         public override void Dispose()
         {
-            corporateCalendarDataContext.Dispose();
+            calendarDataContext.Dispose();
             base.Dispose();
         }
 
@@ -120,7 +120,7 @@ namespace Gcpe.Hub.Calendar
         {
             get
             {
-                IQueryable<Guid> activitiesSharedWith = corporateCalendarDataContext.ActivitySharedWiths
+                IQueryable<Guid> activitiesSharedWith = calendarDataContext.ActivitySharedWiths
                                     .Where(p => p.ActivityId == ActivityId)
                                     .Select(p => p.MinistryId);
 
@@ -262,7 +262,7 @@ namespace Gcpe.Hub.Calendar
 
         private void LoadMinistryScript(List<Guid> selectedMinistryIds = null)
         {
-            var ddm = new DropDownListManager(corporateCalendarDataContext);
+            var ddm = new DropDownListManager(calendarDataContext);
             IQueryable<Ministry> ministries = (IQueryable<Ministry>)ddm.GetAllActiveMinistryOptions(selectedMinistryIds);
             System.Text.StringBuilder stbScript = new System.Text.StringBuilder();
             stbScript.Append("var ministries = {");
@@ -319,7 +319,7 @@ namespace Gcpe.Hub.Calendar
 
         private void SetNewActivityDefaults()
         {
-            PopulateDropDownLists(null, null, null, null, null, null, null, null);
+            PopulateDropDownLists(null, null, null, null, null, null, null, null, null);
 
             // Set the default dates
             //EndDate.Value = StartDate.Value = DateTime.Now.ToString("MM/dd/yyyy", ci.InvariantCulture);
@@ -339,7 +339,7 @@ namespace Gcpe.Hub.Calendar
             int index = -1;
 
             /*IQueryable<Ministry> ministry =
-                corporateCalendarDataContext.Ministries.Where(m => m.Id == userMinistryIds.FirstOrDefault());
+                calendarDataContext.Ministries.Where(m => m.Id == userMinistryIds.FirstOrDefault());
 
              Does this ministry have a default contact?
             if (ministry.Any() && (ministry.First().ContactUserId != null))
@@ -366,9 +366,11 @@ namespace Gcpe.Hub.Calendar
             }
         }
 
-        private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins)
+        // We might want to put these in the Language table if the need for a "Add Hindi" button (for example) arises in NRMS ... and news
+        static string[] defaultTranslations = { "Chinese (Simplified)", "Chinese (Traditional)", "French", "Hindi", "Korean", "Punjabi", "Tagalog", "Urdu"};
+        private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<string> translations, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins)
         {
-            var ddm = new DropDownListManager(corporateCalendarDataContext);
+            var ddm = new DropDownListManager(calendarDataContext);
             object dataSource;
             // Government Representatives
             if (RepresentativeDropDownList != null)
@@ -490,6 +492,22 @@ namespace Gcpe.Hub.Calendar
                 BindDropDownList(KeywordList, "Name", dataSource);
             }
 
+            // Translations Required
+            if (TranslationsRequired != null)
+            {
+                TranslationsRequired.Items.Clear();
+                foreach (string t in defaultTranslations)
+                {
+                    TranslationsRequired.Items.Add(t);
+                }
+                for (int i = 0; i < (translations != null ? translations.Count : 0); i++)
+                {
+                    string translation = translations[i].TrimStart();
+                    if (defaultTranslations.Contains(translation)) continue;
+                    TranslationsRequired.Items.Add(translation);
+                }
+            }
+
             if (LAStatusRadioButtonList != null)
             {
                 LAStatusRadioButtonList.DataSource = ddm.GetHQStatusOptions();
@@ -576,7 +594,7 @@ namespace Gcpe.Hub.Calendar
             // This information is pulled from a stored procedure form the database view.
             if (CommContactDropDownList != null)
             {
-                var ddm = new DropDownListManager(corporateCalendarDataContext);
+                var ddm = new DropDownListManager(calendarDataContext);
                 object dataSource;
                 // if the activity is assigned to a ministry, make sure that the selected contact is also part of that ministry and populate the
                 // com contact drop down with 
@@ -598,22 +616,22 @@ namespace Gcpe.Hub.Calendar
             //Update the activity with new values from db.
             //especially important after save of existing activity when it reloads values
             this.CurrentActiveActivity = ActivityWebService.GetActiveActivityById((int)ActivityId);
-            var categoriesSelectedValues = corporateCalendarDataContext.GetActivityCategories(ActivityId);
-            var commMaterialsSelectedValues = corporateCalendarDataContext.GetActivityCommunicationMaterials(ActivityId);
-            var nrOriginsSelectedValues = corporateCalendarDataContext.GetActivityNewsReleaseOrigins(ActivityId);
-            var sectorsSelectedValues = corporateCalendarDataContext.GetActivitySectors(ActivityId);
-            var themesSelectedValues = corporateCalendarDataContext.GetActivityThemes(ActivityId);
-            var keywordsSelectedValues = corporateCalendarDataContext.GetActivityKeywords(ActivityId);
-            var initiativeSelectedValues = corporateCalendarDataContext.sGetActivityInitiatives(ActivityId);
+            string categoriesSelectedValues = calendarDataContext.GetActivityCategories(ActivityId).SingleOrDefault()?.categories;
+            string commMaterialsSelectedValues = calendarDataContext.GetActivityCommunicationMaterials(ActivityId).SingleOrDefault()?.activityCommunicationMaterials;
+            string nrOriginsSelectedValues = calendarDataContext.GetActivityNewsReleaseOrigins(ActivityId).SingleOrDefault()?.activityNewsReleaseOrigins;
+            string sectorsSelectedValues = calendarDataContext.GetActivitySectors(ActivityId).SingleOrDefault()?.activitySectors;
+            string themesSelectedValues = calendarDataContext.GetActivityThemes(ActivityId).SingleOrDefault()?.activityThemes;
+            string initiativeSelectedValues = calendarDataContext.sGetActivityInitiatives(ActivityId);
+            var keywordsSelectedValues = calendarDataContext.GetActivityKeywords(ActivityId);
 
 
-            List<Guid> selectedSectorIds = null;
-            if (sectorsSelectedValues.SingleOrDefault() != null && !string.IsNullOrEmpty(sectorsSelectedValues.SingleOrDefault().activitySectors))
-                selectedSectorIds = sectorsSelectedValues.SingleOrDefault().activitySectors.Split(',').Select(e => Guid.Parse(e)).ToList();
+            List <Guid> selectedSectorIds = null;
+            if (!string.IsNullOrEmpty(sectorsSelectedValues))
+                selectedSectorIds = sectorsSelectedValues.Split(',').Select(e => Guid.Parse(e)).ToList();
 
             List<Guid> selectedThemeIds = null;
-            if (themesSelectedValues.SingleOrDefault() != null && !string.IsNullOrEmpty(themesSelectedValues.SingleOrDefault().activityThemes))
-                selectedThemeIds = themesSelectedValues.SingleOrDefault().activityThemes.Split(',').Select(e => Guid.Parse(e)).ToList();
+            if (!string.IsNullOrEmpty(themesSelectedValues))
+                selectedThemeIds = themesSelectedValues.Split(',').Select(e => Guid.Parse(e)).ToList();
 
             List<int> selectedKeywords = keywordsSelectedValues.Select(k => k.keywordId.Value).ToList();
 
@@ -621,19 +639,23 @@ namespace Gcpe.Hub.Calendar
             if (!string.IsNullOrEmpty(initiativeSelectedValues))
                 selectedInitiatives = initiativeSelectedValues.Split(',').Select(e => int.Parse(e)).ToList();
 
+            List<string> selectedTranslations = null;
+            if (!string.IsNullOrEmpty(CurrentActiveActivity.Translations))
+                selectedTranslations = CurrentActiveActivity.Translations.Split(',').ToList();
+
             List<int> selectedCategoryIds = null;
-            if (categoriesSelectedValues.SingleOrDefault() != null && !string.IsNullOrEmpty(categoriesSelectedValues.SingleOrDefault().categories))
-                selectedCategoryIds = categoriesSelectedValues.SingleOrDefault().categories.Split(',').Select(e => int.Parse(e)).ToList();
+            if (!string.IsNullOrEmpty(categoriesSelectedValues))
+                selectedCategoryIds = categoriesSelectedValues.Split(',').Select(e => int.Parse(e)).ToList();
 
             List<int> selectedCommMaterialIds = null;
-            if (commMaterialsSelectedValues.SingleOrDefault() != null && !string.IsNullOrEmpty(commMaterialsSelectedValues.SingleOrDefault().activityCommunicationMaterials))
-                selectedCommMaterialIds = commMaterialsSelectedValues.SingleOrDefault().activityCommunicationMaterials.Split(',').Select(e => int.Parse(e)).ToList();
+            if (commMaterialsSelectedValues != null && !string.IsNullOrEmpty(commMaterialsSelectedValues))
+                selectedCommMaterialIds = commMaterialsSelectedValues.Split(',').Select(e => int.Parse(e)).ToList();
 
             List<int> selectedNROriginIds = null;
-            if (nrOriginsSelectedValues.SingleOrDefault() != null && !string.IsNullOrWhiteSpace(nrOriginsSelectedValues.SingleOrDefault().activityNewsReleaseOrigins))
-                selectedNROriginIds = nrOriginsSelectedValues.SingleOrDefault().activityNewsReleaseOrigins.Split(',').Select(e => int.Parse(e)).ToList();
+            if (!string.IsNullOrWhiteSpace(nrOriginsSelectedValues))
+                selectedNROriginIds = nrOriginsSelectedValues.Split(',').Select(e => int.Parse(e)).ToList();
 
-            PopulateDropDownLists(CurrentActiveActivity, selectedCategoryIds, selectedSectorIds, selectedThemeIds, selectedKeywords, selectedInitiatives, selectedCommMaterialIds, selectedNROriginIds);
+            PopulateDropDownLists(CurrentActiveActivity, selectedCategoryIds, selectedSectorIds, selectedThemeIds, selectedKeywords, selectedTranslations, selectedInitiatives, selectedCommMaterialIds, selectedNROriginIds);
             timestamp.Value = (CurrentActiveActivity.LastUpdatedDateTime ?? CurrentActiveActivity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString();
 
             var selectedMinistryIds = new List<Guid>();
@@ -665,12 +687,13 @@ namespace Gcpe.Hub.Calendar
             if (LACommentsRow.Visible)
             {
                 LACommentsTextBox.Text = CurrentActiveActivity.HqComments;
-                LAStatusRadioButtonList.SelectedValue = CurrentActiveActivity.HqStatusId != null ? CurrentActiveActivity.HqStatusId.ToString() : "";
+                LAStatusRadioButtonList.SelectedValue = CurrentActiveActivity.HqStatusId?.ToString() ?? "";
             }
             CommentsTextBox.Text = CurrentActiveActivity.Comments?.Trim();
 
             SignificanceTextBox.Text = CurrentActiveActivity.Significance;
             SchedulingTextBox.Text = CurrentActiveActivity.Schedule;
+            TranslationsTextbox.Text = CurrentActiveActivity.Translations?.Replace(", ", "~");
             KeywordsTextBox.Text = string.Join("~", keywordsSelectedValues.Select(k => k.keywordName));
 
             StrategyTextBox.Text = CurrentActiveActivity.Strategy;
@@ -679,16 +702,16 @@ namespace Gcpe.Hub.Calendar
             VenueTextBox.Text = CurrentActiveActivity.Venue;
 
             // Start date and time 
-            StartDate.Value = CurrentActiveActivity.StartDateTime != null ? CurrentActiveActivity.StartDateTime.Value.ToString("MM/dd/yyyy", ci.InvariantCulture): "";
+            StartDate.Value = CurrentActiveActivity.StartDateTime?.ToString("MM/dd/yyyy", ci.InvariantCulture) ?? "";
             StartTime.SelectedValue = CurrentActiveActivity.StartDateTime == null ? "" : CurrentActiveActivity.StartDateTime.Value.ToString("h:mm tt", ci.InvariantCulture);
 
             // End date and time
-            EndDate.Value = CurrentActiveActivity.EndDateTime != null ?  CurrentActiveActivity.EndDateTime.Value.ToString("MM/dd/yyyy", ci.InvariantCulture): "";
-            EndTime.SelectedValue = CurrentActiveActivity.EndDateTime == null ? "" : CurrentActiveActivity.EndDateTime.Value.ToString("h:mm tt", ci.InvariantCulture);
+            EndDate.Value = CurrentActiveActivity.EndDateTime?.ToString("MM/dd/yyyy", ci.InvariantCulture) ?? "";
+            EndTime.SelectedValue = CurrentActiveActivity.EndDateTime?.ToString("h:mm tt", ci.InvariantCulture) ?? "";
 
             // Release (NR) date and time
-            NRDate.Value = CurrentActiveActivity.NRDateTime != null ? CurrentActiveActivity.NRDateTime.Value.ToString("MM/dd/yyyy", ci.InvariantCulture): "";
-            NRTime.SelectedValue = CurrentActiveActivity.NRDateTime == null ? "" : CurrentActiveActivity.NRDateTime.Value.ToString("h:mm tt", ci.InvariantCulture);
+            NRDate.Value = CurrentActiveActivity.NRDateTime?.ToString("MM/dd/yyyy", ci.InvariantCulture) ?? "";
+            NRTime.SelectedValue = CurrentActiveActivity.NRDateTime?.ToString("h:mm tt", ci.InvariantCulture) ?? "";
 
             #endregion
 
@@ -731,7 +754,7 @@ namespace Gcpe.Hub.Calendar
                 // The Communication Contact drop down value is the SystemUserId, so need to find that for the
                 // communication contact.
                 IQueryable<CommunicationContact> comContact =
-                    corporateCalendarDataContext.CommunicationContacts.Where(
+                    calendarDataContext.CommunicationContacts.Where(
                                  r => r.Id == CurrentActiveActivity.CommunicationContactId.Value);
 
                 if (comContact.Any())
@@ -781,7 +804,7 @@ namespace Gcpe.Hub.Calendar
 
             #region Populate HiddenFields
 
-            var sharedWithSelectedValues = corporateCalendarDataContext.GetActivitySharedWithMinistries(ActivityId).SingleOrDefault();
+            var sharedWithSelectedValues = calendarDataContext.GetActivitySharedWithMinistries(ActivityId).SingleOrDefault();
             if (sharedWithSelectedValues != null)
                 SharedWithSelectedValuesServerSide.Text =
                     SharedWithSelectedValues.Text = (sharedWithSelectedValues.sharedWithMinistries ?? "").ToLower();
@@ -789,26 +812,13 @@ namespace Gcpe.Hub.Calendar
             // TO DO: Rename to SharedWithMinistries (upper start)
 
 
-            var getActivityCommunicationMaterialsResult = commMaterialsSelectedValues.SingleOrDefault();
-            if (getActivityCommunicationMaterialsResult != null)
-                CommMaterialsSelectedValuesServerSide.Text =
-                    CommMaterialsSelectedValues.Text = getActivityCommunicationMaterialsResult.activityCommunicationMaterials;
-            // TO DO: Rename activityCommunicationMaterials to CommunicationMaterials
+            CommMaterialsSelectedValuesServerSide.Text = CommMaterialsSelectedValues.Text = commMaterialsSelectedValues ?? "";
 
-            var getActivitySectorsResult = sectorsSelectedValues.SingleOrDefault();
-            if (getActivitySectorsResult != null)
-                SectorsSelectedValuesServerSide.Text =
-                    SectorsSelectedValues.Text = (getActivitySectorsResult.activitySectors ?? "").ToLower();
-            // TO DO: Rename activitySectors to Sectors
+            SectorsSelectedValuesServerSide.Text = SectorsSelectedValues.Text = (sectorsSelectedValues ?? "").ToLower();
 
-            var getActivityThemesResult = themesSelectedValues.SingleOrDefault();
-            if (getActivityThemesResult != null)
-                ThemesSelectedValuesServerSide.Text =
-                    ThemesSelectedValues.Text = (getActivityThemesResult.activityThemes ?? "").ToLower();
+            ThemesSelectedValuesServerSide.Text = ThemesSelectedValues.Text = (themesSelectedValues ?? "").ToLower();
 
-            var getActivityInitiativesResult = initiativeSelectedValues ?? "";
-            InitiativesSelectedValuesServerSide.Text =
-                InitiativesSelectedValues.Text = getActivityInitiativesResult;
+            InitiativesSelectedValuesServerSide.Text = InitiativesSelectedValues.Text = initiativeSelectedValues ?? "";
 
 
             #endregion
@@ -844,12 +854,12 @@ namespace Gcpe.Hub.Calendar
             }
             #endregion
 
-            if (corporateCalendarDataContext.FavoriteActivities.Any(f => f.ActivityId == ActivityId && f.SystemUserId == Master.CustomPrincipal.Id))
+            if (calendarDataContext.FavoriteActivities.Any(f => f.ActivityId == ActivityId && f.SystemUserId == Master.CustomPrincipal.Id))
                 FavoriteButton.Text = "Remove Favourite";
 
             UpdateFavoriteIcon(Master.CustomPrincipal.Id);
 
-            var files = corporateCalendarDataContext.ActivityFiles.Where(f => f.ActivityId == ActivityId);
+            var files = calendarDataContext.ActivityFiles.Where(f => f.ActivityId == ActivityId);
 
             if (!files.Any() && !Settings.Default.ShowRecordsSection)
                 RecordsSection.Style.Add("display", "none");
@@ -917,7 +927,7 @@ namespace Gcpe.Hub.Calendar
             var newActivity = new CorporateCalendar.Data.Activity();
             var customPrincipal = Master.CustomPrincipal;
 
-            var db = corporateCalendarDataContext;
+            var db = calendarDataContext;
             try
             {
                 db.Connection.Open();
@@ -958,7 +968,7 @@ namespace Gcpe.Hub.Calendar
                 if (!string.IsNullOrEmpty(ComContactSelectedValue.Value))
                 {
                     int comContactSystemUserId = int.Parse(ComContactSelectedValue.Value);
-                    var comContactId = corporateCalendarDataContext.ActiveCommunicationContacts.Where(
+                    var comContactId = calendarDataContext.ActiveCommunicationContacts.Where(
                                     r =>
                                     r.SystemUserId == comContactSystemUserId &&
                                     r.MinistryId == Guid.Parse(ContactMinistryDropDownList.Value)).First().Id;
@@ -1067,9 +1077,9 @@ namespace Gcpe.Hub.Calendar
                 activity.HqStatusId = isNone ? null : (int?)Convert.ToInt32(LAStatusRadioButtonList.SelectedValue);
             }
 
-            // checking for the visibility of the look ahead comments for sanity
             if (IsNewActivity && !customPrincipal.IsInRole(SecurityRole.Administrator) && !LACommentsRow.Visible) 
             {
+                // draw attention to the look ahead section so that admins have to go back in and edit it
                 activity.HqComments = "**";
             }
 
@@ -1085,7 +1095,7 @@ namespace Gcpe.Hub.Calendar
         /// </summary>
         private bool Update()
         {
-            var activity = corporateCalendarDataContext.Activities.Single(p => p.Id == ActivityId);
+            var activity = calendarDataContext.Activities.Single(p => p.Id == ActivityId);
 
             if (timestamp.Value != (activity.LastUpdatedDateTime ?? activity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString())
             {
@@ -1151,7 +1161,7 @@ namespace Gcpe.Hub.Calendar
             activity.ContactMinistryId = Guid.Parse(ContactMinistryDropDownList.Value);
 
             if (!string.IsNullOrEmpty(ComContactSelectedValue.Value))
-                activity.CommunicationContactId = corporateCalendarDataContext.CommunicationContacts.Where(
+                activity.CommunicationContactId = calendarDataContext.CommunicationContacts.Where(
                    t =>
                     t.SystemUserId == Convert.ToInt32(ComContactSelectedValue.Value) &&
                     t.MinistryId == activity.ContactMinistryId).First().Id;
@@ -1179,15 +1189,16 @@ namespace Gcpe.Hub.Calendar
 
             bool categoryHasChanged = CategoriesDropDownList.Value != CategoriesDropDownList.Items.FindByText(CurrentActiveActivity.Categories.TrimStart())?.Value;
             bool commMaterialsHaveChanged = CommMaterialsSelectedValuesServerSide.Text != CommMaterialsSelectedValues.Text;
+            string translations = TranslationsTextbox.Text.Replace("~", ", ");
 
-            ActivityManager.UpdateActivity(corporateCalendarDataContext, customPrincipal, activity,
+            ActivityManager.UpdateActivity(calendarDataContext, customPrincipal, activity,
                 ReplaceSpecialCharacters(title), ReplaceSpecialCharacters(DetailsTextBox.Text.Trim()),
                 GetDateTime(StartDate.Value, IsAllDayCheckBox.Checked ? null : StartTime.SelectedValue, false),
-                GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true),
-                PotentialDatesTextBox.Text.Trim(), newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged,
-                commMaterialsHaveChanged, IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, GetDropDownListValues());
+                GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true), PotentialDatesTextBox.Text.Trim(),
+                newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged, commMaterialsHaveChanged,
+                IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues());
 
-            SaveDocuments(corporateCalendarDataContext, activity);
+            SaveDocuments(calendarDataContext, activity);
 
             return true;
         }
@@ -1402,7 +1413,7 @@ namespace Gcpe.Hub.Calendar
         {
             if (!IsNewActivity)
             {
-                var dc = corporateCalendarDataContext;
+                var dc = calendarDataContext;
                 var customPrincipalId = Master.CustomPrincipal.Id;
                 var favorite = dc.FavoriteActivities.SingleOrDefault(f => f.ActivityId == ActivityId && f.SystemUserId == customPrincipalId);
 
@@ -1427,7 +1438,7 @@ namespace Gcpe.Hub.Calendar
 
         private void UpdateFavoriteIcon(int customPrincipalId)
         {
-            var favoriteUsers = corporateCalendarDataContext.FavoriteActivities.Where(f => f.ActivityId == ActivityId).Select(f => f.SystemUser);
+            var favoriteUsers = calendarDataContext.FavoriteActivities.Where(f => f.ActivityId == ActivityId).Select(f => f.SystemUser);
 
             if (favoriteUsers.Any())
             {
@@ -1495,7 +1506,7 @@ namespace Gcpe.Hub.Calendar
 
         private void InsertNewsFeed(string desc, string textDesc, string title, int? idToLink)
         {
-            var dc = corporateCalendarDataContext;
+            var dc = calendarDataContext;
             var customPrincipal = Master.CustomPrincipal;
 
             string dateTimeIconHtml = string.Format("<img src=\"images/calendar-edit-icon.png\" title=\"{0}\" align=\"absmiddle\" />&nbsp;", DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());

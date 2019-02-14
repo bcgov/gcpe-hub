@@ -102,8 +102,9 @@ public class ActivityDAO
                         delegate (ActiveActivity p)
                         {
                             return p.Title.ToLower().Contains(quickSearch)
-                                || (!string.IsNullOrWhiteSpace(p.Details) && p.Details.ToLower().Contains(quickSearch))
-                                || (!string.IsNullOrWhiteSpace(p.City) && p.City.ToLower().Contains(quickSearch));
+                                || (p.Details?.ToLower().Contains(quickSearch) == true)
+                                || (p.City?.ToLower().Contains(quickSearch) == true)
+                                || (p.Translations?.ToLower().Contains(quickSearch) == true);
                         }
                         );
 

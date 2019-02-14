@@ -767,6 +767,14 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
+                                    <td class="column-left">Translations Required:</td>
+                                    <td class="column-right">
+                                        <select id="TranslationsRequired" multiple="true" runat="server" style="display:none"/>
+                                        <asp:TextBox ID="TranslationsTextbox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr class="row" style="display:none">
+                                    <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left">Sectors:</td>
                                     <td class="column-right">
                                         <select id="SectorDropDownList" multiple="true" runat="server" style="display:none"/>
@@ -2288,88 +2296,109 @@
                 SetChanged();
             });
 
-            //var newTagPrefix = "Add new tag: ";
-            var newTagPrefix = " (new tag)";
+            var newPrefix = " (new ";
+            var onSelectCustom = function (e) {
+                if (e.item[0].textContent.indexOf(newPrefix) === -1) {
+                    var dataItems = e.sender.dataSource.data();
+                    if (dataItems[dataItems.length - 1].indexOf(newPrefix) !== -1) {
+                        // remove the the new item in the popup so that the change function (below) does not select it when called
+                        dataItems.splice(dataItems.length - 1, 1);
+                    }
+                }
+                return false; // do not prevent the selection
+            };
             var newItemText;
+            var onFilteringCustom = function (e) { // user has typed a character, let see if we should display the new item menu
+                var _prev = e.sender._prev;
+                if (_prev && newItemText !== _prev) {
+                    newItemText = _prev;
+                    var newItemTextLower = newItemText.toLowerCase();
+                    var dataItems = e.sender.dataSource.data();
+
+                    var newItemPrefix = newPrefix + (e.sender.element.id === "KeywordsTextBox"  ? "tag)" : "language)");
+                    var addNewItemMenuItem = newItemText.length >= 3;
+                    for (var i = 0; i < dataItems.length; i++) {
+                        var dataItem = dataItems[i];
+                        if (newItemTextLower === dataItem.toLowerCase()) {
+                            addNewItemMenuItem = false; // exact match
+                        } else if (dataItem.indexOf(newItemPrefix) !== -1) {
+                            if (!addNewItemMenuItem) {
+                                dataItems.splice(i, 1); // remove the new item in the popup
+                            } else {
+                                // replace the existing new item in the popup
+                                addNewItemMenuItem = false;
+                                dataItems[i] = newItemText + newItemPrefix;
+                            }
+                            break;
+                        }
+                    }
+                    if (addNewItemMenuItem) {
+                        dataItems.push(newItemText + newItemPrefix);
+                    }
+                }
+            };
+
+            var onChangeCustom = function (e) {
+                var ctrl = e.sender;
+                var dataItems = ctrl.dataSource.data();
+                if (dataItems.length === 0) {
+                    return;
+                }
+                var itemToAddToDb = "";
+
+                var lastDataItemIdx = dataItems.length - 1;
+                var lastDataItem = dataItems[lastDataItemIdx];
+
+                let posPrefix = lastDataItem.indexOf(newPrefix);
+                if (posPrefix !== -1) {
+                    // new item selected: update the new item in the popup
+                    itemToAddToDb = lastDataItem.substr(0, posPrefix);
+                    dataItems[lastDataItemIdx] = itemToAddToDb;
+                }
+                var value = ctrl.value().slice(0); // make a copy if the array
+                if (itemToAddToDb) {
+                    ctrl.dataSource.filter({});
+                    value[value.length - 1] = itemToAddToDb;
+                    ctrl.value(value);
+                }
+                ctrl.element[0].value = value.join('~'); // for the post back to the server
+            };
+
+
+            var translationsTextbox = $('#TranslationsTextbox');
+            translationsTextbox.kendoMultiSelect({
+                dataSource: $('#TranslationsRequired option').map(function( i, elem ) {
+                    return elem.text;
+                }).get(),
+                filter: "startswith",
+                maxSelectedItems: 10,
+                value: translationsTextbox[0].value.split('~'),
+                filtering: onFilteringCustom,
+                select: onSelectCustom,
+                change: onChangeCustom
+            });
+
             var keywordsTextBox = $('#KeywordsTextBox');
             keywordsTextBox.kendoMultiSelect({
                 dataSource: $('#KeywordList option').map(function( i, elem ) {
                     return elem.text;
                 }).get(),
                 filter: "startswith",
-                maxSelectedItems :10,
+                maxSelectedItems: 10,
                 value: keywordsTextBox[0].value.split("~"),
-                dataBound: function() { // user has typed a character
-                    if (this._prev && newItemText != this._prev) {
-                        newItemText = this._prev;
-                        var newItemTextLower = newItemText.toLowerCase();
-                        var dataItems = this.dataSource.data();
-
-                        var addNewTagMenuItem = newItemText.length >= 3;
-                        for (var i = 0; i < dataItems.length; i++) {
-                            var dataItem = dataItems[i];
-                            if (newItemTextLower == dataItem.toLowerCase()) {
-                                addNewTagMenuItem = false; // exact match
-                            } else if (dataItem.indexOf(newTagPrefix) != -1) {
-                                if (!addNewTagMenuItem){
-                                    dataItems.splice(i, 1); // remove the new tag item in the popup
-                                } else {
-                                    // replace the existing new tag item in the popup
-                                    addNewTagMenuItem = false;
-                                    dataItems[i] = newItemText + newTagPrefix;
-                                }
-                                break;
-                            }
-                        }
-                        if (addNewTagMenuItem)
-                        {
-                            dataItems.push(newItemText + newTagPrefix);
-                        }
-                        this.search();
-                    }
-                },
-                select: function (selection) {
-                    if (selection.item[0].textContent.indexOf(newTagPrefix) == -1) {
-                        var dataItems = this.dataSource.data();
-                        if (dataItems[dataItems.length -1].indexOf(newTagPrefix) != -1) {
-                            // remove the the new tag item in the popup so that the change function (below) does not select it when called
-                            dataItems.splice(dataItems.length -1, 1);
-                        }
-                    }
-                    return false; // do not prevent the selection
-                },
-                change: function() {
-                    var dataItems = this.dataSource.data();
-                    if (dataItems.length == 0) {
-                        return;
-                    }
-                    var tagToAddToDb = "";
-
-                    var lastDataItemIdx = dataItems.length -1;
-                    var lastDataItem = dataItems[lastDataItemIdx];
-
-                    if (lastDataItem.indexOf(newTagPrefix) != -1) {
-                        // new tag selected: update the new tag item in the popup
-                        tagToAddToDb = lastDataItem.replace(newTagPrefix, "");
-                        dataItems[lastDataItemIdx] = tagToAddToDb;
-                    }
-                    var value = this.value().slice(0);
-                    if (tagToAddToDb) {
-                        this.dataSource.filter({});
-                        value[value.length -1 ] = tagToAddToDb;
-                        this.value(value);
-                    }
-                    keywordsTextBox[0].value = value.join('~'); // for the post back to the server
-                }
+                filtering: onFilteringCustom,
+                select: onSelectCustom,
+                change: onChangeCustom
             });
 
-            var keywordsMultiSelect = $('#KeywordsTextBox').data("kendoMultiSelect");
+            var keywordsMultiSelect = keywordsTextBox.data("kendoMultiSelect");
+
             // assume that an empty activity title on page load means that we're creating a new activity
-            var activityTitle = $("#TitleTextBox").val();    
+            var activityTitle = $("#TitleTextBox").val();
             if(!activityTitle) {
                 // search the pre-populated list of tags for the 30-60-90 tag
                 var defaultTag = $.map(keywordsMultiSelect.dataSource.data(), function(dataItem) {
-                if(dataItem == "30-60-90")
+                if(dataItem === "30-60-90")
                     return dataItem;
                 });
                 // set the tag as a selected value and trigger a change event to persist the selection
@@ -2377,7 +2406,7 @@
                 keywordsMultiSelect.trigger("change");
             }
 
-            $('#KeywordsTextBox').keyup(function () {
+            keywordsTextBox.keyup(function () {
                 SetChanged();
             });
 

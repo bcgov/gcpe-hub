@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hub.Legacy", "Hub.Legacy", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcpe.Hub.Data_Legacy", "Hub.Legacy\Gcpe.Hub.Data_Legacy\Gcpe.Hub.Data_Legacy.csproj", "{75961919-A93A-4405-BFEA-D6B776898109}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Gcpe.Hub.Database", "Hub.Legacy\Gcpe.Hub.Database\Gcpe.Hub.Database.sqlproj", "{C78C1F28-5CEB-4E64-B4F3-A519D477894A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,12 @@ Global
 		{75961919-A93A-4405-BFEA-D6B776898109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75961919-A93A-4405-BFEA-D6B776898109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75961919-A93A-4405-BFEA-D6B776898109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +94,7 @@ Global
 		{8C591746-F18D-4F8E-8FED-A5CF937D5939} = {D1E7EA39-992D-4744-87E8-FE673D4CA7CF}
 		{24C2A5AF-3AD6-42C6-8731-1E2181B8F6CA} = {D1E7EA39-992D-4744-87E8-FE673D4CA7CF}
 		{75961919-A93A-4405-BFEA-D6B776898109} = {D1E7EA39-992D-4744-87E8-FE673D4CA7CF}
+		{C78C1F28-5CEB-4E64-B4F3-A519D477894A} = {D1E7EA39-992D-4744-87E8-FE673D4CA7CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C00D1997-2D88-4C82-B9E2-7F6C21D15EEC}

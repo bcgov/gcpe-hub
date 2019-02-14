@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Web;
 using CorporateCalendar.Security;
 using Gcpe.Hub.Properties;
@@ -7,7 +8,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 {
     public string GetVersion()
     {
-        return Settings.Default.Version;
+        return ConfigurationManager.AppSettings["Version"];
     }
     //Security is determined based upon user Account Name. Here the user Identity gives the Users Account Name.
     CustomPrincipal _customPrincipal = null;

@@ -7,7 +7,7 @@ SELECT      [calendar].Activity.Id, [calendar].Activity.StatusId, [calendar].Act
             [calendar].Activity.IsCrossGovernment, [calendar].Activity.IsActive,[calendar].Activity.Schedule, [calendar].Activity.Significance, [calendar].Activity.IsIssue,
             [calendar].Activity.IsMilestone, [calendar].Activity.Strategy, [calendar].Activity.NRDateTime, [calendar].Activity.CreatedDateTime, [calendar].Activity.CreatedBy,
             [calendar].Activity.LastUpdatedDateTime, [calendar].Activity.LastUpdatedBy, [calendar].Activity.CommunicationContactId, [calendar].Status.Name AS Status, HqStatus.Name AS HqStatus,
-            [calendar].City.Name AS City, [calendar].Activity.NRDistributionId, [calendar].sGetActivitySharedWithMinistries([calendar].Activity.Id) AS SharedWithMinistryIds, 
+            [calendar].City.Name AS City, [calendar].Activity.Translations, [calendar].Activity.NRDistributionId, [calendar].sGetActivitySharedWithMinistries([calendar].Activity.Id) AS SharedWithMinistryIds, 
             [calendar].sGetActivityFavoriteSystemUsers([calendar].Activity.Id) AS FavoriteSystemUsers,[calendar].sGetActivityCategoriesByName([calendar].Activity.Id) AS Categories,
             [calendar].sGetActivitySectorsByName([calendar].Activity.Id) AS Sectors, [calendar].sGetActivityNROrigins([calendar].Activity.Id) AS NROrigins, 
             STUFF((Select ', '+ keywordName FROM [calendar].GetActivityKeywords([calendar].Activity.Id) FOR XML PATH('')), 1, 1, '') AS Keywords,

@@ -412,7 +412,7 @@ namespace Gcpe.Hub.Calendar
 
                     dr.cell.Add("Categories", ApplyMarkup(t.IsCategoriesNeedsReview ? Markup : null, categories));
 
-                    dr.cell.Add("Keywords", t.Keywords);
+                    dr.cell.Add("Keywords", t.Keywords??"");
 
                     string representatives = ApplyMarkup(t.IsRepresentativeNeedsReview ? Markup : null, (t.GovernmentRepresentative ?? ""));
                     if (t.IsPremierRequestedOrConfirmed)
@@ -420,7 +420,7 @@ namespace Gcpe.Hub.Calendar
                         representatives = "Premier" + (representatives == "" ? "" : ", ") + representatives;
                     }
                     dr.cell.Add("GovernmentRepresentative", representatives);
-
+                    dr.cell.Add("Translations", t.Translations??"");
 
                     if (!string.IsNullOrEmpty(t.FavoriteSystemUsers))
                     {
