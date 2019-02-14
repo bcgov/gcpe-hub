@@ -80,9 +80,9 @@ public class ActivityManager
     /// <summary>
     /// This is used from the Activity page
     /// </summary>
-    public static void UpdateActivity(CorporateCalendarDataContext db, CustomPrincipal customPrincipal, CorporateCalendar.Data.Activity activity,
+    public static void UpdateActivity(CorporateCalendarDataContext db, CustomPrincipal customPrincipal, Activity activity,
         string title, string details, DateTime? startDateTime, DateTime? endDateTime, string potentialDates, int? representativeId, int? cityId, string otherCity,
-        bool categoryHasChanged, bool commMaterialsHaveChanged, bool isIssue, bool isConfidential, Dictionary<string, string> dropDownListValues)
+        bool categoryHasChanged, bool commMaterialsHaveChanged, bool isIssue, bool isConfidential, string translationsRequired, Dictionary<string, string> dropDownListValues)
     {
         //-- Need to check if these fields were modified and mark them
         //--Title and Details
@@ -142,6 +142,12 @@ public class ActivityManager
             activity.IsIssue = isIssue;
             activity.IsConfidential = isConfidential;
             activity.IsCategoriesNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (activity.Translations != translationsRequired)
+        {
+            activity.Translations = translationsRequired;
             activity.StatusId = 1; // Changed
         }
 

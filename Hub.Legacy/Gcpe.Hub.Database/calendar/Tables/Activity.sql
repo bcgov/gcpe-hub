@@ -12,6 +12,7 @@
     [HqComments]                  NVARCHAR (2000)   NULL,
     [LeadOrganization]            NVARCHAR (100)   NULL,
     [Venue]                       NVARCHAR (150)   NULL,
+    [Translations]                NVARCHAR (150)   NULL,
     [StatusId]                    INT              NULL,
     [HqStatusId]                  INT              NULL,
     [HqSection]                   INT              CONSTRAINT [DF_Activity_HqSection] DEFAULT ((2)) NOT NULL,

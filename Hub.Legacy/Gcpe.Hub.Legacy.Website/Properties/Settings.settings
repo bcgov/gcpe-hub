@@ -50,9 +50,6 @@
     <Setting Name="HQAdmin" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="SharedWithExcludes" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>

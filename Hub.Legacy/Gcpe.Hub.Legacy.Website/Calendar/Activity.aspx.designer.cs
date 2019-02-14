@@ -643,6 +643,24 @@ namespace Gcpe.Hub.Calendar {
         protected global::System.Web.UI.WebControls.CustomValidator NRDistributionDropDownListValidator;
         
         /// <summary>
+        /// TranslationsRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect TranslationsRequired;
+        
+        /// <summary>
+        /// TranslationsTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TranslationsTextbox;
+        
+        /// <summary>
         /// SectorDropDownList control.
         /// </summary>
         /// <remarks>
@@ -659,7 +677,6 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect ThemeDropDownList;
-
         
         /// <summary>
         /// ActivityNewsList control.
@@ -966,7 +983,6 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ThemesSelectedValuesServerSide;
-
         
         /// <summary>
         /// InitiativesSelectedValues control.

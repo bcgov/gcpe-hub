@@ -599,17 +599,6 @@ namespace Gcpe.Hub.Calendar
             var parameters = new List<ReportParameter>();
             parameters.Add(new ReportParameter("SiteURL", siteUrl + "Activity.aspx?ActivityId="));
 
-            if (operation == "LookAheadReport")
-            {
-                foreach (var activeActivity in ActivityList)
-                {
-                    if (activeActivity.HqComments == "**")
-                    {
-                        activeActivity.HqComments = string.Empty;
-                    }
-                }
-            }
-
             if (operation == "PlanningReport")
             {
                 GeneratePlannedActivities(reportData, ActivityList);
@@ -1004,7 +993,7 @@ namespace Gcpe.Hub.Calendar
         private static string FormatHqComments(ActiveActivity activity, bool isAppOwner)
         {
             string hqComments = isAppOwner ? activity.HqComments : "";
-            if (string.IsNullOrEmpty(hqComments)) return null;
+            if (hqComments == null || hqComments.Length <= 2) return null; // 2 for **
 
             while (true)
             {
