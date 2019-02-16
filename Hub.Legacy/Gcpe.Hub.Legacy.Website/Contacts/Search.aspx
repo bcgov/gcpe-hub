@@ -15,9 +15,10 @@
             <div class="noprint">
                 <mr:AdvancedSearchControl runat="server" ID="advancedSearchControlDesktop" />
             </div>
-
-            <div class="search-search-criteria" runat="server" id="searchCriteria"></div>
-
+            <div class="search-search-criteria">
+                <span runat="server" id="searchCount"></span><span runat="server" id="searchCriteria"></span>
+            </div>
+            
         </div>
 
         <div class="phone phone-search-top">
@@ -26,7 +27,7 @@
             <a href="" runat="server" id="advancedSearchHref" class="refine-results-link right-chevron">Refine Results</a>
             <div class="clear"></div>
 
-            <p><asp:Literal runat="server" runat="server" ID="searchCriteriaLit" /></p>
+            <p><asp:Literal runat="server" ID="searchCriteriaLit" /></p>
         </div>
 
         <mr:TabControl CssClass="search-page-tabs" ID="tabControl" runat="server" IsAddScreen="false" ForPhone="True" />
@@ -54,7 +55,7 @@
 
                     <script type="text/javascript">
                         var element = document.getElementById('reportTypeContainer');
-                        if (element != null) {
+                        if (element !== null) {
                             var elements = element.getElementsByTagName("input");
                             for (var i = 0; i < elements.length; i++) {
                                 elements[i].className = "ignore-unload";
@@ -92,7 +93,7 @@
             function ConfirmSaveReport() {
 
                 var element = document.getElementById('reportTitleNameTb');
-                if (element.value.trim() == "") {
+                if (element.value.trim() === "") {
                     alert(reportTitleTextEmpty);
                     return false;
                 }
@@ -111,20 +112,16 @@
                 request.open("GET", requestUrl, false);
                 request.send();
 
-                if (request.responseText == "0") {
+                if (request.responseText === "0") {
                     // title in use
                     alert(reportTitleUsedText);
                     return false;
-                } else if (request.responseText == "1") {
-                    // valid title
-                    return true;
-                } else {
+                } else if (request.responseText !== "1") {
                     // unknown error
                     alert(errorOccurredText);
                     return false;
                 }
-
-
+                // valid title
                 return true;
             }
         </script>
