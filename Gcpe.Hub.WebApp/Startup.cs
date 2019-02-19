@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Gcpe.Hub.WebApp
 {
@@ -20,10 +19,8 @@ namespace Gcpe.Hub.WebApp
             if (env.IsDevelopment())
                 builder.AddUserSecrets<Startup>();
             if (!System.Diagnostics.Debugger.IsAttached)
-            {
                 builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                builder.AddEnvironmentVariables(); // for openshift
-            }
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
