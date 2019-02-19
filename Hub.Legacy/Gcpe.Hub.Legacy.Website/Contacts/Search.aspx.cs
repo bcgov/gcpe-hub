@@ -139,7 +139,8 @@ public partial class Search : System.Web.UI.Page
         int totalCount = contactCount + outletCount + companyCount;
 
         // desktop search setup
-        searchCriteria.InnerHtml = totalCount + " Results for \"" + advancedSearchControlDesktop.SearchCriteriaString + "\"";
+        searchCount.InnerText = totalCount.ToString();
+        searchCriteria.InnerHtml = " Results for \"" + advancedSearchControlDesktop.SearchCriteriaString + "\"";
 
         // mobile advanced search setup
         advancedSearchHref.HRef = "RefineResults.aspx?" + advancedSearchControlDesktop.SearchCriteriaQueryUrl;

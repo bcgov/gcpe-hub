@@ -834,6 +834,7 @@
     <Content Include="Resources\BC\MediaRelations%402x.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="WebAnalytics.html" />
     <None Include="Properties\PublishProfiles\Debug Build to Development.pubxml" />
     <None Include="Properties\PublishProfiles\Release Build to Test.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -2477,7 +2478,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

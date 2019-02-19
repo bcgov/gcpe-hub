@@ -52,6 +52,8 @@
         });
 
     </script>
+<!-- #include file="~/WebAnalytics.html" -->
+
 </head>
 <body>
     <asp:Panel ID="printButtonPanel" runat="server">
@@ -73,8 +75,8 @@
                     <a href="<%= ResolveUrl("~/Contacts") %>" class="mobile-menu phone">
                         <img runat="server" src="~/Contacts/images/HomeButton.png" border="0" alt="home" /></a>
 
-                    <img runat="server" ID="DesktopLogo" runat="server" class="logo desktop" alt="logo / media relations site" border="0" />
-                    <img runat="server" ID="PhoneLogo" runat="server" class="logo phone" alt="logo / media relations site" border="0" />
+                    <img runat="server" id="DesktopLogo" class="logo desktop" alt="logo / media relations site" border="0" />
+                    <img runat="server" id="PhoneLogo" class="logo phone" alt="logo / media relations site" border="0" />
                 </div>
 
                 <div class="common-page-navigation">
@@ -127,7 +129,7 @@
 
         <script type="text/javascript">
             function ShowSearchLoadingModule() {
-                $("#loadingModule").modal('show')
+                $("#loadingModule").modal('show');
             }
         </script>
 

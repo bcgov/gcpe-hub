@@ -131,8 +131,8 @@
             var found = false;
 
             for (var k = 0; k < selectedItems.length; k++) {
-                if (selectedItems[k][1] == selectedCriteriaType) {
-                    if (selectedItems[k][3] == itemsToAdd[i][1]) {
+                if (selectedItems[k][1] === selectedCriteriaType) {
+                    if (selectedItems[k][3] === itemsToAdd[i][1]) {
                         found = true;
                         break;
                     }
@@ -147,7 +147,7 @@
                 }
             }
         }
-        if (element != null) addTitleAttributeToElement(element);
+        if (element !== null) addTitleAttributeToElement(element);
     }
 
     function GetIsTypeTb(criteriaType) {
@@ -192,7 +192,7 @@
 
         RemoveAllDropDownElements(valuesDropdown);
 
-        if (selectedValue.trim() == "") {
+        if (selectedValue.trim() === "") {
             // reset the drop down
             AddElementsToDropDown(valuesDropdown, [["Select ", ""]]);
             valuesDropdown.disabled = true;
@@ -225,7 +225,7 @@
 
         var selectedType = typesDropDown.options[typesDropDown.selectedIndex].value;
         var selectedTypeName = typesDropDown.options[typesDropDown.selectedIndex].innerHTML;
-        if (selectedType.trim() != "") {
+        if (selectedType.trim() !== "") {
             var isTb = GetIsTypeTb(selectedType);
             if (!isTb) {
                 selectedValue = valuesDropdown.options[valuesDropdown.selectedIndex].value;
@@ -239,7 +239,7 @@
             } else {
                 var textBoxElement = document.getElementById('searchValueTextBox');
                 var value = textBoxElement.value.trim();
-                if (value != "") {
+                if (value !== - "") {
                     selectedItems.push([selectedTypeName, selectedType, value, value]);
                     textBoxElement.value = "";
                 }
@@ -286,7 +286,7 @@
         var typesDropDown = document.getElementById('searchTypeListBox');
         var valuesDropdown = document.getElementById('searchValuesListBox');
 
-        if (typesDropDown.options[typesDropDown.selectedIndex].value.trim() != "") {
+        if (typesDropDown.options[typesDropDown.selectedIndex].value.trim() !== "") {
 
             var isTb = GetIsTypeTb(typesDropDown.options[typesDropDown.selectedIndex].value);
 
@@ -309,7 +309,7 @@
         var textboxElement = document.getElementById('<%= searchByNameTb.ClientID %>');
         var oldFunc = textboxElement.onchange;
         textboxElement.onchange = function () {
-            if (oldFunc != null) {
+            if (oldFunc !== null) {
                 oldFunc();
             }
 
@@ -319,23 +319,37 @@
         var radioElementA = document.getElementById('<%= matchAllRb.ClientID %>');
         var oldFunc2 = radioElementA.onchange;
         radioElementA.onchange = function () {
-            if (oldFunc2 != null) oldFunc2();
+            if (oldFunc2 !== null) oldFunc2();
             HideSaveButton();
         };
 
         var radioElementB = document.getElementById('<%= matchAnyRb.ClientID %>');
         var oldFunc3 = radioElementB.onchange;
         radioElementB.onchange = function () {
-            if (oldFunc3 != null) oldFunc2();
+            if (oldFunc3 !== null) oldFunc2();
             HideSaveButton();
         };
 
         ChangeValuesForSelectedType(document.getElementById("<%=searchTypeListBox.ClientID%>"));
+
+        var searchCount = document.getElementById('searchCount');
+        if (searchCount) {
+            var filters = {};
+            for (var i = 0; i < selectedItems.length; i++) {
+                var selectedItem = selectedItems[i];
+                filters[selectedItem[0]] = selectedItem[2];
+            }
+            //alert(JSON.stringify(filters));
+            window.snowplow('trackSiteSearch',
+                textboxElement.value.split(' '),
+                filters,
+                searchCount.innerText);
+        }
     });
 
     function HideSaveButton() {
         var element = document.getElementById('<%= saveReportButtonLink.ClientID %>');
-        if (element != null) {
+        if (element !== null) {
             element.style.display = 'none';
         }
     }

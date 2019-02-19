@@ -270,7 +270,7 @@ function arrowKeyTypedown(id, event) {
     var divs = con.getElementsByTagName("div");
     if (event.keyCode === 38) {
         //up
-        if (idx === null) {
+        if (idx === undefined) {
             //get first item
             idx = 0;
         } else {
@@ -284,7 +284,7 @@ function arrowKeyTypedown(id, event) {
         typedown_selected_item[id] = idx;
     } else if (event.keyCode === 40) {
         //down
-        if (idx === null) {
+        if (idx === undefined) {
             //get first item
             idx = 0;
         } else {
@@ -297,15 +297,15 @@ function arrowKeyTypedown(id, event) {
         divs[idx].className = divs[idx].className + " selected";
         typedown_selected_item[id] = idx;
     } else if (event.keyCode === 37) {
-        if (idx !== null) {
+        if (idx !== undefined) {
             setTypedownContent(divs[idx], id);
         }
     } else if (event.keyCode === 39) {
-        if (idx !== null) {
+        if (idx !== undefined) {
             setTypedownContent(divs[idx], id);
         }
     } else if (event.keyCode === 13) {
-        if (idx !== null) {
+        if (idx !== undefined) {
             typedown_off[id] = true;
 
             //if (!setTypedownContent(divs[idx], id)) {
@@ -320,7 +320,7 @@ function arrowKeyTypedown(id, event) {
             return false;
         }
     } else if (event.keyCode === 27) {
-        if (idx !== null) {
+        if (idx !== undefined) {
             divs[idx].className = divs[idx].className.replace(" selected", "");
         }
 
