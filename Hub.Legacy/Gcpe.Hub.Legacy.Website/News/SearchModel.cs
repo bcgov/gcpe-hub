@@ -3,10 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Script.Serialization;
+using legacy::Gcpe.Hub.Data.Entity;
 
 namespace Gcpe.Hub.News
 {
-    using legacy::Gcpe.Hub.Data.Entity;
 
     public class SearchModel : HubModel
     {
@@ -233,6 +234,29 @@ namespace Gcpe.Hub.News
 
                 return sectors;
             }
+        }
+
+        public string AllQueryFilters()
+        {
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            var filters = new Dictionary<string, string>();
+            if (filterByDateRange.HasValue)
+            {
+                filters["DateRange"] = filterByDateRange.ToString();
+            }
+            if (filterByStatus.HasValue)
+            {
+                filters["Status"] = filterByStatus.Value.ToString();
+            }
+            if (filterByMinistries.Any())
+            {
+                filters["Ministries"] = filterByMinistries.First().Value;
+            }
+            if (filterBySectors.Any())
+            {
+                filters["Sector"] = filterBySectors.First().Value;
+            }
+            return json.Serialize(filters);
         }
 
         public class SearchResult
