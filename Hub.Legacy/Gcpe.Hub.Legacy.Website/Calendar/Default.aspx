@@ -43,43 +43,63 @@
 
         //----------------------------------------------------------------------
         // Used by Search and Save to get the URL with parameters
-        function AddToFilter(filter, delimiter, name, value, defaultValue) {
-            if (value != '' && value != defaultValue)
-            {
-                if (filter != '')filter += delimiter;
-                filter += name + value;
+        function AddToFilter(filters, name, value) {
+            if (value) {
+                filters[name] = value;
             }
-            return filter;
         }
 
-        function GetFilter(forPost) {
-            var delimiter = forPost ? "|" : "&";
+        function AddSelect(filters, name, fselect) {
+            // use select option that has the clear text (for snowplow)
+            if (fselect.selectedIndex !== 0) {
+                filters[name] = fselect[fselect.selectedIndex];
+            }
+        }
 
-            var filter = ''
-            filter = AddToFilter(filter, delimiter, 'status=', $("#fstatus").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'category=', $("#fcategory").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'ministry=', $("#fministry").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'contact=', $("#fcontact").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'representative=', $("#frepresentative").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'initiative=', $("#finitiative").val(), '*');
+        function AddToFilters(filters) {
+            AddSelect(filters, 'status', $("#fstatus")[0]);
+            AddSelect(filters, 'category', $("#fcategory")[0]);
+            AddSelect(filters, 'ministry', $("#fministry")[0]);
+            AddSelect(filters, 'contact', $("#fcontact")[0]);
+            AddSelect(filters, 'representative', $("#frepresentative")[0]);
+            AddSelect(filters, 'initiative', $("#finitiative")[0]);
+            AddSelect(filters, 'premierRequested', $("#fpremier")[0]);
+            AddSelect(filters, 'isissue', $("#fissue")[0]);
+            AddSelect(filters, 'dateConfirmed', $("#fdateConfirmed")[0]);
+
             var fkeyword = $("#fkeyword").getKendoMultiSelect();
-            filter = AddToFilter(filter, delimiter, 'keywords=', fkeyword ? fkeyword.value().join('~') : '');
-            filter = AddToFilter(filter, delimiter, 'premierRequested=', $("#fpremier").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'datefrom=', $("#StartDateTextBox").val());
-            filter = AddToFilter(filter, delimiter, 'dateto=', $("#EndDateTextBox").val());
-            filter = AddToFilter(filter, delimiter, 'isissue=', $("#fissue").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'dateConfirmed=', $("#fdateConfirmed").val(), '*');
-            filter = AddToFilter(filter, delimiter, 'quickSearch=', forPost ? $("#txtSearch").val() : encodeURIComponent($("#txtSearch").val()));
-            filter = AddToFilter(filter, delimiter, 'display=', $("#DisplayRadioButtonList input:checked").val(), '3');
-            filter = AddToFilter(filter, delimiter, 'thisdayonly=', $("#ThisDayOnlyCheckBox")[0].checked, "False");
-            filter = AddToFilter(filter, delimiter, 'lookahead=', $("#lookaheadYes")[0].checked, 'False');
-            var lookaheadNo = $("#lookaheadNo")[0].checked ? "False" : '';
-            filter = AddToFilter(filter, delimiter, 'lookahead=', lookaheadNo);
-
-            if (!forPost && filter != '') filter = '?' + filter;
-            return filter;
+            if (fkeyword) {
+                AddToFilter(filters, 'keywords', fkeyword.dataItems().reduce(function (acc, item) {
+                    return acc ? { value: acc.value + '~' + item.value, text: acc.text + ' or ' + item.text } : item;
+                }, null));
+            }
+            AddToFilter(filters, 'datefrom', $("#StartDateTextBox").val());
+            AddToFilter(filters, 'dateto', $("#EndDateTextBox").val());
+            var display = $("#DisplayRadioButtonList input:checked")[0];
+            AddToFilter(filters, 'display', display.value === '3' ? null : { value: display.value, text: display.nextSibling.textContent });
+            AddToFilter(filters, 'thisdayonly', $("#ThisDayOnlyCheckBox")[0].checked);
         }
 
+        function GetQuery(filters, txtSearch, forPost) { // Modifies filters too
+            // lookahead is for User AND Corporate queries
+            if ($("#lookaheadNo")[0].checked) {
+                filters['lookahead'] = false;
+            } else {
+                AddToFilter(filters, 'lookahead', $("#lookaheadYes")[0].checked);
+            }
+            var filterArray = Object.keys(filters).map(function (key) {
+                var val = filters[key];
+                if (val.value !== undefined) {
+                    filters[key] = val.text; // to be used later by snowplow
+                    val = val.value;
+                }
+                return key + '=' + val;
+            });
+            if (txtSearch !== '') {
+                filterArray.push('quickSearch=' + txtSearch); // do not put this in filters because snowplow has a different argument for it
+            }
+            return filterArray.join(forPost ? "|" : "&");
+        }
 
         //----------------------------------------------------------------------
         // Resets all the filters options, likely more intuitive to only have 
@@ -150,37 +170,47 @@
 
         //----------------------------------------------------------------------
         // Update the Grid by the search Filters
-        function search(filter) {
-            var onMobile = !$("#NavigationMenu").is(':visible')
-            var sidebarIsClosed = !$('#contentwrapper').hasClass("visible")
-            if (onMobile != sidebarIsClosed) {
+        function search(filters) {
+            var onMobile = !$("#NavigationMenu").is(':visible');
+            var sidebarIsClosed = !$('#contentwrapper').hasClass("visible");
+            if (onMobile !== sidebarIsClosed) {
                 toggleSidebar(true);
             }
 
             $("#loadingPanel").modal('show');
-            if (!filter)
-                filter = 'ActivityListProvider.ashx' + GetFilter();
+            var txtSearch = '';
+            if (!filters) {
+                filters = {};
+                AddToFilters(filters);
+                txtSearch = encodeURIComponent($("#txtSearch").val());
+            }
+            var queryParams = GetQuery(filters, txtSearch);
 
             var activityGridDiv = $("#activityGridDiv");
             var calendarDiv = $('#calendarDiv');
             initCalendar(calendarDiv);
 
             $('#ActivityGrid_tbl').flexOptions({
-                url: filter,
+                url: 'ActivityListProvider.ashx' + (queryParams === '' ? queryParams : '?' + queryParams),
                 newp: 1,
                 preProcess: function (data) {
                     $('.popover').popover('hide'); // force the current tooltip to close so it does not get stuck
                     calendarDiv.fullCalendar('addEventSource', data.rows);
 
-                    if (data.page == 1) {
+                    if (data.page === 1) {
                         setupInfiniteScrolling(activityGridDiv);
+                    } else {
+                        filters['page'] = data.page;
                     }
                     $("#lastLoadedDatetime").val(data.loadedTime);
                     $(".fTitle").text("B.C Government Activities: " + data.total);
+                    if (queryParams !== '') {
+                        window.snowplow('trackSiteSearch', txtSearch.split(' '), filters, data.total);
+                    }
                     return data;
                 },
                 onSuccess: function () {
-                    if (activityGridDiv.css("display") == "none") {
+                    if (activityGridDiv.css("display") === "none") {
                         if (getMoreActivitiesIfNeeded(calendarDiv)) return;
                     }
 
@@ -191,15 +221,15 @@
             }).flexReload();
             $('#SelectedTextBox').val('');
 
-            var gridIsHidden = activityGridDiv.css("display") == "none";
-            if (onMobile != gridIsHidden) // force grid view on desktop and calendar view on mobile
+            var gridIsHidden = activityGridDiv.css("display") === "none";
+            if (onMobile !== gridIsHidden) // force grid view on desktop and calendar view on mobile
                 toggleView();
         }
 
         function setupInfiniteScrolling(activityGridDiv) {
             // Infinite scroll
             $(window).scroll(function () {
-                if (activityGridDiv.css("display") == "none") return;
+                if (activityGridDiv.css("display") === "none") return;
                 var scrollTop = $(window).scrollTop();
                 //var sidebarIsVisible = $('#contentwrapper').hasClass("visible");
                 //if (sidebarIsVisible ? scrollTop > 600 : scrollTop < 100)toggleSidebar();
@@ -219,7 +249,7 @@
         function toggleView() {
             var activityGridDiv = $("#activityGridDiv");
             var calendarDiv = $('#calendarDiv');
-            if (activityGridDiv.css("display") == "none") {
+            if (activityGridDiv.css("display") === "none") {
                 $(".toggleView").text("Calendar View");
                 calendarDiv.hide();
                 activityGridDiv.show();
@@ -227,7 +257,7 @@
                 $(".toggleView").text("Grid View");
 
                 var th = $("th.sorted", activityGridDiv);
-                if (th.prop("abbr") != "StartEndDateTime" || $(".sasc", th).length == 0) {
+                if (th.prop("abbr") !== "StartEndDateTime" || $(".sasc", th).length === 0) {
                     var newSort = $("th[abbr=StartEndDateTime]");
                     dateMin = null, dateMax = null;
                     calendarDiv.fullCalendar('removeEvents');
@@ -293,16 +323,16 @@
                     evt = evt.cell;
                     //if (color)evt.color = color;
                     var posTB = evt.StartEndDateTime.lastIndexOf(tbSpan);
-                    if (posTB != -1)
+                    if (posTB !== -1)
                     {
-                        var isTBC = evt.StartEndDateTime.indexOf("BC</span></b>", posTB + tbSpan.length) != -1;
+                        var isTBC = evt.StartEndDateTime.indexOf("BC</span></b>", posTB + tbSpan.length) !== -1;
                         evt.title = tbSpan + (isTBC ? "BC" : "BD") + "</span></b> " + evt.title;
                     }
                     //else evt.color = '#F0FFF0'; // Green = Confirmed
 
-                    if (dateMin == null || dateMin > evt.end)
+                    if (dateMin === null || dateMin > evt.end)
                         dateMin = evt.end;
-                    if (dateMax == null || dateMax < evt.start)
+                    if (dateMax === null || dateMax < evt.start)
                         dateMax = evt.start;
 
                     return evt;
@@ -340,60 +370,41 @@
         // Used to execute the Corporate Queries
         function runCorporateQuery() {
 
-            var showAll = true;
-            var nbrDays = null;
-            var statuses = '';
-            var hqStatuses = '';
-            var deletedYN = false;
+            var query = { 'op': 'rcc' };
+            query.showAll = $('#rdCQAll').is(':checked');
+            query.nbrDays = query.showAll ? '' : $("#txtNumberDays").val();
 
-            var rdAll = $('#rdCQAll').is(':checked');
-
-            if (rdAll == true) {
-                showAll = true;
-                nbrDays = null;
-            } else {
-                showAll = false;
-                nbrDays = $("#txtNumberDays").val();
-            }
-
+            query.statuses = '';
+            query.hqStatuses = '';
+            query.deletedYN = false;
 
             var items = $('#chkBxStatus input:checkbox');
             for (var i = 0; i < items.length; i++) {
-                if (items[i].checked == true) {
-                    if (items[i].value == 'Deleted') {
-                        deletedYN = true;
-                    }
-                    else if (items[i].value.indexOf("LA ") != -1) {
-                        if (hqStatuses) hqStatuses += ",";
-                        hqStatuses += items[i].value.substr(3);
-                    }
-                    else {
-                        if (statuses) statuses += ",";
-                        statuses += items[i].value;
-                    }
+                if (items[i].checked !== true) continue;
+
+                if (items[i].value === 'Deleted') {
+                    query.deletedYN = true;
+                } else if (items[i].value.indexOf("LA ") != -1) {
+                    if (query.hqStatuses) query.hqStatuses += ",";
+                    query.hqStatuses += items[i].value.substr(3);
+                } else {
+                    if (query.statuses) query.statuses += ",";
+                    query.statuses += items[i].value;
                 }
             }
 
-            var queryString = '?op=rcc' + '&showAll=' + showAll + '&nbrDays=' + nbrDays + '&statuses=' + statuses + '&hqStatuses=' + hqStatuses + '&deletedYN=' + deletedYN;
-
-            if ($("#lookaheadYes")[0].checked)
-                queryString = queryString + '&' + 'lookahead=' + 'true';
-            else if ($("#lookaheadNo")[0].checked)
-                queryString = queryString + '&' + 'lookahead=' + 'false';
-
-            var filter = 'ActivityListProvider.ashx' + queryString;
-            search(filter);
+            search(query);
         }
 
         function ClearLAStatus() {
             var msg = "For how many days?";
             jPrompt(msg, 10, "Clear Look Ahead Status of Activities", function (result) {
-                if (result != null) {
+                if (result !== null) {
                     $.ajax({
                         type: 'POST',
                         url: 'ActivityHandler.ashx?Op=ClearLAStatus&numberDays=' + result,
                         success: function (data) {
-                            if (data != null && data != undefined && data.length > 0)
+                            if (data !== null && data !== undefined && data.length > 0)
                                 jAlert(data, 'Look Ahead Status Clear Error');
                             $('#ActivityGrid_tbl').flexOptions().flexReload();
                         }
@@ -413,7 +424,7 @@
             for (var i = 0; i < fParams.length; i++) {
                 var fieldAndvalue = fParams[i].split('=');
                 var value = fieldAndvalue[1];
-                if (value == "*" || value == '') continue;
+                if (value === "*" || value === '') continue;
                 var filter = null;
                 switch (fieldAndvalue[0])
                 {
@@ -744,7 +755,7 @@
           
             if ($("#fcontact").is(":visible")) {
                 $('#fcontact option').each(function () {
-                    if ($(this).text() == currentUserName) {
+                    if ($(this).text() === currentUserName) {
                         $(this).prop('selected', true).trigger('change');
                     }
                 });
@@ -875,7 +886,9 @@
         }).click(function () {
             jPrompt('Type a name for your search query:', 'My Query', 'Save a Query', function (r) {
                 if (r) {
-                    var error = saveFilter(r, GetFilter(true), function (error) {
+                    var filters = {};
+                    AddToFilters(filters);
+                    var error = saveFilter(r, GetQuery(filters, $("#txtSearch").val(), true), function (error) {
                         var msg = error ? 'Sorry, there was an error saving your query. ' + error : 'Filter Saved.';
                         jAlert(msg, 'Save a Query');
                     });
@@ -935,7 +948,7 @@
         $("#fmore").change(function () {
             var $this = $(this);
             var filter = $("#" + $this.val());
-            if ($this.val() == "fcontact") {
+            if ($this.val() === "fcontact") {
                 UpdateCommunicationContacts();
             }
             if (filter !== null) {
