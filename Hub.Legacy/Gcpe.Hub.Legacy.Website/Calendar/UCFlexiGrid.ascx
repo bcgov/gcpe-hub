@@ -30,26 +30,33 @@
         }
     }
 
+    function GetFilter(filters)
+    {
+        var txtSearch = encodeURIComponent($("#txtSearch").val());
+        AddToFilters(filters);
+        var filter = GetQuery(filters, txtSearch);
+        window.snowplow('trackSiteSearch', txtSearch.replace(" ", "', '"), filters);
+        return filter;
+    }
 
     function download() {
-        var filter = GetFilter();
-        var queryString = 'ActivityHandler.ashx' + (filter == '' ? '?' : filter + '&') + 'Op=ExportSelected';
-        window.location = queryString;
+        var filter = GetFilter({'Op':'ExportSelected'});
+        window.location = 'ActivityHandler.ashx?' + filter;
     }
 
     function planningReport() {
-        var filter = GetFilter();
-        window.open('ActivityHandler.ashx' + (filter == '' ? '?' : filter + '&') + 'Op=PlanningReport');
+        var filter = GetFilter({'Op':'PlanningReport'});
+        window.open('ActivityHandler.ashx?' + filter);
     }
 
     function lookAheadReport() {
-        var filter = GetFilter();
-        window.open('ActivityHandler.ashx' + (filter == '' ? '?' : filter + '&') + 'Op=LookAheadReport');
+        var filter = GetFilter({'Op':'LookAheadReport'});
+        window.open('ActivityHandler.ashx?' + filter);
     }
 
     function main30_60_90Report() {
-        var filter = GetFilter();
-        window.open('ActivityHandler.ashx' + (filter == '' ? '?' : filter + '&') + 'Op=Main30_60_90Report');
+        var filter = GetFilter({'Op':'Main30_60_90Report'});
+        window.open('ActivityHandler.ashx?' + filter);
     }
 
     $(document).ready(function () {

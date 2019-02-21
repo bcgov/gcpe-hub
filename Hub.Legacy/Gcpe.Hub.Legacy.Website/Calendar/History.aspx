@@ -197,9 +197,11 @@
                 contentType: "application/json; charset=utf-8",
                 url: "CorporateCalendarUpdateWebService.asmx/GetTodaysUpdates",
                 dataType: "json",
-                success: function (data) {
-                    $('#result').html(data.d);
+                success: function (result) {
+                    $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
+                    var filters = { 'date': 'today' };
+                    window.snowplow('trackSiteSearch', [], filters, $('#totalCount').text());
                 },
                 error: function (e) {
                     $('#result').html("An Error Occurred");
@@ -214,9 +216,11 @@
                 contentType: "application/json; charset=utf-8",
                 url: "CorporateCalendarUpdateWebService.asmx/GetLatestUpdates",
                 dataType: "json",
-                success: function (data) {
-                    $('#result').html(data.d);
+                success: function (result) {
+                    $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
+                    var filters = { 'LatestUpdates': 5 };
+                    window.snowplow('trackSiteSearch', [], filters, $('#totalCount').text());
                 },
                 error: function (e) {
                     $('#result').html("An Error Occurred");
@@ -226,18 +230,28 @@
         }
         function getUpdatesBetweenDates() {
             $("#loadingPanel").modal('show');
+            var txtKeyword = $("#txtKeyword").val();
+            var filters = {};
+            filters['fromDate'] =$("#UpdateStartDateTextBox").val();
+            filters['toDate'] = $("#UpdateEndDateTextBox").val();
+            filters['updateType'] = $("#updateType").val();
+            filters['keyword'] = txtKeyword;
+            var data = JSON.stringify(filters);
+            Object.keys(filters).forEach(function (key) {
+                if (key === 'keyword' || filters[key] === '') {
+                    delete filters[key];
+                }
+            });
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 url: "CorporateCalendarUpdateWebService.asmx/GetUpdatesBetweenDates",
-                data: "{ fromDate: '" + $("#UpdateStartDateTextBox").val()
-                    + "', toDate: '" + $("#UpdateEndDateTextBox").val() + "' "
-                    + ", updateType: '" + $("#updateType").val() + "' "
-                    + ", keyword: '" + $("#txtKeyword").val() + "'  }",
+                data: data,
                 dataType: "json",
-                success: function (data) {
-                    $('#result').html(data.d);
+                success: function (result) {
+                    $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
+                    window.snowplow('trackSiteSearch', txtKeyword.split(' '), filters, $('#totalCount').text());
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
@@ -250,15 +264,17 @@
         }
         function getUpdatesForActivity(activityID) {
             $("#loadingPanel").modal('show');
+            var filter = {'activityId': activityID };
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 url: "CorporateCalendarUpdateWebService.asmx/GetUpdatesForActivity",
-                data: "{ activityId: '" + activityID+ "'  }",
+                data: JSON.stringify(filter),
                 dataType: "json",
-                success: function (data) {
-                    $('#result').html(data.d);
+                success: function (result) {
+                    $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
+                    window.snowplow('trackSiteSearch', [], filter, $('#totalCount').text());
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

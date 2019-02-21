@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.Services;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CorporateCalendar.Data;
@@ -123,7 +123,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
         return modifiedNewsFeedItems;
     }
 
-    private string GetHtml(IEnumerable<NewsFeed> newsFeedItems, out int count)
+    private string GetHtml(IEnumerable<NewsFeed> newsFeedItems, out string count)
     {
         var modifiedNewsFeedItems = ModifyNewsFeedItems(newsFeedItems);
         var repeater = new System.Web.UI.WebControls.Repeater
@@ -133,7 +133,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
         };
 
         repeater.DataBind();
-        count = repeater.Items.Count;
+        count = "<span id='totalCount'>" + repeater.Items.Count + "</span>";
         var stringBuilder = new StringBuilder();
         var stringWriter = new StringWriter(stringBuilder);
         var htmlTextWriter = new HtmlTextWriter(stringWriter);
@@ -147,7 +147,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
     [WebMethod]
     public string GetLatestUpdates()
     {
-        int count = 0;
+        string count;
         using (var ctx = new CorporateCalendarDataContext())
         {
             IOrderedEnumerable<NewsFeed> newsFeedItems = GetNewsFeedItems(ctx, NewsFeedType.LastestFive);
@@ -161,7 +161,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
     [WebMethod]
     public string GetTodaysUpdates()
     {
-        int count = 0;
+        string count;
         using (var ctx = new CorporateCalendarDataContext())
         {
             IOrderedEnumerable<NewsFeed> newsFeedItems = GetNewsFeedItems(ctx, NewsFeedType.Today);
@@ -197,7 +197,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
                 return GetUpdatesForActivity(activityId);
             }
         }
-        int count = 0;
+        string count;
         bool hasFromDate = !string.IsNullOrEmpty(fromDate);
         bool hasToDate = !string.IsNullOrEmpty(toDate);
 
@@ -226,7 +226,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
     [WebMethod]
     public string GetUpdatesForActivity(int activityId)
     {
-        int count = 0;
+        string count;
         using (var ctx = new CorporateCalendarDataContext())
         {
             IOrderedEnumerable<NewsFeed> newsFeedItems = GetActivityNewsFeedItems(ctx, activityId);
@@ -265,7 +265,7 @@ public class CorporateCalendarUpdateTemplate : System.Web.UI.ITemplate
 
     static void Item_DataBinding(object sender, System.EventArgs e)
     {
-        System.Web.UI.WebControls.Literal literal = (System.Web.UI.WebControls.Literal)sender;
+        var literal = (System.Web.UI.WebControls.Literal)sender;
         RepeaterItem ri = (RepeaterItem)literal.NamingContainer;
         string item1Value = (string)DataBinder.Eval(ri.DataItem, "Text");
         literal.Text = "<li id=\"NewsFeedItem\"  style=\"list-style: none\">" + item1Value + "</li>";

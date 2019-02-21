@@ -17,6 +17,7 @@
     <link rel="shortcut icon" runat="server" ID="favicon" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
+<!-- #include file="~/WebAnalytics.html" -->
 </head>
 <body id="MasterBody" runat="server">
     <div id="PageContent">
