@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Gcpe.Hub.WebApp
 {
@@ -35,6 +36,10 @@ namespace Gcpe.Hub.WebApp.Middleware
             {
                 await _next(httpContext);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                await httpContext.Response.WriteAsync("<h1>" + ex.Message + "</h1>");
+            }
             catch (ApiHttpException ex)
             {
                 var response = httpContext.Response;
@@ -42,15 +47,10 @@ namespace Gcpe.Hub.WebApp.Middleware
                 response.StatusCode = ex.StatusCode;
 
                 // Use an InnerException first.
-                string errMsg = (ex.InnerException ?? ex).Message;
+                var errMsg = new { message = (ex.InnerException ?? ex).Message };
 
                 // ApiHttpException takes an Exception on the constructor for the InnerException.
-                var result = Newtonsoft.Json.JsonConvert.SerializeObject(new
-                {
-                    message = errMsg
-                });
-
-                await response.WriteAsync(result);
+                await response.WriteAsync(JsonConvert.SerializeObject(errMsg));
             }
         }
     }

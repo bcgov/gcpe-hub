@@ -14,6 +14,11 @@ namespace Gcpe.Hub.WebApp.Controllers
     [Route("api/users")]
     public class UsersApiController : BaseController
     {
+        /// <summary>
+        /// The Role Id MUST match the id of the Role in the Role Table in the database
+        /// </summary>
+        public enum SecurityRole { ReadOnly = 1, Editor, Advanced, Administrator, SysAdmin };
+
         public UsersApiController(HubDbContext db) : base(db)
         {
         }
@@ -31,7 +36,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                           //.Include(e => e.CommunicationContact)
                           .Where(e => e.IsActive)
                           .Where(e => e.CommunicationContact.Any(f => f.SortOrder != 0))
-                          .Where(e => e.RoleId != 1 && e.RoleId != 5)
+                          .Where(e => e.RoleId != (int)SecurityRole.ReadOnly && e.RoleId != (int)SecurityRole.SysAdmin)
                           .OrderBy(e => e.FullName)
                           .AsQueryable();
 
@@ -68,8 +73,8 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 dto.Id = user.RowGuid;
                 dto.DisplayAs = user.FullName;
-                dto.IsEditor = user.RoleId >= 2;
-                dto.IsAdvanced = user.RoleId >= 3;
+                dto.IsEditor = user.RoleId >= (int)SecurityRole.Editor;
+                dto.IsAdvanced = user.RoleId >= (int)SecurityRole.Advanced;
 
                 dto.WorkTelephoneExtension = GetPhoneExtension(user.PhoneNumber, out workPhoneWithoutExtension);
                 dto.WorkTelephone = FormatPhoneNumber(workPhoneWithoutExtension);
