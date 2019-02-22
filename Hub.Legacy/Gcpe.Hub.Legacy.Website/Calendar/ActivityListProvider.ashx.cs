@@ -43,6 +43,7 @@ namespace Gcpe.Hub.Calendar
             }
 
             List<ActiveActivity> activeActivitiesForGridView;
+            IList<string> hiddenColumns = null;
 
             if (string.IsNullOrEmpty(context.Request.QueryString["name"])
                 && !string.IsNullOrEmpty(context.Request.QueryString["op"])
@@ -53,17 +54,27 @@ namespace Gcpe.Hub.Calendar
             else // user is trying to run a "my query" or they are running a filter at run time
             {
                 int display = int.TryParse(context.Request["display"], out display) ? display : 3;
-                string hiddenColumns = context.Request["hiddencolumns"];
+
                 using (var dc = new CorporateCalendarDataContext())
                 {
                     var systemUser = dc.SystemUsers.SingleOrDefault(su => su.Id == customPrincipal.Id);
-
-                    if (systemUser != null && (systemUser.FilterDisplayValue != display || (hiddenColumns != null && systemUser.HiddenColumns != hiddenColumns)))
+                    if (systemUser != null)
                     {
-                        systemUser.FilterDisplayValue = display;
-                        if (hiddenColumns != null)
-                            systemUser.HiddenColumns = hiddenColumns;
-                        dc.SubmitChanges();
+                        hiddenColumns = systemUser.HiddenColumns.Split(',').ToList();
+                        string cid2toggle = context.Request["cid2toggle"];
+                        if (systemUser.FilterDisplayValue != display || !string.IsNullOrEmpty(cid2toggle))
+                        {
+                            systemUser.FilterDisplayValue = display;
+                            if (!string.IsNullOrEmpty(cid2toggle))
+                            {
+                                if (!hiddenColumns.Remove(cid2toggle))
+                                {
+                                    hiddenColumns.Add(cid2toggle);
+                                }
+                                systemUser.HiddenColumns = string.Join(",", hiddenColumns.OrderBy(c => c));
+                            }
+                            dc.SubmitChanges();
+                        }
                     }
                 }
 
@@ -90,7 +101,7 @@ namespace Gcpe.Hub.Calendar
 
             string lastChangeTime = activeActivitiesForGridView.Any() ? activeActivitiesForGridView.Max(a => a.LastUpdatedDateTime ?? a.CreatedDateTime ?? DateTime.MinValue).ToString("yyyy-MM-ddTHH:mm:ss.fffffff") : "";
 
-            List<UIDataRow> dataRows = GetUIDataRowsFromList(activeActivitiesForGridView.GetRange(startIndex, iRecordsPerPage), customPrincipal.Id, includeMarkup);
+            List<UIDataRow> dataRows = GetUIDataRowsFromList(activeActivitiesForGridView.GetRange(startIndex, iRecordsPerPage), customPrincipal.Id, includeMarkup, hiddenColumns);
 
             UIDataModel uiDataModel = new UIDataModel();
             uiDataModel.rows = new List<UIDataRow>();
@@ -338,7 +349,7 @@ namespace Gcpe.Hub.Calendar
         /// <typeparam name="T"></typeparam>
         /// <param name="list">The list.</param>
         /// <returns></returns>
-        protected List<UIDataRow> GetUIDataRowsFromList(List<ActiveActivity> list, int systemUserId, bool includeReviewMarkup)
+        protected List<UIDataRow> GetUIDataRowsFromList(List<ActiveActivity> list, int systemUserId, bool includeReviewMarkup, IList<string> hiddenColumns)
         {
             var dataRows = new List<UIDataRow>();
             using (var dc = new CorporateCalendar.Data.CorporateCalendarDataContext())
@@ -412,7 +423,20 @@ namespace Gcpe.Hub.Calendar
 
                     dr.cell.Add("Categories", ApplyMarkup(t.IsCategoriesNeedsReview ? Markup : null, categories));
 
-                    dr.cell.Add("Keywords", t.Keywords??"");
+                    // TODO: get the column numbers from ActivityGrid.ColModel
+                    if (hiddenColumns?.Contains("1") != true)
+                    {
+                        dr.cell.Add("Keywords", t.Keywords ?? "");
+                    }
+                    if (hiddenColumns?.Contains("2") != true)
+                    {
+                        dr.cell.Add("Ministry", t.Ministry);
+                    }
+                    if (hiddenColumns?.Contains("3") != true)
+                    {
+                        string status = ApplyMarkup(t.StatusId != 2 || t.IsActiveNeedsReview ? Markup : null, t.IsActive ? t.Status : "Deleted");
+                        dr.cell.Add("Status", status + (string.IsNullOrEmpty(t.HqStatus) ? "" : "<br/><span style='font-size:11px'>LA&nbsp;" + t.HqStatus + "<span>"));
+                    }
 
                     string representatives = ApplyMarkup(t.IsRepresentativeNeedsReview ? Markup : null, (t.GovernmentRepresentative ?? ""));
                     if (t.IsPremierRequestedOrConfirmed)
@@ -465,10 +489,6 @@ namespace Gcpe.Hub.Calendar
                     }
 
                     dr.cell.Add("Id", t.Id);
-                    string status = ApplyMarkup(t.StatusId != 2 || t.IsActiveNeedsReview ? Markup : null, t.IsActive ? t.Status : "Deleted");
-
-                    dr.cell.Add("Status", status + (string.IsNullOrEmpty(t.HqStatus) ? "" : "<br/><span style='font-size:11px'>LA&nbsp;" + t.HqStatus + "<span>"));
-                    dr.cell.Add("Ministry", t.Ministry);
                     dr.cell.Add("PremierRequested", t.PremierRequested == "Yes" ? "Premier Reqstd" : t.PremierRequested ?? "");
                     dr.cell.Add("LeadOrganization", t.LeadOrganization);
                     dr.cell.Add("NameAndNumber", t.ContactName + "<br/>" + t.ContactNumber.Replace("-", "\u2011")); //\u2011 = non-breaking hyphen
@@ -511,18 +531,21 @@ namespace Gcpe.Hub.Calendar
 
                     dr.cell.Add("City", string.IsNullOrEmpty(venue) ? city : city + "<br />" + venue);
 
-                    string commMaterials = string.Empty;
-                    if (t.CommunicationsMaterials != null)
+                    if (hiddenColumns?.Contains("7") != true)
                     {
-                        commMaterials = ApplyMarkup(t.IsCommMaterialsNeedsReview ? Markup : null, t.CommunicationsMaterials.Replace("&", "&amp;"));
-                    }
-                    string origins = GetNROriginsString(t);
-                    if (!string.IsNullOrEmpty(origins) && !string.IsNullOrEmpty(t.NRDistributions))
-                    {
-                        origins += "&#013;"; //<br/>
-                    }
+                        string commMaterials = string.Empty;
+                        if (t.CommunicationsMaterials != null)
+                        {
+                            commMaterials = ApplyMarkup(t.IsCommMaterialsNeedsReview ? Markup : null, t.CommunicationsMaterials.Replace("&", "&amp;"));
+                        }
+                        string origins = GetNROriginsString(t);
+                        if (!string.IsNullOrEmpty(origins) && !string.IsNullOrEmpty(t.NRDistributions))
+                        {
+                            origins += "&#013;"; //<br/>
+                        }
 
-                    dr.cell.Add("CommunicationsMaterials", " <span title=\"" + origins + t.NRDistributions + "\">" + commMaterials + "</span>");
+                        dr.cell.Add("CommunicationsMaterials", " <span title=\"" + origins + t.NRDistributions + "\">" + commMaterials + "</span>");
+                    }
 
                     if (isSharedWithMinistries)
                     {

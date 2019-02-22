@@ -657,9 +657,6 @@
                 }, {
                     name: 'qtype',
                     value: p.qtype
-                }, {
-                    name: 'hiddencolumns',  // Added. GCPE (Bruno)
-                    value: $.map($(':not(input:checked)', g.nDiv), function (chkbox){return chkbox.value;})
                 }];
                 if (p.params.length) {
                     for (var pi = 0; pi < p.params.length; pi++) {

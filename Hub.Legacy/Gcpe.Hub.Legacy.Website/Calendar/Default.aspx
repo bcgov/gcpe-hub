@@ -178,12 +178,11 @@
             }
 
             $("#loadingPanel").modal('show');
-            var txtSearch = '';
             if (!filters) {
                 filters = {};
                 AddToFilters(filters);
-                txtSearch = encodeURIComponent($("#txtSearch").val());
             }
+            var txtSearch = filters.op === 'rcc' ? '' : encodeURIComponent($("#txtSearch").val());;
             var queryParams = GetQuery(filters, txtSearch);
 
             var activityGridDiv = $("#activityGridDiv");
@@ -208,6 +207,11 @@
                         window.snowplow('trackSiteSearch', txtSearch.split(' '), filters, data.total);
                     }
                     return data;
+                },
+                onToggleCol: function (cid) {
+                    filters = {'cid2toggle': cid};
+                    AddToFilters(filters);
+                    search(filters);
                 },
                 onSuccess: function () {
                     if (activityGridDiv.css("display") === "none") {
