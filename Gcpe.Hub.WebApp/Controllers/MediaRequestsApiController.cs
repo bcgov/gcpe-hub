@@ -25,6 +25,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         readonly MailProvider mailProvider;
         readonly string HQMinistry = "GCPEMedia";
         static HttpClient Client = new HttpClient();
+        static int PageSize = 40;
         private readonly IConfiguration Configuration;
 
         public MediaRequestsApiController(HubDbContext db, MailProvider mailProvider, IConfiguration configuration) : base(db)
@@ -86,12 +87,11 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<SearchResultsDto> Get(string query, IList<string> filters = null,
-            int _skip = 0,
-            int _limit = 20)
+        public async Task<SearchResultsDto> Get(string query, int page, string leadMinistryDisplayName, string companyNames, string contactNames)
         {
             var results = new SearchResultsDto();
             bool useSearchService = Configuration.GetValue<bool>("SearchService:Enable");
+            int skip = page * PageSize;
             if (useSearchService && query != null)
             {
                 // adjust the query to allow for partial text matches.
@@ -106,8 +106,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                     adjustedQuery = "/.*" + query + ".*/";
                 }
                 // get a list of IDs from the search service.
-                var facets = new List<string> { "leadMinistryDisplayName", "companyNames", "contactNames" };
-                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, filters, facets, _skip, _limit);
+                var facets = new Dictionary<string, string> { { "leadMinistryDisplayName" , leadMinistryDisplayName}, { "companyNames", companyNames}, { "contactNames", contactNames} };
+                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
                 // get full information on each MediaRequest from the database
@@ -123,7 +123,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     results.MediaRequests = data.Select(e => ConvertToDto(e)).ToList();
 
-                    foreach (var facet in facets) // iterate in the order we asked for
+                    foreach (var facet in facets.Keys) // iterate in the order we asked for
                     {
                         IList<FacetResult> facetResult;
                         if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
@@ -159,13 +159,13 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 // Search never does idsOnly.
                 const Boolean idsOnly = false;
-                results.MediaRequests = await QueryMediaRequests(suffixClause, _skip, _limit, idsOnly);
+                results.MediaRequests = await QueryMediaRequests(suffixClause, skip, PageSize, idsOnly);
             }
 
             return results;
         }
 
-        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IList<string> filters, IList<string> facets, int? _skip, int _limit)
+        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IDictionary<string, string> facets, int? _skip, int _limit)
         {
             DocumentSearchResult result = null;
             // Add the Http Get parameters
@@ -175,16 +175,14 @@ namespace Gcpe.Hub.WebApp.Controllers
                 newUri = QueryHelpers.AddQueryString(newUri, "skip", _skip.ToString());
             }
             newUri = QueryHelpers.AddQueryString(newUri, "limit", _limit.ToString());
-            foreach (var filter in filters)
-            {
-                string[] fPair = filter.Split('|', 2);
-                if (fPair.Length != 2) continue;
-                string azureFormat = fPair[0].EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
-                newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, fPair[0], fPair[1]));
-            }
             foreach (var facet in facets)
             {
-                newUri = QueryHelpers.AddQueryString(newUri, "facets", facet);
+                newUri = QueryHelpers.AddQueryString(newUri, "facets", facet.Key);
+                if (!string.IsNullOrEmpty(facet.Value))
+                {
+                    string azureFormat = facet.Key.EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
+                    newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, facet.Key, facet.Value));
+                }
             }
             newUri = QueryHelpers.AddQueryString(newUri, "selectedFields", "id");
 

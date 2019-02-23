@@ -161,7 +161,7 @@
                     history.pushState(state, rm.matchedRoute.windowTitle, state.url);
                 }
             }
-            
+            window['snowplow']('trackPageView');
         }
 
         public confirmedNavBack() {
