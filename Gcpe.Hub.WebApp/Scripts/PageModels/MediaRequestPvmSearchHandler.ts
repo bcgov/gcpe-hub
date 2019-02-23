@@ -10,7 +10,6 @@
         private zeroResults: KnockoutObservable<boolean>;
         public searchString: KnockoutObservable<string>;
         private currentPage: number;
-        private currentPageSize: number = 40;
         public showSearchUi: KnockoutObservable<boolean>;
         public searchActive: KnockoutObservable<boolean>;
         public isFetching: KnockoutObservable<boolean>;
@@ -97,17 +96,12 @@
 
             this.isFetching(true);
 
-            var searchOptions = {
-                query: this.searchString(),
-                filters: [],
-                _skip: (this.currentPage * this.currentPageSize),
-                _limit: this.currentPageSize
-            };
+            var filters = {};
             this.facets().forEach(facet => {
                 for (var fi = 0; fi < facet.filters.length; fi++) {
                     const filter: any = facet.filters[fi];
                     if (filter.isChecked) {
-                        searchOptions.filters.push(facet.name + "|" + filter.name);
+                        filters[facet.name] = filter.name;
                     }
                 }
             });
@@ -118,7 +112,7 @@
             $.ajax({
                 url: '/api/mediarequests/search',
                 type: "get",
-                data: searchOptions,
+                data: $.extend(filters, { query: this.searchString(), page: this.currentPage}),
                 traditional: true,
                 success: (results) => {
 
@@ -137,7 +131,7 @@
 
                                 for (var fi = 0; fi < facet.filters.length; fi++) {
                                     const filter = facet.filters[fi];
-                                    filter.isChecked = searchOptions.filters.indexOf(facet.name + "|" + filter.name) != -1;
+                                    filter.isChecked = filters[facet.name] === filter.name;
                                 }
                                 var selectedFilters = facet.filters.filter(filter => filter.isChecked);
                                 if (selectedFilters.length != 0) {
@@ -146,6 +140,7 @@
                                 }
                             }
                             this.facets(results.facets)
+                            window['snowplow']('trackSiteSearch', this.searchString().split(' '), filters);
                         }
                         if (results.mediaRequests) {
                             // If results.length == 0, There's no more pages to fetch!
