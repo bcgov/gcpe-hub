@@ -632,6 +632,12 @@ namespace CorporateCalendarAdmin
                 SetLabelColorText(Label2, "Mandatory field is missing.", "red");
                 return false;
             }
+            if (ContactMinistryListBox.SelectedItem == null)
+            {
+                UserIsValid = false;
+                SetLabelColorText(Label2, "Please select at least 1 Ministry.", "red");
+                return false;
+            }
             return true;
         }
 
