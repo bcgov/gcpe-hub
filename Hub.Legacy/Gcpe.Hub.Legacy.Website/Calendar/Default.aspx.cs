@@ -136,27 +136,7 @@ namespace Gcpe.Hub.Calendar
                 DisplayRadioButtonList.SelectedValue = display.HasValue ? display.ToString() : "3";
             }
 
-
-            var colModel = new List<ColumnModel>();
-            string[] hiddenColumns = customPrincipal.HiddenColumns != null ? customPrincipal.HiddenColumns.Split(',') : new[] { "1", "2", "3", "10" };
-            ActivityGrid.ColModel = colModel;
-            //Create the columns for the Grid.
-            int i = 0;
-            colModel.Add(new ColumnModel("Activity Id", "MinistryActivityId", 6, true, HorizontalAlign.Right, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Tags", "Keywords", 4, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Ministry", "Ministry", 5, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Status", "Status", 4, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Date & Time", "StartEndDateTime", 6, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Title & Summary", "TitleDetails", 32, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Categories", "Categories", 6, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Comm. Materials", "CommunicationsMaterials", 7, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Premier", "PremierRequested", 4, false, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Lead Org.", "LeadOrganization", 5, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Translations", "Translations", 6, false, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("City", "City", 6, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Comm. Contact", "NameAndNumber", 7, true, HorizontalAlign.Left, hiddenColumns, i++));
-            colModel.Add(new ColumnModel("Govt Rep.", "GovernmentRepresentative", 5, true, HorizontalAlign.Left, hiddenColumns, i++));
-            // Columns widths total 100%
+            ActivityGrid.HiddenColumns = customPrincipal.HiddenColumns?.Split(',') ?? ColumnModel.HiddenByDefault;
         }
 
         void BindSelectFilter(System.Web.UI.HtmlControls.HtmlSelect fSelect, string title, object dataSource)

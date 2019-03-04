@@ -32,7 +32,7 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
         set;
     }
     public string DataType { get; set; }
-    public List<ColumnModel> ColModel { get; set; }
+    public string[] HiddenColumns { get; set; }
     public string SortName { get; set; }
     public string SortOrder { get; set; }
     public bool UsePager { get; set; }
@@ -45,7 +45,7 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
 
     public string OnRowSelected { get; set; }
 
-    public string AppendButton(string cssClass,string text, string onclick)
+    public string AppendButton(string cssClass, string text, string onclick)
     {
         string paddingForImage = cssClass == "toggleView" ? "" : " style='padding-left:20px'";
 
@@ -59,9 +59,9 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
 
         #region Render the FlexiGrid Javascript initialization code
         int totalWidthPercentage = 0;
-        foreach (ColumnModel col in ColModel)
+        foreach (ColumnModel col in ColumnModel.ColumnInfos.Values)
         {
-            if (!col.Hide)
+            if (!col.IsHidden(HiddenColumns))
                 totalWidthPercentage += col.PercentWidth;
         }
         if (totalWidthPercentage == 0)
@@ -96,23 +96,24 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
 
         startupScript.Append("colModel : [");
 
-        foreach (ColumnModel col in ColModel)
+        foreach (var col in ColumnModel.ColumnInfos)
         {
+            var colModel = col.Value;
             startupScript.AppendLine();
 
             startupScript.Append("{display: '");
-            startupScript.Append(col.Display);
+            startupScript.Append(colModel.Display);
 
             startupScript.Append("', name: '");
-            startupScript.Append(col.Name);
+            startupScript.Append(col.Key);
             startupScript.Append("', width: ");
-            startupScript.Append(col.PercentWidth + " * adjustedGridWidth");
+            startupScript.Append(colModel.PercentWidth + " * adjustedGridWidth");
             startupScript.Append(", sortable: ");
-            startupScript.Append(col.Sortable.ToString().ToLower());
+            startupScript.Append(colModel.Sortable.ToString().ToLower());
             startupScript.Append(", align: '");
-            startupScript.Append(col.Align.ToString().ToLower());
+            startupScript.Append(colModel.Align.ToString().ToLower());
             startupScript.Append("', hide: ");
-            startupScript.Append(col.Hide ? "true" : "false");
+            startupScript.Append(colModel.IsHidden(HiddenColumns) ? "true" : "false");
             startupScript.Append("},");
         }
         startupScript.Remove(startupScript.Length - 1, 1);
@@ -167,7 +168,7 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
         startupScript.AppendLine();
 
         startupScript.Append("width: 'auto'");
-       // startupScript.Append(Width);
+        // startupScript.Append(Width);
         startupScript.Append(",");
         startupScript.AppendLine();
 
@@ -187,7 +188,7 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
         startupScript.AppendLine();
         startupScript.Append(");");
         startupScript.AppendLine();/**/
-        
+
         // Review: The script needs to be located here in the code-behind, because IE won't render
         // the grid if you try to call out to a script located on the page itself
 
@@ -245,20 +246,45 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
 /// </summary>
 public class ColumnModel
 {
-    public ColumnModel(string displayName, string modelFieldName, int percentWidth, bool sortable, HorizontalAlign align, string[] hiddenColumns, int colIndex)
+    public static string[] HiddenByDefault = new[] { "1", "2", "3", "10" };
+    public static Dictionary<string, ColumnModel> ColumnInfos = new Dictionary<string, ColumnModel>(){
+        {"MinistryActivityId", new ColumnModel("0", HorizontalAlign.Right, 6, true, "Activity Id") },
+        {"Keywords", new ColumnModel("1", HorizontalAlign.Left, 4, true, "Tags") },
+        {"Ministry", new ColumnModel("2", HorizontalAlign.Left, 5, true, "Ministry") },
+        {"Status", new ColumnModel("3", HorizontalAlign.Left, 4, true, "Status") },
+        {"StartEndDateTime",  new ColumnModel("4", HorizontalAlign.Left, 6, true, "Date & Time") },
+        {"TitleDetails",  new ColumnModel("5", HorizontalAlign.Left, 32, true, "Title & Summary") },
+        {"Categories", new ColumnModel("6", HorizontalAlign.Left, 6, true, "Categories") },
+        {"CommunicationsMaterials",  new ColumnModel("7", HorizontalAlign.Left, 7, true, "Comm. Materials") },
+        {"PremierRequested",  new ColumnModel("8", HorizontalAlign.Left, 4, false,"Premier") },
+        {"LeadOrganization",  new ColumnModel("9", HorizontalAlign.Left, 5, true, "Lead Org.") },
+        {"Translations",  new ColumnModel("10", HorizontalAlign.Left, 6, false,"Translations") },
+        {"City",  new ColumnModel("11", HorizontalAlign.Left, 6, true, "City") },
+        {"NameAndNumber",  new ColumnModel("12", HorizontalAlign.Left, 7, true, "Comm. Contact") },
+        {"GovernmentRepresentative",  new ColumnModel("13", HorizontalAlign.Left, 5, true, "Govt Rep.") }
+        // Columns widths should total 100%
+    };
+    public ColumnModel(string colIndex, HorizontalAlign align, int percentWidth, bool sortable, string displayName)
     {
-        this.Display = displayName;
-        this.Align = align;
-        this.Name = modelFieldName;
-        this.Sortable = sortable;
-        this.PercentWidth = percentWidth;
-        this.Hide = hiddenColumns.Contains(colIndex.ToString());
+        Display = displayName;
+        Align = align;
+        Sortable = sortable;
+        PercentWidth = percentWidth;
+        ColIndex = colIndex;
     }
 
-    public string Display { get; set; }
-    public string Name { get; set; }
-    public int PercentWidth { get; set; }
-    public bool Sortable { get; set; }
-    public HorizontalAlign Align { get; set; }
-    public bool Hide { get; set; }
+    public string Display { get; }
+    public int PercentWidth { get; }
+    public bool Sortable { get; }
+    public HorizontalAlign Align { get; }
+    public string ColIndex { get; }
+
+    public bool IsHidden(IEnumerable<string> hiddenColumns)
+    {
+        return hiddenColumns.Contains(ColIndex);
+    }
+    public static bool IsHidden(string columnName, IEnumerable<string> hiddenColumns)
+    {
+        return ColumnInfos[columnName].IsHidden(hiddenColumns);
+    }
 }

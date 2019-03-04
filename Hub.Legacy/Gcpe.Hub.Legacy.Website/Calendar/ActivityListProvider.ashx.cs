@@ -60,16 +60,16 @@ namespace Gcpe.Hub.Calendar
                     var systemUser = dc.SystemUsers.SingleOrDefault(su => su.Id == customPrincipal.Id);
                     if (systemUser != null)
                     {
-                        hiddenColumns = systemUser.HiddenColumns.Split(',').ToList();
-                        string cid2toggle = context.Request["cid2toggle"];
-                        if (systemUser.FilterDisplayValue != display || !string.IsNullOrEmpty(cid2toggle))
+                        hiddenColumns = (systemUser.HiddenColumns?.Split(',') ?? ColumnModel.HiddenByDefault).ToList();
+                        string column2toggle = context.Request["cid2toggle"];
+                        if (systemUser.FilterDisplayValue != display || !string.IsNullOrEmpty(column2toggle))
                         {
                             systemUser.FilterDisplayValue = display;
-                            if (!string.IsNullOrEmpty(cid2toggle))
+                            if (!string.IsNullOrEmpty(column2toggle))
                             {
-                                if (!hiddenColumns.Remove(cid2toggle))
+                                if (!hiddenColumns.Remove(column2toggle))
                                 {
-                                    hiddenColumns.Add(cid2toggle);
+                                    hiddenColumns.Add(column2toggle);
                                 }
                                 systemUser.HiddenColumns = string.Join(",", hiddenColumns.OrderBy(c => c));
                             }
@@ -423,28 +423,36 @@ namespace Gcpe.Hub.Calendar
 
                     dr.cell.Add("Categories", ApplyMarkup(t.IsCategoriesNeedsReview ? Markup : null, categories));
 
-                    // TODO: get the column numbers from ActivityGrid.ColModel
-                    if (hiddenColumns?.Contains("1") != true)
+                    if (!ColumnModel.IsHidden("Keywords", hiddenColumns))
                     {
                         dr.cell.Add("Keywords", t.Keywords ?? "");
                     }
-                    if (hiddenColumns?.Contains("2") != true)
+                    if (!ColumnModel.IsHidden("Ministry", hiddenColumns))
                     {
                         dr.cell.Add("Ministry", t.Ministry);
                     }
-                    if (hiddenColumns?.Contains("3") != true)
+                    if (!ColumnModel.IsHidden("Status", hiddenColumns))
                     {
                         string status = ApplyMarkup(t.StatusId != 2 || t.IsActiveNeedsReview ? Markup : null, t.IsActive ? t.Status : "Deleted");
                         dr.cell.Add("Status", status + (string.IsNullOrEmpty(t.HqStatus) ? "" : "<br/><span style='font-size:11px'>LA&nbsp;" + t.HqStatus + "<span>"));
                     }
-
-                    string representatives = ApplyMarkup(t.IsRepresentativeNeedsReview ? Markup : null, (t.GovernmentRepresentative ?? ""));
-                    if (t.IsPremierRequestedOrConfirmed)
+                    if (!ColumnModel.IsHidden("Translations", hiddenColumns))
                     {
-                        representatives = "Premier" + (representatives == "" ? "" : ", ") + representatives;
+                        dr.cell.Add("Translations", t.Translations ?? "");
                     }
-                    dr.cell.Add("GovernmentRepresentative", representatives);
-                    dr.cell.Add("Translations", t.Translations??"");
+                    if (!ColumnModel.IsHidden("PremierRequested", hiddenColumns))
+                    {
+                        dr.cell.Add("PremierRequested", t.PremierRequested == "Yes" ? "Premier Reqstd" : t.PremierRequested ?? "");
+                    }
+                    if (!ColumnModel.IsHidden("GovernmentRepresentative", hiddenColumns))
+                    {
+                        string representatives = ApplyMarkup(t.IsRepresentativeNeedsReview ? Markup : null, (t.GovernmentRepresentative ?? ""));
+                        if (t.IsPremierRequestedOrConfirmed)
+                        {
+                            representatives = "Premier" + (representatives == "" ? "" : ", ") + representatives;
+                        }
+                        dr.cell.Add("GovernmentRepresentative", representatives);
+                    }
 
                     if (!string.IsNullOrEmpty(t.FavoriteSystemUsers))
                     {
@@ -489,7 +497,6 @@ namespace Gcpe.Hub.Calendar
                     }
 
                     dr.cell.Add("Id", t.Id);
-                    dr.cell.Add("PremierRequested", t.PremierRequested == "Yes" ? "Premier Reqstd" : t.PremierRequested ?? "");
                     dr.cell.Add("LeadOrganization", t.LeadOrganization);
                     dr.cell.Add("NameAndNumber", t.ContactName + "<br/>" + t.ContactNumber.Replace("-", "\u2011")); //\u2011 = non-breaking hyphen
 
