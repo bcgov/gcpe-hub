@@ -229,6 +229,7 @@
     <Build Include="media\Tables\WebAddressType.sql" />
     <Build Include="Storage\FTS_MediaRequest.sql" />
     <Build Include="FullTextIndexes.sql" />
+    <Build Include="dashboard\Tables\UserMinistryPreference.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Gcpe.Hub.Database.refactorlog" />
