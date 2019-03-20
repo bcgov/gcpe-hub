@@ -181,7 +181,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 if (!string.IsNullOrEmpty(facet.Value))
                 {
                     string azureFormat = facet.Key.EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
-                    newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, facet.Key, facet.Value));
+                    newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, facet.Key, facet.Value.Replace("'","''")));
                 }
             }
             newUri = QueryHelpers.AddQueryString(newUri, "selectedFields", "id");
