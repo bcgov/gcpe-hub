@@ -92,19 +92,17 @@ public class ActivityDAO
                                                                     excludeshared,
                                                                     keyActivities,
                                                                     myFavorites);
-                // We have removed the quick search from the grid
-                // For now we are using the same method of searching the content for
-                // the ID, Title, Details (Summary) or City for the quickSearch
 
                 if (!string.IsNullOrEmpty(quickSearch))
                 {
                     List<ActiveActivity> filteredActiveActivitiesWithTitleSearchApplied = filteredActiveActivities.FindAll(
                         delegate (ActiveActivity p)
                         {
-                            return p.Title.ToLower().Contains(quickSearch)
-                                || (p.Details?.ToLower().Contains(quickSearch) == true)
-                                || (p.City?.ToLower().Contains(quickSearch) == true)
-                                || (p.Translations?.ToLower().Contains(quickSearch) == true);
+                            return p.Title.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1
+                                || (p.Details!= null && p.Details.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.City != null && p.City.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Translations != null && p.Translations.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Significance != null && p.Significance.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1);
                         }
                         );
 
