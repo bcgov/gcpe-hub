@@ -226,11 +226,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
         {
             get
             {
-                var locations = from nrl in DbContext.NewsReleaseLanguages
-                                where nrl.LanguageId == 4105 && nrl.Release.IsActive && nrl.Location != ""
-                                orderby nrl.Location
-                                select nrl.Location;
-                return locations.Distinct().ToArray();
+                return Model.EnglishLocations(DbContext);
             }
         }
 

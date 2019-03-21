@@ -286,5 +286,16 @@ namespace Gcpe.Hub.News.ReleaseManagement
             }
             return distributionLists;
         }
+
+        public IEnumerable<string> EnglishLocations (HubEntities dbContext)
+        {
+            DateTime cutOff = DateTime.Today.AddYears(-5);
+            var locations = from nrl in dbContext.NewsReleaseLanguages
+                            where nrl.LanguageId == 4105 && nrl.Release.IsActive &&
+                            nrl.Release.PublishDateTime > cutOff && nrl.Location != ""
+                            group nrl by nrl.Location into g
+                            select new { Location = g.Key, Count = g.Count() };
+            return locations.OrderByDescending(e => e.Count).ThenBy(e => e.Location).Select(e => e.Location);
+        }
     }
 }
