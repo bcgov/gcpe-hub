@@ -258,7 +258,7 @@ public class ColumnModel
         {"CommunicationsMaterials",  new ColumnModel("7", HorizontalAlign.Left, 7, true, "Comm. Materials") },
         {"PremierRequested",  new ColumnModel("8", HorizontalAlign.Left, 4, false,"Premier") },
         {"LeadOrganization",  new ColumnModel("9", HorizontalAlign.Left, 5, true, "Lead Org.") },
-        {"Translations",  new ColumnModel("10", HorizontalAlign.Left, 6, false,"Translations") },
+        {"Translations",  new ColumnModel("10", HorizontalAlign.Left, 6, true,"Translations") },
         {"City",  new ColumnModel("11", HorizontalAlign.Left, 6, true, "City") },
         {"NameAndNumber",  new ColumnModel("12", HorizontalAlign.Left, 7, true, "Comm. Contact") },
         {"GovernmentRepresentative",  new ColumnModel("13", HorizontalAlign.Left, 5, true, "Govt Rep.") }
