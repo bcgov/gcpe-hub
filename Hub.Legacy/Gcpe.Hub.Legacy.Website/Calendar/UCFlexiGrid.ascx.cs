@@ -281,7 +281,7 @@ public class ColumnModel
 
     public bool IsHidden(IEnumerable<string> hiddenColumns)
     {
-        return hiddenColumns.Contains(ColIndex);
+        return hiddenColumns?.Contains(ColIndex) == true;
     }
     public static bool IsHidden(string columnName, IEnumerable<string> hiddenColumns)
     {
