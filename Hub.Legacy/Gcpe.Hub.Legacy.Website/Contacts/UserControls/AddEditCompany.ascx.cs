@@ -964,7 +964,7 @@ public partial class UserControls_AddEditCompany : System.Web.UI.UserControl
             bool modifiedByAnotherUser = (timestamp.Value != company.ModifiedDate.ToOADate().ToString());
             if (modifiedByAnotherUser)
             {
-                ErrorLit.Text = "The company was updated by another user and your changes have not been saved.<br/> Please review your changes below and re-apply them.";
+                ErrorLit.Text = "The company was updated by another user and your changes cannot be saved.<br/> Please open the company again in order to see the most recent changes";
                 return false;
             }
             else

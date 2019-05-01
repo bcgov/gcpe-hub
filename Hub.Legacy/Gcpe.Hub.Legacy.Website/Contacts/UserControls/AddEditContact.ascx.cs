@@ -707,7 +707,7 @@ public partial class UserControls_AddEditContact : System.Web.UI.UserControl
                         bool modifiedByAnotherUser = (timestamp.Value != contact.ModifiedDate.ToOADate().ToString());
                         if (modifiedByAnotherUser)
                         {
-                            ErrorLit.Text = "The contact was updated by another user and your changes have not been saved.<br/> Please review your changes below and re-apply them.";
+                            ErrorLit.Text = "The contact was updated by another user and your changes cannot be saved.<br/> Please open the contact again in order to see the most recent changes";
                             errors = -1;
                         }
                         else

@@ -359,7 +359,7 @@
                 <table style="margin: auto;">
                     <tr>
                         <td><%--<img src="../images/alert-icon.png" alt="warning" />--%></td>
-                        <td><span style="font-weight: bold;" id="ErrorNoticeText" runat="server">Activity was updated by another user, and your changes have not been saved</span>. Please review the new values below and resubmit any changes.</td>
+                        <td><span style="font-weight: bold;" id="ErrorNoticeText" runat="server">Activity was updated by another user, and your changes cannot be saved</span>. Please open the activity again in order to see the most recent changes.</td>
                     </tr>
                 </table>
             </div>
