@@ -1186,6 +1186,10 @@ namespace Gcpe.Hub.Calendar
                 activity.LastUpdatedBy = customPrincipal.Id;
                 activity.LastUpdatedDateTime = DateTime.Now;
             }
+            else if (customPrincipal.IsGCPEHQ && activity.LastUpdatedDateTime != null && KeywordsTextBox.Text.Contains("HQ-1"))
+            {
+                activity.LastUpdatedDateTime = activity.LastUpdatedDateTime.Value.AddSeconds(1);
+            }
 
             bool categoryHasChanged = CategoriesDropDownList.Value != CategoriesDropDownList.Items.FindByText(CurrentActiveActivity.Categories.TrimStart())?.Value;
             bool commMaterialsHaveChanged = CommMaterialsSelectedValuesServerSide.Text != CommMaterialsSelectedValues.Text;
