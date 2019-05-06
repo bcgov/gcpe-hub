@@ -1182,14 +1182,10 @@ namespace Gcpe.Hub.Calendar
             // Meta Data (The rest of the fields are handled by the database using simple default values)
             // Don't update this info if current user is GCPEHQ Admin and the activity is not a GCPEHQ activity
             if (!customPrincipal.IsGCPEHQ || !customPrincipal.IsInRoleOrGreater(SecurityRole.Administrator) || 
-                activity.Ministry.Abbreviation == customPrincipal.GCPEHQ_Ministry || activity.LastUpdatedDateTime == null || KeywordsTextBox.Text.Contains("HQ-1"))
+                activity.Ministry.Abbreviation == customPrincipal.GCPEHQ_Ministry || activity.LastUpdatedDateTime == null)
             {
                 activity.LastUpdatedBy = customPrincipal.Id;
                 activity.LastUpdatedDateTime = DateTime.Now;
-            }
-            else if (customPrincipal.IsGCPEHQ && activity.LastUpdatedDateTime != null && KeywordsTextBox.Text.Contains("HQ-1"))
-            {
-                activity.LastUpdatedDateTime = activity.LastUpdatedDateTime.Value.AddSeconds(1);
             }
 
             bool categoryHasChanged = CategoriesDropDownList.Value != CategoriesDropDownList.Items.FindByText(CurrentActiveActivity.Categories.TrimStart())?.Value;
