@@ -733,6 +733,7 @@
     <Content Include="News\Images\settings.png" />
     <Content Include="News\LiveFeedManagement.aspx" />
     <Content Include="News\MediaAssetManagement.asmx" />
+    <Content Include="News\ProjectGranvilleManagement.aspx" />
     <Content Include="News\ReleaseManagement\Controls\ReleaseImagePicker.ascx" />
     <Content Include="News\ReleaseManagement\Controls\ReleaseNavigationBar.ascx" />
     <Content Include="News\ReleaseManagement\Default.aspx" />
@@ -1785,6 +1786,13 @@
     <Compile Include="Calendar\MinistryHandler.ashx.cs">
       <DependentUpon>MinistryHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="News\ProjectGranvilleManagement.aspx.cs">
+      <DependentUpon>ProjectGranvilleManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News\ProjectGranvilleManagement.aspx.designer.cs">
+      <DependentUpon>ProjectGranvilleManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="News\ReleaseManagement\FlickrHandler.ashx.cs">
       <DependentUpon>FlickrHandler.ashx</DependentUpon>
     </Compile>
@@ -2478,7 +2486,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

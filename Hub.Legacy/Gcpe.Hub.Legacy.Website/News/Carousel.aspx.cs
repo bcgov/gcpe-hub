@@ -30,6 +30,7 @@ namespace Gcpe.Hub.News
             site.AddNavigationItem("Files", "~/News/FileManagement");
             site.AddNavigationItem("Carousel", "~/News/Carousel");
             site.AddNavigationItem("Live Feed", "~/News/LiveFeedManagement");
+            site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
 
             Guid id;
             if (Guid.TryParse((string)Request.QueryString["Id"], out id))
