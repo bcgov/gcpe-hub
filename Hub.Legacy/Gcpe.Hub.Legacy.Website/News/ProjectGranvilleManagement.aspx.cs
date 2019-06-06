@@ -1,13 +1,13 @@
-extern alias legacy;
+﻿extern alias legacy;
 
 using System;
 using legacy::Gcpe.Hub.Data.Entity;
 
 namespace Gcpe.Hub.News
 {
-    public partial class LiveFeedManagement : Hub.News.Page
+    public partial class ProjectGranvilleManagement : Hub.News.Page
     {
-        string appSetting = "live_webcast_enabled";
+        string appSetting = "granville";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Gcpe.Hub.News
             }
         }
 
-        protected void btnToggleLiveFeed(object sender, EventArgs ev)
+        protected void btnToggleProjectGranville(object sender, EventArgs ev)
         {
             bool newState = !GetFeedState();
             SetFeedState(newState);
@@ -36,8 +36,8 @@ namespace Gcpe.Hub.News
 
         private void SetControlText(bool enabled)
         {
-            enabled_Label.InnerHtml = enabled ? "Live Feed is Enabled" : "Live Feed is Disabled";
-            save_Button.Text = enabled ? "Disable Live Feed" : "Enable Live Feed";
+            enabled_Label.InnerHtml = enabled ? "Project Granville is Enabled" : "Project Granville is Disabled";
+            save_Button.Text = enabled ? "Disable Project Granville" : "Enable Project Granville";
         }
 
         private bool GetFeedState()
