@@ -593,10 +593,10 @@ namespace Gcpe.Hub.Calendar
                         }
                     }
 
-                    dr.cell.Add("MinistryActivityId", string.Format("<span style='padding:0px;'>{0}{1}{2}{3}{4}{5}</span><br/><span style='padding-left:0px;padding-right:0px;color:#2c3539;' title='" + toolTipMessage + "'>{6}</span>",
+                    dr.cell.Add("MinistryActivityId", string.Format("<span style='padding:0px;'>{0}{1}{2}{3}{4}{5}</span><br/><span style='padding-left:0px;padding-right:0px;color:#2c3539;' title='" + toolTipMessage + "'>{6}</span><br /><span style='font-size:12px; color: red;'>created {7}</span>",
                             favoriteImageTag, isReviewedImageTag, isInternalImageTag, isLockedImageTag, isSharedImageTag,
                             CorporateCalendar.Utility.GridHelper.Linkify(string.Format("{0}-\u200B{1}", // \u200B : 0-width space to make Firefox break lines at hyphens, like other browsers
-                            ministryAbbreviation, activityId), "Activity.aspx?ActivityId=" + activityId), changedMessage));
+                            ministryAbbreviation, activityId), "Activity.aspx?ActivityId=" + activityId), changedMessage, t.CreatedDateTime?.ToString("MMM d, yyyy")));
 
                     dataRows.Add(dr);
                 }
