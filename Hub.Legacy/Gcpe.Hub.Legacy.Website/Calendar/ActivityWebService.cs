@@ -120,7 +120,7 @@ public class ActivityWebService : System.Web.Services.WebService
 
             int cloneId = clone.Id;
 
-            UpdateLinkingTables(cloneId, dropDownListValues, customPrincipal, db);
+            UpdateLinkingTables(cloneId, dropDownListValues, customPrincipal, db, cloningActivity: true);
             db.SubmitChanges();
             transactionScope.Complete();
 
@@ -209,7 +209,7 @@ public class ActivityWebService : System.Web.Services.WebService
 
 
     public static void UpdateLinkingTables(int activityId, Dictionary<string, string> dropDownListValues,
-        CorporateCalendar.Security.CustomPrincipal customPrincipal, CorporateCalendarDataContext db)
+        CorporateCalendar.Security.CustomPrincipal customPrincipal, CorporateCalendarDataContext db, bool cloningActivity = false)
     {
         foreach (var dropDownList in dropDownListValues)
         {
@@ -389,6 +389,9 @@ public class ActivityWebService : System.Web.Services.WebService
                     foreach (var keywordName in newKeywordsNames)
                     {
                         var newKeyword = newKeywords.FirstOrDefault(k => k.Name == keywordName);
+
+                        if (cloningActivity == true && newKeyword.Name != "30-60-90") continue;
+
                         if (newKeyword == null)
                         {
                             newKeyword = new Keyword()
