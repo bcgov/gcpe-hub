@@ -604,12 +604,20 @@ namespace Gcpe.Hub.Properties {
                 return ((string)(this["FlickrApiVerifier"]));
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Uri FlickrPrivateBaseUri {
             get {
                 return ((global::System.Uri)(this["FlickrPrivateBaseUri"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string FlickrErrorNotificationContactEmail {
+            get {
+                return ((string)(this["FlickrErrorNotificationContactEmail"]));
             }
         }
         

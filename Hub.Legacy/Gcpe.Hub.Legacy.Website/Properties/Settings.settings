@@ -200,6 +200,9 @@
     <Setting Name="FlickrApiVerifier" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="FlickrErrorNotificationContactEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="FlickrPrivateBaseUri" Type="System.Uri" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>

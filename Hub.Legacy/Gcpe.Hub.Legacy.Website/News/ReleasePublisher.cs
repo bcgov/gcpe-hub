@@ -112,20 +112,29 @@ namespace Gcpe.Hub
                     if (!string.IsNullOrWhiteSpace(post.AssetUrl))
                     {
                         var postUri = new Uri(post.AssetUrl);
-                        if (post.AssetUrl.Contains("flickr") || post.AssetUrl.Contains("flic.kr"))
+                        try
                         {
-                            var photoId = postUri.Segments[2].Split('_')[0];
-                            if (flickrManager.FlickrAssetExists(photoId) == true)
+                            if (post.AssetUrl.Contains("flickr") || post.AssetUrl.Contains("flic.kr"))
                             {
-                                var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
-                                var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
-                                post.AssetUrl = assetUri.ToString();
+                                var photoId = postUri.Segments[2].Split('_')[0];
+                                if (flickrManager.FlickrAssetExists(photoId) == true)
+                                {
+                                    var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
+                                    var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
+                                    post.AssetUrl = assetUri.ToString();
+                                }
+                                else
+                                {
+                                    // the flickr asset has been deleted so we will no longer store a reference to it
+                                    post.AssetUrl = string.Empty;
+                                }
                             }
-                            else
-                            {
-                                // the flickr asset has been deleted so we will no longer store a reference to it
-                                post.AssetUrl = string.Empty;
-                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Utils.LogError("An error occured when publishing a post with a Flickr asset", e);
+                            flickrManager.SendErrorNotification(post.Reference, post.AssetUrl);
+                            post.AssetUrl = string.Empty;
                         }
                     }
 
