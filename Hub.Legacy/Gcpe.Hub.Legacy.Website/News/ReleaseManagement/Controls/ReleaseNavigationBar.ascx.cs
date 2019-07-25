@@ -38,7 +38,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
 
         protected IEnumerable<System.Web.UI.WebControls.ListItem> DocumentLanguages(Guid documentId)
         {
-           var documents = new List<System.Web.UI.WebControls.ListItem>();
+            var documents = new List<System.Web.UI.WebControls.ListItem>();
 
             Model.AddDocumentLanguages(documentId, documents);
 
@@ -87,7 +87,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
             //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
             string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.ReleaseTypeId == ReleaseType.Release ? Model.Key : Model.Reference)) + ".pdf";
-            
+
             string body = "";
             body += "Please refer to the files attached to this email. The following is the summary of the News Release" + "\r\n";
             body += "\r\n";
@@ -173,7 +173,15 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             body += "This email was auto-generated." + "\r\n";
             body += "" + "\r\n";
 
-            body += System.Text.Encoding.UTF8.GetString(Model.GetTextDocument());
+            var textDoc = System.Text.Encoding.UTF8.GetString(Model.GetTextDocument());
+            if (Model.ReleaseTypeId == ReleaseType.Advisory)
+            {
+                body += textDoc.Replace(Model.FirstHeadline + "\r\n", "");
+            }
+            else
+            {
+                body += textDoc;
+            }
 
             message.Body = body;
             message.BodyEncoding = System.Text.Encoding.UTF8;
