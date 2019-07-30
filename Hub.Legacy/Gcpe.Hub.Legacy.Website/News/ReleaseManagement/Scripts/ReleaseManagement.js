@@ -275,7 +275,7 @@ function onPageReloaded(sender, args) {
     var hiddenEditControlButton = $(".editButton[style='visibility: hidden;']");
     if (hiddenEditControlButton.length)
         onDocumentEdit(hiddenEditControlButton.get());
-    //window.scrollTo(0,0);
+    window.scrollTo(0,0);
 }
 
 function onCancel(cancelBtn) {
