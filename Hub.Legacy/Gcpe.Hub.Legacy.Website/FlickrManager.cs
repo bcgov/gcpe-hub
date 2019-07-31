@@ -127,21 +127,33 @@ namespace Gcpe.Hub
 
         public void SendErrorNotification(string reference, string assetUrl)
         {
+            string baseUrl = "https://hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
+
+            if (new string(Settings.Default.NewsHostUri.Authority.Take(3).ToArray()) == "dev")
+            {
+                baseUrl = $"https://{new string(Settings.Default.NewsHostUri.Authority.Take(3).ToArray())}.hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
+                DoSend(reference, assetUrl, baseUrl);
+                return;
+            }
+
+            if (new string(Settings.Default.NewsHostUri.Authority.Take(4).ToArray()) == "test")
+            {
+                baseUrl = $"https://{new string(Settings.Default.NewsHostUri.Authority.Take(4).ToArray())}.hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
+                DoSend(reference, assetUrl, baseUrl);
+                return;
+            }
+
+            DoSend(reference, assetUrl, baseUrl);
+        }
+
+        private static void DoSend(string reference, string assetUrl, string baseUrl)
+        {
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
             message.From = new System.Net.Mail.MailAddress(Settings.Default.FlickrErrorNotificationContactEmail);
             message.To.Add(message.From);
 
             message.Subject = "A BC Gov News entry needs your attention when Flickr services are back online:";
             message.IsBodyHtml = true;
-
-            // figure out which environment we're in depending on which news app we're publishing to
-            var env = new string(Settings.Default.NewsHostUri.Authority.Take(3).ToArray());
-            string baseUrl = "https://hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
-
-            if (env == "dev" || env == "test")
-            {
-                baseUrl = $"https://{env}.hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
-            }
 
             string body = $"<p>Please add the following asset -- {assetUrl} -- to <a href='{baseUrl}{reference}'>{reference}</a>.</p>";
             body += "<p>You can check Flickr's status at <a href='https://status.flickr.net'>https://status.flickr.net</a></p>";
@@ -153,8 +165,6 @@ namespace Gcpe.Hub
             {
                 client.Send(message);
             }
-
         }
-
     }
 }
