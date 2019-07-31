@@ -80,6 +80,21 @@
             });
 
             $("#<%= btnSaveAssets.ClientID %>").click(function () {
+                var assetUrl = $("#<%= txtAsset.ClientID %>").val();
+
+                if (assetUrl.includes('www.flickr.com') || assetUrl.includes('flic.kr') || assetUrl.includes('staticflickr.com')) {
+                    var sp = new StatusPage.page({ page : '9htz5wc2q8lk' });
+                    sp.incidents({
+                        filter: 'unresolved',
+                        success: function (data) {
+                            if (data.incidents.length > 0) {
+                                alert('Please note that Flickr has been experiencing technical issues within the past few days.' +
+                                    ' As a result, you may experience degraded performance and/or upload failures when using a Flickr post as the super asset.');
+                            }
+                        }
+                    });
+                }
+                
                 return IsAssetsFormValid();
             });
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gcpe.News.ReleaseManagement;
 using legacy::Gcpe.Hub.Data.Entity;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -271,18 +272,25 @@ namespace Gcpe.Hub.News.ReleaseManagement
             {
                 if (Model.Asset.Host.Contains("flickr") || Model.Asset.Host.Contains("flic.kr"))
                 {
-                    var photoId = Model.Asset.Segments[2].Split('_')[0];
-                    if (flickrManager.FlickrAssetExists(photoId))
+                    try
                     {
-                        var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
-                        var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
-                        // as a side-effect, this will update the asset url in the db if the model is re-saved.
-                        Model.Asset = assetUri;
+                        var photoId = Model.Asset.Segments[2].Split('_')[0];
+                        if (flickrManager.FlickrAssetExists(photoId))
+                        {
+                            var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
+                            var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
+                            // as a side-effect, this will update the asset url in the db if the model is re-saved.
+                            Model.Asset = assetUri;
+                        }
+                        else
+                        {
+                            // the flickr asset has been deleted so we will no longer store a reference to it
+                            Model.Asset = null;
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        // the flickr asset has been deleted so we will no longer store a reference to it
-                        Model.Asset = null;
+                        Utils.LogError("An error occured when attempting to load a Flickr asset for previewing", e);
                     }
                 }
             }
@@ -419,7 +427,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 }
 
                 bool superAssetHasChanged = (superAssetBeforeSave != superAssetAfterSave);
-                
+
             }
             catch (HubModelException mEx)
             {
@@ -610,7 +618,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 //    Model.RssPublishIndex = chkPublishToInPublish.Checked;
                 //}
 
-                 Model.Publish();
+                Model.Publish();
 
                 // If this IsCommitted after the SuperAsset has been set, force the refresh.
                 //if (Model.IsCommitted)
