@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using Gcpe.News.ReleaseManagement;
+using System;
+using System.Web;
 
 namespace Gcpe.Hub
 {
@@ -11,9 +13,16 @@ namespace Gcpe.Hub
 
         public void ProcessRequest(HttpContext context)
         {
-            string photoId = context.Request.Form["photoId"];
-            if(!string.IsNullOrWhiteSpace(photoId) && flickrManager.FlickrAssetExists(photoId))
-                flickrManager.SetFlickrAssetPermissionsToPrivate(photoId);
+            try
+            {
+                string photoId = context.Request.Form["photoId"];
+                if (!string.IsNullOrWhiteSpace(photoId) && flickrManager.FlickrAssetExists(photoId))
+                    flickrManager.SetFlickrAssetPermissionsToPrivate(photoId);
+            }
+            catch (Exception e)
+            {
+                Utils.LogError("An error occured setting a Flickr asset to private", e);
+            }
         }
 
         public bool IsReusable

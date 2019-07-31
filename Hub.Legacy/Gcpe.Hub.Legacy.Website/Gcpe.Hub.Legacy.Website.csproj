@@ -747,6 +747,7 @@
     <Content Include="News\ReleaseManagement\Release.aspx" />
     <Content Include="News\ReleaseManagement\Releases.aspx" />
     <Content Include="News\ReleaseManagement\Scripts\ReleaseManagement.js" />
+    <Content Include="News\ReleaseManagement\Scripts\se-v2.js" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2486,7 +2487,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
