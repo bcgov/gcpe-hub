@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gcpe.Hub.Properties;
@@ -174,9 +175,15 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             body += "" + "\r\n";
 
             var textDoc = System.Text.Encoding.UTF8.GetString(Model.GetTextDocument());
-            if (Model.ReleaseTypeId == ReleaseType.Advisory)
+            // if we have a media advisory of type "event reminder", remove the duplicated title from the body
+            if (Model.ReleaseTypeId == ReleaseType.Advisory && textDoc.IndexOf("MEDIA ADVISORY - EVENT REMINDER") > -1)
             {
-                body += textDoc.Replace(Model.FirstHeadline + "\r\n", "");
+                var idxOfMediaAdvisoryType = textDoc.IndexOf("MEDIA ADVISORY - EVENT REMINDER");
+                var mediaAdvisoryType = textDoc.Substring(idxOfMediaAdvisoryType);
+                var idxOfNewline = mediaAdvisoryType.IndexOf("\r\n\r\n");
+                var haystack = mediaAdvisoryType.Substring(0, idxOfNewline);
+                var needle = haystack.Substring(haystack.IndexOf("\r\n"));
+                body += textDoc.Replace(needle, "");
             }
             else
             {
