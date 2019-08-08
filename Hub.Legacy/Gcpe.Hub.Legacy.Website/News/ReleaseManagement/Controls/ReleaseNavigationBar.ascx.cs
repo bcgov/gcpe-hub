@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gcpe.Hub.Properties;
@@ -38,7 +39,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
 
         protected IEnumerable<System.Web.UI.WebControls.ListItem> DocumentLanguages(Guid documentId)
         {
-           var documents = new List<System.Web.UI.WebControls.ListItem>();
+            var documents = new List<System.Web.UI.WebControls.ListItem>();
 
             Model.AddDocumentLanguages(documentId, documents);
 
@@ -87,7 +88,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
             //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
             string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.ReleaseTypeId == ReleaseType.Release ? Model.Key : Model.Reference)) + ".pdf";
-            
+
             string body = "";
             body += "Please refer to the files attached to this email. The following is the summary of the News Release" + "\r\n";
             body += "\r\n";
@@ -173,7 +174,21 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             body += "This email was auto-generated." + "\r\n";
             body += "" + "\r\n";
 
-            body += System.Text.Encoding.UTF8.GetString(Model.GetTextDocument());
+            var textDoc = System.Text.Encoding.UTF8.GetString(Model.GetTextDocument());
+            // if we have a media advisory of type "event reminder", remove the duplicated title from the body
+            if (Model.ReleaseTypeId == ReleaseType.Advisory && textDoc.IndexOf("MEDIA ADVISORY - EVENT REMINDER") > -1)
+            {
+                var idxOfMediaAdvisoryType = textDoc.IndexOf("MEDIA ADVISORY - EVENT REMINDER");
+                var mediaAdvisoryType = textDoc.Substring(idxOfMediaAdvisoryType);
+                var idxOfNewline = mediaAdvisoryType.IndexOf("\r\n\r\n");
+                var haystack = mediaAdvisoryType.Substring(0, idxOfNewline);
+                var needle = haystack.Substring(haystack.IndexOf("\r\n"));
+                body += textDoc.Replace(needle, "");
+            }
+            else
+            {
+                body += textDoc;
+            }
 
             message.Body = body;
             message.BodyEncoding = System.Text.Encoding.UTF8;
