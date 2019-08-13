@@ -143,6 +143,13 @@ namespace Gcpe.Hub
                 return;
             }
 
+            if (new string(Settings.Default.NewsHostUri.Authority.Take(3).ToArray()) == "uat")
+            {
+                baseUrl = $"https://{new string(Settings.Default.NewsHostUri.Authority.Take(3).ToArray())}.hub.gcpe.gov.bc.ca/Legacy/News/ReleaseManagement/Published/";
+                DoSend(reference, assetUrl, baseUrl);
+                return;
+            }
+
             DoSend(reference, assetUrl, baseUrl);
         }
 
@@ -151,6 +158,8 @@ namespace Gcpe.Hub
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
             message.From = new System.Net.Mail.MailAddress(Settings.Default.FlickrErrorNotificationContactEmail);
             message.To.Add(message.From);
+            message.CC.Add(Settings.Default.FlickrErrorNotificationContactEmailCC);
+            message.Bcc.Add(Settings.Default.FlickrErrorNotificationContactEmailBCC);
 
             message.Subject = "A BC Gov News entry needs your attention when Flickr services are back online:";
             message.IsBodyHtml = true;
