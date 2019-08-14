@@ -25,6 +25,7 @@ public class ActivityDAO
     /// <param name="communicationContactId"></param>
     /// <param name="governmentRepresentativeId"></param>
     /// <param name="premierRequestedId"></param>
+    /// <param name="distributionId"></param>
     /// <param name="initiativeId"></param>
     /// <param name="keywordIds"></param>
     /// <param name="dateConfirmed"></param>
@@ -46,6 +47,7 @@ public class ActivityDAO
         int? communicationContactId,
         int? governmentRepresentativeId,
         int? premierRequestedId,
+        int? distributionId,
         int? initiativeId,
         IList<string> keywordIds,
         bool? dateConfirmed,
@@ -67,7 +69,8 @@ public class ActivityDAO
                     string[] activityIdString = quickSearch.Split('-');
                     if (int.TryParse(activityIdString[activityIdString.Length - 1], out activityId) && activityId > 10000)
                     {
-                        return (from a in dc.ActiveActivities where a.Id == activityId
+                        return (from a in dc.ActiveActivities
+                                where a.Id == activityId
                                 select a).ToList();
                     }
                 }
@@ -83,6 +86,7 @@ public class ActivityDAO
                                                                     communicationContactId,
                                                                     governmentRepresentativeId,
                                                                     premierRequestedId,
+                                                                    distributionId,
                                                                     initiativeId,
                                                                     keywordIds?.Select(k => Convert.ToInt32(k)),
                                                                     dateConfirmed,
@@ -99,7 +103,7 @@ public class ActivityDAO
                         delegate (ActiveActivity p)
                         {
                             return p.Title.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1
-                                || (p.Details!= null && p.Details.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Details != null && p.Details.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
                                 || (p.City != null && p.City.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
                                 || (p.Translations != null && p.Translations.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
                                 || (p.Significance != null && p.Significance.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1);
@@ -129,6 +133,7 @@ public class ActivityDAO
                                                                                    int? communicationContactId,
                                                                                    int? governmentRepresentativeId,
                                                                                    int? premierRequestedId,
+                                                                                   int? distributionId,
                                                                                    int? initiativeId,
                                                                                    IEnumerable<int> keywordIds,
                                                                                    bool? dateConfirmed,
@@ -181,6 +186,7 @@ public class ActivityDAO
 
             if (governmentRepresentativeId != null) activitiesQuery = activitiesQuery.Where(a => a.GovernmentRepresentativeId == governmentRepresentativeId);
             if (premierRequestedId != null) activitiesQuery = activitiesQuery.Where(a => a.PremierRequestedId == premierRequestedId);
+            if (distributionId != null) activitiesQuery = activitiesQuery.Where(a => a.NRDistributionId == distributionId);
             if (dateConfirmed != null) activitiesQuery = activitiesQuery.Where(a => dateConfirmed == a.IsConfirmed || (a.StartDateTime.Value.Date == a.EndDateTime.Value.Date && !a.IsAllDay));
             if (isIssue != null) activitiesQuery = activitiesQuery.Where(a => a.IsIssue == isIssue);
             if (initiativeId != null) activitiesQuery = activitiesQuery.Where(a => dc.ActivityInitiatives.Any(e => e.ActivityId == a.Id && e.InitiativeId == initiativeId));

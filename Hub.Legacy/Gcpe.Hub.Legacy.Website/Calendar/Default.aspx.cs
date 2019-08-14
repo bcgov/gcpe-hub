@@ -116,6 +116,9 @@ namespace Gcpe.Hub.Calendar
                 // Premier Requested are loaded into the dropdown list.
                 BindSelectFilter(fpremier, "Select Premier Requested", ddm.GetActivePremierRequestedOptions());
 
+                // Distributions are loaded into the dropdown list.
+                BindSelectFilter(fdistribution, "Select Distribution", ddm.GetActiveNrDistributionOptions());
+
                 // Categories are loaded into the dropdown list.
                 BindSelectFilter(fcategory, "Select Category", ddm.GetActiveCategoryOptions(isHq));
 
