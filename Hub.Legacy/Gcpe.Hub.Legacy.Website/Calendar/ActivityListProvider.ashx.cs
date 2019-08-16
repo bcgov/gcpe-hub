@@ -192,6 +192,7 @@ namespace Gcpe.Hub.Calendar
                 contactId,
                 GetIntParam("representative", request),
                 GetIntParam("premierRequested", request),
+                GetIntParam("distribution", request),
                 GetIntParam("initiative", request),
                 request["keywords"]?.Split('~'),
                 bool.TryParse(request["dateConfirmed"], out myBool) ? myBool : (bool?)null,
