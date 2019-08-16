@@ -203,6 +203,12 @@
     <Setting Name="FlickrErrorNotificationContactEmail" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="FlickrErrorNotificationContactEmailCC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FlickrErrorNotificationContactEmailBCC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="FlickrPrivateBaseUri" Type="System.Uri" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
