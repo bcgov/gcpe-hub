@@ -148,6 +148,15 @@ namespace Gcpe.Hub.Calendar {
         protected global::System.Web.UI.HtmlControls.HtmlSelect fpremier;
         
         /// <summary>
+        /// fdistribution control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect fdistribution;
+        
+        /// <summary>
         /// fmore control.
         /// </summary>
         /// <remarks>

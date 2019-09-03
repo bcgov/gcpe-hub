@@ -36,10 +36,10 @@
                 $("#DateRange").toggle();
             });--%>
 
-            window.snowplow('trackSiteSearch',
+             <%--window.snowplow('trackSiteSearch',
                 ['<%= txtKeyword.Text.Replace(" ", "', '") %>'],
                 <%= Model.AllQueryFilters() %>,
-                <%= Model.CountResults() %> );
+                <%= Model.CountResults() %> );--%>
         }
 
         function InitializeNewPageRequest(sender, args) {

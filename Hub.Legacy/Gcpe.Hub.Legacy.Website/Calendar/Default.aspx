@@ -64,6 +64,7 @@
             AddSelect(filters, 'representative', $("#frepresentative")[0]);
             AddSelect(filters, 'initiative', $("#finitiative")[0]);
             AddSelect(filters, 'premierRequested', $("#fpremier")[0]);
+            AddSelect(filters, 'distribution', $("#fdistribution")[0]);
             AddSelect(filters, 'isissue', $("#fissue")[0]);
             AddSelect(filters, 'dateConfirmed', $("#fdateConfirmed")[0]);
 
@@ -118,6 +119,7 @@
             ResetFilterOption($("#frepresentative"));
             ResetFilterOption($("#finitiative"));
             ResetFilterOption($("#fpremier"));
+            ResetFilterOption($("#fdistribution"));
             ResetFilterOption($("#fissue"));
             ResetFilterOption($("#fdateConfirmed"));
             $("#DisplayRadioButtonList_1").next('label').text(myMinLabel);
@@ -453,6 +455,9 @@
                     case "premierRequested":
                         $.uniform.update($("#fpremier").val(value));
                         break;
+                   case "distribution":
+                        $.uniform.update($("#fdistribution").val(value));
+                        break;
                     case "datefrom":
                         filter = $("#StartDateTextBox").val(value);
                         break;
@@ -583,6 +588,8 @@
                 </select>
                 <select id="fpremier" runat="server" title="Premier Requested">
                 </select>
+                <select id="fdistribution" runat="server" title="Distribution">
+                </select>
                 <select id="fmore" runat="server">
                     <option selected="selected" value="*">More...</option>
                     <option value="fissue">Issue</option>
@@ -593,6 +600,7 @@
                     <option value="frepresentative">Lead Representative</option>
                     <option value="finitiative">Initiative</option>
                     <option value="fpremier">Premier Requested</option>
+                    <option value="fdistribution">Distribution</option>
                 </select>
 
                 <table style="margin-top:10px;width:100%;">

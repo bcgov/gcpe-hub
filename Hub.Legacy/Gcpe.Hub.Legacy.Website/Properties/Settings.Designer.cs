@@ -620,6 +620,22 @@ namespace Gcpe.Hub.Properties {
                 return ((string)(this["FlickrErrorNotificationContactEmail"]));
             }
         }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string FlickrErrorNotificationContactEmailCC {
+            get {
+                return ((string)(this["FlickrErrorNotificationContactEmailCC"]));
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string FlickrErrorNotificationContactEmailBCC {
+            get {
+                return ((string)(this["FlickrErrorNotificationContactEmailBCC"]));
+            }
+        }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
