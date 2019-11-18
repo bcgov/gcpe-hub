@@ -83,6 +83,7 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery.maskedinput-1.3.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery.url.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/date.js") %>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/navigator.sendbeacon"></script>
 
     <link rel="stylesheet" href="<%= ResolveUrl("~/Calendar/Content/Custom.css") %>" />
     <!-- RDK -->
@@ -1037,13 +1038,17 @@
                                                                                         <p align='left'><b>TV/Radio:</b> use for interviews; set to date/time it will air.</p>" });
 
             // Handle Save Button
-            $('#SaveButton').button({label: 'Save'}).click(function (event) {
+            $('#SaveButton').button({ label: 'Save' }).click(function (event) {
                 if (!IsSaveValid()) {
                     event.preventDefault();
                     return;
                 }
                 warn_on_unload = "";
                 $('#IsPostBackHiddenField').val('true');
+                // force the tab/window to close so ministry users are forced to re-open the activity and get any subsequent changes made by HQ
+                // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently 
+                // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
+                // window.close();
             });
 
             // Work around to get icons working
@@ -1059,6 +1064,7 @@
                     var $this = $(this);
                     jConfirm("Are you sure you want to cancel these changes?", null, function (ok) {
                         if (!ok) return;
+                        CancelEditing();
                         warn_on_unload = "";
                         $this.prev().click();
                     });
@@ -1176,7 +1182,7 @@
                     $('#EndTime').val(newStart.toString("h:mm tt"));
                     previousStart = $('#StartTime').val();
                 }
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             }
         });
 
@@ -1193,14 +1199,14 @@
                     $('#EndTimeRequiredValidator').hide();
                     $('#EndTimeCustomValidator').hide();
                 }
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             }
         });
 
         $('#NRTime').editableSelect({
             bg_iframe: true,
             onSelect: function (listItem) {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             }
         });
         var select = $('.editable-select:first');
@@ -1210,7 +1216,7 @@
         // Handle all-day activities
 
         $("#IsAllDayCheckBox").click(function () {
-            SetChanged();
+            SetChanged($.url().param('ActivityId'));
 
             if ($('#IsAllDayCheckBox').is(':checked')) {
                 $('#StartTime').val("12:00 AM");
@@ -1366,7 +1372,7 @@
             $('#IsDateConfirmed').click(function () {
                 ShowHidePotentialDates();
                 SetLASection();
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             var startDate = $("#StartDate");
@@ -1374,16 +1380,16 @@
             var nrDate = $("#NRDate");
 
             startDate.change(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
                 SetLASection();
             });
 
             endDate.change(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
                 SetLASection();
             });
             nrDate.change(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             // --------------------------------------------
@@ -1392,7 +1398,7 @@
             //    Clear's Other City Values and hides that row
             $('#IsAtLegislatureCheckBox').click(function () {
 
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
 
                 var cityDropDown = $('#CityDropDownList');
                 var venueTextBox = $('#VenueTextBox');
@@ -1426,7 +1432,7 @@
 
             $('#IsInternalCheckBoxNotUsed').click(function () {
 
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
 
                 if (this.checked) {
                     var sharedWithMinistryAbbreviations = $("#SharedWithSelectedText").html(); // TO DO: change "abbreviations" to "codes"
@@ -1452,7 +1458,7 @@
             // Handle Is Cross-Government Logic
 
             $('#IsCrossGovernmentCheckBox').click(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
 
                 if (this.checked) {
                     // check all shared-with options
@@ -1467,7 +1473,7 @@
             $('#IsConfidentialCheckBox').click(function () {
                 var elt = $(this);
                 elt.closest("tr").css("color",elt.prop('checked') ? "darkred" : "");
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
                 SetLASection();
             });
 
@@ -1475,11 +1481,11 @@
             $('#IsIssueCheckBox').click(function () {
                 var elt = $(this);
                 elt.closest("tr").css("font-weight", elt.prop('checked') ? "bold" : "");
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#IsMilestoneCheckBox').click(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             // --------------------------------------------
@@ -1501,7 +1507,7 @@
                     // pass in a value. 
                 },
                 click: function (event, ui) {
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1530,7 +1536,7 @@
                 },
                 close: function () {
                     UpdateLeadOrgPlaceholder();
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                     SetLASection();
                 }
             });
@@ -1547,7 +1553,7 @@
                 click: function (event, ui) {
                     $('#ComContactSelectedValue').val(ui.value);
                     $('#CommunicationContactRequiredFieldValidator').hide();
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1590,7 +1596,7 @@
                         $('#OtherCityRow').hide();
                         $('#VenueTextBox').focus();
                     }
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             }).multiselectfilter();
 
@@ -1645,7 +1651,7 @@
 
                 close: function () {
                     if (sharedWithHiddenTarget.val() != $('#SharedWithSelectedValuesServerSide').val()) {
-                        SetChanged();
+                        SetChanged($.url().param('ActivityId'));
                     }
                 }
             }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
@@ -1720,7 +1726,7 @@
                         $("#IsAllDayCheckBox").click();
                     }
 
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                     SetLASection();
                 }
             });
@@ -1759,7 +1765,7 @@
                 close: function () {
                     if (commMaterialsHiddenTarget.val() != $('#CommMaterialsSelectedValuesServerSide').val()) {
                         SetLASection();
-                        SetChanged();
+                        SetChanged($.url().param('ActivityId'));
                     }
                 }
             }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
@@ -1784,7 +1790,7 @@
                 },
                 close: function () {
                     SetLASection();
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1799,7 +1805,7 @@
                 selectedList: 1,
                 click: function (event, ui) {
                     $('#IsNRDistributionsDirty').val('true');
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1838,7 +1844,7 @@
                 },
                 close: function () {
                     if ($('#SectorsSelectedValuesServerSide').val() != $('#SectorsSelectedValues').val()) {
-                        SetChanged();
+                        SetChanged($.url().param('ActivityId'));
                     }
                 }
             }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
@@ -1882,7 +1888,7 @@
                 },
                 close: function () {
                     if ($('#ThemesSelectedValuesServerSide').val() != $('#ThemesSelectedValues').val()) {
-                        SetChanged();
+                        SetChanged($.url().param('ActivityId'));
                     }
                 }
             }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
@@ -1923,7 +1929,7 @@
                 },
                 close: function () {
                     if ($('#InitiativesSelectedValuesServerSide').val() != $('#InitiativesSelectedValues').val()) {
-                        SetChanged();
+                        SetChanged($.url().param('ActivityId'));
                     }
                 }
             }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
@@ -1939,7 +1945,7 @@
                 header: 'Select an option',
                 selectedList: 1,
                 click: function () {
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1951,7 +1957,7 @@
                 header: 'Select an option',
                 selectedList: 1,
                 click: function () {
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1963,7 +1969,7 @@
                 header: 'Select an option',
                 selectedList: 1,
                 click: function () {
-                    SetChanged();
+                    SetChanged($.url().param('ActivityId'));
                 }
             });
 
@@ -1976,9 +1982,16 @@
     </script>
 
     <script type="text/javascript">
-
+        
         //window.onunload = CheckInActivity;
         window.onbeforeunload = ConfirmUnsavedChanges;
+
+        window.onunload = CancelEditing;
+        function CancelEditing() {
+            var id = $.url().param('ActivityId') || '';
+            DoCancel(id);
+        }
+
 
         function CalculateMaxEndDate(numDays) {
             var startDate = new Date($('#StartDate').val());
@@ -2172,7 +2185,7 @@
                 laSectionInOverride = newCheckedSection && !newCheckedSection.prop('checked');
                 DisplayOverride(laSectionInOverride);
                 ValidatorValidate(LACommentsCustomValidator);
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             }
         });
 
@@ -2184,7 +2197,6 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-
             // disable start and end time if IsAllDay is checked onload
             if ($('#IsAllDayCheckBox').is(':checked')) {
                 $('#StartTime').hide();
@@ -2255,12 +2267,12 @@
                 // var text = $('#TitleTextBox').val();
                 //$('#TitleTextBox').val(text.replace(/(\r\n|\n|\r)/gm, ""));
                 limitChars('TitleTextBox', 100, 'charlimitinfo');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#DetailsTextBox').keyup(function () {
                 limitChars('DetailsTextBox', 500, 'charlimitinfo1');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             var initialText = $("#LACommentsTextBox").val();
@@ -2273,27 +2285,27 @@
                     $("#LACommentsTextBox").val().length > 0) {
                     laStatusRadioButtonList.find("input[value='7']").prop('checked', true).trigger("click");
                 }
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#CommentsTextBox').keyup(function () {
                 limitChars('CommentsTextBox', 4000, 'charlimitinfo3');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#VenueTextBox').keyup(function () {
                 limitChars('VenueTextBox', 55, 'charlimitinfo4');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#OtherCityTextBox').keyup(function () {
                 limitChars('OtherCityTextBox', 55, 'charlimitinfo5');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#LeadOrganizationTextBox').keyup(function () {
                 limitChars('LeadOrganizationTextBox', 80, 'charlimitinfo6');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             var newPrefix = " (new ";
@@ -2407,26 +2419,26 @@
             }
 
             keywordsTextBox.keyup(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#SignificanceTextBox').keyup(function () {
                 limitChars('SignificanceTextBox', 500, 'charlimitinfo7');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#StrategyTextBox').keyup(function () {
                 limitChars('StrategyTextBox', 500, 'charlimitinfo9');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#SchedulingTextBox').keyup(function () {
                 limitChars('SchedulingTextBox', 500, 'charlimitinfo8');
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#PotentialDatesTextBox').keyup(function () {
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             var laStatusRadioButtonList = $('#LAStatusRadioButtonList');
@@ -2435,7 +2447,7 @@
             laStatusRadioButtonList.click(function (evt) {
                 laStatusRadioButtonList.find("input:not(checked)").parent().css("background", "");
                 SetLAStatusColor(evt.target);
-                SetChanged();
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#LeadOrganizationTextBox').blur(function () {

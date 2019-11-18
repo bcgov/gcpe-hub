@@ -558,7 +558,7 @@
                 </table>
 
                 <div style="padding-bottom:5px">Search for:</div>
-                <input type="text" id="txtSearch" style="margin-left:3px; width:195px; height:22px" runat="server" placeholder="ID, Title, Summary"/> 
+                <input type="text" id="txtSearch" style="margin-left:3px; width:195px; height:22px" runat="server" placeholder="ID, Keywords, City"/> 
 
                 <select id="KeywordList" multiple="true" runat="server" style="display:none"/>
                 <asp:TextBox ID="fkeyword" style="width:194px;margin:2px 0 0 2px" runat="server"></asp:TextBox>

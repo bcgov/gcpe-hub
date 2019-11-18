@@ -41,13 +41,40 @@ function limitChars(textid, limit, infodiv) {
         return true;
     }
 }
-function SetChanged() {
+function SetChanged(activityId) {
+    var id = activityId || '';
+    if (!isChanged)
+        GetActivityStatus(id); // we only one to do this once per open activity, rather than every time a change event is fired on a control
     isChanged = true;
     $('#ChangesPending').show();
     $("#SavedSuccessfullyNotice").hide();
 }
 function GetChanged() {
     return isChanged;
+}
+var conflictMsgWasShown = false;
+function GetActivityStatus(activityId) {
+    $.ajax({
+        type: "POST",
+        url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
+        data: { 'activityId': activityId },
+        dataType: "text",
+        success: function (msg) {
+            if (msg) {
+                alert(msg);
+                conflictMsgWasShown = true;
+                window.onbeforeunload = function () { };
+                window.open('', '_self', '').close();
+            }
+        }
+    });
+}
+function DoCancel(id) {
+    if (conflictMsgWasShown)
+        return;
+    var formData = new FormData();
+    formData.append("activityId", id);
+    navigator.sendBeacon("ActivityEditingHandler.ashx?Op=CancelEditingActivity", formData);
 }
 // I can't call uncheckAll as it forces the close method where we track if things have changed
 function MultiSelectReset(sender) {
