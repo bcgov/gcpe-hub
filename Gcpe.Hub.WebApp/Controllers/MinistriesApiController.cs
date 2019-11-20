@@ -76,8 +76,9 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         internal static IQueryable<Ministry> QueryMinistries(HubDbContext db)
         {
+            // add GCPE Media Relations in the ministry list
             return db.Ministry
-                     .Where(m => m.IsActive && m.MinistryLanguage.Any() && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier"))
+                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier"))
                      .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName);
         }
 

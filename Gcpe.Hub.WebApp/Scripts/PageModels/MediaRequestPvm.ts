@@ -622,20 +622,24 @@
             return false;
         }
 
+        public submitAndSendEditMediaRequestToMyself = () => {
+            this._submitEditMediaRequest(true, true);
+        }
+
         public submitAndSendEditMediaRequest = () => {
-            this._submitEditMediaRequest(true);
+            this._submitEditMediaRequest(true, false);
         }
 
         public submitEditMediaRequest = () => {
-            this._submitEditMediaRequest(false);
+            this._submitEditMediaRequest(false, false);
         }
 
         // internal only, don't use this in a click binding.
-        private _submitEditMediaRequest = (sendEmail?: boolean) => {
+        private _submitEditMediaRequest = (sendEmail?: boolean, onlySendtoMyself?: boolean) => {
             this.pageError(undefined);
 
             this.currentMediaRequest().triggerEmail(sendEmail);
-
+            this.currentMediaRequest().onlyEmailMyself(onlySendtoMyself);
             var validatable = ko.validatedObservable(this.currentMediaRequest());
             if (validatable().isValid()) {
                 $(".disable-on-busy").addClass("disabled");

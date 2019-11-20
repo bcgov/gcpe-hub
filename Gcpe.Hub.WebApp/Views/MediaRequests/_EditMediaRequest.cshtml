@@ -9,6 +9,7 @@
                 <li><a href="#" id="addreportermenu" data-bind="click: function(){ $('#dom-mediaContactSearch').show(); $('#dom-mediaContactSearch .searchable-combo').focus();}">Add Reporter</a></li>
                 <li data-bind="visible:id()"><a href="#" id="addfollowupmenu" data-bind="click: $root.cloneCurrentRequest">Create Follow-up</a></li>
                 <li data-bind="visible:id() && isMyResponsiblity()"><a href="#" id="deleterequestmenu" data-bind="click: $root.deleteCurrentRequest">Delete Request</a></li>
+                <li data-bind="visible:id()"><a href="#" id="sendemailtomyself" data-bind="click: $root.submitAndSendEditMediaRequestToMyself.bind($root)">Email Request</a></li>
             </ul>
         </div></div>
     </h3>
