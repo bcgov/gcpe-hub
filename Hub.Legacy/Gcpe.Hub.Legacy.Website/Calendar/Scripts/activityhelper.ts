@@ -46,7 +46,13 @@ function limitChars(textid, limit, infodiv) {
     }
 }
 
-function SetChanged() {
+function SetChanged(activityId?: string) {
+
+    var id = activityId || '';
+
+    if (!isChanged)
+        GetActivityStatus(id); // we only one to do this once per open activity, rather than every time a change event is fired on a control
+
     isChanged = true;
     $('#ChangesPending').show();
     $("#SavedSuccessfullyNotice").hide();
@@ -54,6 +60,33 @@ function SetChanged() {
 
 function GetChanged() {
     return isChanged;
+}
+
+var conflictMsgWasShown = false;
+
+function GetActivityStatus(activityId?: string) {
+    $.ajax({
+        type: "POST",
+        url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
+        data: { 'activityId': activityId },
+        dataType: "text",
+        success: function (msg) {
+            if (msg) {
+                alert(msg);
+                conflictMsgWasShown = true;
+                window.onbeforeunload = () => { };
+                window.open('', '_self', '').close();
+            }
+        }
+    });
+}
+
+function DoCancel(id: string) {
+    if (conflictMsgWasShown) return;
+
+    var formData = new FormData();
+    formData.append("activityId", id);
+    navigator.sendBeacon("ActivityEditingHandler.ashx?Op=CancelEditingActivity", formData);
 }
 
 // I can't call uncheckAll as it forces the close method where we track if things have changed
@@ -79,7 +112,7 @@ function SetMultiSelectedValues(sender, target, hiddentarget, validator, validat
     // update the target based on how many are checked
     target.html(checkedTitles.length ? checkedTitles.join(', ') : '');
 
-        // Show / hide the target row
+    // Show / hide the target row
     if (checkedTitles.length > 0) {
         if (validator != null) {
             validator.hide();
@@ -124,4 +157,3 @@ function hideIrrelevantPanels(category: string) {
         $("#releaseFieldset").show();
     }
 }
-

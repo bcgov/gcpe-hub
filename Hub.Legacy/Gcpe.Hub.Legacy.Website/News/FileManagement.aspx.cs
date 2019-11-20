@@ -88,15 +88,14 @@ namespace Gcpe.Hub.News
 
         public IEnumerable<string> GetStaticFiles()
         {
-            List<string>  mediaAssets = new List<string>();
+            List<string> mediaAssets = new List<string>();
 
 #if !LOCAL_MEDIA_STORAGE
             var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("files"));
 
-            foreach (CloudBlockBlob blob in container.ListBlobs().OfType<CloudBlockBlob>())
+            foreach (CloudBlockBlob blob in container.ListBlobs(null, false, BlobListingDetails.Metadata, null, null).OfType<CloudBlockBlob>())
             {
                 string fileName;
-                blob.FetchAttributes();
                 mediaAssets.Add(blob.Metadata.TryGetValue("filename", out fileName) ? fileName : Path.GetFileName(blob.Name));
             }
 #else
@@ -113,7 +112,6 @@ namespace Gcpe.Hub.News
                 }
             }
 #endif
-
             return mediaAssets;
         }
 

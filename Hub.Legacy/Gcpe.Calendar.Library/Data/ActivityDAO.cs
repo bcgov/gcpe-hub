@@ -106,7 +106,14 @@ public class ActivityDAO
                                 || (p.Details != null && p.Details.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
                                 || (p.City != null && p.City.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
                                 || (p.Translations != null && p.Translations.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
-                                || (p.Significance != null && p.Significance.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1);
+                                || (p.Significance != null && p.Significance.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Comments != null && p.Comments.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.LeadOrganization != null && p.LeadOrganization.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Strategy != null && p.Strategy.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.HqComments != null && p.HqComments.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Schedule != null && p.Schedule.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1)
+                                || (p.Venue != null && p.Venue.IndexOf(quickSearch, StringComparison.OrdinalIgnoreCase) != -1);
+
                         }
                         );
 

@@ -55,7 +55,11 @@ namespace CorporateCalendar.Logging
             /// <summary>
             /// NewsFeed message: Used to indicate a message for the Corporate News Feed
             /// </summary>
-            Deactivate
+            Deactivate,
+            /// <summary>
+            /// NewsFeed message: Used to indicate a message for the Corporate News Feed
+            /// </summary>
+            Edit
         };
 
 

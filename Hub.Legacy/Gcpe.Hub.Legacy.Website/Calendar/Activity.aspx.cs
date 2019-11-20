@@ -14,6 +14,7 @@ using Ministry = CorporateCalendar.Data.Ministry;
 using ci = System.Globalization.CultureInfo;
 using Gcpe.Hub.News.ReleaseManagement;
 using Gcpe.Hub.Properties;
+using System.Web.UI;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -367,7 +368,7 @@ namespace Gcpe.Hub.Calendar
         }
 
         // We might want to put these in the Language table if the need for a "Add Hindi" button (for example) arises in NRMS ... and news
-        static string[] defaultTranslations = { "Chinese (Simplified)", "Chinese (Traditional)", "French", "Hindi", "Korean", "Punjabi", "Tagalog", "Urdu"};
+        static string[] defaultTranslations = { "Chinese (Simplified)", "Chinese (Traditional)", "French", "Hindi", "Korean", "Punjabi", "Tagalog", "Urdu" };
         private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<string> translations, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins)
         {
             var ddm = new DropDownListManager(calendarDataContext);
@@ -625,7 +626,7 @@ namespace Gcpe.Hub.Calendar
             var keywordsSelectedValues = calendarDataContext.GetActivityKeywords(ActivityId);
 
 
-            List <Guid> selectedSectorIds = null;
+            List<Guid> selectedSectorIds = null;
             if (!string.IsNullOrEmpty(sectorsSelectedValues))
                 selectedSectorIds = sectorsSelectedValues.Split(',').Select(e => Guid.Parse(e)).ToList();
 
@@ -1077,7 +1078,7 @@ namespace Gcpe.Hub.Calendar
                 activity.HqStatusId = isNone ? null : (int?)Convert.ToInt32(LAStatusRadioButtonList.SelectedValue);
             }
 
-            if (IsNewActivity && !customPrincipal.IsInRole(SecurityRole.Administrator) && !LACommentsRow.Visible) 
+            if (IsNewActivity && !customPrincipal.IsInRole(SecurityRole.Administrator) && !LACommentsRow.Visible)
             {
                 // draw attention to the look ahead section so that admins have to go back in and edit it
                 activity.HqComments = "**";
@@ -1122,7 +1123,7 @@ namespace Gcpe.Hub.Calendar
             int? NRDistributionId = NRDistributionHasValue ? (int?)Convert.ToInt32(NRDistributionDropDownList.Value) : null;
 
             string newNROrigin = NROriginDropDownList.Items.FindByText(CurrentActiveActivity.NROrigins?.TrimStart())?.Value;
-            
+
             if (activity.IsConfirmed != IsDateConfirmed.Checked || activity.Significance != SignificanceTextBox.Text
                 || activity.Schedule != SchedulingTextBox.Text || activity.LeadOrganization != LeadOrganizationTextBox.Text
                 || activity.Strategy != StrategyTextBox.Text || activity.IsAllDay != IsAllDayCheckBox.Checked
@@ -1181,7 +1182,7 @@ namespace Gcpe.Hub.Calendar
 
             // Meta Data (The rest of the fields are handled by the database using simple default values)
             // Don't update this info if current user is GCPEHQ Admin and the activity is not a GCPEHQ activity
-            if (!customPrincipal.IsGCPEHQ || !customPrincipal.IsInRoleOrGreater(SecurityRole.Administrator) || 
+            if (!customPrincipal.IsGCPEHQ || !customPrincipal.IsInRoleOrGreater(SecurityRole.Administrator) ||
                 activity.Ministry.Abbreviation == customPrincipal.GCPEHQ_Ministry || activity.LastUpdatedDateTime == null)
             {
                 activity.LastUpdatedBy = customPrincipal.Id;
@@ -1327,7 +1328,7 @@ namespace Gcpe.Hub.Calendar
 
             var deletedDocumentIds = deletedDocuments.Value.Split(',').Where(e => e != string.Empty).Select(int.Parse).ToList();
 
-            var filesToDelete = db.ActivityFiles.Where(a => deletedDocumentIds.Contains(a.Id)).ToList();            
+            var filesToDelete = db.ActivityFiles.Where(a => deletedDocumentIds.Contains(a.Id)).ToList();
             db.ActivityFiles.DeleteAllOnSubmit(filesToDelete);
 
             var activityFiles = db.ActivityFiles.Where(a => a.ActivityId == activity.Id).ToList();
@@ -1360,7 +1361,7 @@ namespace Gcpe.Hub.Calendar
                 {
                     ActivityId = activity.Id,
                     FileLength = length,
-                    FileName =  Path.GetFileName(file.FileName),
+                    FileName = Path.GetFileName(file.FileName),
                     FileType = file.ContentType,
                     Data = new System.Data.Linq.Binary(fileData),
                     Md5 = fileMd5,
@@ -1390,6 +1391,7 @@ namespace Gcpe.Hub.Calendar
             {
                 Insert();
             }
+            ForcePageToClose();
         }
 
         protected void ReviewButtonClick(object sender, EventArgs e)
@@ -1408,6 +1410,15 @@ namespace Gcpe.Hub.Calendar
                     ErrorNotice.Style.Clear();
                 }
             }
+            ForcePageToClose();
+        }
+
+        private void ForcePageToClose()
+        {
+            // force the tab/window to close so ministry users are forced to re-open the activity and get any subsequent changes made by HQ
+            // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently 
+            // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
+            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close();", true);
         }
 
         protected void FavoriteButtonClick(object sender, EventArgs e)
