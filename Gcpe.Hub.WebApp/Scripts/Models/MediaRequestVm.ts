@@ -50,6 +50,7 @@ class MediaRequestVm {
     public completed: KnockoutComputed<boolean>;
     public editPageHeader: KnockoutComputed<string>;
     public triggerEmail: KnockoutObservable<boolean>;
+    public onlyEmailMyself: KnockoutObservable<boolean>;
     public isMajorOutlet: KnockoutComputed<boolean>;
     public isOverdue: KnockoutComputed<boolean>;
     public isMyResponsiblity: KnockoutComputed<boolean>;
@@ -97,6 +98,7 @@ class MediaRequestVm {
             }
         });
         this.triggerEmail = ko.observable<boolean>();
+        this.onlyEmailMyself = ko.observable<boolean>();
         this.errors = ko.validation.group(this);
         
         this.gotModified = ko.observable<string>();
@@ -490,6 +492,10 @@ class MediaRequestVm {
         var qryString = "";
         if (this.triggerEmail()) {
             qryString = "?triggerEmail=true";
+
+        }
+        if (this.onlyEmailMyself()) {
+            qryString = "?onlyEmailMyself=true";
         }
 
         //we need to sort out if we are inserting or updating.

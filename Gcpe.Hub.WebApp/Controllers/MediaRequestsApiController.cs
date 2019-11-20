@@ -397,7 +397,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<Guid> Post([FromBody]MediaRequestDto dto, Boolean triggerEmail = false)
+        public async Task<Guid> Post([FromBody]MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
 
@@ -415,11 +415,11 @@ namespace Gcpe.Hub.WebApp.Controllers
             // update dto with the new ID.
             dto.Id = mediaRequest.Id;
 
-            if (triggerEmail)
+            if (triggerEmail || onlyEmailMyself)
             {
                 try
                 {
-                    await EmailMediaRequest(dto);
+                    await EmailMediaRequest(dto, onlyEmailMyself);
                 }
 #if !DEBUG
                 catch (Exception)
@@ -779,7 +779,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         }
         [HttpPut("{id}")]
-        public async Task Put(Guid id, [FromBody]MediaRequestDto dto, Boolean triggerEmail = false)
+        public async Task Put(Guid id, [FromBody]MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
             if (id != dto.Id)
@@ -791,11 +791,11 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             await db.SaveChangesAsync();
 
-            if (triggerEmail)
+            if (triggerEmail || onlyEmailMyself)
             {
                 try
                 {
-                    await EmailMediaRequest(dto);
+                    await EmailMediaRequest(dto, onlyEmailMyself);
                 }
 #if !DEBUG
                 catch (Exception)
@@ -1016,7 +1016,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         }
 
-        private async Task EmailMediaRequest(MediaRequestDto dto)
+        private async Task EmailMediaRequest(MediaRequestDto dto, Boolean onlyEmailMyself = false)
         {
             if (UserMe.EmailAddress == null)
                 throw new Exception("User cannot send email");
@@ -1069,7 +1069,16 @@ namespace Gcpe.Hub.WebApp.Controllers
             //fromContacts.Add(fromContact);
             //await mailProvider.SendAsync(subject, bodyHtml, fromContacts, fromContact);
 
-            await mailProvider.SendAsync(subject, bodyHtml, myContact, toList, ccList);
+            if (!onlyEmailMyself)
+            {
+                await mailProvider.SendAsync(subject, bodyHtml, myContact, toList, ccList);
+            }
+            else {
+                var toMyself = new List<MailAddress>();
+                toMyself.Add(myContact);
+                await mailProvider.SendAsync(subject, bodyHtml, myContact, toMyself, null);
+            }
+            
 
             // send any pending take over requests.
             if (dto.TakeOverRequestMinistry != null)
