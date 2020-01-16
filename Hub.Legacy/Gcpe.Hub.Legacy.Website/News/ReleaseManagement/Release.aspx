@@ -976,7 +976,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.MediaAssetsUri + Model.ReleasePathName  + "/" + Model.Key + "/" + Container.DataItem.ToString() %>' Text="<%# Container.DataItem.ToString() %>" /></td>
+                                            <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.MediaAssetsUri + Model.ReleasePathName  + "/" + Model.Key.ToLower() + "/" + Container.DataItem.ToString() %>' Text="<%# Container.DataItem.ToString() %>" /></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
