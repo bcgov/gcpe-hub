@@ -106,6 +106,14 @@
                         </asp:HyperLink>
                 
                     </td>
+                   
+                    <% if (this.Folder == "Drafts")
+                    { %>
+                    <td title="<%# Item.Reference == string.Empty ? "" : "Approved" %>" style="border-color:white; width:12px; background-color:<%# Item.Reference == string.Empty ? "" : "green" %>;">
+                        &nbsp;
+                    </td>
+                    <% } %>
+                    
                 </tr>
             </table>
             
@@ -158,7 +166,9 @@
                         </asp:HyperLink>
                 
                     </td>
-
+                    <td title="<%# Item.Reference == string.Empty ? "" : "Approved" %>" style="border-color:white; width:12px; background-color:<%# Item.Reference == string.Empty ? "" : "green" %>;">
+                        &nbsp;
+                    </td>
                 </tr>
             </table>
         </ItemTemplate>
