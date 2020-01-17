@@ -1018,7 +1018,27 @@
 
     <script type="text/javascript">
 
+        var idleTime = 0;
         $(document).ready(function () {
+
+            // Increment the idle time counter every minute.
+            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+            // Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+
+            function timerIncrement() {
+                idleTime = idleTime + 1;
+                console.log(idleTime);
+                if (idleTime > 2) { // 3 minutes
+                    window.open('', '_self', '').close();
+                }
+            }
 
             // Add tool tips
             $("#DetailsTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe this activity in the present tense, including <b>who</b> is participating (each spokesperson and their role), <b>what</b> is happening (key details of the activity) and <b>how much</b> is being funded.  The summary should contain all of the details that are needed for the look ahead report." });
