@@ -260,7 +260,9 @@ namespace Gcpe.Hub.Calendar
             bool.TryParse(request["deletedYN"], out includeDeleted);
             DateTime? endDatetime = null;
             if (!showAll)
-                endDatetime = DateTime.Today.AddDays(nbrDays + 1);
+            {
+                endDatetime = nbrDays == -1 ? DateTime.Today.AddDays(-1) : DateTime.Today.AddDays(nbrDays + 1);
+            }
 
             queryResults = ActivityDAO.GetAllActivitiesSecurely(customPrincipal.Id,
                             isCurrentUserInOwnerList,

@@ -308,9 +308,18 @@ public class ActivityDAO
         {
             IQueryable<ActiveActivity> activities;
 
-            if (endDateTime < DateTime.Today)
+            if (endDateTime <= DateTime.Today)
             {
+                //  we want to return cloned activities, which show up as changed with new activities
+                if (statuses.Contains("New")) {
+                    var statusesList = new List<string>();
 
+                    statusesList.Add(statuses[0]);
+                    statusesList.Add("Changed");
+
+                    statuses = statusesList.ToArray();
+                    includeChanged = true;
+                }
                 var daysBetweenTodayAndEndDateTime = (endDateTime - DateTime.Today).Value.Days;
 
                 activities = from a in dc.ActiveActivities

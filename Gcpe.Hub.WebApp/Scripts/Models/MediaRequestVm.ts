@@ -228,8 +228,7 @@ class MediaRequestVm {
                 onlyIf: () => {
                     return (!ko.validation.utils.isEmptyVal(this.respondedAt()));
                 }
-            },
-            maxLength: 6000
+            }
         });
 
         this.resolution.extend({

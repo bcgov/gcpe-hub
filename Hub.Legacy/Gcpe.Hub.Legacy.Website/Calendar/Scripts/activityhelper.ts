@@ -55,6 +55,7 @@ function SetChanged(activityId?: string) {
 
     isChanged = true;
     $('#ChangesPending').show();
+    $('#InactivityNotice').hide();
     $("#SavedSuccessfullyNotice").hide();
 }
 
