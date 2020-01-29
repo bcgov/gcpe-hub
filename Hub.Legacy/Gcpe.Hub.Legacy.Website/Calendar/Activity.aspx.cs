@@ -204,6 +204,7 @@ namespace Gcpe.Hub.Calendar
                     if (Request.QueryString["new"] != null)
                     {
                         SavedSuccessfullyNotice.Style.Clear();
+                        InactivityNotice.Style.Add("display", "none");
                     }
                 }
                 else
@@ -1104,6 +1105,8 @@ namespace Gcpe.Hub.Calendar
                 return false;
             }
             SavedSuccessfullyNotice.Style.Clear();
+            InactivityNotice.Style.Add("display", "none");
+
 
             var customPrincipal = Master.CustomPrincipal;
 

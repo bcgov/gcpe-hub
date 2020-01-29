@@ -40,7 +40,7 @@
                             <li><a id="newActivity" runat="server" href="activity.aspx" target="_blank">New Activity</a></li>
                             <li><a href="history.aspx">Recent Activity/Updates</a></li>
                             <li><a id="manage" runat="server">Manage</a></li>
-                            <li><a id="help" runat="server">Help</a></li>
+                            <li><a id="help" runat="server" target="_blank">Help</a></li>
                         </ul>
                     </div>
                 </div>

@@ -115,7 +115,7 @@ public class CorporateCalendarUpdateWebService : System.Web.Services.WebService
                 // Change the onhover activity Title to be in the main body and add the activity Detail on hover
                 modifiedNewsFeedItemText = modifiedNewsFeedItemText.Substring(0, posAt) + ")" + modifiedNewsFeedItemText.Substring(posAt + 4);
                 modifiedNewsFeedItemText = modifiedNewsFeedItemText.Substring(0, posClosing) + " - Start date: " + newsFeedItem.Activity.StartDateTime.Value.ToShortDateString() + " End date: " + newsFeedItem.Activity.EndDateTime.Value.ToShortDateString() + "</a> (" + modifiedNewsFeedItemText.Substring(posClosing + 2);
-                modifiedNewsFeedItemText = modifiedNewsFeedItemText.Replace("style=\"color: Blue\" title=\"", "style='color: Blue' title='" + newsFeedItem.Activity.Details + "'>");
+                modifiedNewsFeedItemText = modifiedNewsFeedItemText.Replace("style=\"color: Blue\" title=\"", "target='_blank' style='color: Blue' title='" + newsFeedItem.Activity.Details + "'>");
             }
             newsFeedItem.Text = modifiedNewsFeedItemText;
             modifiedNewsFeedItems.Add(newsFeedItem);

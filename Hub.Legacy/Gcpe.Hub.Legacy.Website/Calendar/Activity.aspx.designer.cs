@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gcpe.Hub.Calendar {
-    
-    
-    public partial class Activity {
-        
+namespace Gcpe.Hub.Calendar
+{
+
+
+    public partial class Activity
+    {
+
         /// <summary>
         /// timestamp control.
         /// </summary>
@@ -20,7 +22,16 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField timestamp;
-        
+
+        /// <summary>
+        /// InactivityNotice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl InactivityNotice;
+
         /// <summary>
         /// SavedSuccessfullyNotice control.
         /// </summary>
@@ -29,7 +40,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl SavedSuccessfullyNotice;
-        
+
         /// <summary>
         /// ErrorNotice control.
         /// </summary>
@@ -38,7 +49,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorNotice;
-        
+
         /// <summary>
         /// ErrorNoticeText control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorNoticeText;
-        
+
         /// <summary>
         /// ActiveIDLabel control.
         /// </summary>
@@ -56,7 +67,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ActiveIDLabel;
-        
+
         /// <summary>
         /// ActiveID control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ActiveID;
-        
+
         /// <summary>
         /// LastUpdated control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LastUpdated;
-        
+
         /// <summary>
         /// LastUpdatedLabel control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LastUpdatedLabel;
-        
+
         /// <summary>
         /// IsInternalCheckBoxNotUsed control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsInternalCheckBoxNotUsed;
-        
+
         /// <summary>
         /// FavoriteIcon control.
         /// </summary>
@@ -101,7 +112,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FavoriteIcon;
-        
+
         /// <summary>
         /// FavoriteButton control.
         /// </summary>
@@ -110,7 +121,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button FavoriteButton;
-        
+
         /// <summary>
         /// CategoriesDropDownList control.
         /// </summary>
@@ -119,7 +130,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect CategoriesDropDownList;
-        
+
         /// <summary>
         /// CategoriesDropDownListRequiredFieldValidator control.
         /// </summary>
@@ -128,7 +139,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CategoriesDropDownListRequiredFieldValidator;
-        
+
         /// <summary>
         /// IsConfidentialCheckBox control.
         /// </summary>
@@ -137,7 +148,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsConfidentialCheckBox;
-        
+
         /// <summary>
         /// TitleTextBox control.
         /// </summary>
@@ -146,7 +157,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TitleTextBox;
-        
+
         /// <summary>
         /// TitleRequiredFieldValidator control.
         /// </summary>
@@ -155,7 +166,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator TitleRequiredFieldValidator;
-        
+
         /// <summary>
         /// DetailsTextBox control.
         /// </summary>
@@ -164,7 +175,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DetailsTextBox;
-        
+
         /// <summary>
         /// DetailsRequiredFieldValidator control.
         /// </summary>
@@ -173,7 +184,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator DetailsRequiredFieldValidator;
-        
+
         /// <summary>
         /// IsIssueCheckBox control.
         /// </summary>
@@ -182,7 +193,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsIssueCheckBox;
-        
+
         /// <summary>
         /// SignificanceRow control.
         /// </summary>
@@ -191,7 +202,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow SignificanceRow;
-        
+
         /// <summary>
         /// SignificanceTextBox control.
         /// </summary>
@@ -200,7 +211,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SignificanceTextBox;
-        
+
         /// <summary>
         /// SignificanceRequiredFieldValidator control.
         /// </summary>
@@ -209,7 +220,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator SignificanceRequiredFieldValidator;
-        
+
         /// <summary>
         /// LeadOrganizationTextBox control.
         /// </summary>
@@ -218,7 +229,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox LeadOrganizationTextBox;
-        
+
         /// <summary>
         /// InitiativeDropDownList control.
         /// </summary>
@@ -227,7 +238,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect InitiativeDropDownList;
-        
+
         /// <summary>
         /// KeywordList control.
         /// </summary>
@@ -236,7 +247,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect KeywordList;
-        
+
         /// <summary>
         /// KeywordsTextBox control.
         /// </summary>
@@ -245,7 +256,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox KeywordsTextBox;
-        
+
         /// <summary>
         /// CommContactDropDownList control.
         /// </summary>
@@ -254,7 +265,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect CommContactDropDownList;
-        
+
         /// <summary>
         /// CommunicationContactRequiredFieldValidator control.
         /// </summary>
@@ -263,7 +274,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator CommunicationContactRequiredFieldValidator;
-        
+
         /// <summary>
         /// IsMilestoneCheckBox control.
         /// </summary>
@@ -272,7 +283,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsMilestoneCheckBox;
-        
+
         /// <summary>
         /// StrategyTextBox control.
         /// </summary>
@@ -281,7 +292,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox StrategyTextBox;
-        
+
         /// <summary>
         /// StrategyIsRequiredFieldValidator control.
         /// </summary>
@@ -290,7 +301,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator StrategyIsRequiredFieldValidator;
-        
+
         /// <summary>
         /// CommMaterialsDropDownList control.
         /// </summary>
@@ -299,7 +310,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect CommMaterialsDropDownList;
-        
+
         /// <summary>
         /// CommMaterialsDropDownListValidator control.
         /// </summary>
@@ -308,7 +319,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CommMaterialsDropDownListValidator;
-        
+
         /// <summary>
         /// CommentsTextBox control.
         /// </summary>
@@ -317,7 +328,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CommentsTextBox;
-        
+
         /// <summary>
         /// ContactMinistryDropDownList control.
         /// </summary>
@@ -326,7 +337,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect ContactMinistryDropDownList;
-        
+
         /// <summary>
         /// ContactMinistryRequiredFieldValidator control.
         /// </summary>
@@ -335,7 +346,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ContactMinistryRequiredFieldValidator;
-        
+
         /// <summary>
         /// IsCrossGovernmentCheckBox control.
         /// </summary>
@@ -344,7 +355,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsCrossGovernmentCheckBox;
-        
+
         /// <summary>
         /// SharedWithDropDownList control.
         /// </summary>
@@ -353,7 +364,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect SharedWithDropDownList;
-        
+
         /// <summary>
         /// laFieldset control.
         /// </summary>
@@ -362,7 +373,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl laFieldset;
-        
+
         /// <summary>
         /// LACommentsRow control.
         /// </summary>
@@ -371,7 +382,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow LACommentsRow;
-        
+
         /// <summary>
         /// LACommentsTextBox control.
         /// </summary>
@@ -380,7 +391,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox LACommentsTextBox;
-        
+
         /// <summary>
         /// LACommentsCustomValidator control.
         /// </summary>
@@ -389,7 +400,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator LACommentsCustomValidator;
-        
+
         /// <summary>
         /// LAStatusRow control.
         /// </summary>
@@ -398,7 +409,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow LAStatusRow;
-        
+
         /// <summary>
         /// LAStatusRadioButtonList control.
         /// </summary>
@@ -407,7 +418,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList LAStatusRadioButtonList;
-        
+
         /// <summary>
         /// LASectionCheckBoxList control.
         /// </summary>
@@ -416,7 +427,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList LASectionCheckBoxList;
-        
+
         /// <summary>
         /// NRDate control.
         /// </summary>
@@ -425,7 +436,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText NRDate;
-        
+
         /// <summary>
         /// NRTime control.
         /// </summary>
@@ -434,7 +445,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList NRTime;
-        
+
         /// <summary>
         /// StartDate control.
         /// </summary>
@@ -443,7 +454,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText StartDate;
-        
+
         /// <summary>
         /// StartDateRequiredFieldValidator control.
         /// </summary>
@@ -452,7 +463,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator StartDateRequiredFieldValidator;
-        
+
         /// <summary>
         /// StartTime control.
         /// </summary>
@@ -461,7 +472,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList StartTime;
-        
+
         /// <summary>
         /// StartTimeValidator control.
         /// </summary>
@@ -470,7 +481,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl StartTimeValidator;
-        
+
         /// <summary>
         /// StartTimeCustomValidator control.
         /// </summary>
@@ -479,7 +490,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator StartTimeCustomValidator;
-        
+
         /// <summary>
         /// EndDate control.
         /// </summary>
@@ -488,7 +499,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText EndDate;
-        
+
         /// <summary>
         /// EndDateRequiredFieldValidator control.
         /// </summary>
@@ -497,7 +508,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator EndDateRequiredFieldValidator;
-        
+
         /// <summary>
         /// EndTime control.
         /// </summary>
@@ -506,7 +517,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList EndTime;
-        
+
         /// <summary>
         /// EndTimeRequiredValidator control.
         /// </summary>
@@ -515,7 +526,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl EndTimeRequiredValidator;
-        
+
         /// <summary>
         /// EndTimeCustomValidator control.
         /// </summary>
@@ -524,7 +535,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator EndTimeCustomValidator;
-        
+
         /// <summary>
         /// Label24 control.
         /// </summary>
@@ -533,7 +544,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label24;
-        
+
         /// <summary>
         /// IsAllDayCheckBox control.
         /// </summary>
@@ -542,7 +553,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsAllDayCheckBox;
-        
+
         /// <summary>
         /// DateConfirmedLabel control.
         /// </summary>
@@ -551,7 +562,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label DateConfirmedLabel;
-        
+
         /// <summary>
         /// IsDateConfirmed control.
         /// </summary>
@@ -560,7 +571,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsDateConfirmed;
-        
+
         /// <summary>
         /// PotentialDatesLabel control.
         /// </summary>
@@ -569,7 +580,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PotentialDatesLabel;
-        
+
         /// <summary>
         /// PotentialDatesTextBox control.
         /// </summary>
@@ -578,7 +589,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PotentialDatesTextBox;
-        
+
         /// <summary>
         /// ScheduleRow control.
         /// </summary>
@@ -587,7 +598,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow ScheduleRow;
-        
+
         /// <summary>
         /// SchedulingTextBox control.
         /// </summary>
@@ -596,7 +607,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SchedulingTextBox;
-        
+
         /// <summary>
         /// SchedulingFieldValidator control.
         /// </summary>
@@ -605,7 +616,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator SchedulingFieldValidator;
-        
+
         /// <summary>
         /// NROriginDropDownList control.
         /// </summary>
@@ -614,7 +625,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect NROriginDropDownList;
-        
+
         /// <summary>
         /// NROriginDropDownListValidator control.
         /// </summary>
@@ -623,7 +634,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator NROriginDropDownListValidator;
-        
+
         /// <summary>
         /// NRDistributionDropDownList control.
         /// </summary>
@@ -632,7 +643,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect NRDistributionDropDownList;
-        
+
         /// <summary>
         /// NRDistributionDropDownListValidator control.
         /// </summary>
@@ -641,7 +652,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator NRDistributionDropDownListValidator;
-        
+
         /// <summary>
         /// TranslationsRequired control.
         /// </summary>
@@ -650,7 +661,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect TranslationsRequired;
-        
+
         /// <summary>
         /// TranslationsTextbox control.
         /// </summary>
@@ -659,7 +670,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TranslationsTextbox;
-        
+
         /// <summary>
         /// SectorDropDownList control.
         /// </summary>
@@ -668,7 +679,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect SectorDropDownList;
-        
+
         /// <summary>
         /// ThemeDropDownList control.
         /// </summary>
@@ -677,7 +688,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect ThemeDropDownList;
-        
+
         /// <summary>
         /// ActivityNewsList control.
         /// </summary>
@@ -686,7 +697,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater ActivityNewsList;
-        
+
         /// <summary>
         /// PremierRequestedDropDownList control.
         /// </summary>
@@ -695,7 +706,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect PremierRequestedDropDownList;
-        
+
         /// <summary>
         /// RepresentativeDropDownList control.
         /// </summary>
@@ -704,7 +715,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect RepresentativeDropDownList;
-        
+
         /// <summary>
         /// IsAtLegislatureCheckBox control.
         /// </summary>
@@ -713,7 +724,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox IsAtLegislatureCheckBox;
-        
+
         /// <summary>
         /// CityDropDownList control.
         /// </summary>
@@ -722,7 +733,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect CityDropDownList;
-        
+
         /// <summary>
         /// OtherCityRow control.
         /// </summary>
@@ -731,7 +742,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow OtherCityRow;
-        
+
         /// <summary>
         /// OtherCityTextBox control.
         /// </summary>
@@ -740,7 +751,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox OtherCityTextBox;
-        
+
         /// <summary>
         /// VenueTextBox control.
         /// </summary>
@@ -749,7 +760,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox VenueTextBox;
-        
+
         /// <summary>
         /// EventPlannerDropDownList control.
         /// </summary>
@@ -758,7 +769,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect EventPlannerDropDownList;
-        
+
         /// <summary>
         /// VideographerDropDownList control.
         /// </summary>
@@ -767,7 +778,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect VideographerDropDownList;
-        
+
         /// <summary>
         /// RecordsSection control.
         /// </summary>
@@ -776,7 +787,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel RecordsSection;
-        
+
         /// <summary>
         /// deletedDocuments control.
         /// </summary>
@@ -785,7 +796,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField deletedDocuments;
-        
+
         /// <summary>
         /// documentsRepeater control.
         /// </summary>
@@ -794,7 +805,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater documentsRepeater;
-        
+
         /// <summary>
         /// ActionsFieldset control.
         /// </summary>
@@ -803,7 +814,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ActionsFieldset;
-        
+
         /// <summary>
         /// SaveButton control.
         /// </summary>
@@ -812,7 +823,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SaveButton;
-        
+
         /// <summary>
         /// CancelButton control.
         /// </summary>
@@ -821,7 +832,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CancelButton;
-        
+
         /// <summary>
         /// ReviewButton control.
         /// </summary>
@@ -830,7 +841,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ReviewButton;
-        
+
         /// <summary>
         /// CloneButton control.
         /// </summary>
@@ -839,7 +850,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CloneButton;
-        
+
         /// <summary>
         /// DeleteButton control.
         /// </summary>
@@ -848,7 +859,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DeleteButton;
-        
+
         /// <summary>
         /// ActivityIdHiddenField control.
         /// </summary>
@@ -857,7 +868,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField ActivityIdHiddenField;
-        
+
         /// <summary>
         /// UserFirstNameLastNameHiddenField control.
         /// </summary>
@@ -866,7 +877,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField UserFirstNameLastNameHiddenField;
-        
+
         /// <summary>
         /// UserIdHiddenField control.
         /// </summary>
@@ -875,7 +886,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField UserIdHiddenField;
-        
+
         /// <summary>
         /// UserEmailHiddenField control.
         /// </summary>
@@ -884,7 +895,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField UserEmailHiddenField;
-        
+
         /// <summary>
         /// PageGUID control.
         /// </summary>
@@ -893,7 +904,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField PageGUID;
-        
+
         /// <summary>
         /// IsLockedHiddenField control.
         /// </summary>
@@ -902,7 +913,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField IsLockedHiddenField;
-        
+
         /// <summary>
         /// CategoryIdHiddenField control.
         /// </summary>
@@ -911,7 +922,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CategoryIdHiddenField;
-        
+
         /// <summary>
         /// SharedWithSelectedValues control.
         /// </summary>
@@ -920,7 +931,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SharedWithSelectedValues;
-        
+
         /// <summary>
         /// SharedWithSelectedValuesServerSide control.
         /// </summary>
@@ -929,7 +940,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SharedWithSelectedValuesServerSide;
-        
+
         /// <summary>
         /// CommMaterialsSelectedValues control.
         /// </summary>
@@ -938,7 +949,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CommMaterialsSelectedValues;
-        
+
         /// <summary>
         /// CommMaterialsSelectedValuesServerSide control.
         /// </summary>
@@ -947,7 +958,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CommMaterialsSelectedValuesServerSide;
-        
+
         /// <summary>
         /// SectorsSelectedValues control.
         /// </summary>
@@ -956,7 +967,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SectorsSelectedValues;
-        
+
         /// <summary>
         /// SectorsSelectedValuesServerSide control.
         /// </summary>
@@ -965,7 +976,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SectorsSelectedValuesServerSide;
-        
+
         /// <summary>
         /// ThemesSelectedValues control.
         /// </summary>
@@ -974,7 +985,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ThemesSelectedValues;
-        
+
         /// <summary>
         /// ThemesSelectedValuesServerSide control.
         /// </summary>
@@ -983,7 +994,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ThemesSelectedValuesServerSide;
-        
+
         /// <summary>
         /// InitiativesSelectedValues control.
         /// </summary>
@@ -992,7 +1003,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InitiativesSelectedValues;
-        
+
         /// <summary>
         /// InitiativesSelectedValuesServerSide control.
         /// </summary>
@@ -1001,7 +1012,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InitiativesSelectedValuesServerSide;
-        
+
         /// <summary>
         /// ApplicationOwnerOrganizations control.
         /// </summary>
@@ -1010,7 +1021,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ApplicationOwnerOrganizations;
-        
+
         /// <summary>
         /// IsPostBackHiddenField control.
         /// </summary>
@@ -1019,7 +1030,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsPostBackHiddenField;
-        
+
         /// <summary>
         /// IsCommunicationMaterialsDirty control.
         /// </summary>
@@ -1028,7 +1039,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsCommunicationMaterialsDirty;
-        
+
         /// <summary>
         /// IsNROriginsDirty control.
         /// </summary>
@@ -1037,7 +1048,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsNROriginsDirty;
-        
+
         /// <summary>
         /// IsNRDistributionsDirty control.
         /// </summary>
@@ -1046,7 +1057,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsNRDistributionsDirty;
-        
+
         /// <summary>
         /// IsSectorsDirty control.
         /// </summary>
@@ -1055,7 +1066,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsSectorsDirty;
-        
+
         /// <summary>
         /// IsThemesDirty control.
         /// </summary>
@@ -1064,7 +1075,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsThemesDirty;
-        
+
         /// <summary>
         /// IsInitiativesDirty control.
         /// </summary>
@@ -1073,7 +1084,7 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsInitiativesDirty;
-        
+
         /// <summary>
         /// ComContactSelectedValue control.
         /// </summary>
@@ -1082,15 +1093,17 @@ namespace Gcpe.Hub.Calendar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden ComContactSelectedValue;
-        
+
         /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new SiteMaster Master {
-            get {
+        public new SiteMaster Master
+        {
+            get
+            {
                 return ((SiteMaster)(base.Master));
             }
         }

@@ -47,6 +47,7 @@ function SetChanged(activityId) {
         GetActivityStatus(id); // we only one to do this once per open activity, rather than every time a change event is fired on a control
     isChanged = true;
     $('#ChangesPending').show();
+    $('#InactivityNotice').hide();
     $("#SavedSuccessfullyNotice").hide();
 }
 function GetChanged() {

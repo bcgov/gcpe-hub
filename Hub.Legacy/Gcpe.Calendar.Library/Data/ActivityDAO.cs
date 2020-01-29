@@ -306,12 +306,28 @@ public class ActivityDAO
 
         using (var dc = new CorporateCalendarDataContext())
         {
-            var activities = from a in dc.ActiveActivities
+            IQueryable<ActiveActivity> activities;
+
+            if (endDateTime <= DateTime.Today)
+            {
+                //  we want to return cloned activities, which show up as changed with new activities
+                if (statuses.Contains("New")) {
+                    var statusesList = new List<string>();
+
+                    statusesList.Add(statuses[0]);
+                    statusesList.Add("Changed");
+
+                    statuses = statusesList.ToArray();
+                    includeChanged = true;
+                }
+                var daysBetweenTodayAndEndDateTime = (endDateTime - DateTime.Today).Value.Days;
+
+                activities = from a in dc.ActiveActivities
                              let ministries = dc.SystemUserMinistries.Where(m => m.SystemUserId == systemUserId && m.IsActive).Select(m => m.MinistryId)
                              let sharedMinistries = dc.ActivitySharedWiths.Where(asw => asw.ActivityId == a.Id).Select(asw => asw.MinistryId)
                              where (ministries.Any(i => i == a.ContactMinistryId) || ministries.Where(f => sharedMinistries.Any(s => s == f)).Any()
                                         || isCurrentUserInOwnerList)
-                                    && (endDateTime == null || a.StartDateTime <= endDateTime) && a.EndDateTime > DateTime.Today
+                                    && (a.CreatedDateTime >= DateTime.Now.AddDays(daysBetweenTodayAndEndDateTime))
                                     //Changed/New/Reviewed activities
                                     && ((hqStatuses.Contains(a.HqStatus)) ||
                                          (statuses.Contains(a.Status) && a.IsActive) ||
@@ -320,6 +336,24 @@ public class ActivityDAO
                                          //Deleted activities
                                          (includeDeleted && !a.IsActive))
                              select a;
+
+                return activities.ToList();
+            }
+
+            activities = from a in dc.ActiveActivities
+                         let ministries = dc.SystemUserMinistries.Where(m => m.SystemUserId == systemUserId && m.IsActive).Select(m => m.MinistryId)
+                         let sharedMinistries = dc.ActivitySharedWiths.Where(asw => asw.ActivityId == a.Id).Select(asw => asw.MinistryId)
+                         where (ministries.Any(i => i == a.ContactMinistryId) || ministries.Where(f => sharedMinistries.Any(s => s == f)).Any()
+                                    || isCurrentUserInOwnerList)
+                                && (endDateTime == null || a.StartDateTime <= endDateTime) && a.EndDateTime > DateTime.Today
+                                //Changed/New/Reviewed activities
+                                && ((hqStatuses.Contains(a.HqStatus)) ||
+                                     (statuses.Contains(a.Status) && a.IsActive) ||
+                                     //Included the deleted and to be reviewed activities if Changed status is requested
+                                     (includeChanged && !a.IsActive && a.IsActiveNeedsReview) ||
+                                     //Deleted activities
+                                     (includeDeleted && !a.IsActive))
+                         select a;
 
             return activities.ToList();
         }

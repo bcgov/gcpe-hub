@@ -8,6 +8,7 @@ using CorporateCalendar.Data;
 using CorporateCalendar.Security;
 using Microsoft.Reporting.WinForms;
 using Gcpe.Hub.Properties;
+using System.Web.UI.WebControls;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -449,6 +450,14 @@ namespace Gcpe.Hub.Calendar
                         var leadOrganizationTableCell = NewCellWithBorder(activity.LeadOrganization);
                         var commContactTableCell = NewCellWithBorder(activity.ContactName + EXCELBRK + activity.ContactNumber);
 
+                        TableCell eventPlannerTableCell = null;
+                        using (var dc = new CorporateCalendarDataContext())
+                        {
+                            var dbEventPlanner = dc.EventPlanners.FirstOrDefault(e => e.Id == activity.EventPlannerId);
+                            eventPlannerTableCell = dbEventPlanner == null ? NewCellWithBorder("") : NewCellWithBorder(dbEventPlanner.Name);
+                        }
+
+
                         tableRow.Cells.Add(idTableCell);
                         tableRow.Cells.Add(ministryTableCell);
                         tableRow.Cells.Add(NewCellWithBorder("<strong>" + categories + "</strong>"));
@@ -456,6 +465,7 @@ namespace Gcpe.Hub.Calendar
                         tableRow.Cells.Add(NewCellWithBorder("<strong>" + title + "</strong>"));
                         tableRow.Cells.Add(summaryTableCell);
                         tableRow.Cells.Add(NewCellWithBorder(significance));
+                        tableRow.Cells.Add(eventPlannerTableCell);
                         tableRow.Cells.Add(NewCellWithBorder(activity.Schedule));
                         tableRow.Cells.Add(NewCellWithBorder(activity.CommunicationsMaterials));
                         tableRow.Cells.Add(leadOrganizationTableCell);
@@ -474,6 +484,7 @@ namespace Gcpe.Hub.Calendar
                     AddHeaderCell(row, "Title", 90);
                     AddHeaderCell(row, "Summary", 250);
                     AddHeaderCell(row, "Significance and Strategy", 180);
+                    AddHeaderCell(row, "Event Planner", 70);
                     AddHeaderCell(row, "Scheduling Notes", 90);
                     AddHeaderCell(row, "Comm. Materials", 70);
                     AddHeaderCell(row, "Lead Org");

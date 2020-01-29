@@ -338,12 +338,28 @@
     <div style="margin: 0 auto">
 
         <div style="width: 100%; padding-bottom: 10px;">
+            <div runat="server" id="InactivityNotice" class="ChangesNotice" style="background-color: #CCCCCC; border: 1px solid #CCCCCC;">
+                <table style="margin: auto;">
+                    <tr>
+                        <td>
+                            <img src="../images/alert-icon.png" alt="warning" /></td>
+                        <td><span style="font-weight: bold;">Note:</span> This tab will be closed after 15 minutes of inactivity.</td>
+                    </tr>
+                </table>
+            </div>
             <div id="ChangesPending" class="ChangesNotice" style="display: none;">
                 <table style="margin: auto;">
                     <tr>
                         <td>
                             <img src="../images/alert-icon.png" alt="warning" /></td>
-                        <td><span style="font-weight: bold;">Activity has changes that have not been saved</span>. Please click the save button to update this activity.</td>
+                        <td><span style="font-weight: bold;">Activity has changes that have not been saved</span>. Please save your work.</td>
+                    </tr>
+                </table>
+                <table style="margin: auto;">
+                    <tr>
+                        <td>
+                            <img src="../images/alert-icon.png" alt="warning" /><span style="font-weight: bold; padding: 0;">NOTE:</span> This tab will be closed after 15 minutes of inactivity.
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -950,14 +966,14 @@
                         </fieldset>
                         </asp:Panel>
 
-                         <fieldset runat="server" id="ActionsFieldset">
+                         <fieldset runat="server" id="ActionsFieldset" style="font-size: 10px;">
 
                              <%--There is a known issue (see below) that the icons won't show up on asp:buttons,
             so we have jquery buttons and use the postback event from the hidden asp:buttons
             so using a proxy button for the query buttons--%>
 
                             <div style="padding: 1px; padding-bottom: 5px; display: inline-block">
-                                <asp:Button ID="SaveButton" runat="server" OnClick="SaveButtonClick" Text="Save"/>
+                                <asp:Button ID="SaveButton" runat="server" OnClick="SaveButtonClick" Text="Save and Close"/>
 
                                 <asp:Button ID="CancelButton" runat="server" OnClick="CancelButton_Click" Text="Cancel" CssClass="hidden" CausesValidation="false" />
                             </div>
@@ -968,7 +984,7 @@
                             <div style="display: inline-block; display: inline-block">
                                 <asp:Button ID="CloneButton" runat="server" OnClick="CloneButtonClick" Text="Clone" CausesValidation="false" />
                             </div>
-                            <div style="display: inline-block; display: inline-block">
+                            <div style="display: inline-block; display: inline-block; padding-bottom: 5px;">
                                 <asp:Button ID="DeleteButton" runat="server" OnClick="DeleteButton_Click" Text="Delete" CssClass="hidden" CausesValidation="false" />
                             </div>
                         </fieldset>
@@ -1018,7 +1034,27 @@
 
     <script type="text/javascript">
 
+        var idleTime = 0;
         $(document).ready(function () {
+
+            // Increment the idle time counter every minute.
+            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+            // Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+
+            function timerIncrement() {
+                idleTime = idleTime + 1;
+                if (idleTime > 14) { // 15 minutes
+                    window.onbeforeunload = null;
+                    window.open('', '_self', '').close();
+                }
+            }
 
             // Add tool tips
             $("#DetailsTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe this activity in the present tense, including <b>who</b> is participating (each spokesperson and their role), <b>what</b> is happening (key details of the activity) and <b>how much</b> is being funded.  The summary should contain all of the details that are needed for the look ahead report." });
@@ -1037,8 +1073,28 @@
                                                                                         <p align='left'><b>Speech/Remarks:</b> use for Minister’s routine speaking engagements. Start time is speaking time. </p>\
                                                                                         <p align='left'><b>TV/Radio:</b> use for interviews; set to date/time it will air.</p>" });
 
+
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+
+            var saveBtnLabelText = 'Save';
+
+            var activityIdQueryParam = getParameterByName('ActivityId');
+            var isClonedQueryParam = getParameterByName('IsCloned');
+
+            if (activityIdQueryParam !== null || isClonedQueryParam !== null) {
+                saveBtnLabelText = 'Save and Close';
+            }
+
             // Handle Save Button
-            $('#SaveButton').button({ label: 'Save' }).click(function (event) {
+            $('#SaveButton').button({ label: saveBtnLabelText }).click(function (event) {
                 if (!IsSaveValid()) {
                     event.preventDefault();
                     return;
