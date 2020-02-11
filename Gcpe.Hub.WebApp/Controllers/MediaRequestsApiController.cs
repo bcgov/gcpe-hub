@@ -115,7 +115,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     // extract the ids.
                     string inClause = string.Join("','", searchServiceResult.Results.Select(r => r.Document.Values.First()));
-                    List<MediaRequest> data = db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause + "') order by RequestedAt DESC").ToList();
+                    List<MediaRequest> data = db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause + "') order by RequestedAt DESC").ToList();
 
                     LoadNavigationProperties(data);
 
@@ -253,15 +253,15 @@ namespace Gcpe.Hub.WebApp.Controllers
                 //when were getting new ones, we have to get them all. Skipping and limiting is applied to the 'before' requests
                 suffixClause += string.Format(" OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", _skip, _limit);
             }
-            IQueryable<MediaRequest> query = db.MediaRequest;
+            IQueryable<MediaRequest> query = null;
             if (!string.IsNullOrEmpty(suffixClause))
             {
                 string sql = "SELECT DISTINCT rq.* FROM media.MediaRequest rq" + suffixClause;
 
-                query = query.FromSql(sql);
+                query = db.MediaRequest.FromSqlRaw(sql);
             }
 
-            var list = await QueryMediaRequestsAsync(query, idsOnly);
+            var list = await QueryMediaRequestsAsync(query ?? db.MediaRequest, idsOnly);
 
 
             return list.Select(e => ConvertToDto(e));
@@ -333,12 +333,12 @@ namespace Gcpe.Hub.WebApp.Controllers
                 IEnumerable<MediaRequest> list2populate = list;
                 if (withParents.Count() != 0)
                 {
-                    db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id " + SqlHelper.ToInClause(withParents.Select(r => r.RequestParentId.Value))).Load();
+                    db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id " + SqlHelper.ToInClause(withParents.Select(r => r.RequestParentId.Value))).Load();
                     list2populate = list2populate.Union(withParents.Select(r => r.RequestParent));
                 }
 
                 string inClause = SqlHelper.ToInClause(list2populate.Select(r => r.Id));
-                db.MediaRequest.FromSql("SELECT * FROM media.MediaRequest WHERE Id " + inClause)
+                db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id " + inClause)
                      .Include(e => e.Resolution)
                      .Include(e => e.ResponsibleUser)
                      .Include(e => e.CreatedBy)
@@ -348,7 +348,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                      .Include(e => e.TakeOverRequestMinistry)
                      .Load();
 
-                db.MediaRequestContact.FromSql("SELECT * FROM media.MediaRequestContact WHERE MediaRequestId " + inClause)
+                db.MediaRequestContact.FromSqlRaw("SELECT * FROM media.MediaRequestContact WHERE MediaRequestId " + inClause)
                     .Include(e => e.Company).Include(e => e.Contact).Load();
 
                 List<Guid> contactsGuids = new List<Guid>();
@@ -358,7 +358,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                         contactsGuids.Add(mediaRequestContact.ContactId);
                 }
                 inClause = SqlHelper.ToInClause(contactsGuids);
-                db.ContactMediaJobTitle.FromSql("SELECT * FROM media.ContactMediaJobTitle WHERE ContactId " + inClause).Load();
+                db.ContactMediaJobTitle.FromSqlRaw("SELECT * FROM media.ContactMediaJobTitle WHERE ContactId " + inClause).Load();
                 SqlHelper.LoadContactNavigationProperties(inClause, db);
             }
         }

@@ -29,8 +29,8 @@ namespace Gcpe.Hub.WebApp.Providers
         }
         public static void LoadContactNavigationProperties(string inClause, HubDbContext db)
         {
-            db.ContactPhoneNumber.FromSql("SELECT * FROM media.ContactPhoneNumber WHERE ContactId " + inClause).Load();
-            db.ContactWebAddress.FromSql("SELECT * FROM media.ContactWebAddress WHERE ContactId " + inClause).Load();
+            db.ContactPhoneNumber.FromSqlRaw("SELECT * FROM media.ContactPhoneNumber WHERE ContactId " + inClause).Load();
+            db.ContactWebAddress.FromSqlRaw("SELECT * FROM media.ContactWebAddress WHERE ContactId " + inClause).Load();
         }
 
         public static string CreateSearchClause(string search, string pattern)

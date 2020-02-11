@@ -30,7 +30,7 @@ namespace Gcpe.Hub.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HubDbContext"))
                                                                   .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
@@ -107,7 +107,7 @@ namespace Gcpe.Hub.WebApp
                 app.UseSwagger();
 
                 // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-                app.UseSwaggerUi();
+                app.UseSwaggerUI();
             }
         }
     }

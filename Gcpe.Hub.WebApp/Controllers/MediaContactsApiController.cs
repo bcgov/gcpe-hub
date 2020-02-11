@@ -150,8 +150,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                 outlet.CompanyName = dto.Name;
                 outlet.CompanyDescription = " ";
                 outlet.IsOutlet = true;
-                outlet.CreationDate = DateTime.Now;
-                outlet.ModifiedDate = DateTime.Now;
+                outlet.CreationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                outlet.ModifiedDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                 db.Company.Add(outlet);
                 WriteActivityLogEntry(outlet, "", 4); //ActivityType.Record_Created
             }
@@ -185,16 +185,18 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             List<MediaContactDto> results = new List<MediaContactDto>();
 
+            // restore first name search ..  but only first 2 characters for fuzzy matching
+            string s = "(CONTAINS(CompanyName, '\"*{0}*\"') OR CONTAINS(LastName, '\"{0}*\"') OR CONTAINS(FirstName, '\"{1}*\"'))";
+            string whereClause = SqlHelper.CreateSearchClause(filter, s);
+
             var contactsQuery = db.ContactMediaJobTitle
+                                .FromSqlRaw("SELECT cc.* FROM media.ContactMediaJobTitle cc LEFT JOIN media.Contact c ON cc.ContactId = c.Id LEFT JOIN media.Company cp ON cc.CompanyId = cp.Id" + whereClause)
                                 .Include(e => e.Contact)
                                 .Where(e => e.Contact.IsActive)
                                 .Where(e => !e.Contact.MinisterialJobTitleId.HasValue)
                                 .AsQueryable();
 
-            // restore first name search ..  but only first 2 characters for fuzzy matching
-            string s = "(CONTAINS(CompanyName, '\"*{0}*\"') OR CONTAINS(LastName, '\"{0}*\"') OR CONTAINS(FirstName, '\"{1}*\"'))";
-            string whereClause = SqlHelper.CreateSearchClause(filter, s);
-            contactsQuery = contactsQuery.FromSql("SELECT cc.* FROM media.ContactMediaJobTitle cc LEFT JOIN media.Contact c ON cc.ContactId = c.Id LEFT JOIN media.Company cp ON cc.CompanyId = cp.Id" + whereClause);
+
             var contactJobTitles = await contactsQuery.ToListAsync();
 
             if (contactJobTitles.Count == 0) return results;
@@ -208,7 +210,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 if (!outletGuids.Contains(contactJobTitle.CompanyId))
                     outletGuids.Add(contactJobTitle.CompanyId);
             }
-            db.Company.FromSql("SELECT * FROM media.Company WHERE Id " + SqlHelper.ToInClause(outletGuids)).Load();
+            db.Company.FromSqlRaw("SELECT * FROM media.Company WHERE Id " + SqlHelper.ToInClause(outletGuids)).Load();
             SqlHelper.LoadContactNavigationProperties(SqlHelper.ToInClause(contactsGuids), db);
 
             foreach (ContactMediaJobTitle contactJob in contactJobTitles.OrderBy(e => e.Contact.FirstName).ThenBy(e => e.Contact.LastName).ThenBy(e => e.Company.CompanyName))
@@ -405,6 +407,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     WriteActivityLogEntry(contact, "", 4); //  4=ActivityType.Record_Created
                 }
                 jobDto.Id = contactJob.Id;
+                db.Entry(contactJob).State = EntityState.Added;
             }
             else
             {
