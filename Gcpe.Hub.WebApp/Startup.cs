@@ -30,7 +30,7 @@ namespace Gcpe.Hub.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc(options => options.EnableEndpointRouting = false).AddNewtonsoftJson();
 
             services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HubDbContext"))
                                                                   .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
