@@ -78,7 +78,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             // add GCPE Media Relations in the ministry list
             return db.Ministry
-                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier"))
+                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier") || m.Abbreviation == "COVID")
                      .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName);
         }
 
@@ -135,7 +135,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             Ministry ministry = await db.Ministry.FindAsync(dto.Id);
 
             // Only permit updating select properties.
-            SystemUser priUser = null; 
+            SystemUser priUser = null;
             if (dto.PrimaryContact != null)
             {
                 priUser = await db.SystemUser.SingleOrDefaultAsync(e => e.RowGuid == dto.PrimaryContact.Id);
