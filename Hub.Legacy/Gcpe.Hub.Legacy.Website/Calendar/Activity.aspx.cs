@@ -369,7 +369,7 @@ namespace Gcpe.Hub.Calendar
         }
 
         // We might want to put these in the Language table if the need for a "Add Hindi" button (for example) arises in NRMS ... and news
-        static string[] defaultTranslations = { "Chinese (Simplified)", "Chinese (Traditional)", "French", "Hindi", "Korean", "Punjabi", "Tagalog", "Urdu" };
+        static string[] defaultTranslations = { "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Farsi", "French", "Hebrew", "Hindi", "Korean", "Punjabi", "Tagalog", "Urdu" };
         private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<string> translations, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins)
         {
             var ddm = new DropDownListManager(calendarDataContext);
