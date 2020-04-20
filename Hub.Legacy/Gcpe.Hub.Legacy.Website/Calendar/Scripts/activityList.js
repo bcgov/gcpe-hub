@@ -66,7 +66,7 @@ function saveFilter(name, queryString, msgCallBack) {
 }
 function UpdateMyQueriesList(updatedData) {
     $("#MyQueryList").empty();
-    for (var i in updatedData) { // There are 3 columns returned (from the view) for each row
+    for (var i in updatedData) {
         var aFilter = updatedData[i];
         var listItem = '<li><span id="' + aFilter.Id + '">'
             + '<a href=\"javascript:runMyQuery(\'' + aFilter.QueryString + '\')\">' + aFilter.Name + '</a></span></li>';
