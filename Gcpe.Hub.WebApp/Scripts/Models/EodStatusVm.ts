@@ -8,8 +8,7 @@
         this.lastActivity = ko.observable(undefined);
         this.ministry = ko.observable(new MinistryVm(data.ministry));
 
-        if (data.lastActivity)
-        {
+        if (data.lastActivity) {
             this.lastActivity(new Date(data.lastActivity));
         }
 
@@ -38,7 +37,7 @@
             if (this.eodState() === "OK") {
                 retval = "No new media requests";
             } else {
-                
+
                 if (this.ministry() && this.ministry().eodLastRunDateTime()) {
                     var nowDtStr: string = moment(new Date()).format("YYYY-MM-DD");
                     var lrd: moment.Moment = moment(this.ministry().eodLastRunDateTime());
@@ -52,7 +51,7 @@
                             nextWeek: 'dddd [at] LT',
                             lastDay: '[yesterday at] LT ',
                             lastWeek: '[last] dddd [at] LT',
-                            sameElse: 'dddd, MMM D, h:mm A'
+                            sameElse: 'dddd, MMM D, YYYY, h:mm A'
                         });
                     }
                 }
@@ -65,7 +64,7 @@
             return retval;
         });
 
-        
+
     }
 
     public static findEodReportSummaryMinistries(callback: Function): void {

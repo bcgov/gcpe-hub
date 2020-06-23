@@ -106,7 +106,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     adjustedQuery = "/.*" + query + ".*/";
                 }
                 // get a list of IDs from the search service.
-                var facets = new Dictionary<string, string> { { "leadMinistryDisplayName" , leadMinistryDisplayName}, { "companyNames", companyNames}, { "contactNames", contactNames} };
+                var facets = new Dictionary<string, string> { { "leadMinistryDisplayName", leadMinistryDisplayName }, { "companyNames", companyNames }, { "contactNames", contactNames } };
                 DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
@@ -181,7 +181,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 if (!string.IsNullOrEmpty(facet.Value))
                 {
                     string azureFormat = facet.Key.EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
-                    newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, facet.Key, facet.Value.Replace("'","''")));
+                    newUri = QueryHelpers.AddQueryString(newUri, "filters", string.Format(azureFormat, facet.Key, facet.Value.Replace("'", "''")));
                 }
             }
             newUri = QueryHelpers.AddQueryString(newUri, "selectedFields", "id");
@@ -397,7 +397,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<Guid> Post([FromBody]MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
+        public async Task<Guid> Post([FromBody] MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
 
@@ -440,7 +440,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpPost("postendofdayupdates")]
-        public async Task UpdateEndOfDay([FromBody]List<ReportUpdate> updates)
+        public async Task UpdateEndOfDay([FromBody] List<ReportUpdate> updates)
         {
             var mediaRequestIds = updates.Select(e => e.Id).ToArray();
 
@@ -779,7 +779,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         }
         [HttpPut("{id}")]
-        public async Task Put(Guid id, [FromBody]MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
+        public async Task Put(Guid id, [FromBody] MediaRequestDto dto, Boolean triggerEmail = false, Boolean onlyEmailMyself = false)
         {
             //TODO: Consider if this method should return DTO instead of Guid
             if (id != dto.Id)
@@ -1030,7 +1030,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             string subject = subjectTemplate.Replace("{{MinistryAbbreviation}}", dto.LeadMinistry.Abbreviation).Replace("{{RequestTopic}}", dto.RequestTopic);
 
-            string bodyHtml = GenerateEmail(dto);
+            string bodyHtml = GenerateEmail(dto, onlyEmailMyself);
 
             var toList = new List<MailAddress>();
             var ccList = new List<MailAddress>();
@@ -1073,12 +1073,13 @@ namespace Gcpe.Hub.WebApp.Controllers
             {
                 await mailProvider.SendAsync(subject, bodyHtml, myContact, toList, ccList);
             }
-            else {
+            else
+            {
                 var toMyself = new List<MailAddress>();
                 toMyself.Add(myContact);
                 await mailProvider.SendAsync(subject, bodyHtml, myContact, toMyself, null);
             }
-            
+
 
             // send any pending take over requests.
             if (dto.TakeOverRequestMinistry != null)
@@ -1126,7 +1127,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 ccList.Add(MailAddressFor(ministry.SecondContactUser));
 
             await mailProvider.SendAsync(messageSubject, messageBody, myContact, toList, ccList);
-            
+
         }
 
         private static string FormatTelephone(string telephone, string extension)
@@ -1266,20 +1267,40 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         }
 
-        private string GenerateEmail(MediaRequestDto dto)
+        private string GenerateEmail(MediaRequestDto dto, Boolean onlyEmailMyself)
         {
+            var isClosed = dto.RespondedAt != null;
+
             string template = "";
             //closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>"
             template += "<p style=\"padding-right: 8px; vertical-align:top;\">";
             template += "<b>Deadline</b>  ";
             template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";
+            if (isClosed) // add responded date to closed request
+            {
+                template += "<b>Responded</b>  ";
+                template += "<span style=\"color:black;\">&#8203;</span>{{RespondedAt}}<br />";
+            }
             template += "<br /><b>Request</b><br />";
             template += "<span style=\"color:black;\">{{Request}}</span><br />";
-            template += "<br /><b>Background</b><br />";
-            template += "<span style=\"color:black;\">{{Background}}</span><br />";
-            template += "<b>Recommendation</b>";
-            template += "<span style=\"color:black;\"></span>";
-            template += "</p>";
+            if (isClosed) // add response to closed request
+            {
+                template += "<br /><b>Response</b><br />";
+                template += "<span style=\"color:black;\">{{Response}}</span><br />";
+            }
+            if (!isClosed)  // only add recommendation to open requests, remove if closed
+            {
+                template += "<br /><b>Recommendation</b>";
+                template += "<span style=\"color:black;\"></span>";
+                template += "</p>";
+            }
+            if (!isClosed || (isClosed && dto.ParentRequest != null)) // only add background to open requests, remove if closed (or sending a closed follow-up to myself)
+            {
+                template += "<br /><b>Background</b><br />";
+                template += "<span style=\"color:black;\">{{Background}}</span><br />";
+            }
+            
+
 
             var sb = new StringBuilder();
 
@@ -1360,9 +1381,16 @@ namespace Gcpe.Hub.WebApp.Controllers
                 template = template.Replace("{{Deadline}}", "ASAP");
             }
 
+            if (dto.RespondedAt.HasValue)
+            {
+                template = template.Replace("{{RespondedAt}}", dto.RespondedAt?.DateTime.ToLocalTime().ToString("f"));
+            }
+
             template = template.Replace("{{MinistryName}}", dto.LeadMinistry.DisplayAs);
             template = template.Replace("{{RequestedAt}}", dto.RequestedAt.DateTime.ToLocalTime().ToString("f"));
             template = template.Replace("{{Request}}", dto.RequestContent.Replace("\r\n", "\n").Replace("\n", "<br />"));
+            if (isClosed) template = template.Replace("{{Response}}", dto.Response.Replace("\r\n", "\n").Replace("\n", "<br />")); // add the response to closed requests
+
 
             string background = "";
 
@@ -1385,7 +1413,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 background += "</div>";
             }
 
-            template = template.Replace("{{Background}}", background);
+            if(!isClosed || (isClosed && dto.ParentRequest != null)) template = template.Replace("{{Background}}", background); // add the background to open requests
 
             sb.Append(template);
 

@@ -1,7 +1,9 @@
 ﻿extern alias legacy;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -524,6 +526,72 @@ namespace Gcpe.Hub.News.ReleaseManagement
             }
         }
 
+        public string RequiredTranslations()
+        {
+            var rvl = "";
+
+            if (Release.ActivityId.HasValue)
+            {
+                rvl = db.Database.SqlQuery<string>(@"select Translations from calendar.activity where Id=@Id",
+                    new object[] { new SqlParameter("@Id", Release.ActivityId) }).FirstOrDefault();
+            }
+
+            return rvl;
+
+        }
+
+        public bool HasTranslations
+        {
+            get { return Release.HasTranslations; }
+            set { Release.HasTranslations = value; }
+        }
+
+        private List<string> translations;
+        public IEnumerable<string> Translations
+        {
+            get
+            {
+                if (translations == null)
+                {
+                    translations = new List<string>();
+
+#if !LOCAL_MEDIA_STORAGE
+                    var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("translations"));
+
+                    var directory = container.GetDirectoryReference(ReleasePathName);
+                    IEnumerable<CloudBlockBlob> blobs = directory.GetDirectoryReference(Release.Key.ToLower()).ListBlobs().OfType<CloudBlockBlob>();
+                    if (blobs.Count() == 0)
+                    {
+                        blobs = directory.GetDirectoryReference(Release.Key).ListBlobs().OfType<CloudBlockBlob>();
+                    }
+
+                    foreach (CloudBlockBlob blob in blobs)
+                    {
+                        string fileName;
+                        blob.FetchAttributes();
+                        translations.Add(blob.Metadata.TryGetValue("filename", out fileName) ? fileName : Path.GetFileName(blob.Name));
+                    }
+#else
+
+                    if (!String.IsNullOrEmpty(Settings.Default.MediaAssetsUnc))
+                    {
+                        string directory = Path.Combine(Settings.Default.MediaAssetsUnc, ReleasePathName, Release.Key);
+
+                        if (Directory.Exists(directory))
+                        {
+                            foreach (string file in Directory.GetFiles(directory))
+                            {
+                                string key = "/" + Release.Key + "/" + Path.GetFileName(file);
+                                mediaAssets.Add(Path.GetFileName(file));
+                            }
+                        }
+                    }
+#endif
+                }
+                return translations;
+            }
+        }
+
         public Uri Asset
         {
             get { return Release.AssetUrl == "" ? null : new Uri(Release.AssetUrl); }
@@ -683,6 +751,18 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
                 return count;
             }
+        }
+
+        private bool displayTranslationsAnchorPanel = false;
+        public bool DisplayTranslationsAnchorPanel
+        {
+            get { return displayTranslationsAnchorPanel; }
+            set { displayTranslationsAnchorPanel = value; }
+        }
+
+        public List<NewsReleaseLog> MostRecentLogMessages
+        {
+            get { return Release.Logs.OrderBy(l => l.DateTime).ToList(); }
         }
 
         public IEnumerable<HistoryHtml> History

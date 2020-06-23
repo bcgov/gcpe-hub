@@ -748,6 +748,7 @@
     <Content Include="News\ReleaseManagement\Releases.aspx" />
     <Content Include="News\ReleaseManagement\Scripts\ReleaseManagement.js" />
     <Content Include="News\ReleaseManagement\Scripts\se-v2.js" />
+    <Content Include="News\TranslationManagement.asmx" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1808,6 +1809,10 @@
     </Compile>
     <Compile Include="News\LiveFeedManagement.aspx.designer.cs">
       <DependentUpon>LiveFeedManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News\TranslationManagement.asmx.cs">
+      <DependentUpon>TranslationManagement.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

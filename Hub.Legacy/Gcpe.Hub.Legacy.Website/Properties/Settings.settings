@@ -164,6 +164,12 @@
     <Setting Name="MediaAssetsUri" Type="System.Uri" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ContentDeliveryUri" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TranslationsUri" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="PublishLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>

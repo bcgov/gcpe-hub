@@ -93,7 +93,7 @@ namespace Gcpe.Hub.News
 #if !LOCAL_MEDIA_STORAGE
             var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("files"));
 
-            foreach (CloudBlockBlob blob in container.ListBlobs(null, false, BlobListingDetails.Metadata, null, null).OfType<CloudBlockBlob>())
+            foreach (CloudBlockBlob blob in container.ListBlobs(null, false, BlobListingDetails.Metadata, null, null).OfType<CloudBlockBlob>().OrderByDescending(b => b.Properties.LastModified))
             {
                 string fileName;
                 mediaAssets.Add(blob.Metadata.TryGetValue("filename", out fileName) ? fileName : Path.GetFileName(blob.Name));

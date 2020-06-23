@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gcpe.Hub.News.ReleaseManagement {
-    
-    
-    public partial class Release {
-        
+namespace Gcpe.Hub.News.ReleaseManagement
+{
+
+
+    public partial class Release
+    {
+
         /// <summary>
         /// ctrlNavBar control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Gcpe.Hub.News.ReleaseManagement.Controls.ReleaseNavigationBar ctrlNavBar;
-        
+
         /// <summary>
         /// ltrReleaseName control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrReleaseName;
-        
+
         /// <summary>
         /// ltrRssSummay control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrRssSummay;
-        
+
         /// <summary>
         /// pnlErrors control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlErrors;
-        
+
         /// <summary>
         /// rptErrors control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptErrors;
-        
+
         /// <summary>
         /// pnlSelectMinistry control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSelectMinistry;
-        
+
         /// <summary>
         /// rblMinistry control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblMinistry;
-        
+
         /// <summary>
         /// pnlShowMinistry control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlShowMinistry;
-        
+
         /// <summary>
         /// pnlNoMinistry control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoMinistry;
-        
+
         /// <summary>
         /// btnApprove control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnApprove;
-        
+
         /// <summary>
         /// CancelApprove control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton CancelApprove;
-        
+
         /// <summary>
         /// EditSwitch control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink EditSwitch;
-        
+
         /// <summary>
         /// literalSelectedLists control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal literalSelectedLists;
-        
+
         /// <summary>
         /// ApproveSwitch control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink ApproveSwitch;
-        
+
         /// <summary>
         /// PublishSwitch control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink PublishSwitch;
-        
+
         /// <summary>
         /// lbtnUnpublishSwitch control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnUnpublishSwitch;
-        
+
         /// <summary>
         /// txtCorpCalId control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCorpCalId;
-        
+
         /// <summary>
         /// plannedPublishDateTimePicker control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox plannedPublishDateTimePicker;
-        
+
         /// <summary>
         /// chkNewsArchives control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkNewsArchives;
-        
+
         /// <summary>
         /// chkNewsOnDemand control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkNewsOnDemand;
-        
+
         /// <summary>
         /// chkMediaContacts control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkMediaContacts;
-        
+
         /// <summary>
         /// mediaDistributionListBox control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox mediaDistributionListBox;
-        
+
         /// <summary>
         /// btnSavePlannedPublishDate control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSavePlannedPublishDate;
-        
+
         /// <summary>
         /// CancelSavePlannedPublishDate control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton CancelSavePlannedPublishDate;
-        
+
         /// <summary>
         /// literal2 control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal literal2;
-        
+
         /// <summary>
         /// btnPublish control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPublish;
-        
+
         /// <summary>
         /// ReleaseCategoriesEdit control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink ReleaseCategoriesEdit;
-        
+
         /// <summary>
         /// lblViewHomeTopOrFeature control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblViewHomeTopOrFeature;
-        
+
         /// <summary>
         /// CategoriesEdit control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel CategoriesEdit;
-        
+
         /// <summary>
         /// lblHomeTopOrFeature control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblHomeTopOrFeature;
-        
+
         /// <summary>
         /// homeTopSwitch control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink homeTopSwitch;
-        
+
         /// <summary>
         /// valHomeTopOrFeature control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField valHomeTopOrFeature;
-        
+
         /// <summary>
         /// homeFeatureSwitch control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink homeFeatureSwitch;
-        
+
         /// <summary>
         /// rptMinistry control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptMinistry;
-        
+
         /// <summary>
         /// rptSector control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptSector;
-        
+
         /// <summary>
         /// rptTheme control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTheme;
-        
+
         /// <summary>
         /// cklstTag control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cklstTag;
-        
+
         /// <summary>
         /// btnSaveCategories control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveCategories;
-        
+
         /// <summary>
         /// lbtnCancelCategories control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancelCategories;
-        
+
         /// <summary>
         /// AssetsEditSwitch control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink AssetsEditSwitch;
-        
+
         /// <summary>
         /// txtAsset control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAsset;
-        
+
         /// <summary>
         /// chkHasMediaAssets control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkHasMediaAssets;
-        
+
         /// <summary>
         /// rptAssetList control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAssetList;
-        
+
         /// <summary>
         /// AssetUploadBlock control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel AssetUploadBlock;
-        
+
         /// <summary>
         /// btnSaveAssets control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveAssets;
-        
+
         /// <summary>
         /// hdnAssetButton control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button hdnAssetButton;
-        
+
         /// <summary>
         /// lbtnCancelAssets control.
         /// </summary>
@@ -434,7 +436,79 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancelAssets;
-        
+
+        /// <summary>
+        /// TranslationsEditSwitch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink TranslationsEditSwitch;
+
+        /// <summary>
+        /// TranslationsAnchorPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel TranslationsAnchorPanel;
+
+        /// <summary>
+        /// chkHasTranslations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkHasTranslations;
+
+        /// <summary>
+        /// rptTranslationList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptTranslationList;
+
+        /// <summary>
+        /// TranslationUploadBlock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel TranslationUploadBlock;
+
+        /// <summary>
+        /// btnSaveTranslations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveTranslations;
+
+        /// <summary>
+        /// hdnTranslationButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button hdnTranslationButton;
+
+        /// <summary>
+        /// lbtnCancelTranslations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnCancelTranslations;
+
         /// <summary>
         /// MetaEditSwitch control.
         /// </summary>
@@ -443,7 +517,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink MetaEditSwitch;
-        
+
         /// <summary>
         /// ltrLocation control.
         /// </summary>
@@ -452,7 +526,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrLocation;
-        
+
         /// <summary>
         /// Literal1 control.
         /// </summary>
@@ -461,7 +535,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Literal1;
-        
+
         /// <summary>
         /// Literal4 control.
         /// </summary>
@@ -470,7 +544,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Literal4;
-        
+
         /// <summary>
         /// Literal3 control.
         /// </summary>
@@ -479,7 +553,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Literal3;
-        
+
         /// <summary>
         /// MetaEdit control.
         /// </summary>
@@ -488,7 +562,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel MetaEdit;
-        
+
         /// <summary>
         /// txtKey control.
         /// </summary>
@@ -497,7 +571,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtKey;
-        
+
         /// <summary>
         /// txtRedirect control.
         /// </summary>
@@ -506,7 +580,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRedirect;
-        
+
         /// <summary>
         /// releaseDateTimePicker control.
         /// </summary>
@@ -515,7 +589,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox releaseDateTimePicker;
-        
+
         /// <summary>
         /// txtLocation control.
         /// </summary>
@@ -524,7 +598,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLocation;
-        
+
         /// <summary>
         /// txtSummary control.
         /// </summary>
@@ -533,7 +607,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSummary;
-        
+
         /// <summary>
         /// txtSocialMediaHeadline control.
         /// </summary>
@@ -542,7 +616,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSocialMediaHeadline;
-        
+
         /// <summary>
         /// txtSocialMediaSummary control.
         /// </summary>
@@ -551,7 +625,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSocialMediaSummary;
-        
+
         /// <summary>
         /// txtKeywords control.
         /// </summary>
@@ -560,7 +634,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtKeywords;
-        
+
         /// <summary>
         /// btnSaveMeta control.
         /// </summary>
@@ -569,7 +643,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveMeta;
-        
+
         /// <summary>
         /// lbtnCancelMeta control.
         /// </summary>
@@ -578,7 +652,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancelMeta;
-        
+
         /// <summary>
         /// rptDocument control.
         /// </summary>
@@ -587,7 +661,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptDocument;
-        
+
         /// <summary>
         /// pnlHistory control.
         /// </summary>
@@ -596,7 +670,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlHistory;
-        
+
         /// <summary>
         /// showAllHistory control.
         /// </summary>
@@ -605,7 +679,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton showAllHistory;
-        
+
         /// <summary>
         /// pnlDelete control.
         /// </summary>
@@ -614,7 +688,7 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlDelete;
-        
+
         /// <summary>
         /// btnDelete control.
         /// </summary>
@@ -623,15 +697,17 @@ namespace Gcpe.Hub.News.ReleaseManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDelete;
-        
+
         /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new Gcpe.Hub.News.ReleaseManagement.ReleaseManagement Master {
-            get {
+        public new Gcpe.Hub.News.ReleaseManagement.ReleaseManagement Master
+        {
+            get
+            {
                 return ((Gcpe.Hub.News.ReleaseManagement.ReleaseManagement)(base.Master));
             }
         }

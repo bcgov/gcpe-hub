@@ -65,6 +65,10 @@
         <a href="#Assets" draggable='false' class="nav-menu-item">Assets</a>
     </div>
 
+    <div class="release-documents hideForAdvisories" style="padding:0px 2px 0px 0px;">
+        <a href="#Translations" draggable='false' class="nav-menu-item">Translations</a>
+    </div>
+
     <div class="release-documents" style="padding:0px 2px 0px 0px;">
         <a href="#Meta" draggable='false' class="nav-menu-item">Meta</a>
     </div>

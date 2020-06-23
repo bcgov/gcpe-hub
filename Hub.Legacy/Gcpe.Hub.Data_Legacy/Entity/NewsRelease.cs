@@ -57,6 +57,7 @@ namespace Gcpe.Hub.Data.Entity
         public string RedirectUrl { get; set; }
         public Nullable<int> NodSubscribers { get; set; }
         public Nullable<int> MediaSubscribers { get; set; }
+        public bool HasTranslations { get; set; }
     
         public virtual ICollection<NewsReleaseLanguage> Languages { get; set; }
         public virtual ICollection<Ministry> Ministries { get; set; }

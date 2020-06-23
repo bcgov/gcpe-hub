@@ -17,6 +17,18 @@
         var isPublishDateRequired = false;
 
         function pageLoad() {
+            var translationsAnchor = $("#TranslationsAnchorPanel");
+            if (translationsAnchor.length) {
+                $('html, body').animate({
+                    scrollTop: $('#Assets').offset().top + $('#Assets').outerHeight(true)
+                }, 1000);
+            }
+
+            $("#FileInput1").change(function () {
+                if (!$("#chkHasTranslations").is(":checked")) {
+                    $("#formContentPlaceHolder_formContentPlaceHolder_chkHasTranslations").prop("checked", true);
+                }
+            });
 
             function getPhotoId(url) {
                 var photoId = "";
@@ -95,6 +107,10 @@
                     });
                 }
                 
+                return IsAssetsFormValid();
+            });
+
+            $("#<%= btnSaveTranslations.ClientID %>").click(function () {
                 return IsAssetsFormValid();
             });
 
@@ -186,10 +202,25 @@
                 return false;
             });
 
+            $("#<%= TranslationsEditSwitch.ClientID %>").click(function () {
+                HideAllSettings();
+                $("#TranslationsEdit").removeClass('disable-section');
+                $("#TranslationsView").hide();
+                $("#TranslationsEdit").show();
+                return false;
+            });
+
             $("#<%= lbtnCancelAssets.ClientID %>").click(function () {
                 ShowAllSettings();
                 $("#AssetsEdit").hide();
                 $("#AssetsView").show();
+                return true;
+            });
+
+            $("#<%= lbtnCancelTranslations.ClientID %>").click(function () {
+                ShowAllSettings();
+                $("#TranslationsEdit").hide();
+                $("#TranslationsView").show();
                 return true;
             });
 
@@ -435,8 +466,36 @@
             }
         }
 
+        function OnHasTranslationsClick(checkBox) {
+
+            if (checkBox.checked) {
+                $("#TranslationUploadBlock").show();
+            } else {
+                $("#TranslationUploadBlock").hide();
+                $("#FileInput1").replaceWith($("#FileInput1").clone(true));
+            }
+        }
+
 
         function OnAssetDeleteSwitch(link) {
+            deleted = (link.text != "Cancel");
+
+            file = $('td:first span', $(link).parent().parent());
+
+            if (deleted) {
+                file.css("text-decoration", "line-through");
+                link.text = "Cancel";
+
+            } else {
+                file.css("text-decoration", "");
+                link.text = "Delete";
+            }
+
+            $(link).parent().find("input[type=hidden]").val(deleted);
+
+        }
+
+        function OnTranslationDeleteSwitch(link) {
             deleted = (link.text != "Cancel");
 
             file = $('td:first span', $(link).parent().parent());
@@ -461,6 +520,16 @@
                 startUpload('<%= ResolveUrl("~/News/MediaAssetManagement.asmx") %>', 'FileInput', 4 * 1024 * 1024, 'uploadProgress', 'uploadStatusMessage', '', '', 'uploadkey', 'uploadPath', 'hdnAssetButton');
             } else {
                 $("#hdnAssetButton").click();
+            }
+        }
+
+        function SaveTranslations() {
+            if ("<%# TranslationUploadBlock.Visible%>".toLowerCase() == "true"
+                && document.getElementById("FileInput1").files != null
+                && document.getElementById("FileInput1").files.length > 0) {
+                startUpload('<%= ResolveUrl("~/News/TranslationManagement.asmx") %>', 'FileInput1', 4 * 1024 * 1024, 'uploadProgress1', 'uploadStatusMessage1', '', '', 'uploadkey1', 'uploadPath1', 'hdnTranslationButton');
+            } else {
+                $("#hdnTranslationButton").click();
             }
         }
     </script>
@@ -961,8 +1030,6 @@
                         </div>
                     </div>
 
-                    <%--<h3 class="section-title">Media Assets</h3>--%>
-
                     <div class="view-group">
                         <div class="lbl">Has Media Assets</div>
                         <div class="txt">
@@ -976,7 +1043,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.MediaAssetsUri + Model.ReleasePathName  + "/" + Model.Key.ToLower() + "/" + Container.DataItem.ToString() %>' Text="<%# Container.DataItem.ToString() %>" /></td>
+                                            <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.MediaAssetsUri + Model.ReleasePathName  + "/" + Model.Key.ToLower() + "/" + Container.DataItem.ToString().ToLower() %>' Text="<%# Container.DataItem.ToString() %>" /></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -1071,6 +1138,118 @@
                         <asp:Button ID="btnSaveAssets" runat="server" Text="Save" CssClass="primary" OnClientClick="SaveAssets(); return false;" />
                         <asp:Button ID="hdnAssetButton" runat="server" Text="Save" CssClass="primary" OnClick="btnSaveAssets_Click" Style="visibility: hidden; display: none;" ClientIDMode="Static" />
                         <asp:LinkButton runat="server" ID="lbtnCancelAssets" CssClass="cancel" Text="Cancel" OnClick="lbtnCancelAssets_Click"></asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+            <div id="Translations" class="hideForAdvisories">
+                <div id="TranslationsView" class="section view">
+                    <h2 class="section-title">Translations</h2>
+                    <div class="section-action-options">
+                        <asp:HyperLink runat="server" NavigateUrl="#" ID="TranslationsEditSwitch" CssClass="switch" ClientIDMode="Static" Visible="<%# Model.CanEdit %>">Edit</asp:HyperLink>
+                    </div>  
+                    <div class="view-group">
+                        <div class="lbl">Has Translations</div>
+                        <div class="txt">
+                            <asp:Literal runat="server" Text='<%# (Model.HasTranslations ? "Yes" : "No") %>' />
+                        </div>
+                        <div class="lbl">Required Translations</div>
+                        <div class="txt">
+                            <asp:Literal runat="server" Text='<%# (!string.IsNullOrWhiteSpace(Model.RequiredTranslations()) ? Model.RequiredTranslations() : "") %>' />
+                        </div>
+                         <asp:Panel ID="TranslationsAnchorPanel" CssClass="field-group" ClientIDMode="Static" runat="server" Visible="<%# Model.DisplayTranslationsAnchorPanel %>" />
+                        <table id="TranslationList1">
+                            <% if (Model.Translations.Any())
+                                {
+                            %>
+                            <asp:Repeater DataSource="<%# Model.Translations %>" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:HyperLink runat="server" NavigateUrl='<%# Gcpe.Hub.Properties.Settings.Default.ContentDeliveryUri + Model.ReleasePathName  + "/" + Model.Key + "/" + Container.DataItem.ToString() %>' Text="<%# Container.DataItem.ToString() %>" Target="_blank" /></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <% }
+                                else
+                                {
+                            %>
+                            <tr>
+                                <td>No translations are uploaded.</td>
+                            </tr>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="TranslationsEdit" class="section edit">
+                    <h2>Translations</h2>
+                    <div class="field-group">
+                        <div class="txt">
+                            <asp:CheckBox runat="server" ID="chkHasTranslations" Checked="<%# Model.HasTranslations %>" Text="Has Translations" onclick="OnHasTranslationsClick(this);" />
+                        </div>
+                    </div>
+                    <div class="lbl">Required Translations</div>
+                        <div class="txt" style="color: black;">
+                            <asp:Literal runat="server" Text='<%# (!string.IsNullOrWhiteSpace(Model.RequiredTranslations()) ? Model.RequiredTranslations() : "") %>' />
+                        </div>
+                    <div class="field-group" style="margin-top: 8px;">
+                        <table class="txt" id="TranslationList2">
+                            <% if (Model.Translations.Any())
+                                {
+                            %>
+                            <asp:Repeater ID="rptTranslationList" DataSource="<%# Model.Translations %>" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="file" runat="server" Text="<%# Container.DataItem.ToString() %>" /></td>
+                                        <td style="text-align: center; padding: 3px;">
+                                            <asp:HyperLink ID="btnDeleteTranslation" runat="server" CssClass="switch" NavigateUrl="#" onclick='OnTranslationDeleteSwitch(this); return false;' Text="Delete"></asp:HyperLink>
+                                            <asp:HiddenField ID="valDeleted" Value="" runat="server" />
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                            <% }
+                                else
+                                {
+                            %>
+                            <tr>
+                                <td colspan="2">No translations are uploaded.</td>
+                            </tr>
+                            <% } %>
+                        </table>
+                    </div>
+
+                    <asp:Panel ID="TranslationUploadBlock" CssClass="field-group" ClientIDMode="Static" runat="server" Visible="<%# Model.IsPublished || (Model.IsCommitted && !Model.IsPublished) || Model.IsApproved %>">
+                        <h3>Upload File</h3>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="file" name="FileInput1" id="FileInput1" class="fileInput" multiple="multiple" size="60" />
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <input type="hidden" value="<%# Model.Key %>" id="uploadkey1" name="uploadkey1" />
+                                    <input type="hidden" value="<%# Model.ReleasePathName %>" id="uploadPath1" name="uploadPath1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <progress id="uploadProgress1" value="0" max="100" style="width: 100%; height: 10px" hidden="hidden" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="left">
+                                    <span id="uploadStatusMessage1" class="message"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+
+                    <div class="inform-actions">
+                        <asp:Button ID="btnSaveTranslations" runat="server" Text="Save" CssClass="primary" OnClientClick="SaveTranslations(); return false;" />
+                        <asp:Button ID="hdnTranslationButton" runat="server" Text="Save" CssClass="primary" OnClick="btnSaveTranslations_Click" Style="visibility: hidden; display: none;" ClientIDMode="Static" />
+                        <asp:LinkButton runat="server" ID="lbtnCancelTranslations" CssClass="cancel" Text="Cancel" OnClick="lbtnCancelTranslations_Click"></asp:LinkButton>
                     </div>
                 </div>
             </div>
