@@ -23,6 +23,7 @@
     [Keywords]        NVARCHAR (MAX)     NOT NULL,
     [AssetUrl]        VARCHAR (MAX)      NOT NULL,
     [RedirectUrl]     VARCHAR (MAX)      DEFAULT ('') NOT NULL,
+    [HasTranslations] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Releases] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [CK_NewsRelease_CommittedPublishDateTime] CHECK ([IsCommitted]=(0) OR [IsCommitted]=(1) AND [PublishDateTime] IS NOT NULL),
     CONSTRAINT [CK_NewsRelease_ReleaseDateTime] CHECK ([IsPublished]=(0) OR [IsPublished]=(1) AND [ReleaseDateTime] IS NOT NULL),

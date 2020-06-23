@@ -189,6 +189,7 @@
           <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AssetUrl" Type="varchar(max)" Nullable="false" />
           <Property Name="RedirectUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="HasTranslations" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="NewsReleaseCollection">
           <Key>
@@ -1683,6 +1684,7 @@
           <NavigationProperty Name="MediaDistributionLists" Relationship="Gcpe.Hub_Model.NewsReleaseMediaDistribution" FromRole="NewsRelease" ToRole="MediaDistributionList" />
           <Property Name="NodSubscribers" Type="Int32" />
           <Property Name="MediaSubscribers" Type="Int32" />
+          <Property Name="HasTranslations" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="NewsReleaseLanguage">
           <Key>
@@ -2651,6 +2653,7 @@
           <EntitySetMapping Name="NewsReleases">
             <EntityTypeMapping TypeName="Gcpe.Hub_Model.NewsRelease">
               <MappingFragment StoreEntitySet="NewsRelease">
+                <ScalarProperty Name="HasTranslations" ColumnName="HasTranslations" />
                 <ScalarProperty Name="MediaSubscribers" ColumnName="MediaSubscribers" />
                 <ScalarProperty Name="NodSubscribers" ColumnName="NodSubscribers" />
                 <ScalarProperty Name="RedirectUrl" ColumnName="RedirectUrl" />

@@ -56,6 +56,8 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     Controls.Document doc = (Controls.Document)rpt.FindControl("ctrlDocument");
                     doc.Model = Model;
                 }
+
+                if (!string.IsNullOrWhiteSpace(Model.RequiredTranslations())) Model.HasTranslations = true;
             }
             else
             {
@@ -94,6 +96,8 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
                 plannedPublishDateTimePicker.Text = Model.PublishDateTime != null ? Model.PublishDateTime.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
                 releaseDateTimePicker.Text = Model.ReleaseDate != null ? Model.ReleaseDate.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
+
+                if (!string.IsNullOrWhiteSpace(Model.RequiredTranslations())) Model.HasTranslations = true;
 
                 //ScriptManager.GetCurrent(Page).RegisterPostBackControl(CancelApprove);
                 //ScriptManager.GetCurrent(Page).RegisterPostBackControl(lbtnCancelCategories);
@@ -442,6 +446,53 @@ namespace Gcpe.Hub.News.ReleaseManagement
             DataBind();
         }
 
+        protected void btnSaveTranslations_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Model.HasTranslations = chkHasTranslations.Checked;
+
+                if (Model.IsCommitted && Model.IsPublished || (Model.IsCommitted && !Model.IsPublished) || Model.IsApproved)
+                {
+                    Model.SaveWithLog("Translations Updated"); // will set IsPublish to false.
+                }
+                else
+                {
+                    Model.Save();
+                }
+
+                var translationsUpdatedBeforePublish
+                   = Model.MostRecentLogMessages.Count() > 1
+                   && Model.MostRecentLogMessages?[1] != null
+                   && Model.MostRecentLogMessages?[1]?.Description == "Translations Updated";
+
+                var lastUpdateWasTranslations = Model.MostRecentLogMessages?.LastOrDefault()?.Description == "Translations Updated";
+
+                Model.DisplayTranslationsAnchorPanel = lastUpdateWasTranslations || translationsUpdatedBeforePublish;
+
+                foreach (RepeaterItem item in rptTranslationList.Items)
+                {
+                    Label label = (Label)item.FindControl("file");
+                    HiddenField valTopOrFeature = (HiddenField)item.FindControl("valDeleted");
+                    if (valTopOrFeature.Value.ToLower() == "true")
+                    {
+                        DeleteTranslations(label.Text);
+                    }
+                }
+            }
+            catch (HubModelException mEx)
+            {
+                DisplayErrors(mEx.Errors);
+            }
+            catch (Exception fde)
+            {
+                List<string> errorMessages = new List<string>();
+                errorMessages.Add(fde.Message);
+                DisplayErrors(errorMessages);
+            }
+            DataBind();
+        }
+
         protected void btnSaveMeta_Click(object sender, EventArgs e)
         {
             try
@@ -710,6 +761,56 @@ namespace Gcpe.Hub.News.ReleaseManagement
 #endif
         }
 
+        private void DeleteTranslations(string fileName)
+        {
+#if !LOCAL_MEDIA_STORAGE
+            var container = new CloudBlobContainer(Global.ModifyContainerWithSharedAccessSignature("translations"));
+
+            var directory = container.GetDirectoryReference(Model.ReleasePathName);
+
+            var file = directory.GetDirectoryReference(Model.Key.ToLower()).GetBlobReference(fileName.ToLower());
+            if (!file.Exists())
+            {
+                file = directory.GetDirectoryReference(Model.Key).GetBlobReference(fileName); // for backwards compatibility
+            }
+
+            file.Delete();
+#else
+            string directory = Path.Combine(Settings.Default.MediaAssetsUnc, Model.ReleasePathName, Model.Key);
+            if (System.IO.File.Exists(Path.Combine(directory, fileName)))
+            {
+                System.IO.File.Delete(Path.Combine(directory, fileName));
+
+                Global.QueueBackgroundWorkItemWithRetry(() =>
+                {
+                    foreach (string folder in Properties.Settings.Default.DeployFolders)
+                    {
+                        string deployDirectory = Path.Combine(folder, Model.ReleasePathName, Model.Key);
+
+                        if (System.IO.File.Exists(Path.Combine(deployDirectory, fileName)))
+                        {
+                            System.IO.File.Delete(Path.Combine(deployDirectory, fileName));
+
+                            if (!System.IO.Directory.GetFiles(deployDirectory).Any())
+                            {
+                                System.IO.Directory.Delete(deployDirectory);
+                            }
+                        }
+                    }
+                });
+
+                //Delete the folder if the folder is empty
+                string[] files = Directory.GetFiles(directory);
+                List<object> fileList = new List<object>();
+
+                if (files.Count() == 0)
+                {
+                    Directory.Delete(directory);
+                }
+            }
+#endif
+        }
+
         protected void lbtnStopPublishSwitch_Click(object sender, EventArgs e)
         {
             try
@@ -768,6 +869,11 @@ namespace Gcpe.Hub.News.ReleaseManagement
         }
 
         protected void lbtnCancelAssets_Click(object sender, EventArgs e)
+        {
+            DataBind();
+        }
+
+        protected void lbtnCancelTranslations_Click(object sender, EventArgs e)
         {
             DataBind();
         }

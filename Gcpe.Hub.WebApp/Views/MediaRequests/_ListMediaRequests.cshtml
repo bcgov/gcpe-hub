@@ -94,8 +94,8 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 media-request-data-panel">
             <span class="pull-right badge-padding label" data-bind="{text: isOverdue() && !completed() ? 'Overdue' : requestStatus(), css: isOverdue() && !completed() ? 'label-danger-overdue' : requestStatus() == 'Closed' ? 'label-default label-default-close' : 'label-normal label-outline'}"></span><br />
-            <span class="pull-right" name="created"  style="text-align:right;" data-bind="attr: { 'create-date' : createdAt}, css: isOverdue() && !completed() ? 'deadline' : '', momentDateDisplay: {value: isOverdue() && !completed() ? deadlineAt : requestStatus() == 'Closed' ? respondedAt : createdAt, format: isOverdue() && !completed() ? 'CALENDAR' : requestStatus() == 'Closed' ? 'CALENDAR' :'FROMNOW'}"></span><br />
-            <span class="deadline pull-right" data-bind="visible: requestStatus() == 'Open' && !isOverdue(), momentDateDisplay: {value: deadlineAt, format:'CALENDAR'}"></span><br />
+            <span class="pull-right" name="created"  style="text-align:right;" data-bind="attr: { 'create-date' : createdAt}, css: isOverdue() && !completed() ? 'deadline' : '', momentDateDisplay: {value: isOverdue() && !completed() ? deadlineAt : requestStatus() == 'Closed' ? respondedAt : createdAt, format: isOverdue() && !completed() ? 'LLLL' : requestStatus() == 'Closed' ? 'LLLL' :'FROMNOW'}"></span><br />
+            <span class="deadline pull-right" data-bind="visible: requestStatus() == 'Open' && !isOverdue(), momentDateDisplay: {value: deadlineAt, format:'LLLL'}"></span><br />
         </div>
         @*<div class="col-xs-12">
                 <label>Created</label><span data-bind="momentDateDisplay: {value: createdAt, format:'CALENDAR'}"></span>&nbsp;
