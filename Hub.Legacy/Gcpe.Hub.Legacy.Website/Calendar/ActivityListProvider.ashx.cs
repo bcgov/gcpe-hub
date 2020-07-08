@@ -1,4 +1,6 @@
-﻿using System;
+﻿extern alias legacy;
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,6 +9,9 @@ using System.Web;
 using System.Web.Script.Serialization;
 using CorporateCalendar.Data;
 using CorporateCalendar.Security;
+using legacy::Gcpe.Hub.Data.Entity;
+using Gcpe.Hub.News.ReleaseManagement;
+using CorporateCalendar;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -15,6 +20,8 @@ namespace Gcpe.Hub.Calendar
     /// </summary>
     public class ActivityListProvider : IHttpHandler, System.Web.SessionState.IReadOnlySessionState
     {
+        CorporateCalendar.Security.CustomPrincipal customPrincipal;
+
         public void ProcessRequest(HttpContext context)
         {
             string recordsPerPage = context.Request.Form["rp"];
@@ -30,7 +37,7 @@ namespace Gcpe.Hub.Calendar
             int startIndex = (iPageIndex - 1) * iRecordsPerPage;
 
             // Since this class does not inherit the masterpage, we must construct an instance of the current user's CustomPrincipal from the session.
-            var customPrincipal = new CustomPrincipal(HttpContext.Current.User.Identity);
+            customPrincipal = new CustomPrincipal(HttpContext.Current.User.Identity);
 
             bool includeMarkup = false;
 
@@ -387,6 +394,7 @@ namespace Gcpe.Hub.Calendar
                     string isInternalImageTag = string.Empty;
                     string isLockedImageTag = string.Empty;
                     string isSharedImageTag = string.Empty;
+                    string hasReleaseImageTag = string.Empty;
                     //string isConfirmedImageTag = string.Empty;
 
                     string details = t.Details == "" ? t.Comments : t.Details;
@@ -560,9 +568,43 @@ namespace Gcpe.Hub.Calendar
                     if (isSharedWithMinistries)
                     {
                         //isSharedWithOtherMinistries = true;
+                        var sharedWithIds = dc.GetActivitySharedWithMinistries(t.Id).Select(s => s.sharedWithMinistries).FirstOrDefault().Split(',');
+                        var sharedWithMinistries = string.Join(", ", dc.Ministries.Where(mi => sharedWithIds.Contains(mi.Id.ToString())).Select(m => m.Abbreviation).ToList().OrderBy(a => a));
+                        var titleString = t.IsCrossGovernment ? "Shared with all ministries" : $"Shared with: {sharedWithMinistries}";
+
                         isSharedImageTag =
-                            "<img style='float:left' title='This activity is shared with other ministries' src='../images/shared.png' />";
+                            $"<img style='float:left' title='{titleString}' src='../images/shared.png' />";
                     }
+
+                    List<NewsRelease> newsReleases = null;
+                    using (var hub = new legacy::Gcpe.Hub.Data.Entity.HubEntities())
+                    {
+                        newsReleases = hub.NewsReleases.Where(r => r.ActivityId == t.Id && r.IsActive).ToList();
+
+
+                        var release = newsReleases?.FirstOrDefault();
+                        var releaseType = release == null ? "" : Enum.GetName(typeof(ReleaseType), release?.ReleaseType);
+                        string publishStatus = "Draft";
+                        if (release != null && release.PublishDateTime.HasValue)
+                            publishStatus = ReleaseModel.FormatPublishStatusDate(release.PublishDateTime.Value, release.IsPublished, release.IsCommitted);
+                        var userHasAccessToHub = hub.Users.Any(u => u.EmailAddress == customPrincipal.Email);
+                        var target = userHasAccessToHub ? "target='_blank'" : "";
+                        if (release != null && releaseType == "Release")
+                        {
+                            if (customPrincipal.IsInRoleOrGreater(SecurityRole.Advanced))
+                            {
+                                hasReleaseImageTag =
+                                    $"<a href='ReleaseDownloadHandler.ashx?releaseId={release.Id}' {target}><img style='float:left' title='{publishStatus}' src='../images/release.png' /></a>";
+                            }
+                            else
+                            {
+                                hasReleaseImageTag =
+                                    $"<img style='float:left' title='{publishStatus}' src='../images/release.png' />";
+
+                            }
+                        }
+                    }
+
 
                     /*if (isConfirmed)
                     {
@@ -596,8 +638,8 @@ namespace Gcpe.Hub.Calendar
                         }
                     }
 
-                    dr.cell.Add("MinistryActivityId", string.Format("<span style='padding:0px;'>{0}{1}{2}{3}{4}{5}</span><br/><span style='padding-left:0px;padding-right:0px;color:#2c3539;' title='" + toolTipMessage + "'>{6}</span><br /><span style='font-size:11px; color: red;'>created {7}</span>",
-                            favoriteImageTag, isReviewedImageTag, isInternalImageTag, isLockedImageTag, isSharedImageTag,
+                    dr.cell.Add("MinistryActivityId", string.Format("<span style='padding:0px;'>{0}{1}{2}{3}{4}{5}{6}</span><br/><span style='padding-left:0px;padding-right:0px;color:#2c3539;' title='" + toolTipMessage + "'>{7}</span><br /><span style='font-size:11px; color: red;'>created {8}</span>",
+                            favoriteImageTag, isReviewedImageTag, isInternalImageTag, isLockedImageTag, isSharedImageTag, hasReleaseImageTag,
                             CorporateCalendar.Utility.GridHelper.Linkify(string.Format("{0}-\u200B{1}", // \u200B : 0-width space to make Firefox break lines at hyphens, like other browsers
                             ministryAbbreviation, activityId), "Activity.aspx?ActivityId=" + activityId), changedMessage, t.CreatedDateTime?.ToString("MMM d, yyyy")));
 
