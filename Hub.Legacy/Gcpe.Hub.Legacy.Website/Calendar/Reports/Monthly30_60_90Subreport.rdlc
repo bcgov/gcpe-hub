@@ -41,6 +41,10 @@
           <DataField>Contact</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Updated">
+          <DataField>Updated</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Color">
           <DataField>Color</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -326,6 +330,13 @@
                                 </TextRun>
                                 <TextRun>
                                   <Value>=vbcrlf &amp; Fields!Contact.Value</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!Updated.Value</Value>
+                                  <MarkupType>HTML</MarkupType>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                   </Style>

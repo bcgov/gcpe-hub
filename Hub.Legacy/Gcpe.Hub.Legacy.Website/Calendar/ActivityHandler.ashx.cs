@@ -842,6 +842,7 @@ namespace Gcpe.Hub.Calendar
             var releaseColumn = activitiesColumns.Add("Release", typeof(string));
             var colorColumn = activitiesColumns.Add("Color", typeof(string));
             var contactColumn = activitiesColumns.Add("Contact", typeof(string));
+            var updatedColumn = activitiesColumns.Add("Updated", typeof(string));
 
             DateTime endDate = startDate.AddMonths(1);
 
@@ -859,6 +860,7 @@ namespace Gcpe.Hub.Calendar
                 if (!string.IsNullOrEmpty(activity.ContactName))
                 {
                     row[contactColumn] += activity.ContactName;
+                    row[updatedColumn] += $"<br ><br > <span style='font-size:8pt'>{ActivityListProvider.GetCreatedOrUpdatedMessage(activity.Status == "New", activity.CreatedDateTime, "", activity.LastUpdatedDateTime)}</span>";
                 }
                 string materials = activity.CommunicationsMaterials;
                 if (!string.IsNullOrEmpty(activity.Strategy))
