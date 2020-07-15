@@ -172,10 +172,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
                     assetInfo.NormalTag = FormatAssetTag(new Uri("https://www.youtube.com/watch?v=" + videoId));
                 }
-                else if (uri.Host.Contains("facebook.com"))
-                {
-                    assetInfo.NormalTag = FormatAssetTag(uri);
-                }
                 else
                 {
                     //Asset is an unrecognized format; convert to HTML link.
@@ -259,14 +255,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
                                                "<iframe src=\"{0}\" frameborder=\"0\" allowfullscreen ></iframe>" +
                                                "</div>"
                                                , HttpUtility.HtmlDecode(url));
-                    }
-                    else if (uri.Host == "www.facebook.com")
-                    {
-                        return string.Format(
-                                              "<div class=\"asset-facebook-preview\">" +
-                                                 "<div class=\"fb-post\" data-href=\"{0}\"></div>" +
-                                              "</div>"
-                                              , url);
                     }
                 }
                 catch (UriFormatException)
