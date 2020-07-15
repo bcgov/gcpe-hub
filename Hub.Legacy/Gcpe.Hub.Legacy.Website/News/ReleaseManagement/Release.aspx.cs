@@ -386,7 +386,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                         if (assetUri == null)
                             throw new HubModelException(new string[] { "Invalid YouTube URL for SuperAsset (" + txtAsset.Text + ")." });
                     }
-                    else if (!assetUri.Host.Contains("facebook.com") && assetUri.ToString() != "https://news.gov.bc.ca/live")
+                    else if (assetUri.Host.Contains("facebook.com") || assetUri.ToString() != "https://news.gov.bc.ca/live")
                     {
                         throw new HubModelException(new string[] { "Unknown type of SuperAsset (" + txtAsset.Text + ")." });
                     }
