@@ -205,6 +205,10 @@ namespace Gcpe.Hub.Calendar
                         activity.IsEndDateNeedsReview = false;
                         activity.IsCategoriesNeedsReview = false;
                         activity.IsCommMaterialsNeedsReview = false;
+                        activity.IsStrategyNeedsReview = false;
+                        activity.IsSchedulingConsiderationsNeedsReview = false;
+                        activity.IsSignificanceNeedsReview = false;
+                        activity.IsInternalNotesNeedsReview = false;
                     }
                     string dateTimeIconHtml = string.Format("<img src=\"images/calendar-edit-icon.png\" title=\"{0}\" align=\"absmiddle\" />&nbsp;", DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
 

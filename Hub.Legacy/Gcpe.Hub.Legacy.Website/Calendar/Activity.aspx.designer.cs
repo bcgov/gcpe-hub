@@ -204,6 +204,15 @@ namespace Gcpe.Hub.Calendar
         protected global::System.Web.UI.HtmlControls.HtmlTableRow SignificanceRow;
 
         /// <summary>
+        /// SignificanceTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell SignificanceTitle;
+
+        /// <summary>
         /// SignificanceTextBox control.
         /// </summary>
         /// <remarks>
@@ -598,6 +607,15 @@ namespace Gcpe.Hub.Calendar
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow ScheduleRow;
+
+        /// <summary>
+        /// SchedulingTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell SchedulingTitle;
 
         /// <summary>
         /// SchedulingTextBox control.

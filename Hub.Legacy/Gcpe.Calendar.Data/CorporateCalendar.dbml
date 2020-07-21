@@ -589,6 +589,10 @@
       <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IsSignificanceNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsStrategyNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSchedulingConsiderationsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsInternalNotesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Activity_ActivitySharedWith" Member="ActivitySharedWiths" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySharedWith" />
       <Association Name="Activity_Log" Member="Logs" ThisKey="Id" OtherKey="ActivityId" Type="Log" />
       <Association Name="Activity_ActivitySector" Member="ActivitySectors" ThisKey="Id" OtherKey="ActivityId" Type="ActivitySector" />
@@ -681,6 +685,10 @@
       <Column Name="IsCategoriesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsActiveNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsCommMaterialsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSignificanceNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsInternalNotesNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsStrategyNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSchedulingConsiderationsNeedsReview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="calendar.ActivityFiles" Member="ActivityFiles">
