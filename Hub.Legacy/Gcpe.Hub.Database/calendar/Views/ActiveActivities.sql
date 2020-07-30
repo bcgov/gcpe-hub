@@ -15,7 +15,8 @@ SELECT      [calendar].Activity.Id, [calendar].Activity.StatusId, [calendar].Act
             [calendar].PremierRequested.Name AS PremierRequested, [calendar].CommunicationContact.Name AS ContactName, [calendar].SystemUser.PhoneNumber AS ContactNumber,
             [calendar].Activity.EventPlannerId, [calendar].Activity.VideographerId, [calendar].sGetActivityCommunicationMaterialsByName([calendar].Activity.Id) AS CommunicationsMaterials, 
             [calendar].Activity.IsTitleNeedsReview, [calendar].Activity.IsDetailsNeedsReview, [calendar].Activity.IsRepresentativeNeedsReview, [calendar].Activity.IsCityNeedsReview, 
-            [calendar].Activity.IsStartDateNeedsReview, [calendar].Activity.IsEndDateNeedsReview, [calendar].Activity.IsCategoriesNeedsReview, [calendar].Activity.IsActiveNeedsReview, [calendar].Activity.IsCommMaterialsNeedsReview
+            [calendar].Activity.IsStartDateNeedsReview, [calendar].Activity.IsEndDateNeedsReview, [calendar].Activity.IsCategoriesNeedsReview, [calendar].Activity.IsActiveNeedsReview, [calendar].Activity.IsCommMaterialsNeedsReview,
+            [calendar].Activity.IsSignificanceNeedsReview, [calendar].Activity.IsStrategyNeedsReview, [calendar].Activity.IsInternalNotesNeedsReview, [calendar].Activity.IsSchedulingConsiderationsNeedsReview
 
 FROM        [calendar].Activity LEFT OUTER JOIN
             [calendar].Status ON [calendar].Activity.StatusId = [calendar].Status.Id LEFT OUTER JOIN

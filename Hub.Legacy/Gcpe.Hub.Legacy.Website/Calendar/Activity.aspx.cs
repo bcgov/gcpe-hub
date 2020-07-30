@@ -1127,6 +1127,11 @@ namespace Gcpe.Hub.Calendar
 
             string newNROrigin = NROriginDropDownList.Items.FindByText(CurrentActiveActivity.NROrigins?.TrimStart())?.Value;
 
+            bool significanceHasChanged = activity.Significance != SignificanceTextBox.Text;
+            bool internalNotesHasChanged = activity.Comments != CommentsTextBox.Text;
+            bool scheduleHasChanged = activity.Schedule != SchedulingTextBox.Text;
+            bool strategyHasChanged = activity.Strategy != StrategyTextBox.Text;
+
             if (activity.IsConfirmed != IsDateConfirmed.Checked || activity.Significance != SignificanceTextBox.Text
                 || activity.Schedule != SchedulingTextBox.Text || activity.LeadOrganization != LeadOrganizationTextBox.Text
                 || activity.Strategy != StrategyTextBox.Text || activity.IsAllDay != IsAllDayCheckBox.Checked
@@ -1201,7 +1206,8 @@ namespace Gcpe.Hub.Calendar
                 GetDateTime(StartDate.Value, IsAllDayCheckBox.Checked ? null : StartTime.SelectedValue, false),
                 GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true), PotentialDatesTextBox.Text.Trim(),
                 newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged, commMaterialsHaveChanged,
-                IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues());
+                IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues(), significanceHasChanged,
+                internalNotesHasChanged, scheduleHasChanged, strategyHasChanged);
 
             SaveDocuments(calendarDataContext, activity);
 

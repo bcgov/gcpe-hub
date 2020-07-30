@@ -828,74 +828,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_ActivitySharedWith", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
-		public Ministry Ministry
-		{
-			get
-			{
-				return this._Ministry.Entity;
-			}
-			set
-			{
-				Ministry previousValue = this._Ministry.Entity;
-				if (((previousValue != value) 
-							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ministry.Entity = null;
-						previousValue.ActivitySharedWiths.Remove(this);
-					}
-					this._Ministry.Entity = value;
-					if ((value != null))
-					{
-						value.ActivitySharedWiths.Add(this);
-						this._MinistryId = value.Id;
-					}
-					else
-					{
-						this._MinistryId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Ministry");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySharedWith", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivitySharedWiths.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivitySharedWiths.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivitySharedWith", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -960,6 +892,74 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_ActivitySharedWith", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
+		public Ministry Ministry
+		{
+			get
+			{
+				return this._Ministry.Entity;
+			}
+			set
+			{
+				Ministry previousValue = this._Ministry.Entity;
+				if (((previousValue != value) 
+							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ministry.Entity = null;
+						previousValue.ActivitySharedWiths.Remove(this);
+					}
+					this._Ministry.Entity = value;
+					if ((value != null))
+					{
+						value.ActivitySharedWiths.Add(this);
+						this._MinistryId = value.Id;
+					}
+					else
+					{
+						this._MinistryId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Ministry");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySharedWith", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivitySharedWiths.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivitySharedWiths.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -1383,40 +1383,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Log", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.Logs.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.Logs.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Log", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -1481,6 +1447,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Log", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.Logs.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.Logs.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -1825,40 +1825,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySector", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivitySectors.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivitySectors.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivitySector", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -1923,6 +1889,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySector", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivitySectors.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivitySectors.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -2267,40 +2267,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityNROrigin", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivityNROrigins.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityNROrigins.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivityNROrigin", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -2365,6 +2331,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityNROrigin", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivityNROrigins.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityNROrigins.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -2709,40 +2709,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityCommunicationMaterial", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivityCommunicationMaterials.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityCommunicationMaterials.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivityCommunicationMaterial", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -2807,6 +2773,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityCommunicationMaterial", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivityCommunicationMaterials.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityCommunicationMaterials.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -3151,40 +3151,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityCategory", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivityCategories.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityCategories.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivityCategory", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -3249,6 +3215,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityCategory", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivityCategories.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityCategories.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -3943,40 +3943,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_SystemUserMinistry", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
-		public Ministry Ministry
-		{
-			get
-			{
-				return this._Ministry.Entity;
-			}
-			set
-			{
-				Ministry previousValue = this._Ministry.Entity;
-				if (((previousValue != value) 
-							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ministry.Entity = null;
-						previousValue.SystemUserMinistries.Remove(this);
-					}
-					this._Ministry.Entity = value;
-					if ((value != null))
-					{
-						value.SystemUserMinistries.Add(this);
-						this._MinistryId = value.Id;
-					}
-					else
-					{
-						this._MinistryId = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("Ministry");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_SystemUserMinistry", Storage="_SystemUser", ThisKey="SystemUserId", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -4075,6 +4041,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("LastUpdatedBySystemUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_SystemUserMinistry", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
+		public Ministry Ministry
+		{
+			get
+			{
+				return this._Ministry.Entity;
+			}
+			set
+			{
+				Ministry previousValue = this._Ministry.Entity;
+				if (((previousValue != value) 
+							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ministry.Entity = null;
+						previousValue.SystemUserMinistries.Remove(this);
+					}
+					this._Ministry.Entity = value;
+					if ((value != null))
+					{
+						value.SystemUserMinistries.Add(this);
+						this._MinistryId = value.Id;
+					}
+					else
+					{
+						this._MinistryId = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Ministry");
 				}
 			}
 		}
@@ -4433,74 +4433,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_NewsFeed", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
-		public Ministry Ministry
-		{
-			get
-			{
-				return this._Ministry.Entity;
-			}
-			set
-			{
-				Ministry previousValue = this._Ministry.Entity;
-				if (((previousValue != value) 
-							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ministry.Entity = null;
-						previousValue.NewsFeeds.Remove(this);
-					}
-					this._Ministry.Entity = value;
-					if ((value != null))
-					{
-						value.NewsFeeds.Add(this);
-						this._MinistryId = value.Id;
-					}
-					else
-					{
-						this._MinistryId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Ministry");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_NewsFeed", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.NewsFeeds.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.NewsFeeds.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_NewsFeed", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -4565,6 +4497,74 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_NewsFeed", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
+		public Ministry Ministry
+		{
+			get
+			{
+				return this._Ministry.Entity;
+			}
+			set
+			{
+				Ministry previousValue = this._Ministry.Entity;
+				if (((previousValue != value) 
+							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ministry.Entity = null;
+						previousValue.NewsFeeds.Remove(this);
+					}
+					this._Ministry.Entity = value;
+					if ((value != null))
+					{
+						value.NewsFeeds.Add(this);
+						this._MinistryId = value.Id;
+					}
+					else
+					{
+						this._MinistryId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Ministry");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_NewsFeed", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.NewsFeeds.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.NewsFeeds.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -5483,40 +5483,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_CommunicationContact", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
-		public Ministry Ministry
-		{
-			get
-			{
-				return this._Ministry.Entity;
-			}
-			set
-			{
-				Ministry previousValue = this._Ministry.Entity;
-				if (((previousValue != value) 
-							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ministry.Entity = null;
-						previousValue.CommunicationContacts.Remove(this);
-					}
-					this._Ministry.Entity = value;
-					if ((value != null))
-					{
-						value.CommunicationContacts.Add(this);
-						this._MinistryId = value.Id;
-					}
-					else
-					{
-						this._MinistryId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Ministry");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_CommunicationContact", Storage="_SystemUser", ThisKey="SystemUserId", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -5547,6 +5513,40 @@ namespace CorporateCalendar.Data
 						this._SystemUserId = default(int);
 					}
 					this.SendPropertyChanged("SystemUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_CommunicationContact", Storage="_Ministry", ThisKey="MinistryId", OtherKey="Id", IsForeignKey=true)]
+		public Ministry Ministry
+		{
+			get
+			{
+				return this._Ministry.Entity;
+			}
+			set
+			{
+				Ministry previousValue = this._Ministry.Entity;
+				if (((previousValue != value) 
+							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ministry.Entity = null;
+						previousValue.CommunicationContacts.Remove(this);
+					}
+					this._Ministry.Entity = value;
+					if ((value != null))
+					{
+						value.CommunicationContacts.Add(this);
+						this._MinistryId = value.Id;
+					}
+					else
+					{
+						this._MinistryId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Ministry");
 				}
 			}
 		}
@@ -8355,40 +8355,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Ministry2", Storage="_SecondContactUser", ThisKey="SecondContactUserId", OtherKey="Id", IsForeignKey=true)]
-		public SystemUser SecondContactUser
-		{
-			get
-			{
-				return this._SecondContactUser.Entity;
-			}
-			set
-			{
-				SystemUser previousValue = this._SecondContactUser.Entity;
-				if (((previousValue != value) 
-							|| (this._SecondContactUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SecondContactUser.Entity = null;
-						previousValue.Ministries2.Remove(this);
-					}
-					this._SecondContactUser.Entity = value;
-					if ((value != null))
-					{
-						value.Ministries2.Add(this);
-						this._SecondContactUserId = value.Id;
-					}
-					else
-					{
-						this._SecondContactUserId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("SecondContactUser");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Ministry1", Storage="_EodLastRunUser", ThisKey="EodLastRunUserId", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser EodLastRunUser
 		{
@@ -8453,6 +8419,40 @@ namespace CorporateCalendar.Data
 						this._ParentId = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("ParentMinistry");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Ministry2", Storage="_SecondContactUser", ThisKey="SecondContactUserId", OtherKey="Id", IsForeignKey=true)]
+		public SystemUser SecondContactUser
+		{
+			get
+			{
+				return this._SecondContactUser.Entity;
+			}
+			set
+			{
+				SystemUser previousValue = this._SecondContactUser.Entity;
+				if (((previousValue != value) 
+							|| (this._SecondContactUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SecondContactUser.Entity = null;
+						previousValue.Ministries2.Remove(this);
+					}
+					this._SecondContactUser.Entity = value;
+					if ((value != null))
+					{
+						value.Ministries2.Add(this);
+						this._SecondContactUserId = value.Id;
+					}
+					else
+					{
+						this._SecondContactUserId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("SecondContactUser");
 				}
 			}
 		}
@@ -10333,40 +10333,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityInitiative", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.ActivityInitiatives.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityInitiatives.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_ActivityInitiative", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -10431,6 +10397,40 @@ namespace CorporateCalendar.Data
 						this._LastUpdatedBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SystemUser1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityInitiative", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivityInitiatives.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityInitiatives.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -11992,40 +11992,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_FavoriteActivity", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
-		public Activity Activity
-		{
-			get
-			{
-				return this._Activity.Entity;
-			}
-			set
-			{
-				Activity previousValue = this._Activity.Entity;
-				if (((previousValue != value) 
-							|| (this._Activity.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Activity.Entity = null;
-						previousValue.FavoriteActivities.Remove(this);
-					}
-					this._Activity.Entity = value;
-					if ((value != null))
-					{
-						value.FavoriteActivities.Add(this);
-						this._ActivityId = value.Id;
-					}
-					else
-					{
-						this._ActivityId = default(int);
-					}
-					this.SendPropertyChanged("Activity");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_FavoriteActivity", Storage="_SystemUser", ThisKey="SystemUserId", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -12056,6 +12022,40 @@ namespace CorporateCalendar.Data
 						this._SystemUserId = default(int);
 					}
 					this.SendPropertyChanged("SystemUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_FavoriteActivity", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.FavoriteActivities.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.FavoriteActivities.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
 				}
 			}
 		}
@@ -12568,6 +12568,14 @@ namespace CorporateCalendar.Data
 		
 		private System.Nullable<System.Guid> _RowGuid;
 		
+		private bool _IsSignificanceNeedsReview;
+		
+		private bool _IsStrategyNeedsReview;
+		
+		private bool _IsSchedulingConsiderationsNeedsReview;
+		
+		private bool _IsInternalNotesNeedsReview;
+		
 		private EntitySet<ActivitySharedWith> _ActivitySharedWiths;
 		
 		private EntitySet<Log> _Logs;
@@ -12720,6 +12728,14 @@ namespace CorporateCalendar.Data
     partial void OnTimeStampChanged();
     partial void OnRowGuidChanging(System.Nullable<System.Guid> value);
     partial void OnRowGuidChanged();
+    partial void OnIsSignificanceNeedsReviewChanging(bool value);
+    partial void OnIsSignificanceNeedsReviewChanged();
+    partial void OnIsStrategyNeedsReviewChanging(bool value);
+    partial void OnIsStrategyNeedsReviewChanged();
+    partial void OnIsSchedulingConsiderationsNeedsReviewChanging(bool value);
+    partial void OnIsSchedulingConsiderationsNeedsReviewChanged();
+    partial void OnIsInternalNotesNeedsReviewChanging(bool value);
+    partial void OnIsInternalNotesNeedsReviewChanged();
     #endregion
 		
 		public Activity()
@@ -13799,6 +13815,86 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSignificanceNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsSignificanceNeedsReview
+		{
+			get
+			{
+				return this._IsSignificanceNeedsReview;
+			}
+			set
+			{
+				if ((this._IsSignificanceNeedsReview != value))
+				{
+					this.OnIsSignificanceNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsSignificanceNeedsReview = value;
+					this.SendPropertyChanged("IsSignificanceNeedsReview");
+					this.OnIsSignificanceNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsStrategyNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsStrategyNeedsReview
+		{
+			get
+			{
+				return this._IsStrategyNeedsReview;
+			}
+			set
+			{
+				if ((this._IsStrategyNeedsReview != value))
+				{
+					this.OnIsStrategyNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsStrategyNeedsReview = value;
+					this.SendPropertyChanged("IsStrategyNeedsReview");
+					this.OnIsStrategyNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSchedulingConsiderationsNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsSchedulingConsiderationsNeedsReview
+		{
+			get
+			{
+				return this._IsSchedulingConsiderationsNeedsReview;
+			}
+			set
+			{
+				if ((this._IsSchedulingConsiderationsNeedsReview != value))
+				{
+					this.OnIsSchedulingConsiderationsNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsSchedulingConsiderationsNeedsReview = value;
+					this.SendPropertyChanged("IsSchedulingConsiderationsNeedsReview");
+					this.OnIsSchedulingConsiderationsNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsInternalNotesNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsInternalNotesNeedsReview
+		{
+			get
+			{
+				return this._IsInternalNotesNeedsReview;
+			}
+			set
+			{
+				if ((this._IsInternalNotesNeedsReview != value))
+				{
+					this.OnIsInternalNotesNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsInternalNotesNeedsReview = value;
+					this.SendPropertyChanged("IsInternalNotesNeedsReview");
+					this.OnIsInternalNotesNeedsReviewChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySharedWith", Storage="_ActivitySharedWiths", ThisKey="Id", OtherKey="ActivityId")]
 		public EntitySet<ActivitySharedWith> ActivitySharedWiths
 		{
@@ -14125,6 +14221,40 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_Activity", Storage="_Ministry", ThisKey="ContactMinistryId", OtherKey="Id", IsForeignKey=true)]
+		public Ministry Ministry
+		{
+			get
+			{
+				return this._Ministry.Entity;
+			}
+			set
+			{
+				Ministry previousValue = this._Ministry.Entity;
+				if (((previousValue != value) 
+							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ministry.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._Ministry.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._ContactMinistryId = value.Id;
+					}
+					else
+					{
+						this._ContactMinistryId = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Ministry");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NRDistribution_Activity", Storage="_NRDistribution", ThisKey="NRDistributionId", OtherKey="Id", IsForeignKey=true)]
 		public NRDistribution NRDistribution
 		{
@@ -14227,40 +14357,6 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Videographer_Activity", Storage="_Videographer", ThisKey="VideographerId", OtherKey="Id", IsForeignKey=true)]
-		public Videographer Videographer
-		{
-			get
-			{
-				return this._Videographer.Entity;
-			}
-			set
-			{
-				Videographer previousValue = this._Videographer.Entity;
-				if (((previousValue != value) 
-							|| (this._Videographer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Videographer.Entity = null;
-						previousValue.Activities.Remove(this);
-					}
-					this._Videographer.Entity = value;
-					if ((value != null))
-					{
-						value.Activities.Add(this);
-						this._VideographerId = value.Id;
-					}
-					else
-					{
-						this._VideographerId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Videographer");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Activity", Storage="_SystemUser", ThisKey="CreatedBy", OtherKey="Id", IsForeignKey=true)]
 		public SystemUser SystemUser
 		{
@@ -14329,36 +14425,36 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ministry_Activity", Storage="_Ministry", ThisKey="ContactMinistryId", OtherKey="Id", IsForeignKey=true)]
-		public Ministry Ministry
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Videographer_Activity", Storage="_Videographer", ThisKey="VideographerId", OtherKey="Id", IsForeignKey=true)]
+		public Videographer Videographer
 		{
 			get
 			{
-				return this._Ministry.Entity;
+				return this._Videographer.Entity;
 			}
 			set
 			{
-				Ministry previousValue = this._Ministry.Entity;
+				Videographer previousValue = this._Videographer.Entity;
 				if (((previousValue != value) 
-							|| (this._Ministry.HasLoadedOrAssignedValue == false)))
+							|| (this._Videographer.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Ministry.Entity = null;
+						this._Videographer.Entity = null;
 						previousValue.Activities.Remove(this);
 					}
-					this._Ministry.Entity = value;
+					this._Videographer.Entity = value;
 					if ((value != null))
 					{
 						value.Activities.Add(this);
-						this._ContactMinistryId = value.Id;
+						this._VideographerId = value.Id;
 					}
 					else
 					{
-						this._ContactMinistryId = default(Nullable<System.Guid>);
+						this._VideographerId = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Ministry");
+					this.SendPropertyChanged("Videographer");
 				}
 			}
 		}
@@ -14659,6 +14755,14 @@ namespace CorporateCalendar.Data
 		private bool _IsActiveNeedsReview;
 		
 		private bool _IsCommMaterialsNeedsReview;
+		
+		private bool _IsSignificanceNeedsReview;
+		
+		private bool _IsInternalNotesNeedsReview;
+		
+		private bool _IsStrategyNeedsReview;
+		
+		private bool _IsSchedulingConsiderationsNeedsReview;
 		
 		public ActiveActivity()
 		{
@@ -15684,6 +15788,70 @@ namespace CorporateCalendar.Data
 				if ((this._IsCommMaterialsNeedsReview != value))
 				{
 					this._IsCommMaterialsNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSignificanceNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsSignificanceNeedsReview
+		{
+			get
+			{
+				return this._IsSignificanceNeedsReview;
+			}
+			set
+			{
+				if ((this._IsSignificanceNeedsReview != value))
+				{
+					this._IsSignificanceNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsInternalNotesNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsInternalNotesNeedsReview
+		{
+			get
+			{
+				return this._IsInternalNotesNeedsReview;
+			}
+			set
+			{
+				if ((this._IsInternalNotesNeedsReview != value))
+				{
+					this._IsInternalNotesNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsStrategyNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsStrategyNeedsReview
+		{
+			get
+			{
+				return this._IsStrategyNeedsReview;
+			}
+			set
+			{
+				if ((this._IsStrategyNeedsReview != value))
+				{
+					this._IsStrategyNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSchedulingConsiderationsNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsSchedulingConsiderationsNeedsReview
+		{
+			get
+			{
+				return this._IsSchedulingConsiderationsNeedsReview;
+			}
+			set
+			{
+				if ((this._IsSchedulingConsiderationsNeedsReview != value))
+				{
+					this._IsSchedulingConsiderationsNeedsReview = value;
 				}
 			}
 		}

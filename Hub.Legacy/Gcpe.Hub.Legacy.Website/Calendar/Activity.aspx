@@ -472,7 +472,7 @@
                                 </tr>
                                 <tr class="row" runat="server" id="SignificanceRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Significance:</td>
+                                    <td id="SignificanceTitle" class="column-left">Significance:</td>
                                     <td class="column-right">
                                         <div>
                                             <asp:TextBox
@@ -541,7 +541,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Strategy:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsStrategyNeedsReview)%>">Strategy:</td>
                                     <td class="column-right">
                                         <div>
                                             <asp:TextBox
@@ -572,7 +572,7 @@
                                     </td>
                                 </tr>
                                 <tr class="row">
-                                    <td class="column-right" colspan="3" style="padding-left: 12px;">Internal Notes:
+                                    <td class="column-right <%=Markup(CurrentActiveActivity.IsInternalNotesNeedsReview)%>" colspan="3" style="padding-left: 12px;">Internal Notes:
                                     </td>
                                 </tr>
                                 <tr class="row">
@@ -739,7 +739,7 @@
                                 </tr>
                                 <tr class="row" runat="server" id="ScheduleRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left" style="line-height: 18px;">Scheduling
+                                    <td id="SchedulingTitle" runat="server" class="column-left" style="line-height: 18px;">Scheduling
                                         Considerations & Approval Notes:</td>
                                     <td class="column-right">
                                         <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas" Style="height: 60px;" TextMode="MultiLine"
@@ -1055,6 +1055,27 @@
                     window.open('', '_self', '').close();
                 }
             }
+
+            function highlightChangedFields() {
+                var significanceClass = "<%=Markup(CurrentActiveActivity.IsSignificanceNeedsReview)%>";
+                if (significanceClass && significanceClass === "reviewed") {
+
+                    var $significanceTitle = $("#SignificanceTitle");
+                    if ($significanceTitle.length) {
+                        $significanceTitle.addClass(significanceClass);
+                    }
+                }
+
+                var schedulingClass = "<%=Markup(CurrentActiveActivity.IsSchedulingConsiderationsNeedsReview)%>";
+                if (schedulingClass && schedulingClass === "reviewed") {
+
+                    var $schedulingTitle = $("#SchedulingTitle");
+                    if ($schedulingTitle.length) {
+                        $schedulingTitle.addClass(schedulingClass);
+                    }
+                }         
+            }
+            highlightChangedFields();
 
             // Add tool tips
             $("#DetailsTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe this activity in the present tense, including <b>who</b> is participating (each spokesperson and their role), <b>what</b> is happening (key details of the activity) and <b>how much</b> is being funded.  The summary should contain all of the details that are needed for the look ahead report." });

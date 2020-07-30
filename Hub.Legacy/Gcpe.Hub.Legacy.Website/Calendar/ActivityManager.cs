@@ -52,6 +52,10 @@ public class ActivityManager
                 activity.IsEndDateNeedsReview = false;
                 activity.IsCategoriesNeedsReview = false;
                 activity.IsCommMaterialsNeedsReview = false;
+                activity.IsSignificanceNeedsReview = false;
+                activity.IsInternalNotesNeedsReview = false;
+                activity.IsSchedulingConsiderationsNeedsReview = false;
+                activity.IsStrategyNeedsReview = false;
             }
             //activity.IsReviewed = true;
             dc.SubmitChanges();
@@ -82,7 +86,8 @@ public class ActivityManager
     /// </summary>
     public static void UpdateActivity(CorporateCalendarDataContext db, CustomPrincipal customPrincipal, Activity activity,
         string title, string details, DateTime? startDateTime, DateTime? endDateTime, string potentialDates, int? representativeId, int? cityId, string otherCity,
-        bool categoryHasChanged, bool commMaterialsHaveChanged, bool isIssue, bool isConfidential, string translationsRequired, Dictionary<string, string> dropDownListValues)
+        bool categoryHasChanged, bool commMaterialsHaveChanged, bool isIssue, bool isConfidential, string translationsRequired, Dictionary<string, string> dropDownListValues,
+        bool significanceHasChanged, bool internalNotesHasChanged, bool scheduleHasChanged, bool strategyHasChanged)
     {
         //-- Need to check if these fields were modified and mark them
         //--Title and Details
@@ -154,6 +159,26 @@ public class ActivityManager
         if (commMaterialsHaveChanged)
         {
             activity.IsCommMaterialsNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (significanceHasChanged) {
+            activity.IsSignificanceNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (internalNotesHasChanged) {
+            activity.IsInternalNotesNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (scheduleHasChanged) {
+            activity.IsSchedulingConsiderationsNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (strategyHasChanged) {
+            activity.IsStrategyNeedsReview = true;
             activity.StatusId = 1; // Changed
         }
 

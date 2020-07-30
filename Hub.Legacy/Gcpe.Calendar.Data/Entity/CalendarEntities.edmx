@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Gcpe.CorporateCalendar_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Gcpe.CorporateCalendar_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,7 +22,7 @@
           <Property Name="HqComments" Type="nvarchar" MaxLength="2000" />
           <Property Name="LeadOrganization" Type="nvarchar" MaxLength="100" />
           <Property Name="Venue" Type="nvarchar" MaxLength="150" />
-          <Property Name="Translations" Type="nvarchar" MaxLength="150" />
+          <Property Name="Translations" Type="nvarchar" MaxLength="500" />
           <Property Name="StatusId" Type="int" />
           <Property Name="HqStatusId" Type="int" />
           <Property Name="HqSection" Type="int" Nullable="false" />
@@ -59,6 +59,10 @@
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="RowGuid" Type="uniqueidentifier" />
+          <Property Name="IsSignificanceNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsStrategyNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsSchedulingConsiderationsNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsInternalNotesNeedsReview" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivityCategories">
           <Key>
@@ -1122,18 +1126,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ministry_Parent">
-          <End Role="Ministry" Type="Self.Ministry" Multiplicity="0..1" />
-          <End Role="Ministry1" Type="Self.Ministry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ministry">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ministry1">
-              <PropertyRef Name="ParentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ministry_ContactSystemUser">
           <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="0..1" />
           <End Role="Ministry" Type="Self.Ministry" Multiplicity="*" />
@@ -1155,6 +1147,18 @@
             </Principal>
             <Dependent Role="Ministry">
               <PropertyRef Name="EodLastRunUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ministry_Parent">
+          <End Role="Ministry" Type="Self.Ministry" Multiplicity="0..1" />
+          <End Role="Ministry1" Type="Self.Ministry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ministry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ministry1">
+              <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1539,10 +1543,6 @@
             <End Role="SystemUser" EntitySet="SystemUser" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ministry_Parent" Association="Self.FK_Ministry_Parent">
-            <End Role="Ministry" EntitySet="Ministry" />
-            <End Role="Ministry1" EntitySet="Ministry" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ministry_ContactSystemUser" Association="Self.FK_Ministry_ContactSystemUser">
             <End Role="SystemUser" EntitySet="SystemUser" />
             <End Role="Ministry" EntitySet="Ministry" />
@@ -1550,6 +1550,10 @@
           <AssociationSet Name="FK_Ministry_EodLastRunSystemUser" Association="Self.FK_Ministry_EodLastRunSystemUser">
             <End Role="SystemUser" EntitySet="SystemUser" />
             <End Role="Ministry" EntitySet="Ministry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ministry_Parent" Association="Self.FK_Ministry_Parent">
+            <End Role="Ministry" EntitySet="Ministry" />
+            <End Role="Ministry1" EntitySet="Ministry" />
           </AssociationSet>
           <AssociationSet Name="FK_Ministry_SecondContactSystemUser" Association="Self.FK_Ministry_SecondContactSystemUser">
             <End Role="SystemUser" EntitySet="SystemUser" />
@@ -1681,7 +1685,11 @@
           <NavigationProperty Name="Status1" Relationship="Gcpe.CorporateCalendar_Model.FK_Activity_HqStatus" FromRole="Activity" ToRole="Status" />
           <NavigationProperty Name="ActivityFiles" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityFiles_Activity" FromRole="Activity" ToRole="ActivityFile" />
           <NavigationProperty Name="Ministry" Relationship="Gcpe.CorporateCalendar_Model.FK_Activity_Ministry1" FromRole="Activity" ToRole="Ministry" />
-          <Property Name="Translations" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Translations" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsSignificanceNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsStrategyNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsSchedulingConsiderationsNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsInternalNotesNeedsReview" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivityCategory">
           <Key>
@@ -3298,6 +3306,10 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.Activity">
               <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="IsInternalNotesNeedsReview" ColumnName="IsInternalNotesNeedsReview" />
+                <ScalarProperty Name="IsSchedulingConsiderationsNeedsReview" ColumnName="IsSchedulingConsiderationsNeedsReview" />
+                <ScalarProperty Name="IsStrategyNeedsReview" ColumnName="IsStrategyNeedsReview" />
+                <ScalarProperty Name="IsSignificanceNeedsReview" ColumnName="IsSignificanceNeedsReview" />
                 <ScalarProperty Name="Translations" ColumnName="Translations" />
                 <ScalarProperty Name="NRDateTime" ColumnName="NRDateTime" />
                 <ScalarProperty Name="IsCommMaterialsNeedsReview" ColumnName="IsCommMaterialsNeedsReview" />

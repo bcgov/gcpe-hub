@@ -66,10 +66,116 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Entity\Activity.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityCategory.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityCommunicationMaterial.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityFile.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityFilter.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityInitiative.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityKeyword.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityNROrigin.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivitySector.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivitySharedWith.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ActivityTheme.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CalendarEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CalendarEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\CalendarEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalendarEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Category.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\City.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CommunicationContact.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CommunicationMaterial.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\EventPlanner.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\GovernmentRepresentative.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Initiative.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Keyword.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Log.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Ministry.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\NewsFeed.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\NRDistribution.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\NROrigin.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PremierRequested.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Role.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Sector.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Status.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SystemUser.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SystemUserMinistry.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Theme.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Videographer.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +204,18 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entity\CalendarEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CalendarEntities.Context.cs</LastGenOutput>
+      <DependentUpon>CalendarEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Entity\CalendarEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CalendarEntities.cs</LastGenOutput>
+      <DependentUpon>CalendarEntities.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

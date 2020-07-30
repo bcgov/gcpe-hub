@@ -839,6 +839,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="WebAnalytics.html" />
     <Content Include="Calendar\ActivityEditingHandler.ashx" />
+    <Content Include="Calendar\ReleaseDownloadHandler.ashx" />
     <None Include="Properties\PublishProfiles\Debug Build to Development.pubxml" />
     <None Include="Properties\PublishProfiles\Release Build to Test.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -1754,6 +1755,9 @@
     <Compile Include="Calendar\History.aspx.designer.cs">
       <DependentUpon>History.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendar\ReleaseDownloadHandler.ashx.cs">
+      <DependentUpon>ReleaseDownloadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Calendar\Site.master.cs">
       <DependentUpon>Site.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2496,7 +2500,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
