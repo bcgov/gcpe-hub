@@ -388,7 +388,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     }
                     else if (assetUri.Host.Contains("facebook.com"))
                     {
-                        throw new HubModelException(new string[] { "Unknown type of SuperAsset (" + txtAsset.Text + ")." });
+                        throw new HubModelException(new string[] { "Facebook is no longer supported due to privacy concerns. Use YouTube or Flickr URLs instead." });
                     } 
                     else if (assetUri.ToString() != "https://news.gov.bc.ca/live")
                     {
