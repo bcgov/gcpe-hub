@@ -140,7 +140,6 @@
                                 }
                             }
                             this.facets(results.facets)
-                            window['snowplow']('trackSiteSearch', this.searchString().split(' '), filters);
                         }
                         if (results.mediaRequests) {
                             // If results.length == 0, There's no more pages to fetch!

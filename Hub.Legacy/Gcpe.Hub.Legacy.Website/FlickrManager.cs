@@ -15,6 +15,8 @@ namespace Gcpe.Hub
         private static readonly Flickr flickrClient = new Flickr();
         private static readonly Uri flickrPrivateBaseUrl = Settings.Default.FlickrPrivateBaseUri;
         private static HttpClient client = new HttpClient();
+        // flickr's alphabet for constructing short urls
+        private static string sBase58Alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
         public bool AuthenticateWithFlickr()
         {
@@ -89,6 +91,35 @@ namespace Gcpe.Hub
         public string ConstructPrivateAssetUrl(string photoId)
         {
             return $"{flickrPrivateBaseUrl}{photoId}";
+        }
+
+        public string ConstructPublicAssetUrl(string key)
+        {
+            return $"https://www.flickr.com/photos/bcgovphotos/{DecodeBase58(key)}/";
+        }
+
+        public bool IsAssetPublic(string photoId)
+        {
+            if (AuthenticateWithFlickr() != true)
+                throw new InvalidOperationException("Unable to authenticate with Flickr.");
+
+            return flickrClient.PhotosGetPerms(photoId).IsPublic;
+        }
+
+        public static long DecodeBase58(String base58StringToExpand)
+        {
+            long lConverted = 0;
+            long lTemporaryNumberConverter = 1;
+
+            while (base58StringToExpand.Length > 0)
+            {
+                String sCurrentCharacter = base58StringToExpand.Substring(base58StringToExpand.Length - 1);
+                lConverted = lConverted + (lTemporaryNumberConverter * sBase58Alphabet.IndexOf(sCurrentCharacter));
+                lTemporaryNumberConverter = lTemporaryNumberConverter * sBase58Alphabet.Length;
+                base58StringToExpand = base58StringToExpand.Substring(0, base58StringToExpand.Length - 1);
+            }
+
+            return lConverted;
         }
 
         public bool ShouldCancelRequestDueToServiceOutage()

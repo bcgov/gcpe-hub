@@ -150,6 +150,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 join nrdl in db.NewsReleaseDocumentLanguages on nrt.PageTitle equals nrdl.PageTitle into g
                 from nrdlg in g.DefaultIfEmpty()
                 where nrt.LanguageId == languageId
+                && nrt.PageTitle != "Media Advisory - EVENT REMINDER" // (task 3576) this table doesn't have an IsActive flag in the database, so we're removing it this way
                 group nrt.ReleaseType by nrt.PageTitle into r
                 orderby r.Count() descending
                 select new { PageTitle = r.Key, ReleaseType = r.Distinct().FirstOrDefault() };

@@ -29,13 +29,11 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 if (releaseId != null)
                 {
                     Model = new ReleaseModel(HubModel.DecodeGuid(releaseId));
-                    PrepareFlickrAssetForPreviewing(Model);
                 }
                 else
                 {
                     string reference = (string)Page.RouteData.Values["Reference"];
                     Model = new ReleaseModel(reference);
-                    PrepareFlickrAssetForPreviewing(Model);
                 }
             }
             catch (Exception)
@@ -270,36 +268,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
                              topOrFeature.Text, chk.Checked);
         }
 
-        private void PrepareFlickrAssetForPreviewing(ReleaseModel Model)
-        {
-            if (Model.Asset != null)
-            {
-                if (Model.Asset.Host.Contains("flickr") || Model.Asset.Host.Contains("flic.kr"))
-                {
-                    try
-                    {
-                        var photoId = Model.Asset.Segments[2].Split('_')[0];
-                        if (flickrManager.FlickrAssetExists(photoId))
-                        {
-                            var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
-                            var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
-                            // as a side-effect, this will update the asset url in the db if the model is re-saved.
-                            Model.Asset = assetUri;
-                        }
-                        else
-                        {
-                            // the flickr asset has been deleted so we will no longer store a reference to it
-                            Model.Asset = null;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Utils.LogError("An error occured when attempting to load a Flickr asset for previewing", e);
-                    }
-                }
-            }
-        }
-
         private void InitTopOrFeature(HyperLink topSwitch, HyperLink featureSwitch, HiddenField valTopOrFeature, string topOrFeatureText, bool isValid = true)
         {
             if (!Model.IsCommitted || Model.IsScheduled)
@@ -374,7 +342,18 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     if (assetUri.Host.Contains("flickr") || assetUri.Host.Contains("flic.kr"))
                     {
-                        assetUri = AssetEmbedManager.NormalizeFlickrUri(assetUri);
+                        // handle short urls, get the id and construct public url to display the preview
+                        if (assetUri.Host == "flic.kr" && !string.IsNullOrWhiteSpace(assetUri.Segments[2].TrimEnd('/')))
+                        {
+                            var key = assetUri.Segments[2].TrimEnd('/');
+                            assetUri = new Uri(flickrManager.ConstructPublicAssetUrl(key));
+                        }
+
+                        var photoId = assetUri.Segments[3].TrimEnd('/');
+
+                        // if the asset is public, load the preview
+                        if (flickrManager.IsAssetPublic(photoId))
+                            assetUri = AssetEmbedManager.NormalizeFlickrUri(assetUri);
 
                         if (assetUri == null)
                             throw new HubModelException(new string[] { "Invalid Flickr URL for SuperAsset (" + txtAsset.Text + ")." });
