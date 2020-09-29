@@ -831,7 +831,6 @@
     <Content Include="Contacts\MasterPage\MediaRelationsResponsive.master" />
     <Content Include="Calendar\Admin\Scripts\CNAME" />
     <Content Include="Calendar\Admin\Site.master" />
-    <Content Include="News\ReleaseManagement\FlickrHandler.ashx" />
     <Content Include="Resources\BC\favicon.ico" />
     <Content Include="Resources\BC\LookAheadCover.jpg" />
     <Content Include="Resources\BC\MediaRelations%402x.png" />
@@ -1803,9 +1802,6 @@
     <Compile Include="News\ProjectGranvilleManagement.aspx.designer.cs">
       <DependentUpon>ProjectGranvilleManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="News\ReleaseManagement\FlickrHandler.ashx.cs">
-      <DependentUpon>FlickrHandler.ashx</DependentUpon>
-    </Compile>
     <Compile Include="FlickrManager.cs" />
     <Compile Include="News\LiveFeedManagement.aspx.cs">
       <DependentUpon>LiveFeedManagement.aspx</DependentUpon>
@@ -2500,7 +2496,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

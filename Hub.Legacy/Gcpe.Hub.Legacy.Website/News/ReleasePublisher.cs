@@ -114,13 +114,22 @@ namespace Gcpe.Hub
                         var postUri = new Uri(post.AssetUrl);
                         try
                         {
-                            if (post.AssetUrl.Contains("flickr") || post.AssetUrl.Contains("flic.kr"))
+                            var publishDate = post.PublishDateTime.Value;
+                            
+                            if (postUri.Host.Contains("staticflickr.com"))
                             {
-                                var photoId = postUri.Segments[2].Split('_')[0];
+                                var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(post.AssetUrl));
+                                post.AssetUrl = assetUri.ToString();
+                            }
+                            else if (publishDateIsNow(publishDate, now) && (post.AssetUrl.Contains("flickr") || post.AssetUrl.Contains("flic.kr")))
+                            {
+                                var photoId = new Uri(post.AssetUrl).Segments[3].TrimEnd('/');
                                 if (flickrManager.FlickrAssetExists(photoId) == true)
                                 {
-                                    var privateAssetUri = flickrManager.ConstructPrivateAssetUrl(photoId);
-                                    var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(privateAssetUri));
+                                    if (!flickrManager.IsAssetPublic(photoId))
+                                        flickrManager.SetFlickrAssetPermissionsToPublic(photoId);
+
+                                    var assetUri = AssetEmbedManager.NormalizeFlickrUri(new Uri(post.AssetUrl));
                                     post.AssetUrl = assetUri.ToString();
                                 }
                                 else
@@ -164,6 +173,22 @@ namespace Gcpe.Hub
                 }
             }
             return nextCheckTime;
+        }
+
+        private static bool publishDateIsNow(DateTimeOffset publishDate, DateTimeOffset now)
+        {
+            if (publishDate == null)
+                return false;
+
+            // remove the seconds
+            now = now.AddSeconds(-now.Second);
+            publishDate = publishDate.AddSeconds(-now.Second);
+
+            // remove the milliseconds
+            now = now.AddMilliseconds(-now.Millisecond);
+            publishDate = publishDate.AddMilliseconds(-now.Millisecond);
+
+            return (publishDate.Date == now.Date) && (publishDate.Hour == now.Hour && publishDate.Minute == now.Minute);
         }
 
         public static void UnpublishNewsRelease(string permanentUri)

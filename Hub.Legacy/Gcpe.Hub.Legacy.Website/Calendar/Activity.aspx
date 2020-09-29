@@ -905,7 +905,7 @@
                                 </tr>
                                 <tr id="VideographerContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Videographer:</td>
+                                    <td class="column-left">Digital:</td>
                                     <td class="column-right">
                                         <select id="VideographerDropDownList" multiple="true" runat="server" style="display:none"/>
                                     </td>
@@ -1571,18 +1571,14 @@
             // Government representatives
             $('#RepresentativeDropDownList').multiselect({
                 multiple: false,
-                noneSelectedText:'',
+                noneSelectedText: '',
+                position: {
+                    my: 'left bottom',
+                    at: 'left top'
+                },
                 header: 'Select an option',
                 selectedList: 1,
                 height: 250,
-                position: {
-                    //my: 'center',
-                    //at: 'center'
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button.
-                    // multiselect automatically sets "of" unless you explicitly
-                    // pass in a value. 
-                },
                 click: function (event, ui) {
                     SetChanged($.url().param('ActivityId'));
                 }
@@ -1593,7 +1589,11 @@
             // Contact ministries dropdownlist logic
             $('#ContactMinistryDropDownList').multiselect({
                 multiple: false,
-                noneSelectedText:'',
+                noneSelectedText: '',
+                position: {
+                    my: 'left bottom',
+                    at: 'left top'
+                },
                 header: 'Select an option',
                 selectedList: 1,
                 height: 250,
@@ -1638,7 +1638,11 @@
             // Cities dropdownlist logic
             $('#CityDropDownList').multiselect({
                 multiple: false,
-                noneSelectedText:'',
+                noneSelectedText: '',
+                position: {
+                    my: 'left bottom',
+                    at: 'left top'
+                },
                 header: '',
                 selectedList: 1,
                 height: 200,
@@ -1689,8 +1693,8 @@
                 noneSelectedText:'',
                 header: true,
                 position: {
-                    //my: 'left bottom',
-                    //at: 'left top'
+                    my: 'left bottom',
+                    at: 'left top'
                 },
                 height: 200,
 
@@ -1860,7 +1864,6 @@
                 noneSelectedText:'',
                 header: 'Select an option',
                 selectedList: 1,
-                minWidth: 310,
                 click: function (event, ui) {
                     $('#IsNROriginsDirty').val('true');
                     return true;
@@ -1939,7 +1942,6 @@
             $('#ThemeDropDownList').multiselect({
                 noneSelectedText:'',
                 header: true,
-                minWidth: 360,
                 checkAll: function () {
                     $('#IsThemesDirty').val('true');
                     $("#callback").removeAttr('checked');
@@ -1979,7 +1981,7 @@
             var initiativesHiddenTarget = $('#InitiativesSelectedValues');
 
             $('#InitiativeDropDownList').multiselect({
-                noneSelectedText:'',
+                noneSelectedText: '',
                 header: true,
                 checkAll: function () {
                     $('#IsInitiativesDirty').val('true');
@@ -2030,6 +2032,10 @@
             // Event Planner
             $('#EventPlannerDropDownList').multiselect({
                 multiple: false,
+                position: {
+                    my: 'left bottom',
+                    at: 'left top'
+                },
                 noneSelectedText:'',
                 header: 'Select an option',
                 selectedList: 1,
@@ -2042,6 +2048,10 @@
             // Videographer
             $('#VideographerDropDownList').multiselect({
                 multiple: false,
+                position: {
+                    my: 'left bottom',
+                    at: 'left top'
+                },
                 noneSelectedText:'',
                 header: 'Select an option',
                 selectedList: 1,

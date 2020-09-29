@@ -64,9 +64,6 @@ namespace Gcpe.Hub.News.ReleaseManagement
             {
                 using (var client = new System.Net.WebClient())
                 {
-                    var photoId = uri.Segments[3].TrimEnd('/');
-                    flickrManager.SetFlickrAssetPermissionsToPublic(photoId);
-
                     try
                     {
                         var result = client.DownloadString(string.Format("http://www.flickr.com/services/oembed?url={0}", uri));

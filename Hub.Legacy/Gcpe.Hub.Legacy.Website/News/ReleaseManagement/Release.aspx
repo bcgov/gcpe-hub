@@ -17,6 +17,7 @@
         var isPublishDateRequired = false;
 
         function pageLoad() {
+
             var translationsAnchor = $("#TranslationsAnchorPanel");
             if (translationsAnchor.length) {
                 $('html, body').animate({
@@ -29,35 +30,6 @@
                     $("#formContentPlaceHolder_formContentPlaceHolder_chkHasTranslations").prop("checked", true);
                 }
             });
-
-            function getPhotoId(url) {
-                var photoId = "";
-
-                if (url.includes('www.flickr.com') || url.includes('flic.kr')) { // handle urls for private images on Flickr
-                    var segments = url.split('/');
-                    photoId = segments[5];
-                } else if (url.includes('staticflickr.com')) { // handle urls for public images
-                    var segments = url.split('/');
-                    photoId = segments[4].split('_')[0];
-                }
-
-                return photoId;
-            }
-
-            var lockFlickrAsset = function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../FlickrHandler.ashx",
-                    data: { photoId: getPhotoId('<%= Model.Asset %>') },
-                    dataType: "json"
-                });
-            };
-
-            var isPublished = '<%= Model.IsPublished.ToString().ToLower() %>';
-
-            if (!isPublished) {
-                lockFlickrAsset();
-            }
 
             // Locations
             //  - set up autocomplete 
