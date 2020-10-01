@@ -6,7 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="formContentPlaceHolder" runat="server">
-
     <div>
         <h1 style="display: inline">
             <asp:Literal ID="ltrPageTitle" runat="server" Text="<%# Model.ResultSetName %>"></asp:Literal>
@@ -95,6 +94,11 @@
                                 <span style="padding-bottom:4px;display:block;">
                                     <span style="font-size:0.95em; text-transform:uppercase"><%# ReleaseModel.ReleaseDocumentType(Item.ReleaseType, Item.PageTitle) %></span>
                                     <asp:Literal runat="server" Text='<%# Item.ReleaseType == "Story" && Item.PageTitle == "Release" ? "" : Item.PageTitle %>' Mode="Encode" />
+                                    <span class="activitySpan">
+                                        <asp:Label id="label1" ToolTip="<%# Item.ActivityId %>" runat="server">
+                                            <i class="<%# Item.ActivityId != null ? "fa fa-calendar" : null %>"></i>
+                                        </asp:Label>
+                                    </span>
                                 </span>
                                 <span style="display:block;"><%# PublishStatusDate(Item) %></span> 
                             </span>
