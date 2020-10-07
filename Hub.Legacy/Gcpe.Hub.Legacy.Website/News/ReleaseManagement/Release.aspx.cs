@@ -349,10 +349,14 @@ namespace Gcpe.Hub.News.ReleaseManagement
                             assetUri = new Uri(flickrManager.ConstructPublicAssetUrl(key));
                         }
 
-                        var photoId = assetUri.Segments[3].TrimEnd('/');
+                        string photoId = "";
+
+                        if (assetUri.Segments.Length == 4)
+                            photoId = assetUri.Segments[3].TrimEnd('/');
+
 
                         // if the asset is public, load the preview
-                        if (flickrManager.IsAssetPublic(photoId))
+                        if (!string.IsNullOrWhiteSpace(photoId) && flickrManager.IsAssetPublic(photoId))
                             assetUri = AssetEmbedManager.NormalizeFlickrUri(assetUri);
 
                         if (assetUri == null)
@@ -368,7 +372,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     else if (assetUri.Host.Contains("facebook.com"))
                     {
                         throw new HubModelException(new string[] { "Facebook is no longer supported due to privacy concerns. Use YouTube or Flickr URLs instead." });
-                    } 
+                    }
                     else if (assetUri.ToString() != "https://news.gov.bc.ca/live")
                     {
                         throw new HubModelException(new string[] { "Unknown type of SuperAsset (" + txtAsset.Text + ")." });
@@ -380,7 +384,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     throw new HubModelException(new string[] { "Invalid URL format for SuperAsset (" + Model.Asset + ")." });
                 }
-
+                Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
                 Model.HasMediaAssets = chkHasMediaAssets.Checked;
 
                 if (Model.IsCommitted && Model.IsPublished)
@@ -493,7 +497,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
                 Model.Summary = txtSummary.Text;
                 Model.SocialMediaSummary = txtSocialMediaSummary.Text;
-                Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
+                //Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
                 Uri uriResult;
                 if (string.IsNullOrEmpty(txtRedirect.Text))
                 {
