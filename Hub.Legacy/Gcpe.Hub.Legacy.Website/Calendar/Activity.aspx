@@ -2414,7 +2414,8 @@
                     var newItemTextLower = newItemText.toLowerCase();
                     var dataItems = e.sender.dataSource.data();
 
-                    var newItemPrefix = newPrefix + (e.sender.element.id === "KeywordsTextBox"  ? "tag)" : "language)");
+                    var elementId = $(e.sender.element).prop("id");
+                    var newItemPrefix = newPrefix + (elementId === "KeywordsTextBox"  ? "tag)" : "language)");
                     var addNewItemMenuItem = newItemText.length >= 3;
                     for (var i = 0; i < dataItems.length; i++) {
                         var dataItem = dataItems[i];

@@ -403,7 +403,7 @@
                                 <div class="search-result-info">
                                     <div style="display: inline-block"><%# ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Source %>  | </div>
                                     <div style="display: inline-block">
-                                        <%# ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Date.HasValue ? ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Date.Value.ToString("MMMM dd, yyyy") : (((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).IsCommitted ? "Published" : "Draft") %>
+                                        <%# ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Date.HasValue ? ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Date.Value.ToString("MMMM dd, yyyy") : (((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Status) %>
                                     </div>
                                 </div>
                                 <div class="search-result-desc"><%# ((Gcpe.Hub.News.SearchModel.SearchResult)Container.DataItem).Description %></div>
