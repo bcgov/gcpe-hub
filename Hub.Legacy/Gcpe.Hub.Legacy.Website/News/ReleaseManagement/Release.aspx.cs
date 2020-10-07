@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -349,10 +350,14 @@ namespace Gcpe.Hub.News.ReleaseManagement
                             assetUri = new Uri(flickrManager.ConstructPublicAssetUrl(key));
                         }
 
-                        var photoId = assetUri.Segments[3].TrimEnd('/');
+                        string photoId = "";
+                        
+                        if(assetUri.Segments.Length == 4)
+                            photoId = assetUri.Segments[3].TrimEnd('/');
+
 
                         // if the asset is public, load the preview
-                        if (flickrManager.IsAssetPublic(photoId))
+                        if (!string.IsNullOrWhiteSpace(photoId) && flickrManager.IsAssetPublic(photoId))
                             assetUri = AssetEmbedManager.NormalizeFlickrUri(assetUri);
 
                         if (assetUri == null)
