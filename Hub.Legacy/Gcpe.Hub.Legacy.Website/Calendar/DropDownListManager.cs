@@ -392,14 +392,16 @@ public class DropDownListManager
         var keywords = from a in corporateCalendarDataContext.ActiveActivities
                        join ak in corporateCalendarDataContext.ActivityKeywords on a.Id equals ak.ActivityId
                        join k in corporateCalendarDataContext.Keywords on ak.KeywordId equals k.Id
-                       where (includedIds??noIds).Contains(k.Id) || (k.LastUpdatedDateTime >= cutOffDate &&
+                       where (includedIds??noIds).Contains(k.Id) || 
+                            k.IsActive
+                            && (k.LastUpdatedDateTime >= cutOffDate &&
                             (isCurrentUserInOwnerList // User is HQ
                            || !a.IsConfidential // Activity is not confidential
                            || ministries.Any(m => m == a.ContactMinistryId) // User's Ministry
                            || ministries.Any(m => corporateCalendarDataContext.ActivitySharedWiths.Any(asw => asw.ActivityId == a.Id && asw.MinistryId == m))))  // Shared with User's Ministry
                        select k;
 
-        return keywords.Distinct().OrderBy(k => k.Name).ToArray();
+        return keywords.Distinct().OrderBy(k => k.SortOrder).ToArray();
     }
     #endregion
 

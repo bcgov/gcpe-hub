@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -350,8 +351,8 @@ namespace Gcpe.Hub.News.ReleaseManagement
                         }
 
                         string photoId = "";
-
-                        if (assetUri.Segments.Length == 4)
+                        
+                        if(assetUri.Segments.Length == 4)
                             photoId = assetUri.Segments[3].TrimEnd('/');
 
 

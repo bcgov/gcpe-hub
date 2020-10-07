@@ -105,6 +105,7 @@ namespace Gcpe.Hub.News
             {
                 var ministriesFilter = filterByMinistries.Select(m => m.Key).ToList();
                 var sectorsFilter = filterBySectors.Select(m => m.Key).ToList();
+                var isCCIDsearch = false;
 
                 IQueryable<NewsRelease> results;
 
@@ -112,6 +113,16 @@ namespace Gcpe.Hub.News
                 {
                     results = from nr in db.NewsReleases
                               where nr.IsActive
+                              select nr;
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(keyword, @"[a-zA-Z]+-\d+"))
+                {
+                    var activityId = Int32.Parse(keyword.Split('-')[1]);
+                    isCCIDsearch = true;
+
+                    results = from nr in db.NewsReleases
+                              where nr.IsActive
+                              && nr.ActivityId == activityId
                               select nr;
                 }
                 else
@@ -127,6 +138,7 @@ namespace Gcpe.Hub.News
                     results = results.Where(nr => nr.ReleaseDateTime >= filterByStartDate);
 
                 //if (filterByStatus == StatusOptions.Published)
+                if (!isCCIDsearch)
                     results = results.Where(nr => nr.IsCommitted);
 
                 if (filterByEndDate.HasValue)
@@ -268,6 +280,18 @@ namespace Gcpe.Hub.News
             public bool IsCommitted;
             public string Source;
             public string Url;
+            public string Status
+            {
+                get
+                {
+                    string status = "";
+                    if (Url.Contains("Drafts")) status = "Draft";
+                    if (Url.Contains("Published")) status = "Published";
+                    if (Url.Contains("Scheduled")) status = "Scheduled";
+
+                    return status;
+                }
+            }
 
             public bool IsPublished;
             public string Reference;
