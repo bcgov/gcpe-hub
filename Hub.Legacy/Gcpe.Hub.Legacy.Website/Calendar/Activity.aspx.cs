@@ -1132,6 +1132,45 @@ namespace Gcpe.Hub.Calendar
             bool scheduleHasChanged = activity.Schedule != SchedulingTextBox.Text;
             bool strategyHasChanged = activity.Strategy != StrategyTextBox.Text;
 
+            bool premierRequestedHasChanged = false;
+            if (premierRequestedHasValue)
+                premierRequestedHasChanged = (int?)Convert.ToInt32(PremierRequestedDropDownList.Value) != activity.PremierRequestedId;
+
+            bool digitalHasValue = !string.IsNullOrWhiteSpace(VideographerDropDownList.Value);
+            bool digitalHasChanged = false;
+            if (digitalHasValue)
+                digitalHasChanged = (int?)Convert.ToInt32(VideographerDropDownList.Value) != activity.VideographerId;
+
+            bool eventPlannerHasValue = !string.IsNullOrWhiteSpace(EventPlannerDropDownList.Value);
+            bool eventPlannerHasChanged = false;
+            if (eventPlannerHasValue)
+                eventPlannerHasChanged = (int?)Convert.ToInt32(EventPlannerDropDownList.Value) != activity.EventPlannerId;
+
+            bool initiativesHaveChanged = InitiativesSelectedValuesServerSide.Text != InitiativesSelectedValues.Text;
+            var selectedKeywords = KeywordsTextBox.Text.Split('~');
+            var selectedKeywordIds = calendarDataContext
+                .Keywords
+                .Where(k => selectedKeywords.Contains(k.Name))
+                .Distinct()
+                .Select(k => k.Id)
+                .ToArray();
+            var keywordIdsSelectedServerSide = calendarDataContext
+                .ActivityKeywords
+                .Where(ak => ak.ActivityId == activity.Id)
+                .Select(ak => ak.KeywordId)
+                .ToArray();
+            bool keywordsHaveChanged = keywordIdsSelectedServerSide.Length != selectedKeywordIds.Length;
+
+            bool NRDistributionHasChanged = false;
+            if (NRDistributionHasValue)
+                NRDistributionHasChanged = (int?)Convert.ToInt32(NRDistributionDropDownList.Value) != activity.NRDistributionId;
+
+            bool NROriginHasChanged = NROriginDropDownList.Value != (newNROrigin ?? "");
+            bool leadOrganizationHasChanged = activity.LeadOrganization != LeadOrganizationTextBox.Text;
+            var translationsServerSide = activity.Translations ?? "";
+            bool translationsRequiredHasChanged = translationsServerSide != TranslationsTextbox.Text.Replace("~", ", ");
+            bool venueHasChanged = activity.Venue != VenueTextBox.Text;
+
             if (activity.IsConfirmed != IsDateConfirmed.Checked || activity.Significance != SignificanceTextBox.Text
                 || activity.Schedule != SchedulingTextBox.Text || activity.LeadOrganization != LeadOrganizationTextBox.Text
                 || activity.Strategy != StrategyTextBox.Text || activity.IsAllDay != IsAllDayCheckBox.Checked
@@ -1180,7 +1219,6 @@ namespace Gcpe.Hub.Calendar
 
             activity.Venue = VenueTextBox.Text;
 
-            bool eventPlannerHasValue = !string.IsNullOrWhiteSpace(EventPlannerDropDownList.Value);
             activity.EventPlannerId = eventPlannerHasValue ? (int?)Convert.ToInt32(EventPlannerDropDownList.Value) : null;
 
             bool videographerHasValue = !string.IsNullOrWhiteSpace(VideographerDropDownList.Value);
@@ -1207,7 +1245,8 @@ namespace Gcpe.Hub.Calendar
                 GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true), PotentialDatesTextBox.Text.Trim(),
                 newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged, commMaterialsHaveChanged,
                 IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues(), significanceHasChanged,
-                internalNotesHasChanged, scheduleHasChanged, strategyHasChanged);
+                internalNotesHasChanged, scheduleHasChanged, strategyHasChanged, premierRequestedHasChanged, venueHasChanged, digitalHasChanged, eventPlannerHasChanged, initiativesHaveChanged,
+                keywordsHaveChanged, leadOrganizationHasChanged, NRDistributionHasChanged, NROriginHasChanged, translationsRequiredHasChanged);
 
             SaveDocuments(calendarDataContext, activity);
 

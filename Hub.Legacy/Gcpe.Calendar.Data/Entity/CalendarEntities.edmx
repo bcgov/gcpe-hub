@@ -63,6 +63,16 @@
           <Property Name="IsStrategyNeedsReview" Type="bit" Nullable="false" />
           <Property Name="IsSchedulingConsiderationsNeedsReview" Type="bit" Nullable="false" />
           <Property Name="IsInternalNotesNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsLeadOrganizationNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsInitiativesNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsTagsNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsOriginNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsDistributionNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsTranslationsRequiredNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsPremierRequestedNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsVenueNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsEventPlannerNeedsReview" Type="bit" Nullable="false" />
+          <Property Name="IsDigitalNeedsReview" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivityCategories">
           <Key>
@@ -298,7 +308,7 @@
           <Property Name="SortOrder" Type="int" />
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ShortName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -1690,6 +1700,16 @@
           <Property Name="IsStrategyNeedsReview" Type="Boolean" Nullable="false" />
           <Property Name="IsSchedulingConsiderationsNeedsReview" Type="Boolean" Nullable="false" />
           <Property Name="IsInternalNotesNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsLeadOrganizationNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsInitiativesNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsTagsNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsOriginNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsDistributionNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsTranslationsRequiredNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsPremierRequestedNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsVenueNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsEventPlannerNeedsReview" Type="Boolean" Nullable="false" />
+          <Property Name="IsDigitalNeedsReview" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivityCategory">
           <Key>
@@ -2934,7 +2954,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="SortOrder" Type="Int32" />
           <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
@@ -3306,6 +3326,16 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.Activity">
               <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="IsDigitalNeedsReview" ColumnName="IsDigitalNeedsReview" />
+                <ScalarProperty Name="IsEventPlannerNeedsReview" ColumnName="IsEventPlannerNeedsReview" />
+                <ScalarProperty Name="IsVenueNeedsReview" ColumnName="IsVenueNeedsReview" />
+                <ScalarProperty Name="IsPremierRequestedNeedsReview" ColumnName="IsPremierRequestedNeedsReview" />
+                <ScalarProperty Name="IsTranslationsRequiredNeedsReview" ColumnName="IsTranslationsRequiredNeedsReview" />
+                <ScalarProperty Name="IsDistributionNeedsReview" ColumnName="IsDistributionNeedsReview" />
+                <ScalarProperty Name="IsOriginNeedsReview" ColumnName="IsOriginNeedsReview" />
+                <ScalarProperty Name="IsTagsNeedsReview" ColumnName="IsTagsNeedsReview" />
+                <ScalarProperty Name="IsInitiativesNeedsReview" ColumnName="IsInitiativesNeedsReview" />
+                <ScalarProperty Name="IsLeadOrganizationNeedsReview" ColumnName="IsLeadOrganizationNeedsReview" />
                 <ScalarProperty Name="IsInternalNotesNeedsReview" ColumnName="IsInternalNotesNeedsReview" />
                 <ScalarProperty Name="IsSchedulingConsiderationsNeedsReview" ColumnName="IsSchedulingConsiderationsNeedsReview" />
                 <ScalarProperty Name="IsStrategyNeedsReview" ColumnName="IsStrategyNeedsReview" />

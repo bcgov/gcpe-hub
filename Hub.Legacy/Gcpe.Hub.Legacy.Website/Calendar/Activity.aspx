@@ -489,7 +489,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Lead Organization:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsLeadOrganizationNeedsReview)%>">Lead Organization:</td>
                                     <td class="column-right">
                                         <asp:TextBox ID="LeadOrganizationTextBox" TextMode="MultiLine" CssClass="new-activity-textareas" placeholder="Province of BC"
                                             runat="server"></asp:TextBox>
@@ -498,7 +498,7 @@
                                 </tr>
                                 <tr class="row"> 
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Initiatives:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">Initiatives:</td>
                                     <td class="column-right">
                                         <select id="InitiativeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="InitiativesSelectedTextRow" style="display: none">
@@ -509,7 +509,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Tags:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsTagsNeedsReview)%>">Tags:</td>
                                     <td class="column-right">
                                         <select id="KeywordList" multiple="true" runat="server" style="display:none"/>
                                         <asp:TextBox ID="KeywordsTextBox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
@@ -758,7 +758,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Origin:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsOriginNeedsReview)%>">Origin:</td>
                                     <td class="column-right">
                                         <select id="NROriginDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <asp:CustomValidator id="NROriginDropDownListValidator" runat="server" Display="Dynamic"
@@ -772,7 +772,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Distribution:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsDistributionNeedsReview)%>">Distribution:</td>
                                     <td class="column-right">
                                         <select id="NRDistributionDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <asp:CustomValidator id="NRDistributionDropDownListValidator" runat="server" Display="Dynamic"
@@ -784,7 +784,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Translations Required:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsTranslationsRequiredNeedsReview)%>">Translations Required:</td>
                                     <td class="column-right">
                                         <select id="TranslationsRequired" multiple="true" runat="server" style="display:none"/>
                                         <asp:TextBox ID="TranslationsTextbox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
@@ -851,7 +851,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Premier Requested:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsPremierRequestedNeedsReview)%>">Premier Requested:</td>
                                     <td class="column-right">
                                         <select id="PremierRequestedDropDownList" multiple="true" runat="server" style="display:none"/>
                                     </td>
@@ -889,7 +889,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Venue:</td>
+                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsVenueNeedsReview)%>">Venue:</td>
                                     <td class="column-right">
                                         <asp:TextBox ID="VenueTextBox" TextMode="MultiLine" MaxLength="50" CssClass="new-activity-textareas"
                                             runat="server"></asp:TextBox>
@@ -898,14 +898,14 @@
                                 </tr>
                                 <tr id="EventPlannerContainer" class="row">
                                         <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                        <td class="column-left">Event Planner:</td>
+                                        <td class="column-left <%=Markup(CurrentActiveActivity.IsEventPlannerNeedsReview)%>">Event Planner:</td>
                                         <td class="column-right">
                                             <select id="EventPlannerDropDownList" multiple="true" runat="server" style="display:none"/>
                                         </td>
                                 </tr>
                                 <tr id="VideographerContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Digital:</td>
+                                    <td class="column-left  <%=Markup(CurrentActiveActivity.IsDigitalNeedsReview)%>">Digital:</td>
                                     <td class="column-right">
                                         <select id="VideographerDropDownList" multiple="true" runat="server" style="display:none"/>
                                     </td>

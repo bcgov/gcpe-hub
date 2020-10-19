@@ -16,7 +16,9 @@ SELECT      [calendar].Activity.Id, [calendar].Activity.StatusId, [calendar].Act
             [calendar].Activity.EventPlannerId, [calendar].Activity.VideographerId, [calendar].sGetActivityCommunicationMaterialsByName([calendar].Activity.Id) AS CommunicationsMaterials, 
             [calendar].Activity.IsTitleNeedsReview, [calendar].Activity.IsDetailsNeedsReview, [calendar].Activity.IsRepresentativeNeedsReview, [calendar].Activity.IsCityNeedsReview, 
             [calendar].Activity.IsStartDateNeedsReview, [calendar].Activity.IsEndDateNeedsReview, [calendar].Activity.IsCategoriesNeedsReview, [calendar].Activity.IsActiveNeedsReview, [calendar].Activity.IsCommMaterialsNeedsReview,
-            [calendar].Activity.IsSignificanceNeedsReview, [calendar].Activity.IsStrategyNeedsReview, [calendar].Activity.IsInternalNotesNeedsReview, [calendar].Activity.IsSchedulingConsiderationsNeedsReview
+            [calendar].Activity.IsSignificanceNeedsReview, [calendar].Activity.IsStrategyNeedsReview, [calendar].Activity.IsInternalNotesNeedsReview, [calendar].Activity.IsSchedulingConsiderationsNeedsReview, [Calendar].Activity.IsLeadOrganizationNeedsReview,
+            [Calendar].Activity.IsInitiativesNeedsReview, [Calendar].Activity.IsTagsNeedsReview, [Calendar].Activity.IsOriginNeedsReview, [Calendar].Activity.IsDistributionNeedsReview, [Calendar].Activity.IsTranslationsRequiredNeedsReview, [Calendar].Activity.IsPremierRequestedNeedsReview, [Calendar].Activity.IsVenueNeedsReview,
+            [Calendar].Activity.IsEventPlannerNeedsReview, [Calendar].Activity.IsDigitalNeedsReview
 
 FROM        [calendar].Activity LEFT OUTER JOIN
             [calendar].Status ON [calendar].Activity.StatusId = [calendar].Status.Id LEFT OUTER JOIN
