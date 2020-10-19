@@ -56,6 +56,16 @@ public class ActivityManager
                 activity.IsInternalNotesNeedsReview = false;
                 activity.IsSchedulingConsiderationsNeedsReview = false;
                 activity.IsStrategyNeedsReview = false;
+                activity.IsPremierRequestedNeedsReview = false;
+                activity.IsVenueNeedsReview = false;
+                activity.IsDigitalNeedsReview = false;
+                activity.IsEventPlannerNeedsReview = false;
+                activity.IsTranslationsRequiredNeedsReview = false;
+                activity.IsInitiativesNeedsReview = false;
+                activity.IsTagsNeedsReview = false;
+                activity.IsLeadOrganizationNeedsReview = false;
+                activity.IsDistributionNeedsReview = false;
+                activity.IsOriginNeedsReview = false;
             }
             //activity.IsReviewed = true;
             dc.SubmitChanges();
@@ -87,7 +97,9 @@ public class ActivityManager
     public static void UpdateActivity(CorporateCalendarDataContext db, CustomPrincipal customPrincipal, Activity activity,
         string title, string details, DateTime? startDateTime, DateTime? endDateTime, string potentialDates, int? representativeId, int? cityId, string otherCity,
         bool categoryHasChanged, bool commMaterialsHaveChanged, bool isIssue, bool isConfidential, string translationsRequired, Dictionary<string, string> dropDownListValues,
-        bool significanceHasChanged, bool internalNotesHasChanged, bool scheduleHasChanged, bool strategyHasChanged)
+        bool significanceHasChanged, bool internalNotesHasChanged, bool scheduleHasChanged, bool strategyHasChanged, bool premierRequestedHasChanged, bool venueHasChanged,
+        bool digitalHasChanged, bool eventPlannerHasChanged, bool initiativesHaveChanged, bool keywordsHaveChanged, bool leadOrganizationHasChanged, bool NRDistributionHasChanged,
+        bool NROriginHasChanged, bool translationsRequiredHasChanged)
     {
         //-- Need to check if these fields were modified and mark them
         //--Title and Details
@@ -179,6 +191,65 @@ public class ActivityManager
 
         if (strategyHasChanged) {
             activity.IsStrategyNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (premierRequestedHasChanged) {
+            activity.IsPremierRequestedNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (venueHasChanged)
+        {
+            activity.IsVenueNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (digitalHasChanged)
+        {
+            activity.IsDigitalNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (eventPlannerHasChanged)
+        {
+            activity.IsEventPlannerNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (initiativesHaveChanged)
+        {
+            activity.IsInitiativesNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (keywordsHaveChanged)
+        {
+            activity.IsTagsNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (leadOrganizationHasChanged)
+        {
+            activity.IsLeadOrganizationNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (NRDistributionHasChanged)
+        {
+            activity.IsDistributionNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (NROriginHasChanged)
+        {
+            activity.IsOriginNeedsReview = true;
+            activity.StatusId = 1; // Changed
+        }
+
+        if (translationsRequiredHasChanged)
+        {
+            activity.IsTranslationsRequiredNeedsReview = true;
             activity.StatusId = 1; // Changed
         }
 
