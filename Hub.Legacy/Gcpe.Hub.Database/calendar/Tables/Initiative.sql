@@ -5,7 +5,7 @@
     [SortOrder] INT              NULL,
     [TimeStamp] ROWVERSION       NOT NULL,
     [RowGuid]   UNIQUEIDENTIFIER CONSTRAINT [DF_Initiative_RowGuid] DEFAULT (newid()) NOT NULL,
-    [ShortName] NVARCHAR (30)    NULL,
+    [ShortName] NVARCHAR (40)    NULL,
     CONSTRAINT [PK_Initiative] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

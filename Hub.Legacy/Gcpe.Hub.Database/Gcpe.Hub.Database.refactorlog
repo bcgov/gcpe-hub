@@ -1028,4 +1028,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DisplayAs" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d44dfcba-553c-4444-94b1-6c76a84ed081" ChangeDateTime="10/13/2020 21:38:36">
+    <Property Name="ElementName" Value="[calendar].[Activity].[IsInitiatives]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[calendar].[Activity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsInitiativesNeedsReview" />
+  </Operation>
 </Operations>

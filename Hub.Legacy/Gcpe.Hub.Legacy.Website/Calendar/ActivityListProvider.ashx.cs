@@ -411,7 +411,7 @@ namespace Gcpe.Hub.Calendar
                         details = "<span style='color:darkred'>Not for Look Ahead</span> " + details;
 
                     string city = ApplyMarkup(t.IsCityNeedsReview ? Markup : null, t.CityOrOther);
-                    string venue = t.Venue;
+                    string venue = ApplyMarkup(t.IsVenueNeedsReview ? Markup : null, t.Venue);
                     string otherCity = t.OtherCity;
                     string schedulingConsiderations = t.Schedule;
                     string changedMessage = "";
@@ -436,7 +436,9 @@ namespace Gcpe.Hub.Calendar
 
                     if (!ColumnModel.IsHidden("Keywords", hiddenColumns))
                     {
-                        dr.cell.Add("Keywords", t.Keywords ?? "");
+                        string keywords = string.Empty;
+                        keywords = ApplyMarkup(t.IsTagsNeedsReview ? Markup : null, t.Keywords);
+                        dr.cell.Add("Keywords", keywords ?? "");
                     }
                     if (!ColumnModel.IsHidden("Ministry", hiddenColumns))
                     {
@@ -449,11 +451,17 @@ namespace Gcpe.Hub.Calendar
                     }
                     if (!ColumnModel.IsHidden("Translations", hiddenColumns))
                     {
-                        dr.cell.Add("Translations", t.Translations ?? "");
+                        string translations = string.Empty;
+                        translations = t.Translations ?? "";
+                        translations = ApplyMarkup(t.IsTranslationsRequiredNeedsReview ? Markup : null, translations);
+                        dr.cell.Add("Translations", translations);
                     }
                     if (!ColumnModel.IsHidden("PremierRequested", hiddenColumns))
                     {
-                        dr.cell.Add("PremierRequested", t.PremierRequested == "Yes" ? "Premier Reqstd" : t.PremierRequested ?? "");
+                        String premierRequested = string.Empty;
+                        premierRequested = t.PremierRequested == "Yes" ? "Premier Reqstd" : t.PremierRequested ?? "";
+                        premierRequested = ApplyMarkup(t.IsPremierRequestedNeedsReview ? Markup : null, premierRequested);
+                        dr.cell.Add("PremierRequested", premierRequested);
                     }
                     if (!ColumnModel.IsHidden("GovernmentRepresentative", hiddenColumns))
                     {
@@ -508,7 +516,11 @@ namespace Gcpe.Hub.Calendar
                     }
 
                     dr.cell.Add("Id", t.Id);
-                    dr.cell.Add("LeadOrganization", t.LeadOrganization);
+
+                    string leadOrganization = string.Empty;
+                    leadOrganization = ApplyMarkup(t.IsLeadOrganizationNeedsReview ? Markup : null, t.LeadOrganization);
+                    dr.cell.Add("LeadOrganization", leadOrganization);
+                    
                     dr.cell.Add("NameAndNumber", t.ContactName + "<br/>" + t.ContactNumber.Replace("-", "\u2011")); //\u2011 = non-breaking hyphen
 
                     string startEndHoverText = string.Empty;

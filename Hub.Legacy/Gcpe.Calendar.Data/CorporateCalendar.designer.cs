@@ -9868,7 +9868,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(30) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(40) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string ShortName
 		{
 			get
@@ -12576,6 +12576,26 @@ namespace CorporateCalendar.Data
 		
 		private bool _IsInternalNotesNeedsReview;
 		
+		private bool _IsLeadOrganizationNeedsReview;
+		
+		private bool _IsInitiativesNeedsReview;
+		
+		private bool _IsTagsNeedsReview;
+		
+		private bool _IsOriginNeedsReview;
+		
+		private bool _IsDistributionNeedsReview;
+		
+		private bool _IsTranslationsRequiredNeedsReview;
+		
+		private bool _IsPremierRequestedNeedsReview;
+		
+		private bool _IsVenueNeedsReview;
+		
+		private bool _IsEventPlannerNeedsReview;
+		
+		private bool _IsDigitalNeedsReview;
+		
 		private EntitySet<ActivitySharedWith> _ActivitySharedWiths;
 		
 		private EntitySet<Log> _Logs;
@@ -12736,6 +12756,26 @@ namespace CorporateCalendar.Data
     partial void OnIsSchedulingConsiderationsNeedsReviewChanged();
     partial void OnIsInternalNotesNeedsReviewChanging(bool value);
     partial void OnIsInternalNotesNeedsReviewChanged();
+    partial void OnIsLeadOrganizationNeedsReviewChanging(bool value);
+    partial void OnIsLeadOrganizationNeedsReviewChanged();
+    partial void OnIsInitiativesNeedsReviewChanging(bool value);
+    partial void OnIsInitiativesNeedsReviewChanged();
+    partial void OnIsTagsNeedsReviewChanging(bool value);
+    partial void OnIsTagsNeedsReviewChanged();
+    partial void OnIsOriginNeedsReviewChanging(bool value);
+    partial void OnIsOriginNeedsReviewChanged();
+    partial void OnIsDistributionNeedsReviewChanging(bool value);
+    partial void OnIsDistributionNeedsReviewChanged();
+    partial void OnIsTranslationsRequiredNeedsReviewChanging(bool value);
+    partial void OnIsTranslationsRequiredNeedsReviewChanged();
+    partial void OnIsPremierRequestedNeedsReviewChanging(bool value);
+    partial void OnIsPremierRequestedNeedsReviewChanged();
+    partial void OnIsVenueNeedsReviewChanging(bool value);
+    partial void OnIsVenueNeedsReviewChanged();
+    partial void OnIsEventPlannerNeedsReviewChanging(bool value);
+    partial void OnIsEventPlannerNeedsReviewChanged();
+    partial void OnIsDigitalNeedsReviewChanging(bool value);
+    partial void OnIsDigitalNeedsReviewChanged();
     #endregion
 		
 		public Activity()
@@ -13895,6 +13935,206 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLeadOrganizationNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsLeadOrganizationNeedsReview
+		{
+			get
+			{
+				return this._IsLeadOrganizationNeedsReview;
+			}
+			set
+			{
+				if ((this._IsLeadOrganizationNeedsReview != value))
+				{
+					this.OnIsLeadOrganizationNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsLeadOrganizationNeedsReview = value;
+					this.SendPropertyChanged("IsLeadOrganizationNeedsReview");
+					this.OnIsLeadOrganizationNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsInitiativesNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsInitiativesNeedsReview
+		{
+			get
+			{
+				return this._IsInitiativesNeedsReview;
+			}
+			set
+			{
+				if ((this._IsInitiativesNeedsReview != value))
+				{
+					this.OnIsInitiativesNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsInitiativesNeedsReview = value;
+					this.SendPropertyChanged("IsInitiativesNeedsReview");
+					this.OnIsInitiativesNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTagsNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsTagsNeedsReview
+		{
+			get
+			{
+				return this._IsTagsNeedsReview;
+			}
+			set
+			{
+				if ((this._IsTagsNeedsReview != value))
+				{
+					this.OnIsTagsNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsTagsNeedsReview = value;
+					this.SendPropertyChanged("IsTagsNeedsReview");
+					this.OnIsTagsNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsOriginNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsOriginNeedsReview
+		{
+			get
+			{
+				return this._IsOriginNeedsReview;
+			}
+			set
+			{
+				if ((this._IsOriginNeedsReview != value))
+				{
+					this.OnIsOriginNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsOriginNeedsReview = value;
+					this.SendPropertyChanged("IsOriginNeedsReview");
+					this.OnIsOriginNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDistributionNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsDistributionNeedsReview
+		{
+			get
+			{
+				return this._IsDistributionNeedsReview;
+			}
+			set
+			{
+				if ((this._IsDistributionNeedsReview != value))
+				{
+					this.OnIsDistributionNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsDistributionNeedsReview = value;
+					this.SendPropertyChanged("IsDistributionNeedsReview");
+					this.OnIsDistributionNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTranslationsRequiredNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsTranslationsRequiredNeedsReview
+		{
+			get
+			{
+				return this._IsTranslationsRequiredNeedsReview;
+			}
+			set
+			{
+				if ((this._IsTranslationsRequiredNeedsReview != value))
+				{
+					this.OnIsTranslationsRequiredNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsTranslationsRequiredNeedsReview = value;
+					this.SendPropertyChanged("IsTranslationsRequiredNeedsReview");
+					this.OnIsTranslationsRequiredNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPremierRequestedNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsPremierRequestedNeedsReview
+		{
+			get
+			{
+				return this._IsPremierRequestedNeedsReview;
+			}
+			set
+			{
+				if ((this._IsPremierRequestedNeedsReview != value))
+				{
+					this.OnIsPremierRequestedNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsPremierRequestedNeedsReview = value;
+					this.SendPropertyChanged("IsPremierRequestedNeedsReview");
+					this.OnIsPremierRequestedNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsVenueNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsVenueNeedsReview
+		{
+			get
+			{
+				return this._IsVenueNeedsReview;
+			}
+			set
+			{
+				if ((this._IsVenueNeedsReview != value))
+				{
+					this.OnIsVenueNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsVenueNeedsReview = value;
+					this.SendPropertyChanged("IsVenueNeedsReview");
+					this.OnIsVenueNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEventPlannerNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsEventPlannerNeedsReview
+		{
+			get
+			{
+				return this._IsEventPlannerNeedsReview;
+			}
+			set
+			{
+				if ((this._IsEventPlannerNeedsReview != value))
+				{
+					this.OnIsEventPlannerNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsEventPlannerNeedsReview = value;
+					this.SendPropertyChanged("IsEventPlannerNeedsReview");
+					this.OnIsEventPlannerNeedsReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDigitalNeedsReview", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public bool IsDigitalNeedsReview
+		{
+			get
+			{
+				return this._IsDigitalNeedsReview;
+			}
+			set
+			{
+				if ((this._IsDigitalNeedsReview != value))
+				{
+					this.OnIsDigitalNeedsReviewChanging(value);
+					this.SendPropertyChanging();
+					this._IsDigitalNeedsReview = value;
+					this.SendPropertyChanged("IsDigitalNeedsReview");
+					this.OnIsDigitalNeedsReviewChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivitySharedWith", Storage="_ActivitySharedWiths", ThisKey="Id", OtherKey="ActivityId")]
 		public EntitySet<ActivitySharedWith> ActivitySharedWiths
 		{
@@ -14763,6 +15003,26 @@ namespace CorporateCalendar.Data
 		private bool _IsStrategyNeedsReview;
 		
 		private bool _IsSchedulingConsiderationsNeedsReview;
+		
+		private bool _IsLeadOrganizationNeedsReview;
+		
+		private bool _IsInitiativesNeedsReview;
+		
+		private bool _IsTagsNeedsReview;
+		
+		private bool _IsOriginNeedsReview;
+		
+		private bool _IsDistributionNeedsReview;
+		
+		private bool _IsTranslationsRequiredNeedsReview;
+		
+		private bool _IsPremierRequestedNeedsReview;
+		
+		private bool _IsVenueNeedsReview;
+		
+		private bool _IsEventPlannerNeedsReview;
+		
+		private bool _IsDigitalNeedsReview;
 		
 		public ActiveActivity()
 		{
@@ -15852,6 +16112,166 @@ namespace CorporateCalendar.Data
 				if ((this._IsSchedulingConsiderationsNeedsReview != value))
 				{
 					this._IsSchedulingConsiderationsNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLeadOrganizationNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsLeadOrganizationNeedsReview
+		{
+			get
+			{
+				return this._IsLeadOrganizationNeedsReview;
+			}
+			set
+			{
+				if ((this._IsLeadOrganizationNeedsReview != value))
+				{
+					this._IsLeadOrganizationNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsInitiativesNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsInitiativesNeedsReview
+		{
+			get
+			{
+				return this._IsInitiativesNeedsReview;
+			}
+			set
+			{
+				if ((this._IsInitiativesNeedsReview != value))
+				{
+					this._IsInitiativesNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTagsNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsTagsNeedsReview
+		{
+			get
+			{
+				return this._IsTagsNeedsReview;
+			}
+			set
+			{
+				if ((this._IsTagsNeedsReview != value))
+				{
+					this._IsTagsNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsOriginNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsOriginNeedsReview
+		{
+			get
+			{
+				return this._IsOriginNeedsReview;
+			}
+			set
+			{
+				if ((this._IsOriginNeedsReview != value))
+				{
+					this._IsOriginNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDistributionNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsDistributionNeedsReview
+		{
+			get
+			{
+				return this._IsDistributionNeedsReview;
+			}
+			set
+			{
+				if ((this._IsDistributionNeedsReview != value))
+				{
+					this._IsDistributionNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTranslationsRequiredNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsTranslationsRequiredNeedsReview
+		{
+			get
+			{
+				return this._IsTranslationsRequiredNeedsReview;
+			}
+			set
+			{
+				if ((this._IsTranslationsRequiredNeedsReview != value))
+				{
+					this._IsTranslationsRequiredNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPremierRequestedNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsPremierRequestedNeedsReview
+		{
+			get
+			{
+				return this._IsPremierRequestedNeedsReview;
+			}
+			set
+			{
+				if ((this._IsPremierRequestedNeedsReview != value))
+				{
+					this._IsPremierRequestedNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsVenueNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsVenueNeedsReview
+		{
+			get
+			{
+				return this._IsVenueNeedsReview;
+			}
+			set
+			{
+				if ((this._IsVenueNeedsReview != value))
+				{
+					this._IsVenueNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEventPlannerNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsEventPlannerNeedsReview
+		{
+			get
+			{
+				return this._IsEventPlannerNeedsReview;
+			}
+			set
+			{
+				if ((this._IsEventPlannerNeedsReview != value))
+				{
+					this._IsEventPlannerNeedsReview = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDigitalNeedsReview", DbType="Bit NOT NULL")]
+		public bool IsDigitalNeedsReview
+		{
+			get
+			{
+				return this._IsDigitalNeedsReview;
+			}
+			set
+			{
+				if ((this._IsDigitalNeedsReview != value))
+				{
+					this._IsDigitalNeedsReview = value;
 				}
 			}
 		}

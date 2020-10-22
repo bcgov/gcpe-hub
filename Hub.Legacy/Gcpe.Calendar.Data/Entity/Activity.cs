@@ -85,6 +85,16 @@ namespace CorporateCalendar.Data.Entity
         public bool IsStrategyNeedsReview { get; set; }
         public bool IsSchedulingConsiderationsNeedsReview { get; set; }
         public bool IsInternalNotesNeedsReview { get; set; }
+        public bool IsLeadOrganizationNeedsReview { get; set; }
+        public bool IsInitiativesNeedsReview { get; set; }
+        public bool IsTagsNeedsReview { get; set; }
+        public bool IsOriginNeedsReview { get; set; }
+        public bool IsDistributionNeedsReview { get; set; }
+        public bool IsTranslationsRequiredNeedsReview { get; set; }
+        public bool IsPremierRequestedNeedsReview { get; set; }
+        public bool IsVenueNeedsReview { get; set; }
+        public bool IsEventPlannerNeedsReview { get; set; }
+        public bool IsDigitalNeedsReview { get; set; }
     
         public virtual City City { get; set; }
         public virtual CommunicationContact CommunicationContact { get; set; }
