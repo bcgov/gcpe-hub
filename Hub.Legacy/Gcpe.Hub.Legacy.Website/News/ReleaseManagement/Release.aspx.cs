@@ -385,11 +385,18 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     throw new HubModelException(new string[] { "Invalid URL format for SuperAsset (" + Model.Asset + ")." });
                 }
+               
+                if ((!string.IsNullOrEmpty(txtSocialMediaHeadline.Text))&&(txtSocialMediaHeadline.Text.Length>150))
+                {
+                    throw new HubModelException(new string[] { "Alt text should be less than 150 characters. " });
+                }
                 Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
                 Model.HasMediaAssets = chkHasMediaAssets.Checked;
 
                 if (Model.IsCommitted && Model.IsPublished)
                 {
+
+
                     Model.SaveWithLog("Release Assets Updated"); // will set IsPublish to false.
                 }
                 else
