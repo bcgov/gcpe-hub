@@ -1003,6 +1003,13 @@
                     </div>
 
                     <div class="view-group">
+                        <div class="lbl">Alt text</div>
+                        <div class="txt">
+                            <asp:Literal ID="Literal4" runat="server" Mode="Encode" Text='<%# Model.SocialMediaHeadline == "" || Model.SocialMediaHeadline == null ? "None" : Model.SocialMediaHeadline %>' />
+                        </div>
+                    </div>
+
+                    <div class="view-group">
                         <div class="lbl">Has Media Assets</div>
                         <div class="txt">
                             <asp:Literal runat="server" Text='<%# (Model.HasMediaAssets ? "Yes" : "No") %>' />
@@ -1043,6 +1050,13 @@
                             <div>
                                 <asp:TextBox runat="server" ID="txtAsset" Width="400px" Text="<%# Model.Asset %>" />
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="label">Alt Text</div>
+                        <div class="txt">
+                            <asp:TextBox ID="txtSocialMediaHeadline" runat="server" Width="98%" Height="50px" Text='<%# Model.SocialMediaHeadline %>' TextMode="MultiLine"></asp:TextBox>
                         </div>
                     </div>
 
@@ -1286,13 +1300,6 @@
                     </div>
 
                     <div class="view-group hideForAdvisories">
-                        <div class="lbl">Social Media Headline</div>
-                        <div class="txt">
-                            <asp:Literal ID="Literal4" runat="server" Mode="Encode" Text='<%# Model.SocialMediaHeadline == "" || Model.SocialMediaHeadline == null ? "None" : Model.SocialMediaHeadline %>' />
-                        </div>
-                    </div>
-
-                    <div class="view-group hideForAdvisories">
                         <div class="lbl">Social Media Summary</div>
                         <div class="txt">
                             <asp:Literal ID="Literal3" runat="server" Mode="Encode" Text='<%# Model.SocialMediaSummary == "" || Model.SocialMediaSummary == null ? "None" : Model.SocialMediaSummary %>' />
@@ -1347,13 +1354,7 @@
                         </div>
                     </div>
 
-                    <div class="field-group required hideForAdvisories">
-                        <div class="label">Social Media Headline</div>
-                        <div class="txt">
-                            <asp:TextBox ID="txtSocialMediaHeadline" runat="server" Width="98%" Height="80px" Text='<%# Model.SocialMediaHeadline %>' TextMode="MultiLine"></asp:TextBox>
-                        </div>
-                    </div>
-
+                    
                     <div class="field-group required hideForAdvisories">
                         <div class="label">Social Media Summary</div>
                         <div class="txt">

@@ -6,7 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="formContentPlaceHolder" runat="server">
-
     <div>
         <h1 style="display: inline">
             <asp:Literal ID="ltrPageTitle" runat="server" Text="<%# Model.ResultSetName %>"></asp:Literal>
@@ -95,8 +94,19 @@
                                 <span style="padding-bottom:4px;display:block;">
                                     <span style="font-size:0.95em; text-transform:uppercase"><%# ReleaseModel.ReleaseDocumentType(Item.ReleaseType, Item.PageTitle) %></span>
                                     <asp:Literal runat="server" Text='<%# Item.ReleaseType == "Story" && Item.PageTitle == "Release" ? "" : Item.PageTitle %>' Mode="Encode" />
+                                    <!--
+                                    <span class="activitySpan">
+                                        <asp:Label id="label1" ToolTip="<%# Item.ActivityId %>" runat="server">
+                                            <i class="<%# Item.ActivityId != null ? "fa fa-calendar" : null %>"></i>
+                                        </asp:Label>
+                                    </span>
+                                    -->
                                 </span>
-                                <span style="display:block;"><%# PublishStatusDate(Item) %></span> 
+                                <span style="<%# PublishStatusDate(Item) != "" ? "padding-bottom:3px;display:block;" : "" %>"><%# PublishStatusDate(Item) %></span>                             
+                                <span style="display:block;">
+                                     <span><%# Item.ActivityId != null ? "Activity ID:" : null %></span>
+                                     <span><%# Item.ActivityId != null ? Item.ActivityId : null %></span>    
+                                </span>  
                             </span>
                             <span style="display:inline-block;width:72%;line-height:1.2em;vertical-align:top;">
                                 <span class="title"><asp:Literal runat="server" Text="<%# Item.Headline %>" Mode="Encode" /></span>
@@ -155,8 +165,19 @@
                                 <span style="padding-bottom:4px;display:block;">
                                     <span style="font-size:0.95em; text-transform:uppercase"><%# Item.IsCalActivity ? Item.EventType : ReleaseModel.ReleaseDocumentType(Item.ReleaseType, Item.PageTitle) %></span>
                                     <asp:Literal runat="server" Text='<%# Item.IsCalActivity || (Item.ReleaseType == "Story" && Item.PageTitle == "Release") ? "" : Item.PageTitle %>' Mode="Encode" />
+                                    <!--
+                                    <span class="activitySpan">
+                                        <asp:Label id="label1" ToolTip="<%# Item.ActivityId %>" runat="server">
+                                            <i class="<%# Item.ActivityId != null ? "fa fa-external-link" : null %>"></i>
+                                        </asp:Label>
+                                    </span>
+                                    -->
                                 </span>
-                                <span style="display:block;"><%# PublishStatusDate(Item) %></span> 
+                                <span style="<%# PublishStatusDate(Item) != "" ? "padding-bottom:3px;display:block;" : "" %>"><%# PublishStatusDate(Item) %></span> 
+                                <span style="display:block;">
+                                     <span><%# Item.ActivityId != null ? "Activity ID:" : null %></span>
+                                     <span><%# Item.ActivityId != null ? Item.ActivityId : null %></span>    
+                                </span> 
                             </span>
                             <span style="display:inline-block;width:72%;line-height:1.2em;vertical-align:top;">
                                 <span class="title"><asp:Literal runat="server" Text='<%# (Item.IsCalActivity && !string.IsNullOrWhiteSpace(Item.Location) ? Item.Location + " - " : "") + (Item.IsConfidential == true ? "Not For Look Ahead" : Item.Headline) %>' Mode="Encode" /></span>

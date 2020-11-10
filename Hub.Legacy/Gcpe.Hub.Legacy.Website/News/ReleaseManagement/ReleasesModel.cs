@@ -39,7 +39,8 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 CreateDate = r.Logs.Where(l => l.Description.StartsWith("Created ")).Select(l => l.DateTime).FirstOrDefault(),
                 FirstOrganization = GetFirstOrganization(r),
                 PublishDateTime = r.PublishDateTime,
-                ReleaseType = Enum.GetName(typeof(ReleaseType), r.ReleaseType)
+                ReleaseType = Enum.GetName(typeof(ReleaseType), r.ReleaseType),
+                ActivityId = r.ActivityId
             });
 
             return results;

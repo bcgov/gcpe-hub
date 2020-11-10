@@ -373,7 +373,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     else if (assetUri.Host.Contains("facebook.com"))
                     {
                         throw new HubModelException(new string[] { "Facebook is no longer supported due to privacy concerns. Use YouTube or Flickr URLs instead." });
-                    } 
+                    }
                     else if (assetUri.ToString() != "https://news.gov.bc.ca/live")
                     {
                         throw new HubModelException(new string[] { "Unknown type of SuperAsset (" + txtAsset.Text + ")." });
@@ -385,11 +385,18 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     throw new HubModelException(new string[] { "Invalid URL format for SuperAsset (" + Model.Asset + ")." });
                 }
-
+               
+                if ((!string.IsNullOrEmpty(txtSocialMediaHeadline.Text))&&(txtSocialMediaHeadline.Text.Length>150))
+                {
+                    throw new HubModelException(new string[] { "Alt text should be less than 150 characters. " });
+                }
+                Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
                 Model.HasMediaAssets = chkHasMediaAssets.Checked;
 
                 if (Model.IsCommitted && Model.IsPublished)
                 {
+
+
                     Model.SaveWithLog("Release Assets Updated"); // will set IsPublish to false.
                 }
                 else
@@ -498,7 +505,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
                 Model.Summary = txtSummary.Text;
                 Model.SocialMediaSummary = txtSocialMediaSummary.Text;
-                Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
+                //Model.SocialMediaHeadline = txtSocialMediaHeadline.Text;
                 Uri uriResult;
                 if (string.IsNullOrEmpty(txtRedirect.Text))
                 {
