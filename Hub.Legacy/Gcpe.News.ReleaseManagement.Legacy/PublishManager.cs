@@ -75,7 +75,7 @@ namespace Gcpe.News.ReleaseManagement
                 if (currentCollection != null)
                     currentCollectionName = "news_releases_" + currentCollection.Name;
                 else
-                    currentCollectionName = "news_releases_2017-2021";
+                    currentCollectionName = "news_releases_2020-2024";
             }
             string path = Path.Combine(directory.FullName, currentCollectionName);
 
