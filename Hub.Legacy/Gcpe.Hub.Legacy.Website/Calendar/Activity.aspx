@@ -53,7 +53,7 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery-ui-1.11.4.js") %>"></script>
 
     <script>jQuery.fn.tooltip = bootstrap_tooltip;</script>
-    
+
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.ui.core.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.popup.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/kendo/2016.2.504/kendo.data.min.js") %>"></script>
@@ -110,7 +110,7 @@
         // VALIDATION ------------------------------------------------------------------------------------------------
 
         // Start by checking for blank required field first, if any are found, show the validator messages
-        // The required fields are 
+        // The required fields are
 
         //Breaking this into smaller functions to help debugging
 
@@ -141,7 +141,7 @@
             }
         }
 
-        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory. 
+        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory.
         function validateOriginForCategory(source, args) {
             if ($('#CategoriesDropDownList').val() == '12'
                 || $('#CategoriesDropDownList').val() == '58')
@@ -156,7 +156,7 @@
             args.IsValid = true;
         }
 
-        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory. 
+        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory.
         function validateDistributionForCategory(source, args) {
             if ($('#CategoriesDropDownList').val() == '12'
                 || $('#CategoriesDropDownList').val() == '58')
@@ -171,7 +171,7 @@
             args.IsValid = true;
         }
 
-        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory. 
+        // 3075 : For activities with a Category of Proposed Release or Approved Release, Origin, Distribution and Comm Materials need to be  Mandatory.
         function validateCommMaterialsForCategory(source, args) {
             if ($('#CategoriesDropDownList').val() == '12'
                 || $('#CategoriesDropDownList').val() == '58')
@@ -189,7 +189,7 @@
         // 3076 : Creating a new activity defaults to no start and end date, Start Time and End Time Validation after removing the initial values
         function validateTime(source, args){
             if (args.Value == '')
-            { 
+            {
                 args.IsValid = false;
                 return;
             }
@@ -313,7 +313,7 @@
             }*/
 
             return true;
-        }        
+        }
 
     </script>
 
@@ -321,12 +321,12 @@
         .ui-datepicker {
             margin-left: -80px;
         }
-        /*class="new-activity-date" 
+        /*class="new-activity-date"
             editable-select new-activity-time
             */
         .editable-select {
             width: 81px;
-        }        
+        }
     </style>
 
 
@@ -347,18 +347,18 @@
                     </tr>
                 </table>
             </div>
-            <div id="ChangesPending" class="ChangesNotice" style="display: none;">
+            <div id="ChangesPending" class="ChangesNotice-Modifier" style="display: none;">
                 <table style="margin: auto;">
                     <tr>
-                        <td>
+                        <td style="padding-bottom: 8px;">
                             <img src="../images/alert-icon.png" alt="warning" /></td>
                         <td><span style="font-weight: bold;">Activity has changes that have not been saved</span>. Please save your work.</td>
                     </tr>
                 </table>
-                <table style="margin: auto;">
+                <table id="SecondaryAlert" style="margin: auto; width: 100%; background-color: #D9EAF7; color: #464849;">
                     <tr>
-                        <td>
-                            <img src="../images/alert-icon.png" alt="warning" /><span style="font-weight: bold; padding: 0;">NOTE:</span> This tab will be closed after 15 minutes of inactivity.
+                        <td id="ChangesPendingAlert" style="padding-top: 8px; padding-bottom: 8px;">
+                            <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i> This tab will be closed after 15 minutes of inactivity.
                         </td>
                     </tr>
                 </table>
@@ -397,7 +397,7 @@
 
                         <div class="checks" style="display: none;">
                             <asp:CheckBox ID="IsInternalCheckBoxNotUsed" runat="server" Text="Is Internal?" /></div>
-                        
+
                         <div style="display: inline-block; display: inline-block">
                             <span runat="server" id="FavoriteIcon"></span>
                             <asp:Button ID="FavoriteButton" runat="server" OnClick="FavoriteButtonClick" Text="Add Favourite" />
@@ -420,7 +420,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Category:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Category:</td>
                                     <td class="column-right">
                                         <div id="CategoriesDropDownContainer">
                                             <select id="CategoriesDropDownList" multiple="true" runat="server" style="display:none"/>
@@ -429,12 +429,12 @@
                                                 <div id="CategoriesSelectedText" class="panel">
                                                 </div>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr class="row" <%= CurrentActiveActivity.IsConfidential ? "style='color:darkred'" : ""%>>
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Not for Look Ahead:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Not for Look Ahead:</td>
                                     <td class="column-right">
                                         <div class="checks">
                                             <asp:CheckBox ID="IsConfidentialCheckBox" runat="server" Text="" /></div>
@@ -443,9 +443,9 @@
 
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsTitleNeedsReview)%>">Title:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTitleNeedsReview)%>">Title:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" TextMode="MultiLine" runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="TitleRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="TitleTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                         <span style="float: right"><span id="charlimitinfo">Characters remaining: 100</span></span>
@@ -453,18 +453,18 @@
                                 </tr>
                                 <tr class="row" id="SummaryRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsDetailsNeedsReview)%>">Summary:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDetailsNeedsReview)%>">Summary:</td>
                                     <td class="column-right">
-                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas" Style="height: 60px;" TextMode="MultiLine"
+                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" Style="height: 60px;" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="DetailsRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="DetailsTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <span style="float: right"><span id="charlimitinfo1">Characters remaining: 500</span></span>
+                                        <span style="float: right"><span id="charlimitinfo1">Characters remaining: 700</span></span>
                                     </td>
                                 </tr>
                                 <tr class="row" id="IssueRow" <%= CurrentActiveActivity.IsIssue ? "style='font-weight:bold'" : "" %>>
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Issue:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Issue:</td>
                                     <td class="column-right">
                                         <div class="checks">
                                             <asp:CheckBox ID="IsIssueCheckBox" runat="server" Text="" /></div>
@@ -472,13 +472,14 @@
                                 </tr>
                                 <tr class="row" runat="server" id="SignificanceRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td id="SignificanceTitle" class="column-left">Significance:</td>
+                                    <td id="SignificanceTitle" class="column-left label-dark">Significance:</td>
                                     <td class="column-right">
                                         <div>
                                             <asp:TextBox
                                                 id="SignificanceTextBox"
                                                 CssClass="new-activity-textareas"
                                                 Style="height: 60px;"
+                                                ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
                                                 runat="server"></asp:TextBox>
                                         </div>
@@ -489,16 +490,16 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsLeadOrganizationNeedsReview)%>">Lead Organization:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsLeadOrganizationNeedsReview)%>">Lead Organization:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="LeadOrganizationTextBox" TextMode="MultiLine" CssClass="new-activity-textareas" placeholder="Province of BC"
+                                        <asp:TextBox ID="LeadOrganizationTextBox" TextMode="MultiLine" ForeColor="#4d4d4d" CssClass="new-activity-textareas" placeholder="Province of BC"
                                             runat="server"></asp:TextBox>
                                         <span style="float: right"><span id="charlimitinfo6">Characters remaining: 80</span></span>
                                     </td>
                                 </tr>
-                                <tr class="row"> 
+                                <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">Initiatives:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">Initiatives:</td>
                                     <td class="column-right">
                                         <select id="InitiativeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="InitiativesSelectedTextRow" style="display: none">
@@ -509,7 +510,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsTagsNeedsReview)%>">Tags:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTagsNeedsReview)%>">Tags:</td>
                                     <td class="column-right">
                                         <select id="KeywordList" multiple="true" runat="server" style="display:none"/>
                                         <asp:TextBox ID="KeywordsTextBox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
@@ -523,7 +524,7 @@
                             <table style="max-width: 500px;">
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Comm. Contact:</td>
+                                    <td class="column-left label-dark">Comm. Contact:</td>
                                     <td class="column-right">
                                         <select id="CommContactDropDownList" multiple="true" runat="server" style="display:none" class="new-activity-dropdowns" />
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="CommunicationContactRequiredFieldValidator"
@@ -541,13 +542,14 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsStrategyNeedsReview)%>">Strategy:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsStrategyNeedsReview)%>">Strategy:</td>
                                     <td class="column-right">
                                         <div>
                                             <asp:TextBox
                                                 id="StrategyTextBox"
                                                 CssClass="new-activity-textareas"
                                                 Style="height: 60px;"
+                                                ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
                                                 runat="server"></asp:TextBox>
                                         </div>
@@ -557,7 +559,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsCommMaterialsNeedsReview)%>">Comm. Materials:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCommMaterialsNeedsReview)%>">Comm. Materials:</td>
                                     <td class="column-right">
                                         <select id="CommMaterialsDropDownList" multiple="true" runat="server" style="display: none" />
                                         <div id="CommMaterialsSelectedTextRow" style="display: none">
@@ -572,12 +574,12 @@
                                     </td>
                                 </tr>
                                 <tr class="row">
-                                    <td class="column-right <%=Markup(CurrentActiveActivity.IsInternalNotesNeedsReview)%>" colspan="3" style="padding-left: 12px;">Internal Notes:
+                                    <td class="column-right label-dark <%=Markup(CurrentActiveActivity.IsInternalNotesNeedsReview)%>" colspan="3" style="padding-left: 12px;">Internal Notes:
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-right" colspan="3" style="padding-left: 12px;">
-                                        <asp:TextBox ID="CommentsTextBox" CssClass="new-activity-textareas" Style="height: 100px;" TextMode="MultiLine"
+                                        <asp:TextBox ID="CommentsTextBox" CssClass="new-activity-textareas" Style="height: 100px;" ForeColor="#4d4d4d" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <span style="float: right"><span id="charlimitinfo3">Characters remaining: 4000</span></span>
                                     </td>
@@ -591,7 +593,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Lead Ministry:</td>
+                                    <td class="column-left label-dark">Lead Ministry:</td>
                                     <td class="column-right">
                                         <select id="ContactMinistryDropDownList" multiple="true" runat="server" style="display:none" CssClass="new-activity-dropdowns" />
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="ContactMinistryRequiredFieldValidator"
@@ -602,7 +604,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Cross-Government:</td>
+                                    <td class="column-left label-dark">Cross-Government:</td>
                                     <td class="column-right">
                                         <div class="checks">
                                             <asp:CheckBox ID="IsCrossGovernmentCheckBox" runat="server" Text="" /></div>
@@ -610,7 +612,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Shared With:</td>
+                                    <td class="column-left label-dark">Shared With:</td>
                                     <td class="column-right">
                                         <select id="SharedWithDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="SharedWithSelectedTextRow" style="display: none">
@@ -631,9 +633,9 @@
                             <table>
                                 <tr class="row" runat="server" id="LACommentsRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Executive Summary:</td>
+                                    <td class="column-left label-dark">Executive Summary:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="LACommentsTextBox" CssClass="new-activity-textareas" Style="height: 60px;" TextMode="MultiLine"
+                                        <asp:TextBox ID="LACommentsTextBox" CssClass="new-activity-textareas" Style="height: 60px;" ForeColor="#4d4d4d" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:CustomValidator Display="Dynamic" ID="LACommentsCustomValidator" runat="server" ClientValidationFunction="EvaluateLAComments"
                                             Text="Required" ForeColor="Red"></asp:CustomValidator>
@@ -642,21 +644,21 @@
                                 </tr>
                                 <tr class="row" runat="server" id="LAStatusRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Look Ahead Status:</td>
+                                    <td class="column-left label-dark">Look Ahead Status:</td>
                                     <td class="column-right">
                                         <asp:RadioButtonList ID="LAStatusRadioButtonList" runat="server" RepeatDirection="Horizontal" />
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Look Ahead Section:</td>
+                                    <td class="column-left label-dark">Look Ahead Section:</td>
                                     <td class="column-right">
                                         <asp:CheckBoxList ID="LASectionCheckBoxList" runat="server" RepeatDirection="Horizontal" />
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Release Time:</td>
+                                    <td class="column-left label-dark">Release Time:</td>
                                     <td class="column-right">
                                         <input type="text" id="NRDate" title="Choose a release date and time" value="" runat="server" class="new-activity-date" style="width: 80px;" />
                                         <asp:DropDownList runat="server" ID ="NRTime" CssClass="editable-select" />
@@ -672,7 +674,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsStartDateNeedsReview)%>">Start Date:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsStartDateNeedsReview)%>">Start Date:</td>
                                     <td class="column-right">
                                         <div>
                                             <input type="text" id="StartDate" runat="server" class="new-activity-date" style="width: 80px;" />
@@ -684,8 +686,8 @@
                                                 <span id="StartTimePSTLabel" class="PSTLabel">PST</span>
                                                 <span id="StartTimeValidator" style="color: red" runat="server">Required</span>
                                                 <asp:CustomValidator id="StartTimeCustomValidator" runat="server" Display="Dynamic"
-                                                    EnableClientScript="true" ControlToValidate="StartTime" ShowMessageBox="true" 
-                                                    ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true" 
+                                                    EnableClientScript="true" ControlToValidate="StartTime" ShowMessageBox="true"
+                                                    ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true"
                                                     ClientValidationFunction="validateTime">
                                                 </asp:CustomValidator>
                                             </div>
@@ -695,7 +697,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsEndDateNeedsReview)%>">End Date:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsEndDateNeedsReview)%>">End Date:</td>
                                     <td class="column-right">
                                         <div>
                                             <input type="text" id="EndDate" value="" runat="server" class="new-activity-date" style="width: 80px;" />
@@ -707,8 +709,8 @@
                                                 <span id="EndTimePSTLabel" class="PSTLabel">PST</span>
                                                 <span id="EndTimeRequiredValidator" style="color: red" runat="server">Required</span>
                                                 <asp:CustomValidator id="EndTimeCustomValidator" runat="server" Display="Dynamic"
-                                                    EnableClientScript="true" ControlToValidate="EndTime" ShowMessageBox="true" 
-                                                    ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true" 
+                                                    EnableClientScript="true" ControlToValidate="EndTime" ShowMessageBox="true"
+                                                    ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true"
                                                     ClientValidationFunction="validateTime">
                                                 </asp:CustomValidator>
                                             </div>
@@ -719,7 +721,7 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"></td>
-                                    <td class="column-left">
+                                    <td class="column-left label-dark">
                                         <asp:Label ID="Label24" runat="server" Text="All Day Activity:"></asp:Label>
                                     </td>
                                     <td class="column-right">
@@ -728,7 +730,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">
+                                    <td class="column-left label-dark">
                                         <asp:Label ID="DateConfirmedLabel" runat="server" Text="Dates Confirmed:"></asp:Label>
                                     </td>
                                     <td class="column-right">
@@ -739,10 +741,10 @@
                                 </tr>
                                 <tr class="row" runat="server" id="ScheduleRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td id="SchedulingTitle" runat="server" class="column-left" style="line-height: 18px;">Scheduling
+                                    <td id="SchedulingTitle" runat="server" class="column-left label-dark" style="line-height: 18px;">Scheduling
                                         Considerations & Approval Notes:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas" Style="height: 60px;" TextMode="MultiLine"
+                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas" Style="height: 60px;" ForeColor="#4d4d4d" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SchedulingFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="SchedulingTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -758,33 +760,33 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsOriginNeedsReview)%>">Origin:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsOriginNeedsReview)%>">Origin:</td>
                                     <td class="column-right">
                                         <select id="NROriginDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <asp:CustomValidator id="NROriginDropDownListValidator" runat="server" Display="Dynamic"
-                                            EnableClientScript="true" ControlToValidate="NROriginDropDownList" ShowMessageBox="true" 
-                                            ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true" 
+                                            EnableClientScript="true" ControlToValidate="NROriginDropDownList" ShowMessageBox="true"
+                                            ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true"
                                             ClientValidationFunction="validateOriginForCategory">
                                         </asp:CustomValidator>
-                                        
+
                                     </td>
 
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsDistributionNeedsReview)%>">Distribution:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDistributionNeedsReview)%>">Distribution:</td>
                                     <td class="column-right">
                                         <select id="NRDistributionDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <asp:CustomValidator id="NRDistributionDropDownListValidator" runat="server" Display="Dynamic"
-                                            EnableClientScript="true" ControlToValidate="NRDistributionDropDownList" ShowMessageBox="true" 
-                                            ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true" 
+                                            EnableClientScript="true" ControlToValidate="NRDistributionDropDownList" ShowMessageBox="true"
+                                            ErrorMessage="Required" ForeColor="Red" ValidateEmptyText="True" Enabled="true"
                                             ClientValidationFunction="validateDistributionForCategory">
                                         </asp:CustomValidator>
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsTranslationsRequiredNeedsReview)%>">Translations Required:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTranslationsRequiredNeedsReview)%>">Translations Required:</td>
                                     <td class="column-right">
                                         <select id="TranslationsRequired" multiple="true" runat="server" style="display:none"/>
                                         <asp:TextBox ID="TranslationsTextbox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
@@ -803,7 +805,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Themes:</td>
+                                    <td class="column-left label-dark">Themes:</td>
                                     <td class="column-right">
                                         <select id="ThemeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="ThemesSelectedTextRow" style="display: none">
@@ -851,21 +853,21 @@
                             <table>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsPremierRequestedNeedsReview)%>">Premier Requested:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsPremierRequestedNeedsReview)%>">Premier Requested:</td>
                                     <td class="column-right">
                                         <select id="PremierRequestedDropDownList" multiple="true" runat="server" style="display:none"/>
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsRepresentativeNeedsReview)%>">Representative:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsRepresentativeNeedsReview)%>">Representative:</td>
                                     <td class="column-right">
                                         <select id="RepresentativeDropDownList" multiple="true" runat="server" style="display:none" CssClass="new-activity-dropdowns"  />
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">At BC Legislature:</td>
+                                    <td class="column-left label-dark">At BC Legislature:</td>
                                     <td class="column-right">
                                         <div class="checks">
                                             <asp:CheckBox ID="IsAtLegislatureCheckBox" Text="" runat="server" /></div>
@@ -873,39 +875,39 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsCityNeedsReview)%>">City:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCityNeedsReview)%>">City:</td>
                                     <td class="column-right">
                                         <select id="CityDropDownList" multiple="true" runat="server" style="display:none" CssClass="new-activity-dropdowns"  />
                                     </td>
                                 </tr>
                                 <tr class="row" runat="server" id="OtherCityRow">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left">Other City:</td>
+                                    <td class="column-left label-dark">Other City:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="OtherCityTextBox" TextMode="MultiLine" MaxLength="50" CssClass="new-activity-dropdowns"
+                                        <asp:TextBox ID="OtherCityTextBox" TextMode="MultiLine" MaxLength="50" ForeColor="#4d4d4d" CssClass="new-activity-dropdowns"
                                             runat="server"></asp:TextBox>
                                         <span style="float: right"><span id="charlimitinfo5">Characters remaining: 55</span></span>
                                     </td>
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left <%=Markup(CurrentActiveActivity.IsVenueNeedsReview)%>">Venue:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsVenueNeedsReview)%>">Venue:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="VenueTextBox" TextMode="MultiLine" MaxLength="50" CssClass="new-activity-textareas"
+                                        <asp:TextBox ID="VenueTextBox" TextMode="MultiLine" MaxLength="50" ForeColor="#4d4d4d" CssClass="new-activity-textareas"
                                             runat="server"></asp:TextBox>
                                         <span style="float: right"><span id="charlimitinfo4">Characters remaining: 55</span></span>
                                     </td>
                                 </tr>
                                 <tr id="EventPlannerContainer" class="row">
                                         <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                        <td class="column-left <%=Markup(CurrentActiveActivity.IsEventPlannerNeedsReview)%>">Event Planner:</td>
+                                        <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsEventPlannerNeedsReview)%>">Event Planner:</td>
                                         <td class="column-right">
                                             <select id="EventPlannerDropDownList" multiple="true" runat="server" style="display:none"/>
                                         </td>
                                 </tr>
                                 <tr id="VideographerContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left  <%=Markup(CurrentActiveActivity.IsDigitalNeedsReview)%>">Digital:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDigitalNeedsReview)%>">Digital:</td>
                                     <td class="column-right">
                                         <select id="VideographerDropDownList" multiple="true" runat="server" style="display:none"/>
                                     </td>
@@ -935,7 +937,7 @@
                                                 <asp:HyperLink runat="server" NavigateUrl='<%# ResolveUrl($"~/Calendar/ActivityFile.ashx?id={Item.Id}") %>'>
                                                     <asp:Label runat="server" Text="<%# Item.FileName %>" />
                                                 </asp:HyperLink>
-                                                
+
                                                 <asp:Label  runat="server" Visible="<%# !IsUserReadOnly %>">
                                                 <asp:Label ID="deleteBtn" runat="server" Style="display:none">
                                                 <a href="#" style="color: dimgray" onclick="$(this).parent().parent().prev().addClass('activity-document-deleted'); $(this).hide(); $('#deletedDocuments').val($('#deletedDocuments').val() + ',<%# Item.Id %>'); return false;">
@@ -1073,7 +1075,7 @@
                     if ($schedulingTitle.length) {
                         $schedulingTitle.addClass(schedulingClass);
                     }
-                }         
+                }
             }
             highlightChangedFields();
 
@@ -1086,7 +1088,7 @@
             $("#VideographerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "To book a GCPE videographer, email videorequest@gov.bc.ca <br /> To book a GCPE photographer, email photorequest@gov.bc.ca" });
             $("#StartTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If time is a <b>guess</b>, please leave as 8am-6pm default." });
             $("#EndTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If time is a <b>guess</b>, please leave as 8am-6pm default." });
-            $("#CategoriesDropDownContainer").tooltip({ 
+            $("#CategoriesDropDownContainer").tooltip({
                 trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'><b>Approved Items:</b> use only when Province is involved (releases, activities, events etc.); approval notes must also be added. </p>\
                                                                                         <p align='left'><b>Awareness Dates or Conferences:</b> list name, description and dates it is taking place. Separate entries are needed for spin-off events such as news releases, speeches or announcements.</p>\
                                                                                         <p align='left'><b>FYI Only:</b> use for third-party items with no provincial involvement other than a Minister’s message or quote. </p>\
@@ -1114,6 +1116,13 @@
                 saveBtnLabelText = 'Save and Close';
             }
 
+            // hide the potential dates field for new activities
+            var newQueryParam = getParameterByName('new');
+            if (activityIdQueryParam !== null || activityIdQueryParam === null || newQueryParam == 1 || isClonedQueryParam == "true") {
+                $('#PotentialDatesLabel').hide();
+                $('#PotentialDatesTextBox').hide();
+            }
+
             // Handle Save Button
             $('#SaveButton').button({ label: saveBtnLabelText }).click(function (event) {
                 if (!IsSaveValid()) {
@@ -1123,13 +1132,13 @@
                 warn_on_unload = "";
                 $('#IsPostBackHiddenField').val('true');
                 // force the tab/window to close so ministry users are forced to re-open the activity and get any subsequent changes made by HQ
-                // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently 
+                // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently
                 // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
                 // window.close();
             });
 
             // Work around to get icons working
-            // http://csharp-guide.blogspot.in/2012/07/aspnet-jquery-button-icons-converting.html 
+            // http://csharp-guide.blogspot.in/2012/07/aspnet-jquery-button-icons-converting.html
 
             // Setup cancel button
             $('#CancelButton').each(function () {
@@ -1238,10 +1247,10 @@
         var previousStart = $('#StartTime').val();
         $('#StartTime').editableSelect({
             bg_iframe: true,
-            
+
             onSelect: function (listItem) {
                 // 3076: Creating a new activity defaults to no start and end date
-                // the editable select textbox does not update to the selected value and selected option alway set to "", have to put 2 validation in order to validate on change and on save, 
+                // the editable select textbox does not update to the selected value and selected option alway set to "", have to put 2 validation in order to validate on change and on save,
                 // will need further investigation on those editable select
                 if ( listItem.text() == '' || listItem.text() == null )
                 {
@@ -1471,7 +1480,7 @@
 
             // --------------------------------------------
             // Handle Is At Legislature Logic
-            //  - Sets City to Victoria, Sets Venue to Provincial Legislature, 
+            //  - Sets City to Victoria, Sets Venue to Provincial Legislature,
             //    Clear's Other City Values and hides that row
             $('#IsAtLegislatureCheckBox').click(function () {
 
@@ -1781,10 +1790,10 @@
                     //my: 'center',
                     //at: 'center'
 
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button. 
-                    // multiselect automatically sets "of" unless you explicitly 
-                    // pass in a value. 
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
                 },
                 click: function (event, ui) {
                     $('#CategoriesDropDownListRequiredFieldValidator').hide();
@@ -1825,10 +1834,10 @@
                     //my: 'center',
                     //at: 'center'
 
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button. 
-                    // multiselect automatically sets "of" unless you explicitly 
-                    // pass in a value. 
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
                 },
                 click: function (event, ui) {
                     $('#IsCommunicationMaterialsDirty').val('true');
@@ -1917,10 +1926,10 @@
                     //my: 'center',
                     //at: 'center'
 
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button. 
-                    // multiselect automatically sets "of" unless you explicitly 
-                    // pass in a value. 
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
                 },
                 close: function () {
                     if ($('#SectorsSelectedValuesServerSide').val() != $('#SectorsSelectedValues').val()) {
@@ -1960,10 +1969,10 @@
                     //my: 'center',
                     //at: 'center'
 
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button. 
-                    // multiselect automatically sets "of" unless you explicitly 
-                    // pass in a value. 
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
                 },
                 close: function () {
                     if ($('#ThemesSelectedValuesServerSide').val() != $('#ThemesSelectedValues').val()) {
@@ -2001,10 +2010,10 @@
                     //my: 'center',
                     //at: 'center'
 
-                    // only include the "of" property if you want to position 
-                    // the menu against an element other than the button. 
-                    // multiselect automatically sets "of" unless you explicitly 
-                    // pass in a value. 
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
                 },
                 close: function () {
                     if ($('#InitiativesSelectedValuesServerSide').val() != $('#InitiativesSelectedValues').val()) {
@@ -2069,7 +2078,7 @@
     </script>
 
     <script type="text/javascript">
-        
+
         //window.onunload = CheckInActivity;
         window.onbeforeunload = ConfirmUnsavedChanges;
 
@@ -2100,6 +2109,23 @@
         }
 
         function ShowHidePotentialDates() {
+
+            // disable toggling for new activities
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+            var activityIdQueryParam = getParameterByName('ActivityId');
+            var newQueryParam = getParameterByName('new');
+            var isClonedQueryParam = getParameterByName('IsCloned');
+            if (activityIdQueryParam !== null || activityIdQueryParam === null || newQueryParam == 1 || isClonedQueryParam == "true") return;
+
+
             if ($("#IsDateConfirmed")[0].checked) {
                 $('#PotentialDatesLabel').hide();
                 $('#PotentialDatesTextBox').hide();
@@ -2108,7 +2134,7 @@
                 $('#PotentialDatesTextBox').show();
             }
         }
-        
+
         function UpdateCategoriesFYILabel() {
             var categoriesDropDownList = $('#CategoriesDropDownList');
             var categoriesMultiSelectMenu = categoriesDropDownList.parent().find(".ui-multiselect-menu");
@@ -2358,7 +2384,7 @@
             });
 
             $('#DetailsTextBox').keyup(function () {
-                limitChars('DetailsTextBox', 500, 'charlimitinfo1');
+                limitChars('DetailsTextBox', 700, 'charlimitinfo1');
                 SetChanged($.url().param('ActivityId'));
             });
 
@@ -2565,8 +2591,8 @@
 
         // Show characters remaining
         limitChars('TitleTextBox', 100, 'charlimitinfo');
-        limitChars('DetailsTextBox', 500, 'charlimitinfo1');
-        limitChars('LACommentsTextBox', 2000, 'charlimitinfo2'); 
+        limitChars('DetailsTextBox', 700, 'charlimitinfo1');
+        limitChars('LACommentsTextBox', 2000, 'charlimitinfo2');
         limitChars('CommentsTextBox', 4000, 'charlimitinfo3');
         limitChars('VenueTextBox', 55, 'charlimitinfo4');
         limitChars('OtherCityTextBox', 55, 'charlimitinfo5');

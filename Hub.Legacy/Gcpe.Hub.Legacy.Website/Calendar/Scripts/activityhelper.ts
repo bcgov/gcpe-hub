@@ -68,6 +68,7 @@ var conflictMsgWasShown = false;
 function GetActivityStatus(activityId?: string) {
     $.ajax({
         type: "POST",
+        async: false, // prevent banners from showing/hiding if the activity is locked
         url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
         data: { 'activityId': activityId },
         dataType: "text",

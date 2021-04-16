@@ -23,6 +23,7 @@
         public canClaimMinistry: KnockoutComputed<boolean>;
         public sharingWithMinistries: KnockoutObservable<boolean>;
         public takeOverRequestActive: KnockoutObservable<boolean>;
+        public fyiActive: KnockoutObservable<boolean>;
         public listScrollPos: number;
         private pollingHandler: KnockoutObservable<MediaRequest.PollingHandler>;
         public router: MediaRequest.PvmRouter;
@@ -38,6 +39,7 @@
         public takeOverRequestInProgress: KnockoutObservable<boolean>; // true if the user is being asked to confirm a takeover.
         public currentUi: KnockoutComputed<string>;
         public sharedMinistries: KnockoutObservableArray<string>;
+        public commContacts: KnockoutObservableArray<string>;
         public currentUser: CurrentUserVm;
         public resolutions: KnockoutObservableArray<ResolutionVm>;
         public sharedMinsOnInit: Array<string>;
@@ -71,8 +73,10 @@
             this.reportsHandler = ko.observable<ReportsHandler>(new ReportsHandler(this));
             this.ministryContactsHandler = ko.observable<MinistryContactsHandler>(new MinistryContactsHandler(this));
             this.sharedMinistries = ko.observableArray<string>([]);
+            this.commContacts = ko.observableArray<string>([]);
             this.sharingWithMinistries = ko.observable<boolean>(false);
             this.takeOverRequestActive = ko.observable<boolean>(false);
+            this.fyiActive = ko.observable<boolean>(false);
             this.resolutions = ko.observableArray<ResolutionVm>();
 
             this.currentUi = ko.pureComputed(() => {
@@ -638,6 +642,18 @@
         private _submitEditMediaRequest = (sendEmail?: boolean, onlySendtoMyself?: boolean) => {
             this.pageError(undefined);
 
+            var staffToFyi: Array<UserVm> = [];
+            for (var i = 0; i < this.commContacts().length; i++) {
+                for (var m = 0; this.users().length; m++) {
+                    if (this.commContacts()[i] === this.users()[m].id()) {
+                        staffToFyi.push(this.users()[m]);
+                        break;
+                    }
+                }
+            }
+            this.fyiActive(false);
+            this.currentMediaRequest().commContacts(staffToFyi);
+
             this.currentMediaRequest().triggerEmail(sendEmail);
             this.currentMediaRequest().onlyEmailMyself(onlySendtoMyself);
             var validatable = ko.validatedObservable(this.currentMediaRequest());
@@ -651,6 +667,9 @@
                 const isFollowup = this.currentMediaRequest().parentRequest() ? true : false;
 
                 this.currentMediaRequest().save((err, result) => {
+
+                    // remove any comm. contacts that were fyi'd after saving a new media request, so they don't get re-sent
+                    this.commContacts([]);
 
                     // Re-start polling after save(), regardless the result.
                     this.pollingHandler().pollingOnHold(false);
@@ -895,6 +914,14 @@
         public sendTakeOverRequest = () => {
             this.takeOverRequestActive(true);
             let el: any = $("#dom-takeoverMinistry");
+            el.focus();
+            return false;
+        }
+
+        public sendFyi = () => {
+            this.fyiActive(true);
+            let el: any = $("#dom-fyi");
+            el.selectpicker('toggle');
             el.focus();
             return false;
         }

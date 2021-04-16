@@ -195,6 +195,9 @@ namespace CorporateCalendar.Data
         {
             [ScaffoldColumn(false)]
             public object Activities { get; set; }
+
+            [StringLength(84)]
+            public object Description { get; set; }
         }
     }
 

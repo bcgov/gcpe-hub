@@ -70,6 +70,22 @@ hr { margin-top: 15px; }
 .ChangesNotice {
     background-color:#ffcc00; color:#333; padding: 8px; border:1px solid #ffcc00; width:96%; margin:0 auto; text-align:center;
 }
+.ChangesNotice-Modifier {
+    background-color: #ffcc00; color: #333; padding-top: 8px; width: 96%; margin: 0 auto; text-align: center; padding-left: 0; padding-right: 0; padding-bottom: 0;
+}
+
+.ChangesNotice-Modifier-1 {
+    background-color: #F9F1C6;
+    color: #6C4A00;
+    padding-top: 8px;
+    width: 96%;
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
 .InfoNotice {
     background-color:#a9d4ff; color:#333; padding: 8px; border:1px solid #ffcc00; width:96%; margin:0 auto; text-align:center;
 }
@@ -455,4 +471,8 @@ span.ui-icon.ui-icon-arrowthick-2-n-s {margin-top:4px}
 #uniform-IsDateConfirmed.checker span.checked {
     background-image:url(../../images/confirmed.png);
     background-position: 0px 0px !important;
+}
+
+.label-dark {
+    color: #404040;
 }

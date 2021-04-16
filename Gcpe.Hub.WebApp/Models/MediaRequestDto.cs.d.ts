@@ -1,4 +1,4 @@
-﻿/// <reference path="UserDto.cs.d.ts" />
+/// <reference path="UserDto.cs.d.ts" />
 /// <reference path="MinistryDto.cs.d.ts" />
 /// <reference path="MediaContactDto.cs.d.ts" />
 
@@ -10,8 +10,8 @@ declare module server {
 		modifiedAt: Date;
 		modifiedBy: server.UserDto;
 		leadMinistry: server.MinistryDto;
-        sharedMinistries: server.MinistryDto[];
-        takeOverRequestMinistry: server.MinistryDto;
+		sharedMinistries: server.MinistryDto[];
+		takeOverRequestMinistry: server.MinistryDto;
 		responsibleUser: server.UserDto;
 		mediaContacts: server.MediaContactDto[];
 		deadlineAt: Date;
@@ -27,5 +27,6 @@ declare module server {
 			id: any;
 			displayAs: string;
 		};
+		commContacts: server.UserDto[];
 	}
 }

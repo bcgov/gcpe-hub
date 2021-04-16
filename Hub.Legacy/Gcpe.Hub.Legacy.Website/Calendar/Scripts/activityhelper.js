@@ -57,6 +57,7 @@ var conflictMsgWasShown = false;
 function GetActivityStatus(activityId) {
     $.ajax({
         type: "POST",
+        async: false,
         url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
         data: { 'activityId': activityId },
         dataType: "text",
