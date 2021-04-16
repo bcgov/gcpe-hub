@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c396a92de1dc43f2ae84354963c5ba51" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="c396a92de1dc43f2ae84354963c5ba51" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.Activity" Width="1.5" PointX="23.75" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityCategory" Width="1.5" PointX="10.5" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gcpe.CorporateCalendar_Model.ActivityCommunicationMaterial" Width="1.5" PointX="13.5" PointY="27.75" IsExpanded="true" />

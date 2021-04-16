@@ -1060,6 +1060,14 @@ namespace Gcpe.Hub.WebApp.Controllers
                     ccList.Add(MailAddressFor(ministry.SecondContactUser));
             }
 
+            if (dto.CommContacts.Any())
+            {
+                foreach (var userDto in dto.CommContacts)
+                {
+                    ccList.Add(new MailAddress(userDto.EmailAddress, userDto.DisplayAs));
+                }
+            }
+
             //List<MailboxAddress> fromContacts = new List<MailboxAddress>();
             //fromContacts.Add(fromContact);
             //await mailProvider.SendAsync(subject, bodyHtml, fromContacts, fromContact, fromContacts);
@@ -1299,7 +1307,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 template += "<br /><b>Background</b><br />";
                 template += "<span style=\"color:black;\">{{Background}}</span><br />";
             }
-            
+
 
 
             var sb = new StringBuilder();
@@ -1413,7 +1421,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 background += "</div>";
             }
 
-            if(!isClosed || (isClosed && dto.ParentRequest != null)) template = template.Replace("{{Background}}", background); // add the background to open requests
+            if (!isClosed || (isClosed && dto.ParentRequest != null)) template = template.Replace("{{Background}}", background); // add the background to open requests
 
             sb.Append(template);
 

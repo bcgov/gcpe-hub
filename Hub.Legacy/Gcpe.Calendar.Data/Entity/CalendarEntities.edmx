@@ -14,7 +14,7 @@
           <Property Name="EndDateTime" Type="datetime" />
           <Property Name="PotentialDates" Type="nvarchar" MaxLength="70" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="Details" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="700" Nullable="false" />
           <Property Name="Schedule" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Significance" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Strategy" Type="nvarchar" MaxLength="500" />
@@ -292,7 +292,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="84" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="SortOrder" Type="int" />
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
@@ -1626,7 +1626,7 @@
           <Property Name="StartDateTime" Type="DateTime" Precision="3" />
           <Property Name="EndDateTime" Type="DateTime" Precision="3" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="700" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="HqComments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="LeadOrganization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1897,7 +1897,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="84" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="SortOrder" Type="Int32" />
           <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />

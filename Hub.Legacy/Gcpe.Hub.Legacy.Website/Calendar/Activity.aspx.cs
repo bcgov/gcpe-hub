@@ -1466,7 +1466,8 @@ namespace Gcpe.Hub.Calendar
             // force the tab/window to close so ministry users are forced to re-open the activity and get any subsequent changes made by HQ
             // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently 
             // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
-            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close();", true);
+            var changesPendingMsg = "<i class=\"fa fa-exclamation-triangle fa-fw\" aria-hidden=\"true\"></i> Close this tab & re-open the activity to make changes.";
+            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close(); if(!window.closed) { alert('Please close this tab to avoid editing conflicts. To continue editing, close this tab & open activity again.'); $('#ActionsFieldset').hide(); $('#ChangesPendingAlert').html('" + changesPendingMsg + "'); $('#ChangesPending').removeClass('ChangesNotice-Modifier').addClass('ChangesNotice-Modifier-1').find('table:eq(0)').remove(); $('#SecondaryAlert').css({'background-color': '#F9F1C6', 'color': '#6C4A00'})}", true);
         }
 
         protected void FavoriteButtonClick(object sender, EventArgs e)
@@ -1493,6 +1494,9 @@ namespace Gcpe.Hub.Calendar
                 dc.SubmitChanges();
 
                 UpdateFavoriteIcon(customPrincipalId);
+
+                var changesPendingMsg = "<i class=\"fa fa-exclamation-triangle fa-fw\" aria-hidden=\"true\"></i> Close this tab & re-open the activity to make changes.";
+                ClientScript.RegisterStartupScript(typeof(Page), "closePage", "$('#ActionsFieldset').hide(); $('#ChangesPendingAlert').html('" + changesPendingMsg + "'); $('#ChangesPending').removeClass('ChangesNotice-Modifier').addClass('ChangesNotice-Modifier-1').find('table:eq(0)').remove(); $('#SecondaryAlert').css({'background-color': '#F9F1C6', 'color': '#6C4A00'});", true);
             }
         }
 

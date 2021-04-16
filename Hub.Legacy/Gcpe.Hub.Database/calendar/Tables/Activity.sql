@@ -4,7 +4,7 @@
     [EndDateTime]                 DATETIME         NULL,
     [PotentialDates]              NVARCHAR (70)    NULL,
     [Title]                       NVARCHAR (500)   CONSTRAINT [DF_Activity_Title] DEFAULT ('') NOT NULL,
-    [Details]                     NVARCHAR (500)   CONSTRAINT [DF_Activity_Details] DEFAULT ('') NOT NULL,
+    [Details]                     NVARCHAR (700)   CONSTRAINT [DF_Activity_Details] DEFAULT ('') NOT NULL,
     [Schedule]                    NVARCHAR (500)   CONSTRAINT [DF_Activity_Schedule] DEFAULT ('') NOT NULL,
     [Significance]                NVARCHAR (500)   CONSTRAINT [DF_Activity_Significance] DEFAULT ('') NOT NULL,
     [Strategy]                    NVARCHAR (500)   NULL,

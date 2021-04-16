@@ -29,5 +29,6 @@ namespace Gcpe.Hub.Website.Models
         [JsonConverter(typeof(StringEnumConverter))]
         public Data.Entity.EodReportWith? EodReportWith { get; set; }
         public ResolutionDto Resolution { get; set; }
+        public IEnumerable<UserDto> CommContacts { get; set; }
     }
 }

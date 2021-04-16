@@ -57,6 +57,7 @@ class MediaRequestVm {
     public myMinistries: Array<MinistryVm>;
     public currentUserData: CurrentUserVm;
     public resolution: KnockoutObservable<ResolutionVm>;
+    public commContacts: KnockoutObservableArray<UserVm>;
 
 
     public errors;
@@ -83,6 +84,7 @@ class MediaRequestVm {
         this.parentRequest = ko.observable<MediaRequestVm>();
         this.eodReportWith = ko.observable<number>();
         this.resolution = ko.observable<ResolutionVm>();
+        this.commContacts = ko.observableArray<UserVm>();
 
         this.currentUserData = currentUserData;
 
@@ -255,7 +257,7 @@ class MediaRequestVm {
 
 
     private init(data: server.MediaRequestDto): void {
-       
+        
         this.id(data.id);
         this.createdAt(data.createdAt ? new Date(data.createdAt) : undefined);
         this.createdBy(data.createdBy);
