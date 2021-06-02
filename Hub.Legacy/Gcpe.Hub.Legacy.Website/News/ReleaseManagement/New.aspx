@@ -323,6 +323,23 @@
                         CheckReleaseTypeValid(txtPageTitle, title, $(".PageTitleConfirmation"), pageTitleOptions, SelectedReleaseType());
                         SetPageDefaults(title);
                     }
+                    var multiselect = $("#<%=mediaDistributionListBox.ClientID %>").data("kendoMultiSelect");
+                    var selectedItems = multiselect.value();
+                   
+                    // if document type is media advisory or updated media advisory, then antopopulate distribution list to be MINIS2
+                    if ((title.trim() == 'Media Advisory') || (title.trim() == 'UPDATED Media Advisory'))
+                    {
+                        var res =  multiselect.value().slice();
+                        res.push("f7313b16-4fcb-4a30-9bc9-bc5472da00e8");   
+                        multiselect.dataSource.filter({});
+                        multiselect.value(res) 
+                        multiselect.trigger("change");
+                    }
+                    else
+                    {
+                        multiselect.value(selectedItems);
+                        multiselect.trigger("change");
+                    }
                 }
             }).focus(function () {
                 $(this).autocomplete("search", ""); /* Open autocomplete on focus and show the whole list */
