@@ -83,7 +83,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             message.Subject = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT: " : "") + Model.FirstHeadline;
             //message.Subject = "News Release Item for " + (string.IsNullOrEmpty(Model.Reference) ? "Draft" : Model.Reference);
 
-            message.IsBodyHtml = false;
+            message.IsBodyHtml = true;
 
             //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
             //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
@@ -190,7 +190,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                 body += textDoc;
             }
 
-            message.Body = body;
+            message.Body = $"<pre><div style=\"font-family: MyriadProRegular, Calibri, Arial, sans-serif; font-size:14px;\">{body}</div></pre>";
             message.BodyEncoding = System.Text.Encoding.UTF8;
             message.SubjectEncoding = System.Text.Encoding.UTF8;
 
