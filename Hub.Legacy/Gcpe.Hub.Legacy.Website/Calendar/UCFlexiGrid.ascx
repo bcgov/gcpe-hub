@@ -54,6 +54,11 @@
         window.open('ActivityHandler.ashx?' + filter);
     }
 
+    function execLookAheadReport() {
+        var filter = GetFilter({ 'Op': 'LookAheadReport' });
+        window.open('ActivityHandler.ashx?' + filter + "&" + "Detailed=True");
+    }
+
     function main30_60_90Report() {
         var filter = GetFilter({'Op':'Main30_60_90Report'});
         window.open('ActivityHandler.ashx?' + filter);
@@ -130,6 +135,9 @@
                 <div class='btnseparator hidden-xs'></div>
                 <%=AppendButton("export hidden-xs", "Excel Export", "download()")%>
                 <%=AppendButton("export hidden-xs", "Look Ahead Report", "lookAheadReport()")%>
+                <%if (DisplayExecLADetailedReportButton) { %>
+                <%=AppendButton("export hidden-xs", "Exec Look Ahead", "execLookAheadReport()")%>
+                <% } %>
                 <%=AppendButton("export hidden-xs", "30/60/90 Report", "main30_60_90Report()")%>
                 <div class='btnseparator hidden-xs'></div>
                 <%=AppendButton("export hidden-xs", "Planning Report", "planningReport()")%>

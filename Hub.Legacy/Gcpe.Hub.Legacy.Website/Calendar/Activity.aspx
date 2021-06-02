@@ -400,7 +400,7 @@
 
                         <div style="display: inline-block; display: inline-block">
                             <span runat="server" id="FavoriteIcon"></span>
-                            <asp:Button ID="FavoriteButton" runat="server" OnClick="FavoriteButtonClick" Text="Add Favourite" />
+                            <asp:Button ID="FavoriteButton" runat="server" OnClick="FavoriteButtonClick" Text="Add to Watchlist" />
                         </div>
 
                     </div>
@@ -499,7 +499,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">Initiatives:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">HQ Initiatives:</td>
                                     <td class="column-right">
                                         <select id="InitiativeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="InitiativesSelectedTextRow" style="display: none">
@@ -510,7 +510,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTagsNeedsReview)%>">Tags:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTagsNeedsReview)%>">HQ Tags:</td>
                                     <td class="column-right">
                                         <select id="KeywordList" multiple="true" runat="server" style="display:none"/>
                                         <asp:TextBox ID="KeywordsTextBox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>

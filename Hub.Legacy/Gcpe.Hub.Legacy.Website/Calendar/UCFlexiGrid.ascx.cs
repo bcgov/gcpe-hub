@@ -26,6 +26,14 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
         }
     }
 
+    public bool DisplayExecLADetailedReportButton
+    {
+        get
+        {
+            return customPrincipal.IsGCPEHQ && customPrincipal.IsInRoleOrGreater(SecurityRole.Administrator);
+        }
+    }
+
     public string URL
     {
         get;
@@ -249,7 +257,7 @@ public class ColumnModel
     public static string[] HiddenByDefault = new[] { "1", "2", "3", "10" };
     public static Dictionary<string, ColumnModel> ColumnInfos = new Dictionary<string, ColumnModel>(){
         {"MinistryActivityId", new ColumnModel("0", HorizontalAlign.Right, 6, true, "Activity Id") },
-        {"Keywords", new ColumnModel("1", HorizontalAlign.Left, 4, true, "Tags") },
+        {"Keywords", new ColumnModel("1", HorizontalAlign.Left, 4, true, "HQ Tags") },
         {"Ministry", new ColumnModel("2", HorizontalAlign.Left, 5, true, "Ministry") },
         {"Status", new ColumnModel("3", HorizontalAlign.Left, 4, true, "Status") },
         {"StartEndDateTime",  new ColumnModel("4", HorizontalAlign.Left, 6, true, "Date & Time") },

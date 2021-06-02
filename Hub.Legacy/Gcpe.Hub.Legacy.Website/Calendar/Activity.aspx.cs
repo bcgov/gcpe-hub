@@ -857,7 +857,7 @@ namespace Gcpe.Hub.Calendar
             #endregion
 
             if (calendarDataContext.FavoriteActivities.Any(f => f.ActivityId == ActivityId && f.SystemUserId == Master.CustomPrincipal.Id))
-                FavoriteButton.Text = "Remove Favourite";
+                FavoriteButton.Text = "Remove from Watchlist";
 
             UpdateFavoriteIcon(Master.CustomPrincipal.Id);
 
@@ -1482,13 +1482,13 @@ namespace Gcpe.Hub.Calendar
                 {
                     dc.FavoriteActivities.InsertOnSubmit(new FavoriteActivity() { ActivityId = ActivityId.Value, SystemUserId = customPrincipalId });
 
-                    FavoriteButton.Text = "Remove Favourite";
+                    FavoriteButton.Text = "Remove from Watchlist";
                 }
                 else
                 {
                     dc.FavoriteActivities.DeleteOnSubmit(favorite);
 
-                    FavoriteButton.Text = "Add Favourite";
+                    FavoriteButton.Text = "Add to Watchlist";
                 }
 
                 dc.SubmitChanges();

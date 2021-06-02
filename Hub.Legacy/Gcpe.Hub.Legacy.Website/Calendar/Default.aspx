@@ -614,7 +614,7 @@
                     <asp:ListItem Text="Show All" Value="3" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="My Ministries' Activities Only" Value="2"></asp:ListItem>
                     <asp:ListItem Text="My Activities Only" Value="4" onClick="MyActivitiesClick();"></asp:ListItem>
-                    <asp:ListItem Text="My Favourites Only" Value="10"></asp:ListItem>
+                    <asp:ListItem Text="My Watchlist Only" Value="10"></asp:ListItem>
                 </asp:RadioButtonList>
 
                 <div style="padding-top: 10px; text-align: center; width:100%;">

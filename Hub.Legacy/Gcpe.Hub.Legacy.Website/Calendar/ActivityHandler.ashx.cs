@@ -9,6 +9,7 @@ using CorporateCalendar.Security;
 using Microsoft.Reporting.WinForms;
 using Gcpe.Hub.Properties;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 namespace Gcpe.Hub.Calendar
 {
@@ -16,6 +17,7 @@ namespace Gcpe.Hub.Calendar
     {
         private CustomPrincipal _customPrincipal = null;
         const string IssueColor = "#ccc0d9";
+        private static bool? isDetailedLookAheadReport = null;
 
         public CustomPrincipal CustomPrincipal
         {
@@ -106,6 +108,8 @@ namespace Gcpe.Hub.Calendar
 
             string operation = request.QueryString["Op"];
             // TO DO: ReviewSingle - pull this out of the Activity.aspx.cs file
+
+            isDetailedLookAheadReport = request.QueryString["Detailed"] != null && request.QueryString["Detailed"] == "True";
 
             switch (operation)
             {
@@ -649,6 +653,11 @@ namespace Gcpe.Hub.Calendar
                 {
                     includeLTOutlook = !thisdayonly;
                     toDate = thisdayonly ? reportDate : reportDate.AddDays(is30_60_90 ? 90 : 59);
+
+                    if (isDetailedLookAheadReport == true)
+                    { // reassigning toDate so as not to break existing code
+                        toDate = thisdayonly ? reportDate : reportDate.AddMonths(1);
+                    }
                 }
                 DataColumn dailyPageBreakColumn = null, hasNoActivitiesThatDayColumn = null;
                 if (!is30_60_90)
@@ -935,6 +944,23 @@ namespace Gcpe.Hub.Calendar
                 bool timeTBD = ActivityListProvider.IsTimeTBD(activity.StartDateTime.Value, activity.EndDateTime.Value, activity.IsConfirmed);
                 string friendlyDate = ActivityListProvider.FriendlyDateTimeRange(activity, timeTBD, false, false, reportDate);
 
+
+                var datePattern = @"\w{3}\s\w{3}\s\d{2}\s(0?[1-9]|1[0-2]):[0-5][0-9]\s(AM|PM)"; // check against "Thu May 27 6:10 PM" format
+                var reformatFriendlyDate = Regex.IsMatch(friendlyDate, datePattern)
+                    && (activity.HqStatus == "New" || activity.HqStatus == "Changed"); // formatting bug only occurs with new/changed
+
+                if (reformatFriendlyDate)
+                {
+                    var capturePattern = @"\w{3}\s\w{3}\s(\d{2})\s(0?[1-9]|1[0-2]):[0-5][0-9]\s(AM|PM)"; // capture the numeric day value
+                    var match = Regex.Match(friendlyDate, capturePattern);
+                    if (match.Success)
+                    {
+                        var day = match.Groups[1].Value;                    
+                        if(!string.IsNullOrWhiteSpace(day))
+                            friendlyDate = friendlyDate.Replace(day, $"{day}<br />"); // fix report date alignment with an extra br tag
+                    }
+                }
+
                 int? insertPos = null;
                 if (reportDate.HasValue)
                 {
@@ -953,6 +979,40 @@ namespace Gcpe.Hub.Calendar
 
                 string titleDetails = FormatHqComments(activity, isAppOwner) ?? FormatTitleDetails(activity, false);
                 titleDetails += FormatInitiative(activity, initiativesActivityIds);
+
+                if (isDetailedLookAheadReport == true
+                    && (hqSection == LookAheadSection.Events_and_Speeches
+                        || hqSection == LookAheadSection.Issues_and_Reports || hqSection == LookAheadSection.In_the_News))
+                {
+                    titleDetails = string.Empty; // not ideal, but best to leave the existing code untouched for this scenario
+
+                    string detailsSummary = !string.IsNullOrWhiteSpace(activity.Details) ? $"<br/>{activity.Details}" : "";
+
+                    string cityVenueSeparator = !string.IsNullOrWhiteSpace(activity.City)
+                                                    && !string.IsNullOrWhiteSpace(activity.Venue) ? ": " : "";
+
+                    string city = !string.IsNullOrWhiteSpace(activity.City) && activity.City.Contains(", BC")
+                        ? activity.City.Substring(0, activity.City.IndexOf(','))
+                        : string.IsNullOrWhiteSpace(activity.City) ? "" : activity.City;
+
+                    string cityVenue = string.IsNullOrWhiteSpace(activity.City)
+                                                && string.IsNullOrWhiteSpace(activity.Venue) ? "" : $"<br /><strong>{city}{cityVenueSeparator}{activity.Venue}</strong>";
+
+                    string significance = !string.IsNullOrWhiteSpace(activity.Significance) ? $"<br/>{activity.Significance}" : "";
+
+                    string lastUpdated = "";
+                    if (activity.LastUpdatedDateTime.HasValue) {
+                        var dayOfWeek = activity.LastUpdatedDateTime.Value.DayOfWeek;
+                        var lastUpdatedFriendly = ActivityListProvider.FriendlyDate(activity.LastUpdatedDateTime.Value, false, null);
+                        var year = activity.LastUpdatedDateTime.Value.Year;
+                        var time = ActivityListProvider.FriendlyTime(activity.LastUpdatedDateTime.Value, true);
+
+                        lastUpdated = activity.LastUpdatedDateTime.HasValue 
+                            ? $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {dayOfWeek}, {lastUpdatedFriendly}, {year} {time}</span>" : "";
+                    }
+
+                    titleDetails = $"<strong>{activity.Title}</strong>{detailsSummary} {significance} {cityVenue} {lastUpdated}";                    
+                }
 
                 DataRow row = AddNewDetailsRow(titleDetailsColumn, titleDetails, insertPos);
                 row[dateColumn] = friendlyDate;
