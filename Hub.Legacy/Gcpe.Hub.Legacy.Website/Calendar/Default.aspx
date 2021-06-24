@@ -637,7 +637,7 @@
                     <div><asp:RadioButton runat="server" ID="rdCQAll" Text="Show all" GroupName="showall" /></div>
                     <div>
                         <asp:RadioButton runat="server" ID="rdCQWeeks" Text="For the next " Checked="true" GroupName="showall" />
-                        <input type="text" id="txtNumberDays" name="txtNumberDays" style="width: 35px; padding: 5px;" value="10" /> days(s)
+                        <input type="text" id="txtNumberDays" name="txtNumberDays" style="width: 35px; padding: 5px;" value="8" /> days(s)
                     </div>
                     </div>
 

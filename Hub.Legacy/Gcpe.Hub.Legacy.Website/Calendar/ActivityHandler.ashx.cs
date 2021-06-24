@@ -996,22 +996,36 @@ namespace Gcpe.Hub.Calendar
                         : string.IsNullOrWhiteSpace(activity.City) ? "" : activity.City;
 
                     string cityVenue = string.IsNullOrWhiteSpace(activity.City)
-                                                && string.IsNullOrWhiteSpace(activity.Venue) ? "" : $"<br /><strong>{city}{cityVenueSeparator}{activity.Venue}</strong>";
+                                                && string.IsNullOrWhiteSpace(activity.Venue) ? "" : $"<strong>{city}{cityVenueSeparator}{activity.Venue}</strong>";
 
-                    string significance = !string.IsNullOrWhiteSpace(activity.Significance) ? $"<br/>{activity.Significance}" : "";
+                    string significance = !string.IsNullOrWhiteSpace(activity.Significance) ? $"<p>{activity.Significance}</p>" : "";
 
                     string lastUpdated = "";
                     if (activity.LastUpdatedDateTime.HasValue) {
-                        var dayOfWeek = activity.LastUpdatedDateTime.Value.DayOfWeek;
-                        var lastUpdatedFriendly = ActivityListProvider.FriendlyDate(activity.LastUpdatedDateTime.Value, false, null);
-                        var year = activity.LastUpdatedDateTime.Value.Year;
                         var time = ActivityListProvider.FriendlyTime(activity.LastUpdatedDateTime.Value, true);
 
-                        lastUpdated = activity.LastUpdatedDateTime.HasValue 
-                            ? $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {dayOfWeek}, {lastUpdatedFriendly}, {year} {time}</span>" : "";
+                        bool lastUpdatedYesterdayOrToday = activity.LastUpdatedDateTime.Value.Date == DateTime.Today 
+                            || activity.LastUpdatedDateTime.Value.Date == DateTime.Today.AddDays(-1);
+
+                        var when = "";
+                        if (lastUpdatedYesterdayOrToday) 
+                        {
+                            if (activity.LastUpdatedDateTime.Value.Date == DateTime.Today)
+                            {
+                                when = "today";
+                            } 
+                            else if (activity.LastUpdatedDateTime.Value.Date == DateTime.Today.AddDays(-1)) 
+                            {
+                                when = "yesterday";
+                            }
+                        }
+
+                        lastUpdated = lastUpdatedYesterdayOrToday 
+                            ? $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {when} at {time}</span>"
+                            : $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {ActivityListProvider.GetCreatedOrUpdatedMessage(activity.Status == "New", activity.CreatedDateTime, "", activity.LastUpdatedDateTime)}</span>";
                     }
 
-                    titleDetails = $"<strong>{activity.Title}</strong>{detailsSummary} {significance} {cityVenue} {lastUpdated}";                    
+                    titleDetails = $"<strong>{activity.Title}</strong>{detailsSummary} {significance} {cityVenue} {lastUpdated}";    
                 }
 
                 DataRow row = AddNewDetailsRow(titleDetailsColumn, titleDetails, insertPos);
@@ -1037,6 +1051,8 @@ namespace Gcpe.Hub.Calendar
 
                 if (activity.IsIssue && inTheNews)
                     row[colorColumn] = IssueColor; // Purple
+
+                if(isDetailedLookAheadReport.Value && activity.IsIssue) row[colorColumn] = IssueColor; // highlight upcoming issues in the exec LA report
 
                 //if (!isAppOwner || reportDate.HasValue) {
                 row[releaseColumn] = FormatLookAheadRelease(inTheNews, activity, reportDate, materials);
