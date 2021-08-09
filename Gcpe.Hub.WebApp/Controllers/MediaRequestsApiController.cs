@@ -185,7 +185,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 }
             }
             newUri = QueryHelpers.AddQueryString(newUri, "selectedFields", "id");
-
+            newUri = QueryHelpers.AddQueryString(newUri, "sortFields", "respondedAt desc");
             try
             {
                 HttpResponseMessage response = await SendRequestToAzureSearchServiceAsync(HttpMethod.Get, newUri);

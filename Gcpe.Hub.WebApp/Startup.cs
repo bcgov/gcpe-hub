@@ -32,8 +32,9 @@ namespace Gcpe.Hub.WebApp
             // Add framework services.
             services.AddMvc(options => options.EnableEndpointRouting = false).AddNewtonsoftJson();
 
-            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HubDbContext"))
-                                                                  .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
+            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HubDbContext")));
+                                                                  // deprecated in ef core 5.0
+                                                                  // .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
 
             services.AddSingleton(new Func<IServiceProvider, Gcpe.Hub.Services.Legacy.ISubscribeClient>((serviceProvider) =>
             {
