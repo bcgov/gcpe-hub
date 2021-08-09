@@ -995,10 +995,14 @@ namespace Gcpe.Hub.Calendar
                         ? activity.City.Substring(0, activity.City.IndexOf(','))
                         : string.IsNullOrWhiteSpace(activity.City) ? "" : activity.City;
 
-                    string cityVenue = string.IsNullOrWhiteSpace(activity.City)
-                                                && string.IsNullOrWhiteSpace(activity.Venue) ? "" : $"<strong>{city}{cityVenueSeparator}{activity.Venue}</strong>";
+                    bool noCityVenue = string.IsNullOrWhiteSpace(activity.City)
+                                                && string.IsNullOrWhiteSpace(activity.Venue);
 
-                    string significance = !string.IsNullOrWhiteSpace(activity.Significance) ? $"<p>{activity.Significance}</p>" : "";
+                    string cityVenue = noCityVenue ? "" : $"<strong>{city}{cityVenueSeparator}{activity.Venue}</strong>";
+
+                    string significanceSeparator = noCityVenue ? "" : "<br/>";
+
+                    string significance = !string.IsNullOrWhiteSpace(activity.Significance) ? $"<div style=\"font-size:2pt\">&nbsp;</div>{activity.Significance}{significanceSeparator}" : "";
 
                     string lastUpdated = "";
                     if (activity.LastUpdatedDateTime.HasValue) {
@@ -1020,9 +1024,10 @@ namespace Gcpe.Hub.Calendar
                             }
                         }
 
+                        var nbspFormatting = noCityVenue ? "<br/>" : "&nbsp;&nbsp;";
                         lastUpdated = lastUpdatedYesterdayOrToday 
-                            ? $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {when} at {time}</span>"
-                            : $"&nbsp;&nbsp;<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {ActivityListProvider.GetCreatedOrUpdatedMessage(activity.Status == "New", activity.CreatedDateTime, "", activity.LastUpdatedDateTime)}</span>";
+                            ? $"{nbspFormatting}<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {when} at {time}</span>"
+                            : $"{nbspFormatting}<span style=\"font-size: 9pt; color:#CF7A50;\">Last updated {ActivityListProvider.GetCreatedOrUpdatedMessage(activity.Status == "New", activity.CreatedDateTime, "", activity.LastUpdatedDateTime)}</span>";
                     }
 
                     titleDetails = $"<strong>{activity.Title}</strong>{detailsSummary} {significance} {cityVenue} {lastUpdated}";    

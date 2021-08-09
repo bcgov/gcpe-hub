@@ -404,7 +404,7 @@
 
         function ClearLAStatus() {
             var msg = "For how many days?";
-            jPrompt(msg, 10, "Clear Look Ahead Status of Activities", function (result) {
+            jPrompt(msg, 8, "Clear Look Ahead Status of Activities", function (result) {
                 if (result !== null) {
                     $.ajax({
                         type: 'POST',
