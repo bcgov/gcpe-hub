@@ -258,15 +258,18 @@ namespace Gcpe.Hub.News.ReleaseManagement
             chk.Checked = item.Selected;
 
             Label topOrFeature = (Label)e.Item.FindControl("lblTopOrFeature");
-            if (chk.Checked)
+            if (topOrFeature != null)
             {
-                topOrFeature.Text = TopOrFeatureLabel(item);
-                chk.Enabled = string.IsNullOrEmpty(topOrFeature.Text);
-            }
-            InitTopOrFeature((HyperLink)e.Item.FindControl("topSwitch"),
-                             (HyperLink)e.Item.FindControl("featureSwitch"),
-                             (HiddenField)e.Item.FindControl("valTopOrFeature"),
-                             topOrFeature.Text, chk.Checked);
+                if (chk.Checked)
+                {
+                    topOrFeature.Text = TopOrFeatureLabel(item);
+                    chk.Enabled = string.IsNullOrEmpty(topOrFeature.Text);
+                }
+                InitTopOrFeature((HyperLink)e.Item.FindControl("topSwitch"),
+                                 (HyperLink)e.Item.FindControl("featureSwitch"),
+                                 (HiddenField)e.Item.FindControl("valTopOrFeature"),
+                                 topOrFeature.Text, chk.Checked);
+            }          
         }
 
         private void InitTopOrFeature(HyperLink topSwitch, HyperLink featureSwitch, HiddenField valTopOrFeature, string topOrFeatureText, bool isValid = true)
@@ -307,18 +310,21 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 if (item.Selected)
                 {
                     HiddenField valTopOrFeature = (HiddenField)rpt.FindControl("valTopOrFeature");
-                    if (valTopOrFeature.Value == "Top")
+                    if (valTopOrFeature!=null)
                     {
-                        if (item.FeatureReleaseId == Model.Id)
-                            item.FeatureReleaseId = item.TopReleaseId; //Swap Top and feature
-                        item.TopReleaseId = Model.Id;
-                    }
-                    else if (valTopOrFeature.Value == "Feature")
-                    {
-                        if (item.TopReleaseId == Model.Id)
-                            item.TopReleaseId = item.FeatureReleaseId; //Swap Top and feature
-                        item.FeatureReleaseId = Model.Id;
-                    }
+                        if (valTopOrFeature.Value == "Top")
+                        {
+                            if (item.FeatureReleaseId == Model.Id)
+                                item.FeatureReleaseId = item.TopReleaseId; //Swap Top and feature
+                            item.TopReleaseId = Model.Id;
+                        }
+                        else if (valTopOrFeature.Value == "Feature")
+                        {
+                            if (item.TopReleaseId == Model.Id)
+                                item.TopReleaseId = item.FeatureReleaseId; //Swap Top and feature
+                            item.FeatureReleaseId = Model.Id;
+                        }
+                    }       
                 }
             }
         }

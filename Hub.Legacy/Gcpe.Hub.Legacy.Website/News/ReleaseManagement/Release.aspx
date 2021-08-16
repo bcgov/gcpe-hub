@@ -953,13 +953,6 @@
                                     <tr class="ToggleTopOrFeature">
                                         <td>
                                             <asp:CheckBox ID="chkCategory" runat="server" onclick="OnCheckClick(this);" /></td>
-                                        <td style="text-align: center">
-                                            <asp:Label ID="lblTopOrFeature" runat="server" CssClass="TopOrFeature" />
-                                            <asp:HyperLink ID="topSwitch" runat="server" NavigateUrl="#" CssClass="switch" onclick="return OnTopOrFeatureSwitch(this);">Set as Top</asp:HyperLink>
-                                            <asp:HiddenField ID="valTopOrFeature" runat="server" Value="" />
-                                        </td>
-                                        <td>
-                                            <asp:HyperLink ID="featureSwitch" runat="server" NavigateUrl="#" CssClass="switch" onclick="return OnTopOrFeatureSwitch(this);">Set as Feature</asp:HyperLink></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
