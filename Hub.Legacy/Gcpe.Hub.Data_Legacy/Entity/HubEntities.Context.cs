@@ -15,7 +15,7 @@ namespace Gcpe.Hub.Data.Entity
     
     public partial class HubEntities : DbContext
     {
-    
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -51,5 +51,6 @@ namespace Gcpe.Hub.Data.Entity
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<SystemUser> SystemUsers { get; set; }
         public virtual DbSet<MediaDistributionList> MediaDistributionLists { get; set; }
+        public virtual DbSet<ActivityTags> ActivityTags { get; set; }
     }
 }

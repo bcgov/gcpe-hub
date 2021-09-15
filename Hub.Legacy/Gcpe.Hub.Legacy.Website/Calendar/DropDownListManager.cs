@@ -294,7 +294,7 @@ public class DropDownListManager
     public object GetActiveCategoryOptions(bool isHq, List<int> includedIds = null, bool showLegacy = false)
     {
         IQueryable<Category> options = corporateCalendarDataContext.Categories
-            .Where(p => p.IsActive || (includedIds??noIds).Contains(p.Id) || (isHq && p.Name == "HQ Placeholder"));
+            .Where(p => p.IsActive || (includedIds ?? noIds).Contains(p.Id) || (isHq && p.Name == "HQ Placeholder"));
 
         return options.OrderBy(p => p.SortOrder).ThenBy(p => p.Name);
     }
@@ -360,7 +360,7 @@ public class DropDownListManager
     /// <returns>System.Object</returns>
     public object GetActiveSectorOptions(List<Guid> includedIds)
     {
-        IEnumerable<Sector> options = corporateCalendarDataContext.Sectors.Where(p => p.IsActive || (includedIds??noGuids).Contains(p.Id));
+        IEnumerable<Sector> options = corporateCalendarDataContext.Sectors.Where(p => p.IsActive || (includedIds ?? noGuids).Contains(p.Id));
 
         return options.OrderBy(p => p.DisplayName).ToArray();
     }
@@ -373,7 +373,20 @@ public class DropDownListManager
     /// <returns>System.Object</returns>
     public object GetActiveThemeOptions(List<Guid> includedIds = null)
     {
-        IQueryable<Theme> options = corporateCalendarDataContext.Themes.Where(p => p.IsActive || (includedIds??noGuids).Contains(p.Id));
+        IQueryable<Theme> options = corporateCalendarDataContext.Themes.Where(p => p.IsActive || (includedIds ?? noGuids).Contains(p.Id));
+
+        return options.OrderBy(p => p.SortOrder).ThenBy(p => p.DisplayName).ToArray();
+    }
+    #endregion
+
+    #region Tag
+    /// <summary>
+    /// Returns active rows from the Tag table and sorts by SortOrder column.
+    /// </summary>
+    /// <returns>System.Object</returns>
+    public object GetActiveTagOptions(List<Guid> includedIds = null)
+    {
+        IQueryable<Tag> options = corporateCalendarDataContext.Tags.Where(p => p.IsActive || (includedIds ?? noGuids).Contains(p.Id));
 
         return options.OrderBy(p => p.SortOrder).ThenBy(p => p.DisplayName).ToArray();
     }
@@ -392,7 +405,7 @@ public class DropDownListManager
         var keywords = from a in corporateCalendarDataContext.ActiveActivities
                        join ak in corporateCalendarDataContext.ActivityKeywords on a.Id equals ak.ActivityId
                        join k in corporateCalendarDataContext.Keywords on ak.KeywordId equals k.Id
-                       where (includedIds??noIds).Contains(k.Id) || 
+                       where (includedIds ?? noIds).Contains(k.Id) ||
                             k.IsActive
                             && (k.LastUpdatedDateTime >= cutOffDate &&
                             (isCurrentUserInOwnerList // User is HQ
@@ -412,7 +425,7 @@ public class DropDownListManager
     /// <returns>System.Object</returns>
     public object GetActiveInitiativeOptions(List<int> includedIds = null)
     {
-        IQueryable<Initiative> options = corporateCalendarDataContext.Initiatives.Where(p => p.IsActive || (includedIds??noIds).Contains(p.Id));
+        IQueryable<Initiative> options = corporateCalendarDataContext.Initiatives.Where(p => p.IsActive || (includedIds ?? noIds).Contains(p.Id));
 
         return options.OrderBy(p => p.SortOrder).ThenBy(p => p.Name).ToArray();
     }

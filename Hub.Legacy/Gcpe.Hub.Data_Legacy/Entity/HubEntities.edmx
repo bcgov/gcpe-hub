@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Gcpe.Hub_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivityTags">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="SystemUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -421,6 +434,18 @@
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_ActivityTags_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="ActivityTags" Type="Self.ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CarouselSlide_Carousel">
           <End Role="Carousel" Type="Self.Carousel" Multiplicity="1" />
           <End Role="CarouselSlide" Type="Self.CarouselSlide" Multiplicity="*" />
@@ -1084,6 +1109,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GcpeHub_ModelStoreContainer">
+          <EntitySet Name="ActivityTags" EntityType="Self.ActivityTags" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="SystemUser" EntityType="Self.SystemUser" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="ApplicationSetting" EntityType="Self.ApplicationSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blob" EntityType="Self.Blob" Schema="dbo" store:Type="Tables" />
@@ -1120,6 +1146,10 @@
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActivityTags_Tag" Association="Self.FK_ActivityTags_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
+          </AssociationSet>
           <AssociationSet Name="FK_CarouselSlide_Carousel" Association="Self.FK_CarouselSlide_Carousel">
             <End Role="Carousel" EntitySet="Carousel" />
             <End Role="CarouselSlide" EntitySet="CarouselSlide" />
@@ -1559,6 +1589,11 @@
           <AssociationSet Name="NewsReleaseMediaDistribution" Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution">
             <End Role="MediaDistributionList" EntitySet="MediaDistributionLists" />
             <End Role="NewsRelease" EntitySet="NewsReleases" />
+          </AssociationSet>
+          <EntitySet Name="ActivityTags" EntityType="Gcpe.Hub_Model.ActivityTags" />
+          <AssociationSet Name="FK_ActivityTags_Tag" Association="Gcpe.Hub_Model.FK_ActivityTags_Tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Language">
@@ -2186,6 +2221,7 @@
           <NavigationProperty Name="NewsReleases" Relationship="Gcpe.Hub_Model.NewsReleaseTag" FromRole="Tag" ToRole="NewsRelease" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ActivityTags" Relationship="Gcpe.Hub_Model.FK_ActivityTags_Tag" FromRole="Tag" ToRole="ActivityTags" />
         </EntityType>
         <Association Name="NewsReleaseTag">
           <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
@@ -2586,6 +2622,32 @@
         <Association Name="NewsReleaseMediaDistribution">
           <End Type="Gcpe.Hub_Model.MediaDistributionList" Role="MediaDistributionList" Multiplicity="*" />
           <End Type="Gcpe.Hub_Model.NewsRelease" Role="NewsRelease" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ActivityTags">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Guid" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tag" Relationship="Gcpe.Hub_Model.FK_ActivityTags_Tag" FromRole="ActivityTags" ToRole="Tag" />
+        </EntityType>
+        <Association Name="FK_ActivityTags_Tag">
+          <End Type="Gcpe.Hub_Model.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="Gcpe.Hub_Model.ActivityTags" Role="ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -3025,6 +3087,19 @@
               <ScalarProperty Name="Id" ColumnName="MediaDistributionListId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ActivityTags">
+            <EntityTypeMapping TypeName="Gcpe.Hub_Model.ActivityTags">
+              <MappingFragment StoreEntitySet="ActivityTags">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3039,7 +3114,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gcpe.Hub.Data.Entity
+namespace CorporateCalendar.Data.Entity
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Tag
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tag()
         {
-            this.NewsReleases = new HashSet<NewsRelease>();
             this.ActivityTags = new HashSet<ActivityTags>();
         }
     
@@ -26,7 +26,7 @@ namespace Gcpe.Hub.Data.Entity
         public int SortOrder { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual ICollection<NewsRelease> NewsReleases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityTags> ActivityTags { get; set; }
     }
 }

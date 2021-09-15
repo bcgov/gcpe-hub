@@ -15,8 +15,10 @@ using CorporateCalendar.Data;
 public class ActivityWebService : System.Web.Services.WebService
 {
 
-    private static CorporateCalendarDataContext CorporateCalendarDataContext {
-        get {
+    private static CorporateCalendarDataContext CorporateCalendarDataContext
+    {
+        get
+        {
             var corporateCalendarDataContext = new CorporateCalendarDataContext(); //"param1", "param2", "param3");
             return corporateCalendarDataContext;
         }
@@ -24,7 +26,8 @@ public class ActivityWebService : System.Web.Services.WebService
 
 
 
-    public ActivityWebService() {
+    public ActivityWebService()
+    {
 
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
@@ -45,19 +48,22 @@ public class ActivityWebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public static ActiveActivity GetActiveActivityById(int activityId) {
+    public static ActiveActivity GetActiveActivityById(int activityId)
+    {
         IQueryable<ActiveActivity> activity = CorporateCalendarDataContext.ActiveActivities.Where(a => a.Id == activityId);
         return activity.FirstOrDefault();
     }
 
     [WebMethod]
-    public static List<ActiveActivity> GetAllActiveActivities() {
+    public static List<ActiveActivity> GetAllActiveActivities()
+    {
         throw new NotImplementedException();
     }
 
 
     [WebMethod]
-    public static List<ActiveActivity> GetAllActiveActivitiesForSystemUser(int systemUserId) {
+    public static List<ActiveActivity> GetAllActiveActivitiesForSystemUser(int systemUserId)
+    {
         throw new NotImplementedException();
     }
 
@@ -66,6 +72,8 @@ public class ActivityWebService : System.Web.Services.WebService
     public static int? CloneActiveActivity(ActiveActivity activity, Dictionary<string, string> dropDownListValues, CorporateCalendar.Security.CustomPrincipal customPrincipal)
     {
         var db = CorporateCalendarDataContext; // We need to maintain a common context
+
+        dropDownListValues.Remove("ActivityTagIds"); // remove news subscriptions when cloning
 
         #region Clone the activity
         using (var transactionScope = new TransactionScope())
@@ -97,7 +105,7 @@ public class ActivityWebService : System.Web.Services.WebService
                 PremierRequestedId = activity.PremierRequestedId,
                 // Single-select
                 Venue = activity.Venue,
-                
+
                 IsConfirmed = activity.IsConfirmed,
                 PotentialDates = activity.PotentialDates,
                 IsConfidential = activity.IsConfidential,
@@ -113,7 +121,7 @@ public class ActivityWebService : System.Web.Services.WebService
                 Schedule = activity.Schedule,
                 OtherCity = activity.OtherCity,
                 IsIssue = activity.IsIssue,
-                IsMilestone = activity.IsMilestone
+                IsMilestone = activity.IsMilestone,
             };
 
             db.Activities.InsertOnSubmit(clone);
@@ -131,23 +139,27 @@ public class ActivityWebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public static bool ReviewActiveActivity(int activityId) {
+    public static bool ReviewActiveActivity(int activityId)
+    {
         throw new NotImplementedException();
     }
 
     [WebMethod]
-    public static bool ReviewMultipleActiveActivities(List<int> activityIdList) {
+    public static bool ReviewMultipleActiveActivities(List<int> activityIdList)
+    {
         // Use this method for both ReviewSelectedActiveActivities and ReviewAllActiveActivities (in grid)
         throw new NotImplementedException();
     }
 
     [WebMethod]
-    public static bool DeleteActiveActivity(int activityId) {
+    public static bool DeleteActiveActivity(int activityId)
+    {
         throw new NotImplementedException();
     }
 
     [WebMethod]
-    public static bool DeleteMultipleActiveActivities(List<int> activityIdList) {
+    public static bool DeleteMultipleActiveActivities(List<int> activityIdList)
+    {
         // Use this method for both DeleteSelectedActiveActivities and DeleteAllActiveActivities (in grid)
         throw new NotImplementedException();
     }
@@ -157,9 +169,11 @@ public class ActivityWebService : System.Web.Services.WebService
     {
         var db = CorporateCalendarDataContext;
 
-        using (var transactionScope = new TransactionScope()) {
+        using (var transactionScope = new TransactionScope())
+        {
 
-            var newActivity = new CorporateCalendar.Data.Activity {
+            var newActivity = new CorporateCalendar.Data.Activity
+            {
                 Title = activity.Title,
                 StartDateTime = activity.StartDateTime,
                 EndDateTime = activity.EndDateTime,
@@ -359,6 +373,28 @@ public class ActivityWebService : System.Web.Services.WebService
                         // Submit changes only after
                     }
                     break;
+                case "ActivityTagIds":
+                    // Always delete old items
+                    var currentTags =
+                        db.ActivityTags.Where(p => p.ActivityId == activityId);
+                    if (currentTags.Any())
+                        db.ActivityTags.DeleteAllOnSubmit(currentTags);
+                    foreach (
+                        var activityTag in dropDownValues.Select(tagId => new ActivityTag()
+                        {
+                            ActivityId = activityId,
+                            TagId = Guid.Parse(tagId),
+                            IsActive = true,
+                            LastUpdatedBy = customPrincipal.Id,
+                            CreatedBy = customPrincipal.Id,
+                            CreatedDateTime = DateTime.Now,
+                            LastUpdatedDateTime = DateTime.Now
+                        }))
+                    {
+                        db.ActivityTags.InsertOnSubmit(activityTag);
+                        // Submit changes only after
+                    }
+                    break;
                 case "ActivityKeywords":
                     var previousKeywords =
                         db.ActivityKeywords.Where(p => p.ActivityId == activityId);
@@ -377,7 +413,7 @@ public class ActivityWebService : System.Web.Services.WebService
                         }
                         else
                         {
-                            if (db.ActivityKeywords.Count(k => k.KeywordId == previousKeyword.KeywordId) ==1)
+                            if (db.ActivityKeywords.Count(k => k.KeywordId == previousKeyword.KeywordId) == 1)
                             {
                                 // cleanup keywords not used anymore
                                 db.Keywords.DeleteOnSubmit(db.Keywords.First(k => k.Id == previousKeyword.KeywordId));
@@ -475,14 +511,17 @@ public class ActivityWebService : System.Web.Services.WebService
     [WebMethod]
     public static int? SaveActivity(CorporateCalendar.Data.Activity activity, Dictionary<string, string> dropDownListValues, CorporateCalendar.Security.CustomPrincipal customPrincipal, SaveType saveType)
     {
-        using (var transactionScope = new TransactionScope()) {   
+        using (var transactionScope = new TransactionScope())
+        {
             var db = CorporateCalendarDataContext;
             int newActivityId = 0;
 
-            if (saveType == SaveType.Insert) {
+            if (saveType == SaveType.Insert)
+            {
 
 
-                var newActivity = new CorporateCalendar.Data.Activity {
+                var newActivity = new CorporateCalendar.Data.Activity
+                {
                     Title = activity.Title,
                     StartDateTime = activity.StartDateTime,
                     EndDateTime = activity.EndDateTime,
@@ -526,7 +565,9 @@ public class ActivityWebService : System.Web.Services.WebService
                 //db.Log = new ActionTextWriter(s => System.Diagnostics.Debug.Write(s));
                 db.SubmitChanges();
                 newActivityId = newActivity.Id;
-            } else {
+            }
+            else
+            {
 
                 var newActivity = CorporateCalendarDataContext.Activities.Single(p => p.Id == activity.Id);
 

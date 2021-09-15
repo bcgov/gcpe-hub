@@ -1035,4 +1035,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IsInitiativesNeedsReview" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1572ee22-10a5-41dd-9526-eea3df301408" ChangeDateTime="08/19/2021 23:13:58">
+    <Property Name="ElementName" Value="[dbo].[ActivityNewsSubscriptions].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivityNewsSubscriptions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ActivityId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="98994054-a3c8-49d6-9356-0f0f34cf84ce" ChangeDateTime="08/19/2021 23:15:09">
+    <Property Name="ElementName" Value="[dbo].[ActivityNewsSubscriptions].[NewsReleaseTagId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivityNewsSubscriptions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NewsSubscribeTagId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="266ccf6c-6527-457c-befd-dcea4201af5e" ChangeDateTime="08/19/2021 23:23:48">
+    <Property Name="ElementName" Value="[dbo].[ActivityNewsSubscriptions].[LastUpdatedDatetime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivityNewsSubscriptions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastUpdatedDateTime" />
+  </Operation>
 </Operations>

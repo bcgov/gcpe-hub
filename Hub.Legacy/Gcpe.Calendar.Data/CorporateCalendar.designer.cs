@@ -105,6 +105,12 @@ namespace CorporateCalendar.Data
     partial void InsertActivityTheme(ActivityTheme instance);
     partial void UpdateActivityTheme(ActivityTheme instance);
     partial void DeleteActivityTheme(ActivityTheme instance);
+    partial void InsertTag(Tag instance);
+    partial void UpdateTag(Tag instance);
+    partial void DeleteTag(Tag instance);
+    partial void InsertActivityTag(ActivityTag instance);
+    partial void UpdateActivityTag(ActivityTag instance);
+    partial void DeleteActivityTag(ActivityTag instance);
     partial void InsertInitiative(Initiative instance);
     partial void UpdateInitiative(Initiative instance);
     partial void DeleteInitiative(Initiative instance);
@@ -371,6 +377,22 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		public System.Data.Linq.Table<Tag> Tags
+		{
+			get
+			{
+				return this.GetTable<Tag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ActivityTag> ActivityTags
+		{
+			get
+			{
+				return this.GetTable<ActivityTag>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Initiative> Initiatives
 		{
 			get
@@ -516,6 +538,12 @@ namespace CorporateCalendar.Data
 		public IQueryable<GetActivityThemesResult> GetActivityThemes([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> activityId)
 		{
 			return this.CreateMethodCallQuery<GetActivityThemesResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityId);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="calendar.GetActivityTags", IsComposable=true)]
+		public IQueryable<GetActivityTagsResult> GetActivityTags([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> activityId)
+		{
+			return this.CreateMethodCallQuery<GetActivityTagsResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityId);
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="calendar.sGetActivityInitiatives", IsComposable=true)]
@@ -6092,7 +6120,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(84)", UpdateCheck=UpdateCheck.Never)]
 		public string Description
 		{
 			get
@@ -9780,6 +9808,480 @@ namespace CorporateCalendar.Data
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tag")]
+	public partial class Tag : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _Key;
+		
+		private string _DisplayName;
+		
+		private int _SortOrder;
+		
+		private bool _IsActive;
+		
+		private EntitySet<ActivityTag> _ActivityTags;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnKeyChanging(string value);
+    partial void OnKeyChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
+    partial void OnSortOrderChanging(int value);
+    partial void OnSortOrderChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
+		public Tag()
+		{
+			this._ActivityTags = new EntitySet<ActivityTag>(new Action<ActivityTag>(this.attach_ActivityTags), new Action<ActivityTag>(this.detach_ActivityTags));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Key]", Storage="_Key", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Key
+		{
+			get
+			{
+				return this._Key;
+			}
+			set
+			{
+				if ((this._Key != value))
+				{
+					this.OnKeyChanging(value);
+					this.SendPropertyChanging();
+					this._Key = value;
+					this.SendPropertyChanged("Key");
+					this.OnKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayName", DbType="VarChar(255)")]
+		public string DisplayName
+		{
+			get
+			{
+				return this._DisplayName;
+			}
+			set
+			{
+				if ((this._DisplayName != value))
+				{
+					this.OnDisplayNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayName = value;
+					this.SendPropertyChanged("DisplayName");
+					this.OnDisplayNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SortOrder", DbType="Int NOT NULL")]
+		public int SortOrder
+		{
+			get
+			{
+				return this._SortOrder;
+			}
+			set
+			{
+				if ((this._SortOrder != value))
+				{
+					this.OnSortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._SortOrder = value;
+					this.SendPropertyChanged("SortOrder");
+					this.OnSortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_ActivityTag", Storage="_ActivityTags", ThisKey="Id", OtherKey="TagId")]
+		public EntitySet<ActivityTag> ActivityTags
+		{
+			get
+			{
+				return this._ActivityTags;
+			}
+			set
+			{
+				this._ActivityTags.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ActivityTags(ActivityTag entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tag = this;
+		}
+		
+		private void detach_ActivityTags(ActivityTag entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tag = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="calendar.ActivityTags")]
+	public partial class ActivityTag : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ActivityId;
+		
+		private System.Guid _TagId;
+		
+		private bool _IsActive;
+		
+		private System.DateTime _CreatedDateTime;
+		
+		private int _CreatedBy;
+		
+		private System.DateTime _LastUpdatedDateTime;
+		
+		private int _LastUpdatedBy;
+		
+		private EntityRef<Tag> _Tag;
+		
+		private EntityRef<Activity> _Activity;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnActivityIdChanging(int value);
+    partial void OnActivityIdChanged();
+    partial void OnTagIdChanging(System.Guid value);
+    partial void OnTagIdChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    partial void OnCreatedDateTimeChanging(System.DateTime value);
+    partial void OnCreatedDateTimeChanged();
+    partial void OnCreatedByChanging(int value);
+    partial void OnCreatedByChanged();
+    partial void OnLastUpdatedDateTimeChanging(System.DateTime value);
+    partial void OnLastUpdatedDateTimeChanged();
+    partial void OnLastUpdatedByChanging(int value);
+    partial void OnLastUpdatedByChanged();
+    #endregion
+		
+		public ActivityTag()
+		{
+			this._Tag = default(EntityRef<Tag>);
+			this._Activity = default(EntityRef<Activity>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ActivityId
+		{
+			get
+			{
+				return this._ActivityId;
+			}
+			set
+			{
+				if ((this._ActivityId != value))
+				{
+					if (this._Activity.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActivityIdChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityId = value;
+					this.SendPropertyChanged("ActivityId");
+					this.OnActivityIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid TagId
+		{
+			get
+			{
+				return this._TagId;
+			}
+			set
+			{
+				if ((this._TagId != value))
+				{
+					if (this._Tag.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTagIdChanging(value);
+					this.SendPropertyChanging();
+					this._TagId = value;
+					this.SendPropertyChanged("TagId");
+					this.OnTagIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedDateTime
+		{
+			get
+			{
+				return this._CreatedDateTime;
+			}
+			set
+			{
+				if ((this._CreatedDateTime != value))
+				{
+					this.OnCreatedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDateTime = value;
+					this.SendPropertyChanged("CreatedDateTime");
+					this.OnCreatedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int NOT NULL")]
+		public int CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdatedDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime LastUpdatedDateTime
+		{
+			get
+			{
+				return this._LastUpdatedDateTime;
+			}
+			set
+			{
+				if ((this._LastUpdatedDateTime != value))
+				{
+					this.OnLastUpdatedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdatedDateTime = value;
+					this.SendPropertyChanged("LastUpdatedDateTime");
+					this.OnLastUpdatedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdatedBy", DbType="Int NOT NULL")]
+		public int LastUpdatedBy
+		{
+			get
+			{
+				return this._LastUpdatedBy;
+			}
+			set
+			{
+				if ((this._LastUpdatedBy != value))
+				{
+					this.OnLastUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdatedBy = value;
+					this.SendPropertyChanged("LastUpdatedBy");
+					this.OnLastUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_ActivityTag", Storage="_Tag", ThisKey="TagId", OtherKey="Id", IsForeignKey=true)]
+		public Tag Tag
+		{
+			get
+			{
+				return this._Tag.Entity;
+			}
+			set
+			{
+				Tag previousValue = this._Tag.Entity;
+				if (((previousValue != value) 
+							|| (this._Tag.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tag.Entity = null;
+						previousValue.ActivityTags.Remove(this);
+					}
+					this._Tag.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityTags.Add(this);
+						this._TagId = value.Id;
+					}
+					else
+					{
+						this._TagId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Tag");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityTag", Storage="_Activity", ThisKey="ActivityId", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.ActivityTags.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityTags.Add(this);
+						this._ActivityId = value.Id;
+					}
+					else
+					{
+						this._ActivityId = default(int);
+					}
+					this.SendPropertyChanged("Activity");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="calendar.Initiative")]
 	public partial class Initiative : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -12612,6 +13114,8 @@ namespace CorporateCalendar.Data
 		
 		private EntitySet<ActivityTheme> _ActivityThemes;
 		
+		private EntitySet<ActivityTag> _ActivityTags;
+		
 		private EntitySet<ActivityInitiative> _ActivityInitiatives;
 		
 		private EntitySet<FavoriteActivity> _FavoriteActivities;
@@ -12788,6 +13292,7 @@ namespace CorporateCalendar.Data
 			this._ActivityCategories = new EntitySet<ActivityCategory>(new Action<ActivityCategory>(this.attach_ActivityCategories), new Action<ActivityCategory>(this.detach_ActivityCategories));
 			this._NewsFeeds = new EntitySet<NewsFeed>(new Action<NewsFeed>(this.attach_NewsFeeds), new Action<NewsFeed>(this.detach_NewsFeeds));
 			this._ActivityThemes = new EntitySet<ActivityTheme>(new Action<ActivityTheme>(this.attach_ActivityThemes), new Action<ActivityTheme>(this.detach_ActivityThemes));
+			this._ActivityTags = new EntitySet<ActivityTag>(new Action<ActivityTag>(this.attach_ActivityTags), new Action<ActivityTag>(this.detach_ActivityTags));
 			this._ActivityInitiatives = new EntitySet<ActivityInitiative>(new Action<ActivityInitiative>(this.attach_ActivityInitiatives), new Action<ActivityInitiative>(this.detach_ActivityInitiatives));
 			this._FavoriteActivities = new EntitySet<FavoriteActivity>(new Action<FavoriteActivity>(this.attach_FavoriteActivities), new Action<FavoriteActivity>(this.detach_FavoriteActivities));
 			this._ActivityKeywords = new EntitySet<ActivityKeyword>(new Action<ActivityKeyword>(this.attach_ActivityKeywords), new Action<ActivityKeyword>(this.detach_ActivityKeywords));
@@ -14239,6 +14744,19 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityTag", Storage="_ActivityTags", ThisKey="Id", OtherKey="ActivityId")]
+		public EntitySet<ActivityTag> ActivityTags
+		{
+			get
+			{
+				return this._ActivityTags;
+			}
+			set
+			{
+				this._ActivityTags.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_ActivityInitiative", Storage="_ActivityInitiatives", ThisKey="Id", OtherKey="ActivityId")]
 		public EntitySet<ActivityInitiative> ActivityInitiatives
 		{
@@ -14810,6 +15328,18 @@ namespace CorporateCalendar.Data
 		}
 		
 		private void detach_ActivityThemes(ActivityTheme entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = null;
+		}
+		
+		private void attach_ActivityTags(ActivityTag entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = this;
+		}
+		
+		private void detach_ActivityTags(ActivityTag entity)
 		{
 			this.SendPropertyChanging();
 			entity.Activity = null;
@@ -16831,6 +17361,50 @@ namespace CorporateCalendar.Data
 				if ((this._activityThemes != value))
 				{
 					this._activityThemes = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetActivityTagsResult
+	{
+		
+		private System.Nullable<int> _activityId;
+		
+		private string _activityTags;
+		
+		public GetActivityTagsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activityId", DbType="Int")]
+		public System.Nullable<int> activityId
+		{
+			get
+			{
+				return this._activityId;
+			}
+			set
+			{
+				if ((this._activityId != value))
+				{
+					this._activityId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activityTags", DbType="VarChar(4096)")]
+		public string activityTags
+		{
+			get
+			{
+				return this._activityTags;
+			}
+			set
+			{
+				if ((this._activityTags != value))
+				{
+					this._activityTags = value;
 				}
 			}
 		}

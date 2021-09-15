@@ -423,6 +423,29 @@
       <Association Name="Activity_ActivityTheme" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Tag" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[Key]" Member="Key" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />   
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_ActivityTag" Member="ActivityTags" ThisKey="Id" OtherKey="TagId" Type="ActivityTag" />
+    </Type>
+  </Table>
+  <Table Name="calendar.ActivityTags" Member="ActivityTags">
+    <Type Name="ActivityTag">
+      <Column Name="ActivityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_ActivityTag" Member="Tag" ThisKey="TagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+      <Association Name="Activity_ActivityTag" Member="Activity" ThisKey="ActivityId" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="calendar.Initiative" Member="Initiatives">
     <Type Name="Initiative">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -611,6 +634,7 @@
       <Association Name="Activity_ActivityCategory" Member="ActivityCategories" ThisKey="Id" OtherKey="ActivityId" Type="ActivityCategory" />
       <Association Name="Activity_NewsFeed" Member="NewsFeeds" ThisKey="Id" OtherKey="ActivityId" Type="NewsFeed" />
       <Association Name="Activity_ActivityTheme" Member="ActivityThemes" ThisKey="Id" OtherKey="ActivityId" Type="ActivityTheme" />
+      <Association Name="Activity_ActivityTag" Member="ActivityTags" ThisKey="Id" OtherKey="ActivityId" Type="ActivityTag" />
       <Association Name="Activity_ActivityInitiative" Member="ActivityInitiatives" ThisKey="Id" OtherKey="ActivityId" Type="ActivityInitiative" />
       <Association Name="Activity_FavoriteActivity" Member="FavoriteActivities" ThisKey="Id" OtherKey="ActivityId" Type="FavoriteActivity" />
       <Association Name="Activity_ActivityKeyword" Member="ActivityKeywords" ThisKey="Id" OtherKey="ActivityId" Type="ActivityKeyword" />
@@ -796,6 +820,13 @@
     <ElementType Name="GetActivityThemesResult">
       <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="activityThemes" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="calendar.GetActivityTags" Method="GetActivityTags" IsComposable="true">
+    <Parameter Name="activityId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetActivityTagsResult">
+      <Column Name="activityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activityTags" Type="System.String" DbType="VarChar(4096)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="calendar.sGetActivityInitiatives" Method="sGetActivityInitiatives" IsComposable="true">
