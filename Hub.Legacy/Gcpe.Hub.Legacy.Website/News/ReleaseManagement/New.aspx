@@ -676,11 +676,18 @@
                     });
 
                     chklstTags.prop("checked", false);
-                    jQuery.each(data.d.Initiatives, function(index, tag) {
-                        chklstTags.filter(function() {
+                    jQuery.each(data.d.Tags, function (index, tag) {
+                        chklstTags.filter(function () {
                             return $(this).siblings('label').text() == tag;
                         }).prop("checked", true);
                     });
+
+                    //chklstTags.prop("checked", false);
+                    //jQuery.each(data.d.Initiatives, function(index, tag) {
+                    //    chklstTags.filter(function() {
+                    //        return $(this).siblings('label').text() == tag;
+                    //    }).prop("checked", true);
+                    //});
 
                     IsPageValid();
                 }
@@ -794,6 +801,13 @@
             </div>
         </div>
 
+        <div class="field-group required" id="tagsSection">
+            <div class="label">News Subscribe</div>
+            <div class="CheckBoxList">
+                <asp:CheckBoxList ID="cklstTag" CssClass="chkbxlst" runat="server" DataSource="<%# Model.Tags %>" DataTextField="Text" DataValueField="Value" OnDataBound="cklstTag_DataBound" />
+            </div>
+        </div>
+
         <div id="Organizations" class="field-group required">
             <div class="label">Organizations<span class="disable-note"> Update the page layout above to formal to enter organizations</span></div>
             <div class="txt"> 
@@ -826,13 +840,6 @@
             <div class="label">Location</div>
             <div class="txt">
                 <asp:TextBox ID="txtLocation" runat="server" MaxLength="50"  Width="300px" ></asp:TextBox>
-            </div>
-        </div>
-
-        <div class="field-group required" id="tagsSection">
-            <div class="label">Tags</div>
-            <div class="CheckBoxList">
-                <asp:CheckBoxList ID="cklstTag" CssClass="chkbxlst" runat="server" DataSource="<%# Model.Tags %>" DataTextField="Text" DataValueField="Value" OnDataBound="cklstTag_DataBound" />
             </div>
         </div>
 

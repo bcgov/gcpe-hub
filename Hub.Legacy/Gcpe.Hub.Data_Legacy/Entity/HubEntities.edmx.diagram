@@ -94,6 +94,8 @@
         <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution1" />
         <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution1" />
         <AssociationConnector Association="Gcpe.Hub_Model.NewsReleaseMediaDistribution" />
+        <EntityTypeShape EntityType="Gcpe.Hub_Model.ActivityTags" Width="1.5" PointX="7.5" PointY="25.75" />
+        <AssociationConnector Association="Gcpe.Hub_Model.FK_ActivityTags_Tag" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

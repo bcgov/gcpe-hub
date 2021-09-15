@@ -96,6 +96,9 @@
     <Compile Include="Entity\ActivitySharedWith.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\ActivityTags.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\ActivityTheme.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
@@ -169,6 +172,9 @@
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SystemUserMinistry.cs">
+      <DependentUpon>CalendarEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Tag.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Theme.cs">

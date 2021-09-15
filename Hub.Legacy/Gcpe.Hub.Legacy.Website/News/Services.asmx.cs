@@ -105,6 +105,8 @@ namespace Gcpe.Hub.News
                         .ActivitySharedWiths.Where(s => s.IsActive).Select(s => s.Ministry.Abbreviation).ToList();
                     activity.Themes = corporateCalendarDataContext.Activities.Where(a => a.Id == activity.Id).FirstOrDefault()
                         .ActivityThemes.Where(s => s.IsActive).Select(s => s.Theme.DisplayName).ToList();
+                    activity.Tags = corporateCalendarDataContext.Activities.Where(a => a.Id == activity.Id).FirstOrDefault()
+                        .ActivityTags.Where(s => s.IsActive).Select(s => s.Tag.DisplayName).ToList();
 
                     activity.Initiatives = corporateCalendarDataContext.ActivityInitiatives.Where(a => a.ActivityId == activity.Id && a.IsActive)
                         .Select(s => s.Initiative.Name).ToList();
@@ -156,6 +158,7 @@ namespace Gcpe.Hub.News
             public List<string> Ministries { get; set; }
             public List<string> Sectors { get; set; }
             public List<string> Themes { get; set; }
+            public List<string> Tags { get; set; }
             public List<string> Initiatives { get; set; }
             public string Title { get; set; }
             public string LeadOrganization { get; set; }

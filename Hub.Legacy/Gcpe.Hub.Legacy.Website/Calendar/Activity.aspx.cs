@@ -321,7 +321,7 @@ namespace Gcpe.Hub.Calendar
 
         private void SetNewActivityDefaults()
         {
-            PopulateDropDownLists(null, null, null, null, null, null, null, null, null);
+            PopulateDropDownLists(null, null, null, null, null, null, null, null, null, null);
 
             // Set the default dates
             //EndDate.Value = StartDate.Value = DateTime.Now.ToString("MM/dd/yyyy", ci.InvariantCulture);
@@ -369,8 +369,8 @@ namespace Gcpe.Hub.Calendar
         }
 
         // We might want to put these in the Language table if the need for a "Add Hindi" button (for example) arises in NRMS ... and news
-        static string[] defaultTranslations = { "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Farsi", "French", "Hebrew", "Hindi", "Indonesian", "Japanese", "Korean", "Punjabi", "Spanish", "Tagalog", "Urdu", "Vietnamese" };
-        private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<string> translations, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins)
+        static string[] defaultTranslations = { "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Farsi", "French", "Hebrew", "Hindi", "Indonesian", "Japanese", "Korean", "Punjabi", "Somali", "Spanish", "Swahili", "Tagalog", "Urdu", "Vietnamese" };
+        private void PopulateDropDownLists(ActiveActivity activity, List<int> categories, List<Guid> sectors, List<Guid> themes, List<int> keywords, List<string> translations, List<int> initiatives, List<int> commMaterials, List<int> nrOrigins, List<Guid> tags)
         {
             var ddm = new DropDownListManager(calendarDataContext);
             object dataSource;
@@ -487,6 +487,13 @@ namespace Gcpe.Hub.Calendar
                 BindDropDownList(ThemeDropDownList, "DisplayName", dataSource);
             }
 
+            // Tags
+            if (TagsDropDownList != null)
+            {
+                dataSource = ddm.GetActiveTagOptions(tags);
+                BindDropDownList(TagsDropDownList, "DisplayName", dataSource);
+            }
+
             // Keywords
             if (KeywordList != null)
             {
@@ -592,14 +599,14 @@ namespace Gcpe.Hub.Calendar
         private void PopulateCommContactDropDownList(Guid? ministryId)
         {
             // Communication Contacts
-            // NOTE: The DataTextField is the Comm. Contact's name concatenated with their phone number. 
+            // NOTE: The DataTextField is the Comm. Contact's name concatenated with their phone number.
             // This information is pulled from a stored procedure form the database view.
             if (CommContactDropDownList != null)
             {
                 var ddm = new DropDownListManager(calendarDataContext);
                 object dataSource;
                 // if the activity is assigned to a ministry, make sure that the selected contact is also part of that ministry and populate the
-                // com contact drop down with 
+                // com contact drop down with
                 if (CurrentActiveActivity != null && ministryId.HasValue)
                 {
                     dataSource = ddm.GetCommunicationContactByMinistryIdIncludingId(ministryId.Value, CurrentActiveActivity.CommunicationContactId, DropDownListManager.CommunicationSortOrder.RoleThenName);
@@ -623,6 +630,7 @@ namespace Gcpe.Hub.Calendar
             string nrOriginsSelectedValues = calendarDataContext.GetActivityNewsReleaseOrigins(ActivityId).SingleOrDefault()?.activityNewsReleaseOrigins;
             string sectorsSelectedValues = calendarDataContext.GetActivitySectors(ActivityId).SingleOrDefault()?.activitySectors;
             string themesSelectedValues = calendarDataContext.GetActivityThemes(ActivityId).SingleOrDefault()?.activityThemes;
+            string tagsSelectedValues = calendarDataContext.GetActivityTags(ActivityId).SingleOrDefault()?.activityTags;
             string initiativeSelectedValues = calendarDataContext.sGetActivityInitiatives(ActivityId);
             var keywordsSelectedValues = calendarDataContext.GetActivityKeywords(ActivityId);
 
@@ -634,6 +642,10 @@ namespace Gcpe.Hub.Calendar
             List<Guid> selectedThemeIds = null;
             if (!string.IsNullOrEmpty(themesSelectedValues))
                 selectedThemeIds = themesSelectedValues.Split(',').Select(e => Guid.Parse(e)).ToList();
+
+            List<Guid> selectedTagIds = null;
+            if (!string.IsNullOrEmpty(tagsSelectedValues))
+                selectedTagIds = tagsSelectedValues.Split(',').Select(e => Guid.Parse(e)).ToList();
 
             List<int> selectedKeywords = keywordsSelectedValues.Select(k => k.keywordId.Value).ToList();
 
@@ -657,7 +669,7 @@ namespace Gcpe.Hub.Calendar
             if (!string.IsNullOrWhiteSpace(nrOriginsSelectedValues))
                 selectedNROriginIds = nrOriginsSelectedValues.Split(',').Select(e => int.Parse(e)).ToList();
 
-            PopulateDropDownLists(CurrentActiveActivity, selectedCategoryIds, selectedSectorIds, selectedThemeIds, selectedKeywords, selectedTranslations, selectedInitiatives, selectedCommMaterialIds, selectedNROriginIds);
+            PopulateDropDownLists(CurrentActiveActivity, selectedCategoryIds, selectedSectorIds, selectedThemeIds, selectedKeywords, selectedTranslations, selectedInitiatives, selectedCommMaterialIds, selectedNROriginIds, selectedTagIds);
             timestamp.Value = (CurrentActiveActivity.LastUpdatedDateTime ?? CurrentActiveActivity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString();
 
             var selectedMinistryIds = new List<Guid>();
@@ -703,7 +715,7 @@ namespace Gcpe.Hub.Calendar
             LeadOrganizationTextBox.Text = CurrentActiveActivity.LeadOrganization;
             VenueTextBox.Text = CurrentActiveActivity.Venue;
 
-            // Start date and time 
+            // Start date and time
             StartDate.Value = CurrentActiveActivity.StartDateTime?.ToString("MM/dd/yyyy", ci.InvariantCulture) ?? "";
             StartTime.SelectedValue = CurrentActiveActivity.StartDateTime == null ? "" : CurrentActiveActivity.StartDateTime.Value.ToString("h:mm tt", ci.InvariantCulture);
 
@@ -800,7 +812,7 @@ namespace Gcpe.Hub.Calendar
                 NRDistributionDropDownList.Value = CurrentActiveActivity.NRDistributionId.ToString();
 
             // Multi-select DropDownList are populated on the client-side and use the comma-delimited strings stored
-            // in the hidden fields placed on the page for the server-side values. See the 
+            // in the hidden fields placed on the page for the server-side values. See the
 
             #endregion
 
@@ -819,6 +831,8 @@ namespace Gcpe.Hub.Calendar
             SectorsSelectedValuesServerSide.Text = SectorsSelectedValues.Text = (sectorsSelectedValues ?? "").ToLower();
 
             ThemesSelectedValuesServerSide.Text = ThemesSelectedValues.Text = (themesSelectedValues ?? "").ToLower();
+
+            TagsSelectedValuesServerSide.Text = TagsSelectedValues.Text = (tagsSelectedValues ?? "").ToLower();
 
             InitiativesSelectedValuesServerSide.Text = InitiativesSelectedValues.Text = initiativeSelectedValues ?? "";
 
@@ -965,7 +979,7 @@ namespace Gcpe.Hub.Calendar
                 if (!string.IsNullOrEmpty(ContactMinistryDropDownList.Value))
                     newActivity.ContactMinistryId = Guid.Parse(ContactMinistryDropDownList.Value);
 
-                // The drop down has the SystemUserID, but we want to store the 
+                // The drop down has the SystemUserID, but we want to store the
                 // comm contact id
                 if (!string.IsNullOrEmpty(ComContactSelectedValue.Value))
                 {
@@ -1093,7 +1107,7 @@ namespace Gcpe.Hub.Calendar
 
         /// <summary>
         /// Update an existing activity
-        /// Update the local CurrentActivity property 
+        /// Update the local CurrentActivity property
         /// </summary>
         private bool Update()
         {
@@ -1464,7 +1478,7 @@ namespace Gcpe.Hub.Calendar
         private void ForcePageToClose()
         {
             // force the tab/window to close so ministry users are forced to re-open the activity and get any subsequent changes made by HQ
-            // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently 
+            // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently
             // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
             var changesPendingMsg = "<i class=\"fa fa-exclamation-triangle fa-fw\" aria-hidden=\"true\"></i> Close this tab & re-open the activity to make changes.";
             ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close(); if(!window.closed) { alert('Please close this tab to avoid editing conflicts. To continue editing, close this tab & open activity again.'); $('#ActionsFieldset').hide(); $('#ChangesPendingAlert').html('" + changesPendingMsg + "'); $('#ChangesPending').removeClass('ChangesNotice-Modifier').addClass('ChangesNotice-Modifier-1').find('table:eq(0)').remove(); $('#SecondaryAlert').css({'background-color': '#F9F1C6', 'color': '#6C4A00'})}", true);
@@ -1544,7 +1558,7 @@ namespace Gcpe.Hub.Calendar
                     InsertNewsFeed("clone", "added new clone", CurrentActiveActivity.Title, clonedActivityId);
 
                     /* Remove_RecordLocks
-                    if (!IsNewActivity) 
+                    if (!IsNewActivity)
                         ReleaseCurrentPageRecordLock();
                     */
 
@@ -1558,7 +1572,7 @@ namespace Gcpe.Hub.Calendar
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             /* Remove_RecordLocks
-            if (!IsNewActivity) 
+            if (!IsNewActivity)
                 ReleaseCurrentPageRecordLock();
             */
 
@@ -1674,6 +1688,7 @@ namespace Gcpe.Hub.Calendar
                                             {"ActivityNewsReleaseDistributionIds", NRDistributionDropDownList.Value}, // SPECIAL CASE
                                             {"ActivitySectorIds", SectorsSelectedValues.Text},
                                             {"ActivityThemeIds", ThemesSelectedValues.Text},
+                                            {"ActivityTagIds", TagsSelectedValues.Text},
                                             {"ActivityKeywords", KeywordsTextBox.Text},
                                             {"ActivityInitiativeIds", InitiativesSelectedValues.Text}
                                         };
