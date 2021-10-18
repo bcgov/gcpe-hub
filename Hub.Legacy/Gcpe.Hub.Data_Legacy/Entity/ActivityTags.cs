@@ -12,21 +12,16 @@ namespace Gcpe.Hub.Data.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class ActivityTags
     {
-        public Tag()
-        {
-            this.NewsReleases = new HashSet<NewsRelease>();
-            this.ActivityTags = new HashSet<ActivityTags>();
-        }
-    
-        public System.Guid Id { get; set; }
-        public string Key { get; set; }
-        public string DisplayName { get; set; }
-        public int SortOrder { get; set; }
+        public int ActivityId { get; set; }
+        public System.Guid TagId { get; set; }
         public bool IsActive { get; set; }
+        public System.DateTime CreatedDateTime { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime LastUpdatedDateTime { get; set; }
+        public int LastUpdatedBy { get; set; }
     
-        public virtual ICollection<NewsRelease> NewsReleases { get; set; }
-        public virtual ICollection<ActivityTags> ActivityTags { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

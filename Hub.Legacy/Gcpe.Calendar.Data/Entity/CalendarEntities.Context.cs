@@ -57,5 +57,7 @@ namespace CorporateCalendar.Data.Entity
         public virtual DbSet<Ministry> Ministries { get; set; }
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<Theme> Themes { get; set; }
+        public virtual DbSet<ActivityTags> ActivityTags { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
     }
 }

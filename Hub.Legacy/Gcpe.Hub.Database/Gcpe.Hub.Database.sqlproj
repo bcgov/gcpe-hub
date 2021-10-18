@@ -230,7 +230,7 @@
     <Build Include="media\Tables\WebAddressType.sql" />
     <Build Include="Storage\FTS_MediaRequest.sql" />
     <Build Include="FullTextIndexes.sql" />
-  
+    <Build Include="calendar\Tables\ActivityTags.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Gcpe.Hub.Database.refactorlog" />

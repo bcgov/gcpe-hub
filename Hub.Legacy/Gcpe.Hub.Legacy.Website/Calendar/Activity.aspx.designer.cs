@@ -708,6 +708,15 @@ namespace Gcpe.Hub.Calendar
         protected global::System.Web.UI.HtmlControls.HtmlSelect ThemeDropDownList;
 
         /// <summary>
+        /// TagsDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect TagsDropDownList;
+
+        /// <summary>
         /// ActivityNewsList control.
         /// </summary>
         /// <remarks>
@@ -1014,6 +1023,24 @@ namespace Gcpe.Hub.Calendar
         protected global::System.Web.UI.WebControls.TextBox ThemesSelectedValuesServerSide;
 
         /// <summary>
+        /// TagsSelectedValues control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TagsSelectedValues;
+
+        /// <summary>
+        /// TagsSelectedValuesServerSide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TagsSelectedValuesServerSide;
+
+        /// <summary>
         /// InitiativesSelectedValues control.
         /// </summary>
         /// <remarks>
@@ -1093,6 +1120,15 @@ namespace Gcpe.Hub.Calendar
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IsThemesDirty;
+
+        /// <summary>
+        /// IsTagsDirty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IsTagsDirty;
 
         /// <summary>
         /// IsInitiativesDirty control.

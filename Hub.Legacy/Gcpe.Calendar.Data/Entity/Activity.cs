@@ -29,6 +29,7 @@ namespace CorporateCalendar.Data.Entity
             this.FavoriteUsers = new HashSet<SystemUser>();
             this.ActivityKeywords = new HashSet<ActivityKeyword>();
             this.ActivityFiles = new HashSet<ActivityFile>();
+            this.ActivityTags = new HashSet<ActivityTags>();
         }
     
         public int Id { get; set; }
@@ -132,5 +133,7 @@ namespace CorporateCalendar.Data.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityFile> ActivityFiles { get; set; }
         public virtual Ministry Ministry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityTags> ActivityTags { get; set; }
     }
 }

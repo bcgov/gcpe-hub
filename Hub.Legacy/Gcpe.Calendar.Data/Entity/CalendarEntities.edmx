@@ -205,6 +205,19 @@
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="ActivityTags">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ActivityThemes">
           <Key>
             <PropertyRef Name="ActivityId" />
@@ -522,6 +535,16 @@
           <Property Name="AudioEmbedHtml" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TopReleaseId" Type="uniqueidentifier" />
           <Property Name="FeatureReleaseId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="255" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Theme">
           <Key>
@@ -1028,6 +1051,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityTags_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="ActivityTags" Type="Self.ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityTags_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="ActivityTags" Type="Self.ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ActivityThemes_Activity">
           <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
           <End Role="ActivityThemes" Type="Self.ActivityThemes" Multiplicity="*" />
@@ -1330,6 +1377,7 @@
           <EntitySet Name="ActivityNROrigins" EntityType="Self.ActivityNROrigins" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="ActivitySectors" EntityType="Self.ActivitySectors" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="ActivitySharedWith" EntityType="Self.ActivitySharedWith" Schema="calendar" store:Type="Tables" />
+          <EntitySet Name="ActivityTags" EntityType="Self.ActivityTags" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="ActivityThemes" EntityType="Self.ActivityThemes" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="calendar" store:Type="Tables" />
@@ -1352,6 +1400,7 @@
           <EntitySet Name="Videographer" EntityType="Self.Videographer" Schema="calendar" store:Type="Tables" />
           <EntitySet Name="Ministry" EntityType="Self.Ministry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activity_City" Association="Self.FK_Activity_City">
             <End Role="City" EntitySet="City" />
@@ -1516,6 +1565,14 @@
           <AssociationSet Name="FK_ActivitySharedWith_SystemUser_UpdatedBy" Association="Self.FK_ActivitySharedWith_SystemUser_UpdatedBy">
             <End Role="SystemUser" EntitySet="SystemUser" />
             <End Role="ActivitySharedWith" EntitySet="ActivitySharedWith" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityTags_Activity" Association="Self.FK_ActivityTags_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityTags_Tag" Association="Self.FK_ActivityTags_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
           </AssociationSet>
           <AssociationSet Name="FK_ActivityThemes_Activity" Association="Self.FK_ActivityThemes_Activity">
             <End Role="Activity" EntitySet="Activity" />
@@ -1710,6 +1767,7 @@
           <Property Name="IsVenueNeedsReview" Type="Boolean" Nullable="false" />
           <Property Name="IsEventPlannerNeedsReview" Type="Boolean" Nullable="false" />
           <Property Name="IsDigitalNeedsReview" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ActivityTags" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Activity" FromRole="Activity" ToRole="ActivityTags" />
         </EntityType>
         <EntityType Name="ActivityCategory">
           <Key>
@@ -2901,6 +2959,16 @@
             <End Role="Keyword" EntitySet="Keywords" />
             <End Role="ActivityKeyword" EntitySet="ActivityKeywords" />
           </AssociationSet>
+          <EntitySet Name="ActivityTags" EntityType="Gcpe.CorporateCalendar_Model.ActivityTags" />
+          <EntitySet Name="Tag" EntityType="Gcpe.CorporateCalendar_Model.Tag" />
+          <AssociationSet Name="FK_ActivityTags_Activity" Association="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityTags_Tag" Association="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ActivityTags" EntitySet="ActivityTags" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActivityTheme">
           <Key>
@@ -3314,6 +3382,56 @@
             </Principal>
             <Dependent Role="ActivityKeyword">
               <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActivityTags">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Guid" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Activity" FromRole="ActivityTags" ToRole="Activity" />
+          <NavigationProperty Name="Tag" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Tag" FromRole="ActivityTags" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ActivityTags" Relationship="Gcpe.CorporateCalendar_Model.FK_ActivityTags_Tag" FromRole="Tag" ToRole="ActivityTags" />
+        </EntityType>
+        <Association Name="FK_ActivityTags_Activity">
+          <End Type="Gcpe.CorporateCalendar_Model.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="Gcpe.CorporateCalendar_Model.ActivityTags" Role="ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityTags_Tag">
+          <End Type="Gcpe.CorporateCalendar_Model.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="Gcpe.CorporateCalendar_Model.ActivityTags" Role="ActivityTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityTags">
+              <PropertyRef Name="TagId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3884,6 +4002,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ActivityTags">
+            <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.ActivityTags">
+              <MappingFragment StoreEntitySet="ActivityTags">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="Gcpe.CorporateCalendar_Model.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3898,7 +4040,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

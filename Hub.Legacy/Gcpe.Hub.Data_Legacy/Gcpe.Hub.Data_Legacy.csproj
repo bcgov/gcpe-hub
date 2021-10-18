@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ActivityTags.cs">
+      <DependentUpon>HubEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\ApplicationSetting.cs">
       <DependentUpon>HubEntities.tt</DependentUpon>
     </Compile>

@@ -814,7 +814,17 @@
                                         </div>
                                     </td>
                                 </tr>
-
+                                <tr class="row">
+                                    <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
+                                    <td class="column-left label-dark"><a href="https://news.gov.bc.ca/subscribe" target="_blank">News Subscribe:</a></td>
+                                    <td class="column-right">
+                                        <select id="TagsDropDownList" multiple="true" runat="server" style="display:none"/>
+                                        <div id="TagsSelectedTextRow" style="display: none">
+                                            <div id="TagsSelectedText" class="panel">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <%if (Model.Releases.Any())
                                 { %>
                                 <tr class="row">
@@ -1009,6 +1019,8 @@
                         <asp:TextBox ID="SectorsSelectedValuesServerSide" runat="server" />
                         <asp:TextBox ID="ThemesSelectedValues" runat="server" />
                         <asp:TextBox ID="ThemesSelectedValuesServerSide" runat="server" />
+                        <asp:TextBox ID="TagsSelectedValues" runat="server" />
+                        <asp:TextBox ID="TagsSelectedValuesServerSide" runat="server" />
                         <asp:TextBox ID="InitiativesSelectedValues" runat="server" />
                         <asp:TextBox ID="InitiativesSelectedValuesServerSide" runat="server" />
                         <asp:TextBox ID="ApplicationOwnerOrganizations" runat="server" />
@@ -1019,6 +1031,7 @@
 
                         <asp:TextBox ID="IsSectorsDirty" runat="server" />
                         <asp:TextBox ID="IsThemesDirty" runat="server" />
+                         <asp:TextBox ID="IsTagsDirty" runat="server" />
                         <asp:TextBox ID="IsInitiativesDirty" runat="server" />
 
                         <input type="hidden" runat="server" id="ComContactSelectedValue" />
@@ -1984,6 +1997,47 @@
                 SetMultiSelectedValues($(this), themesTarget, themesHiddenTarget, null, $("#ThemesSelectedTextRow"), $('#IsThemesDirty').val());
             });
 
+            // Tag multiselect logic
+
+            var tagsTarget = $("#TagsSelectedText");
+            var tagsHiddenTarget = $('#TagsSelectedValues');
+
+            $('#TagsDropDownList').multiselect({
+                noneSelectedText: 'Select all that apply',
+                header: true,
+                checkAll: function () {
+                    $('#IsTagsDirty').val('true');
+                    $("#callback").removeAttr('checked');
+                    $(this).multiselect("close");
+                },
+                click: function (event, ui) {
+                    $('#IsTagsDirty').val('true');
+                },
+                uncheckAll: function (e) {
+                    $(this).multiselect("close");
+                },
+                selectedText: function (numChecked, numTotal, checkedItems) {
+                    return numChecked + ' of ' + numTotal + ' news subscriptions selected';
+                },
+                position: {
+                    //my: 'center',
+                    //at: 'center'
+
+                    // only include the "of" property if you want to position
+                    // the menu against an element other than the button.
+                    // multiselect automatically sets "of" unless you explicitly
+                    // pass in a value.
+                },
+                close: function () {
+                    if ($('#TagsSelectedValuesServerSide').val() != $('#TagsSelectedValues').val()) {
+                        SetChanged($.url().param('ActivityId'));
+                    }
+                }
+            }).bind("multiselectclick multiselectcheckall multiselectuncheckall", function (event, ui) {
+
+                SetMultiSelectedValues($(this), tagsTarget, tagsHiddenTarget, null, $("#TagsSelectedTextRow"), $('#IsTagsDirty').val());
+            });
+
             // Initiative multiselect logic
 
             var initiativesTarget = $("#InitiativesSelectedText");
@@ -2361,6 +2415,16 @@
                 });
             }
 
+             // Select this activity's tags
+
+            arrayValues = $('#TagsSelectedValuesServerSide').val().split(',');
+            MultiSelectReset($('#TagsDropDownList'));
+            for (var i = 0; i < arrayValues.length; i++) {
+                $('#TagsDropDownList').multiselect("widget").find(":checkbox[value='" + arrayValues[i] + "']").each(function () {
+                    this.click();
+                });
+            }
+
             // Select this activity's initiatives
 
             arrayValues = $('#InitiativesSelectedValuesServerSide').val().split(',');
@@ -2497,7 +2561,7 @@
                     return elem.text;
                 }).get(),
                 filter: "startswith",
-                maxSelectedItems: 15,
+                maxSelectedItems: 17,
                 value: translationsTextbox[0].value.split('~'),
                 filtering: onFilteringCustom,
                 select: onSelectCustom,

@@ -881,7 +881,7 @@
                     <% if (Model.ReleaseTypeId != ReleaseType.Advisory)
                         { %>
                     <div class="view-group">
-                        <div class="lbl">Tags</div>
+                        <div class="lbl">News Subscribe</div>
                         <div class="txt">
                             <% if (Model.Tags.Any(item => item.Selected))
                                 {
@@ -981,7 +981,7 @@
                     </div>
 
                     <div class="field-group required hideForAdvisories">
-                        <div class="label">Tags</div>
+                        <div class="label">News Subscribe</div>
                         <div class="txt">
                             <asp:CheckBoxList ID="cklstTag" runat="server" DataSource="<%# Model.Tags %>" DataTextField="Text" DataValueField="Value" OnDataBound="cklstTag_DataBound" />
                         </div>
