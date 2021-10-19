@@ -805,7 +805,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left label-dark">Themes:</td>
+                                    <td class="column-left label-dark"><a href="https://news.gov.bc.ca/themes" target="_blank">Themes:</a></td>
                                     <td class="column-right">
                                         <select id="ThemeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="ThemesSelectedTextRow" style="display: none">
