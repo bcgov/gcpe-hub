@@ -772,6 +772,7 @@
                                     </td>
 
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDistributionNeedsReview)%>">Distribution:</td>
@@ -784,6 +785,7 @@
                                         </asp:CustomValidator>
                                     </td>
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTranslationsRequiredNeedsReview)%>">Translations Required:</td>
@@ -792,6 +794,7 @@
                                         <asp:TextBox ID="TranslationsTextbox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row" style="display:none">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left">Sectors:</td>
@@ -814,6 +817,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark"><a href="https://news.gov.bc.ca/subscribe" target="_blank">News Subscribe:</a></td>
