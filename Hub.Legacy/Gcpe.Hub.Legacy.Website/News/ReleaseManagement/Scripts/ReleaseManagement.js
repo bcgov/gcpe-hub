@@ -271,7 +271,6 @@ function IsDocumentValid(saveBtn) {
 
 
 function onPageReloaded(sender, args) {
-    FB.XFBML.parse();
     var hiddenEditControlButton = $(".editButton[style='visibility: hidden;']");
     if (hiddenEditControlButton.length)
         onDocumentEdit(hiddenEditControlButton.get());
