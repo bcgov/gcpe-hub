@@ -1438,6 +1438,7 @@
             $(g.nBtn).addClass('nBtn')
                     .html('<div></div>')
                     .attr('title', 'Hide/Show Columns')
+                    .attr('id', 'hide_show_col')
                     .click(function () {
                         $(g.nDiv).toggle();
                         return true;

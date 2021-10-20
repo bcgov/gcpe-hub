@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gcpe.Hub.News {
-    
-    
-    public partial class Site {
-        
+namespace Gcpe.Hub.News
+{
+
+
+    public partial class Site
+    {
+
         /// <summary>
         /// favicon control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlLink favicon;
-        
+
         /// <summary>
         /// headContentPlaceHolder control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder headContentPlaceHolder;
-        
+
         /// <summary>
         /// form control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
-        
+
         /// <summary>
         /// aSiteTitle control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aSiteTitle;
-        
+
         /// <summary>
         /// appsRepeater control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater appsRepeater;
-        
+
         /// <summary>
         /// navbarRepeater control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater navbarRepeater;
-        
+
         /// <summary>
         /// aUser control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aUser;
-        
+
         /// <summary>
         /// aSettings control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink aSettings;
-        
+
         /// <summary>
         /// aHelp control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink aHelp;
-        
+
         /// <summary>
         /// aSearch control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink aSearch;
-        
+
         /// <summary>
         /// pnlSearch control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSearch;
-        
+
         /// <summary>
         /// txtSearch control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
-        
+
         /// <summary>
         /// pnlUser control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlUser;
-        
+
         /// <summary>
         /// pnlSiteSwitcher control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSiteSwitcher;
-        
+
         /// <summary>
         /// scriptsContentPlaceHolder control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder scriptsContentPlaceHolder;
-        
+
         /// <summary>
         /// content control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel content;
-        
+
         /// <summary>
         /// updatePanel control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updatePanel;
-        
+
         /// <summary>
         /// updateProgress control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress updateProgress;
-        
+
         /// <summary>
         /// formContentPlaceHolder control.
         /// </summary>
