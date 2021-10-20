@@ -138,7 +138,7 @@
                 <%if (DisplayExecLADetailedReportButton) { %>
                 <%=AppendButton("export hidden-xs", "Exec Look Ahead", "execLookAheadReport()", "exec_look_ahead_report_button")%>
                 <% } %>
-                <%=AppendButton("export hidden-xs", "30/60/90 Report", "main30_60_90Report()", "main_report_button")%>
+                <%=AppendButton("export hidden-xs", "30/60/90 Report", "main30_60_90Report()", "main_30_60_90_report_button")%>
                 <div class='btnseparator hidden-xs'></div>
                 <%=AppendButton("export hidden-xs", "Planning Report", "planningReport()", "planning_report_button")%>
                 <div class='btnseparator hidden-xs'></div>
