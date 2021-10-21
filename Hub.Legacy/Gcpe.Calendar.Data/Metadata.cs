@@ -2,6 +2,7 @@
 
 namespace CorporateCalendar.Data
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public enum LookAheadSection { Issues_and_Reports = 1, Events_and_Speeches = 2, In_the_News = 3, Not_On_LA = 4 }
@@ -118,6 +119,11 @@ namespace CorporateCalendar.Data
 
     [ScaffoldTable(false)]
     public partial class ActivitySharedWith
+    {
+    }
+
+    [ScaffoldTable(false)]
+    public partial class ActivityTag
     {
     }
 
@@ -480,6 +486,16 @@ namespace CorporateCalendar.Data
     [ScaffoldTable(false)]
     public partial class SystemUserMinistry
     {
+    }
+
+    [MetadataType(typeof(NewsSubscribe_MD))]
+    [ScaffoldTable(true)]
+    public partial class Tag
+    {
+        [DisplayName("News Subscribe")]
+        public class NewsSubscribe_MD
+        {
+        }
     }
 
 
