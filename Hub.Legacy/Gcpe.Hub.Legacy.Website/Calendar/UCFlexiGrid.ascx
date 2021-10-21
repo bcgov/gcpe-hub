@@ -125,22 +125,22 @@
         </div>
         <div class="tDiv">
             <div class="tDiv2">
-                <%=AppendButton("toggleSidebar", "Open Sidebar", "toggleSidebar(true)")%>
+                <%=AppendButton("toggleSidebar", "Open Sidebar", "toggleSidebar(true)", "open_sidebar_button")%>
                 <div class='btnseparator'></div>
-                <%=AppendButton("toggleView", "Calendar View", "toggleView()")%>
+                <%=AppendButton("toggleView", "Calendar View", "toggleView()", "calendar_view_button")%>
                 <%if (DisplayReviewButton) { %>
                 <div class='btnseparator hidden-xs'></div>
-                <%=AppendButton("review hidden-xs", "Review", "ReviewHandler()")%>
+                <%=AppendButton("review hidden-xs", "Review", "ReviewHandler()", "review_button")%>
                 <% } %>
                 <div class='btnseparator hidden-xs'></div>
-                <%=AppendButton("export hidden-xs", "Excel Export", "download()")%>
-                <%=AppendButton("export hidden-xs", "Look Ahead Report", "lookAheadReport()")%>
+                <%=AppendButton("export hidden-xs", "Excel Export", "download()", "excel_export_button")%>
+                <%=AppendButton("export hidden-xs", "Look Ahead Report", "lookAheadReport()", "look_ahead_report_button")%>
                 <%if (DisplayExecLADetailedReportButton) { %>
-                <%=AppendButton("export hidden-xs", "Exec Look Ahead", "execLookAheadReport()")%>
+                <%=AppendButton("export hidden-xs", "Exec Look Ahead", "execLookAheadReport()", "exec_look_ahead_report_button")%>
                 <% } %>
-                <%=AppendButton("export hidden-xs", "30/60/90 Report", "main30_60_90Report()")%>
+                <%=AppendButton("export hidden-xs", "30/60/90 Report", "main30_60_90Report()", "main_30_60_90_report_button")%>
                 <div class='btnseparator hidden-xs'></div>
-                <%=AppendButton("export hidden-xs", "Planning Report", "planningReport()")%>
+                <%=AppendButton("export hidden-xs", "Planning Report", "planningReport()", "planning_report_button")%>
                 <div class='btnseparator hidden-xs'></div>
             </div>
         </div>

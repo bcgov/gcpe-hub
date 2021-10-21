@@ -53,12 +53,12 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
 
     public string OnRowSelected { get; set; }
 
-    public string AppendButton(string cssClass, string text, string onclick)
-    {
+    public string AppendButton(string cssClass, string text, string onclick, string elementId = "id")
+    { 
         string paddingForImage = cssClass == "toggleView" ? "" : " style='padding-left:20px'";
 
-        return string.Format("<div class='fbutton' onclick='{0}'><div><span class='{1}'{2}>{3}</span></div></div>",
-            onclick, cssClass, paddingForImage, text);
+        return string.Format("<div class='fbutton' onclick='{0}'><div><span id='{4}' class='{1}'{2}>{3}</span></div></div>",
+            onclick, cssClass, paddingForImage, text, elementId);
     }
 
     public override void RenderControl(HtmlTextWriter writer)
