@@ -839,6 +839,26 @@
     <Content Include="WebAnalytics.html" />
     <Content Include="Calendar\ActivityEditingHandler.ashx" />
     <Content Include="Calendar\ReleaseDownloadHandler.ashx" />
+    <Content Include="fonts\BCSans-Bold.eot" />
+    <Content Include="fonts\BCSans-Bold.otf" />
+    <Content Include="fonts\BCSans-Bold.ttf" />
+    <Content Include="fonts\BCSans-Bold.woff" />
+    <Content Include="fonts\BCSans-Bold.woff2" />
+    <Content Include="fonts\BCSans-BoldItalic.eot" />
+    <Content Include="fonts\BCSans-BoldItalic.otf" />
+    <Content Include="fonts\BCSans-BoldItalic.ttf" />
+    <Content Include="fonts\BCSans-BoldItalic.woff" />
+    <Content Include="fonts\BCSans-BoldItalic.woff2" />
+    <Content Include="fonts\BCSans-Italic.eot" />
+    <Content Include="fonts\BCSans-Italic.otf" />
+    <Content Include="fonts\BCSans-Italic.ttf" />
+    <Content Include="fonts\BCSans-Italic.woff" />
+    <Content Include="fonts\BCSans-Italic.woff2" />
+    <Content Include="fonts\BCSans-Regular.eot" />
+    <Content Include="fonts\BCSans-Regular.otf" />
+    <Content Include="fonts\BCSans-Regular.ttf" />
+    <Content Include="fonts\BCSans-Regular.woff" />
+    <Content Include="fonts\BCSans-Regular.woff2" />
     <None Include="Properties\PublishProfiles\Debug Build to Development.pubxml" />
     <None Include="Properties\PublishProfiles\Release Build to Test.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -2496,7 +2516,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
