@@ -212,6 +212,7 @@ namespace CorporateCalendar.Data
     {
     }
 
+    [DisplayName("HQ Leads")]
     [MetadataType(typeof(Initiative_MD))]
     [ScaffoldTable(true)]
     public partial class Initiative
@@ -488,14 +489,16 @@ namespace CorporateCalendar.Data
     {
     }
 
-    [MetadataType(typeof(NewsSubscribe_MD))]
+    [DisplayName("HQ Tags")]
+    [ScaffoldTable(true)]
+    public partial class Keyword
+    {
+    }
+
+    [DisplayName("News Subscribe")]
     [ScaffoldTable(true)]
     public partial class Tag
-    {
-        [DisplayName("News Subscribe")]
-        public class NewsSubscribe_MD
-        {
-        }
+    {     
     }
 
 

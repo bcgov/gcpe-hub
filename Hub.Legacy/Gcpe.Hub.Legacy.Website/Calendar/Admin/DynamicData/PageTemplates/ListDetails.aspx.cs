@@ -55,6 +55,7 @@ namespace CorporateCalendarAdmin
                         || string.Equals(Title, "NROrigins", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(Title, "PremierRequested", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(Title, "Priorities", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(Title, "Roles", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(Title, "Sectors", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(Title, "Status", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(Title, "Themes", StringComparison.OrdinalIgnoreCase)
