@@ -190,7 +190,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                 body += textDoc;
             }
 
-            message.Body = $"<pre><div style=\"font-family: MyriadProRegular, Calibri, Arial, sans-serif; font-size:14px;\">{body}</div></pre>";
+            message.Body = $"<pre><div style=\"font-family: \'BCSans\', \'Noto Sans\', Verdana, Arial, sans-serif; font-size:14px;\">{body}</div></pre>";
             message.BodyEncoding = System.Text.Encoding.UTF8;
             message.SubjectEncoding = System.Text.Encoding.UTF8;
 
