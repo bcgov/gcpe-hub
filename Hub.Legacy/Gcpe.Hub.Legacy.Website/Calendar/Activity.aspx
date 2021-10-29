@@ -445,7 +445,7 @@
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTitleNeedsReview)%>">Title:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas styled-placeholder" ForeColor="#4d4d4d" placeholder="Hover over for tips on this field" TextMode="MultiLine" runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="TitleRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="TitleTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                         <span style="float: right"><span id="charlimitinfo">Characters remaining: 100</span></span>
@@ -455,7 +455,7 @@
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDetailsNeedsReview)%>">Summary:</td>
                                     <td class="column-right">
-                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" Style="height: 60px;" TextMode="MultiLine"
+                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas styled-placeholder" ForeColor="#4d4d4d" placeholder="Hover over for tips on this field" Style="height: 60px;" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="DetailsRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="DetailsTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -477,10 +477,11 @@
                                         <div>
                                             <asp:TextBox
                                                 id="SignificanceTextBox"
-                                                CssClass="new-activity-textareas"
+                                                CssClass="new-activity-textareas styled-placeholder"
                                                 Style="height: 60px;"
                                                 ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
+                                                placeholder="Hover over for tips on this field"
                                                 runat="server"></asp:TextBox>
                                         </div>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SignificanceRequiredFieldValidator" runat="server" EnableClientScript="true"
@@ -547,10 +548,11 @@
                                         <div>
                                             <asp:TextBox
                                                 id="StrategyTextBox"
-                                                CssClass="new-activity-textareas"
+                                                CssClass="new-activity-textareas styled-placeholder"
                                                 Style="height: 60px;"
                                                 ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
+                                                placeholder="Hover over for tips on this field"
                                                 runat="server"></asp:TextBox>
                                         </div>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="StrategyIsRequiredFieldValidator" runat="server" EnableClientScript="true" ControlToValidate="StrategyTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -744,7 +746,7 @@
                                     <td id="SchedulingTitle" runat="server" class="column-left label-dark" style="line-height: 18px;">Scheduling
                                         Considerations & Approval Notes:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas" Style="height: 60px;" ForeColor="#4d4d4d" TextMode="MultiLine"
+                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas styled-placeholder" Style="height: 60px;" placeholder="Hover over for tips on this field" ForeColor="#4d4d4d" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SchedulingFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="SchedulingTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
