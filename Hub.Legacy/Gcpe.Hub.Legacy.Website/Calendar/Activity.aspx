@@ -432,7 +432,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row" <%= CurrentActiveActivity.IsConfidential ? "style='color:darkred'" : ""%>>
+                                <tr id="IsConfidentialContainer" class="row" <%= CurrentActiveActivity.IsConfidential ? "style='color:darkred'" : ""%>>
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsCategoriesNeedsReview)%>">Not for Look Ahead:</td>
                                     <td class="column-right">
@@ -441,11 +441,11 @@
                                     </td>
                                 </tr>
 
-                                <tr class="row">
+                                <tr id="TitleContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTitleNeedsReview)%>">Title:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas styled-placeholder" ForeColor="#4d4d4d" placeholder="Hover over for tips on this field" TextMode="MultiLine" runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="TitleRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="TitleTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                         <span style="float: right"><span id="charlimitinfo">Characters remaining: 100</span></span>
@@ -455,7 +455,7 @@
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDetailsNeedsReview)%>">Summary:</td>
                                     <td class="column-right">
-                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas" ForeColor="#4d4d4d" Style="height: 60px;" TextMode="MultiLine"
+                                        <asp:TextBox id="DetailsTextBox" CssClass="new-activity-textareas styled-placeholder" ForeColor="#4d4d4d" placeholder="Hover over for tips on this field" Style="height: 60px;" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="DetailsRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="DetailsTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -477,10 +477,11 @@
                                         <div>
                                             <asp:TextBox
                                                 id="SignificanceTextBox"
-                                                CssClass="new-activity-textareas"
+                                                CssClass="new-activity-textareas styled-placeholder"
                                                 Style="height: 60px;"
                                                 ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
+                                                placeholder="Hover over for tips on this field"
                                                 runat="server"></asp:TextBox>
                                         </div>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SignificanceRequiredFieldValidator" runat="server" EnableClientScript="true"
@@ -547,10 +548,11 @@
                                         <div>
                                             <asp:TextBox
                                                 id="StrategyTextBox"
-                                                CssClass="new-activity-textareas"
+                                                CssClass="new-activity-textareas styled-placeholder"
                                                 Style="height: 60px;"
                                                 ForeColor="#4d4d4d"
                                                 TextMode="MultiLine"
+                                                placeholder="Hover over for tips on this field"
                                                 runat="server"></asp:TextBox>
                                         </div>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="StrategyIsRequiredFieldValidator" runat="server" EnableClientScript="true" ControlToValidate="StrategyTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -744,7 +746,7 @@
                                     <td id="SchedulingTitle" runat="server" class="column-left label-dark" style="line-height: 18px;">Scheduling
                                         Considerations & Approval Notes:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas" Style="height: 60px;" ForeColor="#4d4d4d" TextMode="MultiLine"
+                                        <asp:TextBox ID="SchedulingTextBox" CssClass="new-activity-textareas styled-placeholder" Style="height: 60px;" placeholder="Hover over for tips on this field" ForeColor="#4d4d4d" TextMode="MultiLine"
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SchedulingFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="SchedulingTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -772,6 +774,7 @@
                                     </td>
 
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsDistributionNeedsReview)%>">Distribution:</td>
@@ -784,6 +787,7 @@
                                         </asp:CustomValidator>
                                     </td>
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsTranslationsRequiredNeedsReview)%>">Translations Required:</td>
@@ -792,6 +796,7 @@
                                         <asp:TextBox ID="TranslationsTextbox" CssClass="new-activity-textareas" width="95%" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <tr style="height: 5px;"></tr>
                                 <tr class="row" style="display:none">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left">Sectors:</td>
@@ -805,7 +810,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left label-dark">Themes:</td>
+                                    <td class="column-left label-dark"><a href="https://news.gov.bc.ca/themes" target="_blank">Themes:</a></td>
                                     <td class="column-right">
                                         <select id="ThemeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="ThemesSelectedTextRow" style="display: none">
@@ -814,7 +819,8 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr style="height: 5px;"></tr>
+                                <tr id="NewsSubscribeContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark"><a href="https://news.gov.bc.ca/subscribe" target="_blank">News Subscribe:</a></td>
                                     <td class="column-right">
@@ -1093,10 +1099,14 @@
             highlightChangedFields();
 
             // Add tool tips
-            $("#DetailsTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe this activity in the present tense, including <b>who</b> is participating (each spokesperson and their role), <b>what</b> is happening (key details of the activity) and <b>how much</b> is being funded.  The summary should contain all of the details that are needed for the look ahead report." });
-            $("#SignificanceTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Explain <b>why</b> this activity is included on the corporate calendar. What is its importance to government or your ministry?" });
-            $("#StrategyTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe how you will <b>promote</b> this activity or announcement." });
-            $("#SchedulingTextBox").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If dates and times are confirmed, please tick the <b>Confirmed</b> box" });
+            $("#DetailsTextBox").tooltip({
+                trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe key details. For instance, list <b>who</b>, <b>how much</b> and <b>for what</b>) in funding announcement entries. If NR ONLY, pls indicate in block caps. Examples: <b>MEDIA AVAIL & NR:</b> Minister XXX makes funding announcement to support XYZ with a one-time grant of $#####. <b>NR ONLY:</b> One-time grant announced for XYZ. Multiple quotes included." });
+            $("#SignificanceTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<b>How</b> will this impact people? <b>What difference</b> will it make? <b>Why</b> is it important?" });
+            $("#StrategyTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "How will you further <b>promote</b> or <b>amplify</b> this announcement? Describe digital content and/or visual components planned, if applicable." });
+            $("#SchedulingTextBox").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Where applicable, explain details and status ie. who has approved something to proceed or to be issued; what time frame is being requested; what may be holding it up, and so on. Be candid. Examples: <ul><li>MO approved to issue; needs content sign-off. Date/time confirmed with CC.</li><li>MO & HQ Events approved to proceed on this date and time.</li><li>MO aiming for late fall; waiting on TB approval.</li><li>Date/time confirmed by third-party organizers.</li></ul>" });
+            $("#TitleContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Give a brief but descriptive title for this entry." });
+            $("#NewsSubscribeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "For ministry releases only. Select if related to BC Coroners Service, CleanBC, COVID-19, Gender Equity and Housing Affordability. This sends the release directly to subscribers." });
+            $("#IsConfidentialContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Select if this item is highly confidential or sensitive. It’s advisable to include **STRICTLY CONFIDENTIAL** in title field for added emphasis." });
             $("#EventPlannerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "To book a GCPE event planner, email events@gov.bc.ca" });
             $("#VideographerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "To book a GCPE videographer, email videorequest@gov.bc.ca <br /> To book a GCPE photographer, email photorequest@gov.bc.ca" });
             $("#StartTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If time is a <b>guess</b>, please leave as 8am-6pm default." });

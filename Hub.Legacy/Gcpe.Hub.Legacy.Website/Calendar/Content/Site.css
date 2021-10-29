@@ -333,3 +333,19 @@ div.accountInfo {
     -moz-border-radius-topright: 6px;
     text-transform: capitalize;
 }
+
+.styled-placeholder::-webkit-input-placeholder {
+    font-style: italic;
+}
+
+.styled-placeholder:-moz-placeholder {
+    font-style: italic;
+}
+
+.styled-placeholder::-moz-placeholder {
+    font-style: italic;
+}
+
+.styled-placeholder:-ms-input-placeholder {
+    font-style: italic;
+}
