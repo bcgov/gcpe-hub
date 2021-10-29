@@ -481,7 +481,7 @@ namespace Gcpe.News.ReleaseManagement.Templates
                             Guid documentId = new Guid(e.Parameters["DocumentId"].Values.Single());
                             var document = Documents.Single(d => d.DocumentId == documentId);
                             document.BodyHtml = document.BodyHtml.Replace("&minus;", "" + (char)0x2013);
-
+                            document.BodyHtml = document.BodyHtml.Replace("&theta;", "" + (char)0x03B8);
                             e.DataSources.Add(new ReportDataSource(dsn, new Document[] { document }));
                         }
                         else if (dsn == "Contacts")
