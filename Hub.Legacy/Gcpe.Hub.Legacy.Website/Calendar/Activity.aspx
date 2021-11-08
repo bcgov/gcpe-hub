@@ -489,7 +489,7 @@
                                         <span style="float: right"><span id="charlimitinfo7">Characters remaining: 500</span></span>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr id="LeadOrganizationContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsLeadOrganizationNeedsReview)%>">Lead Organization:</td>
                                     <td class="column-right">
@@ -500,7 +500,7 @@
                                 </tr>
                                 <tr class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
-                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">HQ Initiatives:</td>
+                                    <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsInitiativesNeedsReview)%>">HQ Initiatives &amp; Leads:</td>
                                     <td class="column-right">
                                         <select id="InitiativeDropDownList" multiple="true" runat="server" style="display:none"/>
                                         <div id="InitiativesSelectedTextRow" style="display: none">
@@ -808,7 +808,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr id="ThemesContainer" class="row">
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark"><a href="https://news.gov.bc.ca/themes" target="_blank">Themes:</a></td>
                                     <td class="column-right">
@@ -1100,24 +1100,27 @@
 
             // Add tool tips
             $("#DetailsTextBox").tooltip({
-                trigger: "hover", html: "true", placement: "right", delay: 250, title: "Describe key details. For instance, list <b>who</b>, <b>how much</b> and <b>for what</b>) in funding announcement entries. If NR ONLY, pls indicate in block caps. Examples: <b>MEDIA AVAIL & NR:</b> Minister XXX makes funding announcement to support XYZ with a one-time grant of $#####. <b>NR ONLY:</b> One-time grant announced for XYZ. Multiple quotes included." });
-            $("#SignificanceTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<b>How</b> will this impact people? <b>What difference</b> will it make? <b>Why</b> is it important?" });
-            $("#StrategyTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "How will you further <b>promote</b> or <b>amplify</b> this announcement? Describe digital content and/or visual components planned, if applicable." });
-            $("#SchedulingTextBox").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Where applicable, explain details and status ie. who has approved something to proceed or to be issued; what time frame is being requested; what may be holding it up, and so on. Be candid. Examples: <ul><li>MO approved to issue; needs content sign-off. Date/time confirmed with CC.</li><li>MO & HQ Events approved to proceed on this date and time.</li><li>MO aiming for late fall; waiting on TB approval.</li><li>Date/time confirmed by third-party organizers.</li></ul>" });
-            $("#TitleContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Give a brief but descriptive title for this entry." });
-            $("#NewsSubscribeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "For ministry releases only. Select if related to BC Coroners Service, CleanBC, COVID-19, Gender Equity and Housing Affordability. This sends the release directly to subscribers." });
-            $("#IsConfidentialContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "Select if this item is highly confidential or sensitive. It’s advisable to include **STRICTLY CONFIDENTIAL** in title field for added emphasis." });
-            $("#EventPlannerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "To book a GCPE event planner, email events@gov.bc.ca" });
-            $("#VideographerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "To book a GCPE videographer, email videorequest@gov.bc.ca <br /> To book a GCPE photographer, email photorequest@gov.bc.ca" });
-            $("#StartTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If time is a <b>guess</b>, please leave as 8am-6pm default." });
-            $("#EndTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "If time is a <b>guess</b>, please leave as 8am-6pm default." });
+                trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>Describe key details. For instance, list <b>who</b>, <b>how much</b> and <b>for what</b>) in funding announcement entries. If NR ONLY, pls indicate in block caps. <br/>Examples: <br/><b>MEDIA AVAIL & NR:</b> Minister XXX makes funding announcement to support XYZ with a one-time grant of $#####. <br/><b>NR ONLY:</b> One-time grant announced for XYZ. Multiple quotes included.</p>" });
+            $("#SignificanceTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'><b>How</b> will this impact people? <b>What difference</b> will this make? <b>Why</b> is this important?</p>" });
+            $("#StrategyTextBox").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>How will you further <b>promote</b> or <b>amplify</b> this announcement? Describe any digital content and/or visual components planned, if applicable.</p>" });
+            $("#SchedulingTextBox").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left' class='remove-margin-bottom'>Where applicable, explain details and status ie. who has approved something to proceed or to be issued; what time frame is being requested; what may be holding it up, and so on. Be candid. <br/>Examples: <ul style='text-align:left;'><li>MO approved to issue; needs content sign-off. Date/time confirmed with CC.</li><li>MO & HQ Events approved to proceed on this date and time.</li><li>MO aiming for late fall; waiting on TB approval.</li><li>Date/time confirmed by third-party organizers.</li></ul></p>" });
+            $("#TitleContainer").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>Give a brief but descriptive title for this entry.</p>" });
+            $("#LeadOrganizationContainer").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>Type over text to change.</p>" });
+            $("#ThemesContainer").tooltip({
+                trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>For ministry releases only. Select relevant theme(s). This pulls the release into related news feeds on <a href='https://gov.bc.ca' target='_blank'>gov.bc.ca</a>.</p>" });
+            $("#NewsSubscribeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>For ministry releases only. Select if related to BC Coroners Service, CleanBC, COVID-19, Gender Equity and Housing Affordability. This sends the release directly to subscribers.</p>" });
+            $("#IsConfidentialContainer").tooltip({ trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>Select if this item is highly confidential or sensitive. It’s advisable to include **STRICTLY CONFIDENTIAL** in title field for added emphasis.</p>" });
+            $("#EventPlannerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>To book a GCPE event planner, email events@gov.bc.ca</p>" });
+            $("#VideographerContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>To book a GCPE videographer, email videorequest@gov.bc.ca <br /> To book a GCPE photographer, email photorequest@gov.bc.ca</p>" });
+            $("#StartTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>If time is a <b>guess</b>, please leave as 8am-6pm default.</p>" });
+            $("#EndTimeContainer").tooltip({ trigger: "hover", html: "true", placement: "left", delay: 250, title: "<p align='left'>If time is a <b>guess</b>, please leave as 8am-6pm default.</p>" });
             $("#CategoriesDropDownContainer").tooltip({
-                trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'><b>Approved Items:</b> use only when Province is involved (releases, activities, events etc.); approval notes must also be added. </p>\
+                trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'><b>Approved Items:</b> use only when Province is involved (releases, activities, events etc.); scheduling/approval notes must also be added. </p>\
                                                                                         <p align='left'><b>Awareness Dates or Conferences:</b> list name, description and dates it is taking place. Separate entries are needed for spin-off events such as news releases, speeches or announcements.</p>\
                                                                                         <p align='left'><b>FYI Only:</b> use for third-party items with no provincial involvement other than a Minister’s message or quote. </p>\
-                                                                                        <p align='left'><b>Proposed Items:</b> use only when Province is involved (releases, activities, events etc.) </p>\
+                                                                                        <p align='left'><b>Proposed Items:</b> use only when Province is involved (releases, activities, events etc.) and date is not yet confirmed.</p>\
                                                                                         <p align='left'><b>Speech/Remarks:</b> use for Minister’s routine speaking engagements. Start time is speaking time. </p>\
-                                                                                        <p align='left'><b>TV/Radio:</b> use for interviews; set to date/time it will air.</p>" });
+                                                                                        <p align='left'><b>TV/Radio:</b> use for interviews if need; set to date/time it will air.</p>" });
 
 
             function getParameterByName(name, url) {
