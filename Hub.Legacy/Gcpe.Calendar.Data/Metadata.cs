@@ -212,7 +212,7 @@ namespace CorporateCalendar.Data
     {
     }
 
-    [DisplayName("HQ Leads")]
+    [DisplayName("HQ Initiatives & Leads")]
     [MetadataType(typeof(Initiative_MD))]
     [ScaffoldTable(true)]
     public partial class Initiative
