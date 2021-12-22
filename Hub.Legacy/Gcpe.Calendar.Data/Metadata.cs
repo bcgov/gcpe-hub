@@ -2,6 +2,7 @@
 
 namespace CorporateCalendar.Data
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public enum LookAheadSection { Issues_and_Reports = 1, Events_and_Speeches = 2, In_the_News = 3, Not_On_LA = 4 }
@@ -122,6 +123,11 @@ namespace CorporateCalendar.Data
     }
 
     [ScaffoldTable(false)]
+    public partial class ActivityTag
+    {
+    }
+
+    [ScaffoldTable(false)]
     public partial class Priority
     {
     }
@@ -206,6 +212,7 @@ namespace CorporateCalendar.Data
     {
     }
 
+    [DisplayName("HQ Initiatives & Leads")]
     [MetadataType(typeof(Initiative_MD))]
     [ScaffoldTable(true)]
     public partial class Initiative
@@ -480,6 +487,18 @@ namespace CorporateCalendar.Data
     [ScaffoldTable(false)]
     public partial class SystemUserMinistry
     {
+    }
+
+    [DisplayName("HQ Tags")]
+    [ScaffoldTable(true)]
+    public partial class Keyword
+    {
+    }
+
+    [DisplayName("News Subscribe")]
+    [ScaffoldTable(true)]
+    public partial class Tag
+    {     
     }
 
 

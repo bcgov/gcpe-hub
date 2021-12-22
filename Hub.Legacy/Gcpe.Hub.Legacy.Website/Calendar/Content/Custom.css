@@ -17,8 +17,8 @@
 .leftHelpDiv,
 .rightHelpDiv {
     display: none;
-    color: #585858;
-    background-color: #96c0e6;
+    color: #1D1B1B;
+    background-color: #c0f3cf;
     border: 1px solid #ccc;
     margin: 10px;
     padding: 10px;
@@ -27,9 +27,16 @@
     /*text-align: justify;*/
 }
 
+    .leftHelpDiv p a,
+    .rightHelpDiv p a,
+    .tooltip > .tooltip-inner a {
+        color: #646873;
+        text-decoration: underline;
+    }
+
 .tooltip > .tooltip-inner {
-    color: #585858;
-    background-color: #96c0e6;
+    color: #1D1B1B;
+    background-color: #c0f3cf;
     border: 1px solid black;
     min-width: 390px;
     padding-left: 0px;
@@ -475,4 +482,8 @@ span.ui-icon.ui-icon-arrowthick-2-n-s {margin-top:4px}
 
 .label-dark {
     color: #404040;
+}
+
+.remove-margin-bottom {
+    margin-bottom: 0;
 }
