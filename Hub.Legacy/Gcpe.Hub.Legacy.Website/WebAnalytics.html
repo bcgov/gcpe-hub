@@ -38,7 +38,10 @@ jQuery(document).ready(function () {
     }
    
     search_button = document.getElementById('ExecuteSearchButton');
-    search_button.addEventListener('click', search_button_click, false);
+    if (search_button != null) {
+        search_button.addEventListener('click', search_button_click, false);
+    }
+    
     function search_button_click() {
   
         window.snowplow('trackSelfDescribingEvent', {
@@ -61,7 +64,9 @@ jQuery(document).ready(function () {
     }
 
     calendar_view_button = document.getElementById('calendar_view_button');
-    calendar_view_button.addEventListener('click', calendar_view_button_click, false);
+    if (calendar_view_button != null) {
+        calendar_view_button.addEventListener('click', calendar_view_button_click, false);
+    }
     function calendar_view_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -72,7 +77,9 @@ jQuery(document).ready(function () {
     }
 
     excel_export_button = document.getElementById('excel_export_button');
-    excel_export_button.addEventListener('click', calendar_view_button_click, false);
+    if (excel_export_button != null) {
+        excel_export_button.addEventListener('click', calendar_view_button_click, false);
+    }
     function excel_export_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -83,7 +90,9 @@ jQuery(document).ready(function () {
     }
 
     look_ahead_report_button = document.getElementById('look_ahead_report_button');
-    look_ahead_report_button.addEventListener('click', look_ahead_report_button_click, false);
+    if (look_ahead_report_button != null) {
+        look_ahead_report_button.addEventListener('click', look_ahead_report_button_click, false);
+    }
     function look_ahead_report_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -94,7 +103,9 @@ jQuery(document).ready(function () {
     }
 
     exec_look_ahead_report_button = document.getElementById('exec_look_ahead_report_button');
-    exec_look_ahead_report_button.addEventListener('click', exec_look_ahead_report_button_click, false);
+    if (exec_look_ahead_report_button != null) {
+        exec_look_ahead_report_button.addEventListener('click', exec_look_ahead_report_button_click, false);
+    }
     function exec_look_ahead_report_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -105,7 +116,9 @@ jQuery(document).ready(function () {
     }
 
     main_report_button = document.getElementById('main_30_60_90_report_button');
-    main_report_button.addEventListener('click', main_report_button_click, false);
+    if (main_report_button != null) {
+        main_report_button.addEventListener('click', main_report_button_click, false);
+    }
     function main_report_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -116,7 +129,9 @@ jQuery(document).ready(function () {
     }
 
     planning_report_button = document.getElementById('planning_report_button');
-    planning_report_button.addEventListener('click', planning_report_button_click, false);
+    if (planning_report_button != null) {
+        planning_report_button.addEventListener('click', planning_report_button_click, false);
+    }
     function planning_report_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -127,18 +142,9 @@ jQuery(document).ready(function () {
     }
 
     manage_button = document.getElementById('manage');
-    manage_button.addEventListener('click', manage_button_click, false);
-    function manage_button_click() {
-        window.snowplow('trackSelfDescribingEvent', {
-            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
-            data: {
-                action: 'manage_button',
-            }
-        });
+    if (manage_button != null) {
+        manage_button.addEventListener('click', manage_button_click, false);
     }
-
-    manage_button = document.getElementById('manage');
-    manage_button.addEventListener('click', manage_button_click, false);
     function manage_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -149,7 +155,9 @@ jQuery(document).ready(function () {
     }
 
     sync_button = document.getElementById('sync');
-    sync_button.addEventListener('click', sync_button_click, false);
+    if (sync_button != null) {
+        sync_button.addEventListener('click', sync_button_click, false);
+    }
     function sync_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -160,7 +168,9 @@ jQuery(document).ready(function () {
     }
 
     help_button = document.getElementById('help');
-    help_button.addEventListener('click', help_button_click, false);
+    if (help_button != null) {
+        help_button.addEventListener('click', help_button_click, false);
+    }
     function help_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -171,7 +181,9 @@ jQuery(document).ready(function () {
     }
 
     manage_query_button = document.getElementById('btnDialog');
-    manage_query_button.addEventListener('click', manage_query_button_click, false);
+    if (manage_query_button != null) {
+        manage_query_button.addEventListener('click', manage_query_button_click, false);
+    }
     function manage_query_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
@@ -182,7 +194,9 @@ jQuery(document).ready(function () {
     }
 
     save_query_button = document.getElementById('SaveQuery');
-    save_query_button.addEventListener('click', save_query_button_click, false);
+    if (save_query_button != null) {
+        save_query_button.addEventListener('click', save_query_button_click, false);
+    }
     function save_query_button_click() {
         window.snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
