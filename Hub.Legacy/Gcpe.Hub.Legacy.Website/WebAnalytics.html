@@ -1,5 +1,6 @@
 ﻿<!-- Snowplow starts plowing - Standalone vE.2.14.0 -->
 <script type="text/javascript">
+jQuery(document).ready(function () {
     ; (function (p, l, o, w, i, n, g) {
         if (!p[i]) {
             p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
@@ -9,7 +10,7 @@
             n.src = w; g.parentNode.insertBefore(n, g)
         }
     }(window, document, "script", "https://www2.gov.bc.ca/StaticWebResources/static/sp/sp-2-14-0.js", "snowplow"));
-    var collector = 'spt.apps.gov.bc.ca';
+    var collector = 'spm.apps.gov.bc.ca';
     window.snowplow('newTracker', 'rt', collector, {
         appId: "Snowplow_standalone",
         cookieLifetime: 86400 * 548,
@@ -21,9 +22,177 @@
             performanceTiming: true
         }
     });
+    
     window.snowplow('enableActivityTracking', 30, 30); // Ping every 30 seconds after 30 seconds
     window.snowplow('enableLinkClickTracking');
     window.snowplow('trackPageView');
+    /*customized tracking*/
+
+    function format_date(dateDiv) {
+        date_list = dateDiv.split('/');
+        date = null;
+        if (date_list.length = 3) {
+            date = date_list[2] + '-' + date_list[0] + '-' + date_list[1];
+        }
+        return date;
+    }
+   
+    search_button = document.getElementById('ExecuteSearchButton');
+    search_button.addEventListener('click', search_button_click, false);
+    function search_button_click() {
+  
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_action/jsonschema/1-0-0',
+            data: {
+                action: 'Search',
+                count: 50,
+                filters: {
+                    from_date: format_date($('#StartDateTextBox').val()),
+                    to_date: format_date($('#EndDateTextBox').val()),
+                    this_day_only: $('#ThisDayOnlyCheckBox').is(':checked'),
+                    look_ahead_filter: $("input[id^='DisplayRadioButtonList_']:checked").next('label').text(),
+                    search_text: $('#txtSearch').val(),
+                    category: $("#fcategory option:selected").text(),
+                    more: $("#fmore option:selected").text(),
+                    look_ahead_filter: $("input[id^='lookahead']:checked").next('label').text()
+                }
+            }
+        });
+    }
+
+    calendar_view_button = document.getElementById('calendar_view_button');
+    calendar_view_button.addEventListener('click', calendar_view_button_click, false);
+    function calendar_view_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'calendar_view_button',
+            }
+        });
+    }
+
+    excel_export_button = document.getElementById('excel_export_button');
+    excel_export_button.addEventListener('click', calendar_view_button_click, false);
+    function excel_export_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'excel_export_button',
+            }
+        });
+    }
+
+    look_ahead_report_button = document.getElementById('look_ahead_report_button');
+    look_ahead_report_button.addEventListener('click', look_ahead_report_button_click, false);
+    function look_ahead_report_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'look_ahead_report_button',
+            }
+        });
+    }
+
+    exec_look_ahead_report_button = document.getElementById('exec_look_ahead_report_button');
+    exec_look_ahead_report_button.addEventListener('click', exec_look_ahead_report_button_click, false);
+    function exec_look_ahead_report_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'exec_look_ahead_report_button',
+            }
+        });
+    }
+
+    main_report_button = document.getElementById('main_30_60_90_report_button');
+    main_report_button.addEventListener('click', main_report_button_click, false);
+    function main_report_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'main_30_60_90_report_button',
+            }
+        });
+    }
+
+    planning_report_button = document.getElementById('planning_report_button');
+    planning_report_button.addEventListener('click', planning_report_button_click, false);
+    function planning_report_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'planning_report_button',
+            }
+        });
+    }
+
+    manage_button = document.getElementById('manage');
+    manage_button.addEventListener('click', manage_button_click, false);
+    function manage_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'manage_button',
+            }
+        });
+    }
+
+    manage_button = document.getElementById('manage');
+    manage_button.addEventListener('click', manage_button_click, false);
+    function manage_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'manage_button',
+            }
+        });
+    }
+
+    sync_button = document.getElementById('sync');
+    sync_button.addEventListener('click', sync_button_click, false);
+    function sync_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'sync_button',
+            }
+        });
+    }
+
+    help_button = document.getElementById('help');
+    help_button.addEventListener('click', help_button_click, false);
+    function help_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'help_button',
+            }
+        });
+    }
+
+    manage_query_button = document.getElementById('btnDialog');
+    manage_query_button.addEventListener('click', manage_query_button_click, false);
+    function manage_query_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'manage_query_button',
+            }
+        });
+    }
+
+    save_query_button = document.getElementById('SaveQuery');
+    save_query_button.addEventListener('click', save_query_button_click, false);
+    function save_query_button_click() {
+        window.snowplow('trackSelfDescribingEvent', {
+            schema: 'iglu:ca.bc.gov.bcs/calendar_click/jsonschema/1-0-0',
+            data: {
+                action: 'save_query_button',
+            }
+        });
+    }
+});
 //  <!-- Snowplow stop plowing -->
 </script>
+
 <!-- Snowplow stop plowing -->
