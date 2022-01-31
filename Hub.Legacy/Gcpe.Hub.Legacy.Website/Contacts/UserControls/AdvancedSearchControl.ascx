@@ -340,10 +340,7 @@
                 filters[selectedItem[0]] = selectedItem[2];
             }
             //alert(JSON.stringify(filters));
-            window.snowplow('trackSiteSearch',
-                textboxElement.value.split(' '),
-                filters,
-                searchCount.innerText);
+            
         }
     });
 
