@@ -2,6 +2,60 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gcpe.Hub.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="DbServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloudEndpointsProtocol" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloudAccountName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloudAccountKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloudEndpointSuffix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FaviconImg" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ContactsHeaderImg" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CalendarLookAheadCoverImg" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NewsHelpUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LdapUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ActiveDirectoryDomain" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SMTPServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogMailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogMailTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ApplicationOwnerOrganizations" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HQAdmin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SharedWithExcludes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HelpFileUri" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="SignificanceIsRequired" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -26,8 +80,17 @@
     <Setting Name="DisableEditTable" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="SubscribeBaseUri" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="DoExceptionLogging" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ContributorGroups" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AdminGroups" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TypedownItemLimit" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">20</Value>
@@ -35,196 +98,130 @@
     <Setting Name="DisableEmail" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="FromEmailAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="MaxBccEmails" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="EnableForecastTab" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="DbServer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">dev.sql.sdlc.gcpe.bcgov</Value>
-    </Setting>
-    <Setting Name="FaviconImg" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">~/Resources/BC/favicon.ico</Value>
-    </Setting>
-    <Setting Name="ContactsHeaderImg" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">~/Resources/BC/MediaRelations@2x.png</Value>
-    </Setting>
-    <Setting Name="CalendarLookAheadCoverImg" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Resources\BC\LookAheadCover.jpg</Value>
-    </Setting>
-    <Setting Name="NewsHelpUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://intranet.gov.bc.ca/assets/download/9AE6AC6DB97B4F2D93C0A6CECC6B0CED</Value>
-    </Setting>
-    <Setting Name="LdapUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">LDAP://idir.bcgov/dc=idir,dc=bcgov</Value>
-    </Setting>
-    <Setting Name="ActiveDirectoryDomain" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">idir.bcgov</Value>
-    </Setting>
-    <Setting Name="SMTPServer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">apps.smtp.gov.bc.ca</Value>
-    </Setting>
-    <Setting Name="LogMailFrom" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">GCPECorporateCalendar@gov.bc.ca</Value>
-    </Setting>
-    <Setting Name="LogMailTo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Craig.Shutko@gov.bc.ca</Value>
-    </Setting>
-    <Setting Name="ApplicationOwnerOrganizations" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">GCPEHQ,GCPEMEDIA,PREM</Value>
-    </Setting>
-    <Setting Name="HQAdmin" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">GCPEHQ</Value>
-    </Setting>
-    <Setting Name="SharedWithExcludes" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">GCPEHQ,GCPEMEDIA</Value>
-    </Setting>
-    <Setting Name="HelpFileUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://intranet.gov.bc.ca/assets/download/91430BC4194F488E83A77D0574603EBB</Value>
-    </Setting>
-    <Setting Name="SubscribeBaseUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">http://dev.newsondemand.gcpe.gov.bc.ca/services/</Value>
-    </Setting>
-    <Setting Name="ContributorGroups" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS</Value>
-    </Setting>
-    <Setting Name="AdminGroups" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS</Value>
-    </Setting>
-    <Setting Name="FromEmailAddress" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">no-reply@gov.bc.ca</Value>
-    </Setting>
     <Setting Name="permissions_1" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCompany/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read|Create|Update</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_2" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsContact/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read|Create|Update</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_4" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsUserReports/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read|Create|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_5" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCommonReports/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_6" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsApprovals/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_7" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsSearch/FIN_AP_GCPE_MDRLTNS_SDLC_TSTRS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_8" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCompany/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Create|Update|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_9" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsContact/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Create|Update|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_10" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsDataLists/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Create|Update|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_11" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsUserReports/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Create|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_12" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCommonReports/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Create|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_13" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsApprovals/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read|Update|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_14" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsSearch/FIN_AP_GCPE_MDRLTNS_SDLC_DVLPRS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_105" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCompany/FIN_AP_GCPE_MDRLTNS_SDLC_CLNTS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_106" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsContact/FIN_AP_GCPE_MDRLTNS_SDLC_CLNTS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_107" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsUserReports/FIN_AP_GCPE_MDRLTNS_SDLC_CLNTS/Read|Create|Delete</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_108" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsCommonReports/FIN_AP_GCPE_MDRLTNS_SDLC_CLNTS/Read</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="permissions_109" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MediaRelationsSearch/FIN_AP_GCPE_MDRLTNS_SDLC_CLNTS/Read</Value>
-    </Setting>
-    <Setting Name="CloudEndpointsProtocol" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https</Value>
-    </Setting>
-    <Setting Name="CloudAccountName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">hubassetsdev</Value>
-    </Setting>
-    <Setting Name="CloudAccountKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">p5kdFzoI42agIFVbuudM+s3IuK0sJ40FUlV54FHjVBtpwNdUGFQnt3YaHpcJYnht3/ol9XXgFZJdLfs0Z9YKTw==</Value>
-    </Setting>
-    <Setting Name="CloudEndpointSuffix" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">core.windows.net</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="NewsHostUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://dev.news.gov.bc.ca/</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MediaAssetsUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://dev.news.gov.bc.ca/assets/</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ContentDeliveryUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://hubassetsdev.azureedge.net/translations/</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TranslationsUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://dev.news.gov.bc.ca/translations/</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PublishLocation" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">E:\Applications\Gcpe.Hub\Publish\</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DeployLocations" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">E:\Applications\Gov.News.Archive\Web Site - Releases\</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MediaAssetsUnc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">\\dev.www.sdlc.gcpe.bcgov\Applications\Gov.News.Media\Web Site - Assets\</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DeployFolders" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;\\dev.www.sdlc.gcpe.bcgov\Applications\Gov.News.Media\Web Site - Assets\Mirror\&lt;/string&gt;
+  &lt;string /&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="NewsFileFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">\\dev.hub.gcpe.gov.bc.ca\NewsFiles\</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EnableForecastTab" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="FlickrApiKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">2336824156b149983ef2e7dd535f56e3</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrApiSecret" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">14336a4436d5617b</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrApiToken" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">72157697185772144-b4c8283bc1de20cb</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrApiTokenSecret" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ea7a13fe637837a0</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrApiVerifier" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">86a36ae0048e8b8b</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrErrorNotificationContactEmail" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">carolynn@shaw.ca</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrErrorNotificationContactEmailCC" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">anne.krutzmann@gov.bc.ca</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrErrorNotificationContactEmailBCC" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">carolynn.hunter@gov.bc.ca</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FlickrPrivateBaseUri" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://www.flickr.com/photos/bcgovphotos/</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TrustedReverseProxyServers" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;142.34.223.240&lt;/string&gt;
-  &lt;string&gt;142.34.223.241&lt;/string&gt;
-  &lt;string&gt;142.34.223.242&lt;/string&gt;
-  &lt;string&gt;142.34.223.243&lt;/string&gt;
+  &lt;string /&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
