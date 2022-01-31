@@ -201,7 +201,6 @@
                     $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
                     var filters = { 'date': 'today' };
-                    window.snowplow('trackSiteSearch', [], filters, $('#totalCount').text());
                 },
                 error: function (e) {
                     $('#result').html("An Error Occurred");
@@ -220,7 +219,6 @@
                     $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
                     var filters = { 'LatestUpdates': 5 };
-                    window.snowplow('trackSiteSearch', [], filters, $('#totalCount').text());
                 },
                 error: function (e) {
                     $('#result').html("An Error Occurred");
@@ -251,7 +249,6 @@
                 success: function (result) {
                     $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
-                    window.snowplow('trackSiteSearch', txtKeyword.split(' '), filters, $('#totalCount').text());
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
@@ -274,7 +271,6 @@
                 success: function (result) {
                     $('#result').html(result.d);
                     $("#loadingPanel").modal('hide');
-                    window.snowplow('trackSiteSearch', [], filter, $('#totalCount').text());
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

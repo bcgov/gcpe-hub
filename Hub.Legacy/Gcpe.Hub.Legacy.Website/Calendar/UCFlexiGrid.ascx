@@ -35,7 +35,6 @@
         var txtSearch = encodeURIComponent($("#txtSearch").val());
         AddToFilters(filters);
         var filter = GetQuery(filters, txtSearch);
-        window.snowplow('trackSiteSearch', txtSearch.replace(" ", "', '"), filters);
         return filter;
     }
 

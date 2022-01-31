@@ -206,7 +206,6 @@
                     $("#lastLoadedDatetime").val(data.loadedTime);
                     $(".fTitle").text("B.C Government Activities: " + data.total);
                     if (queryParams !== '') {
-                        window.snowplow('trackSiteSearch', txtSearch.split(' '), filters, data.total);
                     }
                     return data;
                 },
