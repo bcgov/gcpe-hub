@@ -548,6 +548,24 @@
             CKEDITOR.on('instanceReady', function (ev) {
                 ev.editor.on('paste', function (e) {
                     e.data.dataValue = e.data.dataValue.replace(/<p>\&nbsp\;<\/p>/g, '');
+
+                    // replace/remove empty and superflous anchors
+                    var html = $.parseHTML(e.data.dataValue);
+                    var tmp = $('<output>').append(html); // need to do this for jquery to work with the content
+                    var anchors = tmp.find('a');
+
+                    if (anchors.length) {
+                        anchors.each(function (index) {
+                            var anchor = $(this);
+                            if (anchor.attr('name') && anchor.is(':empty')) { // empty anchors with a name attribute
+                                tmp.find('a[name=' + anchor.attr('name') + ']').remove();
+                            } else if (anchor.attr('name') && !anchor.is(':empty')) { // non-empty anchors with a name attribute
+                                tmp.find('a[name=' + anchor.attr('name') + ']').replaceWith(anchor.html());
+                            }
+                        });
+                    }
+
+                    e.data.dataValue = tmp.html();
                 });
             });
 
