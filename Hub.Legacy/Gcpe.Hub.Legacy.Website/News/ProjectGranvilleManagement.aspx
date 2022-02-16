@@ -3,6 +3,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="server">
     <style>
+        #updatePanel {
+           margin-top: 15px;
+        }
+
         .bc-gov-alertbanner {
           border: 1px solid transparent;
           border-radius: 4px;
@@ -35,6 +39,9 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="formContentPlaceHolder" runat="server">
+    <div class="bc-gov-alertbanner bc-gov-alertbanner-warning" role="alert" aria-labelledby="warning" aria-describedby="warning-desc">
+        <p id="warning-desc"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Do not click this button unless you have approval from IGRS.</p>
+    </div>
     <h1>Project Granville Management</h1>
     <br />
 
@@ -43,9 +50,6 @@
             <tr>
                 <td style="width:30px;"></td>
                 <td style="width:600px;">
-                    <div class="bc-gov-alertbanner bc-gov-alertbanner-warning" role="alert" aria-labelledby="warning" aria-describedby="warning-desc">
-                        <p id="warning-desc"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Do not click this button unless you have approval from IGRS.</p>
-                    </div>
                     <h2 id="enabled_Label" class="live-feed-label" runat="server">Enable Project Granville</h2>
                     <asp:Button ID="save_Button" runat="server" Text="Enable Project Granville" CssClass="primary"  OnClick="btnToggleProjectGranville" onClientClick=" return confirm('Do not click OK unless you have approval from IGRS')" />
                 </td>
