@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gcpe.Hub.News {
-    
-    
-    public partial class FileManagement {
-        
+namespace Gcpe.Hub.News
+{
+
+
+    public partial class FileManagement
+    {
+
         /// <summary>
         /// pnlErrors control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlErrors;
-        
+
         /// <summary>
         /// rptErrors control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptErrors;
-        
+
         /// <summary>
         /// btnUpload control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
-        
+
         /// <summary>
         /// btnRefresh control.
         /// </summary>
@@ -47,16 +49,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRefresh;
-        
-        /// <summary>
-        /// rptAssetList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAssetList;
-        
+
         /// <summary>
         /// btnDelete control.
         /// </summary>
@@ -65,7 +58,7 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDelete;
-        
+
         /// <summary>
         /// hdnFilesButton control.
         /// </summary>
@@ -74,7 +67,16 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button hdnFilesButton;
-        
+
+        /// <summary>
+        /// rptAssetList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAssetList;
+
         /// <summary>
         /// NoFileMessage control.
         /// </summary>
@@ -83,15 +85,17 @@ namespace Gcpe.Hub.News {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow NoFileMessage;
-        
+
         /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new Gcpe.Hub.News.Site Master {
-            get {
+        public new Gcpe.Hub.News.Site Master
+        {
+            get
+            {
                 return ((Gcpe.Hub.News.Site)(base.Master));
             }
         }

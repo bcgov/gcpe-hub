@@ -95,6 +95,7 @@ namespace CorporateCalendarAdmin
             PhoneTextBox.Text = string.Empty;
             EmailTextBox.Text = string.Empty;
             JobTitleTextBox.Text = string.Empty;
+            DescriptionTextBox.Text = string.Empty;
         }
 
         /// <summary>
@@ -170,6 +171,7 @@ namespace CorporateCalendarAdmin
                 PhoneTextBox.Text = systemUser.PhoneNumber;
                 MobileTextBox.Text = systemUser.MobileNumber;
                 EmailTextBox.Text = systemUser.EmailAddress;
+                DescriptionTextBox.Text = systemUser.Description;
 
                 if (systemUser.RoleId > 0)
                 {
@@ -377,6 +379,7 @@ namespace CorporateCalendarAdmin
                         PhoneNumber = PhoneTextBox.Text,
                         MobileNumber = Utility.FormatPhoneNumber(MobileTextBox.Text),
                         EmailAddress = EmailTextBox.Text,
+                        Description = DescriptionTextBox.Text,
                         RowGuid = Guid.NewGuid()
                     };
 
@@ -504,6 +507,7 @@ namespace CorporateCalendarAdmin
                     systemUserUpdt.PhoneNumber = PhoneTextBox.Text;
                     systemUserUpdt.MobileNumber = Utility.FormatPhoneNumber(MobileTextBox.Text);
                     systemUserUpdt.EmailAddress = EmailTextBox.Text;
+                    systemUserUpdt.Description = DescriptionTextBox.Text;
                     systemUserUpdt.LastUpdatedBy = customPrincipal.Id;
                     systemUserUpdt.LastUpdatedDateTime = DateTime.Now;
                 }

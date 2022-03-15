@@ -85,7 +85,7 @@
         <table style="width: 100%; color: #666; border: solid 1px #dbddff; font: .7em Tahoma, Arial, Sans-Serif;">
             <tr>
                 <td class="marker">*</td>
-                <td class="field"">
+                <td class="field">
                     <div>Type of Communication Contact?</div>
                     <asp:RadioButtonList ID="CommContactTypeSortRadioButtonList" runat="server" RepeatDirection="Vertical">
                         <asp:ListItem ID="ListItem1" runat="server" Text="Is not a Communication Contact" Value="0"></asp:ListItem>
@@ -97,10 +97,14 @@
                         <asp:ListItem ID="ListItem7" runat="server" Text="Other" Value="6"></asp:ListItem>
                     </asp:RadioButtonList>
                 </td>
-                <td class="widefield">
+                <td class="field">
                     Ministry Membership(s):
                     <div class="instructions">Select at least one.</div> 
                     <asp:ListBox ID="ContactMinistryListBox" SelectionMode="Multiple" runat="server" Style="width: 200px; height: 200px; color: #666;"></asp:ListBox>
+                </td>
+                <td class="field">
+                    <div class="instructions">Comments/Notes:<span id="count" style="font-weight: bold; display: inline-block; margin-left: 265px;"></span></div>
+                    <asp:TextBox Width="500" Height="200" TextMode="MultiLine" ID="DescriptionTextBox" style="color: #666; font: 13px Tahoma, Arial, Sans-Serif;" runat="server"></asp:TextBox>
                 </td>
             </tr>
         </table>
@@ -242,6 +246,11 @@
 
         //  
 
+        $('#<%=DescriptionTextBox.ClientID %>').keyup(function () {
+            var count = 950 - this.value.length;
+            var adjustedCount = count <= 0 ? 0 : count; // always display a positive number
+            $("#count").html("Characters remaining: " + adjustedCount);
+        });
     </script>
     
 </asp:Content>
