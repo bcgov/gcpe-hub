@@ -413,6 +413,10 @@ namespace CorporateCalendar.Data
             [ScaffoldColumn(false)]
             public object CommunicationContacts { get; set; }
 
+            [DisplayName("Comments/Notes")]
+            [StringLength(1000)]
+            public object Description { get; set; }
+
             [ScaffoldColumn(false)]
             public object Logs { get; set; }
             [ScaffoldColumn(false)]
