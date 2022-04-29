@@ -10,6 +10,17 @@
         .uploadfileblock table tr td {
             padding:0px;
         }
+
+        #searchInput {
+            background-image: url("../images/searchicon.png");
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 500px;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+      }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="server">
@@ -44,8 +55,38 @@
             event.preventDefault(); 
             startUpload('<%= ResolveUrl("~/News/MediaAssetManagement.asmx") %>', 'fileUpload', 1048576, 'uploadProgress', 'uploadStatusMessage', '', '', 'uploadkey', 'uploadPath', 'btnRefresh');
         }
+
+        function doSearch() {
+            var input, filter, table, tr, td, i, txtValue, noFilesMsg;
+            noFilesMsg = document.getElementById("formContentPlaceHolder_NoFileMessage");
+            if (noFilesMsg) return; // cancel search if we have no files
+
+            input = document.getElementById("searchInput");
+            table = document.getElementsByTagName("table")[1]; // the second table is the list of files
+            filter = input.value.toUpperCase();
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
     <h1>File Management</h1>
+
+    <input
+         type="text"
+         id="searchInput"
+         onkeyup="doSearch()"
+         placeholder="Search for PDFs on this page"
+     />
     <br />
 
     <asp:Panel runat="server" ID="pnlErrors" CssClass="section-error" Visible="false">
@@ -92,10 +133,19 @@
 
     <div class="section edit">     
         <h2>Uploaded Files</h2>
-        
+
         <div class="filelistblock">
             
             <table>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <asp:Button ID="btnDelete" CssClass="primary" OnClientClick="SaveFiles();return false;" Text="Save" runat="server"/>
+                        <asp:Button ID="hdnFilesButton" runat="server" Text="Save" CssClass="primary" OnClick="btnSaveFiles_Click" Style="visibility: hidden; display: none;" ClientIDMode="Static" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
                  <asp:Repeater ID="rptAssetList" DataSource="<%# GetStaticFiles() %>" runat="server">
                     <ItemTemplate>
                         <tr>
@@ -112,15 +162,6 @@
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-                <tr>
-                    <td></td>
-                    <td align="left">
-                        <asp:Button ID="btnDelete" CssClass="primary" OnClientClick="SaveFiles();return false;" Text="Save" runat="server"/>
-                        <asp:Button ID="hdnFilesButton" runat="server" Text="Save" CssClass="primary" OnClick="btnSaveFiles_Click" Style="visibility: hidden; display: none;" ClientIDMode="Static" />
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
                 <tr id="NoFileMessage" runat="server" visible="false">
                     <td></td>
                     <td align="left">No file is uploaded.</td>

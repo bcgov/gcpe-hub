@@ -2,7 +2,7 @@
     [Id]                  INT              IDENTITY (1, 1) NOT NULL,
     [Username]            NVARCHAR (20)    NOT NULL,
     [RoleId]              INT              NOT NULL,
-    [Description]         NVARCHAR (50)    NULL,
+    [Description]         NVARCHAR (1000)    NULL,
     [FullName]            NVARCHAR (50)    NULL,
     [DisplayName]         NVARCHAR (50)    NULL,
     [JobTitle]            NVARCHAR (100)   NULL,
