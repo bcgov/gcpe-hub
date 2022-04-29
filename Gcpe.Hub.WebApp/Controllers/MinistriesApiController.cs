@@ -78,7 +78,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             // add GCPE Media Relations in the ministry list
             return db.Ministry
-                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier") || m.Abbreviation == "COVID")
+                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier"))
                      .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName);
         }
 
