@@ -121,6 +121,7 @@
 
         <div class="mDiv">
             <div class="fTitle"><%=Title %></div>
+            <%=ShowChangeFreezeMessage()%>
         </div>
         <div class="tDiv">
             <div class="tDiv2">
