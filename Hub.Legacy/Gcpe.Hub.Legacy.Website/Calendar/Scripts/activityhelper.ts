@@ -48,6 +48,18 @@ function limitChars(textid, limit, infodiv) {
 
 function SetChanged(activityId?: string) {
 
+    var nowDate = new Date();
+    var now = nowDate.toLocaleTimeString("en-CA", {
+        timeZone: "America/Vancouver"
+    });
+    var windowStart = '4:00:00 p.m.';
+    var windowEnd = '5:00:00 p.m.';
+
+    var withinFreezeWindow = (now > windowStart) && (now < windowEnd);
+    if (withinFreezeWindow) {
+        checkDailyChangeFreeze();
+    }
+
     var id = activityId || '';
 
     if (!isChanged)
@@ -89,6 +101,21 @@ function DoCancel(id: string) {
     var formData = new FormData();
     formData.append("activityId", id);
     navigator.sendBeacon("ActivityEditingHandler.ashx?Op=CancelEditingActivity", formData);
+}
+
+function checkDailyChangeFreeze() {
+    $.ajax({
+        type: "GET",
+        url: "ChangeFreezeWindowHandler.ashx",
+        dataType: "text",
+        success: function (resp) {
+            if (resp === "True") {
+                alert("You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.");
+                var saveButton = $('#SaveButton');
+                if(saveButton.length) $('#SaveButton').hide();
+            }
+        }
+    });
 }
 
 // I can't call uncheckAll as it forces the close method where we track if things have changed

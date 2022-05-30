@@ -61,6 +61,35 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
             onclick, cssClass, paddingForImage, text, elementId);
     }
 
+    public string ShowChangeFreezeMessage()
+    {
+        var rvl = "";
+
+        if ((customPrincipal.IsGCPEHQ && customPrincipal.IsInRoleOrGreater(SecurityRole.Editor)) && IsDailyChangeFreeze()) 
+        {
+            rvl = "<div>You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.</div>";
+        }
+
+       return rvl;
+    }
+
+    private bool IsDailyChangeFreeze()
+    {
+        var pacificNow = GetCurrentPacificTime();
+        TimeSpan start = new TimeSpan(16, 0, 0); // 4 PM
+        TimeSpan end = new TimeSpan(17, 0, 0); // 5 PM
+        TimeSpan now = pacificNow.TimeOfDay;
+        var withinFreezeWindow = (now > start) && (now < end);
+
+        return withinFreezeWindow;
+    }
+
+    private DateTime GetCurrentPacificTime()
+    {
+        var pacificTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+        return TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow.DateTime, TimeZoneInfo.Utc, pacificTimeZone);
+    }
+
     public override void RenderControl(HtmlTextWriter writer)
     {
         base.RenderControl(writer);
