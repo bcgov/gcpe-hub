@@ -860,6 +860,7 @@
     <Content Include="fonts\BCSans-Regular.ttf" />
     <Content Include="fonts\BCSans-Regular.woff" />
     <Content Include="fonts\BCSans-Regular.woff2" />
+    <Content Include="Calendar\ChangeFreezeWindowHandler.ashx" />
     <None Include="Properties\PublishProfiles\Debug Build to Development.pubxml" />
     <None Include="Properties\PublishProfiles\Release Build to Test.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -1716,6 +1717,9 @@
     <Compile Include="Calendar\CancelChanges.aspx.designer.cs">
       <DependentUpon>CancelChanges.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendar\ChangeFreezeWindowHandler.ashx.cs">
+      <DependentUpon>ChangeFreezeWindowHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Calendar\CorporateCalendarUpdateWebService.asmx.cs">
       <DependentUpon>CorporateCalendarUpdateWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2524,7 +2528,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
