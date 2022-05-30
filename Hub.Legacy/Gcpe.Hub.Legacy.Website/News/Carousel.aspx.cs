@@ -29,6 +29,7 @@ namespace Gcpe.Hub.News
 
             site.AddNavigationItem("Files", "~/News/FileManagement");
             site.AddNavigationItem("Carousel", "~/News/Carousel");
+            site.AddNavigationItem("Emergency Pin", "~/News/EmergencySlideManagement");
             site.AddNavigationItem("Live Feed", "~/News/LiveFeedManagement");
             site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
 
@@ -36,7 +37,6 @@ namespace Gcpe.Hub.News
             if (Guid.TryParse((string)Request.QueryString["Id"], out id))
             {
                 carousel = DbContext.Carousels.FirstOrDefault(c => c.Id == id);
-
                 isLastCarousel = (carousel == null || !DbContext.Carousels.Any(c => c.PublishDateTime > carousel.PublishDateTime));
             }
 
@@ -45,6 +45,7 @@ namespace Gcpe.Hub.News
                 carousel = DbContext.Carousels.OrderByDescending(c => c.PublishDateTime).FirstOrDefault();
                 isLastCarousel = true;
             }
+
             ScriptManager.GetCurrent(this).RegisterPostBackControl(ButtonSave);
         }
 
@@ -68,55 +69,57 @@ namespace Gcpe.Hub.News
                 foreach (RepeaterItem item in rptSlides.Items)
                 {
                     CarouselSlide carouselSlide = slides.ElementAt(i++);
-
                     Slide slide = carouselSlide.Slide;
-
-                    string headline = ((TextBox)item.FindControl("txtHeadline")).Text;
-                    string summary = ((TextBox)item.FindControl("txtSummary")).Text;
-                    string actionUrl = ((TextBox)item.FindControl("txtActionUrl")).Text;
-                    string facebookPostUrl = ((TextBox)item.FindControl("txtFacebookPostUrl")).Text;
-                    byte sortIndex = Byte.Parse(((HiddenField)item.FindControl("sortIndex")).Value);
-                    Justify justify = ((RadioButton)item.FindControl("RadioLeft")).Checked ? Justify.Left : Justify.Right;
-                    HttpPostedFile imageFile = Request.Files[slide.Id.ToString()];
-                    bool hasNewImage = imageFile.ContentLength != 0 &&
-                        (imageFile.FileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || imageFile.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase));
-
-                    bool slideEdited = slide.Headline != headline || slide.Summary != summary ||
-                        slide.ActionUrl != actionUrl || slide.FacebookPostUrl != facebookPostUrl ||
-                        slide.Justify != justify || hasNewImage;
-
-                    if (slideEdited || carouselSlide.SortIndex != sortIndex)
+                    if (carouselSlide.SortIndex>=0)
                     {
-                        if (slideEdited)
+                        string headline = ((TextBox)item.FindControl("txtHeadline")).Text;
+                        string summary = ((TextBox)item.FindControl("txtSummary")).Text;
+                        string actionUrl = ((TextBox)item.FindControl("txtActionUrl")).Text;
+                        string facebookPostUrl = ((TextBox)item.FindControl("txtFacebookPostUrl")).Text;
+                        sbyte sortIndex = SByte.Parse(((HiddenField)item.FindControl("sortIndex")).Value);
+                        Justify justify = ((RadioButton)item.FindControl("RadioLeft")).Checked ? Justify.Left : Justify.Right;
+                        HttpPostedFile imageFile = Request.Files[slide.Id.ToString()];
+                        bool hasNewImage = imageFile.ContentLength != 0 &&
+                            (imageFile.FileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || imageFile.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase));
+
+                        bool slideEdited = slide.Headline != headline || slide.Summary != summary ||
+                            slide.ActionUrl != actionUrl || slide.FacebookPostUrl != facebookPostUrl ||
+                            slide.Justify != justify || hasNewImage;
+
+                        if (slideEdited || carouselSlide.SortIndex != sortIndex)
                         {
-                            bool sharedSlide = DbContext.CarouselSlides.Count(s => s.SlideId == carouselSlide.SlideId) > 1;
-                            if (sharedSlide)
+                            if (slideEdited)
                             {
-                                slide = NewSlide();
-                                if (!hasNewImage)
+                                bool sharedSlide = DbContext.CarouselSlides.Count(s => s.SlideId == carouselSlide.SlideId) > 1;
+                                if (sharedSlide)
                                 {
-                                    slide.Image = carouselSlide.Slide.Image;
+                                    slide = NewSlide();
+                                    if (!hasNewImage)
+                                    {
+                                        slide.Image = carouselSlide.Slide.Image;
+                                    }
+                                    DbContext.CarouselSlides.Remove(carouselSlide); // SlideId is part of the primary key of a CarouselSlide and cannot be changed
+                                    carouselSlide = NewCarouselSlide(carousel.Id, slide.Id);
                                 }
-                                DbContext.CarouselSlides.Remove(carouselSlide); // SlideId is part of the primary key of a CarouselSlide and cannot be changed
-                                carouselSlide = NewCarouselSlide(carousel.Id, slide.Id);
+                                slide.Headline = headline;
+                                slide.Summary = summary;
+                                slide.ActionUrl = actionUrl;
+                                slide.FacebookPostUrl = facebookPostUrl;
+                                slide.Justify = justify;
+                                if (hasNewImage)
+                                {
+                                    slide.Image = new byte[imageFile.ContentLength];
+                                    imageFile.InputStream.Read(slide.Image, 0, imageFile.ContentLength);
+                                }
                             }
-                            slide.Headline = headline;
-                            slide.Summary = summary;
-                            slide.ActionUrl = actionUrl;
-                            slide.FacebookPostUrl = facebookPostUrl;
-                            slide.Justify = justify;
-                            if (hasNewImage)
-                            {
-                                slide.Image = new byte[imageFile.ContentLength];
-                                imageFile.InputStream.Read(slide.Image, 0, imageFile.ContentLength);
-                            }
+                            carouselSlide.SortIndex = sortIndex;
+                            slide.Timestamp = DateTimeOffset.Now;
                         }
-                        carouselSlide.SortIndex = sortIndex;
-                        slide.Timestamp = DateTimeOffset.Now;
                     }
+                    
                 }
                 DbContext.SaveChanges();
-                DataBind();
+                DataBind();      
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException uEx)
             {
@@ -155,13 +158,18 @@ namespace Gcpe.Hub.News
 
                 foreach (CarouselSlide carouselSlide in SlidesItems)
                 {
-                    NewCarouselSlide(nextCarousel.Id, carouselSlide.SlideId).SortIndex = carouselSlide.SortIndex;
+                    if (carouselSlide.SortIndex>=0)
+                    {
+                        NewCarouselSlide(nextCarousel.Id, carouselSlide.SlideId).SortIndex = carouselSlide.SortIndex;
+                    }
                 }
                 DbContext.SaveChanges();
+                UnpinEmergencySlide();
             }
 
             Redirect("~/News/Carousel.aspx?Id=" + nextCarousel.Id);
         }
+
         legacy::Gcpe.Hub.Data.Entity.Carousel NewCarousel(DateTime publishDateTime)
         {
             return DbContext.Carousels.Add(new legacy::Gcpe.Hub.Data.Entity.Carousel
@@ -197,5 +205,28 @@ namespace Gcpe.Hub.News
             }
             return DbContext.Slides.Add(new Slide { Id = Guid.NewGuid() });
         }
+
+        private void UnpinEmergencySlide()
+        {
+            HubEntities hub = new HubEntities();
+            hub.SetAppSetting("IsPinnedSlide", "false");
+            hub.SetAppSetting("IsPinnedSecondarySlide", "false");
+            hub.SaveChanges();
+        }
+
+        
+        private bool GetFeedState(string appSetting)
+        {
+            HubEntities hub = new HubEntities();
+            string enabled = hub.GetAppSetting(appSetting);
+            return enabled.ToLower() == "true";
+        }
+        private string GetFeedValue(string appSetting)
+        {
+            HubEntities hub = new HubEntities();
+            string value = hub.GetAppSetting(appSetting);
+            return value;
+        }
+
     }
 }
