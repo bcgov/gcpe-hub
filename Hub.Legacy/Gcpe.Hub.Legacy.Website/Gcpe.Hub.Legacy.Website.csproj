@@ -748,6 +748,7 @@
     <Content Include="News\ReleaseManagement\Releases.aspx" />
     <Content Include="News\ReleaseManagement\Scripts\ReleaseManagement.js" />
     <Content Include="News\ReleaseManagement\Scripts\se-v2.js" />
+    <Content Include="News\EmergencySlideManagement.aspx" />
     <Content Include="News\TranslationManagement.asmx" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -1829,6 +1830,13 @@
     </Compile>
     <Compile Include="News\LiveFeedManagement.aspx.designer.cs">
       <DependentUpon>LiveFeedManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News\EmergencySlideManagement.aspx.cs">
+      <DependentUpon>EmergencySlideManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News\EmergencySlideManagement.aspx.designer.cs">
+      <DependentUpon>EmergencySlideManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="News\TranslationManagement.asmx.cs">
       <DependentUpon>TranslationManagement.asmx</DependentUpon>

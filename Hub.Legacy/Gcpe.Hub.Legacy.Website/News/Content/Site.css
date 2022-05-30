@@ -328,3 +328,20 @@ input[type="text"] {
     margin: 0px;
     display:inline-block;
 }
+
+.pinned {
+    color: #1a5a96;
+    transform: rotate(45deg);
+}
+    .pinned:hover {
+        color: grey;
+        transform: rotate(0);
+    }
+
+.unpinned {
+    color: grey;
+}
+.unpinned:hover {
+    color: #1a5a96;
+    transform: rotate(45deg);
+}
