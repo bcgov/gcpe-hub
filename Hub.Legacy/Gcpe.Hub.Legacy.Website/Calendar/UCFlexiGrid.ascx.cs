@@ -64,10 +64,9 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
     public string ShowChangeFreezeMessage()
     {
         var rvl = "";
-
-        if ((customPrincipal.IsGCPEHQ && customPrincipal.IsInRoleOrGreater(SecurityRole.Editor)) && IsDailyChangeFreeze()) 
+        if (!(customPrincipal.IsGCPEHQ && customPrincipal.IsInRoleOrGreater(SecurityRole.Editor)) && IsDailyChangeFreeze()) 
         {
-            rvl = "<div>You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.</div>";
+            rvl = "<div class=\"ChangesNotice-Modifier\" style=\"width: 100%;\"><img src=\"../images/alert-icon.png\" alt=\"warning\"> You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.</div>";
         }
 
        return rvl;
@@ -76,7 +75,7 @@ public partial class UCFlexiGrid : System.Web.UI.UserControl
     private bool IsDailyChangeFreeze()
     {
         var pacificNow = GetCurrentPacificTime();
-        TimeSpan start = new TimeSpan(16, 0, 0); // 4 PM
+        TimeSpan start = new TimeSpan(10, 0, 0); // 4 PM
         TimeSpan end = new TimeSpan(17, 0, 0); // 5 PM
         TimeSpan now = pacificNow.TimeOfDay;
         var withinFreezeWindow = (now > start) && (now < end);

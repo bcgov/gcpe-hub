@@ -46,16 +46,21 @@ function limitChars(textid, limit, infodiv) {
     }
 }
 
-function SetChanged(activityId?: string) {
-
+function checkWithinChangeFreezeWindow() {
     var nowDate = new Date();
     var now = nowDate.toLocaleTimeString("en-CA", {
         timeZone: "America/Vancouver"
     });
-    var windowStart = '4:00:00 p.m.';
+    var windowStart = '10:00:00 a.m.';
     var windowEnd = '5:00:00 p.m.';
 
     var withinFreezeWindow = (now > windowStart) && (now < windowEnd);
+    return withinFreezeWindow;
+}
+
+function SetChanged(activityId?: string) {
+
+    var withinFreezeWindow = checkWithinChangeFreezeWindow();
     if (withinFreezeWindow) {
         checkDailyChangeFreeze();
     }
@@ -111,8 +116,11 @@ function checkDailyChangeFreeze() {
         success: function (resp) {
             if (resp === "True") {
                 alert("You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.");
-                var saveButton = $('#SaveButton');
-                if(saveButton.length) $('#SaveButton').hide();
+                var actionsFieldset = $('#ActionsFieldset');
+                if (actionsFieldset.length) actionsFieldset.remove();
+                $('.ui-multiselect').prop("disabled", true);
+                $('.ui-multiselect span').css('pointer-events', 'none');
+                $('.k-multiselect').css('pointer-events', 'none');
             }
         }
     });
