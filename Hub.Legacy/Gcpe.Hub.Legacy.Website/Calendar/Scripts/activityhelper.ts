@@ -51,7 +51,7 @@ function checkWithinChangeFreezeWindow() {
     var now = nowDate.toLocaleTimeString("en-CA", {
         timeZone: "America/Vancouver"
     });
-    var windowStart = '10:00:00 a.m.';
+    var windowStart = '4:05:00 p.m.';
     var windowEnd = '5:00:00 p.m.';
 
     var withinFreezeWindow = (now > windowStart) && (now < windowEnd);
@@ -115,7 +115,7 @@ function checkDailyChangeFreeze() {
         dataType: "text",
         success: function (resp) {
             if (resp === "True") {
-                alert("You cannot make content changes between 4 pm and 5 pm. Contact the Corp Cal team for emergency content updates.");
+                alert("You cannot make content changes between 4pm-5pm. Contact the Corp Cal Manager to have emerging or urgent updates made for you during this time.");
                 var actionsFieldset = $('#ActionsFieldset');
                 if (actionsFieldset.length) actionsFieldset.remove();
                 $('.ui-multiselect').prop("disabled", true);

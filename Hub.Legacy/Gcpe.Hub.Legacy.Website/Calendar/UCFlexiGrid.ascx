@@ -121,7 +121,7 @@
 
         <div class="mDiv">
             <div class="fTitle"><%=Title %></div>
-            <%=ShowChangeFreezeMessage()%>
+            <div class="ChangesNotice-Modifier" style="width: 100%;"><img src="../images/alert-icon.png" alt="warning">You cannot make content changes between 4pm-5pm. Contact the Corp Cal Manager to have emerging or urgent updates made for you during this time.</div>
         </div>
         <div class="tDiv">
             <div class="tDiv2">
