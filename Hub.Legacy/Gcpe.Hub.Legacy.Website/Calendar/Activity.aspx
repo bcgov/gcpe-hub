@@ -1098,6 +1098,11 @@
             }
             highlightChangedFields();
 
+            var withinFreezeWindow = checkWithinChangeFreezeWindow();
+            if (withinFreezeWindow) {
+                checkDailyChangeFreeze();
+            }
+
             // Add tool tips
             $("#DetailsTextBox").tooltip({
                 trigger: "hover", html: "true", placement: "right", delay: 250, title: "<p align='left'>Describe key details. For instance, list <b>who</b>, <b>how much</b> and <b>for what</b>) in funding announcement entries. If NR ONLY, pls indicate in block caps. <br/>Examples: <br/><b>MEDIA AVAIL & NR:</b> Minister XXX makes funding announcement to support XYZ with a one-time grant of $#####. <br/><b>NR ONLY:</b> One-time grant announced for XYZ. Multiple quotes included.</p>" });

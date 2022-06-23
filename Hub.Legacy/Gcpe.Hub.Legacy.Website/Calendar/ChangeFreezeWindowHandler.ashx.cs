@@ -43,7 +43,7 @@ namespace Gcpe.Hub.Calendar
         private bool IsDailyChangeFreeze()
         {
             var pacificNow = GetCurrentPacificTime();
-            TimeSpan start = new TimeSpan(16, 0, 0); // 4 PM
+            TimeSpan start = new TimeSpan(4, 05, 0); // 4:05 PM
             TimeSpan end = new TimeSpan(17, 0, 0); // 5 PM
             TimeSpan now = pacificNow.TimeOfDay;
             var withinFreezeWindow = (now > start) && (now < end);
