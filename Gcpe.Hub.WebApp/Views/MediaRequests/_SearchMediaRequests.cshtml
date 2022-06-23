@@ -80,14 +80,14 @@
 <script type="text/javascript">
 
     function hideMore(data) {
-        var moreid = data.displayName == 'Ministry' ? 'morelabel-0' : data.displayName == 'Outlet' ? 'morelabel-1' : 'morelabel-2';
+        var moreid = data.displayName == 'Ministry' ? 'morelabel-0' : data.displayName == 'Outlet' ? 'morelabel-1' : data.displayName == 'Contact' ? 'morelabel-2' : 'morelabel-3';
         var element = document.getElementById(moreid);
         element.style.display = element.style.display == 'none' ? 'block' : 'none';
     }
 
     function showmore(data) {
-        var facetid = data.displayName == 'Ministry' ? 'facet-0' : data.displayName == 'Outlet' ? 'facet-1' : 'facet-2';
-        var moreid = facetid == 'facet-0' ? 'morelabel-0' : facetid == 'facet-1' ? 'morelabel-1' : 'morelabel-2';
+        var facetid = data.displayName == 'Ministry' ? 'facet-0' : data.displayName == 'Outlet' ? 'facet-1' : data.displayName == 'Contact' ? 'facet-2' : 'facet-3';
+        var moreid = facetid == 'facet-0' ? 'morelabel-0' : facetid == 'facet-1' ? 'morelabel-1' : facetid == 'facet-2' ? 'morelabel-2' : 'morelabel-3';
 
         var morelabel = document.getElementById(moreid);
 

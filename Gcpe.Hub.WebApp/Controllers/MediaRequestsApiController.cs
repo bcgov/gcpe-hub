@@ -65,7 +65,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             else if (responded == "active" && requestsToday.HasValue)
             {
                 // Open MediaRequests or MediaRequests that were closed today.
-                SqlHelper.AddDateToWhereClause(ref suffixClause, "RespondedAt IS NULL OR RespondedAt > ", requestsToday);
+                SqlHelper.AddDateToWhereClause(ref suffixClause, "RespondedAt IS NULL OR RespondedAt >= ", requestsToday);
             }
 
             if (requestsBefore.HasValue)
@@ -87,7 +87,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<SearchResultsDto> Get(string query, int page, string leadMinistryDisplayName, string companyNames, string contactNames)
+        public async Task<SearchResultsDto> Get(string query, int page, string leadMinistryDisplayName, string companyNames, string contactNames, string resolutionId)
         {
             var results = new SearchResultsDto();
             bool useSearchService = Configuration.GetValue<bool>("SearchService:Enable");
@@ -105,8 +105,13 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     adjustedQuery = "/.*" + query + ".*/";
                 }
+                var temp = await GetResolutions();
+                if (resolutionId != null)
+                {
+                    resolutionId = temp.FirstOrDefault(x => x.DisplayAs == resolutionId).Id.ToString();
+                }
                 // get a list of IDs from the search service.
-                var facets = new Dictionary<string, string> { { "leadMinistryDisplayName", leadMinistryDisplayName }, { "companyNames", companyNames }, { "contactNames", contactNames } };
+                var facets = new Dictionary<string, string> { { "leadMinistryDisplayName", leadMinistryDisplayName }, { "companyNames", companyNames }, { "contactNames", contactNames }, { "resolutionId", resolutionId } };
                 DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
@@ -116,7 +121,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     // extract the ids.
                     string inClause = string.Join("','", searchServiceResult.Results.Select(r => r.Document.Values.First()));
                     List<MediaRequest> data = db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause + "') order by RequestedAt DESC").ToList();
-
+                    
                     LoadNavigationProperties(data);
 
                     // Convert results to MediaRequestDto
@@ -133,7 +138,17 @@ namespace Gcpe.Hub.WebApp.Controllers
                         foreach (FacetResult item in facetResult)
                         {
                             FilterDto fdto = new FilterDto();
-                            fdto.Name = item.Value.ToString();
+                            if (facet!= "resolutionId")
+                            {
+                                fdto.Name = item.Value.ToString();
+                            }
+                            else
+                            {
+                                //var id = new Guid();
+                                Guid.TryParse(item.Value.ToString(), out var id);
+                                fdto.Name = temp.FirstOrDefault(x => x.Id == id).DisplayAs;
+                            }
+                            //fdto.Name = item.Value.ToString();
                             fdto.Count = (int)item.Count;
                             facetFilters.Add(fdto);
                         }
@@ -495,10 +510,11 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 //Retrieve the open requests for the current ministry (all of them back through history).
                 var requests = await db.MediaRequest
-                        .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince)
+                        .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince || e.RespondedAt >= localNow.Date)
                         .Where(e => e.LeadMinistryId == ministry.Id)
                         .Where(e => e.IsActive == true)
-                        .OrderByDescending(e => e.RequestedAt)
+                        .OrderByDescending(e => e.RespondedAt)
+                        .ThenByDescending(e => e.RequestedAt)
                         .ToListAsync();
 
                 LoadNavigationProperties(requests);
@@ -639,9 +655,10 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             //Retrieve the open requests for the current ministry (all of them back through history).
             var requests = await db.MediaRequest
-                    .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime)
+                    .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime || e.RespondedAt >= localNow.Date)
                     .Where(e => e.IsActive == true)
-                    .OrderByDescending(e => e.RequestedAt)
+                    .OrderByDescending(e => e.RespondedAt)
+                    .ThenByDescending(e => e.RequestedAt)
                     .ToListAsync();
 
             LoadNavigationProperties(requests);
@@ -747,11 +764,13 @@ namespace Gcpe.Hub.WebApp.Controllers
             var listMinistryIds = listMinistries.Select(e => e.Id).ToArray();
 
             var openMediaRequests = await db.MediaRequest
-                                            .Where(e => e.RespondedAt == null)
+                                            .Where(e => e.RespondedAt == null || e.RespondedAt >= DateTimeOffset.Now.Date)
                                             .Where(e => listMinistryIds.Contains(e.LeadMinistryId))
                                             .Where(e => e.IsActive)
-                                            .OrderBy(e => e.LeadMinistry.SortOrder).ThenBy(e => e.LeadMinistry.Abbreviation)
-                                                                                   .ThenBy(e => e.RequestedAt)
+                                            .OrderBy(e => e.LeadMinistry.SortOrder)
+                                            .ThenBy(e => e.LeadMinistry.Abbreviation)
+                                            .ThenByDescending(e => e.RespondedAt)         
+                                            .ThenBy(e => e.RequestedAt)
                                             .ToListAsync();
 
             LoadNavigationProperties(openMediaRequests);
@@ -768,9 +787,13 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 foreach (var item in items.Where(mr => mr.LeadMinistry.Id == min.Id))
                 {
-                    if (min.EodLastRunDateTime.Value.Date < localNow.Date)
+                    if (min.EodLastRunDateTime.Value.Date < localNow.Date && item.EodReportWith !=null)
                     {
                         item.EodReportWith = null;
+                    }     
+                    if ( item.RespondedAt >= localNow.Date && item.EodReportWith == null)
+                    {
+                        item.EodReportWith = 0;
                     }
                 }
             }

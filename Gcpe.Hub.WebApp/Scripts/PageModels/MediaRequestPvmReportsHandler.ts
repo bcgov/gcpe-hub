@@ -54,7 +54,7 @@
                 };
             });
             if (changed > 0) {
-                ret = {discardChangesFx: this.unloadData};
+                ret = { discardChangesFx: this.unloadData };
             }
             return ret;
         }
@@ -63,7 +63,7 @@
             this.eodMediaRequests([]);
         }
 
-        
+
 
         public fetchReportData = (user: CurrentUserVm) => {
             this.eodMediaRequests([]);
@@ -101,17 +101,16 @@
                 ko.utils.arrayPushAll<EodStatusVm>(this.eodSummaryMinistries, data);
             });
 
-            this.evergreenTimeout = setTimeout(() => {this.fetchEodSummaryReportData()}, 30000)
+            this.evergreenTimeout = setTimeout(() => { this.fetchEodSummaryReportData() }, 30000)
         }
 
         public collectAndSubmit = () => {
             //make sure all rows in the page have a value for eodWith
             let goodToGo: boolean = true;
             ko.utils.arrayForEach(this.eodMediaRequests(), (mr: KnockoutObservable<MediaRequestVm>) => {
-               
                 if (!(mr().eodReportWith())) {
                     // Set any error to highlight the border. The record is not modified, so validations don't fire automatically.
-                    mr().eodReportWith.setError("Required"); 
+                    mr().eodReportWith.setError("Required");
                     goodToGo = false;
                     this.pvm.pageError({ responseJSON: { message: "Please select a value for every row" }, statusText: "Incomplete" });
                     this.pvm.scrollToTop();
@@ -131,7 +130,7 @@
                     this.unloadData();
                     window.history.back();
 
-                    
+
                 })
             }
         }
@@ -140,17 +139,17 @@
         public collectAndSubmitSummary = () => {
 
             $(".disable-on-busy").addClass("disabled");
-            MediaRequestVm.postEndOfDaySummary( (err, result) => {
+            MediaRequestVm.postEndOfDaySummary((err, result) => {
 
                 $(".disable-on-busy").removeClass("disabled");
                 if (err) {
                     return this.pvm.pageError(err)
                 }
                 window.history.back();
-               
+
             })
         }
 
-        
+
     }
 }

@@ -127,6 +127,8 @@
                                     facet.displayName = "Outlet";
                                 else if (facet.name == "contactNames")
                                     facet.displayName = "Contact";
+                                else if (facet.name == "resolutionId")
+                                    facet.displayName = "Resolution";
                                 else facet.displayName = facet.name;
 
                                 for (var fi = 0; fi < facet.filters.length; fi++) {
