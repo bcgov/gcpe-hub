@@ -41,21 +41,23 @@
             </div>
 
             <div data-bind="text: 'ISSUE: ' + requestTopic()"></div>
+            <div data-bind="with: resolution">
+                STATUS: <span data-bind="text: $data.displayAs"> </span>
+            </div>
 
-            <div>
-
+            <div  data-bind="visible: completed() === false ">
                 <div class="media-request-progress-input" data-bind="validationElement: eodReportWith, css: {'media-request-progress-input-highlight': !(eodReportWith())}">
 
                     <span style="float:left;">STATUS:&nbsp;</span>
 
-                        <!-- ko foreach: [{id:'CommOffice', name:'GCPE'}, {id:'ProgramArea', name:'Program Area'}, {id:'MinistersOffice', name:'Minister\'s Office'} ] -->
+                    <!-- ko foreach: [{id:'CommOffice', name:'GCPE'}, {id:'ProgramArea', name:'Program Area'}, {id:'MinistersOffice', name:'Minister\'s Office'} ] -->
 
-                        <div style="white-space: nowrap; display: inline-block">
-                            <input type="radio" data-bind="validationOptions:{insertMessages: false}, value: $data.id, checked: $parent.eodReportWith, attr: { id: $data.id + 'rb' + $parent.id(), name : $parent.id() + 'progressGroup'}" />
-                            <label data-bind="text: $data.name, attr: {for: $data.id + 'rb' + $parent.id()}"></label>
-                        </div>
+                    <div style="white-space: nowrap; display: inline-block">
+                        <input type="radio" data-bind="validationOptions:{insertMessages: false}, value: $data.id, checked: $parent.eodReportWith, attr: { id: $data.id + 'rb' + $parent.id(), name : $parent.id() + 'progressGroup'}" />
+                        <label data-bind="text: $data.name, attr: {for: $data.id + 'rb' + $parent.id()}"></label>
+                    </div>
 
-                        <!-- /ko -->
+                    <!-- /ko -->
 
                 </div>
 

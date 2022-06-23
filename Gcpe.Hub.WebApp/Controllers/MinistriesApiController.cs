@@ -48,7 +48,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             var requests = await (from m in db.Ministry.Include(e => e.EodLastRunUser)
                                   join r in db.MediaRequest on m.Id equals r.LeadMinistryId
                                   //where (!r.RespondedAt.HasValue || (r.RespondedAt ?? r.RequestedAt) > m.EodLastRunDateTime)
-                                  where (!r.RespondedAt.HasValue || r.RespondedAt.Value > m.EodLastRunDateTime)
+                                  where (!r.RespondedAt.HasValue || r.RespondedAt.Value > m.EodLastRunDateTime || r.RespondedAt >= DateTime.Today)
                                   select r).ToListAsync();
 
             return ministries.Select(e => new EodStatusDto
