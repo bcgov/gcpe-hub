@@ -87,7 +87,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<SearchResultsDto> Get(string query, int page, string leadMinistryDisplayName, string companyNames, string contactNames, string resolutionId)
+        public async Task<SearchResultsDto> Get(string query, int page, string leadMinistryDisplayName, string companyNames, string contactNames, string resolutionId, string fromDate = null, string toDate = null)
         {
             var results = new SearchResultsDto();
             bool useSearchService = Configuration.GetValue<bool>("SearchService:Enable");
@@ -130,29 +130,32 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     foreach (var facet in facets.Keys) // iterate in the order we asked for
                     {
-                        IList<FacetResult> facetResult;
-                        if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
-
-                        List<FilterDto> facetFilters = new List<FilterDto>();
-
-                        foreach (FacetResult item in facetResult)
+                        if (facet != "fromDate" | facet != "toDate")
                         {
-                            FilterDto fdto = new FilterDto();
-                            if (facet!= "resolutionId")
+                            IList<FacetResult> facetResult;
+                            if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
+
+                            List<FilterDto> facetFilters = new List<FilterDto>();
+
+                            foreach (FacetResult item in facetResult)
                             {
-                                fdto.Name = item.Value.ToString();
+                                FilterDto fdto = new FilterDto();
+                                if (facet != "resolutionId")
+                                {
+                                    fdto.Name = item.Value.ToString();
+                                }
+                                else
+                                {
+                                    //var id = new Guid();
+                                    Guid.TryParse(item.Value.ToString(), out var id);
+                                    fdto.Name = temp.FirstOrDefault(x => x.Id == id).DisplayAs;
+                                }
+                                //fdto.Name = item.Value.ToString();
+                                fdto.Count = (int)item.Count;
+                                facetFilters.Add(fdto);
                             }
-                            else
-                            {
-                                //var id = new Guid();
-                                Guid.TryParse(item.Value.ToString(), out var id);
-                                fdto.Name = temp.FirstOrDefault(x => x.Id == id).DisplayAs;
-                            }
-                            //fdto.Name = item.Value.ToString();
-                            fdto.Count = (int)item.Count;
-                            facetFilters.Add(fdto);
-                        }
-                        facetResults.Add(new FacetDto() { Name = facet, Filters = facetFilters });
+                            facetResults.Add(new FacetDto() { Name = facet, Filters = facetFilters });
+                        }   
                     }
                 }
                 else // no search results, return an empty list of media requests.
@@ -791,7 +794,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     {
                         item.EodReportWith = null;
                     }     
-                    if ( item.RespondedAt >= localNow.Date && item.EodReportWith == null)
+                    if ( item.RespondedAt >= DateTime.Now.Date && item.EodReportWith == null)
                     {
                         item.EodReportWith = 0;
                     }
