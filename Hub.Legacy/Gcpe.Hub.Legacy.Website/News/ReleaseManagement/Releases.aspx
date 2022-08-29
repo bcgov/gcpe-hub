@@ -34,9 +34,9 @@
         <div class="release-types" style="width:100px;">
             <a href='<%= this.ResolveUrl("~/News/ReleaseManagement/" + Folder) %>/Factsheet' class='<%# Type == "Factsheet" ? "nav-menu-item selected-page" : "nav-menu-item" %>'>Factsheets</a>
         </div>
-         <div class="release-types" style="width:100px;">
+         <%--<div class="release-types" style="width:100px;">
             <a href='<%= this.ResolveUrl("~/News/ReleaseManagement/" + Folder) %>/Update' class='<%# Type == "Update" ? "nav-menu-item selected-page" : "nav-menu-item" %>'>Updates</a>
-        </div>
+        </div>--%>
         <div class="release-types" style="width:100px;">
             <a href='<%= this.ResolveUrl("~/News/ReleaseManagement/" + Folder) %>/Advisory' class='<%# Type == "Advisory" ? "nav-menu-item selected-page" : "nav-menu-item" %>'>Advisories</a>
         </div>

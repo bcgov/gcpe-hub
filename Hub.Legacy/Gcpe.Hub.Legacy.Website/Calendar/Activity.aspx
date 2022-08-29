@@ -2579,7 +2579,7 @@
                     return elem.text;
                 }).get(),
                 filter: "startswith",
-                maxSelectedItems: 18,
+                maxSelectedItems: 21,
                 value: translationsTextbox[0].value.split('~'),
                 filtering: onFilteringCustom,
                 select: onSelectCustom,

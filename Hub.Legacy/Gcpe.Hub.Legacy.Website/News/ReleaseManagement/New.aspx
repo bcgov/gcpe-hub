@@ -240,7 +240,6 @@
 
     <script id="pageReady">
 
-
         function SelectedReleaseType() {
             var selectedRadio = $("#<%= rblNewsType.ClientID %> input:checked:first");
             if (selectedRadio != null) {
@@ -749,7 +748,7 @@
                     <asp:ListItem runat="server" Selected="True" Text="Release" Value="1" />
                     <asp:ListItem runat="server" Text="Story" Value="2" />
                     <asp:ListItem runat="server" Text="Factsheet" Value="3" />
-                    <asp:ListItem runat="server" Text="Update" Value="4" />
+                    <%--<asp:ListItem runat="server" Text="Update" Value="4" />--%>
                     <asp:ListItem runat="server" Text="Advisory" Value="5" />
                 </asp:RadioButtonList>
             </div> 
