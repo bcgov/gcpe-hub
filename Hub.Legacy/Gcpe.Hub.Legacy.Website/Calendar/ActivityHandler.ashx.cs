@@ -1243,6 +1243,10 @@ namespace Gcpe.Hub.Calendar
                 {
                     release = "3rd party";
                 }
+                else if (origins.Contains("Federal"))
+                {
+                    release = "Fed";
+                }
                 if (release != null)
                 {
                     materials = materials == null ? release : release + "<br >" + materials;
