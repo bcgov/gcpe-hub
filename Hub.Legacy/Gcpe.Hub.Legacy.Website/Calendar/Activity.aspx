@@ -2322,6 +2322,9 @@
 
             $("#LASectionCheckBoxList td").show();
 
+            var checkedSections = $("#LASectionCheckBoxList input:not(:last):checked");
+            if (checkedSections.length !== 0 &&  $('#IsConfidentialCheckBox').prop('checked')) return; // Avoid unassigning the LA section when unchecking not for look ahead
+
             var laPos = 4; // Not For Look Ahead
             if (!$('#IsConfidentialCheckBox').prop('checked')) {
                 var isConfirmed = $("#IsDateConfirmed")[0].checked;
