@@ -915,6 +915,7 @@ namespace Gcpe.Hub.Calendar
             {
                 if (activity.StartDateTime >= reportEndDate) continue;
                 if (BelongsToAwarenessConsultationReport(activity, outlookDate) != null) continue;
+                if (activity.IsConfidential && activity.HqSection == 4) continue;
 
                 string materials = activity.CommunicationsMaterials;
                 var hqSection = (LookAheadSection)Math.Abs(activity.HqSection);
@@ -1242,6 +1243,10 @@ namespace Gcpe.Hub.Calendar
                 else if (origins.Contains("3rd party"))
                 {
                     release = "3rd party";
+                }
+                else if (origins.Contains("Federal"))
+                {
+                    release = "Fed";
                 }
                 if (release != null)
                 {

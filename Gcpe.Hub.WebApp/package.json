@@ -3,8 +3,14 @@
   "name": "asp.net",
   "private": true,
   "devDependencies": {
-    "gulp": "3.9.1",
-    "gulp-watch": "4.3.10",
-    "del": "2.2.2"
+    "del": "2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-watch": "4.3.10"
+  },
+  "dependencies": {
+    "typescript": "^2.3.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.9"
   }
 }

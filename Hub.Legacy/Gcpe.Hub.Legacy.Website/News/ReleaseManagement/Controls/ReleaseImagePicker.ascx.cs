@@ -53,8 +53,13 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                                         //TODO: where ri.IsActive
                                         orderby ri.SortOrder, ri.Name
                                         select ri;
-                    
-                    return releaseImages.ToDictionary(ri => ri.Id, ri => ri.Name);
+
+                    // hide these images by removing since we don't have an inactive flag in the db
+                    var imgDict = releaseImages.ToDictionary(ri => ri.Id, ri => ri.Name);                   
+                    imgDict.Remove(Guid.Parse("677d1038-ec69-47c8-ad5e-b2a4a333e774"));
+                    imgDict.Remove(Guid.Parse("bb8d51f8-5726-4a5f-9275-d08f67b29cf6"));
+
+                    return imgDict;
                 }
             }
         }
