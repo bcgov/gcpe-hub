@@ -130,7 +130,12 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     foreach (var facet in facets.Keys) // iterate in the order we asked for
                     {
-                        if (facet != "fromDate" | facet != "toDate")
+                        IList<FacetResult> facetResult;
+                        if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
+
+                        List<FilterDto> facetFilters = new List<FilterDto>();
+
+                        foreach (FacetResult item in facetResult)
                         {
                             FilterDto fdto = new FilterDto();
                             if (facet!= "resolutionId")
@@ -786,11 +791,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     {
                         item.EodReportWith = null;
                     }     
-<<<<<<< HEAD
-                    if ( item.RespondedAt >= DateTime.Now.Date && item.EodReportWith == null)
-=======
                     if ( item.RespondedAt >= localNow.Date && item.EodReportWith == null)
->>>>>>> ce9e449004407fb8a984a9ba06bed0f91aabfd82
                     {
                         item.EodReportWith = 0;
                     }

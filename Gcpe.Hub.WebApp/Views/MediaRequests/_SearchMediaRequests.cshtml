@@ -32,9 +32,9 @@
     <div id="facet-ui" class="col-xs-12 col-sm-3" style="padding-right:10px;" data-bind="visible: $root.searchHandler().displayFacetUI()" > 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default" data-bind="foreach: $root.searchHandler().facets">
-                <div id="facet-heading" class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-bind="text: displayName, attr: { href: '#facet-' + $index() }, click: hideMore.bind($data)"></a>
+                <div id="facet-heading" class="panel-heading" >
+                    <h4 class="panel-title"  >
+                        <a data-toggle="collapse" data-bind="text: displayName, attr: { href: '#facet-' + $index() }, click: hideMore.bind($data)" ></a>
                     </h4>
                 </div>
                 <div class="panel-collapse collapse in" data-bind="foreach: filters, attr: { id: 'facet-' + $index() }">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <div id="search-results" class="column-xs-12 col-sm-9" >
         <!-- End Facets UI-->

@@ -14,17 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="npm-shrinkwrap.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BundlerMinifier.Core" Version="2.6.362" />
     <PackageReference Include="Gcpe.Hub.Data" Version="1.3.5" />
     <PackageReference Include="Gcpe.NewsOnDemand.Client" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
@@ -45,10 +40,6 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="npm-shrinkwrap.json" />
   </ItemGroup>
 
 </Project>
