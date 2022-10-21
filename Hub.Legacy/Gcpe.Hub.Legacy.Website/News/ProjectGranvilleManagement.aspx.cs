@@ -12,6 +12,7 @@ namespace Gcpe.Hub.News
         protected void Page_Load(object sender, EventArgs e)
         {
             Hub.News.Site site = Master;
+            Response.Redirect("~/News/FileManagement");
             site.MenuText = "BC Gov News";
             site.AddAppItem("BC Gov Corporate Calendar", "~/Calendar");
             site.AddAppItem("News Release Management", "~/News/ReleaseManagement/Drafts");
@@ -20,7 +21,7 @@ namespace Gcpe.Hub.News
             site.AddNavigationItem("Carousel", "~/News/Carousel");
             site.AddNavigationItem("Emergency Pin", "~/News/EmergencySlideManagement");
             site.AddNavigationItem("Live Feed", "~/News/LiveFeedManagement");
-            site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
+            //site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
             if (!IsPostBack)
             {
                 SetControlText(GetFeedState());

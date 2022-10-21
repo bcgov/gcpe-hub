@@ -21,7 +21,7 @@ namespace Gcpe.Hub.News
             site.AddNavigationItem("Carousel", "~/News/Carousel");
             site.AddNavigationItem("Emergency Pin", "~/News/EmergencySlideManagement");
             site.AddNavigationItem("Live Feed", "~/News/LiveFeedManagement");
-            site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
+            //site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
