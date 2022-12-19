@@ -331,7 +331,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 {
                     ministries = new List<CategoryItem<Guid>>();
 
-                    var englishMinistries = from rl in db.MinistryLanguages where rl.LanguageId == 4105 orderby rl.Ministry.SortOrder, rl.Name select rl;
+                    var englishMinistries = from rl in db.MinistryLanguages where rl.LanguageId == 4105 && !rl.Name.Contains("Minister of State for") orderby rl.Ministry.SortOrder, rl.Name select rl;
 
                     foreach (var englishMinistry in englishMinistries)
                     {
