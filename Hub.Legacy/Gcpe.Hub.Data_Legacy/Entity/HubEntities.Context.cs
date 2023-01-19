@@ -15,7 +15,6 @@ namespace Gcpe.Hub.Data.Entity
     
     public partial class HubEntities : DbContext
     {
-        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
