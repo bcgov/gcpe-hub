@@ -414,7 +414,7 @@ namespace CorporateCalendar.Data
             public object CommunicationContacts { get; set; }
 
             [DisplayName("Comments/Notes")]
-            [StringLength(1000)]
+            [StringLength(2000)]
             public object Description { get; set; }
 
             [ScaffoldColumn(false)]
