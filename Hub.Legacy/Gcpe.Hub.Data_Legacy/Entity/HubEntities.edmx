@@ -2082,7 +2082,7 @@
           <Property Name="LanguageId" Type="Int32" Nullable="false" />
           <Property Name="PageImageId" Type="Guid" />
           <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Organizations" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Organizations" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Headline" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Subheadline" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Byline" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />

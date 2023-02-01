@@ -3,7 +3,7 @@
     [LanguageId]    INT              NOT NULL,
     [PageImageId]   UNIQUEIDENTIFIER NULL,
     [PageTitle]     NVARCHAR (50)    NOT NULL,
-    [Organizations] NVARCHAR (250)   NOT NULL,
+    [Organizations] NVARCHAR (500)   NOT NULL,
     [Headline]      NVARCHAR (255)   NOT NULL,
     [Subheadline]   NVARCHAR (100)   NOT NULL,
     [Byline]        NVARCHAR (250)   NOT NULL,
