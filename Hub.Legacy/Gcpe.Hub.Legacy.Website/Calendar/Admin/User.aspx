@@ -247,7 +247,7 @@
         //  
 
         $('#<%=DescriptionTextBox.ClientID %>').keyup(function () {
-            var count = 950 - this.value.length;
+            var count = 1950 - this.value.length;
             var adjustedCount = count <= 0 ? 0 : count; // always display a positive number
             $("#count").html("Characters remaining: " + adjustedCount);
         });

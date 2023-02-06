@@ -481,7 +481,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DisplayName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="JobTitle" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
