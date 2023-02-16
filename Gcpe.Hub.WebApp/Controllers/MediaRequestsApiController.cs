@@ -787,11 +787,11 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 foreach (var item in items.Where(mr => mr.LeadMinistry.Id == min.Id))
                 {
-                    if (min.EodLastRunDateTime.Value.Date < localNow.Date && item.EodReportWith !=null)
+                    if (min.EodLastRunDateTime.Value.Date < localNow.Date && item.RespondedAt == null)
                     {
                         item.EodReportWith = null;
-                    }     
-                    if ( item.RespondedAt >= localNow.Date && item.EodReportWith == null)
+                    }
+                    if (item.EodReportWith == null && item.RespondedAt != null)
                     {
                         item.EodReportWith = 0;
                     }
