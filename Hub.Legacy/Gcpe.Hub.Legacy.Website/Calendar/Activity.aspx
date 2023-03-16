@@ -1655,6 +1655,7 @@
                     UpdateLeadOrgPlaceholder();
                     SetChanged($.url().param('ActivityId'));
                     SetLASection();
+                    populateTags();
                 }
             });
 
@@ -1846,7 +1847,7 @@
                     if (allDayCategory !== $("#IsAllDayCheckBox").is(':checked')) {
                         $("#IsAllDayCheckBox").click();
                     }
-
+                    populateTags();
                     SetChanged($.url().param('ActivityId'));
                     SetLASection();
                 }
@@ -2297,6 +2298,35 @@
                 var oldCheckedSection = $("#LASectionCheckBoxList input:not(:last):checked");
                 oldCheckedSection.prop("checked", "");
                 newCheckedSection.prop("checked", true);
+            }
+        }
+
+        function populateTags() {
+
+            var selectedTags = $('#TagsDropDownList').val();
+            var selectMinistry = GetDropDownSelection('#ContactMinistryDropDownList');
+            var automaticSection = 'f3224320-3d65-4157-a11a-e99c24340934';
+            var selectedCategory = GetDropDownSelection('#CategoriesDropDownList');
+            if (selectedCategory == "Approved Release" || selectedCategory == "Proposed Release") {
+                if (selectMinistry == "WLRS" || selectMinistry == "EMCR" || selectMinistry == "WLRS" || selectMinistry == "ENV" || selectMinistry == "FOR") {
+
+                    if (selectedTags == null || !selectedTags?.includes(automaticSection) ) {
+                        SetChanged($.url().param('ActivityId'));
+                        arrayValues = selectedTags;
+                        if (selectedTags == null) {
+                            arrayValues = new Array(automaticSection);
+                        } else {
+                            arrayValues.push(automaticSection);
+                        }
+                        MultiSelectReset($('#TagsDropDownList'));
+                        for (var i = 0; i < arrayValues.length; i++) {
+                            
+                            $('#TagsDropDownList').multiselect("widget").find(":checkbox[value='" + arrayValues[i] + "']").each(function () {
+                                this.click();
+                            });                            
+                        }     
+                    } 
+                }
             }
         }
 
