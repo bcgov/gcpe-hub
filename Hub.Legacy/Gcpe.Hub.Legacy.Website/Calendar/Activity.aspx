@@ -2301,6 +2301,7 @@
             }
         }
 
+        // 4369: populate natural resources tag automatically for certain categories and lead ministries
         function populateTags() {
 
             var selectedTags = $('#TagsDropDownList').val();
