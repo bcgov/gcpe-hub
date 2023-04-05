@@ -487,3 +487,7 @@ span.ui-icon.ui-icon-arrowthick-2-n-s {margin-top:4px}
 .remove-margin-bottom {
     margin-bottom: 0;
 }
+
+#NewsSubscribeContainer .ui-multiselect-checkboxes {
+    height: 200px !important;
+}
