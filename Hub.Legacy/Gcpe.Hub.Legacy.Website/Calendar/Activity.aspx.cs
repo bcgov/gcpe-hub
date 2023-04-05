@@ -225,7 +225,6 @@ namespace Gcpe.Hub.Calendar
             {
                 //HQ users see all fields
                 DetailsRequiredFieldValidator.Visible = false;
-                SignificanceRequiredFieldValidator.Visible = false;
                 SchedulingFieldValidator.Visible = false;
             }
             else
@@ -236,14 +235,6 @@ namespace Gcpe.Hub.Calendar
                     LACommentsRow.Visible = false;
                     LAStatusRow.Visible = false;
                     laFieldset.Style.Add("display", "none");
-                }
-
-                if (string.IsNullOrEmpty(CurrentActiveActivity.Significance) && !Settings.Default.ShowSignificanceField)
-                {
-                    SignificanceRow.Style.Add("display", "none");
-                    // if we are not showing this field, do not validate - cannot enter data, cannot pass validation.
-                    SignificanceRequiredFieldValidator.Visible = false;
-                    SignificanceRequiredFieldValidator.Enabled = false;
                 }
 
                 if (string.IsNullOrEmpty(CurrentActiveActivity.Schedule) &&
