@@ -2306,7 +2306,7 @@
 
             var selectedTags = $('#TagsDropDownList').val();
             var selectMinistry = GetDropDownSelection('#ContactMinistryDropDownList');
-            var automaticSection = 'f3224320-3d65-4157-a11a-e99c24340934';
+            var automaticSection = '9B683894-298C-4660-8C3F-468EA9C92683';
             var selectedCategory = GetDropDownSelection('#CategoriesDropDownList');
             if (selectedCategory == "Approved Release" || selectedCategory == "Proposed Release") {
                 if (selectMinistry == "WLRS" || selectMinistry == "EMCR" || selectMinistry == "WLRS" || selectMinistry == "ENV" || selectMinistry == "FOR") {
