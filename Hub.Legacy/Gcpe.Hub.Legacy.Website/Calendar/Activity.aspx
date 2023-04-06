@@ -2613,7 +2613,7 @@
                     return elem.text;
                 }).get(),
                 filter: "startswith",
-                maxSelectedItems: 21,
+                maxSelectedItems: 23,
                 value: translationsTextbox[0].value.split('~'),
                 filtering: onFilteringCustom,
                 select: onSelectCustom,
