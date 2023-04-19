@@ -25,7 +25,7 @@ namespace Gcpe.Hub.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SignificanceIsRequired {
             get {
                 return ((bool)(this["SignificanceIsRequired"]));
