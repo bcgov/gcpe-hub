@@ -611,8 +611,8 @@
 
                 <asp:RadioButtonList ID="DisplayRadioButtonList" runat="server" RepeatLayout="Flow" RepeatDirection="Vertical">
                     <asp:ListItem Text="Show All" Value="3" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="My Ministries' Activities Only" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="My Activities Only" Value="4" onClick="MyActivitiesClick();"></asp:ListItem>
+                    <asp:ListItem Text="My Ministries' Activities Only" Value="2" ></asp:ListItem>
+                    <asp:ListItem Text="My Activities Only" Value="4" ></asp:ListItem>
                     <asp:ListItem Text="My Watchlist Only" Value="10"></asp:ListItem>
                 </asp:RadioButtonList>
 
@@ -771,6 +771,9 @@
                     }
                 });
             }
+        }
+        function MyMinistriesClick() {
+            comContactChange()
         }
 
         function initFilters() {

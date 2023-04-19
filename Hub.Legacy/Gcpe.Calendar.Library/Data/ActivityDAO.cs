@@ -214,7 +214,14 @@ public class ActivityDAO
                 //Exclude shared ministries AKA only the user's or searched ministry(ies)
                 if (ministryGuid == null)
                 {
-                    activitiesQuery = activitiesQuery.Where(a => dc.SystemUserMinistries.Any(e => e.MinistryId == a.ContactMinistryId && e.SystemUserId == systemUserId && e.IsActive));
+                    if (communicationContactId != null && communicationContactId != systemUserId)
+                    {
+                        activitiesQuery = activitiesQuery.Where(a => dc.SystemUserMinistries.Any(e => e.MinistryId == a.ContactMinistryId && e.IsActive));
+                    }
+                    else
+                    {
+                        activitiesQuery = activitiesQuery.Where(a => dc.SystemUserMinistries.Any(e => e.MinistryId == a.ContactMinistryId && e.SystemUserId == systemUserId && e.IsActive));
+                    }
                     if (ministry != null)
                     {
                         activitiesQuery = activitiesQuery.Where(a => a.Ministry != ministry); // all but that ministry (e.g CITENG)

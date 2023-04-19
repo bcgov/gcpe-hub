@@ -183,6 +183,10 @@ namespace Gcpe.Hub.Calendar
                 if (contactId == null)
                     contactId = customPrincipal.Id;
             }
+            else if (display == 2)
+            {
+                contactId = null;
+            }
 
             bool? excludeshared = display == 2 ? true : (bool?)null;
             bool? keyActivities = display == 4 ? true : (bool?)null;
