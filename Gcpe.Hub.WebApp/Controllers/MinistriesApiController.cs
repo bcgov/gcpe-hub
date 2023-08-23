@@ -78,7 +78,7 @@ namespace Gcpe.Hub.WebApp.Controllers
         {
             // add GCPE Media Relations in the ministry list
             var list =db.Ministry
-                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier") || m.Abbreviation == "JIC")
+                     .Where(m => m.IsActive && (m.Abbreviation == "GCPEMEDIA" || m.MinistryLanguage.Any()) && !m.DisplayName.StartsWith("Minister of State") && !m.DisplayName.EndsWith("Premier") || m.DisplayName.StartsWith("Joint Information Centre"))
                      .OrderBy(m => m.SortOrder).ThenBy(m => m.DisplayName);
             return list;
         }
@@ -109,7 +109,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                                 .Select(um => um.SystemUser)
                                 .Distinct()
                                 .Where(u => u.IsActive)
-                                .Where(u => u.CommunicationContact.Any(c => c.SortOrder != 0))
+                                .Where(u => u.CommunicationContact.Any(f => (f.SortOrder != 0 && f.IsActive == true)))
                                 .OrderBy(u => u.FullName)
                                 .Select(u => UsersApiController.ConvertToDto(u));
             }
