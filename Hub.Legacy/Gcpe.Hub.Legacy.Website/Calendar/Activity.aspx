@@ -1002,9 +1002,16 @@
                             <div style="display: inline-block; display: inline-block">
                                 <asp:Button ID="CloneButton" runat="server" OnClick="CloneButtonClick" Text="Clone" CausesValidation="false" />
                             </div>
-                            <div style="display: inline-block; display: inline-block; padding-bottom: 5px;">
-                                <asp:Button ID="DeleteButton" runat="server" OnClick="DeleteButton_Click" Text="Delete" CssClass="hidden" CausesValidation="false" />
+                             <% if (IsAdvancedUser) {%>
+                            <div style="display: inline-block; padding-bottom: 5px;" >
+                                <asp:Button ID="DeleteButton" runat="server" OnClick="DeleteButton_Click" Text="Delete" CssClass="hidden" CausesValidation="false"/>
                             </div>
+                             <%}%>
+                             <% if (!IsAdvancedUser) {%>
+                            <div style="display: inline-block; padding-bottom: 5px;" >
+                                <asp:Button ID="DeleteButton2" runat="server" Text="Delete" CssClass="hidden" CausesValidation="false"/>
+                            </div>
+                             <%}%>
                         </fieldset>
                      </div><div style="display: none;">
 
@@ -1198,13 +1205,30 @@
                 }).click(function (event) {
                     event.preventDefault();
                     var $this = $(this);
-                    var msg = "Please confirm and let the Corporate Calendar Team know the reason for deletion.";
+                    var msg = "Click OK to delete or Cancel to return to the activity";
                     jConfirm(msg, "Delete this activity", function (ok) {
                         if (!ok) return;
                         warn_on_unload = "";
                         $this.prev().click();
                     });
                 });
+            });
+            $('#DeleteButton2').button();
+            // Set up delete button
+            $('#DeleteButton2').each(function () {
+                $(this).hide().after('<button>').next().button
+                    ({
+                        icons: { primary: 'ui-icon-trash' },
+                        label: $(this).val()
+                    }).click(function (event) {
+                        event.preventDefault();
+                        var $this = $(this);
+                        var msg = "Please ask the Corporate Calendar Manager to delete this for you and provide a reason why.";
+                        jAlert(msg, "Contact the Corporate Calendar manager to delete this activity", function (ok) {
+                            if (ok) return;
+                            
+                        });
+                    });
             });
             $('#DeleteButton').button();
 

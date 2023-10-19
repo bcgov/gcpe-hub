@@ -41,6 +41,11 @@ namespace Gcpe.Hub.Calendar
             get { return Master.CustomPrincipal.IsInRole(SecurityRole.ReadOnly); }
         }
 
+        public bool IsAdvancedUser
+        {
+            get { return Master.CustomPrincipal.IsInRoleOrGreater(SecurityRole.Administrator); }
+        }
+
         bool? isHq = null;
         private bool IsHq
         {
