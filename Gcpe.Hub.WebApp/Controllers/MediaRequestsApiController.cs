@@ -1193,7 +1193,10 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         private string GenerateEodEmail(IEnumerable<MediaRequest> requests)
         {
-            var openMediaRequests = requests.Where(e => !e.RespondedAt.HasValue);
+            IEnumerable<MediaRequest> openMediaRequests = requests.Where(e => !e.RespondedAt.HasValue && e.DeadlineAt.HasValue).OrderBy(e => e.DeadlineAt).ThenByDescending(e => e.ModifiedAt);
+            IEnumerable<MediaRequest> openMediaRequests2 = requests.Where(e => !e.RespondedAt.HasValue && !e.DeadlineAt.HasValue).OrderByDescending(e => e.ModifiedAt);
+            //IEnumerable<MediaRequest> openMediaRequests3 = requests.Where(e => !e.RespondedAt.HasValue).OrderBy(e => e.DeadlineAt).ThenByDescending(e => e.ModifiedAt);
+            openMediaRequests = openMediaRequests.Concat(openMediaRequests2);
 
             var closedMediaRequests = requests.Where(e => e.RespondedAt.HasValue);
 
@@ -1232,7 +1235,15 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     placeholder += "Unknown ";
                 }
-                mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br /></p>";
+                if (mr.DeadlineAt < DateTime.Now || mr.DeadlineAt == null)
+                {
+                    mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br />" + "<strong>Deadline:</strong> <span style='color:red'>{{Deadline}}</span>" + " </p>";
+                }
+                else
+                {
+                    mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br />" + "<strong>Deadline:</strong> <span style='color:green'>{{Deadline}}</span>" + " </p>";
+                }
+    
                 mediaString = mediaString.Replace("{{EodReportWith}}", EodReportWithString(mr.EodReportWith));
                 string contacts = "";
                 //TODO: Change to a for loop
@@ -1251,6 +1262,18 @@ namespace Gcpe.Hub.WebApp.Controllers
                 }
                 mediaString = mediaString.Replace("{{Contacts}}", contacts + "<br />");
                 mediaString = mediaString.Replace("{{Topic}}", mr.RequestTopic);
+                if (mr.DeadlineAt == null)
+                {
+                    mediaString = mediaString.Replace("{{Deadline}}", "ASAP");
+                }
+                else if (mr.DeadlineAt < DateTime.Now)
+                {
+                    mediaString = mediaString.Replace("{{Deadline}}", "OVERDUE - " + mr.DeadlineAt?.ToString("MM/dd/yyyy HH:mm:ss"));
+                } else
+                {
+                    mediaString = mediaString.Replace("{{Deadline}}", mr.DeadlineAt?.ToString("MM/dd/yyyy HH:mm:ss"));
+                }
+                
             }
             sb.Append(mediaString);
 
@@ -1271,7 +1294,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             string closedMediaString = "";
             foreach (MediaRequest mr in closedMediaRequests)
             {
-                closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
+                closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul>" + "<strong>Deadline:</strong> <span style='color:red'>{{Deadline}}</span>" + " </p>";
                 closedMediaString = closedMediaString.Replace("{{EodReportWith}}", mr.EodReportWith.ToString());
                 string contacts = "";
                 //foreach (MediaRequestContact contact in mr.MediaRequestContact)
@@ -1289,6 +1312,14 @@ namespace Gcpe.Hub.WebApp.Controllers
                 closedMediaString = closedMediaString.Replace("{{Topic}}", mr.RequestTopic);
                 closedMediaString = closedMediaString.Replace("{{Resolution}}", mr.Resolution.DisplayAs);
                 closedMediaString = closedMediaString.Replace("{{Response}}", mr.Response.Replace("\r\n", "\n").Replace("\n", "<br />"));
+                if (mr.DeadlineAt == null)
+                {
+                    closedMediaString = closedMediaString.Replace("{{Deadline}}", "ASAP");
+                }
+                else
+                {
+                    closedMediaString = closedMediaString.Replace("{{Deadline}}", mr.DeadlineAt.ToString());
+                }
             }
             sb.Append(closedMediaString);
             sb.Append("</Div></body></html>");
