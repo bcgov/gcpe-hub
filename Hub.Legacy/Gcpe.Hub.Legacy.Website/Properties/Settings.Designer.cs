@@ -25,15 +25,6 @@ namespace Gcpe.Hub.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SignificanceIsRequired {
-            get {
-                return ((bool)(this["SignificanceIsRequired"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SchedulingIsRequired {
             get {
@@ -263,6 +254,15 @@ namespace Gcpe.Hub.Properties {
         public global::System.Uri HelpFileUri {
             get {
                 return ((global::System.Uri)(this["HelpFileUri"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SignificanceIsRequired {
+            get {
+                return ((bool)(this["SignificanceIsRequired"]));
             }
         }
         

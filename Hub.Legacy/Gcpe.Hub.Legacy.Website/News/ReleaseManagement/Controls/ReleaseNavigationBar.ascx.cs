@@ -82,12 +82,44 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
 
             message.Subject = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT: " : "") + Model.FirstHeadline;
             //message.Subject = "News Release Item for " + (string.IsNullOrEmpty(Model.Reference) ? "Draft" : Model.Reference);
+            if (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "")
+            {
+                message.Subject = "DRAFT: ";
+            }
+            else
+            {
+                if (Model.ReleaseTypeId == ReleaseType.Advisory)
+                {
+                    message.Subject = "FINAL: ";
+                }
+            }
+            message.Subject += Model.FirstHeadline;
 
             message.IsBodyHtml = true;
 
             //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
             //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
-            string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.ReleaseTypeId == ReleaseType.Release ? Model.Key : Model.Reference)) + ".pdf";
+            string fileName;
+
+            if (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == ""){
+                fileName = "DRAFT";
+            }
+            else
+            {
+                if (Model.ReleaseTypeId == ReleaseType.Release)
+                {
+                    fileName = Model.Key;
+                }
+                else if (Model.ReleaseTypeId == ReleaseType.Advisory)
+                {
+                    fileName = "FINAL-" + Model.Key;
+                }
+                else
+                {
+                    fileName = Model.Reference;
+                }
+            }
+            fileName += ".pdf";
 
             string body = "";
             body += "Please refer to the files attached to this email. The following is the summary of the News Release" + "\r\n";
