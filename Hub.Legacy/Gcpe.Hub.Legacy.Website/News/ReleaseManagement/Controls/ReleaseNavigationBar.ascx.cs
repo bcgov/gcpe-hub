@@ -82,27 +82,27 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
 
             message.Subject = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT: " : "") + Model.FirstHeadline;
             //message.Subject = "News Release Item for " + (string.IsNullOrEmpty(Model.Reference) ? "Draft" : Model.Reference);
+            string fileName;
             if (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "")
-            {
-                message.Subject = "DRAFT: ";
-            }
-            else
             {
                 if (Model.ReleaseTypeId == ReleaseType.Advisory)
                 {
-                    message.Subject = "FINAL: ";
+                    if (Model.LeadOrganization == "" && !string.IsNullOrEmpty(Model.Reference))
+                    {
+                        message.Subject = "FINAL: ";
+                        fileName = "FINAL-" + Model.Key;
+                    }
+                    else
+                    {
+                        message.Subject = "DRAFT: ";
+                        fileName = "DRAFT";
+                    }
                 }
-            }
-            message.Subject += Model.FirstHeadline;
-
-            message.IsBodyHtml = true;
-
-            //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
-            //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
-            string fileName;
-
-            if (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == ""){
-                fileName = "DRAFT";
+                else
+                {
+                    message.Subject = "DRAFT: ";
+                    fileName = "DRAFT";
+                }   
             }
             else
             {
@@ -112,13 +112,29 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                 }
                 else if (Model.ReleaseTypeId == ReleaseType.Advisory)
                 {
-                    fileName = "FINAL-" + Model.Key;
+                    if (Model.LeadOrganization == "")
+                    {
+                        fileName = "FINAL-" + Model.Key;
+                    }
+                    else
+                    {
+                        fileName = "FINAL-" + Model.Reference;
+                    }
+                    
+                    message.Subject = "FINAL: ";
                 }
                 else
                 {
                     fileName = Model.Reference;
                 }
             }
+            message.Subject += Model.FirstHeadline;
+
+            message.IsBodyHtml = true;
+
+            //string fileName = (string.IsNullOrEmpty() ? "Draft_" + Model.DraftReference : Model.Reference) + "_" + DateTimeOffset.Now.ToString("yyyyMMddhhMMss") + ".pdf";
+            //string fileName = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT" : (Model.Reference == "" ? "NEWS-" + Model.ReleaseUri.AbsolutePath.Split('/').Last() : Model.Reference)) + ".pdf";
+
             fileName += ".pdf";
 
             string body = "";
