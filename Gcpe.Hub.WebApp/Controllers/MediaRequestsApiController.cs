@@ -1193,7 +1193,10 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         private string GenerateEodEmail(IEnumerable<MediaRequest> requests)
         {
-            var openMediaRequests = requests.Where(e => !e.RespondedAt.HasValue);
+            IEnumerable<MediaRequest> openMediaRequests = requests.Where(e => !e.RespondedAt.HasValue && e.DeadlineAt.HasValue).OrderBy(e => e.DeadlineAt).ThenByDescending(e => e.ModifiedAt);
+            IEnumerable<MediaRequest> openMediaRequests2 = requests.Where(e => !e.RespondedAt.HasValue && !e.DeadlineAt.HasValue).OrderByDescending(e => e.ModifiedAt);
+            //IEnumerable<MediaRequest> openMediaRequests3 = requests.Where(e => !e.RespondedAt.HasValue).OrderBy(e => e.DeadlineAt).ThenByDescending(e => e.ModifiedAt);
+            openMediaRequests = openMediaRequests.Concat(openMediaRequests2);
 
             var closedMediaRequests = requests.Where(e => e.RespondedAt.HasValue);
 
@@ -1232,7 +1235,29 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     placeholder += "Unknown ";
                 }
-                mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br /></p>";
+                /*
+                mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br />" + "<strong>Deadline:</strong> <span style='color:red'>{{Deadline}}</span>" + " </p>";
+                */
+
+                if (mr.RequestParentId != null)
+                {
+                    mediaString += "<p>{{Contacts}}ISSUE: <span><span bgcolor='#428bca' style='border:2px solid #428bca; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #428bca;'>Follow-up</span>" +
+                        " {{Topic}}</span><br />STATUS: " + placeholder + "{{EodReportWith}}<br />";
+                } else
+                {
+                    mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br />";
+                }
+                
+                if (mr.DeadlineAt < DateTime.Now)
+                {
+                    mediaString += "<strong>Deadline:</strong> <span style='color:#A94442;'>" +
+                        "<span bgcolor='#A94442' style='border: 2px solid #A94442; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #A94442;'>OVERDUE</span> {{Deadline}}</span>" + " </p>";
+                }
+                else
+                {
+                    mediaString += "<strong>Deadline:</strong> <span style='color:#A94442;'>{{Deadline}}</span>" + " </p>";
+                }
+                
                 mediaString = mediaString.Replace("{{EodReportWith}}", EodReportWithString(mr.EodReportWith));
                 string contacts = "";
                 //TODO: Change to a for loop
@@ -1249,8 +1274,17 @@ namespace Gcpe.Hub.WebApp.Controllers
                     //contacts += "<b>" + array[i].Contact.FirstName + " " + array[i].Contact.LastName + "</b>" + " - " + array[i].Company.CompanyName;
                     contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " + array[i].Company.CompanyName;
                 }
-                mediaString = mediaString.Replace("{{Contacts}}", contacts + "<br />");
+                mediaString = mediaString.Replace("{{Contacts}}", "<strong>" + contacts + "</strong>" + "<br />");
                 mediaString = mediaString.Replace("{{Topic}}", mr.RequestTopic);
+                
+                if (mr.DeadlineAt == null)
+                {
+                    mediaString = mediaString.Replace("{{Deadline}}", "ASAP");
+                } else
+                {
+                    mediaString = mediaString.Replace("{{Deadline}}", mr.DeadlineAt?.ToLocalTime().ToString("dddd, MMMM dd, yyyy h:mm tt"));
+                }
+                
             }
             sb.Append(mediaString);
 
@@ -1271,7 +1305,16 @@ namespace Gcpe.Hub.WebApp.Controllers
             string closedMediaString = "";
             foreach (MediaRequest mr in closedMediaRequests)
             {
-                closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
+                //closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
+                if (mr.RequestParentId != null)
+                {
+                    closedMediaString += "<p>{{Contacts}}ISSUE: <span><span style='border:1px solid #428bca; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #428bca;'>Follow-up</span> {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>"; 
+                }
+                else
+                {
+                    closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>";
+                }
+
                 closedMediaString = closedMediaString.Replace("{{EodReportWith}}", mr.EodReportWith.ToString());
                 string contacts = "";
                 //foreach (MediaRequestContact contact in mr.MediaRequestContact)
@@ -1285,7 +1328,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                         contacts += "; ";
                     contacts += array[i].Contact.FirstName + " " + array[i].Contact.LastName + " - " + array[i].Company.CompanyName;
                 }
-                closedMediaString = closedMediaString.Replace("{{Contacts}}", contacts + "<br />");
+                closedMediaString = closedMediaString.Replace("{{Contacts}}", "<strong>" + contacts + "</strong>" + "<br />");
                 closedMediaString = closedMediaString.Replace("{{Topic}}", mr.RequestTopic);
                 closedMediaString = closedMediaString.Replace("{{Resolution}}", mr.Resolution.DisplayAs);
                 closedMediaString = closedMediaString.Replace("{{Response}}", mr.Response.Replace("\r\n", "\n").Replace("\n", "<br />"));
@@ -1306,7 +1349,16 @@ namespace Gcpe.Hub.WebApp.Controllers
             //closedMediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: {{Resolution}}<br /><ul style=\"margin-top: -8px;\"><li>{{Response}}</li></ul></p>"
             template += "<p style=\"padding-right: 8px; vertical-align:top;\">";
             template += "<b>Deadline</b>  ";
-            template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";
+            /*template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";*/
+            if (dto.DeadlineAt < DateTime.Now)
+            {
+                template += "<span style=\"color:black;\">&#8203;</span><span style='color:#A94442;'>" +
+                    "<span bgcolor='#A94442' style='border: 2px solid #A94442; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #A94442;'>OVERDUE</span> {{Deadline}}</span><br />";
+            }
+            else
+            {
+                template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";
+            }
             if (isClosed) // add responded date to closed request
             {
                 template += "<b>Responded</b>  ";
@@ -1319,17 +1371,20 @@ namespace Gcpe.Hub.WebApp.Controllers
                 template += "<br /><b>Response</b><br />";
                 template += "<span style=\"color:black;\">{{Response}}</span><br />";
             }
+
+            if (!isClosed || (isClosed && dto.ParentRequest != null)) // only add background to open requests, remove if closed (or sending a closed follow-up to myself)
+            {
+                template += "<br /><b>Background</b><br />";
+                template += "<span style=\"color:black;\">{{Background}}</span><br />";
+            }
+
             if (!isClosed)  // only add recommendation to open requests, remove if closed
             {
                 template += "<br /><b>Recommendation</b>";
                 template += "<span style=\"color:black;\"></span>";
                 template += "</p>";
             }
-            if (!isClosed || (isClosed && dto.ParentRequest != null)) // only add background to open requests, remove if closed (or sending a closed follow-up to myself)
-            {
-                template += "<br /><b>Background</b><br />";
-                template += "<span style=\"color:black;\">{{Background}}</span><br />";
-            }
+            
 
 
 
@@ -1402,13 +1457,13 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (dto.DeadlineAt.HasValue)
             {
-                template = template.Replace("{{DeadlineColor}}", "red");
+                template = template.Replace("{{DeadlineColor}}", "#A94442");
                 template = template.Replace("{{Deadline}}", dto.DeadlineAt?.DateTime.ToLocalTime().ToString("f"));
             }
             else //removing ASAP
             {
                 //template = template.Replace("{{DeadlineColor}}", "black");
-                template = template.Replace("{{DeadlineColor}}", "red");
+                template = template.Replace("{{DeadlineColor}}", "#A94442");
                 template = template.Replace("{{Deadline}}", "ASAP");
             }
 
