@@ -80,7 +80,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             message.From = new System.Net.Mail.MailAddress(Page.User.Identity.GetEmailAddress(), Page.User.Identity.GetDisplayName());
             message.To.Add(message.From);
 
-            message.Subject = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT: " : "") + Model.FirstHeadline;
+            message.Subject = (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "" ? "DRAFT: " : "");
             //message.Subject = "News Release Item for " + (string.IsNullOrEmpty(Model.Reference) ? "Draft" : Model.Reference);
             string fileName;
             if (string.IsNullOrEmpty(Model.Reference) || Model.LeadOrganization == "")

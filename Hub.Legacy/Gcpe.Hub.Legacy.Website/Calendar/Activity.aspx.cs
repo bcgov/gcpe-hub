@@ -406,6 +406,8 @@ namespace Gcpe.Hub.Calendar
 
                 itemToRemove = ContactMinistryDropDownList.Items.FindByText("UNK");
                 if (itemToRemove != null) { ContactMinistryDropDownList.Items.Remove(itemToRemove); }
+                itemToRemove = ContactMinistryDropDownList.Items.FindByText("BCWS");
+                if (itemToRemove != null) { ContactMinistryDropDownList.Items.Remove(itemToRemove); }
             }
 
             PopulateCommContactDropDownList(CurrentActiveActivity.ContactMinistryId);
