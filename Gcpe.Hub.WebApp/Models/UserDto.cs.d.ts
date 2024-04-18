@@ -4,6 +4,7 @@
 		displayAs: string;
 		isEditor: boolean;
 		isAdvanced: boolean;
+		isBCWSOnly: boolean;
 		workTelephone: string;
 		workTelephoneExtension: string;
 		mobileTelephone: string;

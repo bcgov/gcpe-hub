@@ -5,6 +5,7 @@
    // public isCurrent: KnockoutObservable<boolean>;
     public isEditor: KnockoutObservable<boolean>;
     public isAdvanced: KnockoutObservable<boolean>;
+    public isBCWSOnly: KnockoutObservable<boolean>;
     public mobileTelephone: KnockoutObservable<string>;
     public workTelephone: KnockoutObservable<string>;
     public workTelephoneExtension: KnockoutObservable<string>;
@@ -13,7 +14,7 @@
     constructor(data: server.UserDto) {
         this.id = ko.observable(data.id);
         this.displayAs = ko.observable(data.displayAs);
-        //this.isCurrent = ko.observable(false);
+        this.isBCWSOnly = ko.observable(data.isBCWSOnly);
         this.isEditor = ko.observable(data.isEditor);
         this.isAdvanced = ko.observable(data.isAdvanced);
         this.mobileTelephone = ko.observable(data.mobileTelephone);

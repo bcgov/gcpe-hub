@@ -7,10 +7,8 @@ namespace Gcpe.Hub.WebApp.Controllers
     //[ApiExplorerSettings(IgnoreApi = true)]
     public class MediaRequestsController : BaseController
     {
-        protected readonly IConfiguration Configuration;
-        public MediaRequestsController(HubDbContext db, IConfiguration configuration) : base(db)
+        public MediaRequestsController(HubDbContext db, IConfiguration configuration) : base(db, configuration)
         {
-            this.Configuration = configuration;
         }
 
         public IActionResult App()

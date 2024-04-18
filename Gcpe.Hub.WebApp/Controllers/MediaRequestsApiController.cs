@@ -26,14 +26,14 @@ namespace Gcpe.Hub.WebApp.Controllers
         readonly string HQMinistry = "GCPEMedia";
         static HttpClient Client = new HttpClient();
         static int PageSize = 40;
-        private readonly IConfiguration Configuration;
+        string excludedMinistry;
 
-        public MediaRequestsApiController(HubDbContext db, MailProvider mailProvider, IConfiguration configuration) : base(db)
+        public MediaRequestsApiController(HubDbContext db, MailProvider mailProvider, IConfiguration configuration) : base(db, configuration)
         {
             this.mailProvider = mailProvider;
-            Configuration = configuration;
+            excludedMinistry = Configuration.GetValue<string>("ExcludedMinistry");
         }
-
+       
         [HttpGet]
         public async Task<IEnumerable<MediaRequestDto>> Get(string responded = null,
             int _skip = 0,
@@ -46,12 +46,21 @@ namespace Gcpe.Hub.WebApp.Controllers
             DateTimeOffset? modifiedAfter = null)
         {
             string suffixClause = "";
+
             if (ministries != null)
             {
-                string ministryInClause = "IN('" + SqlHelper.ProtectAgainstSqlInjection(ministries).Replace(",", "', '") + "')";
+                string ministryInClause  = "IN('" + SqlHelper.ProtectAgainstSqlInjection(ministries).Replace(",", "', '") + "')";
                 suffixClause = " LEFT JOIN media.MediaRequestSharedMinistry s ON rq.Id = s.MediaRequestId";
-                suffixClause += " WHERE (LeadMinistryId " + ministryInClause + " OR s.MinistryId " + ministryInClause + ") ";
+                suffixClause += " WHERE (LeadMinistryId " + ministryInClause + " OR s.MinistryId " + ministryInClause + " OR TakeOverRequestMinistryId " + ministryInClause + ") ";
             }
+
+            if (UserMe.IsBCWSOnly)
+            {
+                var displayname = db.Ministry.Where(e => e.Abbreviation == excludedMinistry).Select(e => e.Id).First();
+                string ministryInClause = "IN('" + SqlHelper.ProtectAgainstSqlInjection(displayname.ToString()).Replace(",", "', '") + "')";
+                suffixClause = " LEFT JOIN media.MediaRequestSharedMinistry s ON rq.Id = s.MediaRequestId";
+                suffixClause += " WHERE (LeadMinistryId " + ministryInClause + " OR s.MinistryId " + ministryInClause + " OR TakeOverRequestMinistryId " + ministryInClause + ") ";
+            }   
 
             // responded == "all" - nothing to filter out!
             if (responded == "open")
@@ -110,8 +119,14 @@ namespace Gcpe.Hub.WebApp.Controllers
                 {
                     resolutionId = temp.FirstOrDefault(x => x.DisplayAs == resolutionId).Id.ToString();
                 }
-                // get a list of IDs from the search service.
+
                 var facets = new Dictionary<string, string> { { "leadMinistryDisplayName", leadMinistryDisplayName }, { "companyNames", companyNames }, { "contactNames", contactNames }, { "resolutionId", resolutionId } };
+                if (UserMe.IsBCWSOnly)
+                {
+                    var displayname = db.Ministry.Where(e => e.Abbreviation == excludedMinistry).Select(e => e.DisplayName).First();
+                    facets = new Dictionary<string, string> { { "leadMinistryDisplayName", displayname }, { "companyNames", companyNames }, { "contactNames", contactNames }, { "resolutionId", resolutionId } };
+                }
+                
                 DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
@@ -192,7 +207,15 @@ namespace Gcpe.Hub.WebApp.Controllers
             newUri = QueryHelpers.AddQueryString(newUri, "limit", _limit.ToString());
             foreach (var facet in facets)
             {
-                newUri = QueryHelpers.AddQueryString(newUri, "facets", facet.Key);
+                if (facet.Key== "leadMinistryDisplayName")
+                {
+                    newUri = QueryHelpers.AddQueryString(newUri, "facets", facet.Key + ",count:0");
+                }
+                else
+                {
+                    newUri = QueryHelpers.AddQueryString(newUri, "facets", facet.Key);
+                }
+                
                 if (!string.IsNullOrEmpty(facet.Value))
                 {
                     string azureFormat = facet.Key.EndsWith('s') ? "{0}/any(t: t eq '{1}')" : "{0} eq '{1}'";
@@ -301,7 +324,10 @@ namespace Gcpe.Hub.WebApp.Controllers
 
         private async Task<IList<MediaRequest>> QueryMediaRequestsAsync(IQueryable<MediaRequest> query, Boolean idsOnly)
         {
+           
+
             IList<MediaRequest> list = await query.ToListAsync();
+
             /*.Include(e => e.LeadMinistry) // very inefficient and can't use with raw SQL (for text search)
             .Include(e => e.ResponsibleUser)
             .Include(e => e.CreatedBy)
@@ -424,11 +450,39 @@ namespace Gcpe.Hub.WebApp.Controllers
             mediaRequest.CreatedAt = mediaRequest.ModifiedAt;
             mediaRequest.CreatedBy = mediaRequest.ModifiedBy;
 
+            var systemUserMe = db.SystemUser.First(e => e.RowGuid == UserMe.Id);
+
+            //get all open and closed request for those ministries.
+            var listMinistries = await db.Ministry
+                                         .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
+                                         .ToListAsync();
+
+            var listMinistryIds = listMinistries.Select(e => e.Abbreviation).ToArray();
+            Guid guidid = listMinistries.Where(e => e.Abbreviation == excludedMinistry).Select(e => e.Id).FirstOrDefault();
+            
             db.MediaRequest.Add(mediaRequest);
 
             await db.SaveChangesAsync();
             // update dto with the new ID.
             dto.Id = mediaRequest.Id;
+
+            // auto share with FOR and EMCR for BCWS
+            if (!string.IsNullOrEmpty(excludedMinistry) && listMinistryIds.Length==1 && listMinistryIds.Contains(excludedMinistry))
+            {
+                IList<MediaRequestSharedMinistry> existingSharedMinistries = db.MediaRequestSharedMinistry.Where(e => e.MediaRequestId == mediaRequest.Id).ToList();
+                var ministrylist = await db.Ministry.Where(e => e.Abbreviation == "FOR" || e.Abbreviation == "EMCR").ToListAsync();
+                foreach (var sharedMinistry in ministrylist) {
+                    if (!existingSharedMinistries.Any(m => m.MinistryId == sharedMinistry.Id))
+                    {
+                        await db.MediaRequestSharedMinistry.AddAsync(new MediaRequestSharedMinistry
+                        {
+                            MediaRequestId = mediaRequest.Id,
+                            MinistryId = sharedMinistry.Id
+                        });
+                    }
+                }
+                await db.SaveChangesAsync();
+            }
 
             if (triggerEmail || onlyEmailMyself)
             {
@@ -762,14 +816,13 @@ namespace Gcpe.Hub.WebApp.Controllers
                                          .ToListAsync();
 
             var listMinistryIds = listMinistries.Select(e => e.Id).ToArray();
-
             var openMediaRequests = await db.MediaRequest
                                             .Where(e => e.RespondedAt == null || e.RespondedAt >= DateTimeOffset.Now.Date)
                                             .Where(e => listMinistryIds.Contains(e.LeadMinistryId))
                                             .Where(e => e.IsActive)
                                             .OrderBy(e => e.LeadMinistry.SortOrder)
                                             .ThenBy(e => e.LeadMinistry.Abbreviation)
-                                            .ThenByDescending(e => e.RespondedAt)         
+                                            .ThenByDescending(e => e.RespondedAt)
                                             .ThenBy(e => e.RequestedAt)
                                             .ToListAsync();
 
