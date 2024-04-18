@@ -14,6 +14,8 @@ namespace Gcpe.Hub.Website.Models
 
         public bool IsAdvanced { get; set; }
 
+        public bool IsBCWSOnly { get; set; }
+
         public string WorkTelephone { get; set; }
 
         public string WorkTelephoneExtension { get; set; }
