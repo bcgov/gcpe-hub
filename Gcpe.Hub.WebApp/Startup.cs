@@ -8,18 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Gcpe.Hub.WebApp
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath);
-            if (env.IsDevelopment())
-                builder.AddUserSecrets<Startup>();
-            if (!System.Diagnostics.Debugger.IsAttached)
-                builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            
+            builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -32,7 +31,7 @@ namespace Gcpe.Hub.WebApp
             // Add framework services.
             services.AddMvc(options => options.EnableEndpointRouting = false).AddNewtonsoftJson();
 
-            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HubDbContext")));
+            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration["HubDbContext"]));
                                                                   // deprecated in ef core 5.0
                                                                   // .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
 
@@ -63,7 +62,7 @@ namespace Gcpe.Hub.WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // not longer needed in netcore 2.0
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
