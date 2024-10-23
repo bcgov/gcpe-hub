@@ -30,8 +30,8 @@ namespace Gcpe.Hub.WebApp
         {
             // Add framework services.
             services.AddMvc(options => options.EnableEndpointRouting = false).AddNewtonsoftJson();
-
-            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration["HubDbContext"]));
+            // https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-8.0/breaking-changes#sqlserver-contains-compatibility
+            services.AddDbContext<HubDbContext>(options => options.UseSqlServer(Configuration["HubDbContext"], o => o.UseCompatibilityLevel(120)));
                                                                   // deprecated in ef core 5.0
                                                                   // .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)));
 
