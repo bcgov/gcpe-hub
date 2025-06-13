@@ -10,7 +10,7 @@
 namespace Gcpe.Hub.News {
     
     
-    public partial class ProjectGranvilleManagement {
+    public partial class ProjectBlueBridgeManagement {
         
         /// <summary>
         /// enabled_Label control.

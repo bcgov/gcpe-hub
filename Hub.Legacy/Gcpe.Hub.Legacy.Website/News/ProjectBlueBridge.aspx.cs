@@ -5,14 +5,13 @@ using legacy::Gcpe.Hub.Data.Entity;
 
 namespace Gcpe.Hub.News
 {
-    public partial class ProjectGranvilleManagement : Hub.News.Page
+    public partial class ProjectBlueBridgeManagement : Hub.News.Page
     {
         string appSetting = "granville";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Hub.News.Site site = Master;
-            Response.Redirect("~/News/FileManagement");
             site.MenuText = "BC Gov News";
             site.AddAppItem("BC Gov Corporate Calendar", "~/Calendar");
             site.AddAppItem("News Release Management", "~/News/ReleaseManagement/Drafts");
@@ -21,7 +20,7 @@ namespace Gcpe.Hub.News
             site.AddNavigationItem("Carousel", "~/News/Carousel");
             site.AddNavigationItem("Emergency Pin", "~/News/EmergencySlideManagement");
             site.AddNavigationItem("Live Feed", "~/News/LiveFeedManagement");
-            //site.AddNavigationItem("Project Granville", "~/News/ProjectGranvilleManagement");
+            site.AddNavigationItem("Project Blue Bridge", "~/News/ProjectBlueBridge");
             if (!IsPostBack)
             {
                 SetControlText(GetFeedState());
@@ -37,8 +36,8 @@ namespace Gcpe.Hub.News
 
         private void SetControlText(bool enabled)
         {
-            enabled_Label.InnerHtml = enabled ? "Project Granville is Enabled" : "Project Granville is Disabled";
-            save_Button.Text = enabled ? "Disable Project Granville" : "Enable Project Granville";
+            enabled_Label.InnerHtml = enabled ? "Project Blue Bridge is Enabled" : "Project Blue Bridge is Disabled";
+            save_Button.Text = enabled ? "Disable Project Blue Bridge" : "Enable Project Blue Bridge";
         }
 
         private bool GetFeedState()
