@@ -327,6 +327,30 @@
         .editable-select {
             width: 81px;
         }
+
+        /* Alert card */
+        .alert-warning {
+            display: inline-flex; 
+            align-items: center;
+            gap: 8px;
+            background: #FFF3CD;
+            border: 1px solid #FFE8A1;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            line-height: 1.3;
+            margin: 8px 0;
+        }
+
+        .alert-warning .alert-icon svg {
+            display: block;
+            width: 18px;
+            height: 18px;
+            color: black;
+        }
+
+        #endDateWarning { display: none; }
     </style>
 
 
@@ -717,6 +741,18 @@
                                                 </asp:CustomValidator>
                                             </div>
                                         </div>
+                                        <div id="endDateWarning" class="alert-warning ui-widget" role="status" aria-live="polite">
+                                          <span class="alert-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="lucide lucide-triangle-alert">
+                                              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                                              <path d="M12 9v4"></path>
+                                              <path d="M12 17h.01"></path>
+                                            </svg>
+                                          </span>
+                                          <span class="alert-text">The selected end date is in the past.</span>
+                                       </div>
                                     </td>
                                 </tr>
                             </table>
@@ -1057,7 +1093,6 @@
 
         var idleTime = 0;
         $(document).ready(function () {
-
             // Increment the idle time counter every minute.
             var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
@@ -1102,6 +1137,8 @@
             if (withinFreezeWindow) {
                 checkDailyChangeFreeze();
             }
+
+            
 
             // Add tool tips
             $("#DetailsTextBox").tooltip({
@@ -1207,6 +1244,21 @@
                 });
             });
             $('#DeleteButton').button();
+
+            var isAdmin = <%= (Master.CustomPrincipal.RoleId >= 4).ToString().ToLower() %>;
+            if (!isAdmin) {
+                $('#DeleteButton').prop('disabled', true);
+            }
+
+            if (!isAdmin) {
+                $('#DeleteButton').next('button').tooltip({
+                    title: "<p align='left'>Activities must be deleted by calendar admins only. Please email <b>Activity ID</b> with <b>reason for deletion</b> to GcpeCorporateCalendar@gov.bc.ca</p>",
+                    delay: 250,
+                    html: true,
+                    placement: "left"
+                });
+                $('#DeleteButton').next('button').button("disable");
+            }
 
             // Set up clone button
             $('#CloneButton').each(function () {
@@ -1463,6 +1515,29 @@
                     $(this).change();
 
                     SetConfirmedLabel();
+                }
+            });
+
+            $('#EndDate').on('change blur', function () {
+                var val = $(this).val().trim();
+                if (!val) {
+                    $('#endDateWarning').hide();
+                    return;
+                }
+
+                var entered = new Date(val);
+                if (isNaN(entered)) {
+                    $('#endDateWarning').hide();
+                    return;
+                }
+
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (entered < today) {
+                    $('#endDateWarning').css('display', 'inline-flex');
+                } else {
+                    $('#endDateWarning').hide();
                 }
             });
 
