@@ -350,7 +350,7 @@
             color: black;
         }
 
-        #endDateWarning { display: none; }
+        .is-hidden { display: none !important; }
     </style>
 
 
@@ -1518,27 +1518,28 @@
                 }
             });
 
-            $('#EndDate').on('change blur', function () {
-                var val = $(this).val().trim();
+            function setEndDateWarningVisible(visible) {
+                $('#endDateWarning').toggleClass('is-hidden', !visible);
+            }
+
+            function checkEndDate() {
+                const val = $('#EndDate').val();
                 if (!val) {
-                    $('#endDateWarning').hide();
+                    setEndDateWarningVisible(false);
                     return;
                 }
 
-                var entered = new Date(val);
-                if (isNaN(entered)) {
-                    $('#endDateWarning').hide();
-                    return;
-                }
-
-                var today = new Date();
+                const d = new Date(val);
+                const today = new Date();
                 today.setHours(0, 0, 0, 0);
 
-                if (entered < today) {
-                    $('#endDateWarning').css('display', 'inline-flex');
-                } else {
-                    $('#endDateWarning').hide();
-                }
+                setEndDateWarningVisible(d < today);
+            }
+
+            $(function () {
+                checkEndDate();
+
+                $('#EndDate').on('change blur', checkEndDate);
             });
 
             $('#NRDate').datepicker({
