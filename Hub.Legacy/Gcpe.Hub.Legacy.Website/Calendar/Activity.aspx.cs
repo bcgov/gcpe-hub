@@ -1536,6 +1536,13 @@ namespace Gcpe.Hub.Calendar
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
+            if (Master.CustomPrincipal.RoleId < 4)
+            {
+                Response.Redirect("~/CustomErrorPages/NotAuthorized.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             if (!IsNewActivity)
                 ActivityManager.DeleteActivity(ActivityId.Value);
 
