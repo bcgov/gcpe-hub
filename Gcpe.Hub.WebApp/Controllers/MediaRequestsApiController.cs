@@ -459,29 +459,19 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             var listMinistryIds = listMinistries.Select(e => e.Abbreviation).ToArray();
             Guid guidid = listMinistries.Where(e => e.Abbreviation == excludedMinistry).Select(e => e.Id).FirstOrDefault();
-            
+
             db.MediaRequest.Add(mediaRequest);
 
             await db.SaveChangesAsync();
             // update dto with the new ID.
             dto.Id = mediaRequest.Id;
-
+            
             // auto share with FOR and EMCR for BCWS
-            if (!string.IsNullOrEmpty(excludedMinistry) && listMinistryIds.Length==1 && listMinistryIds.Contains(excludedMinistry))
+            if (mediaRequest.LeadMinistry!=null && mediaRequest.LeadMinistry.Abbreviation=="BCWS")
             {
-                IList<MediaRequestSharedMinistry> existingSharedMinistries = db.MediaRequestSharedMinistry.Where(e => e.MediaRequestId == mediaRequest.Id).ToList();
-                var ministrylist = await db.Ministry.Where(e => e.Abbreviation == "FOR" || e.Abbreviation == "EMCR").ToListAsync();
-                foreach (var sharedMinistry in ministrylist) {
-                    if (!existingSharedMinistries.Any(m => m.MinistryId == sharedMinistry.Id))
-                    {
-                        await db.MediaRequestSharedMinistry.AddAsync(new MediaRequestSharedMinistry
-                        {
-                            MediaRequestId = mediaRequest.Id,
-                            MinistryId = sharedMinistry.Id
-                        });
-                    }
-                }
-                await db.SaveChangesAsync();
+                await AutoSharewithFORandEMCR(dto);
+                dto.SharedMinistries = mediaRequest.MediaRequestSharedMinistry
+                                     .Select(rq => MinistriesApiController.ConvertToDto(rq.Ministry, false));
             }
 
             if (triggerEmail || onlyEmailMyself)
@@ -506,6 +496,25 @@ namespace Gcpe.Hub.WebApp.Controllers
             SendRequestToAzureSearchService(HttpMethod.Post, mediaRequest.Id);
 
             return mediaRequest.Id;
+        }
+
+        private async Task AutoSharewithFORandEMCR(MediaRequestDto dto)
+        {
+            IList<MediaRequestSharedMinistry> existingSharedMinistries = db.MediaRequestSharedMinistry.Where(e => e.MediaRequestId == dto.Id).ToList();
+            var ministrylist = await db.Ministry.Where(e => e.Abbreviation == "FOR" || e.Abbreviation == "EMCR").ToListAsync();
+            foreach (var sharedMinistry in ministrylist)
+            {
+                if (!existingSharedMinistries.Any(m => m.MinistryId == sharedMinistry.Id))
+                {
+                    await db.MediaRequestSharedMinistry.AddAsync(new MediaRequestSharedMinistry
+                    {
+                        MediaRequestId = dto.Id,
+                        MinistryId = sharedMinistry.Id
+                    });
+                }
+            }
+            await db.SaveChangesAsync();
+            
         }
 
         [HttpPost("postendofdayupdates")]
