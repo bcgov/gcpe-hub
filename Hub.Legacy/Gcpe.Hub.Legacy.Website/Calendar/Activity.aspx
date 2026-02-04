@@ -718,6 +718,18 @@
                                                 </asp:CustomValidator>
                                             </div>
                                         </div>
+                                        <div id="startDateWarning" class="alert-warning ui-widget is-hidden" role="status" aria-live="polite">
+                                          <span class="alert-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="lucide lucide-triangle-alert">
+                                              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                                              <path d="M12 9v4"></path>
+                                              <path d="M12 17h.01"></path>
+                                            </svg>
+                                          </span>
+                                          <span class="alert-text">The selected start date is in the past.</span>
+                                        </div>
                                     </td>
 
                                 </tr>
@@ -752,7 +764,7 @@
                                             </svg>
                                           </span>
                                           <span class="alert-text">The selected end date is in the past.</span>
-                                       </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -1404,6 +1416,8 @@
                 previousStart = $('#StartTime').val();
             }
             SetConfirmedLabel();
+            checkDate('#StartDate', '#startDateWarning', '#StartTime');
+            checkDate('#EndDate', '#endDateWarning', '#EndTime');
         });
 
     });
@@ -1518,28 +1532,80 @@
                 }
             });
 
-            function setEndDateWarningVisible(visible) {
-                $('#endDateWarning').toggleClass('is-hidden', !visible);
+            function setDateWarningVisible(warningSelector, visible) {
+                $(warningSelector).toggleClass('is-hidden', !visible);
             }
 
-            function checkEndDate() {
-                const val = $('#EndDate').val();
+            function applyTimeToDate(dateValue, timeValue) {
+                if (!timeValue) {
+                    return dateValue;
+                }
+
+                var match = /^\s*(\d{1,2}):(\d{2})\s*(AM|PM)\s*$/i.exec(timeValue);
+                if (!match) {
+                    return dateValue;
+                }
+
+                var hours = parseInt(match[1], 10);
+                var minutes = parseInt(match[2], 10);
+                var meridiem = match[3].toUpperCase();
+
+                if (meridiem === "PM" && hours < 12) {
+                    hours += 12;
+                }
+                if (meridiem === "AM" && hours === 12) {
+                    hours = 0;
+                }
+
+                dateValue.setHours(hours, minutes, 0, 0);
+                return dateValue;
+            }
+
+            function checkDate(fieldSelector, warningSelector, timeSelector) {
+                const val = $(fieldSelector).val();
                 if (!val) {
-                    setEndDateWarningVisible(false);
+                    setDateWarningVisible(warningSelector, false);
                     return;
                 }
 
-                const d = new Date(val);
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
+                const selectedDate = new Date(val);
+                if (isNaN(selectedDate)) {
+                    setDateWarningVisible(warningSelector, false);
+                    return;
+                }
 
-                setEndDateWarningVisible(d < today);
+                const today = new Date();
+                const isAllDay = $("#IsAllDayCheckBox").is(':checked');
+
+                if (isAllDay) {
+                    selectedDate.setHours(0, 0, 0, 0);
+                    today.setHours(0, 0, 0, 0);
+                } else {
+                    applyTimeToDate(selectedDate, $(timeSelector).val());
+                }
+
+                setDateWarningVisible(warningSelector, selectedDate < today);
             }
 
             $(function () {
-                checkEndDate();
+                checkDate('#StartDate', '#startDateWarning', '#StartTime');
+                checkDate('#EndDate', '#endDateWarning', '#EndTime');
 
-                $('#EndDate').on('change blur', checkEndDate);
+                $('#StartDate').on('change blur', function () {
+                    checkDate('#StartDate', '#startDateWarning', '#StartTime');
+                });
+
+                $('#EndDate').on('change blur', function () {
+                    checkDate('#EndDate', '#endDateWarning', '#EndTime');
+                });
+
+                $('#StartTime').on('change blur', function () {
+                    checkDate('#StartDate', '#startDateWarning', '#StartTime');
+                });
+
+                $('#EndTime').on('change blur', function () {
+                    checkDate('#EndDate', '#endDateWarning', '#EndTime');
+                });
             });
 
             $('#NRDate').datepicker({
