@@ -56,7 +56,16 @@ namespace Gcpe.Hub.News.ReleaseManagement
                     doc.Model = Model;
                 }
 
-                if (!string.IsNullOrWhiteSpace(Model.RequiredTranslations())) Model.HasTranslations = true;
+                var requiredTranslations = Model.RequiredTranslations();
+                if (string.Equals(requiredTranslations?.Trim(), "none", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(requiredTranslations?.Trim(), "tbd", StringComparison.OrdinalIgnoreCase))
+                {
+                    Model.HasTranslations = false;
+                }
+                else if (!string.IsNullOrWhiteSpace(requiredTranslations))
+                {
+                    Model.HasTranslations = true;
+                }
             }
             else
             {
@@ -96,7 +105,16 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 plannedPublishDateTimePicker.Text = Model.PublishDateTime != null ? Model.PublishDateTime.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
                 releaseDateTimePicker.Text = Model.ReleaseDate != null ? Model.ReleaseDate.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
 
-                if (!string.IsNullOrWhiteSpace(Model.RequiredTranslations())) Model.HasTranslations = true;
+                var requiredTranslations = Model.RequiredTranslations();
+                if (string.Equals(requiredTranslations?.Trim(), "none", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(requiredTranslations?.Trim(), "tbd", StringComparison.OrdinalIgnoreCase))
+                {
+                    Model.HasTranslations = false;
+                }
+                else if (!string.IsNullOrWhiteSpace(requiredTranslations))
+                {
+                    Model.HasTranslations = true;
+                }
 
                 //ScriptManager.GetCurrent(Page).RegisterPostBackControl(CancelApprove);
                 //ScriptManager.GetCurrent(Page).RegisterPostBackControl(lbtnCancelCategories);
