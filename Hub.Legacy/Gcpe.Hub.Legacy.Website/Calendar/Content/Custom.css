@@ -479,6 +479,10 @@ span.ui-icon.ui-icon-arrowthick-2-n-s {margin-top:4px}
     background-image:url(../../images/confirmed.png);
     background-position: 0px 0px !important;
 }
+#uniform-IsAllDayCheckBox.checker span.checked {
+    background-image:url(../../images/confirmed.png);
+    background-position: 0px 0px !important;
+}
 
 .label-dark {
     color: #404040;
