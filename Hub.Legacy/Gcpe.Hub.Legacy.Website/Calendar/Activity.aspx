@@ -775,7 +775,7 @@
                                         <asp:Label ID="Label24" runat="server" Text="All Day Activity:"></asp:Label>
                                     </td>
                                     <td class="column-right">
-                                        <asp:CheckBox ID="IsAllDayCheckBox" Style="float: left" runat="server" />
+                                        <asp:CheckBox ID="IsAllDayCheckBox" Style="float: left;margin-right: 15px;" runat="server" />
                                     </td>
                                 </tr>
                                 <tr class="row">
@@ -1336,10 +1336,37 @@
             hideIrrelevantPanels($('#CategoriesDropDownList option:selected').text());
         });
 
+    var previousStart = null;
+
+    function ApplyAllDayState(isAllDay) {
+        if (isAllDay) {
+            $('#StartTime').val("12:00 AM");
+            $('#EndTime').val("11:45 PM");
+            $('#StartTime').hide();
+            $('#EndTime').hide();
+            $("#StartTimePSTLabel").hide();
+            $("#EndTimePSTLabel").hide();
+        } else {
+            $('#StartTime').show();
+            $('#EndTime').show();
+            $("#StartTimePSTLabel").show();
+            $("#EndTimePSTLabel").show();
+            $('#StartTime').val("8:00 AM");
+            $('#EndTime').val("6:00 PM");
+            previousStart = $('#StartTime').val();
+        }
+        SetConfirmedLabel();
+        checkDate('#StartDate', '#startDateWarning', '#StartTime');
+        checkDate('#EndDate', '#endDateWarning', '#EndTime');
+        if ($.uniform && $.uniform.update) {
+            $.uniform.update("#IsAllDayCheckBox");
+        }
+    }
+
     $(function () {
 
         var aDate = "2016/1/1 ";
-        var previousStart = $('#StartTime').val();
+        previousStart = $('#StartTime').val();
         $('#StartTime').editableSelect({
             bg_iframe: true,
 
@@ -1396,28 +1423,20 @@
         // --------------------------------------------
         // Handle all-day activities
 
-        $("#IsAllDayCheckBox").click(function () {
-            SetChanged($.url().param('ActivityId'));
-
-            if ($('#IsAllDayCheckBox').is(':checked')) {
-                $('#StartTime').val("12:00 AM");
-                $('#EndTime').val("11:45 PM");
-                $('#StartTime').hide();
-                $('#EndTime').hide();
-                $("#StartTimePSTLabel").hide();
-                $("#EndTimePSTLabel").hide();
-            } else {
-                $('#StartTime').show();
-                $('#EndTime').show();
-                $("#StartTimePSTLabel").show();
-                $("#EndTimePSTLabel").show();
-                $('#StartTime').val("8:00 AM");
-                $('#EndTime').val("6:00 PM");
-                previousStart = $('#StartTime').val();
+        $(document).on("click", "#uniform-IsAllDayCheckBox", function (e) {
+            if (e.target && e.target.id === "IsAllDayCheckBox") {
+                return;
             }
-            SetConfirmedLabel();
-            checkDate('#StartDate', '#startDateWarning', '#StartTime');
-            checkDate('#EndDate', '#endDateWarning', '#EndTime');
+
+            var checkbox = $("#IsAllDayCheckBox");
+            checkbox.prop("checked", !checkbox.prop("checked"));
+            checkbox.trigger("change");
+            e.preventDefault();
+        });
+
+        $("#IsAllDayCheckBox").on("change", function () {
+            SetChanged($.url().param('ActivityId'));
+            ApplyAllDayState($(this).is(':checked'));
         });
 
     });
@@ -1536,31 +1555,6 @@
                 $(warningSelector).toggleClass('is-hidden', !visible);
             }
 
-            function applyTimeToDate(dateValue, timeValue) {
-                if (!timeValue) {
-                    return dateValue;
-                }
-
-                var match = /^\s*(\d{1,2}):(\d{2})\s*(AM|PM)\s*$/i.exec(timeValue);
-                if (!match) {
-                    return dateValue;
-                }
-
-                var hours = parseInt(match[1], 10);
-                var minutes = parseInt(match[2], 10);
-                var meridiem = match[3].toUpperCase();
-
-                if (meridiem === "PM" && hours < 12) {
-                    hours += 12;
-                }
-                if (meridiem === "AM" && hours === 12) {
-                    hours = 0;
-                }
-
-                dateValue.setHours(hours, minutes, 0, 0);
-                return dateValue;
-            }
-
             function checkDate(fieldSelector, warningSelector, timeSelector) {
                 const val = $(fieldSelector).val();
                 if (!val) {
@@ -1575,14 +1569,10 @@
                 }
 
                 const today = new Date();
-                const isAllDay = $("#IsAllDayCheckBox").is(':checked');
 
-                if (isAllDay) {
-                    selectedDate.setHours(0, 0, 0, 0);
-                    today.setHours(0, 0, 0, 0);
-                } else {
-                    applyTimeToDate(selectedDate, $(timeSelector).val());
-                }
+                // Compare date-only (ignore time)
+                selectedDate.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
 
                 setDateWarningVisible(warningSelector, selectedDate < today);
             }
@@ -1987,7 +1977,8 @@
                     var selectedCategory = GetDropDownSelection('#CategoriesDropDownList');
                     var allDayCategory = selectedCategory == "Awareness Day / Week / Month" || selectedCategory == "Conference / AGM / Forum";
                     if (allDayCategory !== $("#IsAllDayCheckBox").is(':checked')) {
-                        $("#IsAllDayCheckBox").click();
+                        $("#IsAllDayCheckBox").prop("checked", allDayCategory);
+                        ApplyAllDayState(allDayCategory);
                     }
                     populateTags();
                     SetChanged($.url().param('ActivityId'));
