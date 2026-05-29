@@ -4,6 +4,7 @@ using Gcpe.Hub.WebApp.Middleware;
 using Gcpe.Hub.WebApp.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -56,6 +57,7 @@ namespace Gcpe.Hub.WebApp
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             ConfigureServices(services);
+            services.Configure<MvcOptions>(options => options.EnableEndpointRouting = false);
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();

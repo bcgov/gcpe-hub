@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Gcpe.Hub.WebApp.Providers
@@ -44,14 +45,18 @@ namespace Gcpe.Hub.WebApp.Providers
             }
 
             message.Subject = subject;
-            message.BodyEncoding = System.Text.Encoding.Default;
+            message.BodyEncoding = Encoding.UTF8;
+            message.SubjectEncoding = Encoding.UTF8;
             message.Body = bodyHtml;
             message.IsBodyHtml = true;
 
             if (!string.IsNullOrEmpty(settings.SmtpHost))
             {
-                using (var client = new System.Net.Mail.SmtpClient(settings.SmtpHost))
+                using (var client = new System.Net.Mail.SmtpClient(settings.SmtpHost, settings.SmtpPort ?? 25))
                 {
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.EnableSsl = settings.EnableSsl;
+                    client.UseDefaultCredentials = settings.UseDefaultCredentials;
                     await client.SendMailAsync(message);
                 }
             }
@@ -75,6 +80,12 @@ namespace Gcpe.Hub.WebApp.Providers
     public class MailProviderSettings
     {
         public string SmtpHost { get; set; }
+
+        public int? SmtpPort { get; set; }
+
+        public bool EnableSsl { get; set; }
+
+        public bool UseDefaultCredentials { get; set; }
 
         public string PickupDirectory { get; set; }
     }
