@@ -56,7 +56,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
             catch (Exception ex)
             {
-                if (showErrors == false) throw ex;
+                if (showErrors == false) throw;
                 Exception inner = ex.InnerException;
                 if (inner == null) value = ex.Message;
                 else value = (inner.InnerException ?? inner).Message;

@@ -61,8 +61,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             }
             else
             {
-                string inClause = SqlHelper.ToInClause(new List<Guid>() { c.Id });
-                SqlHelper.LoadContactNavigationProperties(inClause, db);
+                SqlHelper.LoadContactNavigationProperties(new List<Guid>() { c.Id }, db);
                 c.IsActive = true; // reactivate if it was rejected
                 db.Contact.Update(c);
             }
@@ -189,12 +188,14 @@ namespace Gcpe.Hub.WebApp.Controllers
             string s = "(CONTAINS(CompanyName, '\"*{0}*\"') OR CONTAINS(LastName, '\"{0}*\"') OR CONTAINS(FirstName, '\"{1}*\"'))";
             string whereClause = SqlHelper.CreateSearchClause(filter, s);
 
+            #pragma warning disable EF1003 // Full-text CONTAINS predicate is composed dynamically for SQL Server.
             var contactsQuery = db.ContactMediaJobTitle
                                 .FromSqlRaw("SELECT cc.* FROM media.ContactMediaJobTitle cc LEFT JOIN media.Contact c ON cc.ContactId = c.Id LEFT JOIN media.Company cp ON cc.CompanyId = cp.Id" + whereClause)
                                 .Include(e => e.Contact)
                                 .Where(e => e.Contact.IsActive)
                                 .Where(e => !e.Contact.MinisterialJobTitleId.HasValue)
                                 .AsQueryable();
+            #pragma warning restore EF1003
 
 
             var contactJobTitles = await contactsQuery.ToListAsync();
@@ -210,8 +211,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                 if (!outletGuids.Contains(contactJobTitle.CompanyId))
                     outletGuids.Add(contactJobTitle.CompanyId);
             }
-            db.Company.FromSqlRaw("SELECT * FROM media.Company WHERE Id " + SqlHelper.ToInClause(outletGuids)).Load();
-            SqlHelper.LoadContactNavigationProperties(SqlHelper.ToInClause(contactsGuids), db);
+            db.Company.Where(e => outletGuids.Contains(e.Id)).Load();
+            SqlHelper.LoadContactNavigationProperties(contactsGuids, db);
 
             foreach (ContactMediaJobTitle contactJob in contactJobTitles.OrderBy(e => e.Contact.FirstName).ThenBy(e => e.Contact.LastName).ThenBy(e => e.Company.CompanyName))
             {

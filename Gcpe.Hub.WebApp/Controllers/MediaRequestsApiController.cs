@@ -12,7 +12,6 @@ using Gcpe.Hub.WebApp.Providers;
 using Gcpe.Hub.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Azure.Search.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -127,15 +126,22 @@ namespace Gcpe.Hub.WebApp.Controllers
                     facets = new Dictionary<string, string> { { "leadMinistryDisplayName", displayname }, { "companyNames", companyNames }, { "contactNames", contactNames }, { "resolutionId", resolutionId } };
                 }
                 
-                DocumentSearchResult searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
+                HubSearchResponse searchServiceResult = await QueryHubMediaRequestSearchService(adjustedQuery, facets, skip, PageSize);
                 List<FacetDto> facetResults = new List<FacetDto>();
 
                 // get full information on each MediaRequest from the database
                 if (searchServiceResult.Results != null && searchServiceResult.Results.Count > 0)
                 {
                     // extract the ids.
-                    string inClause = string.Join("','", searchServiceResult.Results.Select(r => r.Document.Values.First()));
-                    List<MediaRequest> data = db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id IN ('" + inClause + "') order by RequestedAt DESC").ToList();
+                    List<Guid> mediaRequestIds = searchServiceResult.Results
+                        .Select(r => r.Document.Values.FirstOrDefault()?.ToString())
+                        .Where(v => Guid.TryParse(v, out _))
+                        .Select(Guid.Parse)
+                        .ToList();
+                    List<MediaRequest> data = db.MediaRequest
+                        .Where(r => mediaRequestIds.Contains(r.Id))
+                        .OrderByDescending(r => r.RequestedAt)
+                        .ToList();
                     
                     LoadNavigationProperties(data);
 
@@ -145,12 +151,12 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     foreach (var facet in facets.Keys) // iterate in the order we asked for
                     {
-                        IList<FacetResult> facetResult;
+                        IList<HubFacetResult> facetResult;
                         if (!searchServiceResult.Facets.TryGetValue(facet, out facetResult)) continue;
 
                         List<FilterDto> facetFilters = new List<FilterDto>();
 
-                        foreach (FacetResult item in facetResult)
+                        foreach (HubFacetResult item in facetResult)
                         {
                             FilterDto fdto = new FilterDto();
                             if (facet!= "resolutionId")
@@ -164,7 +170,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                                 fdto.Name = temp.FirstOrDefault(x => x.Id == id).DisplayAs;
                             }
                             //fdto.Name = item.Value.ToString();
-                            fdto.Count = (int)item.Count;
+                            fdto.Count = item.Count ?? 0;
                             facetFilters.Add(fdto);
                         }
                         facetResults.Add(new FacetDto() { Name = facet, Filters = facetFilters });
@@ -195,9 +201,9 @@ namespace Gcpe.Hub.WebApp.Controllers
             return results;
         }
 
-        private async Task<DocumentSearchResult> QueryHubMediaRequestSearchService(string query, IDictionary<string, string> facets, int? _skip, int _limit)
+        private async Task<HubSearchResponse> QueryHubMediaRequestSearchService(string query, IDictionary<string, string> facets, int? _skip, int _limit)
         {
-            DocumentSearchResult result = null;
+            HubSearchResponse result = null;
             // Add the Http Get parameters
             string newUri = QueryHelpers.AddQueryString("search", "query", query);
             if (_skip != null)
@@ -240,13 +246,30 @@ namespace Gcpe.Hub.WebApp.Controllers
                     throw new ApiHttpException(HttpStatusCode.InternalServerError);
                 }
                 // Success. Remove the continuationToken so that the deserialization succeeds
-                result = JsonConvert.DeserializeObject<DocumentSearchResult>(jsonString.Replace(",\"continuationToken\":null", ""));
+                result = JsonConvert.DeserializeObject<HubSearchResponse>(jsonString.Replace(",\"continuationToken\":null", ""));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new ApiHttpException(HttpStatusCode.InternalServerError);
             }
             return result;
+        }
+
+        private class HubSearchResponse
+        {
+            public IList<HubSearchResult> Results { get; set; }
+            public IDictionary<string, IList<HubFacetResult>> Facets { get; set; }
+        }
+
+        private class HubSearchResult
+        {
+            public IDictionary<string, object> Document { get; set; }
+        }
+
+        private class HubFacetResult
+        {
+            public object Value { get; set; }
+            public int? Count { get; set; }
         }
 
 
@@ -262,7 +285,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 Task<HttpResponseMessage> responseTask = SendRequestToAzureSearchServiceAsync(method, id.ToString());
                 responseTask.Wait();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // non-critical error - the document will be indexed at the next pass of the scheduled job.
             }
@@ -374,12 +397,13 @@ namespace Gcpe.Hub.WebApp.Controllers
                 IEnumerable<MediaRequest> list2populate = list;
                 if (withParents.Count() != 0)
                 {
-                    db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id " + SqlHelper.ToInClause(withParents.Select(r => r.RequestParentId.Value))).Load();
+                    List<Guid> parentIds = withParents.Select(r => r.RequestParentId.Value).Distinct().ToList();
+                    db.MediaRequest.Where(e => parentIds.Contains(e.Id)).Load();
                     list2populate = list2populate.Union(withParents.Select(r => r.RequestParent));
                 }
 
-                string inClause = SqlHelper.ToInClause(list2populate.Select(r => r.Id));
-                db.MediaRequest.FromSqlRaw("SELECT * FROM media.MediaRequest WHERE Id " + inClause)
+                List<Guid> mediaRequestIds = list2populate.Select(r => r.Id).Distinct().ToList();
+                db.MediaRequest.Where(e => mediaRequestIds.Contains(e.Id))
                      .Include(e => e.Resolution)
                      .Include(e => e.ResponsibleUser)
                      .Include(e => e.CreatedBy)
@@ -389,7 +413,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                      .Include(e => e.TakeOverRequestMinistry)
                      .Load();
 
-                db.MediaRequestContact.FromSqlRaw("SELECT * FROM media.MediaRequestContact WHERE MediaRequestId " + inClause)
+                db.MediaRequestContact.Where(e => mediaRequestIds.Contains(e.MediaRequestId))
                     .Include(e => e.Company).Include(e => e.Contact).Load();
 
                 List<Guid> contactsGuids = new List<Guid>();
@@ -398,9 +422,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                     if (!contactsGuids.Contains(mediaRequestContact.ContactId))
                         contactsGuids.Add(mediaRequestContact.ContactId);
                 }
-                inClause = SqlHelper.ToInClause(contactsGuids);
-                db.ContactMediaJobTitle.FromSqlRaw("SELECT * FROM media.ContactMediaJobTitle WHERE ContactId " + inClause).Load();
-                SqlHelper.LoadContactNavigationProperties(inClause, db);
+                db.ContactMediaJobTitle.Where(e => contactsGuids.Contains(e.ContactId)).Load();
+                SqlHelper.LoadContactNavigationProperties(contactsGuids, db);
             }
         }
 
