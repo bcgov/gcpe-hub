@@ -1,12 +1,13 @@
-﻿using System;
+﻿using FlickrNet;
+using Gcpe.Hub.Properties;
+using Gcpe.News.ReleaseManagement;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FlickrNet;
-using Gcpe.Hub.Properties;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Gcpe.Hub
 {
@@ -124,20 +125,27 @@ namespace Gcpe.Hub
 
         public bool ShouldCancelRequestDueToServiceOutage()
         {
-            HttpResponseMessage response = client.GetAsync("https://9htz5wc2q8lk.statuspage.io/api/v2/components.json").Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var jsonString = response.Content.ReadAsStringAsync().Result;
-                var deserializedResult = JsonConvert.DeserializeObject<Root>(jsonString);
+                HttpResponseMessage response = client
+                    .GetAsync("https://9htz5wc2q8lk.statuspage.io/api/v2/components.json")
+                    .Result;
 
-                // we're interested in the API, Login functionality and uploads
-                // if any of these components are in a state other than "operational" (i.e. degraded_performance, partial_outage, or major_outage) we cancel any requests to Flickr
-                // in order not to interfere with the publishing of releases
-                return deserializedResult.Components
-                    .Any(c => c.Name == "API" && c.Status != "operational"
-                            || c.Name == "Login" && c.Status != "operational"
-                            || c.Name == "Uploads" && c.Status != "operational"
-                            || c.Name == "Photo/Video Serving" && c.Status != "operational");
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = response.Content.ReadAsStringAsync().Result;
+                    var deserializedResult = JsonConvert.DeserializeObject<Root>(jsonString);
+
+                    return deserializedResult.Components
+                        .Any(c => c.Name == "API" && c.Status != "operational"
+                                || c.Name == "Login" && c.Status != "operational"
+                                || c.Name == "Uploads" && c.Status != "operational"
+                                || c.Name == "Photo/Video Serving" && c.Status != "operational");
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError("Unable to check Flickr service status. Continuing with Flickr request.", ex);
             }
 
             return false;
