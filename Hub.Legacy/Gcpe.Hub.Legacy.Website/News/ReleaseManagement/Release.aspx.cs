@@ -102,7 +102,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 plannedPublishDateTimePicker.Attributes["onBlur"] = "PublishDateTimePicker_Validate(this)";
                 releaseDateTimePicker.Attributes["onBlur"] = "ReleaseDateTimePicker_Validate(this)";
 
-                plannedPublishDateTimePicker.Text = Model.PublishDateTime != null ? Model.PublishDateTime.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
+                plannedPublishDateTimePicker.Text = Model.PublishDateTime != null ? Gcpe.Time.BcTime.ToLocal(Model.PublishDateTime.Value).ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
                 releaseDateTimePicker.Text = Model.ReleaseDate != null ? Model.ReleaseDate.Value.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture) : "";
 
                 var requiredTranslations = Model.RequiredTranslations();
@@ -633,7 +633,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
                 //TOOD: Check time zone
                 DateTime publishDate;
                 if (DateTime.TryParse(plannedPublishDateTimePicker.Text, out publishDate))
-                    Model.PublishDateTime = publishDate;
+                    Model.PublishDateTime = Gcpe.Time.BcTime.FromLocal(publishDate);
                 else
                     Model.PublishDateTime = (DateTime?)null;
 

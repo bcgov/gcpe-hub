@@ -34,27 +34,10 @@ namespace Gcpe.Hub.Calendar
         {
             var rvl = false;
 
-            if (!IsHq && IsDailyChangeFreeze()) rvl = true;
+            rvl = Gcpe.Time.ChangeFreezeWindow.IsFrozen(DateTimeOffset.UtcNow, IsHq, Gcpe.Time.BcTime.Default);
 
             context.Response.ContentType = "text/plain";
             context.Response.Write(rvl);
-        }
-
-        private bool IsDailyChangeFreeze()
-        {
-            var pacificNow = GetCurrentPacificTime();
-            TimeSpan start = new TimeSpan(4, 05, 0); // 4:05 PM
-            TimeSpan end = new TimeSpan(17, 0, 0); // 5 PM
-            TimeSpan now = pacificNow.TimeOfDay;
-            var withinFreezeWindow = (now > start) && (now < end);
-
-            return withinFreezeWindow;
-        }
-
-        private DateTime GetCurrentPacificTime()
-        {
-            var pacificTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
-            return TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow.DateTime, TimeZoneInfo.Utc, pacificTimeZone);
         }
 
         public bool IsReusable

@@ -78,21 +78,31 @@ namespace Gcpe.Hub.News
             get { return "yyyy-MM-d"; }
         }
 
+        public static string FormatBcWallTime(DateTime wallTime)
+        {
+            DateTimeOffset instant;
+            // Display only: keep the previous implicit conversion rather than failing the page
+            // for a nonexistent BC wall time or missing historical time zone data.
+            return FormatDateTime(Gcpe.Time.BcTime.Default.TryFromLocal(wallTime, out instant) ? instant : wallTime);
+        }
+
         public static string FormatDateTime(DateTimeOffset date)
         {
+            date = Gcpe.Time.BcTime.ToLocal(date);
+            var today = Gcpe.Time.BcTime.Today;
             string text;
 
             System.Globalization.Calendar invariantCalendar = System.Globalization.CultureInfo.InvariantCulture.Calendar;
 
-            if (date.Date.Date == DateTime.Today.AddDays(-1d))
+            if (date.Date.Date == today.AddDays(-1d))
                 text = "Yesterday";
-            else if (date.Date.Date == DateTime.Today)
+            else if (date.Date.Date == today)
                 text = "Today";
-            else if (date.Date.Date == DateTime.Today.AddDays(1d))
+            else if (date.Date.Date == today.AddDays(1d))
                 text = "Tomorrow";
             //else if (date.Date.Date > DateTime.Today && date.Date.Date < DateTime.Today.AddDays(7d))
             //    text = date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");
-            else if (date.Date.Date > DateTime.Today && invariantCalendar.GetWeekOfYear(date.Date, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday) == invariantCalendar.GetWeekOfYear(DateTime.Today, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday))
+            else if (date.Date.Date > today && invariantCalendar.GetWeekOfYear(date.Date, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday) == invariantCalendar.GetWeekOfYear(today, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday))
                 text = date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");
             //else if (date.Date.Date > DateTime.Today && invariantCalendar.GetWeekOfYear(date.Date, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday) == 1 + invariantCalendar.GetWeekOfYear(DateTime.Today, System.Globalization.CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday))
             //    text = "Next " + date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");

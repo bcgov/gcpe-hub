@@ -200,7 +200,7 @@ namespace Gcpe.Hub.News.ReleaseManagement
             //TODO: Convert from Pacific Time to UTC
             DateTime publishDate;
             if (DateTime.TryParse(publishDateTimePicker.Text, out publishDate))
-                Model.PublishDateTime = publishDate;
+                Model.PublishDateTime = Gcpe.Time.BcTime.FromLocal(publishDate);
             else
                 Model.PublishDateTime = (DateTime?)null;
       

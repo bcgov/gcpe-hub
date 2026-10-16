@@ -1021,11 +1021,12 @@ namespace Gcpe.Hub.News.ReleaseManagement
             if (IsScheduled)
             {
                 IsCommitted = true;
-                SaveWithLog("Scheduled for Release on " + PublishDateTime.Value.ToString("MMMM d, yyyy") + " at " + PublishDateTime.Value.ToString("h:mm tt").ToLower()); /* NewsReleaseLog.Description */
+                var publishDate = Gcpe.Time.BcTime.ToLocal(PublishDateTime.Value);
+                SaveWithLog("Scheduled for Release on " + publishDate.ToString("MMMM d, yyyy") + " at " + publishDate.ToString("h:mm tt").ToLower()); /* NewsReleaseLog.Description */
             }
             else
             {
-                var now = DateTimeOffset.Now;
+                var now = Gcpe.Time.BcTime.Now;
                 if (PublishDateTime.HasValue && (DateTimeOffset.Now - PublishDateTime.Value).TotalMinutes > 5)
                 {
                     throw new HubModelException(new string[] { "The publish date cannot be set in the past." });
@@ -1211,20 +1212,22 @@ namespace Gcpe.Hub.News.ReleaseManagement
 
         public static string FormatDateTime(DateTimeOffset date)
         {
+            date = Gcpe.Time.BcTime.ToLocal(date);
+            var today = Gcpe.Time.BcTime.Today;
             string text;
 
             System.Globalization.Calendar invariantCalendar = System.Globalization.CultureInfo.InvariantCulture.Calendar;
             var firstFullWeek = System.Globalization.CalendarWeekRule.FirstFullWeek;
 
-            if (date.Date.Date == DateTime.Today.AddDays(-1d))
+            if (date.Date.Date == today.AddDays(-1d))
                 text = "Yesterday";
-            else if (date.Date.Date == DateTime.Today)
+            else if (date.Date.Date == today)
                 text = "Today";
-            else if (date.Date.Date == DateTime.Today.AddDays(1d))
+            else if (date.Date.Date == today.AddDays(1d))
                 text = "Tomorrow";
             //else if (date.Date.Date > DateTime.Today && date.Date.Date < DateTime.Today.AddDays(7d))
             //    text = date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");
-            else if (date.Date.Date > DateTime.Today && invariantCalendar.GetWeekOfYear(date.Date, firstFullWeek, DayOfWeek.Sunday) == invariantCalendar.GetWeekOfYear(DateTime.Today, firstFullWeek, DayOfWeek.Sunday))
+            else if (date.Date.Date > today && invariantCalendar.GetWeekOfYear(date.Date, firstFullWeek, DayOfWeek.Sunday) == invariantCalendar.GetWeekOfYear(today, firstFullWeek, DayOfWeek.Sunday))
                 text = date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");
             //else if (date.Date.Date > DateTime.Today && invariantCalendar.GetWeekOfYear(date.Date, firstFullWeek, DayOfWeek.Sunday) == 1 + invariantCalendar.GetWeekOfYear(DateTime.Today, firstFullWeek, DayOfWeek.Sunday))
             //    text = "Next " + date.ToString("dddd") + ", " + date.ToString("MMMM d, yyyy");

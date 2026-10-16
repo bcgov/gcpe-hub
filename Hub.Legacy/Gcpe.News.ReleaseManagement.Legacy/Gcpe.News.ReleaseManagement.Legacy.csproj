@@ -90,4 +90,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Compile Include="..\..\Shared\ChangeFreezeWindow.cs" Link="Shared\ChangeFreezeWindow.cs" />
+  </ItemGroup>
 </Project>

@@ -42,4 +42,7 @@
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Shared\BcTime.cs" Link="Shared\BcTime.cs" />
+  </ItemGroup>
 </Project>

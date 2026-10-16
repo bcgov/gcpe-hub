@@ -545,7 +545,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                                                     .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
                                                     .ToListAsync();
 
-            var localNow = DateTimeOffset.Now;
+            var localNow = Gcpe.Time.BcTime.Now;
+            var todayStart = Gcpe.Time.BcTime.FromLocal(localNow.Date);
 
             var emails = new Dictionary<Ministry, IEnumerable<MediaRequest>>();
 
@@ -565,7 +566,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                 var closedSince = ministry.EodFinalizedDateTime;
                 //Compare the EodLastRunDateTime Calendar Date with today's date. If todays date is in the future (i.e. it's been 24 hours since running) update the
                 //EodFinalizedDateTime. 
-                if (ministry.EodLastRunDateTime.Value.Date < localNow.Date)
+                if (Gcpe.Time.BcTime.ToLocal(ministry.EodLastRunDateTime.Value).Date < localNow.Date)
                 {
                     closedSince = ministry.EodLastRunDateTime;
                     //ministry.EodFinalizedDateTime = ministry.EodLastRunDateTime;
@@ -573,7 +574,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 //Retrieve the open requests for the current ministry (all of them back through history).
                 var requests = await db.MediaRequest
-                        .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince || e.RespondedAt >= localNow.Date)
+                        .Where(e => e.RespondedAt == null || e.RespondedAt > closedSince || e.RespondedAt >= todayStart)
                         .Where(e => e.LeadMinistryId == ministry.Id)
                         .Where(e => e.IsActive == true)
                         .OrderByDescending(e => e.RespondedAt)
@@ -618,7 +619,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             //now loop through the summary to see if all's good 
             Boolean allGood = true;
-            var localNow = DateTimeOffset.Now;
+            var localNow = Gcpe.Time.BcTime.Now;
             foreach (EodStatusDto eodSum in summary)
             {
                 Boolean eodStat = false;
@@ -633,7 +634,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                     //bad. allthough...if the last activity was before the eodLastRunDate of the ministry, then we should be ok
                     eodStat = (eodSum.Ministry.EodLastRunDateTime.HasValue && eodSum.LastActivity < eodSum.Ministry.EodLastRunDateTime
-                        && localNow.Date == eodSum.Ministry.EodLastRunDateTime.Value.Date);
+                        && localNow.Date == Gcpe.Time.BcTime.ToLocal(eodSum.Ministry.EodLastRunDateTime.Value).Date);
 
                 }
 
@@ -675,8 +676,8 @@ namespace Gcpe.Hub.WebApp.Controllers
                  .Include(m => m.SystemUserMinistry).ThenInclude(m => m.SystemUser).ThenInclude(su => su.CommunicationContact)
                  .FirstOrDefault(m => m.Abbreviation == HQMinistry);
 
-            var localNow = DateTimeOffset.Now;
-            if (!manualRun && mediaMinistry.EodLastRunDateTime.HasValue && localNow.Date == mediaMinistry.EodLastRunDateTime.Value.Date)
+            var localNow = Gcpe.Time.BcTime.Now;
+            if (!manualRun && mediaMinistry.EodLastRunDateTime.HasValue && localNow.Date == Gcpe.Time.BcTime.ToLocal(mediaMinistry.EodLastRunDateTime.Value).Date)
             {
                 return;
             }
@@ -696,7 +697,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             {
                 mediaMinistry.EodLastRunDateTime = localNow;
             }
-            else if (mediaMinistry.EodLastRunDateTime.Value.Date < localNow.Date)
+            else if (Gcpe.Time.BcTime.ToLocal(mediaMinistry.EodLastRunDateTime.Value).Date < localNow.Date)
             {
                 mediaMinistry.EodFinalizedDateTime = mediaMinistry.EodLastRunDateTime;
             }
@@ -713,12 +714,13 @@ namespace Gcpe.Hub.WebApp.Controllers
             string displayAs = UserMe.DisplayAs;
 
             //TODO: Use populate template
-            var subject = "Emerging Issues/Media Calls - " + DateTime.Today.ToString("D");
+            var subject = "Emerging Issues/Media Calls - " + Gcpe.Time.BcTime.Today.ToString("D");
             string bodyHtml = @"<html style='font-family:Calibri, sans-serif;'>" + @"<style type=""text/css""></style>" + @"<body style='font-family:Calibri, sans-serif; font-size:12.0pt; color: black;'>";
 
             //Retrieve the open requests for the current ministry (all of them back through history).
+            var todayStart = Gcpe.Time.BcTime.FromLocal(localNow.Date);
             var requests = await db.MediaRequest
-                    .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime || e.RespondedAt >= localNow.Date)
+                    .Where(e => e.RespondedAt == null || e.RespondedAt > mediaMinistry.EodFinalizedDateTime || e.RespondedAt >= todayStart)
                     .Where(e => e.IsActive == true)
                     .OrderByDescending(e => e.RespondedAt)
                     .ThenByDescending(e => e.RequestedAt)
@@ -824,9 +826,10 @@ namespace Gcpe.Hub.WebApp.Controllers
                                          .Where(e => e.SystemUserMinistry.Any(f => f.SystemUserId == systemUserMe.Id && f.IsActive))
                                          .ToListAsync();
 
+            var todayStart = Gcpe.Time.BcTime.TodayStart;
             var listMinistryIds = listMinistries.Select(e => e.Id).ToArray();
             var openMediaRequests = await db.MediaRequest
-                                            .Where(e => e.RespondedAt == null || e.RespondedAt >= DateTimeOffset.Now.Date)
+                                            .Where(e => e.RespondedAt == null || e.RespondedAt >= todayStart)
                                             .Where(e => listMinistryIds.Contains(e.LeadMinistryId))
                                             .Where(e => e.IsActive)
                                             .OrderBy(e => e.LeadMinistry.SortOrder)
@@ -840,7 +843,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             //Need be a list because Enums cannot be set to null if the collection is IEnumberable
             var items = openMediaRequests.Select(e => ConvertToDto(e)).ToList();
 
-            var localNow = DateTimeOffset.Now;
+            var localNow = Gcpe.Time.BcTime.Now;
 
             foreach (Ministry min in listMinistries)
             {
@@ -849,7 +852,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
                 foreach (var item in items.Where(mr => mr.LeadMinistry.Id == min.Id))
                 {
-                    if (min.EodLastRunDateTime.Value.Date < localNow.Date && item.RespondedAt == null)
+                    if (Gcpe.Time.BcTime.ToLocal(min.EodLastRunDateTime.Value).Date < localNow.Date && item.RespondedAt == null)
                     {
                         item.EodReportWith = null;
                     }
@@ -1310,7 +1313,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     mediaString += "<p>{{Contacts}}ISSUE: {{Topic}}<br />STATUS: " + placeholder + "{{EodReportWith}}<br />";
                 }
                 
-                if (mr.DeadlineAt < DateTime.Now)
+                if (mr.DeadlineAt < DateTimeOffset.UtcNow)
                 {
                     mediaString += "<strong>Deadline:</strong> <span style='color:#A94442;'>" +
                         "<span bgcolor='#A94442' style='border: 2px solid #A94442; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #A94442;'>OVERDUE</span> {{Deadline}}</span>" + " </p>";
@@ -1344,7 +1347,7 @@ namespace Gcpe.Hub.WebApp.Controllers
                     mediaString = mediaString.Replace("{{Deadline}}", "ASAP");
                 } else
                 {
-                    mediaString = mediaString.Replace("{{Deadline}}", mr.DeadlineAt?.ToLocalTime().ToString("dddd, MMMM dd, yyyy h:mm tt"));
+                    mediaString = mediaString.Replace("{{Deadline}}", mr.DeadlineAt.HasValue ? Gcpe.Time.BcTime.ToLocal(mr.DeadlineAt.Value).ToString("dddd, MMMM dd, yyyy h:mm tt") : null);
                 }
                 
             }
@@ -1412,7 +1415,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             template += "<p style=\"padding-right: 8px; vertical-align:top;\">";
             template += "<b>Deadline</b>  ";
             /*template += "<span style=\"color:black;\">&#8203;</span><span style=\"color:{{DeadlineColor}};\">{{Deadline}}</span><br />";*/
-            if (dto.DeadlineAt < DateTime.Now)
+            if (dto.DeadlineAt < DateTimeOffset.UtcNow)
             {
                 template += "<span style=\"color:black;\">&#8203;</span><span style='color:#A94442;'>" +
                     "<span bgcolor='#A94442' style='border: 2px solid #A94442; font-size:11px; color: #fff; padding:2px 2px 2px;background-color: #A94442;'>OVERDUE</span> {{Deadline}}</span><br />";
@@ -1520,7 +1523,7 @@ namespace Gcpe.Hub.WebApp.Controllers
             if (dto.DeadlineAt.HasValue)
             {
                 template = template.Replace("{{DeadlineColor}}", "#A94442");
-                template = template.Replace("{{Deadline}}", dto.DeadlineAt?.DateTime.ToLocalTime().ToString("f"));
+                template = template.Replace("{{Deadline}}", dto.DeadlineAt.HasValue ? Gcpe.Time.BcTime.ToLocal(dto.DeadlineAt.Value).ToString("f") : null);
             }
             else //removing ASAP
             {
@@ -1531,11 +1534,11 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (dto.RespondedAt.HasValue)
             {
-                template = template.Replace("{{RespondedAt}}", dto.RespondedAt?.DateTime.ToLocalTime().ToString("f"));
+                template = template.Replace("{{RespondedAt}}", dto.RespondedAt.HasValue ? Gcpe.Time.BcTime.ToLocal(dto.RespondedAt.Value).ToString("f") : null);
             }
 
             template = template.Replace("{{MinistryName}}", dto.LeadMinistry.DisplayAs);
-            template = template.Replace("{{RequestedAt}}", dto.RequestedAt.DateTime.ToLocalTime().ToString("f"));
+            template = template.Replace("{{RequestedAt}}", Gcpe.Time.BcTime.ToLocal(dto.RequestedAt).ToString("f"));
             template = template.Replace("{{Request}}", dto.RequestContent.Replace("\r\n", "\n").Replace("\n", "<br />"));
             if (isClosed) template = template.Replace("{{Response}}", dto.Response.Replace("\r\n", "\n").Replace("\n", "<br />")); // add the response to closed requests
 
@@ -1544,7 +1547,7 @@ namespace Gcpe.Hub.WebApp.Controllers
 
             if (dto.ParentRequest != null)
             {
-                background = "This is a follow-up to a media request from " + dto.ParentRequest.RequestedAt.ToString("MMMM d, yyyy") + "." + "<br />";
+                background = "This is a follow-up to a media request from " + Gcpe.Time.BcTime.ToLocal(dto.ParentRequest.RequestedAt).ToString("MMMM d, yyyy") + "." + "<br />";
                 background += "<br />";
                 background += "<div style=\"margin-left: 20px;\">";
                 background += "<i>REQUEST:</i>" + "<br />";
