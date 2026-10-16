@@ -261,3 +261,6 @@ Hub\.Legacy/Gcpe\.Hub\.Legacy\.Website/Calendar/Scripts/ContextualHelp\.js
 .sonarqube
 
 Hub.Legacy.config
+
+# Local time zone regression reports
+/TestResults/
