@@ -47,10 +47,10 @@ function limitChars(textid, limit, infodiv) {
 }
 
 function checkWithinChangeFreezeWindow() {
-    // Coarse UTC pre-check only; the server decides using BC time. Hours 23 and 0 UTC cover
-    // 16:05-17:00 BC at both UTC-7 and UTC-8, without relying on browser time zone data.
+    // Ask the server only during 16:00-17:00 BC at UTC-7 (23:00-24:00 UTC).
+    // The server decides the exact 16:05-17:00 BC freeze and headquarters exemption.
     var utcHour = new Date().getUTCHours();
-    var withinFreezeWindow = (utcHour === 23) || (utcHour === 0);
+    var withinFreezeWindow = utcHour === 23;
     return withinFreezeWindow;
 }
 

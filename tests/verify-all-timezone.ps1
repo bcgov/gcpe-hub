@@ -1,6 +1,52 @@
 # Build first, then verify current production assemblies. No app startup or publish targets.
 param([string]$Dotnet = '', [string]$Msbuild = '', [switch]$LegacyChecksOnly, [string]$WebsiteBin = '')
 
+$script:taskSummary = [ordered]@{}
+foreach ($taskPhase in @('WebApp build', 'Legacy build', 'Core net8.0', 'Core net462', 'Browser JavaScript', 'WebApp business', 'Legacy assemblies', 'Git diff check')) {
+    $script:taskSummary[$taskPhase] = [pscustomobject]@{
+        Phase = $taskPhase; Result = 'NOT RUN'; Passed = 0; Failed = 0; Skipped = 0
+    }
+}
+$script:taskCurrentPhase = ''
+
+function Start-TimePhase([string]$Name) {
+    $script:taskCurrentPhase = $Name
+    $script:taskSummary[$Name].Result = 'RUNNING'
+}
+
+function Read-TimeTestReport([string]$Name, [string]$Path) {
+    [xml]$taskReport = Get-Content -LiteralPath $Path
+    $taskCounters = $taskReport.TestRun.ResultSummary.Counters
+    $taskRow = $script:taskSummary[$Name]
+    $taskRow.Passed = [int]$taskCounters.passed
+    $taskRow.Failed = [int]$taskCounters.failed
+    $taskRow.Skipped = [int]$taskCounters.total - [int]$taskCounters.executed
+    $taskRow.Result = if ([int]$taskCounters.total -gt 0 -and $taskRow.Passed -eq [int]$taskCounters.total) { 'PASS' } else { 'FAIL' }
+    if ($taskRow.Result -ne 'PASS') { throw "Incomplete or failed test execution: $Name" }
+}
+
+function Show-TimeSummary {
+    Write-Host "`n=== Time-zone verification summary ==="
+    $script:taskSummary.Values | ForEach-Object {
+        $taskIsBuildOrDiff = $_.Phase -in @('WebApp build', 'Legacy build', 'Git diff check')
+        [pscustomobject]@{
+            Phase = $_.Phase
+            Result = $_.Result
+            Passed = if ($taskIsBuildOrDiff) { '-' } else { $_.Passed }
+            Failed = if ($taskIsBuildOrDiff) { '-' } else { $_.Failed }
+            Skipped = if ($taskIsBuildOrDiff) { '-' } else { $_.Skipped }
+        }
+    } | Format-Table Phase, Result, Passed, Failed, Skipped -AutoSize | Out-String | Write-Host
+    $taskRows = @($script:taskSummary.Values)
+    $taskPassed = ($taskRows | Measure-Object Passed -Sum).Sum
+    $taskFailed = ($taskRows | Measure-Object Failed -Sum).Sum
+    $taskSkipped = ($taskRows | Measure-Object Skipped -Sum).Sum
+    $taskOverall = if (@($taskRows | Where-Object Result -ne 'PASS').Count -eq 0) { 'PASS' } else { 'FAIL / INCOMPLETE' }
+    Write-Host "Test/check executions: $taskPassed passed, $taskFailed failed, $taskSkipped skipped."
+    Write-Host 'Builds and the Git diff check are listed separately and do not add to test counts.'
+    Write-Host "Overall: $taskOverall"
+}
+
 function Invoke-LegacyTimeChecks {
     param([string]$WebsiteBin = '')
 $ErrorActionPreference = 'Stop'
@@ -18,8 +64,12 @@ foreach ($taskAssembly in @('Gcpe.Hub.Data_Legacy', 'Gcpe.News.ReleaseManagement
 }
 
 $script:taskChecks = 0
+$script:taskFailedChecks = 0
 function Assert-TimeResult([string]$Name, $Expected, $Actual) {
-    if ($Expected -ne $Actual) { throw "$Name expected '$Expected', got '$Actual'." }
+    if ($Expected -ne $Actual) {
+        $script:taskFailedChecks++
+        throw "$Name expected '$Expected', got '$Actual'."
+    }
     $script:taskChecks++
     Write-Host "PASS: $Name | expected: '$Expected' | actual: '$Actual'"
 }
@@ -102,6 +152,8 @@ try {
     Write-Host "Legacy time-zone checks passed: $taskChecks"
 } finally {
     [Threading.Thread]::CurrentThread.CurrentCulture = $taskOriginalCulture
+    # A small machine-readable result lets the parent include child-process checks.
+    Write-Output ('TIMEZONE_LEGACY_RESULT:' + (@{ Passed = $script:taskChecks; Failed = $script:taskFailedChecks } | ConvertTo-Json -Compress))
 }
 
 
@@ -114,19 +166,29 @@ $taskResults = Join-Path (Split-Path $PSScriptRoot -Parent) 'TestResults'
 Push-Location $PSScriptRoot
 try {
     foreach ($framework in $Frameworks) {
+        Start-TimePhase "Core $framework"
         Write-Host "=== Core conversion and server freeze tests ($framework) ==="
         $taskResultName = "timezone-$framework.trx"
+        $taskReportPath = Join-Path $taskResults $taskResultName
+        if (Test-Path -LiteralPath $taskReportPath) { Remove-Item -LiteralPath $taskReportPath }
         & $Dotnet test TimeZone.Tests/TimeZone.Tests.csproj -f $framework --settings timezone.runsettings --logger 'console;verbosity=normal' --logger "trx;LogFileName=$taskResultName" --results-directory $taskResults
-        if ($LASTEXITCODE -ne 0) { throw "Time zone tests failed for $framework." }
-        [xml]$taskReport = Get-Content -LiteralPath (Join-Path $taskResults $taskResultName)
-        $taskCounters = $taskReport.TestRun.ResultSummary.Counters
-        if ([int]$taskCounters.total -eq 0 -or [int]$taskCounters.failed -gt 0 -or [int]$taskCounters.executed -ne [int]$taskCounters.total) {
-            throw "Incomplete or failed test execution for $framework."
-        }
+        $taskTestExit = $LASTEXITCODE
+        if (Test-Path -LiteralPath $taskReportPath) { Read-TimeTestReport "Core $framework" $taskReportPath }
+        if ($taskTestExit -ne 0 -or $script:taskSummary["Core $framework"].Result -ne 'PASS') { throw "Time zone tests failed for $framework." }
     }
+    Start-TimePhase 'Browser JavaScript'
     Write-Host '=== Browser UTC pre-check, initial load and freeze response tests ==='
-    & node --test (Join-Path $PSScriptRoot 'freeze-window.test.cjs')
+    $taskBrowserTotal = 0
+    & node --test --test-reporter=tap (Join-Path $PSScriptRoot 'freeze-window.test.cjs') | ForEach-Object {
+        Write-Host $_
+        if ($_ -match '^# tests (\d+)$') { $taskBrowserTotal = [int]$Matches[1] }
+        if ($_ -match '^# pass (\d+)$') { $script:taskSummary['Browser JavaScript'].Passed = [int]$Matches[1] }
+        if ($_ -match '^# fail (\d+)$') { $script:taskSummary['Browser JavaScript'].Failed = [int]$Matches[1] }
+        if ($_ -match '^# skipped (\d+)$') { $script:taskSummary['Browser JavaScript'].Skipped = [int]$Matches[1] }
+    }
     if ($LASTEXITCODE -ne 0) { throw 'Corp Cal browser checks failed.' }
+    if ($taskBrowserTotal -eq 0 -or $script:taskSummary['Browser JavaScript'].Passed -ne $taskBrowserTotal) { throw 'Incomplete Corp Cal browser checks.' }
+    $script:taskSummary['Browser JavaScript'].Result = 'PASS'
 } finally { Pop-Location }
 
 
@@ -157,9 +219,11 @@ if (-not $Msbuild) {
 }
 Push-Location $taskRoot
 try {
+    Start-TimePhase 'WebApp build'
     Write-Host '=== Build WebApp ==='
     & $Dotnet build Gcpe.Hub.WebApp/Gcpe.Hub.WebApp.csproj --configuration Debug --verbosity quiet
     if ($LASTEXITCODE -ne 0) { throw 'WebApp build failed.' }
+    $script:taskSummary['WebApp build'].Result = 'PASS'
     $taskBuildArgs = @('Hub.Legacy/Gcpe.Hub.Legacy.Website/Gcpe.Hub.Legacy.Website.csproj',
         '/t:Build', '/p:Configuration=Debug', '/v:quiet', '/nologo')
     if ($taskBundledBuild) {
@@ -172,23 +236,43 @@ try {
             "/p:VSToolsPath=$taskTools/webtargets/MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3/tools/VSToolsPath",
             "/p:ReferencePath=$taskOpenXml")
     }
+    Start-TimePhase 'Legacy build'
     Write-Host '=== Build Legacy website and dependencies ==='
     & $Msbuild @taskBuildArgs
     if ($LASTEXITCODE -ne 0) { throw 'Legacy build failed; assembly checks were not run.' }
+    $script:taskSummary['Legacy build'].Result = 'PASS'
     Invoke-CoreTimeChecks -Dotnet $Dotnet
+    Start-TimePhase 'WebApp business'
     Write-Host '=== Business tests: actual email rendering, EOD summary and SQL translation ==='
+    $taskBusinessReport = Join-Path $taskRoot 'TestResults/timezone-business.trx'
+    if (Test-Path -LiteralPath $taskBusinessReport) { Remove-Item -LiteralPath $taskBusinessReport }
     & $Dotnet test tests/BusinessTime.Tests/BusinessTime.Tests.csproj --configuration Debug --verbosity quiet `
         --logger 'console;verbosity=normal' --logger 'trx;LogFileName=timezone-business.trx' --results-directory (Join-Path $taskRoot 'TestResults')
-    if ($LASTEXITCODE -ne 0) { throw 'Offline business tests failed.' }
-    [xml]$taskReport = Get-Content (Join-Path $taskRoot 'TestResults/timezone-business.trx')
-    $taskCounters = $taskReport.TestRun.ResultSummary.Counters
-    if ([int]$taskCounters.total -eq 0 -or [int]$taskCounters.failed -gt 0 -or
-        [int]$taskCounters.executed -ne [int]$taskCounters.total) { throw 'Incomplete business tests.' }
+    $taskTestExit = $LASTEXITCODE
+    if (Test-Path -LiteralPath $taskBusinessReport) { Read-TimeTestReport 'WebApp business' $taskBusinessReport }
+    if ($taskTestExit -ne 0 -or $script:taskSummary['WebApp business'].Result -ne 'PASS') { throw 'Offline business tests failed.' }
+    Start-TimePhase 'Legacy assemblies'
     Write-Host '=== Legacy assembly checks: news, Carousel, templates and scheduling model ==='
-    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -LegacyChecksOnly
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -LegacyChecksOnly | ForEach-Object {
+        if ($_ -like 'TIMEZONE_LEGACY_RESULT:*') {
+            $taskChildResult = $_.Substring('TIMEZONE_LEGACY_RESULT:'.Length) | ConvertFrom-Json
+            $script:taskSummary['Legacy assemblies'].Passed = [int]$taskChildResult.Passed
+            $script:taskSummary['Legacy assemblies'].Failed = [int]$taskChildResult.Failed
+        } else { Write-Host $_ }
+    }
     if ($LASTEXITCODE -ne 0) { throw 'Legacy production-assembly checks failed.' }
+    if ($script:taskSummary['Legacy assemblies'].Passed -eq 0) { throw 'No Legacy checks executed.' }
+    $script:taskSummary['Legacy assemblies'].Result = 'PASS'
+    Start-TimePhase 'Git diff check'
     Write-Host '=== Check diff whitespace ==='
     & git diff --check
     if ($LASTEXITCODE -ne 0) { throw 'git diff --check failed.' }
+    $script:taskSummary['Git diff check'].Result = 'PASS'
     Write-Host 'All offline time-zone verification passed. Real HTTP, database and publishing workflows still require test-environment acceptance.'
-} finally { Pop-Location }
+} catch {
+    if ($script:taskCurrentPhase) { $script:taskSummary[$script:taskCurrentPhase].Result = 'FAIL' }
+    throw
+} finally {
+    Pop-Location
+    Show-TimeSummary
+}

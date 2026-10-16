@@ -9,6 +9,11 @@ cd tests
 
 The script builds WebApp and Legacy, then runs all offline time-zone checks. It prints each test case with its inputs and result, and stops if a build fails, any test fails or is skipped, or no tests execute. Legacy checks also print the expected and actual values.
 
+The final console summary lists each build/check phase, passed/failed/skipped test
+counts and the overall result. If a phase fails, later phases show `NOT RUN`.
+Build and setup errors are shown as phase failures; they are not counted as failed
+test assertions. You do not need to open a report to see whether the run passed.
+
 ## Why the core tests run twice
 
 | Run | Covers | Tests |
@@ -24,7 +29,7 @@ The runtimes implement `TimeZoneInfo` differently, so the shared code is verifie
 | --- | --- |
 | `TimeZone.Tests/BcTimeTests.cs` | `Shared/BcTime.cs`: conversion by date, historical and permanent offsets, fallback rules, missing or corrupt zones, BC midnight, schedule roundtrip and publication dates |
 | `TimeZone.Tests/FreezeWindowTests.cs` | Server freeze rules: strictly after 16:05 and before 17:00 BC, headquarters exemption and historical winter time |
-| `freeze-window.test.cjs` | Calendar browser UTC 23/0-hour pre-check, initial page load, and handling of the server's freeze response |
+| `freeze-window.test.cjs` | Calendar browser pre-check for 16:00–17:00 BC at UTC-7 (23:00–24:00 UTC), initial page load, and handling of the server's freeze response |
 | `BusinessTime.Tests/BusinessTimeTests.cs` | Actual Media Request/EOD email content, overdue and ASAP handling, Ministry EOD summary filtering around BC midnight, and SQL Server query translation |
 | `verify-all-timezone.ps1` | Legacy assembly checks: News formatting, Carousel display/roundtrip, template dates and News model scheduling; also builds both applications and runs `git diff --check` |
 
