@@ -42,13 +42,10 @@ function limitChars(textid, limit, infodiv) {
     }
 }
 function checkWithinChangeFreezeWindow() {
-    var nowDate = new Date();
-    var now = nowDate.toLocaleTimeString("en-CA", {
-        timeZone: "America/Vancouver"
-    });
-    var windowStart = '4:05:00 p.m.';
-    var windowEnd = '5:00:00 p.m.';
-    var withinFreezeWindow = (now > windowStart) && (now < windowEnd);
+    // Coarse UTC pre-check only; the server decides using BC time. Hours 23 and 0 UTC cover
+    // 16:05-17:00 BC at both UTC-7 and UTC-8, without relying on browser time zone data.
+    var utcHour = new Date().getUTCHours();
+    var withinFreezeWindow = (utcHour === 23) || (utcHour === 0);
     return withinFreezeWindow;
 }
 function SetChanged(activityId) {
@@ -96,6 +93,7 @@ function checkDailyChangeFreeze() {
     $.ajax({
         type: "GET",
         url: "ChangeFreezeWindowHandler.ashx",
+        cache: false,
         dataType: "text",
         success: function (resp) {
             if (resp === "True") {

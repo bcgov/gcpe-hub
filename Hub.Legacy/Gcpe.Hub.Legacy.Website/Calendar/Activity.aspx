@@ -688,7 +688,7 @@
                                     <td class="column-right">
                                         <input type="text" id="NRDate" title="Choose a release date and time" value="" runat="server" class="new-activity-date" style="width: 80px;" />
                                         <asp:DropDownList runat="server" ID ="NRTime" CssClass="editable-select" />
-                                        <span class="PSTLabel">PST</span>
+                                        <span class="PSTLabel">PCT</span>
                                     </td>
                                 </tr>
                             </table>
@@ -709,7 +709,7 @@
                                             &nbsp;&nbsp;
                                             <div id="StartTimeContainer" style="display: inline-block; vertical-align: top;" >
                                                 <asp:DropDownList runat="server" ID ="StartTime" CssClass="editable-select" />
-                                                <span id="StartTimePSTLabel" class="PSTLabel">PST</span>
+                                                <span id="StartTimePSTLabel" class="PSTLabel">PCT</span>
                                                 <span id="StartTimeValidator" style="color: red" runat="server">Required</span>
                                                 <asp:CustomValidator id="StartTimeCustomValidator" runat="server" Display="Dynamic"
                                                     EnableClientScript="true" ControlToValidate="StartTime" ShowMessageBox="true"
@@ -744,7 +744,7 @@
                                             &nbsp;&nbsp;
                                             <div id="EndTimeContainer" style="display: inline-block; vertical-align: top;">
                                                 <asp:DropDownList runat="server" ID ="EndTime" CssClass="editable-select" />
-                                                <span id="EndTimePSTLabel" class="PSTLabel">PST</span>
+                                                <span id="EndTimePSTLabel" class="PSTLabel">PCT</span>
                                                 <span id="EndTimeRequiredValidator" style="color: red" runat="server">Required</span>
                                                 <asp:CustomValidator id="EndTimeCustomValidator" runat="server" Display="Dynamic"
                                                     EnableClientScript="true" ControlToValidate="EndTime" ShowMessageBox="true"
