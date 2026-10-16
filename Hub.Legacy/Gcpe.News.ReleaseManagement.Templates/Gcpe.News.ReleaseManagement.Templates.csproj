@@ -70,6 +70,7 @@
     <Compile Include="Document.cs" />
     <Compile Include="Release.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\Shared\BcTime.cs" Link="Shared\BcTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\DocumentReport.rdlc" />
