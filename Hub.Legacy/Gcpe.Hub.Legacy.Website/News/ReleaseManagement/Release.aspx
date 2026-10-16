@@ -1292,7 +1292,7 @@
                     <div class="view-group hideForAdvisories">
                         <div class="lbl">Release Date</div>
                         <div class="txt">
-                            <%: Model.ReleaseDate.HasValue ? FormatDateTime(Model.ReleaseDate.Value) : "Not Published" %>
+                            <%: Model.ReleaseDate.HasValue ? FormatBcWallTime(Model.ReleaseDate.Value) : "Not Published" %>
                         </div>
                     </div>
 

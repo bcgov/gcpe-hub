@@ -28,7 +28,7 @@ namespace Gcpe.Hub
         // return Max of PublishDateTime and ReleaseDateTime
         public static DateTimeOffset? MaxReleaseDate(NewsRelease nr)
         {
-            return nr.ReleaseDateTime > nr.PublishDateTime ? nr.ReleaseDateTime : nr.PublishDateTime;
+            return Gcpe.Time.BcTime.MaxPublishDate(nr.ReleaseDateTime, nr.PublishDateTime);
         }
 
         private static void AppendNewPost(NewsRelease post, List<Hub.Services.Legacy.Models.Article> posts)
@@ -56,7 +56,7 @@ namespace Gcpe.Hub
                         Title = firstEnglish.Headline,
                         Uri = postUrl,
                         Id = post.GetAtomId(),
-                        Published = post.ReleaseDateTime ?? post.PublishDateTime.Value,
+                        Published = Gcpe.Time.BcTime.PublishDate(post.ReleaseDateTime, post.PublishDateTime.Value),
                         HtmlContent = post.English().Summary,
                         TextContent = textContent
                     });

@@ -151,7 +151,7 @@ namespace Gcpe.News.ReleaseManagement
 
             if (!nr.ReleaseDateTime.HasValue)
             {
-                nr.ReleaseDateTime = nr.PublishDateTime.Value.ToLocalTime().DateTime;
+                nr.ReleaseDateTime = Gcpe.Time.BcTime.ToLocal(nr.PublishDateTime.Value).DateTime;
 
                 nr.Logs.Add(new NewsReleaseLog()
                 {

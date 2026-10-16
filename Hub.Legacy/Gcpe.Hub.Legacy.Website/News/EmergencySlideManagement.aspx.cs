@@ -99,7 +99,7 @@ namespace Gcpe.Hub.News
             var id = btn.CommandArgument.ToString();
 
             // create new Carousel when pinning or unpinning
-            var nextCarousel = NewCarousel(DateTime.Now.AddSeconds(30));
+            var nextCarousel = NewCarousel(Gcpe.Time.BcTime.Now.DateTime.AddSeconds(30));
             var last_carousel = DbContext.Carousels.OrderByDescending(c => c.PublishDateTime).FirstOrDefault();
             var SlidesItems = last_carousel.CarouselSlides.OrderBy(s => s.SortIndex);
             
@@ -196,7 +196,7 @@ namespace Gcpe.Hub.News
                 }
                 if (IsPinned)
                 {
-                    var nextCarousel = NewCarousel(DateTime.Now.AddSeconds(30));
+                    var nextCarousel = NewCarousel(Gcpe.Time.BcTime.Now.DateTime.AddSeconds(30));
                     var last_carousel = DbContext.Carousels.OrderByDescending(c => c.PublishDateTime).FirstOrDefault();
                     var SlidesItems = last_carousel.CarouselSlides.Where(s=>s.SortIndex!=-2).OrderBy(s => s.SortIndex);
                     foreach (CarouselSlide carouselSlide in SlidesItems)
@@ -252,7 +252,7 @@ namespace Gcpe.Hub.News
                 }
                 if (IsSecondaryPinned)
                 {
-                    var nextCarousel = NewCarousel(DateTime.Now.AddSeconds(30));
+                    var nextCarousel = NewCarousel(Gcpe.Time.BcTime.Now.DateTime.AddSeconds(30));
                     var last_carousel = DbContext.Carousels.OrderByDescending(c => c.PublishDateTime).FirstOrDefault();
                     var SlidesItems = last_carousel.CarouselSlides.Where(s => s.SortIndex != -1).OrderBy(s => s.SortIndex);
                     foreach (CarouselSlide carouselSlide in SlidesItems)
@@ -308,7 +308,7 @@ namespace Gcpe.Hub.News
             return DbContext.Carousels.Add(new legacy::Gcpe.Hub.Data.Entity.Carousel
             {
                 Id = Guid.NewGuid(),
-                PublishDateTime = publishDateTime,
+                PublishDateTime = Gcpe.Time.BcTime.FromLocal(publishDateTime),
                 Timestamp = DateTime.Now
             });
         }

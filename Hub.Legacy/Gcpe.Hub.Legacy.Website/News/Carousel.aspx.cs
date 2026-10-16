@@ -51,7 +51,7 @@ namespace Gcpe.Hub.News
 
         protected DateTimeOffset CarouselPublishDateTime
         {
-            get { return carousel.PublishDateTime.Value; }
+            get { return Gcpe.Time.BcTime.ToLocal(carousel.PublishDateTime.Value); }
         }
 
         protected IEnumerable<CarouselSlide> SlidesItems
@@ -63,7 +63,7 @@ namespace Gcpe.Hub.News
         {
             try
             {
-                carousel.PublishDateTime = DateTime.Parse(publishDateTimePicker.Text);
+                carousel.PublishDateTime = Gcpe.Time.BcTime.FromLocal(DateTime.Parse(publishDateTimePicker.Text));
                 List<CarouselSlide> slides = SlidesItems.ToList();
                 int i = 0;
                 foreach (RepeaterItem item in rptSlides.Items)
@@ -154,7 +154,7 @@ namespace Gcpe.Hub.News
             legacy::Gcpe.Hub.Data.Entity.Carousel nextCarousel = DbContext.Carousels.Where(c => c.PublishDateTime > carousel.PublishDateTime).OrderBy(c => c.PublishDateTime).FirstOrDefault();
             if (nextCarousel == null)
             {
-                nextCarousel = NewCarousel(DateTime.Now.AddDays(1));
+                nextCarousel = NewCarousel(Gcpe.Time.BcTime.Now.DateTime.AddDays(1));
 
                 foreach (CarouselSlide carouselSlide in SlidesItems)
                 {
@@ -175,7 +175,7 @@ namespace Gcpe.Hub.News
             return DbContext.Carousels.Add(new legacy::Gcpe.Hub.Data.Entity.Carousel
             {
                 Id = Guid.NewGuid(),
-                PublishDateTime = publishDateTime,
+                PublishDateTime = Gcpe.Time.BcTime.FromLocal(publishDateTime),
                 Timestamp = DateTime.Now
             });
         }
@@ -194,7 +194,7 @@ namespace Gcpe.Hub.News
             {
                 return slideToReuse;
             }
-            var oldestCarousels = DbContext.Carousels.Where(c => c.PublishDateTime < DateTime.Now).OrderBy(c => c.PublishDateTime); // do not count scheduled ones
+            var oldestCarousels = DbContext.Carousels.Where(c => c.PublishDateTime < DateTimeOffset.UtcNow).OrderBy(c => c.PublishDateTime); // do not count scheduled ones
             if (oldestCarousels.Count() > 5)
             {
                 var oldestCarousel = oldestCarousels.First();

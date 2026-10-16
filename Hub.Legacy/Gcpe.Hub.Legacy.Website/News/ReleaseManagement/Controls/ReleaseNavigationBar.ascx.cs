@@ -177,8 +177,9 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             {
                 if (Model.PublishDateTime.HasValue)
                 {
+                    var publishDate = Gcpe.Time.BcTime.ToLocal(Model.PublishDateTime.Value);
                     body += Model.IsCommitted ? "Release Date: " : "Planned Release Date: ";
-                    body += Model.PublishDateTime.Value.ToString("MMMM d, yyyy") + " at " + Model.PublishDateTime.Value.ToString("h:mm tt").ToLower() + "\t\r\n";
+                    body += publishDate.ToString("MMMM d, yyyy") + " at " + publishDate.ToString("h:mm tt").ToLower() + "\t\r\n";
                 }
                 else
                 {

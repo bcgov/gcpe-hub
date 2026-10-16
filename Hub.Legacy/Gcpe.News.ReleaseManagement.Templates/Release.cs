@@ -43,9 +43,7 @@ namespace Gcpe.News.ReleaseManagement.Templates
             //TODO: Determine if we should use nr.IsPublished or nr.PublishDateTime.HasValue to determine IsReleased value
             release.IsReleased = !string.IsNullOrEmpty(nr.Reference);
 
-            //TODO: Do not use DateTime.Today: Change to System.DateTime
-
-            release.ReleaseDateTime = nr.ReleaseDateTime ?? (nr.PublishDateTime.HasValue ? nr.PublishDateTime.Value.DateTime : (DateTime?)null) ?? DateTime.Today;
+            release.ReleaseDateTime = nr.ReleaseDateTime ?? (nr.PublishDateTime.HasValue ? Gcpe.Time.BcTime.ToLocal(nr.PublishDateTime.Value).DateTime : (DateTime?)null) ?? Gcpe.Time.BcTime.Today;
             //Meta content values are comma separated strings. A specific single value cannot contain commas
             //TODO: Strip commas from the query string used in the News.Gov search
             release.MetaLocation = nr.English().Location.Replace(",", string.Empty);

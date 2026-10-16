@@ -152,6 +152,8 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
             {
                 if (PageLayout == legacy::Gcpe.Hub.Data.Entity.PageLayout.Formal)
                 {
+                    var releaseDate = Model.ReleaseDate ?? (Model.PublishDateTime.HasValue
+                        ? Gcpe.Time.BcTime.ToLocal(Model.PublishDateTime.Value).DateTime : Gcpe.Time.BcTime.Today);
                     if (LanguageId == Language.enCA)
                     {
                         string text = "For Immediate Release";
@@ -162,7 +164,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                             text += (text == "" ? "" : "<br />") + (Model.ReleaseTypeId == ReleaseType.Release ? Model.Key : Model.Reference);
 
                         //TODO: Display Release Date
-                        text += (text == "" ? "" : "<br />") + Gcpe.News.ReleaseManagement.Templates.Release.CPDateFormat(Model.ReleaseDate ?? Model.PublishDateTime ?? DateTime.Today);
+                        text += (text == "" ? "" : "<br />") + Gcpe.News.ReleaseManagement.Templates.Release.CPDateFormat(releaseDate);
 
                         return text;
                     }
@@ -175,7 +177,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                         else if (Model.ReleaseTypeId != ReleaseType.Advisory)
                             text += (text == "" ? "" : "<br />") + (Model.ReleaseTypeId == ReleaseType.Release ? Model.Key : Model.Reference);
 
-                        text += (text == "" ? "" : "<br />") + (Model.ReleaseDate ?? Model.PublishDateTime ?? DateTime.Today).ToString("d MMMM yyyy", System.Globalization.CultureInfo.GetCultureInfo(LanguageId));
+                        text += (text == "" ? "" : "<br />") + releaseDate.ToString("d MMMM yyyy", System.Globalization.CultureInfo.GetCultureInfo(LanguageId));
                         return text;
                     }
                     else
@@ -235,7 +237,7 @@ namespace Gcpe.Hub.News.ReleaseManagement.Controls
                     if (Model.ReleaseDate.HasValue)
                         releaseDate = Model.ReleaseDate.Value;
                     else if (Model.PublishDateTime.HasValue)
-                        releaseDate = Model.PublishDateTime.Value.DateTime;
+                        releaseDate = Gcpe.Time.BcTime.ToLocal(Model.PublishDateTime.Value).DateTime;
                     else
                         releaseDate = null;
 
