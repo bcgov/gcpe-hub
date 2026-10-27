@@ -77,30 +77,69 @@ function GetChanged() {
 }
 
 var conflictMsgWasShown = false;
+var activityEditingToken: string;
+var activityEditingTimer: number;
+var activityEditingId = '';
 
 function GetActivityStatus(activityId?: string) {
+    if (!activityId) return true; // New activities have no record to lock yet.
+
+    var acquired = false;
     $.ajax({
         type: "POST",
         async: false, // prevent banners from showing/hiding if the activity is locked
         url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
-        data: { 'activityId': activityId },
+        data: { 'activityId': activityId, 'editingToken': activityEditingToken },
         dataType: "text",
+        timeout: 10000,
         success: function (msg) {
             if (msg) {
-                alert(msg);
-                conflictMsgWasShown = true;
-                window.onbeforeunload = () => { };
-                window.open('', '_self', '').close();
+                ShowEditingConflict(msg);
+                return;
             }
+
+            acquired = true;
+            activityEditingId = activityId;
+            conflictMsgWasShown = false;
+            window.clearInterval(activityEditingTimer);
+            activityEditingTimer = window.setInterval(RenewEditingActivity, 60000);
+        },
+        error: function () {
+            alert("Unable to confirm editing access. Please try again before saving.");
         }
+    });
+    return acquired;
+}
+
+function ShowEditingConflict(message: string) {
+    window.clearInterval(activityEditingTimer);
+    if (!conflictMsgWasShown) alert(message);
+    conflictMsgWasShown = true;
+    // Keep unsaved input available to copy instead of closing the tab.
+    $('#SaveButton, #ReviewButton').prop('disabled', true).next('button').prop('disabled', true);
+}
+
+function RenewEditingActivity() {
+    $.ajax({
+        type: "POST",
+        url: "ActivityEditingHandler.ashx?Op=RenewEditingActivity",
+        data: { 'activityId': activityEditingId, 'editingToken': activityEditingToken },
+        dataType: "text",
+        timeout: 10000,
+        success: function (msg) {
+            if (msg) ShowEditingConflict(msg);
+        }
+        // Network failures leave input intact; the next heartbeat retries.
     });
 }
 
 function DoCancel(id: string) {
-    if (conflictMsgWasShown) return;
+    window.clearInterval(activityEditingTimer);
+    if (!id || !activityEditingToken) return;
 
     var formData = new FormData();
     formData.append("activityId", id);
+    formData.append("editingToken", activityEditingToken);
     navigator.sendBeacon("ActivityEditingHandler.ashx?Op=CancelEditingActivity", formData);
 }
 

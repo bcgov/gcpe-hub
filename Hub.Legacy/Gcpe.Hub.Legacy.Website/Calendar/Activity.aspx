@@ -87,7 +87,7 @@
 
     <link rel="stylesheet" href="<%= ResolveUrl("~/Calendar/Content/Custom.css") %>" />
     <!-- RDK -->
-    <script type="text/javascript" src="Scripts/activityhelper.js"></script>
+    <script type="text/javascript" src="Scripts/activityhelper.js?v=20261026"></script>
     <script type="text/javascript" src="Scripts/ContextualHelp.js"></script>
 
 
@@ -259,6 +259,8 @@
 
         function IsSaveValid() {
             if (warn_on_unload == "" && $.url().param('ActivityId') == undefined) return false; // prevent double clicking users to create 2 new activities
+
+            if (!GetActivityStatus($.url().param('ActivityId'))) return false;
 
             var pageIsValid = Page_ClientValidate();
 
@@ -1119,6 +1121,7 @@
             function timerIncrement() {
                 idleTime = idleTime + 1;
                 if (idleTime > 14) { // 15 minutes
+                    CancelEditing(); // Release even when the browser refuses to close this tab.
                     window.onbeforeunload = null;
                     window.open('', '_self', '').close();
                 }
@@ -2288,8 +2291,14 @@
         //window.onunload = CheckInActivity;
         window.onbeforeunload = ConfirmUnsavedChanges;
 
-        window.onunload = CancelEditing;
-        function CancelEditing() {
+        activityEditingToken = '<%= ActivityEditingToken %>';
+        window.addEventListener('pagehide', CancelEditing);
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted && GetChanged()) GetActivityStatus($.url().param('ActivityId'));
+        });
+        function CancelEditing(event) {
+            // The response keeps the same token; a late beacon must not release its lock.
+            if (event && $('#IsPostBackHiddenField').val() === 'true') return;
             var id = $.url().param('ActivityId') || '';
             DoCancel(id);
         }
