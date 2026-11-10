@@ -75,7 +75,7 @@ function GetActivityStatus(activityId) {
     var acquired = false;
     $.ajax({
         type: "POST",
-        async: false, // prevent banners from showing/hiding if the activity is locked
+        async: false,
         url: "ActivityEditingHandler.ashx?Op=GetActivityStatus",
         data: { 'activityId': activityId, 'editingToken': activityEditingToken },
         dataType: "text",
@@ -99,11 +99,12 @@ function GetActivityStatus(activityId) {
 }
 function ShowEditingConflict(message) {
     window.clearInterval(activityEditingTimer);
-    if (!conflictMsgWasShown)
-        alert(message);
+    if (conflictMsgWasShown)
+        return;
     conflictMsgWasShown = true;
-    // Keep unsaved input available to copy instead of closing the tab.
-    $('#SaveButton, #ReviewButton').prop('disabled', true).next('button').prop('disabled', true);
+    alert(message);
+    window.onbeforeunload = function () { };
+    window.open('', '_self', '').close();
 }
 function RenewEditingActivity() {
     $.ajax({

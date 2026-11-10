@@ -102,7 +102,7 @@ namespace Gcpe.Hub.Calendar
             var latestLog = GetLatestEditingLog(activityId);
             if (!OwnsEditingLog(latestLog, editingToken))
             {
-                context.Response.Write("Your editing session has ended. Please copy any unsaved changes and reopen the activity before saving.");
+                context.Response.Write("Your editing session has ended. This tab will automatically be closed. Please try re-opening the activity later.");
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace Gcpe.Hub.Calendar
             if (latestLog != null && latestLog.IsActive && latestLog.LastUpdatedDateTime > DateTime.Now.Subtract(EditingTimeout))
             {
                 var userEditingActivity = GetSystemUser(latestLog);
-                context.Response.Write(string.Format("{0} is editing this activity. Please copy any unsaved changes and reopen the activity later.", userEditingActivity?.FullName));
+                context.Response.Write(string.Format("{0} is editing this activity. This tab will automatically be closed. Please try re-opening the activity later.", userEditingActivity?.FullName));
                 return;
             }
 

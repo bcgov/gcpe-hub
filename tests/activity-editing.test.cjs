@@ -8,7 +8,7 @@ const calendar = path.join(__dirname, '../Hub.Legacy/Gcpe.Hub.Legacy.Website/Cal
 const source = fs.readFileSync(path.join(calendar, 'Scripts/activityhelper.js'), 'utf8');
 
 function fixture() {
-  const requests = [], alerts = [], changes = [], beacons = [], intervals = new Map();
+  const requests = [], alerts = [], changes = [], beacons = [], closes = [], intervals = new Map();
   const fields = new Map();
   let nextTimer = 0, reply = '';
   function $(selector) {
@@ -32,7 +32,7 @@ function fixture() {
     window: {
       setInterval(callback, delay) { intervals.set(++nextTimer, {callback, delay}); return nextTimer; },
       clearInterval(id) { intervals.delete(id); },
-      open() { throw new Error('A lock conflict must preserve unsaved input'); },
+      open(...args) { return {close() { closes.push(args); }}; },
     },
     navigator: {sendBeacon: (url, data) => { beacons.push({url, data}); return true; }},
     FormData,
@@ -40,7 +40,7 @@ function fixture() {
   vm.createContext(context);
   vm.runInContext(source, context);
   context.activityEditingToken = '11111111-1111-4111-8111-111111111111';
-  return {context, requests, alerts, changes, beacons, intervals, fields, reply: value => { reply = value; }};
+  return {context, requests, alerts, changes, beacons, closes, intervals, fields, reply: value => { reply = value; }};
 }
 
 test('new activities do not acquire a lock or start a heartbeat', () => {
@@ -64,16 +64,19 @@ test('acquisition starts one heartbeat and a save recheck renews the same page t
   assert.equal(renew.data.editingToken, f.context.activityEditingToken);
 });
 
-test('a denied acquisition preserves input and prevents saving', () => {
+test('a denied acquisition alerts and closes the tab without disabling save buttons', () => {
   const f = fixture();
   f.reply('Another editor has this activity.');
   assert.equal(f.context.GetActivityStatus('42'), false);
   assert.equal(f.intervals.size, 0);
   assert.equal(f.alerts.length, 1);
-  assert.ok(f.changes.some(c => c.selector.includes('#SaveButton') && c.operation === 'prop' && c.args[1] === true));
+  assert.equal(f.closes.length, 1);
+  assert.deepEqual(f.closes[0], ['', '_self', '']);
+  assert.equal(typeof f.context.window.onbeforeunload, 'function');
+  assert.equal(f.changes.some(c => c.operation === 'prop' && c.args[0] === 'disabled'), false);
 });
 
-test('a lost lease stops heartbeats, keeps input, and alerts only once', () => {
+test('a lost lease stops heartbeats, alerts and closes only once', () => {
   const f = fixture();
   f.context.GetActivityStatus('42');
   [...f.intervals.values()][0].callback();
@@ -82,6 +85,7 @@ test('a lost lease stops heartbeats, keeps input, and alerts only once', () => {
   renew.success('Your editing session has ended.');
   assert.equal(f.intervals.size, 0);
   assert.equal(f.alerts.length, 1);
+  assert.equal(f.closes.length, 1);
 });
 
 test('a transient network failure does not discard input or stop retries', () => {
