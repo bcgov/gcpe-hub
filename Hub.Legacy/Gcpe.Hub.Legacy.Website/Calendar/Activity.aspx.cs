@@ -31,8 +31,6 @@ namespace Gcpe.Hub.Calendar
 
         #region Properties
 
-        protected string ActivityEditingToken => (string)ViewState["ActivityEditingToken"];
-
         private bool IsUserSessionExpired
         {
             get { return (Session.SessionID == null); }
@@ -135,9 +133,6 @@ namespace Gcpe.Hub.Calendar
 
         private void Page_Load(object sender, EventArgs e)
         {
-            if (ViewState["ActivityEditingToken"] == null)
-                ViewState["ActivityEditingToken"] = Guid.NewGuid().ToString("D");
-
             if (!IsPostBack)
             {
                 NRTime.Items.Add("");
@@ -631,18 +626,7 @@ namespace Gcpe.Hub.Calendar
         {
             //Update the activity with new values from db.
             //especially important after save of existing activity when it reloads values
-            var activityTimeStampBeforeLoad = calendarDataContext.Activities
-                .Where(p => p.Id == ActivityId)
-                .Select(p => p.TimeStamp)
-                .SingleOrDefault();
             this.CurrentActiveActivity = ActivityWebService.GetActiveActivityById((int)ActivityId);
-            var activityTimeStampAfterLoad = calendarDataContext.Activities
-                .Where(p => p.Id == ActivityId)
-                .Select(p => p.TimeStamp)
-                .SingleOrDefault();
-            bool activityTimeStampStayedStable = activityTimeStampBeforeLoad == null
-                ? activityTimeStampAfterLoad == null
-                : activityTimeStampAfterLoad != null && activityTimeStampBeforeLoad.ToArray().SequenceEqual(activityTimeStampAfterLoad.ToArray());
             string categoriesSelectedValues = calendarDataContext.GetActivityCategories(ActivityId).SingleOrDefault()?.categories;
             string commMaterialsSelectedValues = calendarDataContext.GetActivityCommunicationMaterials(ActivityId).SingleOrDefault()?.activityCommunicationMaterials;
             string nrOriginsSelectedValues = calendarDataContext.GetActivityNewsReleaseOrigins(ActivityId).SingleOrDefault()?.activityNewsReleaseOrigins;
@@ -689,9 +673,6 @@ namespace Gcpe.Hub.Calendar
 
             PopulateDropDownLists(CurrentActiveActivity, selectedCategoryIds, selectedSectorIds, selectedThemeIds, selectedKeywords, selectedTranslations, selectedInitiatives, selectedCommMaterialIds, selectedNROriginIds, selectedTagIds);
             timestamp.Value = (CurrentActiveActivity.LastUpdatedDateTime ?? CurrentActiveActivity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString();
-            ViewState["ActivityTimeStamp"] = activityTimeStampStayedStable
-                ? (activityTimeStampAfterLoad == null ? new byte[0] : activityTimeStampAfterLoad.ToArray())
-                : null;
 
             var selectedMinistryIds = new List<Guid>();
             if (CurrentActiveActivity.ContactMinistryId.HasValue)
@@ -1139,14 +1120,9 @@ namespace Gcpe.Hub.Calendar
                 ErrorNotice.Style.Clear();
                 return false;
             }
+            SavedSuccessfullyNotice.Style.Clear();
+            InactivityNotice.Style.Add("display", "none");
 
-            var loadedTimeStamp = ViewState["ActivityTimeStamp"] as byte[];
-            var currentTimeStamp = activity.TimeStamp == null ? new byte[0] : activity.TimeStamp.ToArray();
-            if (loadedTimeStamp == null || !loadedTimeStamp.SequenceEqual(currentTimeStamp))
-            {
-                ErrorNotice.Style.Clear();
-                return false;
-            }
 
             var customPrincipal = Master.CustomPrincipal;
 
@@ -1279,27 +1255,17 @@ namespace Gcpe.Hub.Calendar
             bool commMaterialsHaveChanged = CommMaterialsSelectedValuesServerSide.Text != CommMaterialsSelectedValues.Text;
             string translations = TranslationsTextbox.Text.Replace("~", ", ");
 
-            try
-            {
-                ActivityManager.UpdateActivity(calendarDataContext, customPrincipal, activity,
-                    ReplaceSpecialCharacters(title), ReplaceSpecialCharacters(DetailsTextBox.Text.Trim()),
-                    GetDateTime(StartDate.Value, IsAllDayCheckBox.Checked ? null : StartTime.SelectedValue, false),
-                    GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true), PotentialDatesTextBox.Text.Trim(),
-                    newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged, commMaterialsHaveChanged,
-                    IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues(), significanceHasChanged,
-                    internalNotesHasChanged, scheduleHasChanged, strategyHasChanged, premierRequestedHasChanged, venueHasChanged, digitalHasChanged, eventPlannerHasChanged, initiativesHaveChanged,
-                    keywordsHaveChanged, leadOrganizationHasChanged, NRDistributionHasChanged, NROriginHasChanged, translationsRequiredHasChanged);
+            ActivityManager.UpdateActivity(calendarDataContext, customPrincipal, activity,
+                ReplaceSpecialCharacters(title), ReplaceSpecialCharacters(DetailsTextBox.Text.Trim()),
+                GetDateTime(StartDate.Value, IsAllDayCheckBox.Checked ? null : StartTime.SelectedValue, false),
+                GetDateTime(EndDate.Value, IsAllDayCheckBox.Checked ? null : EndTime.SelectedValue, true), PotentialDatesTextBox.Text.Trim(),
+                newRepresentativeId, newCityId, OtherCityTextBox.Text, categoryHasChanged, commMaterialsHaveChanged,
+                IsIssueCheckBox.Checked, IsConfidentialCheckBox.Checked, translations, GetDropDownListValues(), significanceHasChanged,
+                internalNotesHasChanged, scheduleHasChanged, strategyHasChanged, premierRequestedHasChanged, venueHasChanged, digitalHasChanged, eventPlannerHasChanged, initiativesHaveChanged,
+                keywordsHaveChanged, leadOrganizationHasChanged, NRDistributionHasChanged, NROriginHasChanged, translationsRequiredHasChanged);
 
-                SaveDocuments(calendarDataContext, activity);
-            }
-            catch (System.Data.Linq.ChangeConflictException)
-            {
-                ErrorNotice.Style.Clear();
-                return false;
-            }
+            SaveDocuments(calendarDataContext, activity);
 
-            SavedSuccessfullyNotice.Style.Clear();
-            InactivityNotice.Style.Add("display", "none");
             return true;
         }
 
@@ -1483,14 +1449,13 @@ namespace Gcpe.Hub.Calendar
                 {
                     InsertNewsFeed("change", "changed activity", CurrentActiveActivity.Title, this.ActivityId);
                     LoadExistingActivity(); //Reload the activity to show updated values.
-                    ForcePageToClose();
                 }
             }
             else
             {
                 Insert();
-                ForcePageToClose();
             }
+            ForcePageToClose();
         }
 
         protected void ReviewButtonClick(object sender, EventArgs e)
@@ -1501,21 +1466,15 @@ namespace Gcpe.Hub.Calendar
                 if (success)
                 {
                     if (ActivityManager.ReviewActivity(ActivityId.Value, timestamp.Value))
-                    {
                         InsertNewsFeed("review", "reviewed activity", CurrentActiveActivity.Title, this.ActivityId);
-                        LoadExistingActivity(); //Reload the activity to show updated values.
-                        ForcePageToClose();
-                    }
-                    else
-                    {
-                        ErrorNotice.Style.Clear();
-                    }
+                    LoadExistingActivity(); //Reload the activity to show updated values.
                 }
                 else
                 {
                     ErrorNotice.Style.Clear();
                 }
             }
+            ForcePageToClose();
         }
 
         private void ForcePageToClose()
@@ -1524,7 +1483,7 @@ namespace Gcpe.Hub.Calendar
             // previously, ministry users would leave the tab open, HQ would make changes and ministry users would indavertently
             // overwrite those changes made by HQ with later edits to the open activity, causing data to be incorrect
             var changesPendingMsg = "<i class=\"fa fa-exclamation-triangle fa-fw\" aria-hidden=\"true\"></i> Close this tab & re-open the activity to make changes.";
-            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "CancelEditing(); window.close(); if(!window.closed) { alert('Please close this tab to avoid editing conflicts. To continue editing, close this tab & open activity again.'); $('#ActionsFieldset').hide(); $('#ChangesPendingAlert').html('" + changesPendingMsg + "'); $('#ChangesPending').removeClass('ChangesNotice-Modifier').addClass('ChangesNotice-Modifier-1').find('table:eq(0)').remove(); $('#SecondaryAlert').css({'background-color': '#F9F1C6', 'color': '#6C4A00'})}", true);
+            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close(); if(!window.closed) { alert('Please close this tab to avoid editing conflicts. To continue editing, close this tab & open activity again.'); $('#ActionsFieldset').hide(); $('#ChangesPendingAlert').html('" + changesPendingMsg + "'); $('#ChangesPending').removeClass('ChangesNotice-Modifier').addClass('ChangesNotice-Modifier-1').find('table:eq(0)').remove(); $('#SecondaryAlert').css({'background-color': '#F9F1C6', 'color': '#6C4A00'})}", true);
         }
 
         protected void FavoriteButtonClick(object sender, EventArgs e)
