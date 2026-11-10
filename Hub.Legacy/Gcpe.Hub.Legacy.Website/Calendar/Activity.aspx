@@ -87,7 +87,7 @@
 
     <link rel="stylesheet" href="<%= ResolveUrl("~/Calendar/Content/Custom.css") %>" />
     <!-- RDK -->
-    <script type="text/javascript" src="Scripts/activityhelper.js?v=20261026"></script>
+    <script type="text/javascript" src="Scripts/activityhelper.js?v=20261110"></script>
     <script type="text/javascript" src="Scripts/ContextualHelp.js"></script>
 
 
