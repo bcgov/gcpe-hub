@@ -113,10 +113,11 @@ function GetActivityStatus(activityId?: string) {
 
 function ShowEditingConflict(message: string) {
     window.clearInterval(activityEditingTimer);
-    if (!conflictMsgWasShown) alert(message);
+    if (conflictMsgWasShown) return;
     conflictMsgWasShown = true;
-    // Keep unsaved input available to copy instead of closing the tab.
-    $('#SaveButton, #ReviewButton').prop('disabled', true).next('button').prop('disabled', true);
+    alert(message);
+    window.onbeforeunload = () => { };
+    window.open('', '_self', '').close();
 }
 
 function RenewEditingActivity() {
