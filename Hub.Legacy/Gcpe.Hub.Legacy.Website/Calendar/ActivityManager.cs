@@ -18,16 +18,17 @@ public class ActivityManager
         //
     }
 
-    public static bool ReviewActivity(int activityId, string lastUpdatedDateTime) 
+    public static bool ReviewActivity(int activityId, byte[] expectedTimeStamp)
     {
-        var dc = new CorporateCalendar.Data.CorporateCalendarDataContext(); //"param1", "param2", "param3");
-        var activities = from a in dc.Activities
-                         where a.Id == activityId
-                         select a;
+        if (expectedTimeStamp == null)
+            return false;
 
-        if (activities.Count() > 0)
+        using (var dc = new CorporateCalendarDataContext())
         {
-            var activity = activities.First();
+            var activity = dc.Activities.SingleOrDefault(a => a.Id == activityId);
+            if (activity == null || activity.TimeStamp == null ||
+                !activity.TimeStamp.ToArray().SequenceEqual(expectedTimeStamp))
+                return false;
 
             if (activity.IsActive == false)
             {
@@ -35,11 +36,6 @@ public class ActivityManager
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(lastUpdatedDateTime) 
-                    && lastUpdatedDateTime != (activity.LastUpdatedDateTime ?? activity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString())
-                {
-                     return false;
-                }
                 //TODO: 2 should be a constant (Trinity's note when I came across this)
                 //TODO: I noticed in ActivityHandler.ashx they also set activity.IsReviewed = true, does this need to be done too?
                 activity.StatusId = 2; // status id is 2 means a Reviewed
@@ -68,8 +64,15 @@ public class ActivityManager
                 activity.IsOriginNeedsReview = false;
             }
             //activity.IsReviewed = true;
-            dc.SubmitChanges();
-            
+            try
+            {
+                dc.SubmitChanges();
+            }
+            catch (System.Data.Linq.ChangeConflictException)
+            {
+                // The rowversion also protects changes made after the check above.
+                return false;
+            }
         }
         return true;
     }

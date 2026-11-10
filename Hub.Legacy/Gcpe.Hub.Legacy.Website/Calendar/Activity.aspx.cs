@@ -1132,6 +1132,13 @@ namespace Gcpe.Hub.Calendar
         /// </summary>
         private bool Update()
         {
+            byte[] savedTimeStamp;
+            return Update(out savedTimeStamp);
+        }
+
+        private bool Update(out byte[] savedTimeStamp)
+        {
+            savedTimeStamp = null;
             var activity = calendarDataContext.Activities.Single(p => p.Id == ActivityId);
 
             if (timestamp.Value != (activity.LastUpdatedDateTime ?? activity.CreatedDateTime ?? DateTime.MinValue).ToOADate().ToString())
@@ -1291,6 +1298,9 @@ namespace Gcpe.Hub.Calendar
                     keywordsHaveChanged, leadOrganizationHasChanged, NRDistributionHasChanged, NROriginHasChanged, translationsRequiredHasChanged);
 
                 SaveDocuments(calendarDataContext, activity);
+                // LINQ to SQL refreshes this rowversion after our successful save.
+                // Pass this exact version to Review, rather than rereading newer changes.
+                savedTimeStamp = activity.TimeStamp == null ? null : activity.TimeStamp.ToArray();
             }
             catch (System.Data.Linq.ChangeConflictException)
             {
@@ -1497,10 +1507,11 @@ namespace Gcpe.Hub.Calendar
         {
             if (!IsNewActivity)
             {
-                bool success = Update();
+                byte[] savedTimeStamp;
+                bool success = Update(out savedTimeStamp);
                 if (success)
                 {
-                    if (ActivityManager.ReviewActivity(ActivityId.Value, timestamp.Value))
+                    if (ActivityManager.ReviewActivity(ActivityId.Value, savedTimeStamp))
                     {
                         InsertNewsFeed("review", "reviewed activity", CurrentActiveActivity.Title, this.ActivityId);
                         LoadExistingActivity(); //Reload the activity to show updated values.
