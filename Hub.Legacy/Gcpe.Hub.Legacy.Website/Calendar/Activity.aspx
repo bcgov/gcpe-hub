@@ -472,7 +472,7 @@
                                         <asp:TextBox ID="TitleTextBox" CssClass="new-activity-textareas styled-placeholder" ForeColor="#4d4d4d" placeholder="Hover over for tips on this field" TextMode="MultiLine" runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="TitleRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="TitleTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <span style="float: right"><span id="charlimitinfo">Characters remaining: 100</span></span>
+                                        <span style="float: right"><span id="charlimitinfo">Characters remaining: 140</span></span>
                                     </td>
                                 </tr>
                                 <tr class="row" id="SummaryRow">
@@ -483,7 +483,7 @@
                                             runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="DetailsRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="DetailsTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <span style="float: right"><span id="charlimitinfo1">Characters remaining: 700</span></span>
+                                        <span style="float: right"><span id="charlimitinfo1">Characters remaining: 800</span></span>
                                     </td>
                                 </tr>
                                 <tr class="row" id="IssueRow" <%= CurrentActiveActivity.IsIssue ? "style='font-weight:bold'" : "" %>>
@@ -510,7 +510,7 @@
                                         </div>
                                         <asp:RequiredFieldValidator Display="Dynamic" ID="SignificanceRequiredFieldValidator" runat="server" EnableClientScript="true"
                                             ControlToValidate="SignificanceTextBox" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <span style="float: right"><span id="charlimitinfo7">Characters remaining: 500</span></span>
+                                        <span style="float: right"><span id="charlimitinfo7">Characters remaining: 600</span></span>
                                     </td>
                                 </tr>
                                 <tr id="LeadOrganizationContainer" class="row">
@@ -2627,12 +2627,12 @@
             $('#TitleTextBox').keyup(function () {
                 // var text = $('#TitleTextBox').val();
                 //$('#TitleTextBox').val(text.replace(/(\r\n|\n|\r)/gm, ""));
-                limitChars('TitleTextBox', 100, 'charlimitinfo');
+                limitChars('TitleTextBox', 140, 'charlimitinfo');
                 SetChanged($.url().param('ActivityId'));
             });
 
             $('#DetailsTextBox').keyup(function () {
-                limitChars('DetailsTextBox', 700, 'charlimitinfo1');
+                limitChars('DetailsTextBox', 800, 'charlimitinfo1');
                 SetChanged($.url().param('ActivityId'));
             });
 
@@ -2785,7 +2785,7 @@
             });
 
             $('#SignificanceTextBox').keyup(function () {
-                limitChars('SignificanceTextBox', 500, 'charlimitinfo7');
+                limitChars('SignificanceTextBox', 600, 'charlimitinfo7');
                 SetChanged($.url().param('ActivityId'));
             });
 
@@ -2838,14 +2838,14 @@
     <script type="text/javascript">
 
         // Show characters remaining
-        limitChars('TitleTextBox', 100, 'charlimitinfo');
-        limitChars('DetailsTextBox', 700, 'charlimitinfo1');
+        limitChars('TitleTextBox', 140, 'charlimitinfo');
+        limitChars('DetailsTextBox', 800, 'charlimitinfo1');
         limitChars('LACommentsTextBox', 2000, 'charlimitinfo2');
         limitChars('CommentsTextBox', 4000, 'charlimitinfo3');
         limitChars('VenueTextBox', 55, 'charlimitinfo4');
         limitChars('OtherCityTextBox', 55, 'charlimitinfo5');
         limitChars('LeadOrganizationTextBox', 80, 'charlimitinfo6');
-        limitChars('SignificanceTextBox', 500, 'charlimitinfo7');
+        limitChars('SignificanceTextBox', 600, 'charlimitinfo7');
         limitChars('SchedulingTextBox', 500, 'charlimitinfo8');
         limitChars('StrategyTextBox', 500, 'charlimitinfo9');
 
