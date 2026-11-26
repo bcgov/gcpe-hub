@@ -264,3 +264,5 @@ Hub.Legacy.config
 
 # Local time zone regression reports
 /TestResults/
+/Hub.Legacy/Gcpe.Hub.Legacy.Website/Web.config
+/Hub.Legacy/Gcpe.News.ReleaseManagement.Templates/Gcpe.News.ReleaseManagement.Templates.csproj
