@@ -13412,7 +13412,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="NVarChar(500) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="NVarChar(800) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Details
 		{
 			get
@@ -13452,7 +13452,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Significance", DbType="NVarChar(500) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Significance", DbType="NVarChar(600) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Significance
 		{
 			get
@@ -15686,7 +15686,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="NVarChar(800) NOT NULL", CanBeNull=false)]
 		public string Details
 		{
 			get
@@ -15958,7 +15958,7 @@ namespace CorporateCalendar.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Significance", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Significance", DbType="NVarChar(600) NOT NULL", CanBeNull=false)]
 		public string Significance
 		{
 			get
