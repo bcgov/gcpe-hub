@@ -957,9 +957,9 @@
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsVenueNeedsReview)%>">Venue:</td>
                                     <td class="column-right">
-                                        ID="VenueTextBox" TextMode="MultiLine" MaxLength="70"
+                                        <asp:TextBox ID="VenueTextBox" TextMode="MultiLine" MaxLength="70" ForeColor="#4d4d4d" CssClass="new-activity-textareas"
                                             runat="server"></asp:TextBox>
-                                        <span id="charlimitinfo4">Characters remaining: 70</span>
+                                        <span style="float: right"><span id="charlimitinfo4">Characters remaining: 70</span></span>
                                     </td>
                                 </tr>
                                 <tr id="EventPlannerContainer" class="row">
@@ -2656,7 +2656,7 @@
 
             $('#VenueTextBox').keyup(function () {
                 limitChars('VenueTextBox', 70, 'charlimitinfo4');
-                SetChanged
+                SetChanged($.url().param('ActivityId'));
             });
 
             $('#OtherCityTextBox').keyup(function () {
@@ -2843,7 +2843,7 @@
         limitChars('LACommentsTextBox', 2000, 'charlimitinfo2');
         limitChars('CommentsTextBox', 4000, 'charlimitinfo3');
         limitChars('VenueTextBox', 70, 'charlimitinfo4');
-        limitChars('OtherCityTextBox'
+        limitChars('OtherCityTextBox', 55, 'charlimitinfo5');
         limitChars('LeadOrganizationTextBox', 80, 'charlimitinfo6');
         limitChars('SignificanceTextBox', 600, 'charlimitinfo7');
         limitChars('SchedulingTextBox', 500, 'charlimitinfo8');
