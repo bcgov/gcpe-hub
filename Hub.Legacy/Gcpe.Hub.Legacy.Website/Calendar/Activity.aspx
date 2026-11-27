@@ -957,9 +957,9 @@
                                     <td class="column-indicator"><span class="non-required-field">&nbsp;</span></td>
                                     <td class="column-left label-dark <%=Markup(CurrentActiveActivity.IsVenueNeedsReview)%>">Venue:</td>
                                     <td class="column-right">
-                                        <asp:TextBox ID="VenueTextBox" TextMode="MultiLine" MaxLength="50" ForeColor="#4d4d4d" CssClass="new-activity-textareas"
+                                        ID="VenueTextBox" TextMode="MultiLine" MaxLength="70"
                                             runat="server"></asp:TextBox>
-                                        <span style="float: right"><span id="charlimitinfo4">Characters remaining: 55</span></span>
+                                        <span id="charlimitinfo4">Characters remaining: 70</span>
                                     </td>
                                 </tr>
                                 <tr id="EventPlannerContainer" class="row">
@@ -2655,8 +2655,8 @@
             });
 
             $('#VenueTextBox').keyup(function () {
-                limitChars('VenueTextBox', 55, 'charlimitinfo4');
-                SetChanged($.url().param('ActivityId'));
+                limitChars('VenueTextBox', 70, 'charlimitinfo4');
+                SetChanged
             });
 
             $('#OtherCityTextBox').keyup(function () {
@@ -2842,8 +2842,8 @@
         limitChars('DetailsTextBox', 800, 'charlimitinfo1');
         limitChars('LACommentsTextBox', 2000, 'charlimitinfo2');
         limitChars('CommentsTextBox', 4000, 'charlimitinfo3');
-        limitChars('VenueTextBox', 55, 'charlimitinfo4');
-        limitChars('OtherCityTextBox', 55, 'charlimitinfo5');
+        limitChars('VenueTextBox', 70, 'charlimitinfo4');
+        limitChars('OtherCityTextBox'
         limitChars('LeadOrganizationTextBox', 80, 'charlimitinfo6');
         limitChars('SignificanceTextBox', 600, 'charlimitinfo7');
         limitChars('SchedulingTextBox', 500, 'charlimitinfo8');
